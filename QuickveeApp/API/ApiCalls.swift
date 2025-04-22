@@ -780,7 +780,7 @@ extension ApiCalls {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let formattedDate = dateFormatter.string(from: currentDate)
         
-        let comparisonDateString = "2025-04-20 00:00:00"
+        let comparisonDateString = "2025-05-20 00:00:00"
         
         if let comparisonDate = dateFormatter.date(from: comparisonDateString) {
             // Compare the current date with April 15, 2025

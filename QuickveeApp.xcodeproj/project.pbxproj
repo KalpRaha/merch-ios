@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13827AA0DDD8B790B314F1D8 /* Pods_QuickveeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F756E605FAB33D9ED5B76E /* Pods_QuickveeApp.framework */; };
 		A54F2B312BBAB208009B4D53 /* OrderInStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B302BBAB208009B4D53 /* OrderInStoreViewController.swift */; };
 		A54F2B332BBAB3CB009B4D53 /* OrderInStoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B322BBAB3CB009B4D53 /* OrderInStoreTableViewCell.swift */; };
 		A54F2B352BBABA1B009B4D53 /* InStoreDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B342BBABA1B009B4D53 /* InStoreDetailViewController.swift */; };
@@ -23,7 +24,6 @@
 		D20930942B47B4F0007CDAE8 /* SalesRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20930932B47B4F0007CDAE8 /* SalesRecordTableViewCell.swift */; };
 		D20A596D2C3D466400470349 /* PlusCollCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20A596C2C3D466400470349 /* PlusCollCollectionViewCell.swift */; };
 		D20C727129F0F29200DD635D /* NaviViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20C727029F0F29200DD635D /* NaviViewController.swift */; };
-		D20CA2A22BC90FB100620386 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D20CA2A12BC90FB100620386 /* GoogleService-Info.plist */; };
 		D20EE8372AA5F2A800762E56 /* InventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20EE8362AA5F2A800762E56 /* InventoryViewController.swift */; };
 		D20EE8392AA5F2F900762E56 /* InventoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20EE8382AA5F2F900762E56 /* InventoryCollectionViewCell.swift */; };
 		D212983129A885FC0005DB24 /* SetupBusinessHoursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D212983029A885FC0005DB24 /* SetupBusinessHoursViewController.swift */; };
@@ -214,6 +214,7 @@
 		D2C2CFCE29C08FD80023A7A7 /* SetupTaxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C2CFCD29C08FD80023A7A7 /* SetupTaxViewController.swift */; };
 		D2C4B34C2C006CBD005AE9A9 /* MaxPurchaseUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C4B34B2C006CBD005AE9A9 /* MaxPurchaseUpdateViewController.swift */; };
 		D2C525762CE1FEB800C20456 /* StockAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C525752CE1FEB800C20456 /* StockAddTableViewCell.swift */; };
+		D2C69FD72DB6128D00671B15 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D2C69FD62DB6128D00671B15 /* GoogleService-Info.plist */; };
 		D2C93DEB2C86E89000BECFC5 /* AddEditLotteryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C93DEA2C86E89000BECFC5 /* AddEditLotteryViewController.swift */; };
 		D2CA7D782B45242D00918A94 /* DuplicateCatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CA7D772B45242D00918A94 /* DuplicateCatCollectionViewCell.swift */; };
 		D2CA7D7A2B45350C00918A94 /* DuplicateOptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CA7D792B45350C00918A94 /* DuplicateOptionsTableViewCell.swift */; };
@@ -277,16 +278,15 @@
 		D2F9FDB029D5A42900705491 /* VendorFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F9FDAF29D5A42900705491 /* VendorFilterViewController.swift */; };
 		D2FAF7F32BBD67AD00B0B03B /* OrderStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FAF7F22BBD67AD00B0B03B /* OrderStatusViewController.swift */; };
 		D2FFF1582AE924750074344D /* AddVarAttributeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FFF1572AE924750074344D /* AddVarAttributeCell.swift */; };
-		F0C9BD50979803211B7D7180 /* Pods_QuickveeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEFFBBD6B90E217806245727 /* Pods_QuickveeApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		92F779691D626909135EDE96 /* Pods-QuickveeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickveeApp.release.xcconfig"; path = "Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp.release.xcconfig"; sourceTree = "<group>"; };
+		00F756E605FAB33D9ED5B76E /* Pods_QuickveeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickveeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77E581EFB8C8A28711F5CB70 /* Pods-QuickveeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickveeApp.release.xcconfig"; path = "Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp.release.xcconfig"; sourceTree = "<group>"; };
 		A54F2B302BBAB208009B4D53 /* OrderInStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInStoreViewController.swift; sourceTree = "<group>"; };
 		A54F2B322BBAB3CB009B4D53 /* OrderInStoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInStoreTableViewCell.swift; sourceTree = "<group>"; };
 		A54F2B342BBABA1B009B4D53 /* InStoreDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InStoreDetailViewController.swift; sourceTree = "<group>"; };
 		A54F2B362BBABA46009B4D53 /* InStoreRefundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InStoreRefundViewController.swift; sourceTree = "<group>"; };
-		AADD739C252881782D2EFDF5 /* Pods-QuickveeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickveeApp.debug.xcconfig"; path = "Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
 		D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeViewController.swift; sourceTree = "<group>"; };
 		D204CC882AA9AB8800A216C3 /* VariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantViewController.swift; sourceTree = "<group>"; };
@@ -299,7 +299,6 @@
 		D20930932B47B4F0007CDAE8 /* SalesRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesRecordTableViewCell.swift; sourceTree = "<group>"; };
 		D20A596C2C3D466400470349 /* PlusCollCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCollCollectionViewCell.swift; sourceTree = "<group>"; };
 		D20C727029F0F29200DD635D /* NaviViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaviViewController.swift; sourceTree = "<group>"; };
-		D20CA2A12BC90FB100620386 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D20EE8362AA5F2A800762E56 /* InventoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewController.swift; sourceTree = "<group>"; };
 		D20EE8382AA5F2F900762E56 /* InventoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		D212983029A885FC0005DB24 /* SetupBusinessHoursViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupBusinessHoursViewController.swift; sourceTree = "<group>"; };
@@ -493,6 +492,7 @@
 		D2C2CFCD29C08FD80023A7A7 /* SetupTaxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupTaxViewController.swift; sourceTree = "<group>"; };
 		D2C4B34B2C006CBD005AE9A9 /* MaxPurchaseUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxPurchaseUpdateViewController.swift; sourceTree = "<group>"; };
 		D2C525752CE1FEB800C20456 /* StockAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockAddTableViewCell.swift; sourceTree = "<group>"; };
+		D2C69FD62DB6128D00671B15 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D2C93DEA2C86E89000BECFC5 /* AddEditLotteryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditLotteryViewController.swift; sourceTree = "<group>"; };
 		D2CA7D772B45242D00918A94 /* DuplicateCatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateCatCollectionViewCell.swift; sourceTree = "<group>"; };
 		D2CA7D792B45350C00918A94 /* DuplicateOptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateOptionsTableViewCell.swift; sourceTree = "<group>"; };
@@ -557,7 +557,7 @@
 		D2FAF7F22BBD67AD00B0B03B /* OrderStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStatusViewController.swift; sourceTree = "<group>"; };
 		D2FDB5C22BCE575D005C4966 /* QuickveeApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuickveeApp.entitlements; sourceTree = "<group>"; };
 		D2FFF1572AE924750074344D /* AddVarAttributeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVarAttributeCell.swift; sourceTree = "<group>"; };
-		EEFFBBD6B90E217806245727 /* Pods_QuickveeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickveeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F20484F73B6B73D7D9E4E6DB /* Pods-QuickveeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickveeApp.debug.xcconfig"; path = "Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -565,26 +565,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0C9BD50979803211B7D7180 /* Pods_QuickveeApp.framework in Frameworks */,
+				13827AA0DDD8B790B314F1D8 /* Pods_QuickveeApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		558B91D10D63DF13D9C64A27 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				EEFFBBD6B90E217806245727 /* Pods_QuickveeApp.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		A075720D16431750D125C8DE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AADD739C252881782D2EFDF5 /* Pods-QuickveeApp.debug.xcconfig */,
-				92F779691D626909135EDE96 /* Pods-QuickveeApp.release.xcconfig */,
+				F20484F73B6B73D7D9E4E6DB /* Pods-QuickveeApp.debug.xcconfig */,
+				77E581EFB8C8A28711F5CB70 /* Pods-QuickveeApp.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1084,7 +1076,7 @@
 				D2A6838B296C0B3700F852E6 /* QuickveeApp */,
 				D2A6838A296C0B3700F852E6 /* Products */,
 				A075720D16431750D125C8DE /* Pods */,
-				558B91D10D63DF13D9C64A27 /* Frameworks */,
+				D8CA4BD8BBAF5E7F98EC827E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1280,12 +1272,12 @@
 		D2FFEF532AFE0066003400BD /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				D2C69FD62DB6128D00671B15 /* GoogleService-Info.plist */,
 				D2EE17C1297E46AF008D3B1B /* LoginTableViewController.swift */,
 				D2AE052E297E867100CA43DD /* RegisterTableViewController.swift */,
 				D26224E02C6327190008B757 /* StoreSwitchViewController.swift */,
 				D291BD6C297128D900DCD20D /* StoreTableViewCell.swift */,
 				D2182D54297120E6004DF7A1 /* StoreViewController.swift */,
-				D20CA2A12BC90FB100620386 /* GoogleService-Info.plist */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1367,6 +1359,14 @@
 			path = Extention;
 			sourceTree = "<group>";
 		};
+		D8CA4BD8BBAF5E7F98EC827E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				00F756E605FAB33D9ED5B76E /* Pods_QuickveeApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1374,13 +1374,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2A683A0296C0B3700F852E6 /* Build configuration list for PBXNativeTarget "QuickveeApp" */;
 			buildPhases = (
-				724C1EA26E92C0F40E313548 /* [CP] Check Pods Manifest.lock */,
+				D9A5694BFD95F561C43EBF6E /* [CP] Check Pods Manifest.lock */,
 				D2A68385296C0B3700F852E6 /* Sources */,
 				D2A68386296C0B3700F852E6 /* Frameworks */,
 				D2A68387296C0B3700F852E6 /* Resources */,
 				D215ECC42D925D3F00DE9620 /* ShellScript */,
-				CBE9C95839A13BB588CF0A87 /* [CP] Embed Pods Frameworks */,
-				FCC25F71F808293A3AF8AF50 /* [CP] Copy Pods Resources */,
+				C3EC99029878D52AD276A525 /* [CP] Embed Pods Frameworks */,
+				F20911A4D62BD7883131FCAD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1440,7 +1440,7 @@
 				D268EE5F2C8EA44500B45172 /* Manrope-Medium.ttf in Resources */,
 				D2B01B912BB3E2F900A40B93 /* RefundHeaderCell.xib in Resources */,
 				D217914D296EBC6700F77C2A /* Circular Std Bold.ttf in Resources */,
-				D20CA2A22BC90FB100620386 /* GoogleService-Info.plist in Resources */,
+				D2C69FD72DB6128D00671B15 /* GoogleService-Info.plist in Resources */,
 				D2F5AB812CE5C2270050B89C /* HeaderViewCell.xib in Resources */,
 				D2F5AB822CE5C2270050B89C /* NoOrderFoundCell.xib in Resources */,
 				D2F5AB832CE5C2270050B89C /* profileCell.xib in Resources */,
@@ -1453,29 +1453,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		724C1EA26E92C0F40E313548 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-QuickveeApp-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CBE9C95839A13BB588CF0A87 /* [CP] Embed Pods Frameworks */ = {
+		C3EC99029878D52AD276A525 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1483,13 +1461,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1518,7 +1492,29 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n\n";
 		};
-		FCC25F71F808293A3AF8AF50 /* [CP] Copy Pods Resources */ = {
+		D9A5694BFD95F561C43EBF6E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QuickveeApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F20911A4D62BD7883131FCAD /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1526,13 +1522,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1939,14 +1931,14 @@
 		};
 		D2A683A1296C0B3700F852E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AADD739C252881782D2EFDF5 /* Pods-QuickveeApp.debug.xcconfig */;
+			baseConfigurationReference = F20484F73B6B73D7D9E4E6DB /* Pods-QuickveeApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = QuickveeApp/QuickveeApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = UDXGC872R6;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1967,7 +1959,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.merchantech;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1983,14 +1975,14 @@
 		};
 		D2A683A2296C0B3700F852E6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92F779691D626909135EDE96 /* Pods-QuickveeApp.release.xcconfig */;
+			baseConfigurationReference = 77E581EFB8C8A28711F5CB70 /* Pods-QuickveeApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = QuickveeApp/QuickveeAppRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = UDXGC872R6;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2011,7 +2003,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.merchantech;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

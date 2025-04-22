@@ -1095,17 +1095,22 @@ extension CreateBOGODealViewController {
         let formattedDiscount = String(format: "%.2f", discount)
         
         if textField == discountperItemTextfield {
-            
-            if discount_type == "2" {
-                
+              if discount_type == "2" {
                 dollarAmt = formattedDiscount
                 getlessAmtVarient()
-            }
-            else {
+              }
+              else {
                 dollarAmt = ""
+              }
             }
-            
-        }
+            else if textField == discountQtyTextfield {
+              guard qty > freeQty else {
+                ToastClass.sharedToast.showToast(message: "Free Quantity must be less than Buy Quantity",
+                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                discountQtyTextfield.isError(numberOfShakes: 3, revert: true)
+                return
+              }
+            }
         
         guard qty > 0, freeQty > 0, qty > freeQty, discount > 0.00 else {
             describeDealTextfield.text = ""
