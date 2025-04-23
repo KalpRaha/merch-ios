@@ -84,7 +84,6 @@
 		D23681D82AA7016A00728FDB /* ProductsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23681D72AA7016A00728FDB /* ProductsTableViewCell.swift */; };
 		D237A6452BB2E68F00B403AF /* RefundedItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D237A6442BB2E68F00B403AF /* RefundedItemCell.swift */; };
 		D23ACF3629AF46A10067C3F7 /* CouponViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23ACF3529AF46A10067C3F7 /* CouponViewController.swift */; };
-		D23C91962DB0C52700E72351 /* Untitled.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23C91952DB0C51300E72351 /* Untitled.swift */; };
 		D23E91A52CA13124002EA5AE /* TripleSalesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23E91A42CA13124002EA5AE /* TripleSalesTableViewCell.swift */; };
 		D23FC5902BEB75B30005CC17 /* RefundPartialCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23FC58F2BEB75B30005CC17 /* RefundPartialCell.swift */; };
 		D240F92229A74C5000DC76EA /* StoreSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D240F92129A74C5000DC76EA /* StoreSetupViewController.swift */; };
@@ -131,6 +130,8 @@
 		D262DEAC296FD30000011E27 /* TaxesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D262DEAB296FD30000011E27 /* TaxesViewController.swift */; };
 		D262DEAE296FD37E00011E27 /* ReportingPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D262DEAD296FD37E00011E27 /* ReportingPagerViewController.swift */; };
 		D2653C352AA877D500B15DEF /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2653C342AA877D500B15DEF /* AddViewController.swift */; };
+		D265CF502DB76A7E00915F25 /* AddScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D265CF4F2DB76A7E00915F25 /* AddScheduleViewController.swift */; };
+		D265CF542DB7B02000915F25 /* DayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D265CF532DB7B02000915F25 /* DayCollectionViewCell.swift */; };
 		D26636BA29BB056800B8A5FC /* CouponTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26636B929BB056800B8A5FC /* CouponTableViewCell.swift */; };
 		D26636BC29BB24FD00B8A5FC /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26636BB29BB24FD00B8A5FC /* ChangePasswordViewController.swift */; };
 		D26778272CB503F10090D863 /* QuickAddSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26778262CB503F10090D863 /* QuickAddSetupViewController.swift */; };
@@ -360,7 +361,6 @@
 		D23681D72AA7016A00728FDB /* ProductsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewCell.swift; sourceTree = "<group>"; };
 		D237A6442BB2E68F00B403AF /* RefundedItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefundedItemCell.swift; sourceTree = "<group>"; };
 		D23ACF3529AF46A10067C3F7 /* CouponViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponViewController.swift; sourceTree = "<group>"; };
-		D23C91952DB0C51300E72351 /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
 		D23E91A42CA13124002EA5AE /* TripleSalesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripleSalesTableViewCell.swift; sourceTree = "<group>"; };
 		D23FC58F2BEB75B30005CC17 /* RefundPartialCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefundPartialCell.swift; sourceTree = "<group>"; };
 		D240F92129A74C5000DC76EA /* StoreSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreSetupViewController.swift; sourceTree = "<group>"; };
@@ -407,6 +407,8 @@
 		D262DEAB296FD30000011E27 /* TaxesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxesViewController.swift; sourceTree = "<group>"; };
 		D262DEAD296FD37E00011E27 /* ReportingPagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingPagerViewController.swift; sourceTree = "<group>"; };
 		D2653C342AA877D500B15DEF /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		D265CF4F2DB76A7E00915F25 /* AddScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleViewController.swift; sourceTree = "<group>"; };
+		D265CF532DB7B02000915F25 /* DayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCollectionViewCell.swift; sourceTree = "<group>"; };
 		D26636B929BB056800B8A5FC /* CouponTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponTableViewCell.swift; sourceTree = "<group>"; };
 		D26636BB29BB24FD00B8A5FC /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		D26778262CB503F10090D863 /* QuickAddSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickAddSetupViewController.swift; sourceTree = "<group>"; };
@@ -710,7 +712,6 @@
 				D2A2BF7C2B8DF2A6006796D5 /* OrderTableViewCell.swift */,
 				D285ECEA2A2EF7D3009DFAE5 /* OrderOnlineTableViewCell.swift */,
 				D2AE68DC2A7B7F12004D85B8 /* OrderRefundViewController.swift */,
-				D23C91952DB0C51300E72351 /* Untitled.swift */,
 				D2A2BF7A2B8DB8FD006796D5 /* OrderDetailSecondVC.swift */,
 				D28D7B172BABDD860014A9BB /* CartTableCell.swift */,
 			);
@@ -902,6 +903,8 @@
 				D25788FF2D48B492003F6218 /* CreateBOGODealViewController.swift */,
 				D21965152D4C9FB40003E970 /* SelectBogoVariantCell.swift */,
 				D21965132D4C9F4D0003E970 /* SelectBogoVariantViewController.swift */,
+				D265CF4F2DB76A7E00915F25 /* AddScheduleViewController.swift */,
+				D265CF532DB7B02000915F25 /* DayCollectionViewCell.swift */,
 			);
 			path = Bogo;
 			sourceTree = "<group>";
@@ -1558,6 +1561,7 @@
 				D285ECEB2A2EF7D3009DFAE5 /* OrderOnlineTableViewCell.swift in Sources */,
 				D2EE03C52B3AB6CE001626DD /* PassCollectionViewCell.swift in Sources */,
 				D21711882C45171B00B4FE1F /* TagsViewController.swift in Sources */,
+				D265CF502DB76A7E00915F25 /* AddScheduleViewController.swift in Sources */,
 				D2A2BF712B8D9516006796D5 /* ProgressView.swift in Sources */,
 				D27B61E42AC5790A00F753BD /* AddVariantAttributeViewController.swift in Sources */,
 				D2C0C1452C3510C000868B0F /* SetupInventoryViewController.swift in Sources */,
@@ -1568,7 +1572,6 @@
 				D2D625492B75E13300C25D07 /* AddBulkPricingViewController.swift in Sources */,
 				D20784572D313127000E228A /* StockEmailViewController.swift in Sources */,
 				D2A37A442BFCA8CB005B59CE /* PurchaseQuantityViewController.swift in Sources */,
-				D23C91962DB0C52700E72351 /* Untitled.swift in Sources */,
 				D26636BA29BB056800B8A5FC /* CouponTableViewCell.swift in Sources */,
 				D2C2CFCE29C08FD80023A7A7 /* SetupTaxViewController.swift in Sources */,
 				D2D625512B75E29E00C25D07 /* BulkEditViewController.swift in Sources */,
@@ -1742,6 +1745,7 @@
 				D258A6B72B456A47008BF1DC /* DuplicateVarTableViewCell.swift in Sources */,
 				D28604E02975516A0095BE1D /* ReportingTabsCollectionViewCell.swift in Sources */,
 				D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */,
+				D265CF542DB7B02000915F25 /* DayCollectionViewCell.swift in Sources */,
 				D2DC4B962A3330F900E86A71 /* OnlineOrdersModel.swift in Sources */,
 				D2CE36A02976BFD60090A6D2 /* OrderTypesTableViewCell.swift in Sources */,
 				D2A37A422BFC941A005B59CE /* AddPurchaseQtyViewController.swift in Sources */,
