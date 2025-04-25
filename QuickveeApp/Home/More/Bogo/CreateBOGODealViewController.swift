@@ -13,6 +13,11 @@ protocol AddBogoDelegate: AnyObject {
     func setSelectedBogoVarient(mix: [VariantBogoModel])
 }
 
+protocol AddScheduleDelegate: AnyObject {
+    
+    func setScheduleData(data: AddSchedule)
+}
+
 class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var topView: UIView!
@@ -32,8 +37,9 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var dollerBtn: UIButton!
     
     @IBOutlet weak var addScheduleLbl: UILabel!
+    @IBOutlet weak var activeLbl: UILabel!
+    @IBOutlet weak var repeatLbl: UILabel!
     
-  
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
@@ -69,6 +75,8 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
     var activeTextField = UITextField()
     var selectedAllEditIds = [String]()
     
+    var scheduleData: AddSchedule?
+    
     let loadIndicator: ProgressView = {
         let progress = ProgressView(colors: [.white], lineWidth: 3)
         progress.translatesAutoresizingMaskIntoConstraints = false
@@ -101,6 +109,52 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
         
         searchBar.isHidden = true
         
+        if mode == "add" {
+            addScheduleLbl.text = "Add Schedule +"
+            activeLbl.text = "No Schedule Set"
+            repeatLbl.text = ""
+        }
+        else {
+            let sdate = bogoObj?.start_date ?? ""
+            let edate = bogoObj?.end_date ?? ""
+            let stime = bogoObj?.start_time ?? ""
+            let etime = bogoObj?.end_time ?? ""
+            let wdays = bogoObj?.weekly_days ?? ""
+            
+            if bogoObj?.start_date == "0000-00-00" {
+                addScheduleLbl.text = "Add Schedule +"
+                activeLbl.text = "No Schedule Set"
+                repeatLbl.text = ""
+            }
+            else if bogoObj?.end_date == "0000-00-00" {
+                addScheduleLbl.text = "Manage Schedule +"
+                
+                if bogoObj?.start_time == "00:00:00" {
+                    activeLbl.text = "The Deal Will Starting From \(sdate)"
+                }
+                else {
+                    activeLbl.text = "The Deal Will Be Active From \(stime) To \(etime) Starting From \(sdate)"
+                }
+            }
+            else {
+                addScheduleLbl.text = "Manage Schedule +"
+                
+                if bogoObj?.start_time == "00:00:00" {
+                    activeLbl.text = "The Deal Will Be Starting From \(sdate) Till \(edate)"
+                }
+                else {
+                    activeLbl.text = "The Deal Will Be Active From \(stime) To \(etime) Starting From \(sdate) Till \(edate)"
+                }
+            }
+            
+            if bogoObj?.weekly_days == "" {
+                repeatLbl.text = ""
+            }
+            else {
+                repeatLbl.text = "Repeats On (Weekly) \(wdays)"
+            }
+        }
+        
         tableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
         
         let scheduleGest = UITapGestureRecognizer(target: self, action: #selector(addScheduleBtnClick))
@@ -124,10 +178,6 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
         if mode == "add" {
             createTitle.text = "Create BOGO Deal"
             doneBtn.setTitle("Done", for: .normal)
-            
-//            noEndDateSwitch.isOn = false
-//            dateStackHeightConstraint.constant = 53
-//            startEndDateStack.isHidden = false
             
             discount_type = "2"
             
@@ -155,6 +205,12 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             itemsEditIds = bogoObj?.items ?? ""
             bogo_id = bogoObj?.id ?? ""
             
+            if scheduleData == nil {
+                scheduleData = AddSchedule(start_date: bogoObj?.start_date ?? "", end_date: bogoObj?.end_date ?? "",
+                                           full_day: bogoObj?.full_day ?? "", start_time: bogoObj?.start_time ?? "",
+                                           end_time: bogoObj?.end_time ?? "", repeat_type: bogoObj?.repeat_type ?? "",
+                                           weekly_days: bogoObj?.weekly_days ?? "", monthly_days: bogoObj?.monthly_dates ?? "")
+            }
             
             if discount_type == "2" {
                 percentBtn.backgroundColor = UIColor.init(hexString: "#EEEEEE")
@@ -172,37 +228,6 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
                 dollarAmt = ""
             }
             
-            let startdate = bogoObj?.start_date ?? ""
-            let enddate = bogoObj?.end_date ?? ""
-            
-            let sdate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: startdate)
-            let edate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: enddate)
-            
-//            if bogoObj?.no_end_date == "1" {
-//                
-//                dateStackHeightConstraint.constant = 0
-//                startEndDateStack.isHidden = true
-//                noEndDateSwitch.isOn = true
-//                noEndDateSwitch.thumbTintColor = .systemBlue
-//                startDate.text = ""
-//                endDate.text = ""
-//                
-//            }else {
-//                startEndDateStack.isHidden = false
-//                dateStackHeightConstraint.constant = 53
-//                noEndDateSwitch.isOn = false
-//                noEndDateSwitch.thumbTintColor = .white
-//                startDate.text = sdate
-//                endDate.text = edate
-//            }
-            
-            
-//            if noEndDateSwitch.isOn {
-//                noEndDate = "1"
-//            }
-//            else {
-//                noEndDate = "0"
-//            }
             let buy_qty = bogoObj?.buy_qty
             let free_qty = bogoObj?.free_qty
             qtyTextfield.text = buy_qty
@@ -284,31 +309,6 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             dealNameTextfield.isError(numberOfShakes: 3, revert: true)
             return
         }
-        
-//        if noEndDateSwitch.isOn {
-//            startDate.text = ""
-//            endDate.text = ""
-//            
-//        }
-//        else {
-//            guard let start_date = startDate.text, start_date != "" else {
-//                
-//                ToastClass.sharedToast.showToast(message: "Please enter valid start date",
-//                                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-//                startDate.isError(numberOfShakes: 3, revert: true)
-//                return
-//            }
-//            
-//            guard let end_date = endDate.text, end_date != "" else {
-//                
-//                ToastClass.sharedToast.showToast(message: "Please enter valid end date",
-//                                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-//                endDate.isError(numberOfShakes: 3, revert: true)
-//                
-//                return
-//            }
-//            
-//        }
         
         guard let qty = qtyTextfield.text, qty != "", qty != "0" else {
             
@@ -425,12 +425,17 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
         let buy_qty = qtyTextfield.text ?? ""
         let Free_qty = discountQtyTextfield.text ?? ""
         let desc = describeDealTextfield.text ?? ""
-//        let sDate = startDate.text ?? ""
-//        let eDate = endDate.text ?? ""
         
-//        let change_start_date = ToastClass.sharedToast.setCouponlistDate(dateStr: sDate)
-//        let change_end_date = ToastClass.sharedToast.setCouponlistDate(dateStr: eDate)
-//        
+        let sd = scheduleData?.start_date ?? ""
+        let ed = scheduleData?.end_date ?? ""
+        
+        let full = scheduleData?.full_day ?? ""
+        
+        let st = scheduleData?.start_time ?? ""
+        let et = scheduleData?.end_time ?? ""
+        
+        let no_repeat = scheduleData?.repeat_type ?? ""
+        let week = scheduleData?.weekly_days ?? ""
         
         loadIndicator.isAnimating = true
         
@@ -438,8 +443,11 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
                                            description: desc, no_end_date: noEndDate,
                                            use_with_coupon: "1", buy_qty: buy_qty,
                                            free_qty: Free_qty, discount: price,
-                                           discount_type: discount_type , items: items_id,
-                                           start_date: "", end_date: "",
+                                           discount_type: discount_type, items: items_id,
+                                           start_date: sd, end_date: ed,
+                                           full_day: full, start_time: st,
+                                           end_time: et, repeat_type: no_repeat,
+                                           weekly_days: week, monthly_dates: "",
                                            id: bogo_id) { isSuccess, responseData in
             
             if isSuccess {
@@ -541,6 +549,13 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
         performSegue(withIdentifier: "toAddSchedule", sender: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let vc = segue.destination as! AddScheduleViewController
+        vc.delegate = self
+        vc.mode = mode
+        vc.schedule = scheduleData
+    }
     
   
     @IBAction func homeBtnClick(_ sender: UIButton) {
@@ -911,6 +926,46 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
  
     }
     
+}
+
+extension CreateBOGODealViewController: AddScheduleDelegate {
+    
+    func setScheduleData(data: AddSchedule) {
+        scheduleData = data
+        
+        if scheduleData?.start_date == "" || scheduleData?.start_date == "0000-00-00" {
+            addScheduleLbl.text = "Add Schedule +"
+            activeLbl.text = "No Schedule Set"
+            repeatLbl.text = ""
+        }
+        else if scheduleData?.end_date == "" || scheduleData?.end_date == "0000-00-00" {
+            addScheduleLbl.text = "Manage Schedule +"
+            
+            if scheduleData?.start_time == "" || scheduleData?.start_time == "00:00:00" {
+                activeLbl.text = "The Deal Will Starting From \(data.start_date)"
+            }
+            else {
+                activeLbl.text = "The Deal Will Be Active From \(data.start_time) To \(data.end_time) Starting From \(data.start_date)"
+            }
+        }
+        else {
+            addScheduleLbl.text = "Manage Schedule +"
+            
+            if scheduleData?.start_time == "" || scheduleData?.start_time == "00:00:00" {
+                activeLbl.text = "The Deal Will Be Starting From \(data.start_date) Till \(data.end_date)"
+            }
+            else {
+                activeLbl.text = "The Deal Will Be Active From \(data.start_time) To \(data.end_time) Starting From \(data.start_date) Till \(data.end_date)"
+            }
+        }
+        
+        if data.weekly_days == "" {
+            repeatLbl.text = ""
+        }
+        else {
+            repeatLbl.text = "Repeats On (Weekly) \(data.weekly_days)"
+        }
+    }
 }
 
 extension CreateBOGODealViewController: UISearchBarDelegate {

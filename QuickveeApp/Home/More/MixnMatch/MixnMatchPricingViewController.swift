@@ -304,24 +304,18 @@ class MixnMatchPricingViewController: UIViewController {
         
         for items in response {
             
-            let bogodeal = BogoModel(id: "\(items["id"] ?? "")",
-                                     merchant_id: "\(items["merchant_id"] ?? "" )",
-                                     start_date: "\(items["start_date"] ?? "")",
-                                     end_date: "\(items["end_date"] ?? "")",
-                                     deal_name: "\(items["deal_name"] ?? "")",
-                                     desc: "\(items["description"] ?? "")",
-                                     no_end_date: "\(items["no_end_date"] ?? "")",
-                                     use_with_coupon: "\(items["use_with_coupon"] ?? "")",
-                                     buy_qty: "\(items["buy_qty"] ?? "")",
-                                     free_qty: "\(items["free_qty"] ?? "")",
-                                     discount: "\(items["discount"] ?? "")",
-                                     discount_type: "\(items["discount_type"] ?? "")",
-                                     is_disable: "\(items["is_disable"] ?? "")",
-                                     items: "\(items["items"] ?? "")",
-                                     use_status: "\(items["use_status"] ?? "")",
-                                     created_at: "\(items["created_at"] ?? "")",
-                                     updated_at: "\(items["updated_at"] ?? "")",
-                                     is_deleted:"\(items["is_deleted"] ?? "")")
+            let bogodeal = BogoModel(id: "\(items["id"] ?? "")", merchant_id: "\(items["merchant_id"] ?? "")",
+                                     start_date: "\(items["start_date"] ?? "")", end_date: "\(items["end_date"] ?? "")",
+                                     deal_name: "\(items["deal_name"] ?? "")", desc: "\(items["description"] ?? "")",
+                                     no_end_date: "\(items["no_end_date"] ?? "")", use_with_coupon: "\(items["use_with_coupon"] ?? "")",
+                                     buy_qty: "\(items["buy_qty"] ?? "")", free_qty: "\(items["free_qty"] ?? "")",
+                                     discount: "\(items["discount"] ?? "")", discount_type: "\(items["discount_type"] ?? "")",
+                                     is_disable: "\(items["is_disable"] ?? "")", items: "\(items["items"] ?? "")",
+                                     use_status: "\(items["use_status"] ?? "")", full_day: "\(items["full_day"] ?? "")",
+                                     start_time: "\(items["start_time"] ?? "")", end_time: "\(items["end_time"] ?? "")",
+                                     repeat_type: "\(items["repeat_type"] ?? "")", weekly_days: "\(items["weekly_days"] ?? "")",
+                                     monthly_dates: "\(items["monthly_dates"] ?? "")", created_at: "\(items["created_at"] ?? "")",
+                                     updated_at: "\(items["updated_at"] ?? "")", is_deleted: "\(items["is_deleted"] ?? "")")
             
             //"{\"1303835\":[\"\"],\"1303837\":[\"1825755\"],\"1148353\":[\"1721500\",\"1721501\"],\"1148355\":[\"1721513\",\"1721514\"]}"
             

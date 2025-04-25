@@ -3112,7 +3112,9 @@ extension ApiCalls {
     func addBogoApiCall(merchant_id: String, deal_name: String, description: String, no_end_date: String,
                         use_with_coupon: String, buy_qty: String, free_qty: String, discount: String,
                         discount_type: String, items: String, start_date: String, end_date: String,
-                        id: String, completion:@escaping(Bool,[String:Any]) -> ()){
+                        full_day: String, start_time: String, end_time: String, repeat_type: String,
+                        weekly_days: String, monthly_dates: String, id: String,
+                        completion:@escaping(Bool,[String:Any]) -> ()){
         
         let url = AppURLs.ADD_BOGO
         
@@ -3129,6 +3131,12 @@ extension ApiCalls {
             "items": items,
             "start_date": start_date,
             "end_date": end_date,
+            "full_day": full_day,
+            "start_time": start_time,
+            "end_time": end_time,
+            "repeat_type": repeat_type,
+            "weekly_days": weekly_days,
+            "monthly_dates": monthly_dates,
             "id":id
         ]
         
