@@ -368,6 +368,17 @@ class ProductsViewController: UIViewController {
                 
                 print("Ok button tapped")
                 
+                
+                self.noDataLbl.isHidden = true
+                self.addBtn.isHidden = true
+                self.addBtnData.isHidden = true
+                self.tableview.isHidden = true
+                self.addProdLbl.isHidden = true
+                self.addLblView.isHidden = true
+                self.noDataView.isHidden = true
+                self.filterView.isHidden = false
+                self.loadingIndicator.isAnimating = true
+                
                 self.setupDeleteApi(tag: sender.tag)
                 
             }
@@ -396,6 +407,8 @@ class ProductsViewController: UIViewController {
             if isSuccess {
                 ToastClass.sharedToast.showToast(message: "Product deleted successfully", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                 
+                self.setupProductApi()
+               
             }
             else{
                 print("Api Error")

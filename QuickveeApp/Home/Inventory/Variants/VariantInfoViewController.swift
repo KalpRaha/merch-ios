@@ -446,7 +446,7 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
     }
     
     func checkSell() -> String {
-        if checkID.currentImage == UIImage(named: "check inventory") {
+        if selling.currentImage == UIImage(named: "check inventory") {
             return "1"
 
         }
@@ -457,7 +457,7 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
     }
     
     func checkIdBox() -> String {
-        if selling.currentImage == UIImage(named: "check inventory") {
+        if checkID.currentImage == UIImage(named: "check inventory") {
             return "1"
 
         }
@@ -717,6 +717,13 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
         else if textField == reorderLevel {
             activeTextField = textField
         }
+        else if textField == costPerItem {
+            activeTextField = textField
+        }
+        else if textField == price {
+            activeTextField = textField
+        }
+        
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -738,6 +745,61 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         }
+        else if textField == price {
+          
+            
+            let cpi = costPerItem.text ?? "0.00"
+            let price = price.text ?? "0.00"
+            let cost_per_doub = Double(cpi) ?? 0.00
+            let price_doub = Double(price) ?? 0.00
+            
+            let profits = price_doub - cost_per_doub
+            let margins = (profits / price_doub) * 100
+
+            margin.text  = String(format: "%.2f", margins)
+            profit.text = String(format: "%.2f", profits)
+        }
+        
+        
+        else if textField == costPerItem {
+            
+            let cost_per_value = UserDefaults.standard.string(forKey: "cost_per_value") ?? "0"
+            let cost_per_item = textField.text ?? ""
+            
+            guard cost_per_item != "" else {
+                return
+            }
+            
+            if cost_per_value == "" || cost_per_value == "0.00" {
+                
+                let prices = "0.00"
+                let profits = "0.00"
+                let margins = "0.00"
+                
+                 costPerItem.text = cost_per_item
+                price.text = prices
+                profit.text = profits
+                margin.text = margins
+                
+            }
+            
+            else {
+                
+                let cost_per_value_doub = Double(cost_per_value) ?? 0.00
+                let percent = cost_per_value_doub/100
+                
+                let cost_per_item_doub = Double(cost_per_item) ?? 0.00
+                let profits = cost_per_item_doub * percent
+                let prices = cost_per_item_doub + profits
+                let margins = (profits / prices) * 100
+                
+                costPerItem.text = String(format: "%.2f", cost_per_item_doub)
+                price.text  = String(format: "%.2f", prices)
+                margin.text  = String(format: "%.2f", margins)
+                profit.text = String(format: "%.2f", profits)
+            }
+        }
+        
     }
  
     @objc func updateText(textField: MDCOutlinedTextField) {
