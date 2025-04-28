@@ -294,6 +294,33 @@ class AddScheduleViewController: UIViewController {
         collectionView.reloadData()
     }
     
+    func getWeekdaysBetween(startDate: Date, endDate: Date) -> [String]? {
+        
+        let calendar = Calendar.current
+
+        let components = calendar.dateComponents([.day], from: startDate, to: endDate)
+        
+        if let daysBetween = components.day, daysBetween < 7 {
+            
+            var weekdays: [String] = []
+
+            var currentDate = startDate
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "EEE"
+            
+            for _ in 0...daysBetween {
+                let weekdayName = dateFormatter.string(from: currentDate)
+                weekdays.append(weekdayName)
+                if let nextDate = calendar.date(byAdding: .day, value: 1, to: currentDate) {
+                    currentDate = nextDate
+                }
+            }
+            return weekdays
+        } else {
+            return nil
+        }
+    }
+    
     
     @IBAction func backbtnClick(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
@@ -370,6 +397,7 @@ class AddScheduleViewController: UIViewController {
                 ToastClass.sharedToast.showToast(message: "Enter a valid end date", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
                 return
             }
+            eDate = end.text ?? ""
         }
         
         var sTime = ""
@@ -404,37 +432,48 @@ class AddScheduleViewController: UIViewController {
             
             if endSwitch == "0" {
                 
-                let days = daysBetweenDates(startDate: sDate, endDate: eDate) ?? 0
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
                 
-                if days < 7 {
+                let startDate = dateFormatter.date(from: sDate)!
+                let endDate = dateFormatter.date(from: eDate)!
+                
+                for i in 0..<weekDays.count {
                     
-                    let format = DateFormatter()
-                    format.dateFormat = "yyyy-MM-dd"
-                    let date = format.date(from: sDate)
-                    
-                    let component = Calendar.current
-                    let day = component.component(.weekday, from: date!)
-                    
-                    print(day)
-                    
+                    if weekDays[i] == "1" {
+                        dayData.append(arrOfDays[i])
+                    }
                 }
-                else {
-                    
+                
+                guard dayData.count > 0 else {
+                    ToastClass.sharedToast.showToast(message: "Select atleast one day", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+                    return
                 }
+                
+                if let weekdays = getWeekdaysBetween(startDate: startDate, endDate: endDate) {
+                    
+                    guard dayData.allSatisfy({ weekdays.contains($0)}) else {
+                        ToastClass.sharedToast.showToast(message: "Your settings dont match", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+                        return
+                    }
+                }
+                days = dayData.joined(separator: ", ")
             }
             
-            for i in 0..<weekDays.count {
-                
-                if weekDays[i] == "1" {
-                    dayData.append(arrOfDays[i])
+            else {
+                for i in 0..<weekDays.count {
+                    
+                    if weekDays[i] == "1" {
+                        dayData.append(arrOfDays[i])
+                    }
                 }
+                
+                guard dayData.count > 0 else {
+                    ToastClass.sharedToast.showToast(message: "Select atleast one day", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+                    return
+                }
+                days = dayData.joined(separator: ", ")
             }
-            
-            guard dayData.count > 0 else {
-                ToastClass.sharedToast.showToast(message: "Select atleast one day", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
-                return
-            }
-            days = dayData.joined(separator: ", ")
         }
         
         
@@ -539,8 +578,19 @@ extension AddScheduleViewController {
         if let datePicker = activeTextField.inputView as? UIDatePicker{
             let dateFormat = DateFormatter()
             dateFormat.dateFormat = "yyyy-MM-dd"
-            let starttime = dateFormat.string(from: datePicker.date)
-            activeTextField.text = starttime
+            
+            if activeTextField == startDateTextfield {
+                let starttime = dateFormat.string(from: datePicker.date)
+                activeTextField.text = starttime
+            }
+            else {
+                if startDateTextfield.text == "" {
+                    ToastClass.sharedToast.showToast(message: "Enter start date first", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+                }
+                else {
+                    checkEndDate(start: startDateTextfield.text!, end: datePicker.date)
+                }
+            }
             activeTextField.resignFirstResponder()
         }
     }
@@ -549,12 +599,86 @@ extension AddScheduleViewController {
         if let datePicker = activeTextField.inputView as? UIDatePicker{
             let dateFormat = DateFormatter()
             dateFormat.dateFormat = "HH:mm"
-            let starttime = dateFormat.string(from: datePicker.date)
-            activeTextField.text = starttime
-            activeTextField.resignFirstResponder()
+            
+            if activeTextField == startTimeTextfield {
+                
+                if startDateTextfield.text == "" {
+                    ToastClass.sharedToast.showToast(message: "Enter start date first", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+                }
+                else {
+                    let starttime = dateFormat.string(from: datePicker.date)
+                    activeTextField.text = starttime
+                }
+                activeTextField.resignFirstResponder()
+            }
+            else if activeTextField == endTimeTextfield {
+                if startTimeTextfield.text == "" {
+                    ToastClass.sharedToast.showToast(message: "Enter start time first", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+                }
+                else {
+                    if startDateTextfield.text == endDateTextfield.text {
+                        checkEndTime(start: startTimeTextfield.text!, end: datePicker.date)
+                    }
+                    else {
+                        let endtime = dateFormat.string(from: datePicker.date)
+                        activeTextField.text = endtime
+                        activeTextField.resignFirstResponder()
+                    }
+                }
+                activeTextField.resignFirstResponder()
+            }
         }
     }
     
+    func checkEndDate(start: String, end: Date) {
+        
+        let dateFormat = DateFormatter()
+        dateFormat.timeZone = TimeZone(secondsFromGMT: 0)
+        dateFormat.dateFormat = "yyyy-MM-dd"
+        
+        let sdate = dateFormat.date(from: start)!
+        let edate = dateFormat.string(from: end)
+        
+        let end = dateFormat.date(from: edate)!
+        
+        if end >= sdate {
+            activeTextField.text = edate
+        }
+        else {
+            ToastClass.sharedToast.showToast(message: "End date should be equal or greater than start date", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+        }
+    }
+    
+    
+    func checkEndTime(start: String, end: Date) {
+        
+        let cal = Calendar.current
+        let ehour = cal.component(.hour, from: end)
+        let emin = cal.component(.minute, from: end)
+        
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "HH:mm"
+        let start = dateFormat.date(from: start)
+        
+        let shour = cal.component(.hour, from: start!)
+        let smin = cal.component(.minute, from: start!)
+        
+        if shour <= ehour {
+            
+            if smin < emin {
+                endTimeTextfield.text = dateFormat.string(from: end)
+            }
+            else {
+                ToastClass.sharedToast.showToast(message: "Enter a valid end time", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+            }
+        }
+        else {
+            ToastClass.sharedToast.showToast(message: "Enter a valid end time", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+        }
+        activeTextField.resignFirstResponder()
+    }
+    
+
     @objc func cancelClick(textfield: UITextField) {
         activeTextField.resignFirstResponder()
     }
