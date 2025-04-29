@@ -580,6 +580,7 @@ extension AddScheduleViewController {
             dateFormat.dateFormat = "yyyy-MM-dd"
             
             if activeTextField == startDateTextfield {
+                datePicker.minimumDate = Date()
                 let starttime = dateFormat.string(from: datePicker.date)
                 activeTextField.text = starttime
             }
@@ -608,6 +609,7 @@ extension AddScheduleViewController {
                 else {
                     let starttime = dateFormat.string(from: datePicker.date)
                     activeTextField.text = starttime
+                    endTimeTextfield.text = ""
                 }
                 activeTextField.resignFirstResponder()
             }
@@ -663,8 +665,10 @@ extension AddScheduleViewController {
         let shour = cal.component(.hour, from: start!)
         let smin = cal.component(.minute, from: start!)
         
-        if shour <= ehour {
-            
+        if shour < ehour {
+            endTimeTextfield.text = dateFormat.string(from: end)
+        }
+        else if shour == ehour {
             if smin < emin {
                 endTimeTextfield.text = dateFormat.string(from: end)
             }
@@ -673,7 +677,12 @@ extension AddScheduleViewController {
             }
         }
         else {
-            ToastClass.sharedToast.showToast(message: "Enter a valid end time", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+            if ehour == 0 {
+                endTimeTextfield.text = dateFormat.string(from: end)
+            }
+            else {
+                ToastClass.sharedToast.showToast(message: "Enter a valid end time", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+            }
         }
         activeTextField.resignFirstResponder()
     }
