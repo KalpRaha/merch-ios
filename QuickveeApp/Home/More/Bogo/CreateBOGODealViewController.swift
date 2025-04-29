@@ -429,6 +429,9 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
         let sd = scheduleData?.start_date ?? ""
         let ed = scheduleData?.end_date ?? ""
         
+        let change_start_date = ToastClass.sharedToast.setCouponlistDate(dateStr: sd)
+        let change_end_date = ToastClass.sharedToast.setCouponlistDate(dateStr: ed)
+    
         let full = scheduleData?.full_day ?? ""
         
         let st = scheduleData?.start_time ?? ""
@@ -444,7 +447,7 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
                                            use_with_coupon: "1", buy_qty: buy_qty,
                                            free_qty: Free_qty, discount: price,
                                            discount_type: discount_type, items: items_id,
-                                           start_date: sd, end_date: ed,
+                                           start_date: change_start_date, end_date: change_end_date,
                                            full_day: full, start_time: st,
                                            end_time: et, repeat_type: no_repeat,
                                            weekly_days: week, monthly_dates: "",

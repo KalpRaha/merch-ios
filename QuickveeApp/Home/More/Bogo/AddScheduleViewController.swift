@@ -433,7 +433,7 @@ class AddScheduleViewController: UIViewController {
             if endSwitch == "0" {
                 
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
+                dateFormatter.dateFormat = "MM/dd/yyyy"
                 
                 let startDate = dateFormatter.date(from: sDate)!
                 let endDate = dateFormatter.date(from: eDate)!
@@ -577,7 +577,7 @@ extension AddScheduleViewController {
         
         if let datePicker = activeTextField.inputView as? UIDatePicker{
             let dateFormat = DateFormatter()
-            dateFormat.dateFormat = "yyyy-MM-dd"
+            dateFormat.dateFormat = "MM/dd/yyyy"
             
             if activeTextField == startDateTextfield {
                 datePicker.minimumDate = Date()
@@ -636,7 +636,7 @@ extension AddScheduleViewController {
         
         let dateFormat = DateFormatter()
         dateFormat.timeZone = TimeZone(secondsFromGMT: 0)
-        dateFormat.dateFormat = "yyyy-MM-dd"
+        dateFormat.dateFormat = "MM/dd/yyyy"
         
         let sdate = dateFormat.date(from: start)!
         let edate = dateFormat.string(from: end)
