@@ -115,8 +115,11 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             repeatLbl.text = ""
         }
         else {
-            let sdate = bogoObj?.start_date ?? ""
-            let edate = bogoObj?.end_date ?? ""
+            let sdate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: bogoObj?.start_date ?? "")
+            let edate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: bogoObj?.end_date ?? "")
+            
+           // let sdate = bogoObj?.start_date ?? ""
+           // let edate = bogoObj?.end_date ?? ""
             let stime = bogoObj?.start_time ?? ""
             let etime = bogoObj?.end_time ?? ""
             let wdays = bogoObj?.weekly_days ?? ""

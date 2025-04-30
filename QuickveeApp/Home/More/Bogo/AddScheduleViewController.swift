@@ -131,8 +131,13 @@ class AddScheduleViewController: UIViewController {
         }
         else {
             
-            startDateTextfield.text = schedule?.start_date ?? ""
-            endDateTextfield.text = schedule?.end_date ?? ""
+            let sdate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: schedule?.start_date ?? "")
+            let edate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: schedule?.end_date ?? "")
+            
+            
+            startDateTextfield.text = sdate
+            endDateTextfield.text = edate
+            
             startTimeTextfield.text = schedule?.start_time ?? ""
             endTimeTextfield.text = schedule?.end_time ?? ""
             
@@ -578,113 +583,67 @@ extension AddScheduleViewController {
         if let datePicker = activeTextField.inputView as? UIDatePicker{
             let dateFormat = DateFormatter()
             dateFormat.dateFormat = "MM/dd/yyyy"
-            
-            if activeTextField == startDateTextfield {
-                datePicker.minimumDate = Date()
-                let starttime = dateFormat.string(from: datePicker.date)
-                activeTextField.text = starttime
-            }
-            else {
-                if startDateTextfield.text == "" {
-                    ToastClass.sharedToast.showToast(message: "Enter start date first", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
-                }
-                else {
-                    checkEndDate(start: startDateTextfield.text!, end: datePicker.date)
-                }
-            }
+            datePicker.minimumDate = Date()
+            let starttime = dateFormat.string(from: datePicker.date)
+            activeTextField.text = starttime
             activeTextField.resignFirstResponder()
         }
     }
     
     @objc func timeDoneBtn() {
+        
         if let datePicker = activeTextField.inputView as? UIDatePicker{
             let dateFormat = DateFormatter()
-            dateFormat.dateFormat = "HH:mm"
-            
-            if activeTextField == startTimeTextfield {
-                
-                if startDateTextfield.text == "" {
-                    ToastClass.sharedToast.showToast(message: "Enter start date first", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
-                }
-                else {
-                    let starttime = dateFormat.string(from: datePicker.date)
-                    activeTextField.text = starttime
-                    endTimeTextfield.text = ""
-                }
-                activeTextField.resignFirstResponder()
-            }
-            else if activeTextField == endTimeTextfield {
-                if startTimeTextfield.text == "" {
-                    ToastClass.sharedToast.showToast(message: "Enter start time first", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
-                }
-                else {
-                    if startDateTextfield.text == endDateTextfield.text {
-                        checkEndTime(start: startTimeTextfield.text!, end: datePicker.date)
-                    }
-                    else {
-                        let endtime = dateFormat.string(from: datePicker.date)
-                        activeTextField.text = endtime
-                        activeTextField.resignFirstResponder()
-                    }
-                }
-                activeTextField.resignFirstResponder()
-            }
+            dateFormat.dateFormat = "hh:mm a"
+            dateFormat.locale = Locale(identifier: "en_US")
+            let starttime = dateFormat.string(from: datePicker.date)
+            activeTextField.text = starttime
+            activeTextField.resignFirstResponder()
         }
     }
     
-    func checkEndDate(start: String, end: Date) {
+    func checkEndDate(start: String, end: String) -> Bool {
         
         let dateFormat = DateFormatter()
         dateFormat.timeZone = TimeZone(secondsFromGMT: 0)
         dateFormat.dateFormat = "MM/dd/yyyy"
-        
         let sdate = dateFormat.date(from: start)!
-        let edate = dateFormat.string(from: end)
-        
-        let end = dateFormat.date(from: edate)!
-        
-        if end >= sdate {
-            activeTextField.text = edate
+        let edate = dateFormat.date(from: end)!
+        if edate >= sdate {
+            return true
         }
         else {
-            ToastClass.sharedToast.showToast(message: "End date should be equal or greater than start date", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+            return false
         }
     }
     
     
-    func checkEndTime(start: String, end: Date) {
+    func checkEndTime(start: String, end: String) -> Bool {
         
         let cal = Calendar.current
-        let ehour = cal.component(.hour, from: end)
-        let emin = cal.component(.minute, from: end)
-        
         let dateFormat = DateFormatter()
-        dateFormat.dateFormat = "HH:mm"
-        let start = dateFormat.date(from: start)
-        
-        let shour = cal.component(.hour, from: start!)
-        let smin = cal.component(.minute, from: start!)
-        
+        dateFormat.dateFormat = "hh:mm a"
+        dateFormat.locale = Locale(identifier: "en_US")
+        let startTime = dateFormat.date(from: start)!
+        let endTime = dateFormat.date(from: end)!
+        let shour = cal.component(.hour, from: startTime)
+        let smin = cal.component(.minute, from: startTime)
+        let ehour = cal.component(.hour, from: endTime)
+        let emin = cal.component(.minute, from: endTime)
         if shour < ehour {
-            endTimeTextfield.text = dateFormat.string(from: end)
+            return true
         }
         else if shour == ehour {
             if smin < emin {
-                endTimeTextfield.text = dateFormat.string(from: end)
+                return true
             }
             else {
-                ToastClass.sharedToast.showToast(message: "Enter a valid end time", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+                return false
             }
         }
         else {
-            if ehour == 0 {
-                endTimeTextfield.text = dateFormat.string(from: end)
-            }
-            else {
-                ToastClass.sharedToast.showToast(message: "Enter a valid end time", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
-            }
+            return false
         }
-        activeTextField.resignFirstResponder()
     }
     
 

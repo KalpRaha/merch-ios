@@ -1101,6 +1101,26 @@ extension StockSaveViewController: UITextFieldDelegate {
         }
     }
     
+    @objc func updateTextField(textField: MDCOutlinedTextField) {
+       
+        let index = IndexPath(row: textField.tag, section: 0)
+        let cell = tableview.cellForRow(at: index) as! StockSaveTableViewCell
+        
+        
+        var updatetext = textField.text ?? ""
+        
+        
+        if textField ==  cell.newQtyText {
+            
+            if updatetext.count > 6 {
+                updatetext = String(updatetext.dropLast())
+            }
+            activeTextField.text = updatetext
+        }
+    }
+    
+    
+    
     private func setupUI() {
         
         if #available(iOS 13.0, *) {
@@ -1218,6 +1238,9 @@ extension StockSaveViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.qtyValue.text = "\(stock.quantity)"
         }
+        
+        cell.newQtyText.tag = indexPath.row
+        cell.newQtyText.addTarget(self, action: #selector(updateTextField), for: .editingChanged)
         
         cell.newQtyText.text = addNewQty[indexPath.row]
         

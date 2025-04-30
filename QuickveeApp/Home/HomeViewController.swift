@@ -1663,7 +1663,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width = collection.bounds.size.width
-        return CGSize(width: (width/2) - 5, height: 163)
+        return CGSize(width: (width/2) - 5, height: 173)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
