@@ -28,7 +28,6 @@ class AddScheduleViewController: UIViewController {
     @IBOutlet weak var endTimeHeight: NSLayoutConstraint!
     
     var arrOfDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    var mode = ""
     weak var delegate: AddScheduleDelegate?
     
     var endSwitch = "0"
@@ -130,18 +129,54 @@ class AddScheduleViewController: UIViewController {
             donotRepeatSwitch.thumbTintColor = UIColor(hexString: "#0A64F9")
         }
         else {
+
+            var sdate = ""
             
-            let sdate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: schedule?.start_date ?? "")
-            let edate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: schedule?.end_date ?? "")
-            
-            
+            if ToastClass.sharedToast.setCouponsDateFormat(dateStr: schedule?.start_date ?? "") == "" {
+                sdate = schedule?.start_date ?? ""
+            }
+            else {
+                sdate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: schedule?.start_date ?? "")
+            }
             startDateTextfield.text = sdate
-            endDateTextfield.text = edate
             
-            startTimeTextfield.text = schedule?.start_time ?? ""
-            endTimeTextfield.text = schedule?.end_time ?? ""
+            let st = schedule?.start_time ?? ""
+            let et = schedule?.end_time ?? ""
             
-            if schedule?.end_date == "" {
+            if st != "" {
+                let df1 = DateFormatter()
+                df1.dateFormat = "HH:mm:ss"
+                df1.locale = Locale(identifier: "en_GB")
+                
+                if let start = df1.date(from: st) {
+                    
+                    let end = df1.date(from: et)!
+                    
+                    let df2 = DateFormatter()
+                    df2.dateFormat = "hh:mm a"
+                    df2.locale = Locale(identifier: "en_US")
+                    
+                    startTimeTextfield.text = df2.string(from: start)
+                    endTimeTextfield.text = df2.string(from: end)
+                }
+                else {
+                    let df2 = DateFormatter()
+                    df2.dateFormat = "hh:mm a"
+                    df2.locale = Locale(identifier: "en_US")
+                    
+                    let start = df2.date(from: st)!
+                    let end = df2.date(from: et)!
+                    
+                    startTimeTextfield.text = df2.string(from: start)
+                    endTimeTextfield.text = df2.string(from: end)
+                }
+            }
+            else {
+                startTimeTextfield.text = ""
+                endTimeTextfield.text = ""
+            }
+            
+            if schedule?.no_end_date == "1" {
                 endSwitch = "1"
                 noEndDateSwitch.isOn = true
                 noEndDateSwitch.tintColor = UIColor(hexString: "#CCDFFF")
@@ -149,6 +184,7 @@ class AddScheduleViewController: UIViewController {
                 customEndDateTextField(textField: endDateTextfield)
                 endDateTextfield.isUserInteractionEnabled = false
                 endDateTextfield.trailingView?.alpha = 0.1
+                endDateTextfield.text = ""
             }
             else {
                 endSwitch = "0"
@@ -158,6 +194,15 @@ class AddScheduleViewController: UIViewController {
                 createCustomTextField(textField: endDateTextfield)
                 endDateTextfield.isUserInteractionEnabled = true
                 endDateTextfield.trailingView?.alpha = 1
+                
+                var edate = ""
+                if ToastClass.sharedToast.setCouponsDateFormat(dateStr: schedule?.end_date ?? "") == "" {
+                    edate = schedule?.end_date ?? ""
+                }
+                else {
+                    edate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: schedule?.end_date ?? "")
+                }
+                endDateTextfield.text = edate
             }
             
             if schedule?.full_day == "1" {
@@ -398,7 +443,7 @@ class AddScheduleViewController: UIViewController {
             eDate = ""
         }
         else {
-            guard let end = endDateTextfield, end.text != "" else {
+            guard let end = endDateTextfield, end.text != "", checkEndDate(start: startDateTextfield.text!, end: endDateTextfield.text!) else {
                 ToastClass.sharedToast.showToast(message: "Enter a valid end date", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
                 return
             }
@@ -421,6 +466,13 @@ class AddScheduleViewController: UIViewController {
             guard let etime = endTimeTextfield, etime.text != "" else {
                 ToastClass.sharedToast.showToast(message: "Enter a valid end time", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
                 return
+            }
+            
+            if startDateTextfield.text == endDateTextfield.text {
+                guard checkEndTime(start: startTimeTextfield.text!, end: endTimeTextfield.text!) else {
+                    ToastClass.sharedToast.showToast(message: "Enter a valid end time", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+                    return
+                }
             }
             
             sTime = stime.text ?? ""
@@ -482,7 +534,7 @@ class AddScheduleViewController: UIViewController {
         }
         
         
-        let schedule = AddSchedule(start_date: sDate, end_date: eDate,
+        let schedule = AddSchedule(start_date: sDate, end_date: eDate, no_end_date: endSwitch,
                                    full_day: fullSwitch, start_time: sTime,
                                    end_time: eTime, repeat_type: repeatSwitch,
                                    weekly_days: days, monthly_days: "")
@@ -561,7 +613,7 @@ extension AddScheduleViewController {
         }
         else if activeTextField == startTimeTextfield || activeTextField == endTimeTextfield {
             datePicker.datePickerMode = .time
-            datePicker.locale = Locale(identifier: "en_GB")
+            datePicker.locale = Locale(identifier: "en_US")
             doneBtn = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(timeDoneBtn))
         }
         
@@ -583,6 +635,7 @@ extension AddScheduleViewController {
         if let datePicker = activeTextField.inputView as? UIDatePicker{
             let dateFormat = DateFormatter()
             dateFormat.dateFormat = "MM/dd/yyyy"
+            
             datePicker.minimumDate = Date()
             let starttime = dateFormat.string(from: datePicker.date)
             activeTextField.text = starttime
@@ -596,6 +649,7 @@ extension AddScheduleViewController {
             let dateFormat = DateFormatter()
             dateFormat.dateFormat = "hh:mm a"
             dateFormat.locale = Locale(identifier: "en_US")
+            
             let starttime = dateFormat.string(from: datePicker.date)
             activeTextField.text = starttime
             activeTextField.resignFirstResponder()
@@ -609,6 +663,7 @@ extension AddScheduleViewController {
         dateFormat.dateFormat = "MM/dd/yyyy"
         let sdate = dateFormat.date(from: start)!
         let edate = dateFormat.date(from: end)!
+                
         if edate >= sdate {
             return true
         }
@@ -624,12 +679,16 @@ extension AddScheduleViewController {
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "hh:mm a"
         dateFormat.locale = Locale(identifier: "en_US")
+        
         let startTime = dateFormat.date(from: start)!
         let endTime = dateFormat.date(from: end)!
+        
         let shour = cal.component(.hour, from: startTime)
         let smin = cal.component(.minute, from: startTime)
+        
         let ehour = cal.component(.hour, from: endTime)
         let emin = cal.component(.minute, from: endTime)
+        
         if shour < ehour {
             return true
         }
@@ -709,6 +768,7 @@ struct AddSchedule {
     
     var start_date: String
     var end_date: String
+    var no_end_date: String
     var full_day: String //1 or 0
     var start_time: String //hh:mm
     var end_time: String //hh:mm

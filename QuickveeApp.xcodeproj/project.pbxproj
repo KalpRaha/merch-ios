@@ -1185,8 +1185,8 @@
 		D2D477522AFE31AE008290F9 /* APP */ = {
 			isa = PBXGroup;
 			children = (
-				D2A6838E296C0B3700F852E6 /* SceneDelegate.swift */,
 				D2A6838C296C0B3700F852E6 /* AppDelegate.swift */,
+				D2A6838E296C0B3700F852E6 /* SceneDelegate.swift */,
 			);
 			path = APP;
 			sourceTree = "<group>";
@@ -1464,9 +1464,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1525,9 +1529,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1942,7 +1950,7 @@
 				CODE_SIGN_ENTITLEMENTS = QuickveeApp/QuickveeApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = UDXGC872R6;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1986,7 +1994,7 @@
 				CODE_SIGN_ENTITLEMENTS = QuickveeApp/QuickveeAppRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = UDXGC872R6;
 				GENERATE_INFOPLIST_FILE = YES;

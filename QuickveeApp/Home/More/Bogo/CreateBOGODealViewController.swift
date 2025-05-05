@@ -55,10 +55,10 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
     private var isSymbolOnRight = false
     
     var mode = ""
-    var noEndDate = ""
     var discount_type = ""
     var dollarAmt = ""
     var bogo_id = ""
+    var schedule_exist = false
     
     var searching = false
     var bogoObj : BogoModel?
@@ -118,10 +118,32 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             let sdate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: bogoObj?.start_date ?? "")
             let edate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: bogoObj?.end_date ?? "")
             
-           // let sdate = bogoObj?.start_date ?? ""
-           // let edate = bogoObj?.end_date ?? ""
-            let stime = bogoObj?.start_time ?? ""
-            let etime = bogoObj?.end_time ?? ""
+            let st = bogoObj?.start_time ?? ""
+            let et = bogoObj?.end_time ?? ""
+            
+            var stime = ""
+            var etime = ""
+            
+            if st != "" {
+                let df1 = DateFormatter()
+                df1.dateFormat = "HH:mm:ss"
+                df1.locale = Locale(identifier: "en_GB")
+                
+                let start = df1.date(from: st)!
+                let end = df1.date(from: et)!
+                
+                let df2 = DateFormatter()
+                df2.dateFormat = "hh:mm a"
+                df2.locale = Locale(identifier: "en_US")
+                
+                stime = df2.string(from: start)
+                etime = df2.string(from: end)
+            }
+            else {
+                stime = ""
+                etime = ""
+            }
+            
             let wdays = bogoObj?.weekly_days ?? ""
             
             if bogoObj?.start_date == "0000-00-00" {
@@ -208,13 +230,6 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             itemsEditIds = bogoObj?.items ?? ""
             bogo_id = bogoObj?.id ?? ""
             
-            if scheduleData == nil {
-                scheduleData = AddSchedule(start_date: bogoObj?.start_date ?? "", end_date: bogoObj?.end_date ?? "",
-                                           full_day: bogoObj?.full_day ?? "", start_time: bogoObj?.start_time ?? "",
-                                           end_time: bogoObj?.end_time ?? "", repeat_type: bogoObj?.repeat_type ?? "",
-                                           weekly_days: bogoObj?.weekly_days ?? "", monthly_days: bogoObj?.monthly_dates ?? "")
-            }
-            
             if discount_type == "2" {
                 percentBtn.backgroundColor = UIColor.init(hexString: "#EEEEEE")
                 dollerBtn.backgroundColor = UIColor.init(hexString: "#0A64F9")
@@ -236,10 +251,17 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             qtyTextfield.text = buy_qty
             discountQtyTextfield.text = free_qty
             
-            viewsview.isHidden = true
-            indicator.isAnimating = true
-            
-            variantListApi()
+            if scheduleData == nil {
+                scheduleData = AddSchedule(start_date: bogoObj?.start_date ?? "", end_date: bogoObj?.end_date ?? "",
+                                           no_end_date: bogoObj?.no_end_date ?? "",
+                                           full_day: bogoObj?.full_day ?? "", start_time: bogoObj?.start_time ?? "",
+                                           end_time: bogoObj?.end_time ?? "", repeat_type: bogoObj?.repeat_type ?? "",
+                                           weekly_days: bogoObj?.weekly_days ?? "", monthly_days: bogoObj?.monthly_dates ?? "")
+                
+                viewsview.isHidden = true
+                indicator.isAnimating = true
+                variantListApi()
+            }
         }
     }
     
@@ -440,19 +462,43 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
         let st = scheduleData?.start_time ?? ""
         let et = scheduleData?.end_time ?? ""
         
+        var startTime = ""
+        var endTime = ""
+        
+        if st != "" {
+            let df1 = DateFormatter()
+            df1.dateFormat = "hh:mm a"
+            df1.locale = Locale(identifier: "en_US")
+            
+            if let start = df1.date(from: st),
+               let end = df1.date(from: et) {
+                let df2 = DateFormatter()
+                df2.dateFormat = "HH:mm"
+                df2.locale = Locale(identifier: "en_GB")
+                
+                startTime = df2.string(from: start)
+                endTime = df2.string(from: end)
+            }
+            else {
+                startTime = ""
+                endTime = ""
+            }
+        }
+        
+        let ned = scheduleData?.no_end_date ?? ""
         let no_repeat = scheduleData?.repeat_type ?? ""
         let week = scheduleData?.weekly_days ?? ""
         
         loadIndicator.isAnimating = true
         
         ApiCalls.sharedCall.addBogoApiCall(merchant_id: id, deal_name: d_name,
-                                           description: desc, no_end_date: noEndDate,
+                                           description: desc, no_end_date: ned,
                                            use_with_coupon: "1", buy_qty: buy_qty,
                                            free_qty: Free_qty, discount: price,
                                            discount_type: discount_type, items: items_id,
                                            start_date: change_start_date, end_date: change_end_date,
-                                           full_day: full, start_time: st,
-                                           end_time: et, repeat_type: no_repeat,
+                                           full_day: full, start_time: startTime,
+                                           end_time: endTime, repeat_type: no_repeat,
                                            weekly_days: week, monthly_dates: "",
                                            id: bogo_id) { isSuccess, responseData in
             
@@ -552,6 +598,12 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
     }
  
     @objc func addScheduleBtnClick() {
+        if addScheduleLbl.text == "Add Schedule +" {
+            schedule_exist = false
+        }
+        else {
+            schedule_exist = true
+        }
         performSegue(withIdentifier: "toAddSchedule", sender: nil)
     }
     
@@ -559,8 +611,12 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
         
         let vc = segue.destination as! AddScheduleViewController
         vc.delegate = self
-        vc.mode = mode
-        vc.schedule = scheduleData
+        if schedule_exist {
+            vc.schedule = scheduleData
+        }
+        else {
+            vc.schedule = nil
+        }
     }
     
   
@@ -948,7 +1004,7 @@ extension CreateBOGODealViewController: AddScheduleDelegate {
             addScheduleLbl.text = "Manage Schedule +"
             
             if scheduleData?.start_time == "" || scheduleData?.start_time == "00:00:00" {
-                activeLbl.text = "The Deal Will Starting From \(data.start_date)"
+                activeLbl.text = "The Deal Will Active From \(data.start_date)"
             }
             else {
                 activeLbl.text = "The Deal Will Be Active From \(data.start_time) To \(data.end_time) Starting From \(data.start_date)"
@@ -958,7 +1014,7 @@ extension CreateBOGODealViewController: AddScheduleDelegate {
             addScheduleLbl.text = "Manage Schedule +"
             
             if scheduleData?.start_time == "" || scheduleData?.start_time == "00:00:00" {
-                activeLbl.text = "The Deal Will Be Starting From \(data.start_date) Till \(data.end_date)"
+                activeLbl.text = "The Deal Will Be Active From \(data.start_date) Till \(data.end_date)"
             }
             else {
                 activeLbl.text = "The Deal Will Be Active From \(data.start_time) To \(data.end_time) Starting From \(data.start_date) Till \(data.end_date)"
@@ -1130,10 +1186,6 @@ extension CreateBOGODealViewController {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
         
-//        if activeTextField == startDate || activeTextField == endDate {
-//            openDatePicker(textField: activeTextField, tag: activeTextField.tag)
-//        }
-        
         if activeTextField == discountperItemTextfield {
             activeTextField = textField
         }
@@ -1196,164 +1248,6 @@ extension CreateBOGODealViewController {
             
         }
     }
-}
-
-
-extension CreateBOGODealViewController  {
-    
-    func openDatePicker(textField: UITextField, tag: Int) {
-        
-        let datePicker = UIDatePicker()
-        var doneBtn = UIBarButtonItem()
-        if tag < 3 {
-            datePicker.datePickerMode = .date
-            doneBtn = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dateDoneBtn))
-        }
-        datePicker.addTarget(self, action: #selector(datePickerHandler(datePicker:)), for: .valueChanged)
-        if #available(iOS 13.4, *) {
-            datePicker.preferredDatePickerStyle = .wheels
-        }
-        
-        textField.inputView = datePicker
-        
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
-        let cancelBtn = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel))
-        let flexibleBtn = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        toolbar.setItems([cancelBtn, doneBtn, flexibleBtn], animated: false)
-        textField.inputAccessoryView = toolbar
-    }
-    
-    @objc func cancel(textfield: UITextField) {
-        
-        activeTextField.resignFirstResponder()
-    }
-    
-    @objc func dateDoneBtn() {
-        
-        if let datePicker = activeTextField.inputView as? UIDatePicker {
-            if activeTextField.tag == 1 {
-                checkStartDate(date: datePicker.date)
-            }
-            else {
-              //  checkEndDate(date: datePicker.date)
-            }
-        }
-        activeTextField.resignFirstResponder()
-        
-    }
-    
-    @objc func datePickerHandler(datePicker: UIDatePicker) {
-        print(datePicker.date)
-    }
-    
-    
-    func checkStartDate(date: Date) {
-        
-        let dateFormat = DateFormatter()
-        dateFormat.dateFormat = "MM/dd/yyyy"
-        
-        let calendar = Calendar.current
-        let dateToday = Date()
-        let currentDay = calendar.component(.day, from: dateToday)
-        let currentMonth = calendar.component(.month, from: dateToday)
-        let currentYear = calendar.component(.year, from: dateToday)
-        
-        let startDay = calendar.component(.day, from: date)
-        let startMonth = calendar.component(.month, from: date)
-        let startYear = calendar.component(.year, from: date)
-        
-        if startYear < currentYear {
-            
-            showAlert(title: "Alert", message: "Start date should be greater than current date")
-        }
-        
-        else if startYear == currentYear {
-            
-            if startMonth < currentMonth {
-                
-                showAlert(title: "Alert", message: "Start date should be greater than current date")
-            }
-            
-            else if startMonth >= currentMonth {
-                
-                if startDay < currentDay {
-                    
-                    showAlert(title: "Alert", message: "Start date should be greater than current date")
-                }
-                
-                else {
-                    activeTextField.text = dateFormat.string(from: date)
-                   // endDate.text = ""
-                }
-            }
-        }
-        
-        else {
-            activeTextField.text = dateFormat.string(from: date)
-            //endDate.text = ""
-        }
-    }
-//    
-//    func checkEndDate(date: Date) {
-//        
-//        let dateFormat = DateFormatter()
-//        dateFormat.dateFormat = "MM/dd/yyyy"
-//        
-//        if startDate.text == "" {
-//            showAlert(title: "Alert", message: "Please enter start date first")
-//        }
-//        else {
-//            let startDateCheck = dateFormat.date(from: startDate.text!)
-//            
-//            let calendar = Calendar.current
-//            
-//            let startDay = calendar.component(.day, from: startDateCheck!)
-//            let startMonth = calendar.component(.month, from: startDateCheck!)
-//            let startYear = calendar.component(.year, from: startDateCheck!)
-//            
-//            let endDay = calendar.component(.day, from: date)
-//            let endMonth = calendar.component(.month, from: date)
-//            let endYear = calendar.component(.year, from: date)
-//            
-//            if endYear < startYear {
-//                
-//                showAlert(title: "Alert", message: "")
-//            }
-//            
-//            else if endYear == startYear {
-//                
-//                if endMonth < startMonth {
-//                    
-//                    showAlert(title: "Alert", message: "End date should be greater than Start date")
-//                }
-//                
-//                else if endMonth == startMonth {
-//                    
-//                    if endDay < startDay {
-//                        
-//                        showAlert(title: "Alert", message: "End date should be greater than Start date")
-//                    }
-//                    
-//                    //                    else if endDay == startDay {
-//                    //                        showAlert(title: "Alert", message: "End date should be greater than Start date")
-//                    //
-//                    //                    }
-//                    
-//                    else {
-//                        activeTextField.text = dateFormat.string(from: date)
-//                    }
-//                }
-//                
-//                else {
-//                    activeTextField.text = dateFormat.string(from: date)
-//                }
-//            }
-//            else {
-//                activeTextField.text = dateFormat.string(from: date)
-//            }
-//        }
-//        
-//    }
 }
 
 extension CreateBOGODealViewController : UITableViewDelegate, UITableViewDataSource {

@@ -43,6 +43,8 @@ class BogoListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.showsVerticalScrollIndicator = false
         topView.addBottomShadow()
         tableView.delegate = self
         tableView.dataSource = self
@@ -324,7 +326,8 @@ class BogoListViewController: UIViewController {
         let index = IndexPath(row: sender.tag, section: 0)
         let cell = tableView.cellForRow(at: index) as! BogoListTableViewCell
         
-        if checkDate(startDate: bogoList[index.row].start_date, endDate: bogoList[index.row].end_date) {
+        if checkDateTime(startDate: bogoList[index.row].start_date, endDate: bogoList[index.row].end_date,
+                         startTime: bogoList[index.row].start_time, endTime: bogoList[index.row].end_time) {
         }
         else {
             
@@ -443,66 +446,116 @@ class BogoListViewController: UIViewController {
         }
     }
     
-    func checkDate(startDate: String, endDate: String) -> Bool {
-        let dateStartString = startDate
-        let dateEndString = endDate
-        var checkEnd = 0
-        var equals = 0
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        if let targetDate = dateFormatter.date(from: dateStartString) {
-            let now = Date()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            let currentDateString = formatter.string(from: now)
-            let currentDate = dateFormatter.date(from: currentDateString)!
-            if targetDate > currentDate {
-                checkEnd = 0
-                equals = 0
-            }
-            else if targetDate == currentDate {
-                checkEnd = 0
-                equals = 1
-            }
-            else if targetDate < currentDate {
-                checkEnd = 1
-            } else {
-                checkEnd = 1
-            }
-        } else {
-            checkEnd = 0
-            equals = 2
-        }
-        if checkEnd == 1 {
-            if let targetDate = dateFormatter.date(from: dateEndString) {
-                let now = Date()
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd"
-                let currentDateString = formatter.string(from: now)
-                let currentDate = dateFormatter.date(from: currentDateString)!
-                if targetDate < currentDate {
-                    return true
-                } else if targetDate >= currentDate {
-                    return false
-                } else {
-                    return false
-                }
-            } else {
-                return false
-            }
-        }
-        else {
-            if equals == 0 {
+    func checkDateTime(startDate: String, endDate: String, startTime: String, endTime: String) -> Bool {
+        
+        let df1 = DateFormatter()
+        df1.timeZone = TimeZone(secondsFromGMT: 0)
+        df1.dateFormat = "yyyy-MM-dd"
+        
+        let df2 = DateFormatter()
+        df2.dateFormat = "HH:mm:ss"
+        
+        let currentDateString = df1.string(from: Date())
+        let currentTimeString = df2.string(from: Date())
+        
+        if let startDateTime = df1.date(from: startDate),
+           let endDateTime = df1.date(from: endDate) {
+            
+            let currentDate = df1.date(from: currentDateString)!
+            
+            if startDateTime > currentDate {
                 return true
             }
-            else if equals == 2 {
-                return false
+            else if startDateTime <= currentDate {
+                
+                if endDateTime < currentDate {
+                    return true
+                }
+                else {
+                    
+                    let currentTimeArray = currentTimeString.split(separator: ":")
+                    let startTimeArray = startTime.split(separator: ":")
+                    let endTimeArray = endTime.split(separator: ":")
+                    
+                    if startTime == "00:00:00" && endTime == "00:00:00" {
+                        return false
+                    }
+                    else {
+                        if currentTimeArray[0] < endTimeArray[0] {
+                            return false
+                        }
+                        else if currentTimeArray[0] == endTimeArray[0] {
+                            
+                            if currentTimeArray[1] < endTimeArray[1] {
+                                return false
+                            }
+                            else if currentTimeArray[1] == endTimeArray[1] {
+                                return false
+                            }
+                            else {
+                                return true
+                            }
+                        }
+                        else {
+                            return true
+                        }
+                    }
+                }
             }
-            else {
-                return false
+            else if startDateTime == currentDate {
+                
+                if startTime == "00:00:00" && endTime == "00:00:00" {
+                    return false
+                }
+                else {
+                    var checkEnd = 0
+                    let currentTimeArray = currentTimeString.split(separator: ":")
+                    let startTimeArray = startTime.split(separator: ":")
+                    let endTimeArray = endTime.split(separator: ":")
+                    
+                    if currentTimeArray[0] < startTimeArray[0] {
+                        return true
+                    }
+                    else if currentTimeArray[0] == startTimeArray[0] {
+                        
+                        if currentTimeArray[1] < startTimeArray[1] {
+                            return true
+                        }
+                        else if currentTimeArray[1] == startTimeArray[1] {
+                            checkEnd = 1
+                        }
+                        else {
+                            checkEnd = 1
+                        }
+                    }
+                    else {
+                        checkEnd = 1
+                    }
+                    
+                    if checkEnd == 1 {
+                        if currentTimeArray[0] < endTimeArray[0] {
+                            return false
+                        }
+                        else if currentTimeArray[0] == endTimeArray[0] {
+                            
+                            if currentTimeArray[1] < endTimeArray[1] {
+                                return false
+                            }
+                            else if currentTimeArray[1] == endTimeArray[1] {
+                                return false
+                            }
+                            else {
+                                return true
+                            }
+                        }
+                        else {
+                            return true
+                        }
+                    }
+                }
             }
         }
+        return false
     }
     
     
@@ -557,7 +610,7 @@ extension BogoListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.dealLbl.text = bogoList[indexPath.row].deal_name
         cell.offerLbl.text = bogoList[indexPath.row].desc
         
-        if bogoList[indexPath.row].start_date == "0000-00-00" && bogoList[indexPath.row].end_date == "0000-00-00" {
+        if bogoList[indexPath.row].start_date == "0000-00-00" || bogoList[indexPath.row].end_date == "0000-00-00" {
             cell.validDate.text = "NA"
         }
         else {
@@ -569,12 +622,13 @@ extension BogoListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.swichBtn.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
         cell.swichBtn.addTarget(self, action: #selector(changeShadow), for: .valueChanged)
         
-        if checkDate(startDate: bogoList[indexPath.row].start_date, endDate: bogoList[indexPath.row].end_date) {
+        if checkDateTime(startDate: bogoList[indexPath.row].start_date, endDate: bogoList[indexPath.row].end_date,
+        startTime: bogoList[indexPath.row].start_time, endTime: bogoList[indexPath.row].end_time) {
             cell.swichBtn.isOn = true
             cell.swichBtn.thumbTintColor = .white
             cell.swichBtn.isUserInteractionEnabled = false
         }
-        else  if bogoDisableArr[indexPath.row] == "0" {
+        else if bogoDisableArr[indexPath.row] == "0" {
             cell.swichBtn.isOn = true
             cell.swichBtn.thumbTintColor = .systemBlue
             cell.swichBtn.isUserInteractionEnabled = true
