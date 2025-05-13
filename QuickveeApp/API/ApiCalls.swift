@@ -3141,6 +3141,8 @@ extension ApiCalls {
         ]
         
         print(parameters)
+        print(parameters)
+
         
         AF.request(url, method: .post, parameters: parameters).responseData { response in
             

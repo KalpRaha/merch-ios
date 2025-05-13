@@ -150,6 +150,20 @@ class SelectBogoVariantViewController: UIViewController  {
                     self.novariantView.isHidden = true
                     self.loadingIndicator.isAnimating = false
                     self.tableview.reloadData()
+                    
+                    if self.sort_by_price.isEmpty {
+                        self.tableview.isHidden = true
+                        self.novariantView.isHidden = false
+                        self.noDataImg.isHidden = false
+                        self.nodataLbl.isHidden = false
+                    } else {
+                        self.tableview.isHidden = false
+                        self.novariantView.isHidden = true
+                        self.noDataImg.isHidden = true
+                        self.nodataLbl.isHidden = true
+                        self.tableview.reloadData()
+                    }
+                    
                 }
             }
             else {
@@ -238,7 +252,8 @@ class SelectBogoVariantViewController: UIViewController  {
                 }
             }
         }
-        setCheckVariants()
+        
+        self.setCheckVariants()
     }
     
     func setCheckVariants() {

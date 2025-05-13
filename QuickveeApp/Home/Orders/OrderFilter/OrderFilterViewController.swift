@@ -41,6 +41,13 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var leftTable: UITableView!
     
+    @IBOutlet weak var allLbl: UILabel!
+   
+    @IBOutlet weak var pickLbl: UILabel!
+    
+    
+    @IBOutlet weak var delLbl: UILabel!
+    
     var activeTextField = UITextField()
     var filterMode = ""
 
@@ -67,10 +74,15 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
         
         startDate.label.text = "Select Start Date"
         endDate.label.text = "Select End Date"
+   
+        allLbl.text = "All"
+        pickLbl.text = "Pickup: Show pick up orders"
+        delLbl.text = "Delivery: Show delivery orders"
         
-        allBtn.setTitle(" All", for: .normal)
-        pickup.setTitle("  Pickup: Show pick up orders", for: .normal)
-        delivery.setTitle("  Delivery: Show delivery orders", for: .normal)
+        allLbl.font = UIFont(name: "Manrope-Medium", size: 16.0)!
+        pickLbl.font = UIFont(name: "Manrope-Medium", size: 16.0)!
+        delLbl.font = UIFont(name: "Manrope-Medium", size: 16.0)!
+        
         
         rangeSlider.minValue = 0.0
         rangeSlider.maxValue = 1000.0
@@ -110,6 +122,22 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
         clearBtn.addGestureRecognizer(tap)
         tap.numberOfTapsRequired = 1
         clearBtn.isUserInteractionEnabled = true
+        
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(allClick))
+        allLbl.addGestureRecognizer(tap1)
+        tap1.numberOfTapsRequired = 1
+        allLbl.isUserInteractionEnabled = true
+        
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(pickupClick))
+        pickLbl.addGestureRecognizer(tap2)
+        tap2.numberOfTapsRequired = 1
+        pickLbl.isUserInteractionEnabled = true
+        
+        let tap3 = UITapGestureRecognizer(target: self, action: #selector(delClick))
+        delLbl.addGestureRecognizer(tap3)
+        tap3.numberOfTapsRequired = 1
+        delLbl.isUserInteractionEnabled = true
+        
         
         leftTable.separatorColor = UIColor(red: 238.0/255.0, green: 238.0/255.0, blue: 238.0/255.0, alpha: 1.0)
         
@@ -373,6 +401,59 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
             rangeSlider.selectedMinValue = 0.0
             rangeSlider.selectedMaxValue = 850.0
             rangeSlider.layoutSubviews()
+        }
+    }
+    
+    @objc func allClick() {
+        
+        allBtn.setImage(UIImage(named: "select_radio"), for: .normal)
+        pickup.setImage(UIImage(named: "unselect_radio"), for: .normal)
+        delivery.setImage(UIImage(named: "unselect_radio"), for: .normal)
+        
+        if filterMode == "new"{
+            UserDefaults.standard.set("", forKey: "temp_order_new_order_type")
+        }
+        else if filterMode == "closed" {
+            UserDefaults.standard.set("", forKey: "temp_order_closed_order_type")
+        }
+        else {
+            UserDefaults.standard.set("", forKey: "temp_order_failed_order_type")
+        }
+    }
+    
+    @objc func pickupClick()  {
+        
+        
+        allBtn.setImage(UIImage(named: "unselect_radio"), for: .normal)
+        pickup.setImage(UIImage(named: "select_radio"), for: .normal)
+        delivery.setImage(UIImage(named: "unselect_radio"), for: .normal)
+        
+        if filterMode == "new"{
+            UserDefaults.standard.set("pickup", forKey: "temp_order_new_order_type")
+        }
+        else if filterMode == "closed" {
+            UserDefaults.standard.set("pickup", forKey: "temp_order_closed_order_type")
+        }
+        else {
+            UserDefaults.standard.set("pickup", forKey: "temp_order_failed_order_type")
+        }
+    }
+    
+    @objc func delClick()  {
+        
+        
+        allBtn.setImage(UIImage(named: "unselect_radio"), for: .normal)
+        pickup.setImage(UIImage(named: "unselect_radio"), for: .normal)
+        delivery.setImage(UIImage(named: "select_radio"), for: .normal)
+        
+        if filterMode == "new"{
+            UserDefaults.standard.set("delivery", forKey: "temp_order_new_order_type")
+        }
+        else if filterMode == "closed" {
+            UserDefaults.standard.set("delivery", forKey: "temp_order_closed_order_type")
+        }
+        else {
+            UserDefaults.standard.set("delivery", forKey: "temp_order_failed_order_type")
         }
     }
     

@@ -140,41 +140,41 @@ class AddScheduleViewController: UIViewController {
             }
             startDateTextfield.text = sdate
             
-            let st = schedule?.start_time ?? ""
-            let et = schedule?.end_time ?? ""
-            
-            if st != "" {
-                let df1 = DateFormatter()
-                df1.dateFormat = "HH:mm:ss"
-                df1.locale = Locale(identifier: "en_GB")
-                
-                if let start = df1.date(from: st) {
-                    
-                    let end = df1.date(from: et)!
-                    
-                    let df2 = DateFormatter()
-                    df2.dateFormat = "hh:mm a"
-                    df2.locale = Locale(identifier: "en_US")
-                    
-                    startTimeTextfield.text = df2.string(from: start)
-                    endTimeTextfield.text = df2.string(from: end)
-                }
-                else {
-                    let df2 = DateFormatter()
-                    df2.dateFormat = "hh:mm a"
-                    df2.locale = Locale(identifier: "en_US")
-                    
-                    let start = df2.date(from: st)!
-                    let end = df2.date(from: et)!
-                    
-                    startTimeTextfield.text = df2.string(from: start)
-                    endTimeTextfield.text = df2.string(from: end)
-                }
-            }
-            else {
-                startTimeTextfield.text = ""
-                endTimeTextfield.text = ""
-            }
+//            let st = schedule?.start_time ?? ""
+//            let et = schedule?.end_time ?? ""
+//            
+//            if st != "" {
+//                let df1 = DateFormatter()
+//                df1.dateFormat = "HH:mm:ss"
+//                df1.locale = Locale(identifier: "en_GB")
+//                
+//                if let start = df1.date(from: st) {
+//                    
+//                    let end = df1.date(from: et)!
+//                    
+//                    let df2 = DateFormatter()
+//                    df2.dateFormat = "hh:mm a"
+//                    df2.locale = Locale(identifier: "en_US")
+//                    
+//                    startTimeTextfield.text = df2.string(from: start)
+//                    endTimeTextfield.text = df2.string(from: end)
+//                }
+//                else {
+//                    let df2 = DateFormatter()
+//                    df2.dateFormat = "hh:mm a"
+//                    df2.locale = Locale(identifier: "en_US")
+//                    
+//                    let start = df2.date(from: st)!
+//                    let end = df2.date(from: et)!
+//                    
+//                    startTimeTextfield.text = df2.string(from: start)
+//                    endTimeTextfield.text = df2.string(from: end)
+//                }
+//            }
+//            else {
+//                startTimeTextfield.text = ""
+//                endTimeTextfield.text = ""
+//            }
             
             if schedule?.no_end_date == "1" {
                 endSwitch = "1"
@@ -214,6 +214,9 @@ class AddScheduleViewController: UIViewController {
                 endTimeTextfield.isHidden = true
                 startTimeHeight.constant = 0
                 endTimeHeight.constant = 0
+                
+                startTimeTextfield.text = ""
+                endTimeTextfield.text = ""
             }
             else {
                 fullSwitch = "0"
@@ -224,6 +227,41 @@ class AddScheduleViewController: UIViewController {
                 endTimeTextfield.isHidden = false
                 startTimeHeight.constant = 53
                 endTimeHeight.constant = 53
+                
+                let st = schedule?.start_time ?? ""
+                let et = schedule?.end_time ?? ""
+                
+                if st != "" {
+                    
+                    let df1 = DateFormatter()
+                    df1.dateFormat = "HH:mm:ss"
+                    df1.locale = Locale(identifier: "en_GB")
+                    
+                    if let start = df1.date(from: st) {
+                        
+                        let end = df1.date(from: et)!
+                        
+                        let df2 = DateFormatter()
+                        df2.dateFormat = "hh:mm a"
+                        df2.locale = Locale(identifier: "en_US")
+                        
+                        startTimeTextfield.text = df2.string(from: start)
+                        endTimeTextfield.text = df2.string(from: end)
+                    }
+                    else {
+                        let df2 = DateFormatter()
+                        df2.dateFormat = "hh:mm a"
+                        df2.locale = Locale(identifier: "en_US")
+                        
+                        if let start = df2.date(from: st) {
+                            
+                            let end = df2.date(from: et)!
+                            
+                            startTimeTextfield.text = df2.string(from: start)
+                            endTimeTextfield.text = df2.string(from: end)
+                        }
+                    }
+                }
             }
             
             if schedule?.repeat_type == "1" {

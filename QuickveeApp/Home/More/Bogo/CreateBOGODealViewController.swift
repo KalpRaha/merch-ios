@@ -129,15 +129,20 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
                 df1.dateFormat = "HH:mm:ss"
                 df1.locale = Locale(identifier: "en_GB")
                 
-                let start = df1.date(from: st)!
-                let end = df1.date(from: et)!
-                
-                let df2 = DateFormatter()
-                df2.dateFormat = "hh:mm a"
-                df2.locale = Locale(identifier: "en_US")
-                
-                stime = df2.string(from: start)
-                etime = df2.string(from: end)
+                if let start = df1.date(from: st),
+                   let end = df1.date(from: et) {
+                 
+                    let df2 = DateFormatter()
+                    df2.dateFormat = "hh:mm a"
+                    df2.locale = Locale(identifier: "en_US")
+                    
+                    stime = df2.string(from: start)
+                    etime = df2.string(from: end)
+                }
+                else {
+                    stime = ""
+                    etime = ""
+                }
             }
             else {
                 stime = ""
@@ -451,13 +456,21 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
         let Free_qty = discountQtyTextfield.text ?? ""
         let desc = describeDealTextfield.text ?? ""
         
-        let sd = scheduleData?.start_date ?? ""
+        var sd = scheduleData?.start_date ?? ""
         let ed = scheduleData?.end_date ?? ""
         
+        if sd == "" {
+            
+            let date = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yyyy"
+            
+            sd = dateFormatter.string(from: date)
+        }
+  
         let change_start_date = ToastClass.sharedToast.setCouponlistDate(dateStr: sd)
         let change_end_date = ToastClass.sharedToast.setCouponlistDate(dateStr: ed)
     
-        let full = scheduleData?.full_day ?? ""
         
         let st = scheduleData?.start_time ?? ""
         let et = scheduleData?.end_time ?? ""
@@ -485,8 +498,22 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
-        let ned = scheduleData?.no_end_date ?? ""
-        let no_repeat = scheduleData?.repeat_type ?? ""
+        var full = scheduleData?.full_day ?? ""
+        var ned = scheduleData?.no_end_date ?? ""
+        var no_repeat = scheduleData?.repeat_type ?? ""
+        
+        if full == "" {
+            full = "1"
+        }
+        
+        if ned == "" {
+            ned = "1"
+        }
+        
+        if no_repeat == "" {
+            no_repeat = "1"
+        }
+      
         let week = scheduleData?.weekly_days ?? ""
         
         loadIndicator.isAnimating = true
@@ -598,6 +625,7 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
     }
  
     @objc func addScheduleBtnClick() {
+        
         if addScheduleLbl.text == "Add Schedule +" {
             schedule_exist = false
         }
@@ -673,7 +701,7 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func dollerBtnClick(_ sender: UIButton) {
-        
+          
         percentBtn.backgroundColor = UIColor.init(hexString: "#EEEEEE")
         dollerBtn.backgroundColor = UIColor.init(hexString: "#0A64F9")
         dollerBtn.setImage(UIImage(named: "dolllerSym"), for: .normal)
@@ -1085,33 +1113,34 @@ extension CreateBOGODealViewController {
         }
         textField.text = amountAsString
         
+        let qty = Int(qtyTextfield.text ?? "0") ?? 0
+        let freeQty = Int(discountQtyTextfield.text ?? "0") ?? 0
         
-//        if textField == discountperItemTextfield  {
-//            
-//            let qty = Int(qtyTextfield.text ?? "0") ?? 0
-//            let freeQty = Int(discountQtyTextfield.text ?? "0") ?? 0
-//            
-//            let discount = Double(discountperItemTextfield.text ?? "0") ?? 0.0
-//            
-//            guard qty > 0, freeQty > 0, qty > freeQty else {
-//                describeDealTextfield.text = ""
-//                return
-//            }
-//            
-//            let buyQty = qty - freeQty
-//            
-//            let discountType = percentBtn.backgroundColor == UIColor.init(hexString: "#0A64F9") ? "%" : "$"
-//            
-//            
-//            if discount < 100 {
-//                describeDealTextfield.text = "Buy \(buyQty), Get \(freeQty) \(discount) \(discountType) off"
-//            }
-//            else {
-//                describeDealTextfield.text = "Buy \(buyQty), Get \(freeQty) Free"
-//                
-//            }
-//            
-//        }
+        let discount = Double(discountperItemTextfield.text ?? "0") ?? 0.00
+        
+        let buyQty = qty - freeQty
+        
+        let discountType = percentBtn.backgroundColor == UIColor.init(hexString: "#0A64F9") ? "%" : "$"
+        
+        let formattedDiscount = String(format: "%.2f", discount)
+        
+        if textField == discountperItemTextfield {
+              if discount_type == "2" {
+                dollarAmt = formattedDiscount
+                getlessAmtVarient()
+              }
+              else {
+                dollarAmt = ""
+              }
+            }
+            else if textField == discountQtyTextfield {
+              guard qty > freeQty else {
+                ToastClass.sharedToast.showToast(message: "Free Quantity must be less than Buy Quantity",
+                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                discountQtyTextfield.isError(numberOfShakes: 3, revert: true)
+                return
+              }
+            }
         
         if textField.text == "000" {
             textField.text = ""
