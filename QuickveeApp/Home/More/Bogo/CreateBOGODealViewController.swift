@@ -185,6 +185,7 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
+        
         tableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
         
         let scheduleGest = UITapGestureRecognizer(target: self, action: #selector(addScheduleBtnClick))
@@ -457,7 +458,10 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
         let desc = describeDealTextfield.text ?? ""
         
         var sd = scheduleData?.start_date ?? ""
-        let ed = scheduleData?.end_date ?? ""
+        var ed = scheduleData?.end_date ?? ""
+        
+        var change_start_date = ""
+        var change_end_date = ""
         
         if sd == "" {
             
@@ -467,82 +471,116 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             
             sd = dateFormatter.string(from: date)
         }
-  
-        let change_start_date = ToastClass.sharedToast.setCouponlistDate(dateStr: sd)
-        let change_end_date = ToastClass.sharedToast.setCouponlistDate(dateStr: ed)
-    
         
-        let st = scheduleData?.start_time ?? ""
-        let et = scheduleData?.end_time ?? ""
-        
-        var startTime = ""
-        var endTime = ""
-        
-        if st != "" {
-            let df1 = DateFormatter()
-            df1.dateFormat = "hh:mm a"
-            df1.locale = Locale(identifier: "en_US")
+        else {
             
-            if let start = df1.date(from: st),
-               let end = df1.date(from: et) {
-                let df2 = DateFormatter()
-                df2.dateFormat = "HH:mm"
-                df2.locale = Locale(identifier: "en_GB")
-                
-                startTime = df2.string(from: start)
-                endTime = df2.string(from: end)
-            }
-            else {
-                startTime = ""
-                endTime = ""
-            }
-        }
-        
-        var full = scheduleData?.full_day ?? ""
-        var ned = scheduleData?.no_end_date ?? ""
-        var no_repeat = scheduleData?.repeat_type ?? ""
-        
-        if full == "" {
-            full = "1"
-        }
-        
-        if ned == "" {
-            ned = "1"
-        }
-        
-        if no_repeat == "" {
-            no_repeat = "1"
-        }
-      
-        let week = scheduleData?.weekly_days ?? ""
-        
-        loadIndicator.isAnimating = true
-        
-        ApiCalls.sharedCall.addBogoApiCall(merchant_id: id, deal_name: d_name,
-                                           description: desc, no_end_date: ned,
-                                           use_with_coupon: "1", buy_qty: buy_qty,
-                                           free_qty: Free_qty, discount: price,
-                                           discount_type: discount_type, items: items_id,
-                                           start_date: change_start_date, end_date: change_end_date,
-                                           full_day: full, start_time: startTime,
-                                           end_time: endTime, repeat_type: no_repeat,
-                                           weekly_days: week, monthly_dates: "",
-                                           id: bogo_id) { isSuccess, responseData in
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yyyy"
             
-            if isSuccess {
+            if let start = dateFormatter.date(from: sd) {
                 
-                let msg = responseData["msg"] as? String ?? ""
+                let startString = dateFormatter.string(from: start)
+                change_start_date = ToastClass.sharedToast.setCouponlistDate(dateStr: startString)
                 
-                self.loadIndicator.isAnimating = false
-                ToastClass.sharedToast.showToast(message: msg,
-                                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                
-                if msg == "BOGO deal added successfully." || msg == "BOGO deal updated successfully." {
-                    self.navigationController?.popViewController(animated: true)
+                if let end = dateFormatter.date(from: ed) {
+                    
+                    let endString = dateFormatter.string(from: end)
+                    change_end_date = ToastClass.sharedToast.setCouponlistDate(dateStr: endString)
+                }
+                else {
+                    change_end_date = ""
                 }
             }
+            
             else {
-                print("Api Error")
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                
+                if let start = dateFormatter.date(from: sd) {
+                    
+                    change_start_date = dateFormatter.string(from: start)
+                    if let end = dateFormatter.date(from: ed) {
+                        
+                        change_end_date = dateFormatter.string(from: end)
+                    }
+                    else {
+                        change_end_date = ""
+                    }
+                }
+            }
+            
+            let st = scheduleData?.start_time ?? ""
+            let et = scheduleData?.end_time ?? ""
+            
+            var startTime = ""
+            var endTime = ""
+            
+            if st != "" {
+                let df1 = DateFormatter()
+                df1.dateFormat = "hh:mm a"
+                df1.locale = Locale(identifier: "en_US")
+                
+                if let start = df1.date(from: st),
+                   let end = df1.date(from: et) {
+                    let df2 = DateFormatter()
+                    df2.dateFormat = "HH:mm"
+                    df2.locale = Locale(identifier: "en_GB")
+                    
+                    startTime = df2.string(from: start)
+                    endTime = df2.string(from: end)
+                }
+                else {
+                    startTime = ""
+                    endTime = ""
+                }
+            }
+            
+            var full = scheduleData?.full_day ?? ""
+            var ned = scheduleData?.no_end_date ?? ""
+            var no_repeat = scheduleData?.repeat_type ?? ""
+            
+            if full == "" {
+                full = "1"
+            }
+            
+            if ned == "" {
+                ned = "1"
+            }
+            
+            if no_repeat == "" {
+                no_repeat = "1"
+            }
+            
+            let week = scheduleData?.weekly_days ?? ""
+            
+            loadIndicator.isAnimating = true
+            
+            ApiCalls.sharedCall.addBogoApiCall(merchant_id: id, deal_name: d_name,
+                                               description: desc, no_end_date: ned,
+                                               use_with_coupon: "1", buy_qty: buy_qty,
+                                               free_qty: Free_qty, discount: price,
+                                               discount_type: discount_type, items: items_id,
+                                               start_date: change_start_date, end_date: change_end_date,
+                                               full_day: full, start_time: startTime,
+                                               end_time: endTime, repeat_type: no_repeat,
+                                               weekly_days: week, monthly_dates: "",
+                                               id: bogo_id) { isSuccess, responseData in
+                
+                if isSuccess {
+                    
+                    let msg = responseData["msg"] as? String ?? ""
+                    
+                    self.loadIndicator.isAnimating = false
+                    ToastClass.sharedToast.showToast(message: msg,
+                                                     font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                    
+                    if msg == "BOGO deal added successfully." || msg == "BOGO deal updated successfully." {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+                else {
+                    print("Api Error")
+                }
             }
         }
     }

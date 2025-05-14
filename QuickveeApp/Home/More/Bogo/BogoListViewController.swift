@@ -458,8 +458,7 @@ class BogoListViewController: UIViewController {
         let currentDateString = df1.string(from: Date())
         let currentTimeString = df2.string(from: Date())
         
-        if let startDateTime = df1.date(from: startDate),
-           let endDateTime = df1.date(from: endDate) {
+        if let startDateTime = df1.date(from: startDate) {
             
             let currentDate = df1.date(from: currentDateString)!
             
@@ -468,8 +467,41 @@ class BogoListViewController: UIViewController {
             }
             else if startDateTime <= currentDate {
                 
-                if endDateTime < currentDate {
-                    return true
+                if let endDateTime = df1.date(from: endDate) {
+                    
+                    if endDateTime < currentDate {
+                        return true
+                    }
+                    else {
+                        
+                        let currentTimeArray = currentTimeString.split(separator: ":")
+                        let startTimeArray = startTime.split(separator: ":")
+                        let endTimeArray = endTime.split(separator: ":")
+                        
+                        if startTime == "00:00:00" && endTime == "00:00:00" {
+                            return false
+                        }
+                        else {
+                            if currentTimeArray[0] < endTimeArray[0] {
+                                return false
+                            }
+                            else if currentTimeArray[0] == endTimeArray[0] {
+                                
+                                if currentTimeArray[1] < endTimeArray[1] {
+                                    return false
+                                }
+                                else if currentTimeArray[1] == endTimeArray[1] {
+                                    return false
+                                }
+                                else {
+                                    return true
+                                }
+                            }
+                            else {
+                                return true
+                            }
+                        }
+                    }
                 }
                 else {
                     
