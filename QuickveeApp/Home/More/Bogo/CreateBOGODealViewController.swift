@@ -78,6 +78,7 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
     var scheduleData: AddSchedule?
     
     let loadIndicator: ProgressView = {
+        
         let progress = ProgressView(colors: [.white], lineWidth: 3)
         progress.translatesAutoresizingMaskIntoConstraints = false
         return progress
@@ -160,7 +161,13 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
                 addScheduleLbl.text = "Manage Schedule +"
                 
                 if bogoObj?.start_time == "00:00:00" {
-                    activeLbl.text = "The Deal Will Starting From \(sdate)"
+                    
+                    if bogoObj?.end_time == "00:00:00" {
+                        activeLbl.text = "The Deal Will Starting From \(sdate)"
+                    }
+                    else {
+                        activeLbl.text = "The Deal Will Be Active From \(stime) To \(etime) Starting From \(sdate)"
+                    }
                 }
                 else {
                     activeLbl.text = "The Deal Will Be Active From \(stime) To \(etime) Starting From \(sdate)"
@@ -170,7 +177,13 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
                 addScheduleLbl.text = "Manage Schedule +"
                 
                 if bogoObj?.start_time == "00:00:00" {
-                    activeLbl.text = "The Deal Will Be Starting From \(sdate) Till \(edate)"
+                    
+                    if bogoObj?.end_time == "00:00:00" {
+                        activeLbl.text = "The Deal Will Starting From \(sdate)"
+                    }
+                    else {
+                        activeLbl.text = "The Deal Will Be Active From \(stime) To \(etime) Starting From \(sdate)"
+                    }
                 }
                 else {
                     activeLbl.text = "The Deal Will Be Active From \(stime) To \(etime) Starting From \(sdate) Till \(edate)"
@@ -458,10 +471,13 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
         let desc = describeDealTextfield.text ?? ""
         
         var sd = scheduleData?.start_date ?? ""
-        var ed = scheduleData?.end_date ?? ""
+        let ed = scheduleData?.end_date ?? ""
         
         var change_start_date = ""
         var change_end_date = ""
+        
+        var startTime = ""
+        var endTime = ""
         
         if sd == "" {
             
@@ -470,6 +486,8 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             dateFormatter.dateFormat = "MM/dd/yyyy"
             
             sd = dateFormatter.string(from: date)
+            
+            change_start_date = ToastClass.sharedToast.setCouponlistDate(dateStr: sd)
         }
         
         else {
@@ -512,9 +530,6 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             let st = scheduleData?.start_time ?? ""
             let et = scheduleData?.end_time ?? ""
             
-            var startTime = ""
-            var endTime = ""
-            
             if st != "" {
                 let df1 = DateFormatter()
                 df1.dateFormat = "hh:mm a"
@@ -530,57 +545,77 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
                     endTime = df2.string(from: end)
                 }
                 else {
-                    startTime = ""
-                    endTime = ""
-                }
-            }
-            
-            var full = scheduleData?.full_day ?? ""
-            var ned = scheduleData?.no_end_date ?? ""
-            var no_repeat = scheduleData?.repeat_type ?? ""
-            
-            if full == "" {
-                full = "1"
-            }
-            
-            if ned == "" {
-                ned = "1"
-            }
-            
-            if no_repeat == "" {
-                no_repeat = "1"
-            }
-            
-            let week = scheduleData?.weekly_days ?? ""
-            
-            loadIndicator.isAnimating = true
-            
-            ApiCalls.sharedCall.addBogoApiCall(merchant_id: id, deal_name: d_name,
-                                               description: desc, no_end_date: ned,
-                                               use_with_coupon: "1", buy_qty: buy_qty,
-                                               free_qty: Free_qty, discount: price,
-                                               discount_type: discount_type, items: items_id,
-                                               start_date: change_start_date, end_date: change_end_date,
-                                               full_day: full, start_time: startTime,
-                                               end_time: endTime, repeat_type: no_repeat,
-                                               weekly_days: week, monthly_dates: "",
-                                               id: bogo_id) { isSuccess, responseData in
-                
-                if isSuccess {
                     
-                    let msg = responseData["msg"] as? String ?? ""
+                    let df1 = DateFormatter()
+                    df1.dateFormat = "HH:mm:ss"
+                    df1.locale = Locale(identifier: "en_GB")
                     
-                    self.loadIndicator.isAnimating = false
-                    ToastClass.sharedToast.showToast(message: msg,
-                                                     font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                    
-                    if msg == "BOGO deal added successfully." || msg == "BOGO deal updated successfully." {
-                        self.navigationController?.popViewController(animated: true)
+                    if let start = df1.date(from: st),
+                       let end = df1.date(from: et) {
+                        let df2 = DateFormatter()
+                        df2.dateFormat = "HH:mm"
+                        df2.locale = Locale(identifier: "en_GB")
+                        
+                        startTime = df2.string(from: start)
+                        endTime = df2.string(from: end)
+                    }
+                    else {
+                        startTime = ""
+                        endTime = ""
                     }
                 }
-                else {
-                    print("Api Error")
+            }
+            else {
+                startTime = ""
+                endTime = ""
+            }
+        }
+        
+        var full = scheduleData?.full_day ?? ""
+        var ned = scheduleData?.no_end_date ?? ""
+        var no_repeat = scheduleData?.repeat_type ?? ""
+        
+        if full == "" {
+            full = "1"
+        }
+        
+        if ned == "" {
+            ned = "1"
+        }
+        
+        if no_repeat == "" {
+            no_repeat = "1"
+        }
+        
+        let week = scheduleData?.weekly_days ?? ""
+        
+        loadIndicator.isAnimating = true
+        
+        ApiCalls.sharedCall.addBogoApiCall(merchant_id: id, deal_name: d_name,
+                                           description: desc, no_end_date: ned,
+                                           use_with_coupon: "1", buy_qty: buy_qty,
+                                           free_qty: Free_qty, discount: price,
+                                           discount_type: discount_type, items: items_id,
+                                           start_date: change_start_date, end_date: change_end_date,
+                                           full_day: full, start_time: startTime,
+                                           end_time: endTime, repeat_type: no_repeat,
+                                           weekly_days: week, monthly_dates: "",
+                                           id: bogo_id) { isSuccess, responseData in
+            
+            if isSuccess {
+                
+                let msg = responseData["msg"] as? String ?? ""
+                
+                self.loadIndicator.isAnimating = false
+                ToastClass.sharedToast.showToast(message: msg,
+                                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                
+                if msg == "BOGO deal added successfully." || msg == "BOGO deal updated successfully." {
+                    self.navigationController?.popViewController(animated: true)
                 }
+            }
+            else {
+                print("Api Error")
             }
         }
     }
@@ -1151,34 +1186,34 @@ extension CreateBOGODealViewController {
         }
         textField.text = amountAsString
         
-        let qty = Int(qtyTextfield.text ?? "0") ?? 0
-        let freeQty = Int(discountQtyTextfield.text ?? "0") ?? 0
+//        let qty = Int(qtyTextfield.text ?? "0") ?? 0
+//        let freeQty = Int(discountQtyTextfield.text ?? "0") ?? 0
+//        
+//        let discount = Double(discountperItemTextfield.text ?? "0") ?? 0.00
+//        
+//        let buyQty = qty - freeQty
+//        
+//        let discountType = percentBtn.backgroundColor == UIColor.init(hexString: "#0A64F9") ? "%" : "$"
+//        
+//        let formattedDiscount = String(format: "%.2f", discount)
         
-        let discount = Double(discountperItemTextfield.text ?? "0") ?? 0.00
-        
-        let buyQty = qty - freeQty
-        
-        let discountType = percentBtn.backgroundColor == UIColor.init(hexString: "#0A64F9") ? "%" : "$"
-        
-        let formattedDiscount = String(format: "%.2f", discount)
-        
-        if textField == discountperItemTextfield {
-              if discount_type == "2" {
-                dollarAmt = formattedDiscount
-                getlessAmtVarient()
-              }
-              else {
-                dollarAmt = ""
-              }
-            }
-            else if textField == discountQtyTextfield {
-              guard qty > freeQty else {
-                ToastClass.sharedToast.showToast(message: "Free Quantity must be less than Buy Quantity",
-                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                discountQtyTextfield.isError(numberOfShakes: 3, revert: true)
-                return
-              }
-            }
+//        if textField == discountperItemTextfield {
+//              if discount_type == "2" {
+//                dollarAmt = formattedDiscount
+//                getlessAmtVarient()
+//              }
+//              else {
+//                dollarAmt = ""
+//              }
+//            }
+//            else if textField == discountQtyTextfield {
+//              guard qty > freeQty else {
+//                ToastClass.sharedToast.showToast(message: "Free Quantity must be less than Buy Quantity",
+//                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//                discountQtyTextfield.isError(numberOfShakes: 3, revert: true)
+//                return
+//              }
+//            }
         
         if textField.text == "000" {
             textField.text = ""

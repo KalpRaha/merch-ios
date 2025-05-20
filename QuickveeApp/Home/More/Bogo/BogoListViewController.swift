@@ -449,8 +449,12 @@ class BogoListViewController: UIViewController {
     func checkDateTime(startDate: String, endDate: String, startTime: String, endTime: String) -> Bool {
         
         let df1 = DateFormatter()
-        df1.timeZone = TimeZone(secondsFromGMT: 0)
+       // df1.timeZone = TimeZone(secondsFromGMT: 0)
         df1.dateFormat = "yyyy-MM-dd"
+      
+        let df3 = DateFormatter()
+        df3.timeZone = TimeZone(secondsFromGMT: 0)
+        df3.dateFormat = "yyyy-MM-dd"
         
         let df2 = DateFormatter()
         df2.dateFormat = "HH:mm:ss"
@@ -458,16 +462,16 @@ class BogoListViewController: UIViewController {
         let currentDateString = df1.string(from: Date())
         let currentTimeString = df2.string(from: Date())
         
-        if let startDateTime = df1.date(from: startDate) {
+        if let startDateTime = df3.date(from: startDate) {
             
-            let currentDate = df1.date(from: currentDateString)!
+            let currentDate = df3.date(from: currentDateString)!
             
             if startDateTime > currentDate {
                 return true
             }
             else if startDateTime <= currentDate {
                 
-                if let endDateTime = df1.date(from: endDate) {
+                if let endDateTime = df3.date(from: endDate) {
                     
                     if endDateTime < currentDate {
                         return true

@@ -156,11 +156,14 @@ class SelectBogoVariantViewController: UIViewController  {
                         self.novariantView.isHidden = false
                         self.noDataImg.isHidden = false
                         self.nodataLbl.isHidden = false
+                        self.loadingIndicator.isAnimating = false
+
                     } else {
                         self.tableview.isHidden = false
                         self.novariantView.isHidden = true
                         self.noDataImg.isHidden = true
                         self.nodataLbl.isHidden = true
+                        self.loadingIndicator.isAnimating = false
                         self.tableview.reloadData()
                     }
                     

@@ -24,9 +24,6 @@
         <array key="Manrope-SemiBold.ttf">
             <string>Manrope-SemiBold</string>
         </array>
-        <array key="TimesNewRoman.ttf">
-            <string>.SFUI-Regular</string>
-        </array>
     </customFonts>
     <scenes>
         <!--Register Table View Controller-->
@@ -3141,14 +3138,14 @@
             <objects>
                 <viewController storyboardIdentifier="passScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Iqh-Ah-gLr" customClass="PassCodeViewController" customModule="QuickveeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qoe-iD-qpf">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Passcode" translatesAutoresizingMaskIntoConstraints="NO" id="6TU-D4-nY9">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UkL-7Y-aS4">
-                                <rect key="frame" x="0.0" y="241" width="390" height="100"/>
+                                <rect key="frame" x="0.0" y="150" width="390" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Enter Passcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hpf-In-5cS">
                                         <rect key="frame" x="86.666666666666671" y="10.000000000000002" width="216.66666666666663" height="24.666666666666671"/>
@@ -3157,7 +3154,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="LcM-b2-stG">
-                                        <rect key="frame" x="148" y="64.666666666666686" width="94" height="16"/>
+                                        <rect key="frame" x="148" y="64.666666666666657" width="94" height="16"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="biw-iv-sAc">
                                                 <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
@@ -3196,7 +3193,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="mFl-xM-vMc" userLabel="1">
-                                <rect key="frame" x="57" y="374" width="276" height="70"/>
+                                <rect key="frame" x="57" y="283" width="276" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X3h-yO-Smu">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
@@ -3240,7 +3237,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="twk-fP-7gF" userLabel="4">
-                                <rect key="frame" x="57" y="460" width="276" height="70"/>
+                                <rect key="frame" x="57" y="369" width="276" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLq-2d-J2W">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
@@ -3284,7 +3281,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="xyr-eX-jrp" userLabel="7">
-                                <rect key="frame" x="57" y="546" width="276" height="70"/>
+                                <rect key="frame" x="57" y="455" width="276" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bwc-eJ-R80">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
@@ -3328,7 +3325,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="77U-hU-IXn" userLabel="0">
-                                <rect key="frame" x="57" y="632" width="276" height="70"/>
+                                <rect key="frame" x="57" y="541" width="276" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pkM-Td-khY">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
@@ -3373,7 +3370,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74R-7n-g1b">
-                                <rect key="frame" x="300" y="720" width="70" height="70"/>
+                                <rect key="frame" x="300" y="744" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="f16-Db-uWY"/>
                                     <constraint firstAttribute="width" constant="70" id="skg-2E-WkU"/>
@@ -44677,8 +44674,8 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZd-36-S9f">
-                                        <rect key="frame" x="44.000000000000007" y="13" width="71.666666666666686" height="18"/>
-                                        <fontDescription key="fontDescription" name=".SFUI-Regular" family=".AppleSystemUIFont" pointSize="16"/>
+                                        <rect key="frame" x="44.000000000000007" y="12.333333333333327" width="80.666666666666686" height="19.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -44985,7 +44982,7 @@
         <segue reference="SeS-H7-xfm"/>
         <segue reference="Kdt-YW-Tde"/>
         <segue reference="UfE-A6-dPb"/>
-        <segue reference="n96-Wq-Hy2"/>
+        <segue reference="mOk-pP-wFc"/>
         <segue reference="0XF-Ao-PWs"/>
     </inferredMetricsTieBreakers>
     <resources>
