@@ -116,7 +116,7 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             repeatLbl.text = ""
         }
         else {
-            let sdate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: bogoObj?.start_date ?? "")
+            var sdate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: bogoObj?.start_date ?? "")
             let edate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: bogoObj?.end_date ?? "")
             
             let st = bogoObj?.start_time ?? ""
@@ -153,8 +153,15 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             let wdays = bogoObj?.weekly_days ?? ""
             
             if bogoObj?.start_date == "0000-00-00" {
-                addScheduleLbl.text = "Add Schedule +"
-                activeLbl.text = "No Schedule Set"
+                addScheduleLbl.text = "Manage Schedule +"
+                
+                let date = Date()
+                let dateFormat = DateFormatter()
+                dateFormat.timeZone = TimeZone(secondsFromGMT: 0)
+                dateFormat.dateFormat = "MM/dd/yyyy"
+                
+                sdate = dateFormat.string(from: date)
+                activeLbl.text = "The Deal Will Starting From \(sdate)"
                 repeatLbl.text = ""
             }
             else if bogoObj?.end_date == "0000-00-00" {
