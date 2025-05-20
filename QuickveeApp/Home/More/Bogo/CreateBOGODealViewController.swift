@@ -190,7 +190,7 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
                 }
             }
             
-            if bogoObj?.weekly_days == "" {
+            if bogoObj?.weekly_days == "" || bogoObj?.weekly_days == "<null>"  {
                 repeatLbl.text = ""
             }
             else {
@@ -1122,7 +1122,7 @@ extension CreateBOGODealViewController: AddScheduleDelegate {
             }
         }
         
-        if data.weekly_days == "" {
+        if data.weekly_days == "" || bogoObj?.weekly_days == "<null>" {
             repeatLbl.text = ""
         }
         else {

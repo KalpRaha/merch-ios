@@ -104,7 +104,12 @@ class AddScheduleViewController: UIViewController {
         
         if schedule == nil {
             
-            startDateTextfield.text = ""
+            let date = Date()
+            let dateFormat = DateFormatter()
+            dateFormat.timeZone = TimeZone(secondsFromGMT: 0)
+            dateFormat.dateFormat = "MM/dd/yyyy"
+            
+            startDateTextfield.text = dateFormat.string(from: date)
             endDateTextfield.text = ""
             startTimeTextfield.text = ""
             endTimeTextfield.text = ""
@@ -133,7 +138,13 @@ class AddScheduleViewController: UIViewController {
             var sdate = ""
             
             if ToastClass.sharedToast.setCouponsDateFormat(dateStr: schedule?.start_date ?? "") == "" {
-                sdate = schedule?.start_date ?? ""
+                
+                let date = Date()
+                let dateFormat = DateFormatter()
+                dateFormat.timeZone = TimeZone(secondsFromGMT: 0)
+                dateFormat.dateFormat = "MM/dd/yyyy"
+                
+                sdate = dateFormat.string(from: date)
             }
             else {
                 sdate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: schedule?.start_date ?? "")
@@ -176,7 +187,7 @@ class AddScheduleViewController: UIViewController {
 //                endTimeTextfield.text = ""
 //            }
             
-            if schedule?.no_end_date == "1" {
+            if schedule?.no_end_date == "1" || schedule?.no_end_date == "<null>" {
                 endSwitch = "1"
                 noEndDateSwitch.isOn = true
                 noEndDateSwitch.tintColor = UIColor(hexString: "#CCDFFF")
@@ -205,7 +216,7 @@ class AddScheduleViewController: UIViewController {
                 endDateTextfield.text = edate
             }
             
-            if schedule?.full_day == "1" {
+            if schedule?.full_day == "1" || schedule?.full_day == "<null>" {
                 fullSwitch = "1"
                 fullDaySwitch.isOn = true
                 fullDaySwitch.tintColor = UIColor(hexString: "#CCDFFF")
@@ -264,7 +275,7 @@ class AddScheduleViewController: UIViewController {
                 }
             }
             
-            if schedule?.repeat_type == "1" {
+            if schedule?.repeat_type == "1" || schedule?.repeat_type == "<null>" {
                 repeatSwitch = "1"
                 donotRepeatSwitch.isOn = true
                 collectionView.isHidden = true
