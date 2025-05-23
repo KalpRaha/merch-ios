@@ -113,7 +113,7 @@ class SelectBogoVariantViewController: UIViewController  {
         
         searchBar.showsCancelButton = true
         tableview.showsVerticalScrollIndicator = false
-        
+        sort_by_price = []
         variantListApi()
         
         filterLbl.text = ""

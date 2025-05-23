@@ -221,7 +221,7 @@ class CustomerViewController: UIViewController {
         let lastInitial = nameComponents.count > 1 ? nameComponents.last?.prefix(1) ?? "" : ""
         return "\(firstInitial)\(middleInitial)\(lastInitial)"
     }
-    
+          
     func formatPhoneNumber(_ number: String) -> String {
         let formattedNumber = number.replacingOccurrences(of: "(\\d{3})(\\d{3})(\\d{4})", with: "$1-$2-$3", options: .regularExpression, range: nil)
         return formattedNumber
@@ -448,8 +448,7 @@ extension CustomerViewController: UITableViewDelegate, UITableViewDataSource {
             index += 1
         }
         
-        let width = cell.customerView.bounds.size.width
-        cell.customerView.layer.cornerRadius = width/2
+        cell.customerView.layer.cornerRadius = 75 * 0.5
         
         cell.customName.text = customerList[indexPath.row].name.capitalized
         
@@ -495,6 +494,10 @@ extension CustomerViewController: UITableViewDelegate, UITableViewDataSource {
         initialColor = cell.initialLabel.textColor
                                                                                               
         performSegue(withIdentifier: "tocustInfo", sender: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 115.33
     }
     
 }

@@ -60,6 +60,7 @@ class BogoListViewController: UIViewController {
         enableAllBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
         
         flag = 0
+        bogoMixItemsIdArr = []
         bogoListApiCall()
     }
     

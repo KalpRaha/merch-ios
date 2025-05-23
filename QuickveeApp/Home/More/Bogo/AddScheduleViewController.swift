@@ -35,6 +35,7 @@ class AddScheduleViewController: UIViewController {
     var repeatSwitch = "0"
     var week = ""
     
+    var exist = false
     var schedule: AddSchedule?
     
     var weekDays = ["0", "0", "0", "0", "0", "0", "0"]
@@ -104,12 +105,19 @@ class AddScheduleViewController: UIViewController {
         
         if schedule == nil {
             
-            let date = Date()
-            let dateFormat = DateFormatter()
-            dateFormat.timeZone = TimeZone(secondsFromGMT: 0)
-            dateFormat.dateFormat = "MM/dd/yyyy"
+            if exist {
+                let date = Date()
+                let dateFormat = DateFormatter()
+                dateFormat.timeZone = TimeZone(secondsFromGMT: 0)
+                dateFormat.dateFormat = "MM/dd/yyyy"
+                
+                startDateTextfield.text = dateFormat.string(from: date)
+            }
+            else {
+                startDateTextfield.text = ""
+            }
             
-            startDateTextfield.text = dateFormat.string(from: date)
+           
             endDateTextfield.text = ""
             startTimeTextfield.text = ""
             endTimeTextfield.text = ""
@@ -141,7 +149,6 @@ class AddScheduleViewController: UIViewController {
                 
                 let date = Date()
                 let dateFormat = DateFormatter()
-                dateFormat.timeZone = TimeZone(secondsFromGMT: 0)
                 dateFormat.dateFormat = "MM/dd/yyyy"
                 
                 sdate = dateFormat.string(from: date)
@@ -684,8 +691,8 @@ extension AddScheduleViewController {
         if let datePicker = activeTextField.inputView as? UIDatePicker{
             let dateFormat = DateFormatter()
             dateFormat.dateFormat = "MM/dd/yyyy"
-            
             datePicker.minimumDate = Date()
+            
             let starttime = dateFormat.string(from: datePicker.date)
             activeTextField.text = starttime
             activeTextField.resignFirstResponder()

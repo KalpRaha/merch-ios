@@ -828,7 +828,7 @@ class DuplicatePlusViewController: UIViewController {
                 let newCompareprice = Double(c_compareprice)!
                 let newPrice = Double(c_price)!
                 
-                guard newPrice.isLessThanOrEqualTo(newCompareprice) else  {
+                guard newPrice != newCompareprice, newCompareprice > newPrice else {
                     ToastClass.sharedToast.showToast(message: "Compare price must be greater than price", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                     cell.comparePrice.isError(numberOfShakes: 3, revert: true)
                     
@@ -994,7 +994,7 @@ class DuplicatePlusViewController: UIViewController {
                     sayAct(tag: product)
                     let index = IndexPath(row: 0, section: product)
                     let cell = dupVariantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
-                    guard newPrice.isLessThanOrEqualTo(newCompareprice) else  {
+                    guard newPrice != newCompareprice, newCompareprice > newPrice else {
                         ToastClass.sharedToast.showToast(message: "Compare price must be greater than price", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                         cell.comparePrice.isError(numberOfShakes: 3, revert: true)
                         
@@ -1213,6 +1213,7 @@ class DuplicatePlusViewController: UIViewController {
                         }
                         else{
                             ToastClass.sharedToast.showToast(message: "Product already exist", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                            self.loadIndicator.isAnimating = false
                             self.dupSaveBtn.isEnabled = true
                         }
                     }

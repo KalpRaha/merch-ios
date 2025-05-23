@@ -577,6 +577,8 @@ class StockSaveViewController: UIViewController {
         
         let okAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
             
+            self.view.endEditing(true) 
+            
             if self.mode == "add" {
                 
                 self.stockItemsList.remove(at: tag)

@@ -29401,17 +29401,17 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="customercell" id="YAR-W0-Txn" customClass="CustomerTableViewCell" customModule="QuickveeApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="390" height="109"/>
+                                        <rect key="frame" x="0.0" y="50" width="390" height="40.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YAR-W0-Txn" id="aw8-gJ-2NP">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="109"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="40.333332061767578"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ohi-nr-Iyv">
-                                                    <rect key="frame" x="20" y="20" width="69" height="69"/>
+                                                    <rect key="frame" x="20" y="20" width="0.33333333333333215" height="0.33333333333333215"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zq8-w7-iSD">
-                                                            <rect key="frame" x="34.666666666666664" y="34.666666666666664" width="0.0" height="0.0"/>
+                                                            <rect key="frame" x="0.33333333333333215" y="0.33333333333333215" width="0.0" height="0.0"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="18"/>
                                                             <nil key="textColor"/>
@@ -29425,55 +29425,42 @@
                                                         <constraint firstAttribute="width" secondItem="Ohi-nr-Iyv" secondAttribute="height" multiplier="1:1" id="uio-z1-Ghq"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9V4-IC-Jye">
-                                                    <rect key="frame" x="89" y="0.0" width="291" height="109"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsF-zG-hYJ">
-                                                            <rect key="frame" x="20.000000000000004" y="5" width="44.333333333333343" height="23"/>
-                                                            <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5uT-B1-BNS">
-                                                            <rect key="frame" x="20" y="-3.6666666666666661" width="37" height="19"/>
-                                                            <fontDescription key="fontDescription" name="Manrope-Medium" family="Manrope" pointSize="15"/>
-                                                            <color key="textColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buR-m8-rj8">
-                                                            <rect key="frame" x="74.333333333333343" y="30" width="70" height="20"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="70" id="8SP-tC-NFx"/>
-                                                                <constraint firstAttribute="height" constant="20" id="tyM-02-0Yg"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="9"/>
-                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                            <state key="normal" title="DISABLED">
-                                                                <color key="titleColor" name="deletBorder"/>
-                                                            </state>
-                                                        </button>
-                                                    </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsF-zG-hYJ">
+                                                    <rect key="frame" x="30.333333333333332" y="30" width="44.333333333333343" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5uT-B1-BNS">
+                                                    <rect key="frame" x="30.333333333333329" y="60.999999999999993" width="37" height="17.666666666666664"/>
+                                                    <fontDescription key="fontDescription" name="Manrope-Medium" family="Manrope" pointSize="15"/>
+                                                    <color key="textColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buR-m8-rj8">
+                                                    <rect key="frame" x="84.666666666666671" y="30.666666666666671" width="70.000000000000014" height="20"/>
                                                     <constraints>
-                                                        <constraint firstItem="zsF-zG-hYJ" firstAttribute="leading" secondItem="9V4-IC-Jye" secondAttribute="leading" constant="20" id="0C5-Rh-gb2"/>
-                                                        <constraint firstItem="zsF-zG-hYJ" firstAttribute="top" secondItem="9V4-IC-Jye" secondAttribute="top" constant="30" id="9Vl-Fd-uCn"/>
-                                                        <constraint firstItem="5uT-B1-BNS" firstAttribute="leading" secondItem="9V4-IC-Jye" secondAttribute="leading" constant="20" id="Ids-Yb-TIL"/>
-                                                        <constraint firstItem="buR-m8-rj8" firstAttribute="leading" secondItem="zsF-zG-hYJ" secondAttribute="trailing" constant="10" id="WnR-71-Vvj"/>
-                                                        <constraint firstAttribute="bottom" secondItem="5uT-B1-BNS" secondAttribute="bottom" constant="30" id="cXz-wL-SLL"/>
-                                                        <constraint firstItem="5uT-B1-BNS" firstAttribute="top" secondItem="zsF-zG-hYJ" secondAttribute="bottom" constant="10" id="hJS-U6-Oug"/>
-                                                        <constraint firstItem="buR-m8-rj8" firstAttribute="top" secondItem="zsF-zG-hYJ" secondAttribute="top" id="vMm-Us-Lvi"/>
+                                                        <constraint firstAttribute="width" constant="70" id="8SP-tC-NFx"/>
+                                                        <constraint firstAttribute="height" constant="20" id="tyM-02-0Yg"/>
                                                     </constraints>
-                                                </view>
+                                                    <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="9"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" title="DISABLED">
+                                                        <color key="titleColor" name="deletBorder"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="Ohi-nr-Iyv" firstAttribute="leading" secondItem="aw8-gJ-2NP" secondAttribute="leading" constant="20" id="0lX-aX-TKx"/>
-                                                <constraint firstItem="9V4-IC-Jye" firstAttribute="leading" secondItem="Ohi-nr-Iyv" secondAttribute="trailing" id="3ze-dX-j2v"/>
-                                                <constraint firstAttribute="trailing" secondItem="9V4-IC-Jye" secondAttribute="trailing" constant="10" id="4Tu-WK-KjF"/>
+                                                <constraint firstItem="5uT-B1-BNS" firstAttribute="top" secondItem="zsF-zG-hYJ" secondAttribute="bottom" constant="10" id="5N7-Xo-V0v"/>
+                                                <constraint firstItem="buR-m8-rj8" firstAttribute="leading" secondItem="zsF-zG-hYJ" secondAttribute="trailing" constant="10" id="62p-Uj-rCk"/>
+                                                <constraint firstItem="zsF-zG-hYJ" firstAttribute="leading" secondItem="Ohi-nr-Iyv" secondAttribute="trailing" constant="10" id="C9o-KK-7Qb"/>
+                                                <constraint firstItem="buR-m8-rj8" firstAttribute="centerY" secondItem="zsF-zG-hYJ" secondAttribute="centerY" id="JMk-Ru-6gh"/>
                                                 <constraint firstItem="Ohi-nr-Iyv" firstAttribute="top" secondItem="aw8-gJ-2NP" secondAttribute="top" constant="20" id="XG3-34-RzD"/>
-                                                <constraint firstItem="9V4-IC-Jye" firstAttribute="top" secondItem="aw8-gJ-2NP" secondAttribute="top" id="gwU-Qj-gSI"/>
+                                                <constraint firstItem="zsF-zG-hYJ" firstAttribute="top" secondItem="aw8-gJ-2NP" secondAttribute="top" constant="30" id="gS4-MB-vm4"/>
                                                 <constraint firstAttribute="bottom" secondItem="Ohi-nr-Iyv" secondAttribute="bottom" constant="20" id="pNa-vM-64W"/>
-                                                <constraint firstAttribute="bottom" secondItem="9V4-IC-Jye" secondAttribute="bottom" id="ulo-nC-xpb"/>
+                                                <constraint firstItem="5uT-B1-BNS" firstAttribute="leading" secondItem="Ohi-nr-Iyv" secondAttribute="trailing" constant="10" id="x1p-kq-3km"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -43670,13 +43657,13 @@
                                                             <color key="textColor" red="0.61568627450000002" green="0.61568627450000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="DISPOSABLE DEAL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nB-wl-wfN">
-                                                            <rect key="frame" x="10" y="32.333333333333336" width="161.66666666666666" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="DISPOSABLE DEAL" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0nB-wl-wfN">
+                                                            <rect key="frame" x="10" y="32.333333333333336" width="350" height="21"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Buy 1 Get 1 - 50% Off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xc9-Yc-teH">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Buy 1 Get 1 - 50% Off" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xc9-Yc-teH">
                                                             <rect key="frame" x="10" y="73.333333333333314" width="179.66666666666666" height="24.666666666666671"/>
                                                             <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
                                                             <color key="textColor" red="0.18039215689999999" green="0.76078431369999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -43727,6 +43714,7 @@
                                                         <constraint firstItem="jBK-aQ-hdr" firstAttribute="top" secondItem="KVo-DF-BqS" secondAttribute="top" constant="9" id="Ag4-ig-6n6"/>
                                                         <constraint firstAttribute="trailing" secondItem="egx-P5-x3u" secondAttribute="trailing" id="Cyn-we-o87"/>
                                                         <constraint firstItem="0nB-wl-wfN" firstAttribute="leading" secondItem="KVo-DF-BqS" secondAttribute="leading" constant="10" id="HSr-v3-0CA"/>
+                                                        <constraint firstAttribute="trailing" secondItem="0nB-wl-wfN" secondAttribute="trailing" constant="10" id="IR3-k4-FKO"/>
                                                         <constraint firstItem="xc9-Yc-teH" firstAttribute="leading" secondItem="KVo-DF-BqS" secondAttribute="leading" constant="10" id="Sp1-bD-oZi"/>
                                                         <constraint firstItem="jBK-aQ-hdr" firstAttribute="leading" secondItem="KVo-DF-BqS" secondAttribute="leading" constant="10" id="VYl-wG-ESE"/>
                                                         <constraint firstItem="Cp7-IO-TNw" firstAttribute="centerY" secondItem="3ri-bQ-9mo" secondAttribute="centerY" id="WPU-Qj-Avf"/>
@@ -44723,7 +44711,7 @@
                                     <constraint firstItem="h9A-QT-HKH" firstAttribute="top" secondItem="s80-w9-R0K" secondAttribute="bottom" constant="10" id="xnc-YH-gu5"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zig-kG-7LF">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zig-kG-7LF">
                                 <rect key="frame" x="0.0" y="136" width="390" height="629"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -44977,7 +44965,7 @@
         <segue reference="A2Y-M7-eWr"/>
         <segue reference="tUV-1f-0QC"/>
         <segue reference="u8i-O8-kkS"/>
-        <segue reference="44M-DD-teR"/>
+        <segue reference="Cy6-Nf-GeB"/>
         <segue reference="gEx-Le-EEr"/>
         <segue reference="SeS-H7-xfm"/>
         <segue reference="Kdt-YW-Tde"/>

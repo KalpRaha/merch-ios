@@ -508,7 +508,7 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
             let newCompareprice = Double(c_compareprice)!
             let newPrice = Double(c_price)!
             
-            guard newPrice.isLessThanOrEqualTo(newCompareprice) else {
+            guard newPrice != newCompareprice, newCompareprice > newPrice else {
                 ToastClass.sharedToast.showToast(message: " Compare price must be greater than price", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                 compareAtPrice.isError(numberOfShakes: 3, revert: true)
                 return

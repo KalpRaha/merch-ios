@@ -186,10 +186,10 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
                 if bogoObj?.start_time == "00:00:00" {
                     
                     if bogoObj?.end_time == "00:00:00" {
-                        activeLbl.text = "The Deal Will Starting From \(sdate)"
+                        activeLbl.text = "The Deal Will Starting From \(sdate) Till \(edate)"
                     }
                     else {
-                        activeLbl.text = "The Deal Will Be Active From \(stime) To \(etime) Starting From \(sdate)"
+                        activeLbl.text = "The Deal Will Be Active From \(stime) To \(etime) Starting From \(sdate) Till \(edate)"
                     }
                 }
                 else {
@@ -374,7 +374,7 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             
             ToastClass.sharedToast.showToast(message: "Enter Quantity",
                                              font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-            qtyTextfield.isError(numberOfShakes: 3, revert: true)
+            discountQtyTextfield.isError(numberOfShakes: 3, revert: true)
             return
         }
         
@@ -725,6 +725,7 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
         else {
             vc.schedule = nil
         }
+        vc.exist = schedule_exist
     }
     
   
@@ -995,10 +996,12 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             if arr.bogo.isvarient == "1" {
                 subvarArray.removeAll(where: {$0.bogo.var_id == arr.bogo.var_id})
                 variantArray.removeAll(where: {$0.bogo.var_id == arr.bogo.var_id})
+                bogo_mix_exist_ids.removeAll(where: {$0 == arr.bogo.var_id})
             }
             else {
                 subvarArray.removeAll(where: {$0.bogo.product_id == arr.bogo.product_id})
                 variantArray.removeAll(where: {$0.bogo.product_id == arr.bogo.product_id})
+                bogo_mix_exist_ids.removeAll(where: {$0 == arr.bogo.product_id})
             }
         }
         
@@ -1006,9 +1009,11 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             variantArray.remove(at: index)
             if arr.bogo.isvarient == "1" {
                 subvarArray.removeAll(where: {$0.bogo.var_id == arr.bogo.var_id})
+                bogo_mix_exist_ids.removeAll(where: {$0 == arr.bogo.product_id})
             }
             else {
                 subvarArray.removeAll(where: {$0.bogo.product_id == arr.bogo.product_id})
+                bogo_mix_exist_ids.removeAll(where: {$0 == arr.bogo.product_id})
             }
         }
         tableView.reloadData()
