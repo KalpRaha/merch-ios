@@ -9,7 +9,7 @@ import UIKit
 import MaterialComponents
 
 class AddViewController: UIViewController, UITextFieldDelegate {
- 
+    
     @IBOutlet weak var titleField: MDCOutlinedTextField!
     
     @IBOutlet weak var coverView: UIView!
@@ -25,6 +25,9 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     
     let updateArray = ["Register", "Online", "Use Points", "Earn Points", "Lottery"]
     let addArray = ["Use Points", "Earn Points", "Lottery"]
+    
+    let lotteryUpdateArray = ["Register", "Lottery"]
+    let lotteryAddArray = ["Lottery"]
     
     var inventCategory: InventoryCategory?
     
@@ -92,8 +95,6 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         
         
         if addTitleText == "Update" {
-            collHeight.constant = 64 * 3
-            
             setupApi()
         }
         else {
@@ -154,7 +155,6 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         
         if name == "Quickadd" {
             coverView.isHidden = false
-            collHeight.constant = 64 * 2
         }
         else {
             coverView.isHidden = true
@@ -202,11 +202,18 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             isEarn = false
         }
         
-        if lottery == "1" {
-            isLottery = true
+        if name == "Quickadd" {
+            collHeight.constant = 64 * 2
         }
         else {
-            isLottery = false
+            if lottery == "1" {
+                isLottery = true
+                collHeight.constant = 64
+            }
+            else {
+                isLottery = false
+                collHeight.constant = 64 * 3
+            }
         }
     }
     
@@ -370,11 +377,21 @@ extension AddViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if addTitleText == "Update" {
-            updateArray.count
+            if isLottery {
+                lotteryUpdateArray.count
+            }
+            else {
+                updateArray.count
+            }
         }
         
         else {
-            addArray.count
+            if isLottery {
+                lotteryAddArray.count
+            }
+            else {
+                addArray.count
+            }
         }
     }
     
@@ -384,30 +401,28 @@ extension AddViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         
         if addTitleText == "Update" {
             
-            cell.setEmpLbl.text = updateArray[indexPath.row]
-            
-            if indexPath.row == 0 {
+            if isLottery {
                 
-                if isReg {
-                    cell.setEmpImg.image = UIImage(named: "check inventory")
-                }
+                cell.setEmpLbl.text = lotteryUpdateArray[indexPath.row]
                 
-                else {
-                    cell.setEmpImg.image = UIImage(named: "uncheck inventory")
-                }
-                cell.setEmpLbl.textColor = .black
-            }
-            
-            else if indexPath.row == 1 {
-                
-                if isLottery {
-                    cell.setEmpLbl.textColor = .white
-                    cell.setEmpImg.image = UIImage()
-                }
-                else {
-                    if isOnline {
+                if indexPath.row == 0 {
+                    
+                    if isReg {
                         cell.setEmpImg.image = UIImage(named: "check inventory")
                     }
+                    
+                    else {
+                        cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                    }
+                    cell.setEmpLbl.textColor = .black
+                }
+                
+                else if indexPath.row == 1 {
+                    
+                    if isLottery {
+                        cell.setEmpImg.image = UIImage(named: "check inventory")
+                    }
+                    
                     else {
                         cell.setEmpImg.image = UIImage(named: "uncheck inventory")
                     }
@@ -415,55 +430,89 @@ extension AddViewController: UICollectionViewDelegate, UICollectionViewDataSourc
                 }
             }
             
-            else if indexPath.row == 2 {
+            else {
                 
-                if isUse {
-                    cell.setEmpImg.image = UIImage(named: "check inventory")
-                }
+                cell.setEmpLbl.text = updateArray[indexPath.row]
                 
-                else {
-                    cell.setEmpImg.image = UIImage(named: "uncheck inventory")
-                }
-                cell.setEmpLbl.textColor = .black
-            }
-            
-            else if indexPath.row == 3 {
-                
-                if isLottery {
-                    cell.setEmpLbl.textColor = .white
-                    cell.setEmpImg.image = UIImage()
-                }
-                else {
-                    if isEarn {
+                if indexPath.row == 0 {
+                    
+                    if isReg {
                         cell.setEmpImg.image = UIImage(named: "check inventory")
                     }
+                    
                     else {
                         cell.setEmpImg.image = UIImage(named: "uncheck inventory")
                     }
                     cell.setEmpLbl.textColor = .black
                 }
-            }
-            
-            else if indexPath.row == 4 {
                 
-                if isLottery {
-                    cell.setEmpImg.image = UIImage(named: "check inventory")
+                else if indexPath.row == 1 {
+                    
+                    if isLottery {
+                        cell.setEmpLbl.textColor = .white
+                        cell.setEmpImg.image = UIImage()
+                    }
+                    else {
+                        if isOnline {
+                            cell.setEmpImg.image = UIImage(named: "check inventory")
+                        }
+                        else {
+                            cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                        }
+                        cell.setEmpLbl.textColor = .black
+                    }
                 }
                 
-                else {
-                    cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                else if indexPath.row == 2 {
+                    
+                    if isUse {
+                        cell.setEmpImg.image = UIImage(named: "check inventory")
+                    }
+                    
+                    else {
+                        cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                    }
+                    cell.setEmpLbl.textColor = .black
                 }
-                cell.setEmpLbl.textColor = .black
+                
+                else if indexPath.row == 3 {
+                    
+                    if isLottery {
+                        cell.setEmpLbl.textColor = .white
+                        cell.setEmpImg.image = UIImage()
+                    }
+                    else {
+                        if isEarn {
+                            cell.setEmpImg.image = UIImage(named: "check inventory")
+                        }
+                        else {
+                            cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                        }
+                        cell.setEmpLbl.textColor = .black
+                    }
+                }
+                
+                else if indexPath.row == 4 {
+                    
+                    if isLottery {
+                        cell.setEmpImg.image = UIImage(named: "check inventory")
+                    }
+                    
+                    else {
+                        cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                    }
+                    cell.setEmpLbl.textColor = .black
+                }
             }
         }
         
         else {
             
-            cell.setEmpLbl.text = addArray[indexPath.row]
-            
-            if indexPath.row == 0 {
+            if isLottery {
                 
-                if isUse {
+                cell.setEmpLbl.text = lotteryAddArray[indexPath.row]
+                
+                if isLottery {
                     cell.setEmpImg.image = UIImage(named: "check inventory")
                 }
                 else {
@@ -472,14 +521,41 @@ extension AddViewController: UICollectionViewDelegate, UICollectionViewDataSourc
                 cell.setEmpLbl.textColor = .black
             }
             
-            else if indexPath.row == 1 {
+            else {
                 
-                if isLottery {
-                    cell.setEmpLbl.textColor = .white
-                    cell.setEmpImg.image = UIImage()
+                cell.setEmpLbl.text = addArray[indexPath.row]
+                
+                if indexPath.row == 0 {
+                    
+                    if isUse {
+                        cell.setEmpImg.image = UIImage(named: "check inventory")
+                    }
+                    else {
+                        cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                    }
+                    cell.setEmpLbl.textColor = .black
                 }
-                else {
-                    if isEarn {
+                
+                else if indexPath.row == 1 {
+                    
+                    if isLottery {
+                        cell.setEmpLbl.textColor = .white
+                        cell.setEmpImg.image = UIImage()
+                    }
+                    else {
+                        if isEarn {
+                            cell.setEmpImg.image = UIImage(named: "check inventory")
+                        }
+                        else {
+                            cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                        }
+                        cell.setEmpLbl.textColor = .black
+                    }
+                }
+                
+                else if indexPath.row == 2 {
+                    
+                    if isLottery {
                         cell.setEmpImg.image = UIImage(named: "check inventory")
                     }
                     else {
@@ -488,21 +564,10 @@ extension AddViewController: UICollectionViewDelegate, UICollectionViewDataSourc
                     cell.setEmpLbl.textColor = .black
                 }
             }
-            
-            else if indexPath.row == 2 {
-                
-                if isLottery {
-                    cell.setEmpImg.image = UIImage(named: "check inventory")
-                }
-                else {
-                    cell.setEmpImg.image = UIImage(named: "uncheck inventory")
-                }
-                cell.setEmpLbl.textColor = .black
-            }
         }
         return cell
     }
-
+    
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -511,122 +576,191 @@ extension AddViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         
         if addTitleText == "Update" {
             
-            if indexPath.row == 0 {
+            if isLottery {
                 
-                if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
-                    cell.setEmpImg.image = UIImage(named: "check inventory")
-                    isReg = true
+                if indexPath.row == 0 {
+                    
+                    if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
+                        cell.setEmpImg.image = UIImage(named: "check inventory")
+                        isReg = true
+                    }
+                    
+                    else {
+                        cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                        isReg = false
+                    }
                 }
-                
-                else {
-                    cell.setEmpImg.image = UIImage(named: "uncheck inventory")
-                    isReg = false
-                }
-            }
-            
-            else if indexPath.row == 1 {
-                
-                if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
-                    cell.setEmpImg.image = UIImage(named: "check inventory")
-                    isOnline = true
-                }
-                
-                else {
-                    cell.setEmpImg.image = UIImage(named: "uncheck inventory")
-                    isOnline = false
-                }
-            }
-            
-            else if indexPath.row == 2 {
-                
-                if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
-                    cell.setEmpImg.image = UIImage(named: "check inventory")
-                    isUse = true
-                }
-                
-                else {
-                    cell.setEmpImg.image = UIImage(named: "uncheck inventory")
-                    isUse = false
+                else if indexPath.row == 1 {
+                    
+                    if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
+                        cell.setEmpImg.image = UIImage(named: "check inventory")
+                        isLottery = true
+                        isEarn = false
+                        isOnline = false
+                        isReg = false
+                        collHeight.constant = 64
+                        
+                        collection.reloadData()
+                    }
+                    
+                    else {
+                        cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                        isLottery = false
+                        collHeight.constant = 64 * 3
+
+                        collection.reloadData()
+                    }
                 }
             }
             
-            else if indexPath.row == 3 {
+            else {
                 
-                if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
-                    cell.setEmpImg.image = UIImage(named: "check inventory")
-                    isEarn = true
+                if indexPath.row == 0 {
+                    
+                    if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
+                        cell.setEmpImg.image = UIImage(named: "check inventory")
+                        isReg = true
+                    }
+                    
+                    else {
+                        cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                        isReg = false
+                    }
                 }
                 
-                else {
-                    cell.setEmpImg.image = UIImage(named: "uncheck inventory")
-                    isEarn = false
-                }
-            }
-            
-            else if indexPath.row == 4 {
-                
-                if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
-                    cell.setEmpImg.image = UIImage(named: "check inventory")
-                    isLottery = true
-                    isEarn = false
-                    isOnline = false
-                    collection.reloadData()
+                else if indexPath.row == 1 {
+                    
+                    if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
+                        cell.setEmpImg.image = UIImage(named: "check inventory")
+                        isOnline = true
+                    }
+                    
+                    else {
+                        cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                        isOnline = false
+                    }
                 }
                 
-                else {
-                    cell.setEmpImg.image = UIImage(named: "uncheck inventory")
-                    isLottery = false
-                    collection.reloadData()
+                else if indexPath.row == 2 {
+                    
+                    if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
+                        cell.setEmpImg.image = UIImage(named: "check inventory")
+                        isUse = true
+                    }
+                    
+                    else {
+                        cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                        isUse = false
+                    }
+                }
+                
+                else if indexPath.row == 3 {
+                    
+                    if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
+                        cell.setEmpImg.image = UIImage(named: "check inventory")
+                        isEarn = true
+                    }
+                    
+                    else {
+                        cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                        isEarn = false
+                    }
+                }
+                
+                else if indexPath.row == 4 {
+                    
+                    if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
+                        cell.setEmpImg.image = UIImage(named: "check inventory")
+                        isLottery = true
+                        isEarn = false
+                        isOnline = false
+                        isUse = false
+                        collHeight.constant = 64
+                        collection.reloadData()
+                    }
+                    
+                    else {
+                        cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                        isLottery = false
+                        collHeight.constant = 64 * 3
+                        collection.reloadData()
+                    }
                 }
             }
         }
         
         else {
             
-            if indexPath.row == 0 {
-                
-                if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
-                    cell.setEmpImg.image = UIImage(named: "check inventory")
-                    isUse = true
-                }
-                
-                else {
-                    cell.setEmpImg.image = UIImage(named: "uncheck inventory")
-                    isUse = false
-                }
-            }
-            
-            else if indexPath.row == 1 {
-                
-                if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
-                    cell.setEmpImg.image = UIImage(named: "check inventory")
-                    isEarn = true
-                }
-                
-                else {
-                    cell.setEmpImg.image = UIImage(named: "uncheck inventory")
-                    isEarn = false
-                }
-            }
-            
-            else if indexPath.row == 2 {
+            if isLottery {
                 
                 if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
                     cell.setEmpImg.image = UIImage(named: "check inventory")
                     isLottery = true
                     isEarn = false
+                    isOnline = false
+                    isReg = false
+                    collHeight.constant = 64
+                    
                     collection.reloadData()
                 }
                 
                 else {
                     cell.setEmpImg.image = UIImage(named: "uncheck inventory")
                     isLottery = false
+                    collHeight.constant = 64 * 2
                     collection.reloadData()
+                }
+            }
+            
+            else {
+                
+                if indexPath.row == 0 {
+                    
+                    if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
+                        cell.setEmpImg.image = UIImage(named: "check inventory")
+                        isUse = true
+                    }
+                    
+                    else {
+                        cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                        isUse = false
+                    }
+                }
+                
+                else if indexPath.row == 1 {
+                    
+                    if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
+                        cell.setEmpImg.image = UIImage(named: "check inventory")
+                        isEarn = true
+                    }
+                    
+                    else {
+                        cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                        isEarn = false
+                    }
+                }
+                
+                else if indexPath.row == 2 {
+                    
+                    if cell.setEmpImg.image == UIImage(named: "uncheck inventory") {
+                        cell.setEmpImg.image = UIImage(named: "check inventory")
+                        isLottery = true
+                        isEarn = false
+                        isUse = false
+                        collHeight.constant = 64
+                        collection.reloadData()
+                    }
+                    
+                    else {
+                        cell.setEmpImg.image = UIImage(named: "uncheck inventory")
+                        isLottery = false
+                        collHeight.constant = 64 * 2
+                        collection.reloadData()
+                    }
                 }
             }
         }
     }
-
 }
 
 extension AddViewController: UICollectionViewDelegateFlowLayout {
