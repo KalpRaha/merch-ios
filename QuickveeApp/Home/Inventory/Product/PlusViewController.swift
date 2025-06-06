@@ -429,8 +429,38 @@ class PlusViewController: UIViewController {
     func inflateView(prod: ProductById) {
         
         productField.text = prod.title
-        descField.text = prod.description
+        
+        
+        let htmlString = prod.description//"<h2><strong>this is test description new text add rr ff</strong></h2>"
+      
+                if let data = htmlString.data(using: .utf8) {
+                    do {
+                        let attributedString = try NSAttributedString(data: data, options: [
+                            .documentType: NSAttributedString.DocumentType.html,
+                            .characterEncoding: String.Encoding.utf8.rawValue
+                        ], documentAttributes: nil)
+                        
+                        let plain = attributedString.string
+
+                        let singleLine = plain
+                                       .replacingOccurrences(of: "\n", with: " ")
+                                       .replacingOccurrences(of: "\r", with: " ")
+                                       .trimmingCharacters(in: .whitespacesAndNewlines)
+
+                        
+                        
+                        descField.text = singleLine
+                      
+                       
+                    } catch {
+                        print("Error parsing HTML: \(error)")
+                    }
+                }
+       
     }
+    
+    
+
     
     func setupTax() {
         
@@ -1302,11 +1332,23 @@ class PlusViewController: UIViewController {
             let margin = variantsArray[0].margin
             let profit = variantsArray[0].profit
             
-            guard let quant = variantsArray[0].quantity, quant != "" else {
-                cell.qty.isError(numberOfShakes: 3, revert: true)
-                ToastClass.sharedToast.showToast(message: "Please Enter Quantity", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                return
+//            guard let quant = variantsArray[0].quantity, quant != "" else {
+//                cell.qty.isError(numberOfShakes: 3, revert: true)
+//                ToastClass.sharedToast.showToast(message: "Please Enter Quantity", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//                return
+//            }
+           
+            var quant = ""
+           
+           // let variantQty = variantsArray[0].quantity ?? ""
+            
+            if let variantQty = variantsArray[0].quantity,!variantQty.isEmpty {
+                quant = variantQty
+            } else {
+               
+               quant = "0"
             }
+            print(quant)
             
             let custom_code = variantsArray[0].custom_code
             
@@ -1449,16 +1491,31 @@ class PlusViewController: UIViewController {
                 margin_arr.append(variantsArray[product].margin)
                 profit_arr.append(variantsArray[product].profit)
                 
-                guard let quant = variantsArray[product].quantity, quant != "" else {
-                    sayAct(tag: product)
-                    let index = IndexPath(row: 0, section: product)
-                    let cell = variantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
-                    cell.qty.isError(numberOfShakes: 3, revert: true)
-                    ToastClass.sharedToast.showToast(message: "Please Enter Quantity", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                    return
+//                guard let quant = variantsArray[product].quantity, quant != "" else {
+//                    sayAct(tag: product)
+//                    let index = IndexPath(row: 0, section: product)
+//                    let cell = variantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
+//                    cell.qty.isError(numberOfShakes: 3, revert: true)
+//                    ToastClass.sharedToast.showToast(message: "Please Enter Quantity", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//                    return
+//                }
+                
+                var quant = ""
+               
+            
+                
+                if let variantQty = variantsArray[product].quantity,!variantQty.isEmpty {
+                    quant = variantQty
+                } else {
+                   
+                   quant = "0"
                 }
                 
+              
                 quantity_arr.append(quant)
+                
+                print(quantity_arr)
+                
                 custom_arr.append(variantsArray[product].custom_code)
                 
                 guard let upcCode = variantsArray[product].upc, upcCode != "" else {
@@ -1609,6 +1666,27 @@ class PlusViewController: UIViewController {
             }
         }
     }
+ 
+    func cleanAndWrapHtml(originalHtml: String, userEditedText: String) -> String {
+        // Regex to find opening tags (e.g., <p><i><strong>)
+        let openingTagPattern = #"^(<[^/][^>]*>)+"#
+        let closingTagPattern = #"(</[^>]+>)+$"#
+
+        let openingTags = originalHtml.range(of: openingTagPattern, options: .regularExpression).map {
+            String(originalHtml[$0])
+        } ?? ""
+
+        let closingTags = originalHtml.range(of: closingTagPattern, options: .regularExpression).map {
+            String(originalHtml[$0])
+        } ?? ""
+
+        // Encode the userEditedText to be HTML-safe
+        let encodedText = userEditedText.trimmingCharacters(in: .whitespacesAndNewlines)
+            .addingHTMLEntities()
+
+        return openingTags + encodedText + closingTags
+    }
+
     
     func validateEditParams() {
         
@@ -1618,8 +1696,12 @@ class PlusViewController: UIViewController {
             productField.isErrorView(numberOfShakes: 3, revert: true)
             return
         }
-        let desc = descField.text ?? ""
         
+       
+        let desc =  cleanAndWrapHtml(originalHtml: editProd?.description ?? "", userEditedText: descField.text ?? "")
+        
+      
+       
         let brand = brandName.text ?? ""
         
         var tags = ""
@@ -1713,10 +1795,20 @@ class PlusViewController: UIViewController {
             let margin = cell.margin.text ?? ""
             let profit = cell.profit.text ?? ""
             
-            guard let quant = cell.qty.text, quant != "" else {
-                cell.qty.isError(numberOfShakes: 3, revert: true)
-                ToastClass.sharedToast.showToast(message: "Please Enter Quantity", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                return
+//            guard let quant = cell.qty.text, quant != "" else {
+//                cell.qty.isError(numberOfShakes: 3, revert: true)
+//                ToastClass.sharedToast.showToast(message: "Please Enter Quantity", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//                return
+//            }
+//
+            var quant = ""
+           
+            
+            if let variantQty = cell.qty.text,!variantQty.isEmpty {
+                quant = variantQty
+            } else {
+               
+               quant = "0"
             }
             
             guard let upcCode = cell.upcCode.text, upcCode != "" else {
@@ -1852,14 +1944,26 @@ class PlusViewController: UIViewController {
                 margin_arr.append(variantsArray[product].margin)
                 profit_arr.append(variantsArray[product].profit)
                 
-                guard let quant = variantsArray[product].quantity, quant != "" else {
-                    sayAct(tag: product)
-                    let index = IndexPath(row: 0, section: product)
-                    let cell = variantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
-                    cell.qty.isError(numberOfShakes: 3, revert: true)
-                    ToastClass.sharedToast.showToast(message: "Please enter quantity", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                    return
+//                guard let quant = variantsArray[product].quantity, quant != "" else {
+//                    sayAct(tag: product)
+//                    let index = IndexPath(row: 0, section: product)
+//                    let cell = variantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
+//                    cell.qty.isError(numberOfShakes: 3, revert: true)
+//                    ToastClass.sharedToast.showToast(message: "Please enter quantity", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//                    return
+//                }
+//                
+                var quant = ""
+         
+                
+                if let variantQty = variantsArray[product].quantity,!variantQty.isEmpty {
+                    quant = variantQty
+                } else {
+                   
+                   quant = "0"
                 }
+                
+      
                 quantity_arr.append(quant)
                 custom_arr.append(variantsArray[product].custom_code)
                 

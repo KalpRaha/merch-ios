@@ -27,8 +27,12 @@ class ApiCalls {
                 
             case .success(_):
                 do {
+//                    let json = try JSONSerialization.jsonObject(with: response.data!, options: .mutableContainers) as! [String:Any]
                     let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
+
+                    print(json)
                     completion(true,json)
+                   
                 }
                 catch {
                     let res = "ios_app\(response.response?.statusCode)"
@@ -41,6 +45,59 @@ class ApiCalls {
             }
         }
     }
+    
+//    func categoryListCall(merchant_id: String, completion:@escaping(Bool,[String:Any]) -> ()){
+//        let url = AppURLs.INVENTORY_CATEGORY_LIST
+//        let parameters: [String:String] = [
+//            "merchant_id": merchant_id
+//        ]
+//        //      AF.request(url, method: .post, parameters: parameters).responseData { response in
+//        //
+//        //      switch response.result {
+//        //
+//        //      case .success(_):
+//        //        do {
+//        //          let json = try JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as! [String:Any]
+//        //          print(json)
+//        //          completion(true,json)
+//        //        }
+//        //        catch {
+//        //          print(String(data: response.data!, encoding: .utf8))
+//        //          let res = “ios_app\(response.response?.statusCode)”
+//        //          self.logErrorApi(merchant_id: merchant_id, response: res)
+//        //        }
+//        //      case .failure(let error):
+//        //        print(error.localizedDescription)
+//        //        let res = “ios_app\(response.response?.statusCode)”
+//        //        self.logErrorApi(merchant_id: merchant_id, response: res)
+//        //      }
+//        //    }
+//        AF.upload(multipartFormData: { multipartFormData in
+//          for (key, value) in parameters {
+//            multipartFormData.append(Data(value.utf8), withName: key)
+//          }
+//        }, to: url).responseData { response in
+//          switch response.result {
+//          case .success(_):
+//            do {
+//              let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
+//              print(json)
+//              completion(true,json)
+//            }
+//            catch {
+//              print(String(data: response.data!, encoding: .utf8))
+//             // let res = “ios_app\(response.response?.statusCode)”
+//                let res = "ios_app\(response.response?.statusCode)"
+//              self.logErrorApi(merchant_id: merchant_id, response: res)
+//            }
+//          case .failure(let error):
+//            print(error.localizedDescription)
+//          //  let res = “ios_app\(response.response?.statusCode)”
+//              let res = "ios_app\(response.response?.statusCode)"
+//            self.logErrorApi(merchant_id: merchant_id, response: res)
+//          }
+//        }
+//      }
     
     
     func addCategoryCall(title: String, description: String, merchant_id: String, admin_id: String,
@@ -157,7 +214,8 @@ extension ApiCalls {
                 
             case .success(_):
                 do {
-                    let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options: .mutableContainers) as! [String:Any]
+                    print(json)
                     completion(true,json)
                 }
                 catch {

@@ -233,6 +233,8 @@ class DuplicatePlusViewController: UIViewController {
                                         reorder_qty: "\(singleProd?.reorder_qty ?? "")",
                                         purchase_qty: "\(singleProd?.purchase_qty ?? "")")
             dupProdVariants.append(emptyProd)
+            
+            inflateView(prod: emptyProd)
         }
         
         let brand = dupBrandNameLbl
@@ -280,6 +282,40 @@ class DuplicatePlusViewController: UIViewController {
         }
         dupVariantsTable.reloadData()
     }
+    
+    
+    func inflateView(prod: ProductById) {
+        
+      
+        
+        
+        let htmlString = prod.description//"<h2><strong>this is test description new text add rr ff</strong></h2>"
+      
+                if let data = htmlString.data(using: .utf8) {
+                    do {
+                        let attributedString = try NSAttributedString(data: data, options: [
+                            .documentType: NSAttributedString.DocumentType.html,
+                            .characterEncoding: String.Encoding.utf8.rawValue
+                        ], documentAttributes: nil)
+                        
+                        let plain = attributedString.string
+
+                        let singleLine = plain
+                                       .replacingOccurrences(of: "\n", with: " ")
+                                       .replacingOccurrences(of: "\r", with: " ")
+                                       .trimmingCharacters(in: .whitespacesAndNewlines)
+
+                        
+                        
+                        dupDescField.text = singleLine
+                      
+                       
+                    } catch {
+                        print("Error parsing HTML: \(error)")
+                    }
+                }
+           }
+    
     
     func getGeneratedUpc(length: Int) -> String {
         let characters = "0123456789"
@@ -839,10 +875,21 @@ class DuplicatePlusViewController: UIViewController {
             let margin = dupProdVariants[0].margin
             let profit = dupProdVariants[0].profit
             
-            guard let quant = dupProdVariants[0].quantity, quant != "" else {
-                cell.qty.isError(numberOfShakes: 3, revert: true)
-                ToastClass.sharedToast.showToast(message: "Please Enter Quantity", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                return
+//            guard let quant = dupProdVariants[0].quantity, quant != "" else {
+//                cell.qty.isError(numberOfShakes: 3, revert: true)
+//                ToastClass.sharedToast.showToast(message: "Please Enter Quantity", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//                return
+//            }
+            
+            var quant = ""
+           
+          //  let variantQty = dupProdVariants[0].quantity
+            
+            if let variantQty = dupProdVariants[0].quantity,!variantQty.isEmpty {
+                quant = variantQty
+            } else {
+               
+               quant = "0"
             }
             
             let custom_code = dupProdVariants[0].custom_code
@@ -1006,13 +1053,24 @@ class DuplicatePlusViewController: UIViewController {
                 margin_arr.append(dupProdVariants[product].margin)
                 profit_arr.append(dupProdVariants[product].profit)
                 
-                guard let quant = dupProdVariants[product].quantity, quant != "" else {
-                    sayAct(tag: product)
-                    let index = IndexPath(row: 0, section: product)
-                    let cell = dupVariantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
-                    cell.qty.isError(numberOfShakes: 3, revert: true)
-                    ToastClass.sharedToast.showToast(message: "Please Enter Quantity", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                    return
+//                guard let quant = dupProdVariants[product].quantity, quant != "" else {
+//                    sayAct(tag: product)
+//                    let index = IndexPath(row: 0, section: product)
+//                    let cell = dupVariantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
+//                    cell.qty.isError(numberOfShakes: 3, revert: true)
+//                    ToastClass.sharedToast.showToast(message: "Please Enter Quantity", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//                    return
+//                }
+               
+                var quant = ""
+                
+                if quant == dupProdVariants[product].quantity, quant != "" {
+                    
+                    quant = dupProdVariants[product].quantity ?? "0"
+                    
+                } else {
+                   
+                    quant = "0"
                 }
                 
                 quantity_arr.append(quant)

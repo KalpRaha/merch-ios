@@ -172,6 +172,24 @@ extension UIView {
     }
 }
 
+extension String {
+    func addingHTMLEntities() -> String {
+        var result = self
+        let entities = [
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "\"": "&quot;",
+            "'": "&#39;"
+        ]
+        for (char, entity) in entities {
+            result = result.replacingOccurrences(of: char, with: entity)
+        }
+        return result
+    }
+}
+
+
 
 //    public func showToastXS(message : String, font: UIFont) {
 //
