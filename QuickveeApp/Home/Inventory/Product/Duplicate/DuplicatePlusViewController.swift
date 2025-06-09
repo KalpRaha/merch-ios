@@ -48,6 +48,17 @@ class DuplicatePlusViewController: UIViewController {
     @IBOutlet weak var scroll: UIView!
     @IBOutlet weak var dupScrollHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var dupmissView: UIView!
+    @IBOutlet weak var dupmissupclbl: UILabel!
+    @IBOutlet weak var dupmissupcTable: UITableView!
+    @IBOutlet weak var dupmissupcBtn: UIButton!
+    
+    @IBOutlet weak var dupinnermissviewheight: NSLayoutConstraint!
+    @IBOutlet weak var dupmissviewheight: NSLayoutConstraint!
+    @IBOutlet weak var dupmissBtnHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var dupmissTableHeight: NSLayoutConstraint!
+    
     let loadingIndicator: ProgressView = {
         let progress = ProgressView(colors: [.systemBlue], lineWidth: 5)
         progress.translatesAutoresizingMaskIntoConstraints = false
@@ -76,6 +87,8 @@ class DuplicatePlusViewController: UIViewController {
     var dupVariantMode = ""
     var dupVariantGoMode = "duplus"
     var dupattIndex = 0
+    
+    var dupmissVariants = [String]()
     
     var duparrOptVl1 = [String]()
     var duparrOptVl2 = [String]()
@@ -186,6 +199,11 @@ class DuplicatePlusViewController: UIViewController {
         super.viewWillAppear(animated)
         
         setUI()
+        
+        dupmissView.layer.cornerRadius = 10
+        dupmissupcBtn.layer.cornerRadius = 10
+        
+        dupmissView.isHidden = true
         
         if dupProdVariants.count == 0 {
             
@@ -734,6 +752,17 @@ class DuplicatePlusViewController: UIViewController {
     }
     
     
+    @IBAction func misscloseBtnClick(_ sender: UIButton) {
+        dupmissView.isHidden = true
+    }
+    
+    
+    @IBAction func missdupupcBtnClick(_ sender: UIButton) {
+        dupGenUpc()
+        dupmissView.isHidden = true
+    }
+    
+    
     @IBAction func dupAddVarClick(_ sender: UIButton) {
         
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -789,6 +818,20 @@ class DuplicatePlusViewController: UIViewController {
     @IBAction func saveBtnClick(_ sender: UIButton) {
         
         validateDupParams()
+    }
+    
+    func showMissingUPCView(missarray: [String]) {
+        
+        dupmissVariants = missarray
+        
+        dupmissupcTable.reloadData()
+        
+        dupmissView.isHidden = false
+        
+        dupmissTableHeight.constant = 100
+        let minMainViewHeight = dupinnermissviewheight.constant + dupmissTableHeight.constant + dupmissBtnHeight.constant + 20
+        
+        dupmissviewheight.constant = minMainViewHeight
     }
     
     func validateDupParams() {
@@ -895,10 +938,12 @@ class DuplicatePlusViewController: UIViewController {
             let custom_code = dupProdVariants[0].custom_code
             
             guard let upc_code = dupProdVariants[0].upc, upc_code != "" else {
-                cell.upcCode.isError(numberOfShakes: 3, revert: true)
-                ToastClass.sharedToast.showToast(message: "Enter UPC code", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//                cell.upcCode.isError(numberOfShakes: 3, revert: true)
+//                ToastClass.sharedToast.showToast(message: "Enter UPC code", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                showMissingUPCView(missarray: [dupProductField.text ?? ""])
                 return
             }
+            
             
             let trackqnty = dupProdVariants[0].trackqnty
             let isstockcontinue = dupProdVariants[0].isstockcontinue
@@ -1015,6 +1060,8 @@ class DuplicatePlusViewController: UIViewController {
             
             var v_variant_arr = [String]()
             
+            var dupmissupc = [String]()
+            
             for product in 0..<dupProdVariants.count {
                 
                 let costperitem = dupProdVariants[product].costperItem
@@ -1076,13 +1123,33 @@ class DuplicatePlusViewController: UIViewController {
                 quantity_arr.append(quant)
                 custom_arr.append(dupProdVariants[product].custom_code)
                 
-                guard let upcCode = dupProdVariants[product].upc, upcCode != "" else {
-                    sayAct(tag: product)
-                    let index = IndexPath(row: 0, section: product)
-                    let cell = dupVariantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
-                    ToastClass.sharedToast.showToast(message: "Enter UPC code", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                    cell.upcCode.isError(numberOfShakes: 3, revert: true)
-                    return
+//                guard let upcCode = dupProdVariants[product].upc, upcCode != "" else {
+//                    sayAct(tag: product)
+//                    let index = IndexPath(row: 0, section: product)
+//                    let cell = dupVariantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
+//                    ToastClass.sharedToast.showToast(message: "Enter UPC code", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//                    cell.upcCode.isError(numberOfShakes: 3, revert: true)
+//                    return
+//                }
+                var upcCode = ""
+                if let upccode = dupProdVariants[product].upc, upccode != ""  {
+                    upcCode = upccode
+                }
+                else {
+//                    sayAct(tag: product)
+///                    let cell = variantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
+//                    ToastClass.sharedToast.showToast(message: "Enter UPC code", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//                    cell.upcCode.isError(numberOfShakes: 3, revert: true)
+                    if product == dupProdVariants.count - 1 {
+                        dupmissupc.append(dupProdVariants[product].variant)
+                        showMissingUPCView(missarray: dupmissupc)
+                        guard false else {
+                            return
+                        }
+                    }
+                    else {
+                        dupmissupc.append(dupProdVariants[product].variant)
+                    }
                 }
                 upc_arr.append(upcCode)
                 
@@ -1985,6 +2052,9 @@ extension DuplicatePlusViewController: UITableViewDelegate, UITableViewDataSourc
                 return 0
             }
         }
+        else if tableView == dupmissupcTable {
+            return dupmissVariants.count
+        }
         else {
             return dupProdOptions.count
         }
@@ -2132,7 +2202,15 @@ extension DuplicatePlusViewController: UITableViewDelegate, UITableViewDataSourc
             cell.qtyInner.isHidden = true
             return cell
         }
-        
+        else if tableView == dupmissupcTable {
+            
+            let cell = dupmissupcTable.dequeueReusableCell(withIdentifier: "dupmiss", for: indexPath) as! MissUPCTableViewCell
+            
+            cell.missVarLabel.text = dupmissVariants[indexPath.row]
+            
+            return cell
+            
+        }
         else {
             
             let cell = dupAttTable.dequeueReusableCell(withIdentifier: "attrcell", for: indexPath) as! AddAttrCell
