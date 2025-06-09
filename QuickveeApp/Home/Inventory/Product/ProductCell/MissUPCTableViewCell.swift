@@ -9,6 +9,5 @@ import UIKit
 
 class MissUPCTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var missVarLabel: UILabel!
     
 }

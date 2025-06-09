@@ -48,16 +48,14 @@ class DuplicatePlusViewController: UIViewController {
     @IBOutlet weak var scroll: UIView!
     @IBOutlet weak var dupScrollHeight: NSLayoutConstraint!
     
+    
+    @IBOutlet weak var outermissview: UIView!
     @IBOutlet weak var dupmissView: UIView!
     @IBOutlet weak var dupmissupclbl: UILabel!
-    @IBOutlet weak var dupmissupcTable: UITableView!
     @IBOutlet weak var dupmissupcBtn: UIButton!
+    @IBOutlet weak var dupmissCancelBtn: UIButton!
     
-    @IBOutlet weak var dupinnermissviewheight: NSLayoutConstraint!
-    @IBOutlet weak var dupmissviewheight: NSLayoutConstraint!
-    @IBOutlet weak var dupmissBtnHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var dupmissTableHeight: NSLayoutConstraint!
+    @IBOutlet weak var dupcollection: UICollectionView!
     
     let loadingIndicator: ProgressView = {
         let progress = ProgressView(colors: [.systemBlue], lineWidth: 5)
@@ -152,6 +150,10 @@ class DuplicatePlusViewController: UIViewController {
         dupTaxesColl.collectionViewLayout = colllLay
         colllLay.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
+        let collllLay = CustomFlowLayout()
+        dupcollection.collectionViewLayout = collllLay
+        collllLay.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        
         dupAddVarBtn.layer.borderColor = UIColor(red: 10.0/255.0, green: 100.0/255.0, blue: 249.0/255.0, alpha: 1.0).cgColor
         dupAddVarBtn.layer.borderWidth = 1.0
         dupAddVarBtn.layer.cornerRadius = 5
@@ -202,8 +204,14 @@ class DuplicatePlusViewController: UIViewController {
         
         dupmissView.layer.cornerRadius = 10
         dupmissupcBtn.layer.cornerRadius = 10
+        dupmissCancelBtn.layer.cornerRadius = 10
+        dupmissCancelBtn.layer.borderColor = UIColor.black.cgColor
+        dupmissCancelBtn.layer.borderWidth = 1.0
+        
+        dupmissView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
         dupmissView.isHidden = true
+        outermissview.isHidden = true
         
         if dupProdVariants.count == 0 {
             
@@ -754,12 +762,14 @@ class DuplicatePlusViewController: UIViewController {
     
     @IBAction func misscloseBtnClick(_ sender: UIButton) {
         dupmissView.isHidden = true
+        outermissview.isHidden = true
     }
     
     
     @IBAction func missdupupcBtnClick(_ sender: UIButton) {
         dupGenUpc()
         dupmissView.isHidden = true
+        outermissview.isHidden = true
     }
     
     
@@ -824,14 +834,10 @@ class DuplicatePlusViewController: UIViewController {
         
         dupmissVariants = missarray
         
-        dupmissupcTable.reloadData()
+        dupcollection.reloadData()
         
         dupmissView.isHidden = false
-        
-        dupmissTableHeight.constant = 100
-        let minMainViewHeight = dupinnermissviewheight.constant + dupmissTableHeight.constant + dupmissBtnHeight.constant + 20
-        
-        dupmissviewheight.constant = minMainViewHeight
+        outermissview.isHidden = false
     }
     
     func validateDupParams() {
@@ -1061,7 +1067,7 @@ class DuplicatePlusViewController: UIViewController {
             var v_variant_arr = [String]()
             
             var dupmissupc = [String]()
-            
+            var isMiss = false
             for product in 0..<dupProdVariants.count {
                 
                 let costperitem = dupProdVariants[product].costperItem
@@ -1137,19 +1143,11 @@ class DuplicatePlusViewController: UIViewController {
                 }
                 else {
 //                    sayAct(tag: product)
-///                    let cell = variantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
+//                    let cell = variantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
 //                    ToastClass.sharedToast.showToast(message: "Enter UPC code", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
 //                    cell.upcCode.isError(numberOfShakes: 3, revert: true)
-                    if product == dupProdVariants.count - 1 {
-                        dupmissupc.append(dupProdVariants[product].variant)
-                        showMissingUPCView(missarray: dupmissupc)
-                        guard false else {
-                            return
-                        }
-                    }
-                    else {
-                        dupmissupc.append(dupProdVariants[product].variant)
-                    }
+                    isMiss = true
+                    dupmissupc.append(dupProdVariants[product].variant)
                 }
                 upc_arr.append(upcCode)
                 
@@ -1166,6 +1164,13 @@ class DuplicatePlusViewController: UIViewController {
                 reorderQty_arr.append(dupProdVariants[product].reorder_qty)
                 reorderLevel_arr.append(dupProdVariants[product].reorder_level)
                 
+            }
+            
+            if isMiss {
+                guard false else {
+                    showMissingUPCView(missarray: dupmissupc)
+                    return
+                }
             }
             
             if dupresult.count != 0 {
@@ -1978,7 +1983,10 @@ extension DuplicatePlusViewController: UICollectionViewDelegate, UICollectionVie
             
             return dupProdTag.count
         }
-        
+        else if collectionView == dupcollection {
+            
+            return dupmissVariants.count
+        }
         else {
             
             return dupProdTaxes.count
@@ -2014,6 +2022,18 @@ extension DuplicatePlusViewController: UICollectionViewDelegate, UICollectionVie
             return cell
         }
         
+        else if collectionView == dupcollection {
+            
+            let cell = dupcollection.dequeueReusableCell(withReuseIdentifier: "dupmiss", for: indexPath) as! MissUPCCollectionViewCell
+            
+            cell.missLbl.text = dupmissVariants[indexPath.row]
+            cell.missLbl.textColor = .black
+            cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+            cell.contentView.layer.borderWidth = 1.0
+            cell.contentView.layer.cornerRadius = 5.0
+            
+            return cell
+        }
         else {
             
             let cell = dupTaxesColl.dequeueReusableCell(withReuseIdentifier: "taxcell", for: indexPath) as! PlusCollCollectionViewCell
@@ -2051,9 +2071,6 @@ extension DuplicatePlusViewController: UITableViewDelegate, UITableViewDataSourc
             else {
                 return 0
             }
-        }
-        else if tableView == dupmissupcTable {
-            return dupmissVariants.count
         }
         else {
             return dupProdOptions.count
@@ -2201,15 +2218,6 @@ extension DuplicatePlusViewController: UITableViewDelegate, UITableViewDataSourc
             cell.costItemInner.isHidden = true
             cell.qtyInner.isHidden = true
             return cell
-        }
-        else if tableView == dupmissupcTable {
-            
-            let cell = dupmissupcTable.dequeueReusableCell(withIdentifier: "dupmiss", for: indexPath) as! MissUPCTableViewCell
-            
-            cell.missVarLabel.text = dupmissVariants[indexPath.row]
-            
-            return cell
-            
         }
         else {
             

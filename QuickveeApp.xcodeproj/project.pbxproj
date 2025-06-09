@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		50EFAD1F848666AD49C224C1 /* Pods_QuickveeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9518B79834423A2C13C0BE /* Pods_QuickveeApp.framework */; };
+		A52EAC272DF6E171007FB160 /* MissUPCCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52EAC262DF6E171007FB160 /* MissUPCCollectionViewCell.swift */; };
 		A5456A092DE6F376000BB2D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5456A082DE6F376000BB2D7 /* GoogleService-Info.plist */; };
 		A54F2B312BBAB208009B4D53 /* OrderInStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B302BBAB208009B4D53 /* OrderInStoreViewController.swift */; };
 		A54F2B332BBAB3CB009B4D53 /* OrderInStoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B322BBAB3CB009B4D53 /* OrderInStoreTableViewCell.swift */; };
@@ -285,6 +286,7 @@
 /* Begin PBXFileReference section */
 		2A9518B79834423A2C13C0BE /* Pods_QuickveeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickveeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		810001DF67ED71A5175A0AB6 /* Pods-QuickveeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickveeApp.release.xcconfig"; path = "Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp.release.xcconfig"; sourceTree = "<group>"; };
+		A52EAC262DF6E171007FB160 /* MissUPCCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissUPCCollectionViewCell.swift; sourceTree = "<group>"; };
 		A5456A082DE6F376000BB2D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A54F2B302BBAB208009B4D53 /* OrderInStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInStoreViewController.swift; sourceTree = "<group>"; };
 		A54F2B322BBAB3CB009B4D53 /* OrderInStoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInStoreTableViewCell.swift; sourceTree = "<group>"; };
@@ -1183,6 +1185,7 @@
 			isa = PBXGroup;
 			children = (
 				A5D3A9062DF56956000F6B43 /* MissUPCTableViewCell.swift */,
+				A52EAC262DF6E171007FB160 /* MissUPCCollectionViewCell.swift */,
 				D23681D72AA7016A00728FDB /* ProductsTableViewCell.swift */,
 				D28621062AB065CC00AC90B4 /* AddProductCollectionViewCell.swift */,
 				D256D5532AF0B07E00CF4B2C /* AddProdTaxCell.swift */,
@@ -1694,6 +1697,7 @@
 				D2DF61222CE32561003D47B0 /* StockSaveTableViewCell.swift in Sources */,
 				D2EF641A29C2F06000EA83CE /* SetupTaxTableViewCell.swift in Sources */,
 				D28621072AB065CC00AC90B4 /* AddProductCollectionViewCell.swift in Sources */,
+				A52EAC272DF6E171007FB160 /* MissUPCCollectionViewCell.swift in Sources */,
 				A54F2B312BBAB208009B4D53 /* OrderInStoreViewController.swift in Sources */,
 				D2182D55297120E6004DF7A1 /* StoreViewController.swift in Sources */,
 				D2A68397296C0B3700F852E6 /* QuickveeApp.xcdatamodeld in Sources */,
@@ -1928,7 +1932,7 @@
 				CODE_SIGN_ENTITLEMENTS = QuickveeApp/QuickveeApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = UDXGC872R6;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1972,7 +1976,7 @@
 				CODE_SIGN_ENTITLEMENTS = QuickveeApp/QuickveeAppRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = UDXGC872R6;
 				GENERATE_INFOPLIST_FILE = YES;

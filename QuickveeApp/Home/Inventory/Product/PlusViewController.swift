@@ -73,14 +73,11 @@ class PlusViewController: UIViewController {
     
     @IBOutlet weak var missView: UIView!
     @IBOutlet weak var missupclbl: UILabel!
-    @IBOutlet weak var missupcTable: UITableView!
     @IBOutlet weak var missupcBtn: UIButton!
+    @IBOutlet weak var missCancelBtn: UIButton!
+    @IBOutlet weak var misscollection: UICollectionView!
     
-    @IBOutlet weak var innermissviewheight: NSLayoutConstraint!
-    @IBOutlet weak var missviewheight: NSLayoutConstraint!
-    @IBOutlet weak var missBtnHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var missTableHeight: NSLayoutConstraint!
+    @IBOutlet weak var outerMissView: UIView!
     
     private var isSymbolOnRight = false
     
@@ -184,6 +181,10 @@ class PlusViewController: UIViewController {
         tagColl.collectionViewLayout = collLay
         collLay.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
+        let collllLay = CustomFlowLayout()
+        misscollection.collectionViewLayout = collllLay
+        collllLay.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        
         let colllLay = CustomFlowLayout()
         taxesColl.collectionViewLayout = colllLay
         colllLay.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -260,9 +261,14 @@ class PlusViewController: UIViewController {
         
         missView.layer.cornerRadius = 10
         missupcBtn.layer.cornerRadius = 10
+        missCancelBtn.layer.cornerRadius = 10
+        missCancelBtn.layer.borderColor = UIColor.black.cgColor
+        missCancelBtn.layer.borderWidth = 1.0
+        
+        missView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         missView.isHidden = true
-                        
+        outerMissView.isHidden = true
         if mode == "add" {
             
          
@@ -964,11 +970,13 @@ class PlusViewController: UIViewController {
     @IBAction func closeMissBtn(_ sender: UIButton) {
         
         missView.isHidden = true
+        outerMissView.isHidden = true
     }
     
     @IBAction func missUpcBtnClick(_ sender: UIButton) {
         genUpcClick()
         missView.isHidden = true
+        outerMissView.isHidden = true
     }
     
     
@@ -1280,14 +1288,10 @@ class PlusViewController: UIViewController {
         
         missVariants = missarray
         
-        missupcTable.reloadData()
+        misscollection.reloadData()
         
         missView.isHidden = false
-        
-        missTableHeight.constant = 100
-        let minMainViewHeight = innermissviewheight.constant + missTableHeight.constant + missBtnHeight.constant + 20
-        
-        missviewheight.constant = minMainViewHeight
+        outerMissView.isHidden = false
     }
     
     func validateAddParams() {
@@ -1504,7 +1508,7 @@ class PlusViewController: UIViewController {
             var v_variant_arr = [String]()
             
             var missupc = [String]()
-            
+            var isMiss = false
             for product in 0..<variantsArray.count {
                 
                 let costperitem = variantsArray[product].costperItem
@@ -1575,19 +1579,11 @@ class PlusViewController: UIViewController {
                 }
                 else {
 //                    sayAct(tag: product)
-///                    let cell = variantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
+//                    let cell = variantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
 //                    ToastClass.sharedToast.showToast(message: "Enter UPC code", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
 //                    cell.upcCode.isError(numberOfShakes: 3, revert: true)
-                    if product == variantsArray.count - 1 {
-                        missupc.append(variantsArray[product].variant)
-                        showMissingUPCView(missarray: missupc)
-                        guard false else {
-                            return
-                        }
-                    }
-                    else {
-                        missupc.append(variantsArray[product].variant)
-                    }
+                    isMiss = true
+                    missupc.append(variantsArray[product].variant)
                 }
                 upc_arr.append(upcCode)
                 
@@ -1599,6 +1595,13 @@ class PlusViewController: UIViewController {
                 
                 reorderQty_arr.append(variantsArray[product].reorder_qty)
                 reorderLevel_arr.append(variantsArray[product].reorder_level)
+            }
+            
+            if isMiss {
+                guard false else {
+                    showMissingUPCView(missarray: missupc)
+                    return
+                }
             }
             
             if result.count == 0 {
@@ -1967,7 +1970,7 @@ class PlusViewController: UIViewController {
         
         else {
             var missupc = [String]()
-
+            var isMiss = false
             for product in 0..<variantsArray.count {
                 
                 
@@ -2046,19 +2049,11 @@ class PlusViewController: UIViewController {
                 }
                 else {
 //                    sayAct(tag: product)
-///                    let cell = variantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
+//                    let cell = variantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
 //                    ToastClass.sharedToast.showToast(message: "Enter UPC code", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
 //                    cell.upcCode.isError(numberOfShakes: 3, revert: true)
-                    if product == variantsArray.count - 1 {
-                        missupc.append(variantsArray[product].variant)
-                        showMissingUPCView(missarray: missupc)
-                        guard false else {
-                            return
-                        }
-                    }
-                    else {
-                        missupc.append(variantsArray[product].variant)
-                    }
+                    isMiss = true
+                    missupc.append(variantsArray[product].variant)
                 }
                 upc_arr.append(upcCode)
                 
@@ -2077,6 +2072,12 @@ class PlusViewController: UIViewController {
                 reorderLevel_arr.append(variantsArray[product].reorder_level)
             }
             
+            if isMiss {
+                guard false else {
+                    showMissingUPCView(missarray: missupc)
+                    return
+                }
+            }
             
             if result.count != 0 {
                 v_variant_arr = result
@@ -3469,6 +3470,11 @@ extension PlusViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return collTag.count
         }
         
+        else if collectionView == misscollection {
+            
+            return missVariants.count
+        }
+        
         else {
             
             return collTax.count
@@ -3504,6 +3510,19 @@ extension PlusViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return cell
         }
         
+        else if collectionView == misscollection {
+            
+            let cell = misscollection.dequeueReusableCell(withReuseIdentifier: "miss", for: indexPath) as! MissUPCCollectionViewCell
+            
+            cell.missLbl.text = missVariants[indexPath.row]
+            cell.missLbl.textColor = .black
+            cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+            cell.contentView.layer.borderWidth = 1.0
+            cell.contentView.layer.cornerRadius = 5.0
+            
+            return cell
+        }
+        
         else {
             
             let cell = taxesColl.dequeueReusableCell(withReuseIdentifier: "taxcell", for: indexPath) as! PlusCollCollectionViewCell
@@ -3531,9 +3550,6 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 return variantsArray.count
             }
         }
-        else if tableView == missupcTable {
-            return 1
-        }
         else {
             return 1
         }
@@ -3548,9 +3564,6 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             }else{
                 return 0
             }
-        }
-        else if tableView == missupcTable {
-            return missVariants.count
         }
         else {
             return productOptions.count
@@ -3863,17 +3876,6 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         }
-        
-        else if tableView == missupcTable {
-            
-            let cell = missupcTable.dequeueReusableCell(withIdentifier: "miss", for: indexPath) as! MissUPCTableViewCell
-            
-            cell.missVarLabel.text = missVariants[indexPath.row]
-            
-            return cell
-            
-        }
-        
         else {
             
             let cell = attTable.dequeueReusableCell(withIdentifier: "attrcell", for: indexPath) as! AddAttrCell
