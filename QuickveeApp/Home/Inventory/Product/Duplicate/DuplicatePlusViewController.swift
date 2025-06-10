@@ -1147,7 +1147,12 @@ class DuplicatePlusViewController: UIViewController {
 //                    ToastClass.sharedToast.showToast(message: "Enter UPC code", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
 //                    cell.upcCode.isError(numberOfShakes: 3, revert: true)
                     isMiss = true
-                    dupmissupc.append(dupProdVariants[product].variant)
+                    if dupresult.count > 0 {
+                        dupmissupc.append(dupresult[product])
+                    }
+                    else {
+                        dupmissupc.append(dupProdVariants[product].variant)
+                    }
                 }
                 upc_arr.append(upcCode)
                 

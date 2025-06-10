@@ -1583,7 +1583,13 @@ class PlusViewController: UIViewController {
 //                    ToastClass.sharedToast.showToast(message: "Enter UPC code", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
 //                    cell.upcCode.isError(numberOfShakes: 3, revert: true)
                     isMiss = true
-                    missupc.append(variantsArray[product].variant)
+                    print(result)
+                    if result.count > 0 {
+                        missupc.append(result[product])
+                    }
+                    else {
+                        missupc.append(variantsArray[product].variant)
+                    }
                 }
                 upc_arr.append(upcCode)
                 
@@ -2053,7 +2059,12 @@ class PlusViewController: UIViewController {
 //                    ToastClass.sharedToast.showToast(message: "Enter UPC code", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
 //                    cell.upcCode.isError(numberOfShakes: 3, revert: true)
                     isMiss = true
-                    missupc.append(variantsArray[product].variant)
+                    if result.count > 0 {
+                        missupc.append(result[product])
+                    }
+                    else {
+                        missupc.append(variantsArray[product].variant)
+                    }
                 }
                 upc_arr.append(upcCode)
                 
