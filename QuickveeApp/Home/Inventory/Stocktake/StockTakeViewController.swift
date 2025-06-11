@@ -73,6 +73,11 @@ class StockTakeViewController: UIViewController {
             if isSuccess {
                 
                 guard let list = responseData["result"] else {
+                    self.loadingIndicator.isAnimating = false
+                    self.tableview.isHidden = true
+                    self.nostockLabel.isHidden = false
+                    self.noStockImg.isHidden = false
+                    self.nostockLabel.text = "No StockTake Found"
                     return
                 }
                 self.getResponseValues(list: list)

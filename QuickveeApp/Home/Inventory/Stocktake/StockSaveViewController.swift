@@ -335,7 +335,8 @@ class StockSaveViewController: UIViewController {
                     
                     let save = SaveStock(upc: upc, category_id: stockItemsList[fill].cotegory,
                                          product_id: stockItemsList[fill].id, variant_id: var_id,
-                                         product_name: stockItemsList[fill].title,
+                                         product_name: stockItemsList[fill].title, 
+                                         variant: stockItemsList[fill].variant,
                                          current_qty: stockItemsList[fill].quantity,
                                          new_qty: "\(newQty)", discrepancy: "\(discrepancy_per)",
                                          discrepancy_cost: cost_str, stocktake_item_id: "", note: note_per)
@@ -474,7 +475,8 @@ class StockSaveViewController: UIViewController {
                         
                         let save = SaveStock(upc: upc, category_id: stockVarList[fill].cotegory,
                                              product_id: stockVarList[fill].id, variant_id: var_id,
-                                             product_name: prod_name,
+                                             product_name: prod_name, 
+                                             variant: stockVarList[fill].variant,
                                              current_qty: stockVarList[fill].quantity,
                                              new_qty: "\(newQty)", discrepancy: "\(discrepancy_per)",
                                              discrepancy_cost: cost_str, stocktake_item_id: item_id, note: note_per)
@@ -748,7 +750,8 @@ class StockSaveViewController: UIViewController {
                         
                         let save = SaveStock(upc: upc, category_id: stockItemsList[fill].cotegory,
                                              product_id: stockItemsList[fill].id, variant_id: var_id,
-                                             product_name: stockItemsList[fill].title,
+                                             product_name: stockItemsList[fill].title, 
+                                             variant: stockItemsList[fill].variant,
                                              current_qty: stockItemsList[fill].quantity,
                                              new_qty: "\(newQty)", discrepancy: "\(discrepancy_per)",
                                              discrepancy_cost: cost_str, stocktake_item_id: "", note: note_per)
@@ -886,7 +889,8 @@ class StockSaveViewController: UIViewController {
                         
                         let save = SaveStock(upc: upc, category_id: stockVarList[fill].cotegory,
                                              product_id: stockVarList[fill].id, variant_id: var_id,
-                                             product_name: stockVarList[fill].title,
+                                             product_name: stockVarList[fill].title, 
+                                             variant: stockVarList[fill].variant,
                                              current_qty: stockVarList[fill].quantity,
                                              new_qty: "\(newQty)", discrepancy: "\(discrepancy_per)",
                                              discrepancy_cost: cost_str, stocktake_item_id: item_id, note: note_per)
@@ -1300,6 +1304,7 @@ struct SaveStock: Encodable {
     let product_id: String
     let variant_id: String
     let product_name: String
+    let variant: String
     let current_qty: String
     let new_qty: String
     let discrepancy: String

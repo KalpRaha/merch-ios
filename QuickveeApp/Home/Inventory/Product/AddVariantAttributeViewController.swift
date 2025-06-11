@@ -218,7 +218,7 @@ class AddVariantAttributeViewController: UIViewController {
             return
         }
         let lower = cat_name.lowercased()
-        if valueList.contains(where: {$0.lowercased().contains(lower)}) {
+        if valueList.contains(where: {$0.lowercased() == lower}) {
             addCatField.text = ""
             ToastClass.sharedToast.showToast(message: "Variant value already added", font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
         }
