@@ -10,6 +10,11 @@ import Alamofire
 import AdSupport
 import WebKit
 
+protocol NotificationDelegate: AnyObject {
+    
+    func notifyHome()
+}
+
 class PassCodeViewController: UIViewController, WKNavigationDelegate {
     
     @IBOutlet weak var stackFourth: UIStackView!
@@ -402,7 +407,26 @@ class PassCodeViewController: UIViewController, WKNavigationDelegate {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     self.loadingIndicator.isAnimating = false
                     self.loadingIndicator.removeFromSuperview()
-                    self.performSegue(withIdentifier: "passcodetoHome", sender: nil)
+                    
+                    if UserDefaults.standard.bool(forKey: "notification_received") {
+                        
+                        UserDefaults.standard.set(false, forKey: "notification_received")
+                        
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: "NewOrderDetailVC") as! NewOrderDetailVC
+                        
+                        let order_id = UserDefaults.standard.string(forKey: "notification_oid") ?? ""
+                        let odm = UserDefaults.standard.string(forKey: "notification_odm") ?? ""
+                        vc.order_id = order_id
+                        vc.mode = "notify"
+                        vc.live_status = "Accepted"
+                        vc.order_method = odm
+                        vc.delegate = self
+                        self.present(vc, animated: true)
+                    }
+                    else {
+                        self.performSegue(withIdentifier: "passcodetoHome", sender: nil)
+                    }
                 }
             }
             else {
@@ -1585,6 +1609,20 @@ class PassCodeViewController: UIViewController, WKNavigationDelegate {
             loadingIndicator.heightAnchor
                 .constraint(equalTo: self.loadingIndicator.widthAnchor)
         ])
+    }
+}
+
+extension PassCodeViewController: NotificationDelegate {
+    
+    func notifyHome() {
+        if UserDefaults.standard.bool(forKey: "notificationscene") {
+            dismiss(animated: true) {
+                UserDefaults.standard.set(false, forKey: "notificationscene")
+            }
+        }
+        else {
+            self.performSegue(withIdentifier: "passcodetoHome", sender: nil)
+        }
     }
 }
 

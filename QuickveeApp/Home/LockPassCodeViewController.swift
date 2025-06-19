@@ -1057,6 +1057,23 @@ class LockPassCodeViewController: UIViewController {
         loadingIndicator.removeFromSuperview()
     }
     
+    func openNewOrder() {
+        
+        UserDefaults.standard.set(false, forKey: "notification_received")
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NewOrderDetailVC") as! NewOrderDetailVC
+        
+        let order_id = UserDefaults.standard.string(forKey: "notification_oid") ?? ""
+        let odm = UserDefaults.standard.string(forKey: "notification_odm") ?? ""
+        vc.order_id = order_id
+        vc.mode = "notify"
+        vc.live_status = "Accepted"
+        vc.order_method = odm
+        vc.delegate = self
+        self.present(vc, animated: true)
+    }
+    
     func matchPinCode(pin: String) {
         
         var per_array = [String]()
@@ -1115,13 +1132,25 @@ class LockPassCodeViewController: UIViewController {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     self.loadingIndicator.isAnimating = false
                     self.loadingIndicator.removeFromSuperview()
+                    
                     if UserDefaults.standard.string(forKey: "lockSource") == "scene"{
-                        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                        
+                        if UserDefaults.standard.bool(forKey: "notification_received") {
+                            self.openNewOrder()
+                        }
+                        else {
+                            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                        }
                     }
                     else {
-                        let name = UserDefaults.standard.string(forKey: "merchant_name") ?? ""
-                        self.updateDelegate?.updateName(name: name)
-                        self.dismiss(animated: true)
+                        if UserDefaults.standard.bool(forKey: "notification_received") {
+                            self.openNewOrder()
+                        }
+                        else {
+                            let name = UserDefaults.standard.string(forKey: "merchant_name") ?? ""
+                            self.updateDelegate?.updateName(name: name)
+                            self.dismiss(animated: true)
+                        }
                     }
                 }
             }
@@ -1557,4 +1586,9 @@ class LockPassCodeViewController: UIViewController {
     }
 }
 
-
+extension LockPassCodeViewController: NotificationDelegate {
+    
+    func notifyHome() {
+        dismiss(animated: true)
+    }
+}

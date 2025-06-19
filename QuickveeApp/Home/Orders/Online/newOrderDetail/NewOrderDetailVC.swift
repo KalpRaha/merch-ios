@@ -192,6 +192,8 @@ class NewOrderDetailVC: UIViewController {
     var loyaltyRemove = ""
     var arrOfTip = [TipNca]()
     
+    weak var delegate: NotificationDelegate?
+    
     let loadingIndicator: ProgressView = {
         let progress = ProgressView(colors: [.systemBlue], lineWidth: 5)
         progress.translatesAutoresizingMaskIntoConstraints = false
@@ -2784,7 +2786,9 @@ class NewOrderDetailVC: UIViewController {
     
     @IBAction func backBtnClick(_ sender: UIButton) {
         if mode == "notify" {
-            dismiss(animated: true)
+            dismiss(animated: true) {
+                self.delegate?.notifyHome()
+            }
         }
         
         else {
@@ -2795,7 +2799,9 @@ class NewOrderDetailVC: UIViewController {
     @IBAction func homeBtnClick(_ sender: UIButton) {
         
         if mode == "notify" {
-            dismiss(animated: true)
+            dismiss(animated: true) {
+                self.delegate?.notifyHome()
+            }
         }
         
         else {

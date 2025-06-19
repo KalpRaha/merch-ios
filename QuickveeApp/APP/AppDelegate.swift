@@ -84,19 +84,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         let method = id.components(separatedBy: " ")
         let odm = method.first ?? ""
         
-        guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController
-        else {
-            return
-        }
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "NewOrderDetailVC") as! NewOrderDetailVC
-        controller.order_id = order_id
-        controller.mode = "notify"
-        controller.live_status = "Accepted"
-        controller.order_method = odm
-        rootViewController.present(controller, animated: true)
-        
+        UserDefaults.standard.set(true, forKey: "notification_received")
+        UserDefaults.standard.set(order_id, forKey: "notification_oid")
+        UserDefaults.standard.set(odm, forKey: "notification_odm")
+        completionHandler()
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

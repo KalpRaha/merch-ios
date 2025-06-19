@@ -70,8 +70,8 @@ struct AppURLs {
     static let INVENTORY_DELETE_CATEGORY = "\(base_url)Categoryapi/delete_category"
     static let INVENTORY_CATEGORY_BY_ID = "\(base_url)Categoryapi/get_categoryById"
     
-    static let INVENTORY_PRODUCT_LIST = "\(base_url)Productapi/products_list"
-    //static let INVENTORY_PRODUCT_LIST = "https://qa-elasticsearch.quickvee.us/Productapi/new_product_list"
+//    static let INVENTORY_PRODUCT_LIST = "\(base_url)Productapi/products_list"
+    static let INVENTORY_PRODUCT_LIST = "https://qa-elasticsearch.quickvee.us/Productapi/new_product_list"
     static let INVENTORY_PRODUCT_ADD = "\(base_url)Productapi/add_product"
     static let INVENTORY_PRODUCT_DUPLICATE = "\(base_url)Productapi/duplicate_product"
     static let INVENTORY_PRODUCT_EDIT = "\(base_url)Productapi/edit_produt"
