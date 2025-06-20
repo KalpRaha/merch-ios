@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
         if #available(iOS 14.0, *) {
-            completionHandler(UNNotificationPresentationOptions.banner)
+            completionHandler([.banner, .sound, .badge, .list])
         } else {
             // Fallback on earlier versions
         }
