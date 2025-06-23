@@ -84,9 +84,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         let method = id.components(separatedBy: " ")
         let odm = method.first ?? ""
         
-        UserDefaults.standard.set(true, forKey: "notification_received")
-        UserDefaults.standard.set(order_id, forKey: "notification_oid")
-        UserDefaults.standard.set(odm, forKey: "notification_odm")
+        
+        let applicationState = UIApplication.shared.applicationState
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+       
+        if applicationState == .active {
+            // App is already open, so go directly to order detail screen
+            if let orderDetailVC = storyboard.instantiateViewController(withIdentifier: "NewOrderDetailVC") as? NewOrderDetailVC {
+                
+                orderDetailVC.order_id = order_id
+                orderDetailVC.order_method = odm
+                
+                if let rootVC = UIApplication.shared.windows.first?.rootViewController {
+                    if let navController = rootVC as? UINavigationController {
+                        navController.pushViewController(orderDetailVC, animated: true)
+                    } else {
+                        rootVC.present(orderDetailVC, animated: true)
+                    }
+                }
+            }
+        }
+        else {
+            
+            UserDefaults.standard.set(true, forKey: "notification_received")
+            UserDefaults.standard.set(order_id, forKey: "notification_oid")
+            UserDefaults.standard.set(odm, forKey: "notification_odm")
+           
+        }
         completionHandler()
     }
     
