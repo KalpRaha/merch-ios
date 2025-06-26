@@ -167,7 +167,7 @@ class StockAddViewController: UIViewController {
             vc.addNewQty = newAddQty
             vc.discrepancyAdd = discrepancyAdd
             vc.note = note
-            vc.mode = "add"
+            vc.mode = mode
             vc.delegate = self
         }
     }
@@ -190,9 +190,30 @@ class StockAddViewController: UIViewController {
                 ToastClass.sharedToast.showToast(message: "No Variants Selected", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
             }
             else {
-                mode = "add"
-                performSegue(withIdentifier: "toStockSave", sender: nil)
+                if selectMode == "addsaved" {
+                    delegate?.stockCheck(variants: selectAddStock, addNew: newAddQty,
+                                         discrepancy: discrepancyAdd, item_id: stock_Item_Id, notes: note)
+                    dismiss(animated: true)
+                }
+                else {
+                    mode = "add"
+                    performSegue(withIdentifier: "toStockSave", sender: nil)
+                }
             }
+        }
+    }
+    
+    
+    @IBAction func cancelBtnClick(_ sender: UIButton) {
+        
+        if selectMode == "select" {
+            dismiss(animated: true)
+        }
+        else if selectMode == "addsaved" {
+            dismiss(animated: true)
+        }
+        else {
+            navigationController?.popViewController(animated: true)
         }
     }
     
@@ -200,6 +221,9 @@ class StockAddViewController: UIViewController {
     @IBAction func backBtnClick(_ sender: UIButton) {
         
         if selectMode == "select" {
+            dismiss(animated: true)
+        }
+        else if selectMode == "addsaved" {
             dismiss(animated: true)
         }
         else {
@@ -212,6 +236,9 @@ class StockAddViewController: UIViewController {
         
         
         if selectMode == "select" {
+            dismiss(animated: true)
+        }
+        else if selectMode == "addsaved" {
             dismiss(animated: true)
         }
         else {
@@ -468,6 +495,21 @@ extension StockAddViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.check.image = UIImage(named: "uncheck inventory")
                 removeVariant(variant: variantList[indexPath.row])
             }
+        }
+        
+        if selectMode == "add" || selectMode == "addsaved" {
+            
+            UserDefaults.standard.set(true, forKey: "stock_variant_saved")
+            
+            if let encoded = try? JSONEncoder().encode(selectAddStock) {
+                UserDefaults.standard.set(encoded, forKey: "savedVariants")
+            }
+            
+            UserDefaults.standard.set(newAddQty, forKey: "savedAddQty")
+            
+            UserDefaults.standard.set(discrepancyAdd, forKey: "saveddiscrepancyAdd")
+            
+            UserDefaults.standard.set(note, forKey: "savednote")
         }
     }
 }
