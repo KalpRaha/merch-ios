@@ -92,11 +92,14 @@ class PlusViewController: UIViewController {
     var arrCatId = [String]()
     var arrCat = [InventoryCategory]()
     var collCat = [InventoryCategory]()
-    
+    var brandlist = [String]()
+
     var collTag = [String]()
+    
     
     var productOptions = [InventoryOptions]()
     var missVariants = [String]()
+    
     
     var newEditArr = [String]()
     var result = [String]()
@@ -123,6 +126,7 @@ class PlusViewController: UIViewController {
     
     var prod_purchaseQty = ""
     var variantsArray = [ProductById]()
+    var variantsDataSource = [ProductById]()
     var editProd: ProductById?
     
     var unsel_var_array = [String]()
@@ -249,6 +253,8 @@ class PlusViewController: UIViewController {
         }
         
         topview.addBottomShadow()
+        loadSavedProduct()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -326,6 +332,13 @@ class PlusViewController: UIViewController {
         }
         inventSettingsCall()
     }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+           super.viewWillDisappear(animated)
+           saveProductInfo()
+        
+       }
   
     func setUpProductApiId() {
         
@@ -864,6 +877,96 @@ class PlusViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
+
+
+    func saveProductInfo() {
+        
+        let productDraft: [String: String] = [
+            "name": productField.text ?? "",
+            "description": descField.text ?? "",
+            "brand": brandName.text ?? ""
+        ]
+        UserDefaults.standard.set(productDraft, forKey: "draftProduct")
+        print(productDraft)
+        
+        let categoryTitles = collCat.map { $0.title}
+        UserDefaults.standard.set(categoryTitles, forKey: "catArray")
+        
+        let tagTitles = collTag.map { $0}
+        UserDefaults.standard.set(tagTitles, forKey: "tagArray")
+
+      
+        let encoder = JSONEncoder()
+           if let data = try? encoder.encode(variantsArray) {
+               UserDefaults.standard.set(data, forKey: "plus_variants_draft")
+               print(" Variants auto-saved to UserDefaults.")
+           } else {
+               print("Failed to encode variants for auto-save.")
+           }
+        
+        
+    }
+    
+
+    
+    func loadSavedProduct() {
+        
+        if let draft = UserDefaults.standard.dictionary(forKey: "draftProduct") as? [String: String] {
+            productField.text = draft["name"]
+            descField.text = draft["description"]
+            brandName.text = draft["brand"]
+            print("Loaded product text fields.")
+        }
+
+        if let savedCategories = UserDefaults.standard.stringArray(forKey: "catArray") {
+            collCat = savedCategories.map { makeInventoryCategory(from: $0) }
+            catColl.reloadData()
+            print("Loaded categories:", savedCategories)
+        }
+        
+        if let savetags = UserDefaults.standard.stringArray(forKey: "tagArray") {
+            collTag = savetags
+            tagColl.reloadData()
+            print("Loaded tags:", savetags)
+        }
+        
+        let decoder = JSONDecoder()
+           if let data = UserDefaults.standard.data(forKey: "plus_variants_draft"),
+              let saved = try? decoder.decode([ProductById].self, from: data) {
+               variantsArray = saved
+               variantsTable.reloadData()
+               print("Loaded draft variants from UserDefaults.")
+           }
+     
+    }
+    
+    func clearDraft() {
+          UserDefaults.standard.removeObject(forKey: "draftProduct")
+          print("Cleared draft after save or cancel.")
+      }
+    
+    private func makeInventoryCategory(from title: String) -> InventoryCategory {
+        return InventoryCategory(
+            id: "0",
+            title: title,
+            description: "",
+            categoryBanner: "",
+            show_online: "",
+            show_status: "",
+            cat_show_status: "",
+            is_lottery: "",
+            alternateName: "",
+            merchant_id: "",
+            is_deleted: "",
+            user_id: "",
+            created_on: "",
+            updated_on: "",
+            admin_id: "",
+            use_point: "",
+            earn_point: ""
+        )
+    }
+ 
     @objc func openCatScreen() {
         
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -945,6 +1048,7 @@ class PlusViewController: UIViewController {
     }
     
     @IBAction func backBtnClick(_ sender: UIButton) {
+        saveProductInfo()
         navigationController?.popViewController(animated: true)
     }
     
@@ -3666,7 +3770,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             cell.upcCode.delegate = self
             cell.reorderQty.delegate = self
             cell.reorderLevel.delegate = self
-            
+            cell.delegate = self
             cell.scanBtn.tag = indexPath.section
             
             cell.instantBtn.layer.cornerRadius = 10.0
@@ -4244,6 +4348,34 @@ extension PlusViewController {
 //
 //missviewheight.constant = minMainViewHeight
 
+extension PlusViewController:ProductVariantCellProtocol {
+    func variantFieldDidChange(cell: ProductVariantTableViewCell, fieldName: String, value: String) {
+      
+        guard let indexPath = variantsTable.indexPath(for: cell) else { return }
+
+              let index = indexPath.section // or row, depending on how you're indexing variants
+              switch fieldName {
+              case "price":
+                  variantsArray[index].price = value
+              case "compare_price":
+                  variantsArray[index].compare_price = value
+              case "quantity":
+                  variantsArray[index].quantity = value
+              case "upc":
+                  variantsArray[index].upc = value
+              default:
+                  break
+              }
+
+              print("Auto-saved \(fieldName) = \(value) for variant index \(index)")
+          }
+    }
+    
+    
+
+
+
+
 struct InventoryOptions {
     let id: String
     let product_id: String
@@ -4258,7 +4390,7 @@ struct InventoryOptions {
 }
 
 
-struct ProductById {
+struct ProductById: Codable {
     
     var alternateName: String
     var admin_id: String
@@ -4312,6 +4444,9 @@ struct ProductById {
     var purchase_qty: String
 }
 
+
+          
+          
 struct AddProduct {
     
     var merchant_id: String
@@ -4366,3 +4501,20 @@ struct AddProduct {
     var varreorder_level: String
     var varreorder_cost: String
 }
+
+struct VariantDraft: Codable {
+    var price: String
+    var compare_price: String
+    var costperItem: String
+    var margin: String
+    var profit: String
+    var quantity: String
+    var custom_code: String
+    var upc: String
+    var reorder_qty: String
+    var reorder_level: String
+}
+
+
+    
+
