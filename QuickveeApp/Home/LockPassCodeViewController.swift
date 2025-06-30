@@ -89,6 +89,8 @@ class LockPassCodeViewController: UIViewController {
         
         setupUI()
         
+        UserDefaults.standard.set(false, forKey: "lock_free_notification")
+        
         loadingIndicator.isAnimating = true
         passView.isHidden = true
         firstStack.isHidden = true
@@ -1152,6 +1154,7 @@ class LockPassCodeViewController: UIViewController {
                             self.dismiss(animated: true)
                         }
                     }
+                    UserDefaults.standard.set(true, forKey: "lock_free_notification")
                 }
             }
             else {

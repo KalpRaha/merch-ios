@@ -2790,7 +2790,9 @@ class NewOrderDetailVC: UIViewController {
                 self.delegate?.notifyHome()
             }
         }
-        
+        else if mode == "notifyfree" {
+            dismiss(animated: true)
+        }
         else {
             navigationController?.popViewController(animated: true)
         }
@@ -2803,7 +2805,9 @@ class NewOrderDetailVC: UIViewController {
                 self.delegate?.notifyHome()
             }
         }
-        
+        else if mode == "notifyfree" {
+            dismiss(animated: true)
+        }
         else {
             let viewcontrollerArray = navigationController?.viewControllers
             var destiny = 0

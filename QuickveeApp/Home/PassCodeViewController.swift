@@ -72,6 +72,7 @@ class PassCodeViewController: UIViewController, WKNavigationDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        UserDefaults.standard.set(false, forKey: "lock_free_notification")
         hideAppear()
      
     }
@@ -427,6 +428,7 @@ class PassCodeViewController: UIViewController, WKNavigationDelegate {
                     else {
                         self.performSegue(withIdentifier: "passcodetoHome", sender: nil)
                     }
+                    UserDefaults.standard.set(true, forKey: "lock_free_notification")
                 }
             }
             else {
