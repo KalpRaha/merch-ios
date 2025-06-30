@@ -122,7 +122,7 @@ class ProductsViewController: UIViewController {
             
             if isSuccess {
                 
-                guard let list = responseData["result"] else {
+                guard let list = responseData["product_list"] else {
                     
                     print("no results")
                     return
@@ -236,19 +236,9 @@ class ProductsViewController: UIViewController {
             }
         }
         
-        var id_prod = [Int]()
-        for res in smallres {
-            id_prod.append(Int(res.id) ?? 0)
-        }
-        id_prod.sort(by: {$0 > $1})
-        var smallarrange = [InventoryProductModel]()
-        for small in id_prod {
-            smallarrange.append(smallres.first(where: {$0.id == String(small)})!)
-        }
-        productList = smallarrange
+        productList = smallres.reversed()
         subProdArray = productList
         filterProdArray = productList
-        
         
         upcList = subvupc
         
