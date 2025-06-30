@@ -253,7 +253,7 @@ class PlusViewController: UIViewController {
         }
         
         topview.addBottomShadow()
-        loadSavedProduct()
+        
         
     }
     
@@ -282,6 +282,8 @@ class PlusViewController: UIViewController {
             tripleWidth.constant = 0
             titleText.text = "Add Product"
             
+            loadSavedProduct()
+
             if variantsArray.count == 0 {
                 
                 let emptyProd = ProductById(alternateName: "", admin_id: "", description: "", starting_quantity: "", margin: "",
@@ -310,6 +312,9 @@ class PlusViewController: UIViewController {
             }
             isSelectedData = isSel
             
+            print(variantsArray.count)
+            print(isSelectedData.count)
+            
             selectBrandLbl.text = "Select Brand"
             brandInnerView.isHidden = true
             brandName.text = ""
@@ -317,6 +322,7 @@ class PlusViewController: UIViewController {
             
             setupTax()
             setCollHeight(coll: scrollView)
+           
         }
         
         //edit
@@ -334,11 +340,6 @@ class PlusViewController: UIViewController {
     }
     
     
-    override func viewWillDisappear(_ animated: Bool) {
-           super.viewWillDisappear(animated)
-           saveProductInfo()
-        
-       }
   
     func setUpProductApiId() {
         
@@ -896,12 +897,16 @@ class PlusViewController: UIViewController {
         UserDefaults.standard.set(tagTitles, forKey: "tagArray")
 
       
+        if let encoded = try? JSONEncoder().encode(productOptions) {
+            UserDefaults.standard.set(encoded, forKey: "variantAttributes")
+        }
+        
         let encoder = JSONEncoder()
            if let data = try? encoder.encode(variantsArray) {
                UserDefaults.standard.set(data, forKey: "plus_variants_draft")
-               print(" Variants auto-saved to UserDefaults.")
+               
            } else {
-               print("Failed to encode variants for auto-save.")
+             
            }
         
         
@@ -915,35 +920,51 @@ class PlusViewController: UIViewController {
             productField.text = draft["name"]
             descField.text = draft["description"]
             brandName.text = draft["brand"]
-            print("Loaded product text fields.")
+           
         }
 
         if let savedCategories = UserDefaults.standard.stringArray(forKey: "catArray") {
             collCat = savedCategories.map { makeInventoryCategory(from: $0) }
             catColl.reloadData()
-            print("Loaded categories:", savedCategories)
+           
         }
         
         if let savetags = UserDefaults.standard.stringArray(forKey: "tagArray") {
             collTag = savetags
             tagColl.reloadData()
-            print("Loaded tags:", savetags)
+          
+        }
+        
+        if let data = UserDefaults.standard.data(forKey: "variantAttributes"),
+           let decoded = try? JSONDecoder().decode([InventoryOptions].self, from: data) {
+            productOptions = decoded
+            attTable.reloadData()
         }
         
         let decoder = JSONDecoder()
            if let data = UserDefaults.standard.data(forKey: "plus_variants_draft"),
               let saved = try? decoder.decode([ProductById].self, from: data) {
                variantsArray = saved
-               variantsTable.reloadData()
-               print("Loaded draft variants from UserDefaults.")
+               print(variantsArray)
+              // variantsTable.reloadData()
+            
            }
      
     }
     
     func clearDraft() {
-          UserDefaults.standard.removeObject(forKey: "draftProduct")
-          print("Cleared draft after save or cancel.")
-      }
+        let keysToRemove = [
+            "draftProduct",
+            "catArray",
+            "tagArray",
+            "plus_variants_draft"
+        ]
+        
+        let defaults = UserDefaults.standard
+        keysToRemove.forEach { defaults.removeObject(forKey: $0) }
+        
+        print("Cleared all draft-related UserDefaults.")
+    }
     
     private func makeInventoryCategory(from title: String) -> InventoryCategory {
         return InventoryCategory(
@@ -1048,7 +1069,7 @@ class PlusViewController: UIViewController {
     }
     
     @IBAction func backBtnClick(_ sender: UIButton) {
-        saveProductInfo()
+     
         navigationController?.popViewController(animated: true)
     }
     
@@ -1105,6 +1126,7 @@ class PlusViewController: UIViewController {
                 variantsArray[sender.tag].trackqnty = "0"
             }
         }
+        saveProductInfo()
     }
     
     
@@ -1128,6 +1150,7 @@ class PlusViewController: UIViewController {
                 variantsArray[sender.tag].isstockcontinue = "0"
             }
         }
+        saveProductInfo()
     }
     
     
@@ -1151,6 +1174,7 @@ class PlusViewController: UIViewController {
                 variantsArray[sender.tag].is_tobacco = "0"
             }
         }
+        saveProductInfo()
         
     }
   
@@ -1181,6 +1205,7 @@ class PlusViewController: UIViewController {
                 }
             }
         }
+        saveProductInfo()
     }
     
     @IBAction func foodStampableClick(_ sender: UIButton) {
@@ -1203,7 +1228,7 @@ class PlusViewController: UIViewController {
                 variantsArray[sender.tag].food_stampable = "0"
             }
         }
-        
+        saveProductInfo()
     }
  
     @IBAction func threeDotsClick(_ sender: UIButton) {
@@ -1282,6 +1307,7 @@ class PlusViewController: UIViewController {
                 addVarBtnHeight.constant = 50
             }
             refreshVariantTable()
+           // loadSavedProduct()
         }
     }
     
@@ -1841,6 +1867,7 @@ class PlusViewController: UIViewController {
                 }
             }
         }
+        clearDraft()
     }
  
     func cleanAndWrapHtml(originalHtml: String, userEditedText: String) -> String {
@@ -2507,7 +2534,7 @@ extension PlusViewController: PlusAttributeVariant {
         }
         
         refreshVariantTable()
-        
+       // saveProductInfo()
     }
     
     func refreshVariantTable() {
@@ -2631,7 +2658,7 @@ extension PlusViewController: UITextFieldDelegate {
         if mode == "add" {
             
             if textField == productField {
-                
+                saveProductInfo()
             }
             
             else {
@@ -2827,6 +2854,7 @@ extension PlusViewController: UITextFieldDelegate {
                         }
                     }
                 }
+                saveProductInfo()
             }
         }
         //edit
@@ -3770,7 +3798,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             cell.upcCode.delegate = self
             cell.reorderQty.delegate = self
             cell.reorderLevel.delegate = self
-            cell.delegate = self
+           
             cell.scanBtn.tag = indexPath.section
             
             cell.instantBtn.layer.cornerRadius = 10.0
@@ -3841,6 +3869,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.qtyInner.isHidden = true
                 
                 variantsArray[indexPath.section] = variants
+                print(variantsArray)
             }
             
             //edit
@@ -4348,35 +4377,15 @@ extension PlusViewController {
 //
 //missviewheight.constant = minMainViewHeight
 
-extension PlusViewController:ProductVariantCellProtocol {
-    func variantFieldDidChange(cell: ProductVariantTableViewCell, fieldName: String, value: String) {
-      
-        guard let indexPath = variantsTable.indexPath(for: cell) else { return }
 
-              let index = indexPath.section // or row, depending on how you're indexing variants
-              switch fieldName {
-              case "price":
-                  variantsArray[index].price = value
-              case "compare_price":
-                  variantsArray[index].compare_price = value
-              case "quantity":
-                  variantsArray[index].quantity = value
-              case "upc":
-                  variantsArray[index].upc = value
-              default:
-                  break
-              }
 
-              print("Auto-saved \(fieldName) = \(value) for variant index \(index)")
-          }
-    }
     
     
 
 
 
 
-struct InventoryOptions {
+struct InventoryOptions: Codable {
     let id: String
     let product_id: String
     let options1: String
