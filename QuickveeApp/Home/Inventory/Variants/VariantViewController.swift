@@ -34,7 +34,10 @@ class VariantViewController: UIViewController {
     var is_single = ""
     var prodId = ""
     
+    var searchpage = 0
     var page = 0
+    var searchTxt = ""
+    var nameupcvar = ""
     var searchMode = false
     
     let loadingIndicator: ProgressView = {
@@ -217,22 +220,61 @@ class VariantViewController: UIViewController {
             
         }
         
-        if variantArr.count == 0 {
-            page -= 1
+        if searching {
+            if variantArr.count == 0 {
+                searchpage -= 1
+            }
+            else {
+                searchVarArray.append(contentsOf: variantArr)
+            }
         }
         else {
-            variantList.append(contentsOf: variantArr)
-            subVarArray.append(contentsOf: variantArr)
+            if variantArr.count == 0 {
+                page -= 1
+            }
+            else {
+                variantList.append(contentsOf: variantArr)
+                subVarArray.append(contentsOf: variantArr)
+            }
         }
         tableview.reloadData()
     }
     
-    func searchApi(search: String) {
+    func searchApi(search: String, nameupc: String) {
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         
-        ApiCalls.sharedCall.variantListCallSearch(merchant_id: id, search_by_name: search,
-                                                search_by_upc: "") { isSuccess, responseData in
+        searchpage = 1
+        page = 1
+        
+        var name = ""
+        var upc = ""
+        
+        if nameupc == "1" {
+            name = search
+            upc = ""
+        }
+        else {
+            name = ""
+            upc = search
+        }
+        
+        var catid = ""
+        var idarr = [String]()
+        if selectArray.count > 0 {
+            
+            for select in selectArray {
+                idarr.append(select.id)
+            }
+            catid = idarr.joined(separator: ",")
+        }
+        else {
+            catid = ""
+        }
+        
+        ApiCalls.sharedCall.variantListCallSearch(merchant_id: id, search_by_name: name,
+                                                  search_by_upc: upc, cat_ids: catid, page: 1, limit: 30)
+        { isSuccess, responseData in
         
             if isSuccess {
                 
@@ -280,18 +322,22 @@ class VariantViewController: UIViewController {
     }
     
     
-    func performSearch(searchText: String) {
+    func performSearch(searchText: String, nameupc: String) {
         
         if searchMode {
             
             if searchText == "" {
                 tableview.isHidden = true
                 loadingIndicator.isAnimating = false
+                searchTxt = searchText
+                nameupcvar = nameupc
             }
             else {
                 tableview.isHidden = true
                 loadingIndicator.isAnimating = true
-                searchApi(search: searchText)
+                searchTxt = searchText
+                nameupcvar = nameupc
+                searchApi(search: searchText, nameupc: nameupc)
             }
         }
         else {
@@ -402,6 +448,51 @@ extension VariantViewController {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)  {
         
         if searching {
+            
+            if let visiblePaths = tableview.indexPathsForVisibleRows,
+               visiblePaths.contains([0, searchVarArray.count - 1]) {
+                
+                let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+                
+                searchpage += 1
+                
+                var name = ""
+                var upc = ""
+                
+                if nameupcvar == "1" {
+                    name = searchTxt
+                    upc = ""
+                }
+                else {
+                    name = ""
+                    upc = searchTxt
+                }
+                
+                var catid = ""
+                var idarr = [String]()
+                if selectArray.count > 0 {
+                    
+                    for select in selectArray {
+                        idarr.append(select.id)
+                    }
+                    catid = idarr.joined(separator: ",")
+                }
+                else {
+                    catid = ""
+                }
+                
+                ApiCalls.sharedCall.variantListCallSearch(merchant_id: id, search_by_name: name,
+                                                          search_by_upc: upc, cat_ids: catid, page: searchpage, limit: 30)
+                 { isSuccess, responseData in
+                    
+                    if isSuccess {
+                        
+                        self.getResponsePageValues(response: responseData["result"])
+                    }else{
+                        print("Api Error")
+                    }
+                }
+            }
             
         }
         

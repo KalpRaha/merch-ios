@@ -955,7 +955,7 @@ extension ApiCalls {
     }
     
     func variantListCallSearch(merchant_id: String, search_by_name: String,
-                             search_by_upc: String,
+                               search_by_upc: String, cat_ids: String, page: Int, limit: Int,
                                completion:@escaping(Bool,[String:Any]) -> ()){
         
         let url = AppURLs.INVENTORY_VARIANT_LIST_PAGINATION
@@ -963,7 +963,10 @@ extension ApiCalls {
         let parameters: [String:Any] = [
             "merchant_id": merchant_id,
             "search_by_name": search_by_name,
-            "search_by_upc": search_by_upc
+            "search_by_upc": search_by_upc,
+            "cat_ids": cat_ids,
+            "page": page,
+            "limit": limit
         ]
         
         AF.request(url, method: .post, parameters: parameters).responseData { response in

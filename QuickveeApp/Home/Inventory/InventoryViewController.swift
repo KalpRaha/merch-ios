@@ -260,7 +260,6 @@ class InventoryViewController: UIViewController {
                 searchBar.placeholder = "Search Variants"
                 let vc = subControllers[3] as! VariantViewController
                 vc.searchMode = true
-                vc.filterView.isHidden = true
             }
             else if currentVC == 4 {
                 searchBar.placeholder = "Search Brands"
@@ -290,7 +289,6 @@ class InventoryViewController: UIViewController {
             else if currentVC == 3 {
                 searchBar.placeholder = "Search Variants"
                 let vc = subControllers[3] as! VariantViewController
-                vc.filterView.isHidden = true
                 vc.searchMode = true
             }
             else if currentVC == 4 {
@@ -455,8 +453,7 @@ extension InventoryViewController : UISearchBarDelegate {
             else if currentVC == 3 {
                 let vc = subControllers[3] as! VariantViewController
                 vc.searchMode = false
-                vc.filterView.isHidden = false
-                vc.performSearch(searchText: "")
+                vc.performSearch(searchText: "", nameupc: "")
             }
             else if currentVC == 4 {
                 let vc = subControllers[4] as! BrandsTagsViewController
@@ -504,8 +501,7 @@ extension InventoryViewController : UISearchBarDelegate {
             else if currentVC == 3 {
                 let vc = subControllers[3] as! VariantViewController
                 vc.searchMode = false
-                vc.filterView.isHidden = false
-                vc.performSearch(searchText: "")
+                vc.performSearch(searchText: "", nameupc: "")
             }
             else if currentVC == 4 {
                 let vc = subControllers[4] as! BrandsTagsViewController
@@ -536,7 +532,7 @@ extension InventoryViewController : UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if currentVC == 3 {
             let vc = subControllers[3] as! VariantViewController
-            vc.performSearch(searchText: searchBar.text ?? "")
+            vc.performSearch(searchText: searchBar.text ?? "", nameupc: "1")
         }
         else {}
     }
@@ -620,7 +616,7 @@ extension InventoryViewController: BarcodeScannerCodeDelegate, BarcodeScannerErr
         else if currentVC == 3 {
             let vc = subControllers[3] as! VariantViewController
             vc.searchMode = true
-            vc.performSearch(searchText: code)
+            vc.performSearch(searchText: code, nameupc: "0")
         }
         else if currentVC == 6 {
             let vc = subControllers[6] as! StockTakeViewController
