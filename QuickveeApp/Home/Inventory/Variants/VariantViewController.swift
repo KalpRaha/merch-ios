@@ -120,9 +120,22 @@ class VariantViewController: UIViewController {
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         
         page = 1
+
+        var catid = ""
+        var idarr = [String]()
+        if selectArray.count > 0 {
+            
+            for select in selectArray {
+                idarr.append(select.id)
+            }
+            catid = idarr.joined(separator: ",")
+        }
+        else {
+            catid = ""
+        }
         
         ApiCalls.sharedCall.variantListCallPage(merchant_id: id, search_by_name: "",
-                                                search_by_upc: "", cat_ids: "",
+                                                search_by_upc: "", cat_ids: catid,
                                                 page: 1) { isSuccess, responseData in
             
             if isSuccess {
@@ -131,32 +144,6 @@ class VariantViewController: UIViewController {
                     return
                 }
                 self.getResponseValues(list: list)
-                
-                DispatchQueue.main.async {
-                    
-                    if self.variantList.count == 0 {
-                        
-                        self.tableview.isHidden = true
-                        self.loadingIndicator.isAnimating = false
-                        self.filterView.isHidden = true
-                        self.filterHeight.constant = 0
-                        self.noData.isHidden = false
-                        self.noDataLbl.isHidden = false
-                        self.noDataLbl.text = "No Variants Added"
-                    }
-                    
-                    else {
-                        self.tableview.isHidden = false
-                        self.loadingIndicator.isAnimating = false
-                        self.filterView.isHidden = false
-                        self.filterHeight.constant = 25
-                        self.noData.isHidden = true
-                        self.noDataLbl.isHidden = true
-                        self.noDataLbl.text = "No Variants Added"
-                        self.tableview.reloadData()
-                    }
-                }
-                
                 
             }else{
                 print("Api Error")
@@ -169,7 +156,6 @@ class VariantViewController: UIViewController {
         
         let response = list as! [[String:Any]]
         var smallres = [InventoryVariant]()
-        var varupc = [String]()
         for res in response {
             
             let variant = InventoryVariant(id: "\(res["id"] ?? "")", costperItem: "\(res["costperItem"] ?? "")", title: "\(res["title"] ?? "")",
@@ -184,18 +170,82 @@ class VariantViewController: UIViewController {
             
             
             smallres.append(variant)
-            
-            varupc.append(variant.upc)
-            varupc.append(variant.var_upc)
         }
         
         variantList = smallres.reversed()
         subVarArray = variantList
         searchVarArray = variantList
-        varUpc = varupc
+        filterVarArray = variantList
         
-        UserDefaults.standard.set(varUpc, forKey: "variant_upcs")
+        setupUpc()
         
+    }
+    
+    func setupUpc() {
+        
+        let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        
+        ApiCalls.sharedCall.variantListCall(merchant_id: id) { isSuccess, responseData in
+            
+            if isSuccess {
+                
+                guard let list = responseData["result"] else {
+                    return
+                }
+            
+                let response = list as! [[String:Any]]
+                var varupc = [String]()
+                for res in response {
+                    
+                    let variant = InventoryVariant(id: "\(res["id"] ?? "")", costperItem: "\(res["costperItem"] ?? "")", title: "\(res["title"] ?? "")",
+                                                   isvarient: "\(res["isvarient"] ?? "")", upc: "\(res["upc"] ?? "")",
+                                                   cotegory: "\(res["cotegory"] ?? "")",
+                                                   var_id: "\(res["var_id"] ?? "")",
+                                                   var_upc: "\(res["var_upc"] ?? "")",
+                                                   quantity: "\(res["quantity"] ?? "")", price: "\(res["price"] ?? "")",
+                                                   custom_code: "\(res["custom_code"] ?? "")", variant: "\(res["variant"] ?? "")",
+                                                   var_price: "\(res["var_price"] ?? "")", is_lottery: "\(res["is_lottery"] ?? "")",
+                                                   var_costperItem: "\(res["var_costperItem"] ?? "")")
+                    
+                    
+                    
+                    varupc.append(variant.upc)
+                    varupc.append(variant.var_upc)
+                }
+                
+                self.varUpc = varupc
+                
+                UserDefaults.standard.set(self.varUpc, forKey: "variant_upcs")
+                   
+            }else{
+                print("Api Error")
+            }
+            
+            DispatchQueue.main.async {
+                
+                if self.variantList.count == 0 {
+                    
+                    self.tableview.isHidden = true
+                    self.loadingIndicator.isAnimating = false
+                    self.filterView.isHidden = true
+                    self.filterHeight.constant = 0
+                    self.noData.isHidden = false
+                    self.noDataLbl.isHidden = false
+                    self.noDataLbl.text = "No Variants Added"
+                }
+                
+                else {
+                    self.tableview.isHidden = false
+                    self.loadingIndicator.isAnimating = false
+                    self.filterView.isHidden = false
+                    self.filterHeight.constant = 25
+                    self.noData.isHidden = true
+                    self.noDataLbl.isHidden = true
+                    self.noDataLbl.text = "No Variants Added"
+                    self.tableview.reloadData()
+                }
+            }
+        }
     }
     
     func getResponsePageValues(response: Any) {
@@ -235,6 +285,7 @@ class VariantViewController: UIViewController {
             else {
                 variantList.append(contentsOf: variantArr)
                 subVarArray.append(contentsOf: variantArr)
+                filterVarArray.append(contentsOf: variantArr)
             }
         }
         tableview.reloadData()
@@ -506,8 +557,21 @@ extension VariantViewController {
                 
                 page += 1
                 
+                var catid = ""
+                var idarr = [String]()
+                if selectArray.count > 0 {
+                    
+                    for select in selectArray {
+                        idarr.append(select.id)
+                    }
+                    catid = idarr.joined(separator: ",")
+                }
+                else {
+                    catid = ""
+                }
+                
                 ApiCalls.sharedCall.variantListCallPage(merchant_id: id, search_by_name: "",
-                                                        search_by_upc: "", cat_ids: "",
+                                                        search_by_upc: "", cat_ids: catid,
                                                         page: page) { isSuccess, responseData in
                     
                     if isSuccess {
@@ -528,12 +592,16 @@ extension VariantViewController: SelectedCategoryProductsDelegate {
         
         selectArray = categoryArray
         
+        tableview.isHidden = true
+        loadingIndicator.isAnimating = true
+        
         if selectArray.count == 0 {
             setupVariantApi()
             lblSelectCat.text = ""
         }
         else {
-            setupFilterApi()
+            //setupFilterApi()
+            setupVariantApi()
             lblSelectCat.text = "   \(selectArray.count)   "
         }
     }

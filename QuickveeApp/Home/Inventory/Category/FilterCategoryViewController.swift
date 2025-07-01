@@ -215,12 +215,18 @@ class FilterCategoryViewController: UIViewController {
             }
             
             else if catMode == "ProductsVc" {
-                if productsList.contains(where: { $0.cotegory == category.id }) {
+//                if productsList.contains(where: { $0.cotegory == category.id }) {
+//                    smallres.append(category)
+//                }
+                if category.is_lottery == "0" {
                     smallres.append(category)
                 }
             }
             else if catMode == "VariantVc" {
-                if variantList.contains(where: { $0.cotegory == category.id }) {
+//                if variantList.contains(where: { $0.cotegory == category.id }) {
+//                    smallres.append(category)
+//                }
+                if category.is_lottery == "0" {
                     smallres.append(category)
                 }
                 
