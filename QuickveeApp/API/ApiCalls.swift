@@ -919,6 +919,75 @@ extension ApiCalls {
         }
     }
     
+    func variantListCallPage(merchant_id: String, search_by_name: String,
+                             search_by_upc: String, cat_ids: String, page: Int,
+                             completion:@escaping(Bool,[String:Any]) -> ()){
+        
+        let url = AppURLs.INVENTORY_VARIANT_LIST_PAGINATION
+        
+        let parameters: [String:Any] = [
+            "merchant_id": merchant_id,
+            "search_by_name": search_by_name,
+            "search_by_upc": search_by_upc,
+            "cat_ids": cat_ids,
+            "page": page
+        ]
+        
+        AF.request(url, method: .post, parameters: parameters).responseData { response in
+            
+            switch response.result {
+                
+            case .success(_):
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
+                    completion(true,json)
+                }
+                catch {
+                    let res = "ios_app\(response.response?.statusCode)"
+                    self.logErrorApi(merchant_id: merchant_id, response: res)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                let res = "ios_app\(response.response?.statusCode)"
+                self.logErrorApi(merchant_id: merchant_id, response: res)
+            }
+        }
+    }
+    
+    func variantListCallSearch(merchant_id: String, search_by_name: String,
+                             search_by_upc: String,
+                               completion:@escaping(Bool,[String:Any]) -> ()){
+        
+        let url = AppURLs.INVENTORY_VARIANT_LIST_PAGINATION
+        
+        let parameters: [String:Any] = [
+            "merchant_id": merchant_id,
+            "search_by_name": search_by_name,
+            "search_by_upc": search_by_upc
+        ]
+        
+        AF.request(url, method: .post, parameters: parameters).responseData { response in
+            
+            switch response.result {
+                
+            case .success(_):
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
+                    completion(true,json)
+                }
+                catch {
+                    let res = "ios_app\(response.response?.statusCode)"
+                    self.logErrorApi(merchant_id: merchant_id, response: res)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                let res = "ios_app\(response.response?.statusCode)"
+                self.logErrorApi(merchant_id: merchant_id, response: res)
+            }
+        }
+    }
+    
+    
     func variantById(var_id: String, name: String, single: String, completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.INVENTORY_VARIANT_BY_ID

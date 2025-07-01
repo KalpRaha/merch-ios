@@ -258,6 +258,9 @@ class InventoryViewController: UIViewController {
             }
             else if currentVC == 3 {
                 searchBar.placeholder = "Search Variants"
+                let vc = subControllers[3] as! VariantViewController
+                vc.searchMode = true
+                vc.filterView.isHidden = true
             }
             else if currentVC == 4 {
                 searchBar.placeholder = "Search Brands"
@@ -286,6 +289,9 @@ class InventoryViewController: UIViewController {
             }
             else if currentVC == 3 {
                 searchBar.placeholder = "Search Variants"
+                let vc = subControllers[3] as! VariantViewController
+                vc.filterView.isHidden = true
+                vc.searchMode = true
             }
             else if currentVC == 4 {
                 searchBar.placeholder = "Search Brands"
@@ -357,7 +363,8 @@ extension InventoryViewController : UISearchBarDelegate {
             }
             else if currentVC == 3 {
                 let vc = subControllers[3] as! VariantViewController
-                vc.performSearch(searchText: searchText)
+                vc.tableview.isHidden = true
+                vc.loadingIndicator.isAnimating = false
             }
             else if currentVC == 4 {
                 let vc = subControllers[4] as! BrandsTagsViewController
@@ -395,7 +402,8 @@ extension InventoryViewController : UISearchBarDelegate {
             }
             else if currentVC == 3 {
                 let vc = subControllers[3] as! VariantViewController
-                vc.performSearch(searchText: searchText)
+                vc.tableview.isHidden = true
+                vc.loadingIndicator.isAnimating = false
             }
             else if currentVC == 4 {
                 let vc = subControllers[4] as! BrandsTagsViewController
@@ -446,7 +454,8 @@ extension InventoryViewController : UISearchBarDelegate {
             }
             else if currentVC == 3 {
                 let vc = subControllers[3] as! VariantViewController
-                vc.searching = false
+                vc.searchMode = false
+                vc.filterView.isHidden = false
                 vc.performSearch(searchText: "")
             }
             else if currentVC == 4 {
@@ -494,7 +503,8 @@ extension InventoryViewController : UISearchBarDelegate {
             }
             else if currentVC == 3 {
                 let vc = subControllers[3] as! VariantViewController
-                vc.searching = false
+                vc.searchMode = false
+                vc.filterView.isHidden = false
                 vc.performSearch(searchText: "")
             }
             else if currentVC == 4 {
@@ -513,6 +523,22 @@ extension InventoryViewController : UISearchBarDelegate {
                 vc.performSearch(searchText: "")
             }
         }
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        
+        if currentVC == 3 {
+            
+        }
+        else {}
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if currentVC == 3 {
+            let vc = subControllers[3] as! VariantViewController
+            vc.performSearch(searchText: searchBar.text ?? "")
+        }
+        else {}
     }
 }
 
@@ -593,6 +619,7 @@ extension InventoryViewController: BarcodeScannerCodeDelegate, BarcodeScannerErr
         }
         else if currentVC == 3 {
             let vc = subControllers[3] as! VariantViewController
+            vc.searchMode = true
             vc.performSearch(searchText: code)
         }
         else if currentVC == 6 {

@@ -15,6 +15,7 @@ class VariantViewController: UIViewController {
     
     @IBOutlet weak var filterView: UIView!
     
+    @IBOutlet weak var filterHeight: NSLayoutConstraint!
     @IBOutlet weak var noDataLbl: UILabel!
     
     @IBOutlet weak var noData: UIImageView!
@@ -33,6 +34,8 @@ class VariantViewController: UIViewController {
     var is_single = ""
     var prodId = ""
     
+    var page = 0
+    var searchMode = false
     
     let loadingIndicator: ProgressView = {
         let progress = ProgressView(colors: [.systemBlue], lineWidth: 5)
@@ -49,6 +52,9 @@ class VariantViewController: UIViewController {
         var_LabelFilter.isUserInteractionEnabled = true
         
         tableview.showsVerticalScrollIndicator = false
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
     }
     
@@ -67,6 +73,7 @@ class VariantViewController: UIViewController {
         noDataLbl.text = "No Variant Added"
         
         subVarArray = []
+        searchVarArray = []
         searching = false
         setupUI()
         loadingIndicator.isAnimating = true
@@ -109,7 +116,11 @@ class VariantViewController: UIViewController {
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         
-        ApiCalls.sharedCall.variantListCall(merchant_id: id) { isSuccess, responseData in
+        page = 1
+        
+        ApiCalls.sharedCall.variantListCallPage(merchant_id: id, search_by_name: "",
+                                                search_by_upc: "", cat_ids: "",
+                                                page: 1) { isSuccess, responseData in
             
             if isSuccess {
                 
@@ -125,6 +136,7 @@ class VariantViewController: UIViewController {
                         self.tableview.isHidden = true
                         self.loadingIndicator.isAnimating = false
                         self.filterView.isHidden = true
+                        self.filterHeight.constant = 0
                         self.noData.isHidden = false
                         self.noDataLbl.isHidden = false
                         self.noDataLbl.text = "No Variants Added"
@@ -134,6 +146,7 @@ class VariantViewController: UIViewController {
                         self.tableview.isHidden = false
                         self.loadingIndicator.isAnimating = false
                         self.filterView.isHidden = false
+                        self.filterHeight.constant = 25
                         self.noData.isHidden = true
                         self.noDataLbl.isHidden = true
                         self.noDataLbl.text = "No Variants Added"
@@ -174,64 +187,121 @@ class VariantViewController: UIViewController {
         }
         
         variantList = smallres.reversed()
-        subVarArray = smallres.reversed()
+        subVarArray = variantList
+        searchVarArray = variantList
         varUpc = varupc
         
         UserDefaults.standard.set(varUpc, forKey: "variant_upcs")
         
     }
     
-    func performSearch(searchText: String) {
+    func getResponsePageValues(response: Any) {
         
-        if searchText == "" {
+        let responsevalues = response as! [[String:Any]]
+        
+        var variantArr = [InventoryVariant]()
+        
+        for res in responsevalues {
             
-            searching = false
-            if selectArray.count == 0 {
-                setupVariantApi()
-            }
+            let variant = InventoryVariant(id: "\(res["id"] ?? "")", costperItem: "\(res["costperItem"] ?? "")", title: "\(res["title"] ?? "")",
+                                           isvarient: "\(res["isvarient"] ?? "")", upc: "\(res["upc"] ?? "")",
+                                           cotegory: "\(res["cotegory"] ?? "")",
+                                           var_id: "\(res["var_id"] ?? "")",
+                                           var_upc: "\(res["var_upc"] ?? "")",
+                                           quantity: "\(res["quantity"] ?? "")", price: "\(res["price"] ?? "")",
+                                           custom_code: "\(res["custom_code"] ?? "")", variant: "\(res["variant"] ?? "")",
+                                           var_price: "\(res["var_price"] ?? "")", is_lottery: "\(res["is_lottery"] ?? "")",
+                                           var_costperItem: "\(res["var_costperItem"] ?? "")")
             
-            else {
-                setupFilterApi()
-            }
+            variantArr.append(variant)
+            
         }
         
+        if variantArr.count == 0 {
+            page -= 1
+        }
         else {
-            searching = true
-            if selectArray.count == 0 {
-                searchVarArray = subVarArray.filter { $0.title.lowercased().prefix(searchText.count) == searchText.lowercased()
-                    || $0.upc.lowercased().prefix(searchText.count) == searchText.lowercased()
-                    || $0.var_upc.lowercased().prefix(searchText.count) == searchText.lowercased()
-                    || $0.custom_code.lowercased().prefix(searchText.count) == searchText.lowercased()
-                }
-            }
-            
-            else {
-                filterVarArray = subVarArray.filter { $0.title.lowercased().prefix(searchText.count) == searchText.lowercased()
-                    || $0.upc.lowercased().prefix(searchText.count) == searchText.lowercased()
-                    || $0.var_upc.lowercased().prefix(searchText.count) == searchText.lowercased()
-                    || $0.custom_code.lowercased().prefix(searchText.count) == searchText.lowercased()}
-            }
+            variantList.append(contentsOf: variantArr)
+            subVarArray.append(contentsOf: variantArr)
         }
         tableview.reloadData()
+    }
+    
+    func searchApi(search: String) {
         
-        if tableview.visibleCells.isEmpty {
+        let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        
+        ApiCalls.sharedCall.variantListCallSearch(merchant_id: id, search_by_name: search,
+                                                search_by_upc: "") { isSuccess, responseData in
+        
+            if isSuccess {
+                
+                self.getResponseValues(list: responseData["result"])
+                
+                DispatchQueue.main.async {
+                    
+                    if self.variantList.count == 0 {
+                        
+                        self.tableview.isHidden = true
+                        self.loadingIndicator.isAnimating = false
+                        self.filterView.isHidden = true
+                        self.noData.isHidden = false
+                        self.noDataLbl.isHidden = false
+                        self.noDataLbl.text = "No Variants Added"
+                    }
+                    
+                    else {
+                        self.tableview.isHidden = false
+                        self.loadingIndicator.isAnimating = false
+                        self.filterView.isHidden = false
+                        self.noData.isHidden = true
+                        self.noDataLbl.isHidden = true
+                        self.noDataLbl.text = "No Variants Added"
+                    }
+                }
+                
+                if self.searchMode {
+                    self.searching = true
+                    self.filterView.isHidden = true
+                    self.filterHeight.constant = 0
+                }
+                else {
+                    self.searching = false
+                    self.filterView.isHidden = false
+                    self.filterHeight.constant = 25
+                }
+                self.tableview.reloadData()
+            }
             
-            noDataLbl.isHidden = false
-            noDataLbl.text = "No Variants Found"
-            tableview.isHidden = true
-            filterView.isHidden = true
-            noData.isHidden = false
-        }
-        else {
-            noDataLbl.isHidden = true
-            tableview.isHidden = false
-            filterView.isHidden = false
-            noData.isHidden = true
-            noDataLbl.isHidden = true
-            noDataLbl.text = "No Variants Found"
-            tableview.reloadData()
+            else{
+                print("Api Error")
+            }
         }
     }
+    
+    
+    func performSearch(searchText: String) {
+        
+        if searchMode {
+            
+            if searchText == "" {
+                tableview.isHidden = true
+                loadingIndicator.isAnimating = false
+            }
+            else {
+                tableview.isHidden = true
+                loadingIndicator.isAnimating = true
+                searchApi(search: searchText)
+            }
+        }
+        else {
+            tableview.isHidden = true
+            loadingIndicator.isAnimating = true
+            setupVariantApi()
+        }
+        tableview.reloadData()
+    }
+    
     
     func setupFilterApi() {
         
@@ -306,6 +376,59 @@ class VariantViewController: UIViewController {
                 .constraint(equalTo: self.loadingIndicator.widthAnchor)
         ])
     }
+    
+    @objc func keyboardWillShow(notification:NSNotification) {
+        
+        guard let userInfo = notification.userInfo else { return }
+        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        
+        var contentInset:UIEdgeInsets = self.tableview.contentInset
+        contentInset.bottom = keyboardFrame.size.height
+        tableview.contentInset.bottom = contentInset.bottom
+    }
+    
+    @objc func keyboardWillHide(notification:NSNotification) {
+        
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        tableview.contentInset = contentInset
+        
+    }
+}
+
+
+extension VariantViewController {
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)  {
+        
+        if searching {
+            
+        }
+        
+        else {
+            
+            
+            if let visiblePaths = tableview.indexPathsForVisibleRows,
+               visiblePaths.contains([0, variantList.count - 1]) {
+                
+                let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+                
+                page += 1
+                
+                ApiCalls.sharedCall.variantListCallPage(merchant_id: id, search_by_name: "",
+                                                        search_by_upc: "", cat_ids: "",
+                                                        page: page) { isSuccess, responseData in
+                    
+                    if isSuccess {
+                        
+                        self.getResponsePageValues(response: responseData["result"])
+                    }else{
+                        print("Api Error")
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension VariantViewController: SelectedCategoryProductsDelegate {
@@ -331,14 +454,7 @@ extension VariantViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if searching {
-            
-            if selectArray.count == 0 {
-                return searchVarArray.count
-            }
-            
-            else {
-                return filterVarArray.count
-            }
+            return searchVarArray.count
         }
         
         
@@ -361,29 +477,15 @@ extension VariantViewController: UITableViewDelegate, UITableViewDataSource {
         
         if searching {
             
-            if selectArray.count == 0 {
-                
-                let cell = tableview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! VariantTableViewCell
-                
-                cell.variantName.text = searchVarArray[indexPath.row].title
-                
-                cell.borderView.layer.cornerRadius = 7.0
-                cell.borderView.layer.borderColor = UIColor(red: 223.0/255.0, green: 223.0/255.0, blue: 223.0/255.0, alpha: 1.0).cgColor
-                cell.borderView.layer.borderWidth = 1.0
-                return cell
-            }
             
-            else {
-                
-                let cell = tableview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! VariantTableViewCell
-                
-                cell.variantName.text = filterVarArray[indexPath.row].title
-                
-                cell.borderView.layer.cornerRadius = 7.0
-                cell.borderView.layer.borderColor = UIColor(red: 223.0/255.0, green: 223.0/255.0, blue: 223.0/255.0, alpha: 1.0).cgColor
-                cell.borderView.layer.borderWidth = 1.0
-                return cell
-            }
+            let cell = tableview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! VariantTableViewCell
+            
+            cell.variantName.text = searchVarArray[indexPath.row].title
+            
+            cell.borderView.layer.cornerRadius = 7.0
+            cell.borderView.layer.borderColor = UIColor(red: 223.0/255.0, green: 223.0/255.0, blue: 223.0/255.0, alpha: 1.0).cgColor
+            cell.borderView.layer.borderWidth = 1.0
+            return cell
         }
         // searching = false
         else {
@@ -422,38 +524,18 @@ extension VariantViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableview.cellForRow(at: indexPath) as! VariantTableViewCell
             nameVar = cell.variantName.text!
             
-            if selectArray.count == 0 {
-                
-                let is_var = searchVarArray[indexPath.row].isvarient
-                
-                if is_var == "1" {
-                    var_id = searchVarArray[indexPath.row].var_id
-                    prodId = searchVarArray[indexPath.row].id
-                    is_single = "0"
-                }
-                
-                else {
-                    var_id = searchVarArray[indexPath.row].id
-                    prodId = ""
-                    is_single = "1"
-                }
+            let is_var = searchVarArray[indexPath.row].isvarient
+            
+            if is_var == "1" {
+                var_id = searchVarArray[indexPath.row].var_id
+                prodId = searchVarArray[indexPath.row].id
+                is_single = "0"
             }
             
             else {
-                
-                let is_var = filterVarArray[indexPath.row].isvarient
-                
-                if is_var == "1" {
-                    var_id = filterVarArray[indexPath.row].var_id
-                    prodId = filterVarArray[indexPath.row].id
-                    is_single = "0"
-                }
-                
-                else {
-                    var_id = filterVarArray[indexPath.row].id
-                    prodId = ""
-                    is_single = "1"
-                }
+                var_id = searchVarArray[indexPath.row].id
+                prodId = ""
+                is_single = "1"
             }
         }
         // searching = false
