@@ -449,41 +449,36 @@ class PlusViewController: UIViewController {
     }
     
     func inflateView(prod: ProductById) {
-        
-        productField.text = prod.title
-        
-        
-        let htmlString = prod.description//"<h2><strong>this is test description new text add rr ff</strong></h2>"
-      
-                if let data = htmlString.data(using: .utf8) {
-                    do {
-                        let attributedString = try NSAttributedString(data: data, options: [
-                            .documentType: NSAttributedString.DocumentType.html,
-                            .characterEncoding: String.Encoding.utf8.rawValue
-                        ], documentAttributes: nil)
-                        
-                        let plain = attributedString.string
+           productField.text = prod.title
 
-                        let singleLine = plain
-                                       .replacingOccurrences(of: "\n", with: " ")
-                                       .replacingOccurrences(of: "\r", with: " ")
-                                       .trimmingCharacters(in: .whitespacesAndNewlines)
+           let htmlString = prod.description
 
-                        
-                        
-                        descField.text = singleLine
-                      
-                       
-                    } catch {
-                        print("Error parsing HTML: \(error)")
-                    }
-                }
-       
-    }
-    
-    
+           if let data = htmlString.data(using: .utf8) {
+               do {
+                   let attributedString = try NSAttributedString(data: data, options: [
+                       .documentType: NSAttributedString.DocumentType.html,
+                       .characterEncoding: String.Encoding.utf8.rawValue
+                   ], documentAttributes: nil)
 
-    
+                  
+                   let mutableAttributedString = NSMutableAttributedString(attributedString: attributedString)
+                   let paragraphStyle = NSMutableParagraphStyle()
+                   paragraphStyle.lineBreakMode = .byTruncatingTail
+                   paragraphStyle.alignment = .left
+
+                   mutableAttributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: mutableAttributedString.length))
+
+                  
+                   descField.attributedText = mutableAttributedString
+
+
+               } catch {
+                   print("Error parsing HTML: \(error)")
+               }
+           }
+       }
+
+ 
     func setupTax() {
         
         let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
@@ -814,14 +809,14 @@ class PlusViewController: UIViewController {
         if var_count == 0 || var_count == 1 {
             
             if mode == "add" {
-                scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 706
+                scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 706
                 if productOptions.count == 3 {
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
                 }
                 else {
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 776
+                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 776
                     addVarBtn.isHidden = false
                     addVarBtnHeight.constant = 50
                     addVarTop.constant = 20
@@ -830,7 +825,7 @@ class PlusViewController: UIViewController {
             
             else {
                 //771 = 826
-                scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 751
+                scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 751
                 addVarBtn.isHidden = true
                 addVarBtnHeight.constant = 0
                 addVarTop.constant = 0
@@ -840,13 +835,13 @@ class PlusViewController: UIViewController {
             var_count = variantsArray.count - 1
             if mode == "add" {
                 if productOptions.count == 3 {
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 706 + CGFloat(50 * var_count)
+                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 706 + CGFloat(50 * var_count)
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
                 }
                 else {
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 776 + CGFloat(50 * var_count)
+                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 776 + CGFloat(50 * var_count)
                     addVarBtn.isHidden = false
                     addVarBtnHeight.constant = 50
                     addVarTop.constant = 20
@@ -855,7 +850,7 @@ class PlusViewController: UIViewController {
             
             else {
                 //771 = 826
-                scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 751 + CGFloat(50 * var_count)
+                scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 751 + CGFloat(50 * var_count)
                 addVarBtn.isHidden = true
                 addVarBtnHeight.constant = 0
                 addVarTop.constant = 0
@@ -3835,6 +3830,12 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 else {
                     variants = variantsArray[indexPath.section]
                     cell.price.text = variants?.price
+                    if variants?.compare_price == "<null>" || variants?.compare_price == "null" {
+                        cell.comparePrice.text = ""
+                    }
+                    else {
+                        cell.comparePrice.text = variants?.compare_price
+                    }
                     cell.comparePrice.text = variants?.compare_price
                     cell.costPerItem.text = variants?.costperItem
                     cell.margin.text = variants?.margin
@@ -4081,14 +4082,14 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 ////                let tax = taxCollHeight.constant - 50
                 ////
                 ////                if mode == "add" {
-                ////                    scrollHeight.constant = 614 + cat + tax + attHeight.constant + 150
+                ////                    scrollHeight.constant = 664 + cat + tax + attHeight.constant + 150
                 ////                    if productOptions.count == 3 {
                 ////                        addVarBtn.isHidden = true
                 ////                        addVarBtnHeight.constant = 0
                 ////                        addVarTop.constant = 0
                 ////                    }
                 ////                    else {
-                ////                        scrollHeight.constant = 614 + cat + tax + attHeight.constant + 220
+                ////                        scrollHeight.constant = 664 + cat + tax + attHeight.constant + 220
                 ////                        addVarBtn.isHidden = false
                 ////                        addVarBtnHeight.constant = 50
                 ////                        addVarTop.constant = 20
@@ -4096,7 +4097,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 //                }
                 //                else {
                 //                    //771 = 826
-                //                    scrollHeight.constant = 614 + cat + tax + attHeight.constant + 195
+                //                    scrollHeight.constant = 664 + cat + tax + attHeight.constant + 195
                 //                    addVarBtn.isHidden = true
                 //                    addVarBtnHeight.constant = 0
                 //                    addVarTop.constant = 0
@@ -4112,14 +4113,14 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 let tax = taxCollHeight.constant
                 
                 if mode == "add" {
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 706
+                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 706
                     if productOptions.count == 3 {
                         addVarBtn.isHidden = true
                         addVarBtnHeight.constant = 0
                         addVarTop.constant = 0
                     }
                     else {
-                        scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 776
+                        scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 776
                         addVarBtn.isHidden = false
                         addVarBtnHeight.constant = 50
                         addVarTop.constant = 20
@@ -4127,7 +4128,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 else {
                     //771 = 826
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 751
+                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 751
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
@@ -4147,21 +4148,21 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 
                 if mode == "add" {
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count)
+                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count)
                     if productOptions.count == 3 {
                         addVarBtn.isHidden = true
                         addVarBtnHeight.constant = 0
                         addVarTop.constant = 0
                     }
                     else {
-                        scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count)
+                        scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count)
                         addVarBtn.isHidden = false
                         addVarBtnHeight.constant = 50
                         addVarTop.constant = 20
                     }
                 }
                 else {
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count)
+                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count)
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0

@@ -84,27 +84,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         let method = id.components(separatedBy: " ")
         let odm = method.first ?? ""
         
-        UserDefaults.standard.set(true, forKey: "notification_received")
         
-        if UserDefaults.standard.bool(forKey: "lock_free_notification") {
-            
-            guard let rv = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else {
-                return
-            }
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "NewOrderDetailVC") as! NewOrderDetailVC
-            
-            vc.order_id = order_id
-            vc.mode = "notifyfree"
-            vc.live_status = "Accepted"
-            vc.order_method = odm
-            rv.present(vc, animated: true)
+        guard let rv = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else {
+            return
         }
-        else {
-            UserDefaults.standard.set(order_id, forKey: "notification_oid")
-            UserDefaults.standard.set(odm, forKey: "notification_odm")
-        }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NewOrderDetailVC") as! NewOrderDetailVC
+        
+        vc.order_id = order_id
+        vc.mode = "notify"
+        vc.live_status = "Accepted"
+        vc.order_method = odm
+        rv.present(vc, animated: true)
+    
+    
+//        UserDefaults.standard.set(true, forKey: "notification_received")
+//        
+//        if UserDefaults.standard.bool(forKey: "lock_free_notification") {
+//            
+//            guard let rv = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else {
+//                return
+//            }
+//            
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "NewOrderDetailVC") as! NewOrderDetailVC
+//            
+//            vc.order_id = order_id
+//            vc.mode = "notifyfree"
+//            vc.live_status = "Accepted"
+//            vc.order_method = odm
+//            rv.present(vc, animated: true)
+//        }
+//        else {
+//            UserDefaults.standard.set(order_id, forKey: "notification_oid")
+//            UserDefaults.standard.set(odm, forKey: "notification_odm")
+//        }
         completionHandler()
     }
     

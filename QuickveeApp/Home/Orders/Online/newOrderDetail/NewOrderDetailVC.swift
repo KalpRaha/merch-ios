@@ -2786,13 +2786,14 @@ class NewOrderDetailVC: UIViewController {
     
     @IBAction func backBtnClick(_ sender: UIButton) {
         if mode == "notify" {
-            dismiss(animated: true) {
-                self.delegate?.notifyHome()
-            }
-        }
-        else if mode == "notifyfree" {
             dismiss(animated: true)
+//            dismiss(animated: true) {
+//                self.delegate?.notifyHome()
+//            }
         }
+//        else if mode == "notifyfree" {
+//            dismiss(animated: true)
+//        }
         else {
             navigationController?.popViewController(animated: true)
         }
@@ -2801,13 +2802,13 @@ class NewOrderDetailVC: UIViewController {
     @IBAction func homeBtnClick(_ sender: UIButton) {
         
         if mode == "notify" {
-            dismiss(animated: true) {
-                self.delegate?.notifyHome()
-            }
+            dismiss(animated: true) //{
+//                self.delegate?.notifyHome()
+//            }
         }
-        else if mode == "notifyfree" {
-            dismiss(animated: true)
-        }
+//        else if mode == "notifyfree" {
+//            dismiss(animated: true)
+//        }
         else {
             let viewcontrollerArray = navigationController?.viewControllers
             var destiny = 0

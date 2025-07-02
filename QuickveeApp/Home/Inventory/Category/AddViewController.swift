@@ -161,7 +161,14 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         }
         titleField.text = name
         
-        descField.text = inventCategory?.description
+        if inventCategory?.description == "Null" || inventCategory?.description == "<null>" {
+            descField.text = ""
+        }
+        else {
+            descField.text = inventCategory?.description
+        }
+        
+       
         coll_id = inventCategory?.id ?? ""
         
         cat_status = inventCategory?.cat_show_status ?? ""

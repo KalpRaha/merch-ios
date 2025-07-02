@@ -62,40 +62,56 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             
-            if UserDefaults.standard.bool(forKey: "notification_received") {
+            if let mainTabController = storyboard.instantiateViewController(withIdentifier: "lockPass") as?  LockPassCodeViewController {
                 
-                if let mainTabController = storyboard.instantiateViewController(withIdentifier: "passScreen") as? PassCodeViewController {
-                    
-                    if let rootViewController = window?.windowScene?.windows.first?.rootViewController {
-                        rootViewController.modalPresentationStyle = .overCurrentContext
-                        UserDefaults.standard.set(true, forKey: "notificationscene")
-                        rootViewController.present(mainTabController, animated: true, completion: {
-                            mainTabController.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
-                        })
-                    }
-                }
-            }
-            
-            else {
-                
-                if let mainTabController = storyboard.instantiateViewController(withIdentifier: "lockPass") as?  LockPassCodeViewController {
-                    
-                    if let rootViewController = window?.windowScene?.windows.first?.rootViewController {
-                        rootViewController.modalPresentationStyle = .overCurrentContext
-                        UserDefaults.standard.set("scene", forKey: "lockSource")
-                        rootViewController.present(mainTabController, animated: true, completion: {
-                            mainTabController.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
-                        })
-                    }
+                if let rootViewController = window?.windowScene?.windows.first?.rootViewController {
+                    rootViewController.modalPresentationStyle = .overCurrentContext
+                    UserDefaults.standard.set("scene", forKey: "lockSource")
+                    rootViewController.present(mainTabController, animated: true, completion: {
+                        mainTabController.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
+                    })
                 }
             }
         }
+        
+        
+        
+        
+        
+        //            if UserDefaults.standard.bool(forKey: "notification_received") {
+        //
+        //                if let mainTabController = storyboard.instantiateViewController(withIdentifier: "passScreen") as? PassCodeViewController {
+        //
+        //                    if let rootViewController = window?.windowScene?.windows.first?.rootViewController {
+        //                        rootViewController.modalPresentationStyle = .overCurrentContext
+        //                        UserDefaults.standard.set(true, forKey: "notificationscene")
+        //                        rootViewController.present(mainTabController, animated: true, completion: {
+        //                            mainTabController.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
+        //                        })
+        //                    }
+        //                }
+        //            }
+        //
+        //            else {
+        //
+        //                if let mainTabController = storyboard.instantiateViewController(withIdentifier: "lockPass") as?  LockPassCodeViewController {
+        //
+        //                    if let rootViewController = window?.windowScene?.windows.first?.rootViewController {
+        //                        rootViewController.modalPresentationStyle = .overCurrentContext
+        //                        UserDefaults.standard.set("scene", forKey: "lockSource")
+        //                        rootViewController.present(mainTabController, animated: true, completion: {
+        //                            mainTabController.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
+        //                        })
+        //                    }
+        //                }
+        //            }
     }
+    
     
     @available(iOS 13.0, *)
     func sceneDidEnterBackground(_ scene: UIScene) {
-        
-        
+       // UserDefaults.standard.set(false, forKey: "lock_free_notification")
+    
     }
     
     func requestIDFA() {

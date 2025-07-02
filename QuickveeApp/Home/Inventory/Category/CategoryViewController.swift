@@ -156,6 +156,7 @@ class CategoryViewController: UIViewController {
                     
                     self.tableview.isHidden = false
                     self.loadingIndicator.isAnimating = false
+                    self.searching = false
                     self.tableview.reloadData()
                 }
             }else{

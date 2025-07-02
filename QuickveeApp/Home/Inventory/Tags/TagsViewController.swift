@@ -131,6 +131,7 @@ class TagsViewController: UIViewController {
         noTagLbl.text = "No Tags Added"
         
         loadingIndicator.isAnimating = false
+        searching = false
         tableview.reloadData()
     }
     

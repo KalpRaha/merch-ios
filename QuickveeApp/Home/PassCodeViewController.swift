@@ -72,7 +72,7 @@ class PassCodeViewController: UIViewController, WKNavigationDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        UserDefaults.standard.set(false, forKey: "lock_free_notification")
+       // UserDefaults.standard.set(false, forKey: "lock_free_notification")
         hideAppear()
      
     }
@@ -409,26 +409,29 @@ class PassCodeViewController: UIViewController, WKNavigationDelegate {
                     self.loadingIndicator.isAnimating = false
                     self.loadingIndicator.removeFromSuperview()
                     
-                    if UserDefaults.standard.bool(forKey: "notification_received") {
-                        
-                        UserDefaults.standard.set(false, forKey: "notification_received")
-                        
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "NewOrderDetailVC") as! NewOrderDetailVC
-                        
-                        let order_id = UserDefaults.standard.string(forKey: "notification_oid") ?? ""
-                        let odm = UserDefaults.standard.string(forKey: "notification_odm") ?? ""
-                        vc.order_id = order_id
-                        vc.mode = "notify"
-                        vc.live_status = "Accepted"
-                        vc.order_method = odm
-                        vc.delegate = self
-                        self.present(vc, animated: true)
-                    }
-                    else {
-                        self.performSegue(withIdentifier: "passcodetoHome", sender: nil)
-                    }
-                    UserDefaults.standard.set(true, forKey: "lock_free_notification")
+                    self.performSegue(withIdentifier: "passcodetoHome", sender: nil)
+                    
+                    
+                    //                    if UserDefaults.standard.bool(forKey: "notification_received") {
+                    //
+                    //                        UserDefaults.standard.set(false, forKey: "notification_received")
+                    //
+                    //                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    //                        let vc = storyboard.instantiateViewController(withIdentifier: "NewOrderDetailVC") as! NewOrderDetailVC
+                    //
+                    //                        let order_id = UserDefaults.standard.string(forKey: "notification_oid") ?? ""
+                    //                        let odm = UserDefaults.standard.string(forKey: "notification_odm") ?? ""
+                    //                        vc.order_id = order_id
+                    //                        vc.mode = "notify"
+                    //                        vc.live_status = "Accepted"
+                    //                        vc.order_method = odm
+                    //                        vc.delegate = self
+                    //                        self.present(vc, animated: true)
+                    //                    }
+                    //                    else {
+                    //                        self.performSegue(withIdentifier: "passcodetoHome", sender: nil)
+                    //                    }
+                    // UserDefaults.standard.set(true, forKey: "lock_free_notification")
                 }
             }
             else {
@@ -1617,14 +1620,18 @@ class PassCodeViewController: UIViewController, WKNavigationDelegate {
 extension PassCodeViewController: NotificationDelegate {
     
     func notifyHome() {
-        if UserDefaults.standard.bool(forKey: "notificationscene") {
-            dismiss(animated: true) {
-                UserDefaults.standard.set(false, forKey: "notificationscene")
-            }
-        }
-        else {
-            self.performSegue(withIdentifier: "passcodetoHome", sender: nil)
-        }
+        
+        self.performSegue(withIdentifier: "passcodetoHome", sender: nil)
+        
+        
+        //        if UserDefaults.standard.bool(forKey: "notificationscene") {
+        //            dismiss(animated: true) {
+        //                UserDefaults.standard.set(false, forKey: "notificationscene")
+        //            }
+        //        }
+        //        else {
+        //            self.performSegue(withIdentifier: "passcodetoHome", sender: nil)
+        //        }
     }
 }
 

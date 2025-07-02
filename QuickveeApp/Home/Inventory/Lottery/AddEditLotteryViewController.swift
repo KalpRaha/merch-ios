@@ -336,7 +336,7 @@ class AddEditLotteryViewController: UIViewController {
             return
         }
         
-        guard let price = priceField.text, price != "" else {
+        guard let price = priceField.text, price != "", price != "0.00"  else {
             priceField.isErrorView(numberOfShakes: 3, revert: true)
             ToastClass.sharedToast.showToast(message: "Enter Price", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
             return
@@ -434,7 +434,7 @@ class AddEditLotteryViewController: UIViewController {
             return
         }
         
-        guard let price = priceField.text, price != "" else {
+        guard let price = priceField.text, price != "",price != "0.00" else {
             priceField.isErrorView(numberOfShakes: 3, revert: true)
             ToastClass.sharedToast.showToast(message: "Enter Price", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
             return

@@ -311,36 +311,34 @@ class DuplicatePlusViewController: UIViewController {
     
     
     func inflateView(prod: ProductById) {
-        
-      
-        
-        
-        let htmlString = prod.description//"<h2><strong>this is test description new text add rr ff</strong></h2>"
-      
-                if let data = htmlString.data(using: .utf8) {
-                    do {
-                        let attributedString = try NSAttributedString(data: data, options: [
-                            .documentType: NSAttributedString.DocumentType.html,
-                            .characterEncoding: String.Encoding.utf8.rawValue
-                        ], documentAttributes: nil)
-                        
-                        let plain = attributedString.string
+          
+           let htmlString = prod.description
 
-                        let singleLine = plain
-                                       .replacingOccurrences(of: "\n", with: " ")
-                                       .replacingOccurrences(of: "\r", with: " ")
-                                       .trimmingCharacters(in: .whitespacesAndNewlines)
+           if let data = htmlString.data(using: .utf8) {
+               do {
+                   let attributedString = try NSAttributedString(data: data, options: [
+                       .documentType: NSAttributedString.DocumentType.html,
+                       .characterEncoding: String.Encoding.utf8.rawValue
+                   ], documentAttributes: nil)
 
-                        
-                        
-                        dupDescField.text = singleLine
-                      
-                       
-                    } catch {
-                        print("Error parsing HTML: \(error)")
-                    }
-                }
+                  
+                   let mutableAttributedString = NSMutableAttributedString(attributedString: attributedString)
+                   let paragraphStyle = NSMutableParagraphStyle()
+                   paragraphStyle.lineBreakMode = .byTruncatingTail
+                   paragraphStyle.alignment = .left
+
+                   mutableAttributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: mutableAttributedString.length))
+
+                  
+                   dupDescField.attributedText = mutableAttributedString
+
+
+               } catch {
+                   print("Error parsing HTML: \(error)")
+               }
            }
+       }
+
     
     
     func getGeneratedUpc(length: Int) -> String {

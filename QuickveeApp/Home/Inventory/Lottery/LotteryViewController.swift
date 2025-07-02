@@ -87,7 +87,7 @@ class LotteryViewController: UIViewController {
             
             if isSuccess {
                 
-                guard let list = responseData["result"] else {
+                guard let list = responseData["product_list"] else {
                     
                     self.floatBtn.isHidden = true
                     self.tableview.isHidden = true
@@ -185,7 +185,7 @@ class LotteryViewController: UIViewController {
         
         else {
             
-            lotteryList = smallres.sorted(by: {$0.id > $1.id})
+            lotteryList = smallres.reversed()
             subLotteryList = lotteryList
             
             self.tableview.isHidden = false

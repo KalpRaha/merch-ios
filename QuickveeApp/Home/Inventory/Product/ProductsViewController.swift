@@ -164,6 +164,7 @@ class ProductsViewController: UIViewController {
                         self.addProdLbl.isHidden = true
                         self.filterView.isHidden = false
                         self.addLblView.isHidden = true
+                        self.searching = false
                         self.tableview.reloadData()
                     }
                 }
@@ -296,7 +297,7 @@ class ProductsViewController: UIViewController {
                 searchProdArray = subProdArray.filter { product in
                     let searchTextLowercased = searchText.lowercased()
                     let isTitleMatch = product.title.lowercased().contains(searchTextLowercased)
-                    let isUPCMatch = product.upc.lowercased().contains(searchTextLowercased)
+                    let isUPCMatch = product.upc.lowercased() == searchTextLowercased
                     let iscustomMatch = product.custom_code.lowercased().contains(searchTextLowercased)
                     let isVariantTitle = product.vvariant.split(separator: ",").contains { variant in
                         variant.trimmingCharacters(in: .whitespacesAndNewlines).lowercased().contains(searchTextLowercased)
@@ -310,7 +311,7 @@ class ProductsViewController: UIViewController {
             
             else {
                 filterProdArray = subProdArray.filter { $0.title.lowercased().prefix(searchText.count) == searchText.lowercased()
-                    || $0.upc.lowercased().prefix(searchText.count) == searchText.lowercased()
+                    || $0.upc.lowercased() == searchText.lowercased()
                     || $0.vupc.lowercased().prefix(searchText.count) == searchText.lowercased()
                     || $0.custom_code.lowercased().prefix(searchText.count) == searchText.lowercased()}
             }
@@ -422,11 +423,18 @@ class ProductsViewController: UIViewController {
         
         self.loadingIndicator.isAnimating = true
         
-        let product_id = productList[productTag].id
+        var product_id = productList[productTag].id
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         var status = ""
-        let mode = productList[productTag].show_type
-        
+        var mode = ""
+        if searching {
+             mode = searchProdArray[productTag].show_type
+             product_id = searchProdArray[productTag].id
+        }
+        else {
+            mode = productList[productTag].show_type
+            product_id = productList[productTag].id
+        }
         if btn == "Delivery" {
             
             if mode == "0" {
@@ -467,7 +475,7 @@ class ProductsViewController: UIViewController {
         ApiCalls.sharedCall.productUpdateStatus(product_id: product_id, status: status, merchant_id: id) { isSuccess, responseData in
             
             if isSuccess {
-                
+                self.searching = false
                 self.setupProductApi()
             }else{
                 print("Api Error")

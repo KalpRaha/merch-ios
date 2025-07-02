@@ -130,7 +130,13 @@ class CustomerViewController: UIViewController {
                                           total_store_credit: "\(res["total_store_credit"] ?? "")")
             
             
-            small.append(customer)
+            if customer.customer_id == "null" {
+                
+            }
+            else {
+                small.append(customer)
+            }
+           
         }
         if small.count == 0 {
             tableview.isHidden = true
@@ -171,7 +177,12 @@ class CustomerViewController: UIViewController {
                                           total_store_credit: "\(res["total_store_credit"] ?? "")")
             
             
-            small.append(customer)
+            if customer.customer_id == "null" {
+                
+            }
+            else {
+                small.append(customer)
+            }
         }
         
         if small.count == 0 {
