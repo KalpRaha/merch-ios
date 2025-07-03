@@ -129,12 +129,39 @@ class StockTakeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "toStockAdd" {
-            _ = segue.destination as! StockAddViewController
+            let vc = segue.destination as! StockAddViewController
+            vc.selectMode = "add"
         }
         else if segue.identifier == "toDraftSave" {
+            
             let vc = segue.destination as! StockSaveViewController
-            vc.stockId = stock_id
-            vc.mode = mode
+            
+            if mode == "draft" {
+                vc.stockId = stock_id
+                vc.mode = mode
+            }
+            
+            else {
+                
+                var variant_stock = [InventoryVariant]()
+                
+                if let data = UserDefaults.standard.object(forKey: "savedVariants") as? Data,
+                   let variant = try? JSONDecoder().decode([InventoryVariant].self, from: data) {
+                    variant_stock = variant
+                }
+
+                let newAddQty = UserDefaults.standard.stringArray(forKey: "savedAddQty") ?? []
+                
+                let discrepancyAdd = UserDefaults.standard.stringArray(forKey: "saveddiscrepancyAdd") ?? []
+                
+                let note = UserDefaults.standard.stringArray(forKey: "savednote") ?? []
+                
+                vc.stockItemsList = variant_stock
+                vc.addNewQty = newAddQty
+                vc.discrepancyAdd = discrepancyAdd
+                vc.note = note
+                vc.mode = mode
+            }
         }
         else {
             let vc = segue.destination as! StockItemsViewController
@@ -151,8 +178,15 @@ class StockTakeViewController: UIViewController {
         }
         
         else {
-            UserDefaults.standard.set(true, forKey: "isStockAdd")
-            performSegue(withIdentifier: "toStockAdd", sender: nil)
+            
+            if UserDefaults.standard.bool(forKey: "stock_variant_saved") {
+                mode = "addsaved"
+                performSegue(withIdentifier: "toDraftSave", sender: nil)
+            }
+            else {
+                mode = "add"
+                performSegue(withIdentifier: "toStockAdd", sender: nil)
+            }
         }
     }
     

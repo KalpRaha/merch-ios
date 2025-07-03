@@ -1,6 +1,6 @@
 //
 //  StockSaveViewController.swift
-//  
+//
 //
 //  Created by Jamaluddin Syed on 12/11/24.
 //
@@ -84,7 +84,11 @@ class StockSaveViewController: UIViewController {
         
         tableview.showsVerticalScrollIndicator = false
         
-        if mode == "add" {
+        if mode == "addsaved" {
+            searchBtn.isHidden = false
+            stockName.text = "Create Stocktake"
+        }
+        else if mode == "add" {
             searchBtn.isHidden = true
             stockName.text = "Create Stocktake"
         }
@@ -156,7 +160,7 @@ class StockSaveViewController: UIViewController {
             small.append(stockItem)
             
             addNewQty.append(stockItem.new_qty)
-           
+            
             discrepancyAdd.append(stockItem.discrepancy)
             note.append(stockItem.note)
             stockItemId.append(stockItem.id)
@@ -272,7 +276,7 @@ class StockSaveViewController: UIViewController {
             var total_dis_cost = [String]()
             var total_dis = [String]()
             
-            if mode == "add" {
+            if mode == "add" || mode == "addsaved" {
                 
                 if stockItemsList.count == 0 {
                     
@@ -280,136 +284,145 @@ class StockSaveViewController: UIViewController {
                                                      font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                 }
                 else {
-                
-                
-                
-                var total_new_Qty = 0
-                
-                for new in addNewQty {
-                    
-                    guard new != "" else {
-                        ToastClass.sharedToast.showToast(message: "Add New Quantity for all variants",
-                                                         font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                        return
-                    }
-                    
-                    total_new_Qty += Int(new) ?? 0
-                }
-                
-                for fill in 0..<stockItemsList.count {
-                    
-                    var upc = ""
-                    var var_id = ""
-                    var costperItem = ""
-                    
-                    if stockItemsList[fill].isvarient == "1" {
-                        upc = stockItemsList[fill].var_upc
-                        var_id = stockItemsList[fill].var_id
-                        costperItem = stockItemsList[fill].var_costperItem
-                    }
-                    
-                    else {
-                        upc = stockItemsList[fill].upc
-                        var_id = ""
-                        costperItem = stockItemsList[fill].costperItem
-                    }
                     
                     
-                    let cpi_doub = Double(costperItem) ?? 0.00
-                    let newQty = Int(addNewQty[fill]) ?? 0
                     
-                    let discrepancy_per = Int(discrepancyAdd[fill]) ?? 0
+                    var total_new_Qty = 0
                     
-                   
-                    let cost = cpi_doub * Double(discrepancy_per)
-                    var cost_str = String(cost)
-                    let dis_str = String(discrepancy_per)
-                    
-                    if cost_str.contains("-") {
-                        cost_str.removeFirst()
-                    }
-                    total_dis_cost.append(cost_str)
-                    total_dis.append(dis_str)
-                    
-                    let note_per = note[fill]
-                    
-                    let save = SaveStock(upc: upc, category_id: stockItemsList[fill].cotegory,
-                                         product_id: stockItemsList[fill].id, variant_id: var_id,
-                                         product_name: stockItemsList[fill].title, 
-                                         variant: stockItemsList[fill].variant,
-                                         current_qty: stockItemsList[fill].quantity,
-                                         new_qty: "\(newQty)", discrepancy: "\(discrepancy_per)",
-                                         discrepancy_cost: cost_str, stocktake_item_id: "", note: note_per)
-                    
-                    items.append(save)
-                }
-                
-                // Encoding the data into JSON
-                do {
-                    let encoder = JSONEncoder()
-                    encoder.outputFormatting = .prettyPrinted  // Makes the output readable
-                    let jsonData = try encoder.encode(items) // Wrap the object in an array for consistency with the provided JSON structure
-                    
-                    // Convert the encoded JSON into a string for display or further processing
-                    if let jsonString = String(data: jsonData, encoding: .utf8) {
-                        final_json = jsonString
-                    }
-                } catch {
-                    print("Error encoding JSON: \(error)")
-                }
-                
-                var final_dis_cost = 0.00
-                var final_dis = 0.00
-                
-                for cost_total in total_dis_cost {
-                    
-                    final_dis_cost += Double(cost_total) ?? 0.00
-                }
-                
-                for dis_total in total_dis {
-                    
-                    final_dis += Double(dis_total) ?? 0.00
-                }
-                
-                tableview.isHidden = true
-                loadingIndicator.isAnimating = true
-                
-                ApiCalls.sharedCall.saveStockTake(merchant_id: id,
-                                                  employee_id: emp_id,
-                                                  total_qty: "\(total_new_Qty)",
-                                                  total_discrepancy: "\(final_dis)",
-                                                  total_discrepancy_cost: "\(final_dis_cost)",
-                                                  status: "1",
-                                                  datetime: dateFormat,
-                                                  stocktake_items: final_json, stocktake_id: "") { isSuccess, response in
-                    
-                    if isSuccess {
+                    for new in addNewQty {
                         
-                        guard let msg = response["message"] else {
+                        guard new != "" else {
+                            ToastClass.sharedToast.showToast(message: "Add New Quantity for all variants",
+                                                             font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                             return
                         }
                         
-                        self.loadingIndicator.isAnimating = false
-                        self.tableview.isHidden = false
+                        total_new_Qty += Int(new) ?? 0
+                    }
+                    
+                    for fill in 0..<stockItemsList.count {
                         
-                        ToastClass.sharedToast.showToast(message: msg as! String,
-                                                         font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                        var upc = ""
+                        var var_id = ""
+                        var costperItem = ""
                         
-                        var destiny = 0
-                        
-                        let viewcontrollerArray = self.navigationController?.viewControllers
-                        
-                        if let destinationIndex = viewcontrollerArray!.firstIndex(where: { $0 is InventoryViewController }) {
-                            destiny = destinationIndex
+                        if stockItemsList[fill].isvarient == "1" {
+                            upc = stockItemsList[fill].var_upc
+                            var_id = stockItemsList[fill].var_id
+                            costperItem = stockItemsList[fill].var_costperItem
                         }
                         
-                        self.navigationController?.popToViewController(viewcontrollerArray![destiny], animated: true)
+                        else {
+                            upc = stockItemsList[fill].upc
+                            var_id = ""
+                            costperItem = stockItemsList[fill].costperItem
+                        }
+                        
+                        
+                        let cpi_doub = Double(costperItem) ?? 0.00
+                        let newQty = Int(addNewQty[fill]) ?? 0
+                        
+                        let discrepancy_per = Int(discrepancyAdd[fill]) ?? 0
+                        
+                        
+                        let cost = cpi_doub * Double(discrepancy_per)
+                        var cost_str = String(cost)
+                        let dis_str = String(discrepancy_per)
+                        
+                        if cost_str.contains("-") {
+                            cost_str.removeFirst()
+                        }
+                        total_dis_cost.append(cost_str)
+                        total_dis.append(dis_str)
+                        
+                        let note_per = note[fill]
+                        
+                        let save = SaveStock(upc: upc, category_id: stockItemsList[fill].cotegory,
+                                             product_id: stockItemsList[fill].id, variant_id: var_id,
+                                             product_name: stockItemsList[fill].title,
+                                             variant: stockItemsList[fill].variant,
+                                             current_qty: stockItemsList[fill].quantity,
+                                             new_qty: "\(newQty)", discrepancy: "\(discrepancy_per)",
+                                             discrepancy_cost: cost_str, stocktake_item_id: "", note: note_per)
+                        
+                        items.append(save)
                     }
-                    else {
+                    
+                    // Encoding the data into JSON
+                    do {
+                        let encoder = JSONEncoder()
+                        encoder.outputFormatting = .prettyPrinted  // Makes the output readable
+                        let jsonData = try encoder.encode(items) // Wrap the object in an array for consistency with the provided JSON structure
+                        
+                        // Convert the encoded JSON into a string for display or further processing
+                        if let jsonString = String(data: jsonData, encoding: .utf8) {
+                            final_json = jsonString
+                        }
+                    } catch {
+                        print("Error encoding JSON: \(error)")
+                    }
+                    
+                    var final_dis_cost = 0.00
+                    var final_dis = 0.00
+                    
+                    for cost_total in total_dis_cost {
+                        
+                        final_dis_cost += Double(cost_total) ?? 0.00
+                    }
+                    
+                    for dis_total in total_dis {
+                        
+                        final_dis += Double(dis_total) ?? 0.00
+                    }
+                    
+                    tableview.isHidden = true
+                    loadingIndicator.isAnimating = true
+                    
+                    ApiCalls.sharedCall.saveStockTake(merchant_id: id,
+                                                      employee_id: emp_id,
+                                                      total_qty: "\(total_new_Qty)",
+                                                      total_discrepancy: "\(final_dis)",
+                                                      total_discrepancy_cost: "\(final_dis_cost)",
+                                                      status: "1",
+                                                      datetime: dateFormat,
+                                                      stocktake_items: final_json, stocktake_id: "") { isSuccess, response in
+                        
+                        if isSuccess {
+                            
+                            guard let msg = response["message"] else {
+                                return
+                            }
+                            
+                            self.loadingIndicator.isAnimating = false
+                            self.tableview.isHidden = false
+                            
+                            ToastClass.sharedToast.showToast(message: msg as! String,
+                                                             font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                            
+                            if self.mode == "add" {
+                                var destiny = 0
+                                
+                                let viewcontrollerArray = self.navigationController?.viewControllers
+                                
+                                if let destinationIndex = viewcontrollerArray!.firstIndex(where: { $0 is InventoryViewController }) {
+                                    destiny = destinationIndex
+                                }
+                                
+                                self.navigationController?.popToViewController(viewcontrollerArray![destiny], animated: true)
+                            }
+                            
+                            else if self.mode == "addsaved" {
+                                
+                                UserDefaults.standard.set(false, forKey: "stock_variant_saved")
+                                
+                                self.navigationController?.popViewController(animated: true)
+                            }
+                        }
+                        else {
+                        }
                     }
                 }
             }
-        }
             else {
                 
                 if stockVarList.count == 0 {
@@ -475,7 +488,7 @@ class StockSaveViewController: UIViewController {
                         
                         let save = SaveStock(upc: upc, category_id: stockVarList[fill].cotegory,
                                              product_id: stockVarList[fill].id, variant_id: var_id,
-                                             product_name: prod_name, 
+                                             product_name: prod_name,
                                              variant: stockVarList[fill].variant,
                                              current_qty: stockVarList[fill].quantity,
                                              new_qty: "\(newQty)", discrepancy: "\(discrepancy_per)",
@@ -509,7 +522,7 @@ class StockSaveViewController: UIViewController {
                         
                         final_dis += Double(dis_total) ?? 0.00
                     }
-                   
+                    
                     
                     tableview.isHidden = true
                     loadingIndicator.isAnimating = true
@@ -565,6 +578,15 @@ class StockSaveViewController: UIViewController {
     }
     
     
+    @IBAction func backBtnClick(_ sender: UIButton) {
+        if mode == "add" {
+            delegate?.stockAddCheck(variants: stockItemsList, addNewQty: addNewQty,
+                                    disAdd: discrepancyAdd, noteAdd: note)
+        }
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
     @IBAction func deleteBtnClick(_ sender: UIButton) {
         
         showAlert(title: "Alert", message: "Are you sure you want to delete this item?", tag: sender.tag)
@@ -581,18 +603,30 @@ class StockSaveViewController: UIViewController {
             
             self.view.endEditing(true) 
             
-            if self.mode == "add" {
+            if self.mode == "add" || self.mode == "addsaved" {
                 
                 self.stockItemsList.remove(at: tag)
                 self.addNewQty.remove(at: tag)
                 self.discrepancyAdd.remove(at: tag)
                 self.note.remove(at: tag)
                 self.tableview.reloadData()
+                
+                UserDefaults.standard.set(true, forKey: "stock_variant_saved")
+                
+                if let encoded = try? JSONEncoder().encode(self.stockItemsList) {
+                    UserDefaults.standard.set(encoded, forKey: "savedVariants")
+                }
+                
+                UserDefaults.standard.set(self.addNewQty, forKey: "savedAddQty")
+                
+                UserDefaults.standard.set(self.discrepancyAdd, forKey: "saveddiscrepancyAdd")
+                
+                UserDefaults.standard.set(self.note, forKey: "savednote")
             }
             else {
                 
                 let pos = self.stockItemId[tag]
-                                
+                
                 if pos == "" {
                     
                     self.addNewQty.remove(at: tag)
@@ -689,7 +723,7 @@ class StockSaveViewController: UIViewController {
             var total_dis_cost = [String]()
             var total_dis = [String]()
             
-            if mode == "add" {
+            if mode == "add" || mode == "addsaved" {
                 
                 if stockItemsList.count == 0 {
                     
@@ -698,7 +732,7 @@ class StockSaveViewController: UIViewController {
                 }
                 
                 else {
-                                        
+                    
                     var total_new_Qty = 0
                     
                     for new in addNewQty {
@@ -750,7 +784,7 @@ class StockSaveViewController: UIViewController {
                         
                         let save = SaveStock(upc: upc, category_id: stockItemsList[fill].cotegory,
                                              product_id: stockItemsList[fill].id, variant_id: var_id,
-                                             product_name: stockItemsList[fill].title, 
+                                             product_name: stockItemsList[fill].title,
                                              variant: stockItemsList[fill].variant,
                                              current_qty: stockItemsList[fill].quantity,
                                              new_qty: "\(newQty)", discrepancy: "\(discrepancy_per)",
@@ -810,15 +844,24 @@ class StockSaveViewController: UIViewController {
                             ToastClass.sharedToast.showToast(message: msg as! String,
                                                              font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                             
-                            var destiny = 0
-                            
-                            let viewcontrollerArray = self.navigationController?.viewControllers
-                            
-                            if let destinationIndex = viewcontrollerArray!.firstIndex(where: { $0 is InventoryViewController }) {
-                                destiny = destinationIndex
+                            if self.mode == "add" {
+                                var destiny = 0
+                                
+                                let viewcontrollerArray = self.navigationController?.viewControllers
+                                
+                                if let destinationIndex = viewcontrollerArray!.firstIndex(where: { $0 is InventoryViewController }) {
+                                    destiny = destinationIndex
+                                }
+                                
+                                self.navigationController?.popToViewController(viewcontrollerArray![destiny], animated: true)
                             }
                             
-                            self.navigationController?.popToViewController(viewcontrollerArray![destiny], animated: true)
+                            else if self.mode == "addsaved" {
+                                
+                                UserDefaults.standard.set(false, forKey: "stock_variant_saved")
+                                
+                                self.navigationController?.popViewController(animated: true)
+                            }
                             
                         }
                         else {
@@ -889,7 +932,7 @@ class StockSaveViewController: UIViewController {
                         
                         let save = SaveStock(upc: upc, category_id: stockVarList[fill].cotegory,
                                              product_id: stockVarList[fill].id, variant_id: var_id,
-                                             product_name: stockVarList[fill].title, 
+                                             product_name: stockVarList[fill].title,
                                              variant: stockVarList[fill].variant,
                                              current_qty: stockVarList[fill].quantity,
                                              new_qty: "\(newQty)", discrepancy: "\(discrepancy_per)",
@@ -987,6 +1030,21 @@ class StockSaveViewController: UIViewController {
         if mode == "add" {
             
         }
+        else if mode == "addsaved" {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let vc = storyboard.instantiateViewController(withIdentifier: "stockadd") as! StockAddViewController
+            
+            vc.delegate = self
+            vc.selectAddStock = stockItemsList
+            vc.newAddQty = addNewQty
+            vc.discrepancyAdd = discrepancyAdd
+            vc.stock_Item_Id = stockItemId
+            vc.note = note
+            vc.selectMode = "addsaved"
+            
+            present(vc, animated: true)
+        }
         else {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
@@ -1010,7 +1068,12 @@ extension StockSaveViewController: StockDelegate {
                     discrepancy: [String], item_id: [String],
                     notes: [String]) {
         
-        stockVarList = variants
+        if mode == "addsaved" {
+            stockItemsList = variants
+        }
+        else {
+            stockVarList = variants
+        }
         
         addNewQty = addNew
         discrepancyAdd = discrepancy
@@ -1105,10 +1168,25 @@ extension StockSaveViewController: UITextFieldDelegate {
         else {
             
         }
+        
+        if mode == "add" || mode == "addsaved" {
+            
+            UserDefaults.standard.set(true, forKey: "stock_variant_saved")
+            
+            if let encoded = try? JSONEncoder().encode(stockItemsList) {
+                UserDefaults.standard.set(encoded, forKey: "savedVariants")
+            }
+            
+            UserDefaults.standard.set(addNewQty, forKey: "savedAddQty")
+            
+            UserDefaults.standard.set(discrepancyAdd, forKey: "saveddiscrepancyAdd")
+            
+            UserDefaults.standard.set(note, forKey: "savednote")
+        }
     }
     
     @objc func updateTextField(textField: MDCOutlinedTextField) {
-       
+        
         let index = IndexPath(row: textField.tag, section: 0)
         let cell = tableview.cellForRow(at: index) as! StockSaveTableViewCell
         
@@ -1200,7 +1278,7 @@ extension StockSaveViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if mode == "add" {
+        if mode == "add" || mode == "addsaved" {
             return stockItemsList.count
         }
         else {
@@ -1212,7 +1290,7 @@ extension StockSaveViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StockSaveTableViewCell
         
-        if mode == "add" {
+        if mode == "add" || mode == "addsaved" {
             
             let stock = stockItemsList[indexPath.row]
             
@@ -1282,7 +1360,7 @@ extension StockSaveViewController: UITableViewDelegate, UITableViewDataSource {
         cell.newQtyView.layer.cornerRadius = 10
         
         createCustomTextField(textField: cell.noteField)
-
+        
         cell.newQtyText.tag = indexPath.row
         
         cell.noteField.delegate = self
