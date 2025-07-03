@@ -92,14 +92,11 @@ class PlusViewController: UIViewController {
     var arrCatId = [String]()
     var arrCat = [InventoryCategory]()
     var collCat = [InventoryCategory]()
-    var brandlist = [String]()
-
-    var collTag = [String]()
     
+    var collTag = [String]()
     
     var productOptions = [InventoryOptions]()
     var missVariants = [String]()
-    
     
     var newEditArr = [String]()
     var result = [String]()
@@ -126,7 +123,6 @@ class PlusViewController: UIViewController {
     
     var prod_purchaseQty = ""
     var variantsArray = [ProductById]()
-    var variantsDataSource = [ProductById]()
     var editProd: ProductById?
     
     var unsel_var_array = [String]()
@@ -253,8 +249,6 @@ class PlusViewController: UIViewController {
         }
         
         topview.addBottomShadow()
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -282,8 +276,6 @@ class PlusViewController: UIViewController {
             tripleWidth.constant = 0
             titleText.text = "Add Product"
             
-            loadSavedProduct()
-
             if variantsArray.count == 0 {
                 
                 let emptyProd = ProductById(alternateName: "", admin_id: "", description: "", starting_quantity: "", margin: "",
@@ -312,9 +304,6 @@ class PlusViewController: UIViewController {
             }
             isSelectedData = isSel
             
-            print(variantsArray.count)
-            print(isSelectedData.count)
-            
             selectBrandLbl.text = "Select Brand"
             brandInnerView.isHidden = true
             brandName.text = ""
@@ -322,7 +311,6 @@ class PlusViewController: UIViewController {
             
             setupTax()
             setCollHeight(coll: scrollView)
-           
         }
         
         //edit
@@ -338,8 +326,6 @@ class PlusViewController: UIViewController {
         }
         inventSettingsCall()
     }
-    
-    
   
     func setUpProductApiId() {
         
@@ -463,41 +449,36 @@ class PlusViewController: UIViewController {
     }
     
     func inflateView(prod: ProductById) {
-        
-        productField.text = prod.title
-        
-        
-        let htmlString = prod.description//"<h2><strong>this is test description new text add rr ff</strong></h2>"
-      
-                if let data = htmlString.data(using: .utf8) {
-                    do {
-                        let attributedString = try NSAttributedString(data: data, options: [
-                            .documentType: NSAttributedString.DocumentType.html,
-                            .characterEncoding: String.Encoding.utf8.rawValue
-                        ], documentAttributes: nil)
-                        
-                        let plain = attributedString.string
+           productField.text = prod.title
 
-                        let singleLine = plain
-                                       .replacingOccurrences(of: "\n", with: " ")
-                                       .replacingOccurrences(of: "\r", with: " ")
-                                       .trimmingCharacters(in: .whitespacesAndNewlines)
+           let htmlString = prod.description
 
-                        
-                        
-                        descField.text = singleLine
-                      
-                       
-                    } catch {
-                        print("Error parsing HTML: \(error)")
-                    }
-                }
-       
-    }
-    
-    
+           if let data = htmlString.data(using: .utf8) {
+               do {
+                   let attributedString = try NSAttributedString(data: data, options: [
+                       .documentType: NSAttributedString.DocumentType.html,
+                       .characterEncoding: String.Encoding.utf8.rawValue
+                   ], documentAttributes: nil)
 
-    
+                  
+                   let mutableAttributedString = NSMutableAttributedString(attributedString: attributedString)
+                   let paragraphStyle = NSMutableParagraphStyle()
+                   paragraphStyle.lineBreakMode = .byTruncatingTail
+                   paragraphStyle.alignment = .left
+
+                   mutableAttributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: mutableAttributedString.length))
+
+                  
+                   descField.attributedText = mutableAttributedString
+
+
+               } catch {
+                   print("Error parsing HTML: \(error)")
+               }
+           }
+       }
+
+ 
     func setupTax() {
         
         let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
@@ -828,14 +809,14 @@ class PlusViewController: UIViewController {
         if var_count == 0 || var_count == 1 {
             
             if mode == "add" {
-                scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 706
+                scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 706
                 if productOptions.count == 3 {
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
                 }
                 else {
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 776
+                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 776
                     addVarBtn.isHidden = false
                     addVarBtnHeight.constant = 50
                     addVarTop.constant = 20
@@ -844,7 +825,7 @@ class PlusViewController: UIViewController {
             
             else {
                 //771 = 826
-                scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 751
+                scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 751
                 addVarBtn.isHidden = true
                 addVarBtnHeight.constant = 0
                 addVarTop.constant = 0
@@ -854,13 +835,13 @@ class PlusViewController: UIViewController {
             var_count = variantsArray.count - 1
             if mode == "add" {
                 if productOptions.count == 3 {
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 706 + CGFloat(50 * var_count)
+                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 706 + CGFloat(50 * var_count)
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
                 }
                 else {
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 776 + CGFloat(50 * var_count)
+                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 776 + CGFloat(50 * var_count)
                     addVarBtn.isHidden = false
                     addVarBtnHeight.constant = 50
                     addVarTop.constant = 20
@@ -869,7 +850,7 @@ class PlusViewController: UIViewController {
             
             else {
                 //771 = 826
-                scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 751 + CGFloat(50 * var_count)
+                scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 751 + CGFloat(50 * var_count)
                 addVarBtn.isHidden = true
                 addVarBtnHeight.constant = 0
                 addVarTop.constant = 0
@@ -878,116 +859,6 @@ class PlusViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-
-
-    func saveProductInfo() {
-        
-        let productDraft: [String: String] = [
-            "name": productField.text ?? "",
-            "description": descField.text ?? "",
-            "brand": brandName.text ?? ""
-        ]
-        UserDefaults.standard.set(productDraft, forKey: "draftProduct")
-        print(productDraft)
-        
-        let categoryTitles = collCat.map { $0.title}
-        UserDefaults.standard.set(categoryTitles, forKey: "catArray")
-        
-        let tagTitles = collTag.map { $0}
-        UserDefaults.standard.set(tagTitles, forKey: "tagArray")
-
-      
-        if let encoded = try? JSONEncoder().encode(productOptions) {
-            UserDefaults.standard.set(encoded, forKey: "variantAttributes")
-        }
-        
-        let encoder = JSONEncoder()
-           if let data = try? encoder.encode(variantsArray) {
-               UserDefaults.standard.set(data, forKey: "plus_variants_draft")
-               
-           } else {
-             
-           }
-        
-        
-    }
-    
-
-    
-    func loadSavedProduct() {
-        
-        if let draft = UserDefaults.standard.dictionary(forKey: "draftProduct") as? [String: String] {
-            productField.text = draft["name"]
-            descField.text = draft["description"]
-            brandName.text = draft["brand"]
-           
-        }
-
-        if let savedCategories = UserDefaults.standard.stringArray(forKey: "catArray") {
-            collCat = savedCategories.map { makeInventoryCategory(from: $0) }
-            catColl.reloadData()
-           
-        }
-        
-        if let savetags = UserDefaults.standard.stringArray(forKey: "tagArray") {
-            collTag = savetags
-            tagColl.reloadData()
-          
-        }
-        
-        if let data = UserDefaults.standard.data(forKey: "variantAttributes"),
-           let decoded = try? JSONDecoder().decode([InventoryOptions].self, from: data) {
-            productOptions = decoded
-            attTable.reloadData()
-        }
-        
-        let decoder = JSONDecoder()
-           if let data = UserDefaults.standard.data(forKey: "plus_variants_draft"),
-              let saved = try? decoder.decode([ProductById].self, from: data) {
-               variantsArray = saved
-               print(variantsArray)
-              // variantsTable.reloadData()
-            
-           }
-     
-    }
-    
-    func clearDraft() {
-        let keysToRemove = [
-            "draftProduct",
-            "catArray",
-            "tagArray",
-            "plus_variants_draft"
-        ]
-        
-        let defaults = UserDefaults.standard
-        keysToRemove.forEach { defaults.removeObject(forKey: $0) }
-        
-        print("Cleared all draft-related UserDefaults.")
-    }
-    
-    private func makeInventoryCategory(from title: String) -> InventoryCategory {
-        return InventoryCategory(
-            id: "0",
-            title: title,
-            description: "",
-            categoryBanner: "",
-            show_online: "",
-            show_status: "",
-            cat_show_status: "",
-            is_lottery: "",
-            alternateName: "",
-            merchant_id: "",
-            is_deleted: "",
-            user_id: "",
-            created_on: "",
-            updated_on: "",
-            admin_id: "",
-            use_point: "",
-            earn_point: ""
-        )
-    }
- 
     @objc func openCatScreen() {
         
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -1069,7 +940,6 @@ class PlusViewController: UIViewController {
     }
     
     @IBAction func backBtnClick(_ sender: UIButton) {
-     
         navigationController?.popViewController(animated: true)
     }
     
@@ -1126,7 +996,6 @@ class PlusViewController: UIViewController {
                 variantsArray[sender.tag].trackqnty = "0"
             }
         }
-        saveProductInfo()
     }
     
     
@@ -1150,7 +1019,6 @@ class PlusViewController: UIViewController {
                 variantsArray[sender.tag].isstockcontinue = "0"
             }
         }
-        saveProductInfo()
     }
     
     
@@ -1174,7 +1042,6 @@ class PlusViewController: UIViewController {
                 variantsArray[sender.tag].is_tobacco = "0"
             }
         }
-        saveProductInfo()
         
     }
   
@@ -1205,7 +1072,6 @@ class PlusViewController: UIViewController {
                 }
             }
         }
-        saveProductInfo()
     }
     
     @IBAction func foodStampableClick(_ sender: UIButton) {
@@ -1228,7 +1094,7 @@ class PlusViewController: UIViewController {
                 variantsArray[sender.tag].food_stampable = "0"
             }
         }
-        saveProductInfo()
+        
     }
  
     @IBAction func threeDotsClick(_ sender: UIButton) {
@@ -1307,7 +1173,6 @@ class PlusViewController: UIViewController {
                 addVarBtnHeight.constant = 50
             }
             refreshVariantTable()
-           // loadSavedProduct()
         }
     }
     
@@ -1867,7 +1732,6 @@ class PlusViewController: UIViewController {
                 }
             }
         }
-        clearDraft()
     }
  
     func cleanAndWrapHtml(originalHtml: String, userEditedText: String) -> String {
@@ -2534,7 +2398,7 @@ extension PlusViewController: PlusAttributeVariant {
         }
         
         refreshVariantTable()
-       // saveProductInfo()
+        
     }
     
     func refreshVariantTable() {
@@ -2658,7 +2522,7 @@ extension PlusViewController: UITextFieldDelegate {
         if mode == "add" {
             
             if textField == productField {
-                saveProductInfo()
+                
             }
             
             else {
@@ -2854,7 +2718,6 @@ extension PlusViewController: UITextFieldDelegate {
                         }
                     }
                 }
-                saveProductInfo()
             }
         }
         //edit
@@ -3798,7 +3661,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             cell.upcCode.delegate = self
             cell.reorderQty.delegate = self
             cell.reorderLevel.delegate = self
-           
+            
             cell.scanBtn.tag = indexPath.section
             
             cell.instantBtn.layer.cornerRadius = 10.0
@@ -3869,7 +3732,6 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.qtyInner.isHidden = true
                 
                 variantsArray[indexPath.section] = variants
-                print(variantsArray)
             }
             
             //edit
@@ -3968,6 +3830,12 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 else {
                     variants = variantsArray[indexPath.section]
                     cell.price.text = variants?.price
+                    if variants?.compare_price == "<null>" || variants?.compare_price == "null" {
+                        cell.comparePrice.text = ""
+                    }
+                    else {
+                        cell.comparePrice.text = variants?.compare_price
+                    }
                     cell.comparePrice.text = variants?.compare_price
                     cell.costPerItem.text = variants?.costperItem
                     cell.margin.text = variants?.margin
@@ -4214,14 +4082,14 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 ////                let tax = taxCollHeight.constant - 50
                 ////
                 ////                if mode == "add" {
-                ////                    scrollHeight.constant = 614 + cat + tax + attHeight.constant + 150
+                ////                    scrollHeight.constant = 664 + cat + tax + attHeight.constant + 150
                 ////                    if productOptions.count == 3 {
                 ////                        addVarBtn.isHidden = true
                 ////                        addVarBtnHeight.constant = 0
                 ////                        addVarTop.constant = 0
                 ////                    }
                 ////                    else {
-                ////                        scrollHeight.constant = 614 + cat + tax + attHeight.constant + 220
+                ////                        scrollHeight.constant = 664 + cat + tax + attHeight.constant + 220
                 ////                        addVarBtn.isHidden = false
                 ////                        addVarBtnHeight.constant = 50
                 ////                        addVarTop.constant = 20
@@ -4229,7 +4097,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 //                }
                 //                else {
                 //                    //771 = 826
-                //                    scrollHeight.constant = 614 + cat + tax + attHeight.constant + 195
+                //                    scrollHeight.constant = 664 + cat + tax + attHeight.constant + 195
                 //                    addVarBtn.isHidden = true
                 //                    addVarBtnHeight.constant = 0
                 //                    addVarTop.constant = 0
@@ -4245,14 +4113,14 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 let tax = taxCollHeight.constant
                 
                 if mode == "add" {
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 706
+                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 706
                     if productOptions.count == 3 {
                         addVarBtn.isHidden = true
                         addVarBtnHeight.constant = 0
                         addVarTop.constant = 0
                     }
                     else {
-                        scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 776
+                        scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 776
                         addVarBtn.isHidden = false
                         addVarBtnHeight.constant = 50
                         addVarTop.constant = 20
@@ -4260,7 +4128,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 else {
                     //771 = 826
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 751
+                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 751
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
@@ -4280,21 +4148,21 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 
                 if mode == "add" {
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count)
+                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count)
                     if productOptions.count == 3 {
                         addVarBtn.isHidden = true
                         addVarBtnHeight.constant = 0
                         addVarTop.constant = 0
                     }
                     else {
-                        scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count)
+                        scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count)
                         addVarBtn.isHidden = false
                         addVarBtnHeight.constant = 50
                         addVarTop.constant = 20
                     }
                 }
                 else {
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count)
+                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count)
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
@@ -4377,15 +4245,7 @@ extension PlusViewController {
 //
 //missviewheight.constant = minMainViewHeight
 
-
-
-    
-    
-
-
-
-
-struct InventoryOptions: Codable {
+struct InventoryOptions {
     let id: String
     let product_id: String
     let options1: String
@@ -4399,7 +4259,7 @@ struct InventoryOptions: Codable {
 }
 
 
-struct ProductById: Codable {
+struct ProductById {
     
     var alternateName: String
     var admin_id: String
@@ -4453,9 +4313,6 @@ struct ProductById: Codable {
     var purchase_qty: String
 }
 
-
-          
-          
 struct AddProduct {
     
     var merchant_id: String
@@ -4510,20 +4367,3 @@ struct AddProduct {
     var varreorder_level: String
     var varreorder_cost: String
 }
-
-struct VariantDraft: Codable {
-    var price: String
-    var compare_price: String
-    var costperItem: String
-    var margin: String
-    var profit: String
-    var quantity: String
-    var custom_code: String
-    var upc: String
-    var reorder_qty: String
-    var reorder_level: String
-}
-
-
-    
-
