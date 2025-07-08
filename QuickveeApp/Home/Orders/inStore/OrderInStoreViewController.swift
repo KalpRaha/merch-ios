@@ -226,7 +226,8 @@ class OrderInStoreViewController: UIViewController {
             
             let code = CouponCode(coupon_code: "\(coupon["coupon_code"] ?? "")",
                                   coupon_code_amt: "\(coupon["coupon_code_amt"] ?? "")",
-                                  bogo_discount: "\(coupon["bogo_discount"] ?? "")",
+                                  bogo_discount: "\(coupon["bogo_discount"] ?? "")", 
+                                  mix_match_discount: "\(coupon["mix_match_discount"] ?? "")",
                                   loyalty_point_earned: "\(coupon["loyalty_point_earned"] ?? "")",
                                   loyalty_point_amt_earned: "\(coupon["loyalty_point_amt_earned"] ?? "")",
                                   loyalty_point_amt_spent: "\(coupon["loyalty_point_amt_spent"] ?? "")",
@@ -302,6 +303,7 @@ class OrderInStoreViewController: UIViewController {
                 let code = CouponCode(coupon_code: "\(coupon["coupon_code"] ?? "")",
                                       coupon_code_amt: "\(coupon["coupon_code_amt"] ?? "")",
                                       bogo_discount: "\(coupon["bogo_discount"] ?? "")",
+                                      mix_match_discount: "\(coupon["mix_match_discount"] ?? "")",
                                       loyalty_point_earned: "\(coupon["loyalty_point_earned"] ?? "")",
                                       loyalty_point_amt_earned: "\(coupon["loyalty_point_amt_earned"] ?? "")",
                                       loyalty_point_amt_spent: "\(coupon["loyalty_point_amt_spent"] ?? "")",
