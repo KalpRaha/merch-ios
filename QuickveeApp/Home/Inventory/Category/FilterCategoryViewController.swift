@@ -1012,6 +1012,7 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                 else if apiMode == "brands" {
                     let name = searchBrandsTags[indexPath.row]
                     selectBrandsTags = [name.title]
+                    print(self.selectBrandsTags)
                     selectAddBrandsTags = []
                     tapBlue = [name.title]
                     collection.reloadData()
