@@ -12,7 +12,7 @@ import BarcodeScanner
 protocol PlusSelectedCategory: AnyObject {
     
     func getSelectedCats(reverseCategory: [InventoryCategory], reverseBrandsTags: [String],
-                         reverseTaxes: [SetupTaxes], apiMode: String)
+                         reverseTaxes: [SetupTaxes], reverseITS: [Store], apiMode: String)
 }
 
 protocol PlusAttributeVariant : AnyObject {
@@ -49,10 +49,14 @@ class PlusViewController: UIViewController {
     @IBOutlet weak var catColl: UICollectionView!
     @IBOutlet weak var tagColl: UICollectionView!
     @IBOutlet weak var taxesColl: UICollectionView!
+    @IBOutlet weak var itsColl: UICollectionView!
+    
+    @IBOutlet weak var itsLabel: UILabel!
     
     @IBOutlet weak var catcollHeight: NSLayoutConstraint!
     @IBOutlet weak var tagCollHeight: NSLayoutConstraint!
     @IBOutlet weak var taxCollHeight: NSLayoutConstraint!
+    @IBOutlet weak var itsCollHeight: NSLayoutConstraint!
     
     @IBOutlet weak var attTable: UITableView!
     @IBOutlet weak var attHeight: NSLayoutConstraint!
@@ -94,6 +98,8 @@ class PlusViewController: UIViewController {
     var collCat = [InventoryCategory]()
     
     var collTag = [String]()
+    
+    var collIts = [Store]()
     
     var productOptions = [InventoryOptions]()
     var missVariants = [String]()
@@ -167,11 +173,14 @@ class PlusViewController: UIViewController {
         tagColl.layer.borderWidth = 1.0
         taxesColl.layer.borderColor = UIColor(named: "borderColor")?.cgColor
         taxesColl.layer.borderWidth = 1.0
+        itsColl.layer.borderColor = UIColor(named: "borderColor")?.cgColor
+        itsColl.layer.borderWidth = 1.0
         
         brandView.layer.cornerRadius = 5.0
         catColl.layer.cornerRadius = 5.0
         tagColl.layer.cornerRadius = 5.0
         taxesColl.layer.cornerRadius = 5.0
+        itsColl.layer.cornerRadius = 5.0
         
         let colLay = CustomFlowLayout()
         catColl.collectionViewLayout = colLay
@@ -180,6 +189,10 @@ class PlusViewController: UIViewController {
         let collLay = CustomFlowLayout()
         tagColl.collectionViewLayout = collLay
         collLay.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        
+        let colllllLay = CustomFlowLayout()
+        itsColl.collectionViewLayout = colllllLay
+        colllllLay.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
         let collllLay = CustomFlowLayout()
         misscollection.collectionViewLayout = collllLay
@@ -208,6 +221,11 @@ class PlusViewController: UIViewController {
         tagColl.addGestureRecognizer(tag_tap)
         tag_tap.numberOfTapsRequired = 1
         tagColl.isUserInteractionEnabled = true
+        
+        let its_tap = UITapGestureRecognizer(target: self, action: #selector(openItsScreen))
+        itsColl.addGestureRecognizer(its_tap)
+        its_tap.numberOfTapsRequired = 1
+        itsColl.isUserInteractionEnabled = true
         
         let tax_tap = UITapGestureRecognizer(target: self, action: #selector(openTaxScreen))
         taxesColl.addGestureRecognizer(tax_tap)
@@ -795,6 +813,15 @@ class PlusViewController: UIViewController {
                 tagCollHeight.constant = height
             }
         }
+        else if coll == itsColl {
+            let height = itsColl.collectionViewLayout.collectionViewContentSize.height
+            if height <= 50 {
+                itsCollHeight.constant = 50
+            }
+            else {
+                itsCollHeight.constant = height
+            }
+        }
         else {
             
         }
@@ -803,20 +830,23 @@ class PlusViewController: UIViewController {
         let cat = catcollHeight.constant
         let tag = tagCollHeight.constant
         let tax = taxCollHeight.constant
+        let its = itsCollHeight.constant
+        
+        itsLabel.text = "Inventory to Stores"
         
         var var_count = variantsArray.count
         
         if var_count == 0 || var_count == 1 {
             
             if mode == "add" {
-                scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 706
+                scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 706 + 36.33
                 if productOptions.count == 3 {
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
                 }
                 else {
-                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 776
+                    scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 776 + 36.33
                     addVarBtn.isHidden = false
                     addVarBtnHeight.constant = 50
                     addVarTop.constant = 20
@@ -825,23 +855,26 @@ class PlusViewController: UIViewController {
             
             else {
                 //771 = 826
-                scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 751
+                scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 751 + 20
                 addVarBtn.isHidden = true
                 addVarBtnHeight.constant = 0
                 addVarTop.constant = 0
+                itsColl.isHidden = true
+                itsCollHeight.constant = 0
+                itsLabel.text = ""
             }
         }
         else {
             var_count = variantsArray.count - 1
             if mode == "add" {
                 if productOptions.count == 3 {
-                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 706 + CGFloat(50 * var_count)
+                    scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
                 }
                 else {
-                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 776 + CGFloat(50 * var_count)
+                    scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33
                     addVarBtn.isHidden = false
                     addVarBtnHeight.constant = 50
                     addVarTop.constant = 20
@@ -850,10 +883,13 @@ class PlusViewController: UIViewController {
             
             else {
                 //771 = 826
-                scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 751 + CGFloat(50 * var_count)
+                scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 751 + CGFloat(50 * var_count) + 20
                 addVarBtn.isHidden = true
                 addVarBtnHeight.constant = 0
                 addVarTop.constant = 0
+                itsColl.isHidden = true
+                itsCollHeight.constant = 0
+                itsLabel.text = ""
             }
         }
         self.view.layoutIfNeeded()
@@ -911,6 +947,20 @@ class PlusViewController: UIViewController {
         }
     }
     
+    @objc func openItsScreen() {
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "filtercategory") as! FilterCategoryViewController
+        
+        vc.delegatePlus = self
+        vc.catMode = "addProductVc"
+        vc.selectIts = collIts
+        vc.apiMode = "its"
+        present(vc, animated: true, completion: {
+            vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
+        })
+    }
+    
     @objc func openTaxScreen() {
         
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -959,6 +1009,12 @@ class PlusViewController: UIViewController {
     @IBAction func closeTaxBtnClick(_ sender: UIButton) {
         collTax.remove(at: sender.tag)
         taxesColl.reloadData()
+    }
+    
+    
+    @IBAction func closeItsClickBtn(_ sender: UIButton) {
+        collIts.remove(at: sender.tag)
+        itsColl.reloadData()
     }
     
     
@@ -2275,7 +2331,7 @@ class PlusViewController: UIViewController {
 extension PlusViewController: PlusSelectedCategory {
     
     func getSelectedCats(reverseCategory: [InventoryCategory], reverseBrandsTags: [String],
-                         reverseTaxes: [SetupTaxes], apiMode: String) {
+                         reverseTaxes: [SetupTaxes], reverseITS: [Store], apiMode: String) {
         
         scroll.isHidden = true
         loadingIndicator.isAnimating = true
@@ -2321,6 +2377,17 @@ extension PlusViewController: PlusSelectedCategory {
             else {
                 tagColl.reloadData()
                 setCollHeight(coll: tagColl)
+            }
+        }
+        else if apiMode == "its" {
+            collIts = reverseITS
+            if reverseITS.count == 0 {
+                itsColl.reloadData()
+                setCollHeight(coll: itsColl)
+            }
+            else {
+                itsColl.reloadData()
+                setCollHeight(coll: itsColl)
             }
         }
         else {
@@ -3476,6 +3543,11 @@ extension PlusViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return collTag.count
         }
         
+        else if collectionView == itsColl {
+            
+            return collIts.count
+        }
+        
         else if collectionView == misscollection {
             
             return missVariants.count
@@ -3512,6 +3584,19 @@ extension PlusViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.closeBtn.tag = indexPath.row
             
             setCollHeight(coll: tagColl)
+            
+            return cell
+        }
+        
+        else if collectionView == itsColl {
+            
+            let cell = itsColl.dequeueReusableCell(withReuseIdentifier: "itscell", for: indexPath) as! PlusCollCollectionViewCell
+            
+            cell.catPlusLbl.text = collIts[indexPath.row].store_name
+            cell.borderview.layer.cornerRadius = 5.0
+            cell.closeBtn.tag = indexPath.row
+            
+            setCollHeight(coll: itsColl)
             
             return cell
         }
@@ -4076,28 +4161,28 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             //true
             if isSelectedData[tagView] {
                 
-                ////                isSelectedData[tagView].toggle()
-                ////
-                ////                let cat = catcollHeight.constant - 50
-                ////                let tax = taxCollHeight.constant - 50
-                ////
-                ////                if mode == "add" {
-                ////                    scrollHeight.constant = 664 + cat + tax + attHeight.constant + 150
-                ////                    if productOptions.count == 3 {
-                ////                        addVarBtn.isHidden = true
-                ////                        addVarBtnHeight.constant = 0
-                ////                        addVarTop.constant = 0
-                ////                    }
-                ////                    else {
-                ////                        scrollHeight.constant = 664 + cat + tax + attHeight.constant + 220
-                ////                        addVarBtn.isHidden = false
-                ////                        addVarBtnHeight.constant = 50
-                ////                        addVarTop.constant = 20
-                ////                    }
+                //                isSelectedData[tagView].toggle()
+                //
+                //                let cat = catcollHeight.constant - 50
+                //                let tax = taxCollHeight.constant - 50
+                //
+                //                if mode == "add" {
+                //                    scrollHeight.constant = 614 + cat + tax + attHeight.constant + 150
+                //                    if productOptions.count == 3 {
+                //                        addVarBtn.isHidden = true
+                //                        addVarBtnHeight.constant = 0
+                //                        addVarTop.constant = 0
+                //                    }
+                //                    else {
+                //                        scrollHeight.constant = 614 + cat + tax + attHeight.constant + 220
+                //                        addVarBtn.isHidden = false
+                //                        addVarBtnHeight.constant = 50
+                //                        addVarTop.constant = 20
+                //                    }
                 //                }
                 //                else {
                 //                    //771 = 826
-                //                    scrollHeight.constant = 664 + cat + tax + attHeight.constant + 195
+                //                    scrollHeight.constant = 614 + cat + tax + attHeight.constant + 195
                 //                    addVarBtn.isHidden = true
                 //                    addVarBtnHeight.constant = 0
                 //                    addVarTop.constant = 0
@@ -4111,16 +4196,17 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 let cat = catcollHeight.constant
                 let tag = tagCollHeight.constant
                 let tax = taxCollHeight.constant
+                let its = itsCollHeight.constant
                 
                 if mode == "add" {
-                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 706
+                    scrollHeight.constant = 614 + cat + tag + its + tax + attHeight.constant + 706 + 36.33
                     if productOptions.count == 3 {
                         addVarBtn.isHidden = true
                         addVarBtnHeight.constant = 0
                         addVarTop.constant = 0
                     }
                     else {
-                        scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 776
+                        scrollHeight.constant = 614 + cat + tag + its + tax + attHeight.constant + 776 + 36.33
                         addVarBtn.isHidden = false
                         addVarBtnHeight.constant = 50
                         addVarTop.constant = 20
@@ -4128,10 +4214,13 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 else {
                     //771 = 826
-                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + 751
+                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 751 + 20
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
+                    itsColl.isHidden = true
+                    itsCollHeight.constant = 0
+                    itsLabel.text = ""
                 }
             }
         }
@@ -4145,27 +4234,31 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 let cat = catcollHeight.constant
                 let tag = tagCollHeight.constant
                 let tax = taxCollHeight.constant
+                let its = itsCollHeight.constant
                 
                 
                 if mode == "add" {
-                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count)
+                    scrollHeight.constant = 614 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33
                     if productOptions.count == 3 {
                         addVarBtn.isHidden = true
                         addVarBtnHeight.constant = 0
                         addVarTop.constant = 0
                     }
                     else {
-                        scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count)
+                        scrollHeight.constant = 614 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33
                         addVarBtn.isHidden = false
                         addVarBtnHeight.constant = 50
                         addVarTop.constant = 20
                     }
                 }
                 else {
-                    scrollHeight.constant = 664 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count)
+                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count) + 20
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
+                    itsColl.isHidden = true
+                    itsCollHeight.constant = 0
+                    itsLabel.text = ""
                 }
             }
             // false
