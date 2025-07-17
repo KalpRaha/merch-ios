@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 protocol BrandsTagsAddDelegate: AnyObject {
     
@@ -51,6 +52,14 @@ class FilterCategoryViewController: UIViewController {
     var taxes = [SetupTaxes]()
     var subTaxes = [SetupTaxes]()
     var searchTaxes = [SetupTaxes]()
+    
+    //its arrays
+    var selectIts = [Store]()
+    var selectAddIts = [Store]()
+    
+    var its = [Store]()
+    var subIts = [Store]()
+    var searchIts = [Store]()
     
     var tapBlue = [String]()
     
@@ -140,6 +149,14 @@ class FilterCategoryViewController: UIViewController {
         else if apiMode == "brands" || apiMode == "tags" {
             
             setupBrandsApi()
+        }
+        else if apiMode == "its" {
+            collection.isHidden = true
+            loadingIndicator.isAnimating = true
+            setupStoreApi()
+            selectText.text = "Select Store"
+            searchBar.placeholder = "Search Store"
+            noCategoryLbl.text = ""
         }
         else {
             selectText.text = "Select Taxes"
@@ -288,6 +305,12 @@ class FilterCategoryViewController: UIViewController {
         tapBlue.removeAll(where: {$0 == tagName})
     }
     
+    func removeIts(storeName: String) {
+        
+        selectAddIts.removeAll(where: {$0.merchant_id == storeName})
+        tapBlue.removeAll(where: {$0 == storeName})
+    }
+    
     func removeTaxes(taxesName: String) {
         
         selectAddTaxes.removeAll(where: {$0.id == taxesName})
@@ -403,6 +426,103 @@ class FilterCategoryViewController: UIViewController {
         }
     }
     
+    func setupStoreApi() {
+        
+        let email = UserDefaults.standard.string(forKey: "merchant_email") ?? ""
+        let password = UserDefaults.standard.string(forKey: "merchant_password") ?? ""
+        
+        let parameters: [String: Any] = [
+            "email_id": email,
+            "password": password
+        ]
+        
+        let url = AppURLs.ALL_STORES
+        
+        AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default).responseData { (response) in
+            switch response.result {
+                
+            case .success(_):
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
+                    if json["result"] == nil {
+                        self.collection.isHidden = false
+                        self.loadingIndicator.isAnimating = false
+                    }
+                    else {
+                        self.getResponseStoreValues(response: json["result"])
+                        
+                        DispatchQueue.main.async {
+                            self.collection.isHidden = false
+                            self.loadingIndicator.isAnimating = false
+                            self.collection.reloadData()
+                        }
+                    }
+                }
+                catch {
+                    self.collection.isHidden = false
+                    self.loadingIndicator.isAnimating = false
+                }
+                break
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+                self.collection.isHidden = false
+                self.loadingIndicator.isAnimating = false
+                
+            }
+        }
+    }
+    
+    func getResponseStoreValues(response: Any) {
+        
+        let responseArray = response as! [[String:Any]]
+        var storeList = [Store]()
+        
+        for response in responseArray {
+            
+            let store = Store(a_city: "\(response["a_city"] ?? "")",
+                              a_country: "\(response["a_country"] ?? "")",
+                              a_phone: "\(response["a_phone"] ?? "")",
+                              a_state: "\(response["a_state"] ?? "")",
+                              a_zip: "\(response["a_zip"] ?? "")",
+                              email: "\(response["email"] ?? "")",
+                              logo: "\(response["logo"] ?? "")",
+                              merchant_id: "\(response["merchant_id"] ?? "")",
+                              merchant_name: "\(response["merchant_name"] ?? "")",
+                              password: "\(response["password"] ?? "")",
+                              store_name: "\(response["store_name"] ?? "")",
+                              login_store_name: "\(response["login_store_name"] ?? "")",
+                              a_address_line_1: "\(response["a_address_line_1"] ?? "")",
+                              a_address_line_2: "\(response["a_address_line_2"] ?? "")")
+            
+            storeList.append(store)
+        }
+        
+        let stores = UserDefaults.standard.string(forKey: "assigned_store") ?? ""
+        
+        var storeArray = [Store]()
+        
+        for store in storeList {
+            
+            if stores.lowercased().contains(store.merchant_id.lowercased()) {
+                storeArray.append(store)
+            }
+        }
+        
+        its = storeArray
+        subIts = storeArray
+        
+        if selectIts.count > 0 {
+            
+            for select in selectIts {
+                
+                selectAddIts.append(select)
+            }
+        }
+        
+        self.collection.isHidden = false
+        self.loadingIndicator.isAnimating = false
+    }
     
     @IBAction func closeBtnClick(_ sender: UIButton) {
         
@@ -453,7 +573,7 @@ class FilterCategoryViewController: UIViewController {
                 
                 self.loadingIndicator.isAnimating = false
                 self.delegatePlus?.getSelectedCats(reverseCategory: [], reverseBrandsTags: [],
-                                                   reverseTaxes: [], apiMode: self.apiMode)
+                                                   reverseTaxes: [], reverseITS: [], apiMode: self.apiMode)
                 self.dismiss(animated: true)
             }
         }
@@ -481,7 +601,8 @@ class FilterCategoryViewController: UIViewController {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.loadingIndicator.isAnimating = false
-                self.delegateDuplicate?.getSelectedCats(reverseCategory: [], reverseBrandsTags: [], reverseTaxes: [], apiMode: self.apiMode)
+                self.delegateDuplicate?.getSelectedCats(reverseCategory: [], reverseBrandsTags: [], 
+                                                        reverseTaxes: [], reverseITS: [], apiMode: self.apiMode)
                 self.dismiss(animated: true)
             }
         }
@@ -575,14 +696,14 @@ class FilterCategoryViewController: UIViewController {
                 else {
                     delegatePlus?.getSelectedCats(reverseCategory: selectAddCategory,
                                                   reverseBrandsTags: selectAddBrandsTags,
-                                                  reverseTaxes: selectAddTaxes, apiMode: apiMode)
+                                                  reverseTaxes: selectAddTaxes, reverseITS: selectAddIts, apiMode: apiMode)
                     dismiss(animated: true)
                 }
             }
             else {
                 delegatePlus?.getSelectedCats(reverseCategory: selectAddCategory,
                                               reverseBrandsTags: selectAddBrandsTags,
-                                              reverseTaxes: selectAddTaxes, apiMode: apiMode)
+                                              reverseTaxes: selectAddTaxes, reverseITS: selectAddIts, apiMode: apiMode)
                 dismiss(animated: true)
             }
         }
@@ -606,14 +727,14 @@ class FilterCategoryViewController: UIViewController {
                     
                     delegateDuplicate?.getSelectedCats(reverseCategory: selectAddCategory,
                                                        reverseBrandsTags: selectAddBrandsTags,
-                                                       reverseTaxes: selectAddTaxes, apiMode: apiMode)
+                                                       reverseTaxes: selectAddTaxes, reverseITS: [], apiMode: apiMode)
                     dismiss(animated: true)
                 }
             }
             else {
                 delegateDuplicate?.getSelectedCats(reverseCategory: selectAddCategory,
                                                    reverseBrandsTags: selectAddBrandsTags,
-                                                   reverseTaxes: selectAddTaxes, apiMode: apiMode)
+                                                   reverseTaxes: selectAddTaxes, reverseITS: [], apiMode: apiMode)
                 dismiss(animated: true)
             }
         }
@@ -727,6 +848,10 @@ extension FilterCategoryViewController: UISearchBarDelegate {
                 searchBrandsTags = subBrandsTags.filter { $0.title.lowercased().prefix(searchText.count) == searchText.lowercased() }
                 searching = true
             }
+            else if apiMode == "its" {
+                searchIts = subIts.filter { $0.store_name.lowercased().prefix(searchText.count) == searchText.lowercased() }
+                searching = true
+            }
             else {
                 searchTaxes = subTaxes.filter { $0.title.lowercased().prefix(searchText.count) == searchText.lowercased() }
                 searching = true
@@ -799,6 +924,9 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
             else if apiMode == "brands" || apiMode == "tags" {
                 return searchBrandsTags.count
             }
+            else if apiMode == "its" {
+                return searchIts.count
+            }
             else {
                 return searchTaxes.count
             }
@@ -810,6 +938,9 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
             }
             else if apiMode == "brands" || apiMode == "tags" {
                 return brandsTags.count
+            }
+            else if apiMode == "its" {
+                return its.count
             }
             else {
                 return taxes.count
@@ -868,6 +999,20 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
                 }
             }
+            else if apiMode == "its" {
+                
+                cell.categoryName.text = searchIts[indexPath.row].store_name
+                
+                if selectIts.contains(where: {$0.merchant_id == searchIts[indexPath.row].merchant_id})
+                    || tapBlue.contains(where: {$0 == searchIts[indexPath.row].merchant_id}) {
+                    cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                    cell.categoryName.textColor = UIColor(named: "SelectCat")
+                }
+                else {
+                    cell.categoryName.textColor = .black
+                    cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+                }
+            }
             else {
                 
                 cell.categoryName.text = searchTaxes[indexPath.row].title
@@ -895,7 +1040,7 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
                     cell.categoryName.textColor = UIColor(named: "SelectCat")
                 }
-                
+                    
                 else if tapBlue.contains(where: {$0 == categories[indexPath.row].id}) {
                     
                     cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
@@ -936,6 +1081,25 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
                     cell.categoryName.textColor = UIColor(named: "SelectCat")
                     selectAddBrandsTags.append(brandsTags[indexPath.row].title)
+                }
+                else {
+                    cell.categoryName.textColor = .black
+                    cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+                }
+            }
+            else if apiMode == "its" {
+                
+                cell.categoryName.text = its[indexPath.row].store_name
+                
+                if selectIts.contains(where: {$0.merchant_id == its[indexPath.row].merchant_id}) {
+                    cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                    cell.categoryName.textColor = UIColor(named: "SelectCat")
+                }
+                
+                else if tapBlue.contains(where: {$0 == its[indexPath.row].merchant_id}) {
+                    cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                    cell.categoryName.textColor = UIColor(named: "SelectCat")
+                    selectAddIts.append(its[indexPath.row])
                 }
                 else {
                     cell.categoryName.textColor = .black
@@ -990,6 +1154,10 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     selectBrandsTags = []
                     collection.reloadData()
                 }
+                else if apiMode == "its" {
+                    let id = searchIts[indexPath.row].merchant_id
+                    removeIts(storeName: id)
+                }
                 else if apiMode == "tags" {
                     let title = searchBrandsTags[indexPath.row].title
                     removeTags(tagName: title)
@@ -1015,6 +1183,11 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     selectAddBrandsTags = []
                     tapBlue = [name.title]
                     collection.reloadData()
+                }
+                else if apiMode == "its" {
+                    let name = searchIts[indexPath.row]
+                    selectAddIts.append(name)
+                    tapBlue.append(name.merchant_id)
                 }
                 else if apiMode == "tags" {
                     let name = brandsTags[indexPath.row]
@@ -1046,6 +1219,10 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     selectBrandsTags = []
                     collection.reloadData()
                 }
+                else if apiMode == "its" {
+                    let id = its[indexPath.row].merchant_id
+                    removeIts(storeName: id)
+                }
                 else if apiMode == "tags" {
                     let title = brandsTags[indexPath.row].title
                     removeTags(tagName: title)
@@ -1071,6 +1248,11 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     selectAddBrandsTags = []
                     tapBlue = [name.title]
                     collection.reloadData()
+                }
+                else if apiMode == "its" {
+                    let name = its[indexPath.row]
+                    selectAddIts.append(name)
+                    tapBlue.append(name.merchant_id)
                 }
                 else if apiMode == "tags" {
                     let name = brandsTags[indexPath.row]

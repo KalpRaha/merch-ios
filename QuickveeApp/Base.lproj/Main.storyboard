@@ -845,7 +845,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eik-eQ-tAT" userLabel="Coll View">
-                                                <rect key="frame" x="0.0" y="340" width="375" height="289"/>
+                                                <rect key="frame" x="0.0" y="352.66666666666674" width="375" height="397.33333333333326"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHo-Tk-viF">
                                                         <rect key="frame" x="10.000000000000004" y="9.9999999999999982" width="57.333333333333343" height="16.333333333333329"/>
@@ -1085,29 +1085,113 @@
                                                             <outlet property="delegate" destination="b1F-uP-tpI" id="JQ3-bM-PaL"/>
                                                         </connections>
                                                     </collectionView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inventory To Stores" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0j7-Ad-guW">
+                                                        <rect key="frame" x="10" y="307.99999999999994" width="127" height="19.333333333333314"/>
+                                                        <fontDescription key="fontDescription" name="Manrope-Medium" family="Manrope" pointSize="14"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SYD-uY-uah">
+                                                        <rect key="frame" x="10" y="337.33333333333331" width="355" height="50"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="Sq3-CW-pi3"/>
+                                                        </constraints>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YMZ-df-r7E">
+                                                            <size key="itemSize" width="128" height="128"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells>
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="itscell" id="yGA-eP-Kuw" customClass="PlusCollCollectionViewCell" customModule="QuickveeApp" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="27" height="32"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LdH-ca-bsG">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="27" height="32"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <subviews>
+                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="INZ-Ev-S3v">
+                                                                            <rect key="frame" x="0.0" y="5" width="27" height="22"/>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWf-ez-hk2">
+                                                                                    <rect key="frame" x="5" y="5" width="0.0" height="12"/>
+                                                                                    <fontDescription key="fontDescription" name="Manrope-Medium" family="Manrope" pointSize="13"/>
+                                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOq-3k-fCY">
+                                                                                    <rect key="frame" x="5" y="0.0" width="22" height="22"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" secondItem="DOq-3k-fCY" secondAttribute="height" multiplier="1:1" id="HUE-NB-N26"/>
+                                                                                    </constraints>
+                                                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                                    <state key="normal" image="white close"/>
+                                                                                    <connections>
+                                                                                        <action selector="closeItsClickBtn:" destination="b1F-uP-tpI" eventType="touchUpInside" id="lZP-cc-9vj"/>
+                                                                                    </connections>
+                                                                                </button>
+                                                                            </subviews>
+                                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <constraints>
+                                                                                <constraint firstItem="DOq-3k-fCY" firstAttribute="top" secondItem="INZ-Ev-S3v" secondAttribute="top" id="92b-2E-EFA"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="DOq-3k-fCY" secondAttribute="bottom" id="HrL-Bm-ynK"/>
+                                                                                <constraint firstItem="cWf-ez-hk2" firstAttribute="top" secondItem="INZ-Ev-S3v" secondAttribute="top" constant="5" id="KBJ-iI-jy1"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="cWf-ez-hk2" secondAttribute="bottom" constant="5" id="SOk-0N-TWn"/>
+                                                                                <constraint firstItem="cWf-ez-hk2" firstAttribute="leading" secondItem="INZ-Ev-S3v" secondAttribute="leading" constant="5" id="VCW-UN-5f3"/>
+                                                                                <constraint firstItem="DOq-3k-fCY" firstAttribute="leading" secondItem="cWf-ez-hk2" secondAttribute="trailing" id="ZWN-zD-FLa"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="DOq-3k-fCY" secondAttribute="trailing" id="aT9-vq-U5y"/>
+                                                                                <constraint firstItem="cWf-ez-hk2" firstAttribute="centerY" secondItem="INZ-Ev-S3v" secondAttribute="centerY" id="tAv-if-u6n"/>
+                                                                            </constraints>
+                                                                        </view>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="bottom" secondItem="INZ-Ev-S3v" secondAttribute="bottom" constant="5" id="03d-dp-Tvj"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="INZ-Ev-S3v" secondAttribute="trailing" id="0gA-jM-8zA"/>
+                                                                        <constraint firstItem="INZ-Ev-S3v" firstAttribute="leading" secondItem="LdH-ca-bsG" secondAttribute="leading" id="gg8-Ka-D5l"/>
+                                                                        <constraint firstItem="INZ-Ev-S3v" firstAttribute="top" secondItem="LdH-ca-bsG" secondAttribute="top" constant="5" id="wOC-3g-6Fa"/>
+                                                                    </constraints>
+                                                                </collectionViewCellContentView>
+                                                                <connections>
+                                                                    <outlet property="borderview" destination="INZ-Ev-S3v" id="Pxs-Pj-tOL"/>
+                                                                    <outlet property="catPlusLbl" destination="cWf-ez-hk2" id="gcl-hx-f8N"/>
+                                                                    <outlet property="closeBtn" destination="DOq-3k-fCY" id="6co-n0-5kf"/>
+                                                                </connections>
+                                                            </collectionViewCell>
+                                                        </cells>
+                                                        <connections>
+                                                            <outlet property="dataSource" destination="b1F-uP-tpI" id="BEm-8t-MxN"/>
+                                                            <outlet property="delegate" destination="b1F-uP-tpI" id="5Ye-Ax-kGi"/>
+                                                        </connections>
+                                                    </collectionView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="Asc-JS-EOc" firstAttribute="leading" secondItem="Eik-eQ-tAT" secondAttribute="leading" constant="10" id="1Fx-pM-kdu"/>
                                                     <constraint firstItem="0U9-b5-vYm" firstAttribute="top" secondItem="f7e-h0-z6z" secondAttribute="bottom" constant="20" id="3TD-HW-5N1"/>
-                                                    <constraint firstAttribute="bottom" secondItem="9uH-8A-MXD" secondAttribute="bottom" constant="10" id="9GM-Qi-6g7"/>
+                                                    <constraint firstItem="0j7-Ad-guW" firstAttribute="top" secondItem="9uH-8A-MXD" secondAttribute="bottom" constant="20" id="9GM-Qi-6g7"/>
                                                     <constraint firstAttribute="trailing" secondItem="Asc-JS-EOc" secondAttribute="trailing" constant="10" id="9ph-DG-r3D"/>
                                                     <constraint firstItem="0U9-b5-vYm" firstAttribute="leading" secondItem="Eik-eQ-tAT" secondAttribute="leading" constant="10" id="H12-Aa-mao"/>
                                                     <constraint firstItem="Dzg-Mi-DbG" firstAttribute="leading" secondItem="Eik-eQ-tAT" secondAttribute="leading" constant="10" id="JUR-J3-auu"/>
+                                                    <constraint firstItem="0j7-Ad-guW" firstAttribute="leading" secondItem="Eik-eQ-tAT" secondAttribute="leading" constant="10" id="Kr9-q9-4qP"/>
+                                                    <constraint firstItem="SYD-uY-uah" firstAttribute="top" secondItem="0j7-Ad-guW" secondAttribute="bottom" constant="10" id="Plm-5a-MZF"/>
                                                     <constraint firstAttribute="trailing" secondItem="f7e-h0-z6z" secondAttribute="trailing" constant="10" id="Q1v-Mn-Aoq"/>
                                                     <constraint firstItem="Dzg-Mi-DbG" firstAttribute="top" secondItem="Asc-JS-EOc" secondAttribute="bottom" constant="20" id="SqW-XK-o7l"/>
                                                     <constraint firstItem="f7e-h0-z6z" firstAttribute="top" secondItem="AHo-Tk-viF" secondAttribute="bottom" constant="10" id="XYp-Ao-VAf"/>
+                                                    <constraint firstAttribute="trailing" secondItem="SYD-uY-uah" secondAttribute="trailing" constant="10" id="YFV-fu-lET"/>
+                                                    <constraint firstItem="SYD-uY-uah" firstAttribute="leading" secondItem="Eik-eQ-tAT" secondAttribute="leading" constant="10" id="gFe-Ia-teJ"/>
                                                     <constraint firstItem="Asc-JS-EOc" firstAttribute="top" secondItem="0U9-b5-vYm" secondAttribute="bottom" constant="10" id="gkj-xp-k96"/>
                                                     <constraint firstItem="AHo-Tk-viF" firstAttribute="top" secondItem="Eik-eQ-tAT" secondAttribute="top" constant="10" id="hKX-d8-yHd"/>
                                                     <constraint firstAttribute="trailing" secondItem="9uH-8A-MXD" secondAttribute="trailing" constant="10" id="hyH-Ls-fR7"/>
                                                     <constraint firstItem="9uH-8A-MXD" firstAttribute="leading" secondItem="Eik-eQ-tAT" secondAttribute="leading" constant="10" id="kc2-rv-F2b"/>
                                                     <constraint firstItem="9uH-8A-MXD" firstAttribute="top" secondItem="Dzg-Mi-DbG" secondAttribute="bottom" constant="10" id="oWA-1a-iGc"/>
                                                     <constraint firstItem="f7e-h0-z6z" firstAttribute="leading" secondItem="Eik-eQ-tAT" secondAttribute="leading" constant="10" id="sCX-41-jJu"/>
+                                                    <constraint firstAttribute="bottom" secondItem="SYD-uY-uah" secondAttribute="bottom" constant="10" id="scf-Zi-rAM"/>
                                                     <constraint firstItem="AHo-Tk-viF" firstAttribute="leading" secondItem="Eik-eQ-tAT" secondAttribute="leading" constant="10" id="t8m-P3-hb4"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AeJ-Xw-va2" userLabel="Att View">
-                                                <rect key="frame" x="0.0" y="629" width="375" height="116.33333333333337"/>
+                                                <rect key="frame" x="0.0" y="750" width="375" height="119.33333333333337"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Variants" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H81-4t-wiX">
                                                         <rect key="frame" x="10" y="9.9999999999999982" width="50" height="16.333333333333329"/>
@@ -1213,10 +1297,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aXI-x5-O8I" userLabel="Variants View">
-                                                <rect key="frame" x="0.0" y="745.33333333333337" width="375" height="254.66666666666663"/>
+                                                <rect key="frame" x="0.0" y="869.33333333333337" width="375" height="130.66666666666663"/>
                                                 <subviews>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gK0-vR-c9P">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="254.66666666666666"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="130.66666666666666"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="hVJ-ey-3CT" customClass="ProductVariantTableViewCell" customModule="QuickveeApp" customModuleProvider="target">
@@ -1923,6 +2007,9 @@
                         <outlet property="descField" destination="iDm-YI-phi" id="WcV-lw-ZR4"/>
                         <outlet property="detailView" destination="4Oy-C6-t1m" id="QvZ-P8-4mV"/>
                         <outlet property="dupView" destination="ID6-Vu-KQW" id="oxO-qV-JDg"/>
+                        <outlet property="itsColl" destination="SYD-uY-uah" id="T3K-po-Ett"/>
+                        <outlet property="itsCollHeight" destination="Sq3-CW-pi3" id="vnK-kV-kTh"/>
+                        <outlet property="itsLabel" destination="0j7-Ad-guW" id="hqh-wW-aWt"/>
                         <outlet property="maxView" destination="5qP-8l-Jbo" id="G96-cw-Mqa"/>
                         <outlet property="missCancelBtn" destination="UN3-QY-3Qx" id="7Ga-5G-vED"/>
                         <outlet property="missView" destination="fXN-RY-ZcY" id="rqd-D3-eYj"/>
@@ -7028,7 +7115,7 @@
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVd-Jx-6qs">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVd-Jx-6qs">
                                         <rect key="frame" x="185" y="10" width="70" height="30"/>
                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="15"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -8993,7 +9080,7 @@
                                         <rect key="frame" x="0.0" y="10" width="375" height="1320"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Online Ordering" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7TE-aH-E9q">
-                                                <rect key="frame" x="10" y="10.000000000000002" width="105.33333333333333" height="17.666666666666671"/>
+                                                <rect key="frame" x="10" y="10.000000000000002" width="105.33333333333334" height="17.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="15"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -9009,7 +9096,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Business Hours" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tCW-PX-h3F">
-                                                <rect key="frame" x="10" y="68.666666666666657" width="105.33333333333333" height="17.666666666666671"/>
+                                                <rect key="frame" x="10" y="68.666666666666657" width="105.33333333333331" height="17.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Manrope-Medium" family="Manrope" pointSize="15"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -11710,7 +11797,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vva-zh-E0r">
-                                        <rect key="frame" x="313" y="8.6666666666666643" width="52" height="33"/>
+                                        <rect key="frame" x="313" y="8.6666666666666643" width="52" height="33.000000000000007"/>
                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Delete">
@@ -12239,7 +12326,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Stocktake" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7f-dh-hOs">
-                                        <rect key="frame" x="60" y="15.666666666666666" width="124" height="18.666666666666679"/>
+                                        <rect key="frame" x="60" y="15.666666666666666" width="124" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -15919,7 +16006,7 @@
                                                 <rect key="frame" x="0.0" y="863.66666666666663" width="375" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grand Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mWF-gw-rRT">
-                                                        <rect key="frame" x="16" y="14.666666666666742" width="93.333333333333329" height="21"/>
+                                                        <rect key="frame" x="16" y="14.666666666666742" width="93.333333333333314" height="21"/>
                                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -16877,7 +16964,7 @@
                                                 <rect key="frame" x="0.0" y="838.66666666666663" width="375" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grand Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yrc-EO-rci">
-                                                        <rect key="frame" x="16" y="14.666666666666742" width="93.333333333333329" height="21"/>
+                                                        <rect key="frame" x="16" y="14.666666666666742" width="93.333333333333314" height="21"/>
                                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -25145,13 +25232,13 @@
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kw7-Ak-EhE">
-                                        <rect key="frame" x="43.999999999999993" y="10.000000000000002" width="78.333333333333314" height="18.666666666666671"/>
+                                        <rect key="frame" x="43.999999999999993" y="12.666666666666666" width="78.333333333333314" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7M-98-C1A">
-                                        <rect key="frame" x="328.33333333333331" y="10.000000000000002" width="36.666666666666686" height="18.666666666666671"/>
+                                        <rect key="frame" x="328.33333333333331" y="12.666666666666666" width="36.666666666666686" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -25698,7 +25785,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mix n' Match Pricing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyE-2n-nWV">
-                                        <rect key="frame" x="55" y="15.666666666666666" width="147" height="18.666666666666679"/>
+                                        <rect key="frame" x="55" y="15.666666666666666" width="147" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -31415,7 +31502,7 @@
                                                 <rect key="frame" x="0.0" y="396" width="375" height="56"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refunded Product" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NiV-Mb-Dat">
-                                                        <rect key="frame" x="16" y="17.666666666666629" width="147.33333333333334" height="21"/>
+                                                        <rect key="frame" x="16" y="17.666666666666629" width="147.33333333333334" height="21.000000000000007"/>
                                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -31944,7 +32031,7 @@
                                                 <rect key="frame" x="0.0" y="1402.3333333333333" width="375" height="56"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grand Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TnM-y8-gZE">
-                                                        <rect key="frame" x="16" y="10" width="93.333333333333329" height="21"/>
+                                                        <rect key="frame" x="16" y="10" width="93.333333333333343" height="21"/>
                                                         <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -32936,7 +33023,7 @@
                                                 <rect key="frame" x="0.0" y="396" width="375" height="56"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refunded Product" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDj-vQ-g77">
-                                                        <rect key="frame" x="16" y="17.666666666666629" width="147.33333333333334" height="21"/>
+                                                        <rect key="frame" x="16" y="17.666666666666629" width="147.33333333333334" height="21.000000000000007"/>
                                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -33121,13 +33208,13 @@
                                                 <rect key="frame" x="0.0" y="847" width="375" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gross Sale" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKw-AD-71t">
-                                                        <rect key="frame" x="16" y="15.666666666666631" width="78" height="18.666666666666679"/>
+                                                        <rect key="frame" x="16" y="15.666666666666631" width="78" height="18.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$245.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ErE-1d-cx4">
-                                                        <rect key="frame" x="301" y="15.666666666666631" width="58" height="18.666666666666679"/>
+                                                        <rect key="frame" x="301" y="15.666666666666631" width="58" height="18.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -33197,7 +33284,7 @@
                                                 <rect key="frame" x="0.0" y="956" width="375" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Net Sale" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ly-oT-6rh">
-                                                        <rect key="frame" x="16" y="15.666666666666744" width="61" height="18.666666666666679"/>
+                                                        <rect key="frame" x="16" y="15.666666666666744" width="61" height="18.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -34391,7 +34478,7 @@
                                                 <rect key="frame" x="0.0" y="396" width="375" height="56"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refunded Product" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kpr-uO-xNE">
-                                                        <rect key="frame" x="16" y="17.666666666666629" width="147.33333333333334" height="21"/>
+                                                        <rect key="frame" x="16" y="17.666666666666629" width="147.33333333333334" height="21.000000000000007"/>
                                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -34920,7 +35007,7 @@
                                                 <rect key="frame" x="0.0" y="1402.3333333333333" width="375" height="56"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grand Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b66-Kp-nio">
-                                                        <rect key="frame" x="16" y="10" width="93.333333333333329" height="21"/>
+                                                        <rect key="frame" x="16" y="10" width="93.333333333333343" height="21"/>
                                                         <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -35938,7 +36025,7 @@
                                                 <rect key="frame" x="0.0" y="396" width="375" height="56"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refunded Product" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZK-eP-C6o">
-                                                        <rect key="frame" x="16" y="17.666666666666629" width="147.33333333333334" height="21"/>
+                                                        <rect key="frame" x="16" y="17.666666666666629" width="147.33333333333334" height="21.000000000000007"/>
                                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -36467,7 +36554,7 @@
                                                 <rect key="frame" x="0.0" y="1402.3333333333333" width="375" height="56"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grand Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M0Q-3e-cMV">
-                                                        <rect key="frame" x="16" y="10" width="93.333333333333329" height="21"/>
+                                                        <rect key="frame" x="16" y="10" width="93.333333333333343" height="21"/>
                                                         <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -38016,7 +38103,7 @@
                                                 <rect key="frame" x="0.0" y="1402.3333333333333" width="375" height="56"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grand Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIB-f6-oWa">
-                                                        <rect key="frame" x="16" y="10" width="93.333333333333329" height="21"/>
+                                                        <rect key="frame" x="16" y="10" width="93.333333333333343" height="21"/>
                                                         <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -39614,7 +39701,7 @@
                                                 <rect key="frame" x="0.0" y="1412.3333333333333" width="375" height="56"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grand Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hCz-v2-pY7">
-                                                        <rect key="frame" x="16" y="10" width="93.333333333333329" height="21"/>
+                                                        <rect key="frame" x="16" y="10" width="93.333333333333343" height="21"/>
                                                         <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -44900,7 +44987,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIj-QV-hFi">
-                                        <rect key="frame" x="328.33333333333331" y="9.9999999999999982" width="36.666666666666686" height="19.333333333333329"/>
+                                        <rect key="frame" x="318.33333333333331" y="12.666666666666673" width="36.666666666666686" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
