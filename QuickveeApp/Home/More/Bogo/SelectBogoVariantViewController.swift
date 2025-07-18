@@ -21,7 +21,7 @@ class SelectBogoVariantViewController: UIViewController  {
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var nextBtn: UIButton!
     
-    @IBOutlet weak var imageCheckBtn: UIButton!
+    //@IBOutlet weak var imageCheckBtn: UIButton!
     
     @IBOutlet weak var filterBtn: UIButton!
     @IBOutlet weak var filterView: UIView!
@@ -286,18 +286,18 @@ class SelectBogoVariantViewController: UIViewController  {
             subVariantBoGoList = miniSelect
             categoryVariantList = miniSelect
             
-            if subVariantBoGoList.count > 0 {
-                
-                if subVariantBoGoList.allSatisfy({$0.isSelect == true}) {
-                    imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
-                }
-                else {
-                    imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
-                }
-            }
-            else {
-                imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
-            }
+//            if subVariantBoGoList.count > 0 {
+//                
+//                if subVariantBoGoList.allSatisfy({$0.isSelect == true}) {
+//                    imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
+//                }
+//                else {
+//                    imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+//                }
+//            }
+//            else {
+//                imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+//            }
             
             
             
@@ -657,18 +657,18 @@ class SelectBogoVariantViewController: UIViewController  {
             arr = searchvariantBoGoList
             searchSubVariantBoGoList = arr
             
-            if searchSubVariantBoGoList.allSatisfy({$0.isSelect == true}) {
-                imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
-            }
-            else {
-                imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
-            }
+//            if searchSubVariantBoGoList.allSatisfy({$0.isSelect == true}) {
+//                imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
+//            }
+//            else {
+//                imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+//            }
         }
         
         if arr.count == 0 {
             tableview.isHidden = true
             itemNameView.isHidden = true
-            imageCheckBtn.isHidden = true
+           // imageCheckBtn.isHidden = true
             itemNameLbl.isHidden = true
             itempriceLbl.isHidden = true
             noDataImg.isHidden = false
@@ -678,7 +678,7 @@ class SelectBogoVariantViewController: UIViewController  {
         else {
             
             itemNameView.isHidden = false
-            imageCheckBtn.isHidden = false
+           // imageCheckBtn.isHidden = false
             itemNameLbl.isHidden = false
             itempriceLbl.isHidden = false
             tableview.isHidden = false
@@ -776,18 +776,18 @@ extension SelectBogoVariantViewController : SelectedCategoryProductsDelegate  {
             filterLbl.text = "   \(catCount)   "
             filterView.backgroundColor = .systemBlue
             
-            if subVariantBoGoList.count > 0 {
-                
-                if subVariantBoGoList.allSatisfy({$0.isSelect == true}) {
-                    imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
-                }
-                else {
-                    imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
-                }
-            }
-            else {
-                imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
-            }
+//            if subVariantBoGoList.count > 0 {
+//                
+//                if subVariantBoGoList.allSatisfy({$0.isSelect == true}) {
+//                    imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
+//                }
+//                else {
+//                    imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+//                }
+//            }
+//            else {
+//                imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+//            }
         }
         else {
             isCategory = false
@@ -819,7 +819,7 @@ extension SelectBogoVariantViewController : SelectedCategoryProductsDelegate  {
             
             variantBoGoList = subList
             subVariantBoGoList = subList
-            imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+          //  imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
             filterLbl.text = ""
             filterView.backgroundColor = .clear
             
@@ -1073,12 +1073,12 @@ extension SelectBogoVariantViewController: UITableViewDelegate, UITableViewDataS
                 selectCategoryVariant(match: variant, offset: true)
                 bogoSelectedVariants.append(variant)
                 
-                if searchSubVariantBoGoList.allSatisfy({$0.isSelect == true}) {
-                    imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
-                }
-                else {
-                    imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
-                }
+//                if searchSubVariantBoGoList.allSatisfy({$0.isSelect == true}) {
+//                    imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
+//                }
+//                else {
+//                    imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+//                }
                 
                 
             }
@@ -1092,7 +1092,7 @@ extension SelectBogoVariantViewController: UITableViewDelegate, UITableViewDataS
                 selectCategoryVariant(match: variant, offset: false)
                 unSelectVarient(match: variant)
                 
-                imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+               // imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
             }
         }
         else {
@@ -1111,12 +1111,12 @@ extension SelectBogoVariantViewController: UITableViewDelegate, UITableViewDataS
                 selectCategoryVariant(match: variant, offset: true)
                 bogoSelectedVariants.append(variant)
                 
-                if subVariantBoGoList.allSatisfy({$0.isSelect == true}) {
-                    imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
-                }
-                else {
-                    imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
-                }
+//                if subVariantBoGoList.allSatisfy({$0.isSelect == true}) {
+//                    imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
+//                }
+//                else {
+//                    imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+//                }
             }
             else {
                 
@@ -1127,7 +1127,7 @@ extension SelectBogoVariantViewController: UITableViewDelegate, UITableViewDataS
                 selectCategoryVariant(match: variant, offset: false)
                 unSelectVarient(match: variant)
                  
-                imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+              //  imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
             }
         }
     }

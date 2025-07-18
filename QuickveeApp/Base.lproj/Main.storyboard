@@ -4535,7 +4535,7 @@
                                 <rect key="frame" x="0.0" y="50" width="375" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Variant Attribute" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hLu-8q-cfA">
-                                        <rect key="frame" x="113.33333333333333" y="15.666666666666673" width="148.66666666666669" height="18.666666666666671"/>
+                                        <rect key="frame" x="113.33333333333333" y="15.666666666666673" width="148.66666666666669" height="18.666666666666679"/>
                                         <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -7026,15 +7026,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVd-Jx-6qs">
-                                        <rect key="frame" x="185" y="10" width="70" height="30"/>
+                                        <rect key="frame" x="225" y="10" width="30" height="30"/>
                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="15"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Sync Data">
+                                        <state key="normal">
                                             <color key="titleColor" red="0.039215686274509803" green="0.39215686274509803" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
-                                        <connections>
-                                            <action selector="syncDataBtn:" destination="XbE-vU-YFL" eventType="touchUpInside" id="iAT-x8-gG9"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xnW-XJ-hVI">
                                         <rect key="frame" x="265" y="0.0" width="50" height="50"/>
@@ -7124,7 +7121,6 @@
                         <outlet property="scanWidth" destination="CgC-fD-HnY" id="KFF-Sq-dbp"/>
                         <outlet property="searchBar" destination="8M5-8r-wLG" id="0n2-om-9DA"/>
                         <outlet property="searchBtn" destination="eTA-LL-8HK" id="Llt-lh-u0N"/>
-                        <outlet property="syncbtn" destination="SVd-Jx-6qs" id="XNe-FN-EOO"/>
                         <outlet property="topView" destination="z1h-qi-oRi" id="7cg-y9-pWs"/>
                     </connections>
                 </viewController>
@@ -11679,7 +11675,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8J2-Py-ucV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4025" y="1710"/>
+            <point key="canvasLocation" x="4214" y="1700"/>
         </scene>
         <!--Setup Add Tax View Controller-->
         <scene sceneID="dAh-ib-RaE">
@@ -11707,7 +11703,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vva-zh-E0r">
-                                        <rect key="frame" x="313" y="8.6666666666666643" width="52" height="33.000000000000007"/>
+                                        <rect key="frame" x="313" y="8.6666666666666643" width="52" height="33"/>
                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Delete">
@@ -12958,7 +12954,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Lottery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Jh-gD-PKq">
-                                        <rect key="frame" x="60" y="15.666666666666666" width="84" height="18.666666666666671"/>
+                                        <rect key="frame" x="60" y="15.666666666666666" width="84" height="18.666666666666679"/>
                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -25134,16 +25130,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cSa-e3-FqW">
                                 <rect key="frame" x="0.0" y="45" width="375" height="44"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTr-ZY-1Vd">
-                                        <rect key="frame" x="10" y="10" width="24" height="24"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="uncheck inventory"/>
-                                        <connections>
-                                            <action selector="SelectAllClick:" destination="MFg-hg-vY4" eventType="touchUpInside" id="XB1-xu-gtk"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kw7-Ak-EhE">
-                                        <rect key="frame" x="43.999999999999993" y="12.666666666666666" width="78.333333333333314" height="18.666666666666671"/>
+                                        <rect key="frame" x="20" y="12.666666666666666" width="78.333333333333329" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -25157,13 +25145,12 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="e7M-98-C1A" firstAttribute="centerY" secondItem="kw7-Ak-EhE" secondAttribute="centerY" id="ALY-J6-obN"/>
-                                    <constraint firstItem="kw7-Ak-EhE" firstAttribute="centerY" secondItem="cSa-e3-FqW" secondAttribute="centerY" id="Ndw-dG-apk"/>
+                                    <constraint firstAttribute="bottom" secondItem="e7M-98-C1A" secondAttribute="bottom" constant="12.67" id="3JS-qM-LD2"/>
+                                    <constraint firstItem="kw7-Ak-EhE" firstAttribute="top" secondItem="cSa-e3-FqW" secondAttribute="top" constant="12.67" id="4Jm-9Z-RCo"/>
+                                    <constraint firstAttribute="bottom" secondItem="kw7-Ak-EhE" secondAttribute="bottom" constant="12.67" id="Lz2-VW-EUu"/>
                                     <constraint firstAttribute="trailing" secondItem="e7M-98-C1A" secondAttribute="trailing" constant="10" id="Sn7-LA-mBL"/>
-                                    <constraint firstItem="DTr-ZY-1Vd" firstAttribute="top" secondItem="cSa-e3-FqW" secondAttribute="top" constant="10" id="gfp-VE-kmy"/>
-                                    <constraint firstItem="kw7-Ak-EhE" firstAttribute="leading" secondItem="DTr-ZY-1Vd" secondAttribute="trailing" constant="10" id="orT-ZF-Hv2"/>
-                                    <constraint firstAttribute="bottom" secondItem="DTr-ZY-1Vd" secondAttribute="bottom" constant="10" id="pFe-0k-9dm"/>
-                                    <constraint firstItem="DTr-ZY-1Vd" firstAttribute="leading" secondItem="cSa-e3-FqW" secondAttribute="leading" constant="10" id="zLf-5V-amr"/>
+                                    <constraint firstItem="kw7-Ak-EhE" firstAttribute="leading" secondItem="cSa-e3-FqW" secondAttribute="leading" constant="20" id="orT-ZF-Hv2"/>
+                                    <constraint firstItem="e7M-98-C1A" firstAttribute="top" secondItem="cSa-e3-FqW" secondAttribute="top" constant="12.67" id="qnH-EJ-1PH"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GB3-Je-lmC">
@@ -25196,15 +25183,15 @@
                                 <rect key="frame" x="0.0" y="89" width="375" height="668"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SelectMixnMatchCell" rowHeight="54" id="5Kx-Bs-Cea" customClass="SelectMixnMatchCell" customModule="QuickveeApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="375" height="54"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SelectMixnMatchCell" rowHeight="69" id="5Kx-Bs-Cea" customClass="SelectMixnMatchCell" customModule="QuickveeApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="375" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5Kx-Bs-Cea" id="Db3-xf-G7T">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uncheck inventory" translatesAutoresizingMaskIntoConstraints="NO" id="jQF-NV-fbt">
-                                                    <rect key="frame" x="10" y="15" width="24" height="24"/>
+                                                    <rect key="frame" x="10" y="22.666666666666671" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="37c-4j-kPD"/>
                                                     </constraints>
@@ -25425,7 +25412,6 @@
                         <outlet property="filterBtn" destination="Oyl-Yi-Ib0" id="JmR-SC-ka6"/>
                         <outlet property="filterLbl" destination="ZT1-iK-JSF" id="sae-fW-HS6"/>
                         <outlet property="filterView" destination="Sjb-76-qpb" id="dme-vC-4Pl"/>
-                        <outlet property="imageCheckBtn" destination="DTr-ZY-1Vd" id="K5U-M9-lOE"/>
                         <outlet property="itemNameLbl" destination="kw7-Ak-EhE" id="ptC-QY-mxe"/>
                         <outlet property="itemNameView" destination="cSa-e3-FqW" id="DLT-h5-EfJ"/>
                         <outlet property="itempriceLbl" destination="e7M-98-C1A" id="8LX-mg-LbW"/>
@@ -25443,7 +25429,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8jw-8q-hLG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="91" y="3186"/>
+            <point key="canvasLocation" x="90.400000000000006" y="3185.4679802955666"/>
         </scene>
         <!--Add Mixn Match View Controller-->
         <scene sceneID="TcK-S8-5Ir">
@@ -42150,7 +42136,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quick Enter, Prompt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ks-ju-HTy">
-                                                <rect key="frame" x="37.666666666666657" y="10.000000000000002" width="135.00000000000003" height="17.666666666666671"/>
+                                                <rect key="frame" x="37.666666666666657" y="10.000000000000002" width="135" height="17.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -44879,20 +44865,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4pJ-zk-aHs">
                                 <rect key="frame" x="0.0" y="95" width="375" height="44"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oeR-rq-XhA">
-                                        <rect key="frame" x="10" y="10" width="24" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="Grn-8P-TFx"/>
-                                            <constraint firstAttribute="width" constant="24" id="kUX-Ib-Sgb"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="uncheck inventory"/>
-                                        <connections>
-                                            <action selector="selectAllBtnClick:" destination="F6L-zp-uOs" eventType="touchUpInside" id="mjw-gO-N98"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZd-36-S9f">
-                                        <rect key="frame" x="44.000000000000007" y="12.333333333333327" width="80.666666666666686" height="19.333333333333329"/>
+                                        <rect key="frame" x="20" y="12.333333333333327" width="80.666666666666671" height="19.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -44906,13 +44880,12 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="DIj-QV-hFi" firstAttribute="centerY" secondItem="fZd-36-S9f" secondAttribute="centerY" id="06o-uh-bTf"/>
                                     <constraint firstAttribute="trailing" secondItem="DIj-QV-hFi" secondAttribute="trailing" constant="20" id="0vL-hL-gMl"/>
-                                    <constraint firstAttribute="bottom" secondItem="oeR-rq-XhA" secondAttribute="bottom" constant="10" id="4kB-1v-xRq"/>
-                                    <constraint firstItem="oeR-rq-XhA" firstAttribute="leading" secondItem="4pJ-zk-aHs" secondAttribute="leading" constant="10" id="Dfv-zJ-lvf"/>
-                                    <constraint firstItem="fZd-36-S9f" firstAttribute="centerY" secondItem="4pJ-zk-aHs" secondAttribute="centerY" id="Gp0-L6-bF4"/>
-                                    <constraint firstItem="fZd-36-S9f" firstAttribute="leading" secondItem="oeR-rq-XhA" secondAttribute="trailing" constant="10" id="ccM-uY-a1H"/>
-                                    <constraint firstItem="oeR-rq-XhA" firstAttribute="top" secondItem="4pJ-zk-aHs" secondAttribute="top" constant="10" id="n4c-ES-Yz6"/>
+                                    <constraint firstAttribute="bottom" secondItem="fZd-36-S9f" secondAttribute="bottom" constant="12.33" id="Hcd-Qa-D9w"/>
+                                    <constraint firstAttribute="bottom" secondItem="DIj-QV-hFi" secondAttribute="bottom" constant="12.67" id="StQ-Nx-ZzO"/>
+                                    <constraint firstItem="DIj-QV-hFi" firstAttribute="top" secondItem="4pJ-zk-aHs" secondAttribute="top" constant="12.67" id="TR3-jM-i1g"/>
+                                    <constraint firstItem="fZd-36-S9f" firstAttribute="leading" secondItem="4pJ-zk-aHs" secondAttribute="leading" constant="20" id="ccM-uY-a1H"/>
+                                    <constraint firstItem="fZd-36-S9f" firstAttribute="top" secondItem="4pJ-zk-aHs" secondAttribute="top" constant="12.33" id="dld-uZ-9sB"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lEr-FI-SMU">
@@ -45171,7 +45144,6 @@
                         <outlet property="filterBtn" destination="82B-DX-mjb" id="efp-3R-sV2"/>
                         <outlet property="filterLbl" destination="cDw-ih-uXi" id="2j7-4u-ilB"/>
                         <outlet property="filterView" destination="fB9-FB-h8Q" id="UeA-vu-uIo"/>
-                        <outlet property="imageCheckBtn" destination="oeR-rq-XhA" id="FLW-5L-68m"/>
                         <outlet property="itemNameLbl" destination="fZd-36-S9f" id="aYT-Go-jyE"/>
                         <outlet property="itemNameView" destination="4pJ-zk-aHs" id="xeL-Br-Dca"/>
                         <outlet property="itempriceLbl" destination="DIj-QV-hFi" id="ap5-ze-g5D"/>
@@ -45187,14 +45159,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S4R-SH-6sQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1534" y="3982"/>
+            <point key="canvasLocation" x="1599" y="4009"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="79S-AN-vcT"/>
         <segue reference="A2Y-M7-eWr"/>
-        <segue reference="tUV-1f-0QC"/>
-        <segue reference="u8i-O8-kkS"/>
+        <segue reference="2mk-U3-lum"/>
+        <segue reference="gWn-J4-e2K"/>
         <segue reference="Cy6-Nf-GeB"/>
         <segue reference="gEx-Le-EEr"/>
         <segue reference="SeS-H7-xfm"/>

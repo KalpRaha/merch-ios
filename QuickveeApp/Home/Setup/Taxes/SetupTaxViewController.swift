@@ -305,7 +305,7 @@ extension SetupTaxViewController {
 
 
 
-struct SetupTaxes {
+struct SetupTaxes: Codable {
     
     let alternateName: String
     let created_on: String

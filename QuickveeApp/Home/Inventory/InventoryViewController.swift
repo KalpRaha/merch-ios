@@ -20,7 +20,7 @@ class InventoryViewController: UIViewController {
     
     @IBOutlet weak var invent_lbl: UILabel!
     
-    @IBOutlet weak var syncbtn: UIButton!
+    //@IBOutlet weak var syncbtn: UIButton!
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var searchBtn: UIButton!
     @IBOutlet weak var topView: UIView!
@@ -110,7 +110,7 @@ class InventoryViewController: UIViewController {
         searchBtn.alpha = 1
         searchBar.alpha = 0
         scanUpcBtn.alpha = 1
-        syncbtn.alpha = 1
+       // syncbtn.alpha = 1
         backBtn.alpha = 1
         invent_lbl.alpha = 1
         searchBar.showsCancelButton = true
@@ -192,49 +192,49 @@ class InventoryViewController: UIViewController {
     }
     
     
-    
-    @IBAction func syncDataBtn(_ sender: UIButton) {
-        setupUI()
-
-        syncbtn.alpha = 0
-        loadingIndicator.isAnimating = true
-        
-        let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
-        
-        ApiCalls.sharedCall.SyncDataCall(merchant_id: id) { isSuccess, responseData in
-            
-            if isSuccess {
-                
-                guard let list = responseData["message"] else {
-                    self.syncbtn.alpha = 1
-                    self.loadingIndicator.isAnimating = false
-                    self.loadingIndicator.removeFromSuperview()
-
-                    return
-                }
-               
-                ToastClass.sharedToast.showToast(message: "Your Data has been Synced", 
-                                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-         
-                self.syncbtn.alpha = 1
-                self.loadingIndicator.isAnimating = false
-                self.loadingIndicator.removeFromSuperview()
-
-            }else{
-                print("Api Error")
-                self.syncbtn.alpha = 1
-                self.loadingIndicator.isAnimating = false
-                self.loadingIndicator.removeFromSuperview()
-
-            }
-        }
-        
-    }
+//    
+//    @IBAction func syncDataBtn(_ sender: UIButton) {
+//        setupUI()
+//
+//       // syncbtn.alpha = 0
+//        loadingIndicator.isAnimating = true
+//        
+//        let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+//        
+//        ApiCalls.sharedCall.SyncDataCall(merchant_id: id) { isSuccess, responseData in
+//            
+//            if isSuccess {
+//                
+//                guard let list = responseData["message"] else {
+//                    self.syncbtn.alpha = 1
+//                    self.loadingIndicator.isAnimating = false
+//                    self.loadingIndicator.removeFromSuperview()
+//
+//                    return
+//                }
+//               
+//                ToastClass.sharedToast.showToast(message: "Your Data has been Synced", 
+//                                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//         
+//                self.syncbtn.alpha = 1
+//                self.loadingIndicator.isAnimating = false
+//                self.loadingIndicator.removeFromSuperview()
+//
+//            }else{
+//                print("Api Error")
+//                self.syncbtn.alpha = 1
+//                self.loadingIndicator.isAnimating = false
+//                self.loadingIndicator.removeFromSuperview()
+//
+//            }
+//        }
+//        
+//    }
     
     
     @IBAction func searchBtnClick(_ sender: UIButton) {
             
-        syncbtn.alpha = 0
+       // syncbtn.alpha = 0
         backBtn.alpha = 0
         invent_lbl.alpha = 0
         searchBtn.alpha = 0
@@ -318,26 +318,26 @@ class InventoryViewController: UIViewController {
     }
     
     
-    
-    private func setupUI() {
-        if #available(iOS 13.0, *) {
-            overrideUserInterfaceStyle = .light
-        }
-        
-        
-        topView.addSubview(loadingIndicator)
-
-        NSLayoutConstraint.activate([
-            loadingIndicator.centerXAnchor
-                .constraint(equalTo: syncbtn.centerXAnchor, constant: 0),
-            loadingIndicator.centerYAnchor
-                .constraint(equalTo: syncbtn.centerYAnchor),
-            loadingIndicator.widthAnchor
-                .constraint(equalToConstant: 15),
-            loadingIndicator.heightAnchor
-                .constraint(equalTo: self.loadingIndicator.widthAnchor)
-        ])
-    }
+//    
+//    private func setupUI() {
+//        if #available(iOS 13.0, *) {
+//            overrideUserInterfaceStyle = .light
+//        }
+//        
+//        
+//        topView.addSubview(loadingIndicator)
+//
+//        NSLayoutConstraint.activate([
+//            loadingIndicator.centerXAnchor
+//                .constraint(equalTo: syncbtn.centerXAnchor, constant: 0),
+//            loadingIndicator.centerYAnchor
+//                .constraint(equalTo: syncbtn.centerYAnchor),
+//            loadingIndicator.widthAnchor
+//                .constraint(equalToConstant: 15),
+//            loadingIndicator.heightAnchor
+//                .constraint(equalTo: self.loadingIndicator.widthAnchor)
+//        ])
+//    }
 }
 
 extension InventoryViewController : UISearchBarDelegate {
@@ -421,7 +421,7 @@ extension InventoryViewController : UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         
         searchBar.text = ""
-        syncbtn.alpha = 1
+       // syncbtn.alpha = 1
         backBtn.alpha = 1
         invent_lbl.alpha = 1
         searchBtn.alpha = 1
@@ -587,17 +587,17 @@ extension InventoryViewController: UIPageViewControllerDataSource {
 extension InventoryViewController: BarcodeScannerCodeDelegate, BarcodeScannerErrorDelegate, BarcodeScannerDismissalDelegate {
     
     func scannerDidDismiss(_ controller: BarcodeScanner.BarcodeScannerViewController) {
-        print("diddismiss")
+        controller.dismiss(animated: true)
     }
     
     func scanner(_ controller: BarcodeScanner.BarcodeScannerViewController, didReceiveError error: Error) {
-        print("error")
+        controller.dismiss(animated: true)
     }
     
     func scanner(_ controller: BarcodeScanner.BarcodeScannerViewController, didCaptureCode code: String, type: String) {
         print("success")
         
-        syncbtn.alpha = 0
+       // syncbtn.alpha = 0
         backBtn.alpha = 0
         invent_lbl.alpha = 0
         searchBtn.alpha = 0
@@ -858,7 +858,7 @@ extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDat
         }
         
         searchBar.text = ""
-        syncbtn.alpha = 1
+       // syncbtn.alpha = 1
         backBtn.alpha = 1
         invent_lbl.alpha = 1
         searchBtn.alpha = 1

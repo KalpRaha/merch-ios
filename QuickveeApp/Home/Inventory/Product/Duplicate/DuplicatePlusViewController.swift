@@ -2178,12 +2178,29 @@ extension DuplicatePlusViewController: UITableViewDelegate, UITableViewDataSourc
             cell.profit.text = variants.profit
             cell.comparePrice.text = variants.compare_price
             cell.qty.text = variants.quantity
-            cell.customCode.text = variants.custom_code
+           
             cell.upcCode.text = variants.upc
-            cell.reorderQty.text = variants.reorder_qty
-            cell.reorderLevel.text = variants.reorder_level
+            if variants.custom_code == "<null>" || variants.custom_code == "0"{
+                cell.customCode.text = ""
+            }
+            else {
+                cell.customCode.text = variants.custom_code
+            }
             
             
+            if variants.reorder_qty == "0" || variants.reorder_qty == "<null>" {
+                cell.reorderQty.text = ""
+            }
+            else {
+                cell.reorderQty.text = variants.reorder_qty
+            }
+           
+            if variants.reorder_level == "0" || variants.reorder_level == "<null>" {
+                cell.reorderLevel.text = ""
+            }else {
+                cell.reorderLevel.text = variants.reorder_level
+            }
+   
             if variants.trackqnty == "1"{
                 cell.trackQty.setImage(UIImage(named: "check inventory"), for: .normal)
             }

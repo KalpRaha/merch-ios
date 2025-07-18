@@ -247,6 +247,7 @@ class PlusViewController: UIViewController {
       attTable.estimatedSectionHeaderHeight = 0
       variantsTable.estimatedSectionFooterHeight = 0
       
+      descField.delegate = self
       productField.delegate = self
       productField.addTarget(self, action: #selector(updateText), for: .editingChanged)
       
@@ -286,16 +287,16 @@ class PlusViewController: UIViewController {
           tripleWidth.constant = 0
           titleText.text = "Add Product"
          
-          if mode == "add" {
-              hasSaveDraft =  UserDefaults.standard.bool(forKey: "isDraftSaved")
-               print(hasSaveDraft)
-              
-              if hasSaveDraft {
-                  loadSavedProduct()
-              } else {
-                  print("")
-              }
+         
+        hasSaveDraft =  UserDefaults.standard.bool(forKey: "isDraftSaved")
+          print(hasSaveDraft)
+          
+          if hasSaveDraft {
+              loadSavedProduct()
+          } else {
+             
           }
+          
      
           if variantsArray.count == 0 {
               
@@ -455,7 +456,6 @@ class PlusViewController: UIViewController {
       let brand = productEdit.brand
       
       if brand != "" && brand != "<null>" {
-          print(brand)
           selectBrandLbl.text = ""
           brandInnerView.isHidden = false
           brandName.text = brand
@@ -560,9 +560,20 @@ class PlusViewController: UIViewController {
       arrTax = taxArray
       
       if mode == "add" {
-//          if collTax.isEmpty {
-//                 collTax = [arrTax[0]]
-//             }
+          
+          if hasSaveDraft {
+              
+              if UserDefaults.standard.bool(forKey: "emptytaxArray"){
+                  
+              }
+              else {
+               
+                 
+              }
+          }
+          else {
+              collTax = [arrTax[0]]
+          }
           saveProductInfo()
       }
       else {
@@ -597,7 +608,7 @@ class PlusViewController: UIViewController {
                   variantsArray[upc].upc = upcCode
               }
           }
-          //saveProductInfo()
+          saveProductInfo()
           variantsTable.reloadData()
       }
       //edit
@@ -909,47 +920,6 @@ class PlusViewController: UIViewController {
         saveProductInfo()
     }
     
-//
-//  func saveProductInfo() {
-//    
-//      
-//      let productDraft: [String: String] = [
-//          "name": productField.text ?? "",
-//          "description": descField.text ?? "",
-//          "brand": brandName.text ?? ""
-//         
-//      ]
-//     
-//      UserDefaults.standard.set(productDraft, forKey: "draftProduct")
-//      print(productDraft)
-//      
-//      let categoryTitles = collCat.map { $0.title}
-//      UserDefaults.standard.set(categoryTitles, forKey: "catArray")
-//      
-//      let tagTitles = collTag.map { $0}
-//      UserDefaults.standard.set(tagTitles, forKey: "tagArray")
-//
-//    
-////      if let encoded = try? JSONEncoder().encode(productOptions) {
-////          UserDefaults.standard.set(encoded, forKey: "variantAttributes")
-////      }
-//      
-//      if let encoded = try? JSONEncoder().encode(productOptions) {
-//              UserDefaults.standard.set(encoded, forKey: "variantAttributes")
-//             
-//          } else {
-//             
-//          }
-//      
-//      let encoder = JSONEncoder()
-//         if let data = try? encoder.encode(variantsArray) {
-//             UserDefaults.standard.set(data, forKey: "plus_variants_draft")
-//             
-//         } else {
-//           
-//         }
-//      
-//      
 
     func saveProductInfo() {
         
@@ -993,14 +963,16 @@ class PlusViewController: UIViewController {
         print(isValueSaved)
         
         
-        let categoryTitles = collCat.map { $0.title }
-        if !categoryTitles.isEmpty {
-            UserDefaults.standard.set(categoryTitles, forKey: "catArray")
+
+        
+        if let encodedOptions = try? JSONEncoder().encode(collCat) {
+            UserDefaults.standard.set(encodedOptions, forKey: "catArray")
             isValueSaved = true
         }
         else {
             UserDefaults.standard.set([], forKey: "catArray")
             isValueSaved = true
+            
         }
         
         
@@ -1013,29 +985,29 @@ class PlusViewController: UIViewController {
             isValueSaved = true
         }
         
-        let taxTitles = collTax.map { $0.title }
-        if !taxTitles.isEmpty {
-            UserDefaults.standard.set(taxTitles, forKey: "taxArray")
-            isValueSaved = true
+        if !collTax.isEmpty {
+            if let encodedOptions = try? JSONEncoder().encode(collTax) {
+                UserDefaults.standard.set(encodedOptions, forKey: "taxArray")
+                isValueSaved = true
+            }
         }
         else {
-            UserDefaults.standard.set([], forKey: "tagArray")
+            UserDefaults.standard.set([], forKey: "taxArray")
             isValueSaved = true
+            
         }
-        
         
         
         
         if let encodedOptions = try? JSONEncoder().encode(productOptions) {
             UserDefaults.standard.set(encodedOptions, forKey: "variantAttributes")
+            print(encodedOptions)
             isValueSaved = true
-            
-            
         }
         else {
             UserDefaults.standard.set([], forKey: "variantAttributes")
             isValueSaved = true
-
+            
         }
         
         
@@ -1106,32 +1078,31 @@ class PlusViewController: UIViewController {
 
            print(isValueSaved)
 
-       
-        if let savedCategories = UserDefaults.standard.stringArray(forKey: "catArray") {
-            collCat = savedCategories.map { makeInventoryCategory(from: $0) }
-            catColl.reloadData()
-        }
+    
 
+        if let data = UserDefaults.standard.data(forKey: "catArray"),
+           let savedCategories = try? JSONDecoder().decode([InventoryCategory].self, from: data) {
+            print(savedCategories)
+            collCat = savedCategories
+        }
        
         if let savedTags = UserDefaults.standard.stringArray(forKey: "tagArray") {
             collTag = savedTags
             tagColl.reloadData()
         }
 
-//        if let savedTax = UserDefaults.standard.stringArray(forKey: "taxArray") {
-//            print(savedTax)
-//            collTax = savedTax.map { makesetupTax(from: $0 ) }
-//            taxesColl.reloadData()
-//        }
-        if let savedTax = UserDefaults.standard.stringArray(forKey: "taxArray"), !savedTax.isEmpty {
+        
+        if let data = UserDefaults.standard.data(forKey: "taxArray"),
+           let savedTax = try? JSONDecoder().decode([SetupTaxes].self, from: data) {
             print(savedTax)
-            collTax = savedTax.map { makesetupTax(from: $0 ) }
-        } else if mode == "add" {
-            collTax = [arrTax[0]]
+            collTax = savedTax
+            UserDefaults.standard.set(false, forKey: "emptytaxArray")
+        }
+        else {
+            UserDefaults.standard.set(true, forKey: "emptytaxArray")
         }
         
-       
-      
+
         if let data = UserDefaults.standard.data(forKey: "variantAttributes"),
            let decoded = try? JSONDecoder().decode([InventoryOptions].self, from: data) {
             productOptions = decoded
@@ -1159,6 +1130,10 @@ class PlusViewController: UIViewController {
         if let data = UserDefaults.standard.data(forKey: "plus_variants_draft"),
            let savedVariants = try? JSONDecoder().decode([ProductById].self, from: data) {
             variantsArray = savedVariants
+            
+            for i in 0..<variantsArray.count {
+                isQuantity.append("1")
+            }
         }
     }
 
@@ -1177,6 +1152,7 @@ class PlusViewController: UIViewController {
              "variantAttributes",
              "plus_variants_draft",
              "resultKey",
+             "emptytaxArray",
              "isDraftSaved"
          ]
          
@@ -1188,41 +1164,6 @@ class PlusViewController: UIViewController {
     
   }
   
-  private func makeInventoryCategory(from title: String) -> InventoryCategory {
-      return InventoryCategory(
-          id: "0",
-          title: title,
-          description: "",
-          categoryBanner: "",
-          show_online: "",
-          show_status: "",
-          cat_show_status: "",
-          is_lottery: "",
-          alternateName: "",
-          merchant_id: "",
-          is_deleted: "",
-          user_id: "",
-          created_on: "",
-          updated_on: "",
-          admin_id: "",
-          use_point: "",
-          earn_point: ""
-      )
-  }
-
-    private func makesetupTax(from title: String) -> SetupTaxes {
-        return SetupTaxes (
-            alternateName: "",
-            created_on: "",
-            displayname: "",
-            id: "",
-            merchant_id: "",
-            percent: "",
-            title: "",
-            user_id: ""
-        )
-    }
-    
     
   @objc func openCatScreen() {
       
@@ -1335,6 +1276,7 @@ class PlusViewController: UIViewController {
       collTax.remove(at: sender.tag)
       saveProductInfo()
       taxesColl.reloadData()
+     
   }
   
   
@@ -1508,6 +1450,9 @@ class PlusViewController: UIViewController {
           
           if productOptions.count == 2 {
               
+              print(arrOptVl1)
+              print(arrOptVl2)
+              print(arrOptVl3)
               if position == 0 {
                   arrOptVl1 = arrOptVl2
                   arrOptVl2 = arrOptVl3
@@ -1553,7 +1498,12 @@ class PlusViewController: UIViewController {
               addVarBtnHeight.constant = 50
           }
           refreshVariantTable()
-         
+          
+          if let encodedOptions = try? JSONEncoder().encode(productOptions) {
+              UserDefaults.standard.set(encodedOptions, forKey: "variantAttributes")
+          } else {
+              UserDefaults.standard.set([], forKey: "variantAttributes")
+          }
       }
   }
   
@@ -2678,7 +2628,7 @@ extension PlusViewController: PlusSelectedCategory {
           if reverseBrandsTags.count != 0 {
               selectBrandLbl.text = ""
               brandInnerView.isHidden = false
-             // brandName.text = reverseBrandsTags[0]
+            
               setBrandName(reverseBrandsTags[0])
               brandCloseBtn.isHidden = false
           }
@@ -2867,10 +2817,11 @@ extension PlusViewController: PlusAttributeVariant {
       }
       
       if result.count == 0 {
-          
           let count = variantsArray.count - 1
           variantsArray.removeLast(count)
           isSelectedData.removeLast(count)
+          print(variantsArray.count)
+          print(isSelectedData)
       }
       else if result.count > variantsArray.count {
           
@@ -2891,11 +2842,15 @@ extension PlusViewController: PlusAttributeVariant {
           }
       }
       else if result.count < variantsArray.count {
-          
+          print(result.count)
+          print(variantsArray.count)
+          print(isSelectedData)
+          print(isQuantity)
           let count = variantsArray.count - result.count
           variantsArray.removeLast(count)
           isSelectedData.removeLast(count)
           isQuantity.removeLast(count)
+          
       }
       
       if isSelectedData.allSatisfy({$0 == false}) {
@@ -2918,7 +2873,10 @@ extension PlusViewController: UITextFieldDelegate {
       
       if mode == "add" {
           
-          if textField == productField {
+          if textField == productField  {
+              saveProductInfo()
+          }
+          else if textField == descField {
               saveProductInfo()
           }
           

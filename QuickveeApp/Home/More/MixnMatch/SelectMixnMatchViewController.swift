@@ -20,7 +20,7 @@ class SelectMixnMatchViewController: UIViewController {
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var nextBtn: UIButton!
     
-    @IBOutlet weak var imageCheckBtn: UIButton!
+   // @IBOutlet weak var imageCheckBtn: UIButton!
     
     @IBOutlet weak var filterBtn: UIButton!
     @IBOutlet weak var filterView: UIView!
@@ -143,7 +143,7 @@ class SelectMixnMatchViewController: UIViewController {
         loadingIndicator.isAnimating = true
         
         itemNameView.isHidden = true
-        imageCheckBtn.isHidden = true
+        //imageCheckBtn.isHidden = true
         
         itemNameLbl.isHidden = true
         itempriceLbl.isHidden = true
@@ -165,7 +165,7 @@ class SelectMixnMatchViewController: UIViewController {
                     
                     
                     self.itemNameView.isHidden = true
-                    self.imageCheckBtn.isHidden = true
+                   // self.imageCheckBtn.isHidden = true
                     self.itemNameLbl.isHidden = true
                     self.itempriceLbl.isHidden = true
                     
@@ -187,7 +187,7 @@ class SelectMixnMatchViewController: UIViewController {
                         
                         
                         self.itemNameView.isHidden = true
-                        self.imageCheckBtn.isHidden = true
+                        //self.imageCheckBtn.isHidden = true
                         self.itemNameLbl.isHidden = true
                         self.itempriceLbl.isHidden = true
                         
@@ -203,7 +203,7 @@ class SelectMixnMatchViewController: UIViewController {
                         
                         
                         self.itemNameView.isHidden = false
-                        self.imageCheckBtn.isHidden = false
+                       // self.imageCheckBtn.isHidden = false
                         self.itemNameLbl.isHidden = false
                         self.itempriceLbl.isHidden = false
                         
@@ -352,14 +352,14 @@ class SelectMixnMatchViewController: UIViewController {
         subVariantTableList = miniSelect
         categoryVariantList = miniSelect
         
-        if subVariantTableList.allSatisfy({$0.isSelect}) {
-            
-            imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
-        }
-        else {
-            imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
-        }
-        
+//        if subVariantTableList.allSatisfy({$0.isSelect}) {
+//            
+//            imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
+//        }
+//        else {
+//            imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+//        }
+//        
         
         
     }
@@ -509,12 +509,12 @@ class SelectMixnMatchViewController: UIViewController {
             arr = searchVariantTableList
             searchSubVariantTableList = arr
             
-            if searchSubVariantTableList.allSatisfy({$0.isSelect == true}) {
-                imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
-            }
-            else {
-                imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
-            }
+//            if searchSubVariantTableList.allSatisfy({$0.isSelect == true}) {
+//                imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
+//            }
+//            else {
+//                imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+//            }
         }
         
       
@@ -523,7 +523,7 @@ class SelectMixnMatchViewController: UIViewController {
         
             tableview.isHidden = true
             itemNameView.isHidden = true
-            imageCheckBtn.isHidden = true
+           // imageCheckBtn.isHidden = true
             itemNameLbl.isHidden = true
             itempriceLbl.isHidden = true
             noDataImg.isHidden = false
@@ -534,7 +534,7 @@ class SelectMixnMatchViewController: UIViewController {
         else {
             
             itemNameView.isHidden = false
-            imageCheckBtn.isHidden = false
+           // imageCheckBtn.isHidden = false
             itemNameLbl.isHidden = false
             itempriceLbl.isHidden = false
             tableview.isHidden = false
@@ -962,7 +962,7 @@ extension SelectMixnMatchViewController: AddMixnMatchDelegate {
         searching = false
         tableview.reloadData()
         
-        imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+       // imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
     }
 }
 
@@ -983,12 +983,12 @@ extension SelectMixnMatchViewController: SelectedCategoryProductsDelegate {
             filterLbl.text = "   \(cat_count)   "
             filterView.backgroundColor = .systemBlue
             
-            if subVariantTableList.allSatisfy({$0.isSelect}) {
-                imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
-            }
-            else {
-                imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
-            }
+//            if subVariantTableList.allSatisfy({$0.isSelect}) {
+//                imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
+//            }
+//            else {
+//                imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+//            }
         }
         
         else {
@@ -1025,7 +1025,7 @@ extension SelectMixnMatchViewController: SelectedCategoryProductsDelegate {
             variantTableList = subList
             subVariantTableList = subList
             
-            imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+           // imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
             
             filterLbl.text = ""
             filterView.backgroundColor = .clear
@@ -1063,12 +1063,12 @@ extension SelectMixnMatchViewController: SelectedCategoryProductsDelegate {
         subVariantTableList = category_variants
    
      
-        if variantTableList.allSatisfy({$0.isSelect}) {
-            imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
-        }
-        else {
-            imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
-        }
+//        if variantTableList.allSatisfy({$0.isSelect}) {
+//            imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
+//        }
+//        else {
+//            imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+//        }
     }
 }
 
@@ -1497,14 +1497,14 @@ extension SelectMixnMatchViewController : UITableViewDelegate, UITableViewDataSo
                     
                     mixSelectedVariants.append(variant)
                     
-                    if searchSubVariantTableList.allSatisfy({$0.isSelect}) {
-                        imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
-                    }
-                    else {
-                       imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
-                       
-                        
-                    }
+//                    if searchSubVariantTableList.allSatisfy({$0.isSelect}) {
+//                        imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
+//                    }
+//                    else {
+//                       imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+//                       
+//                        
+//                    }
                 }
             }
             
@@ -1516,7 +1516,7 @@ extension SelectMixnMatchViewController : UITableViewDelegate, UITableViewDataSo
                 selectSearchSubVariant(match: variant, offset: false)
                 selectCategoryVariant(match: variant, offset: false)
                 unSelectVarient(match: variant)
-                imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+               // imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
             }
         }
         // searching false
@@ -1599,12 +1599,12 @@ extension SelectMixnMatchViewController : UITableViewDelegate, UITableViewDataSo
                     
                     mixSelectedVariants.append(variant)
                     
-                    if subVariantTableList.allSatisfy({$0.isSelect}) {
-                        imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
-                    }
-                    else {
-                        imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
-                    }
+//                    if subVariantTableList.allSatisfy({$0.isSelect}) {
+//                        imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
+//                    }
+//                    else {
+//                        imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+//                    }
                 }
             }
             else {
@@ -1615,7 +1615,7 @@ extension SelectMixnMatchViewController : UITableViewDelegate, UITableViewDataSo
                 selectCategoryVariant(match: variant, offset: false)
                 unSelectVarient(match: variant)
                 
-                imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+               // imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
             }
         }
     }

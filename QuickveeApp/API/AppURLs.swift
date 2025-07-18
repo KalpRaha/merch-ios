@@ -9,10 +9,10 @@ import Foundation
 
 struct AppURLs {
     // live
-   // static let base_url = "https://api-ci.quickvee.us/"
+    static let base_url = "https://api-ci.quickvee.us/"
     
     //test
-    static let base_url = "https://qa-api-ci.quickvee.us/"
+   // static let base_url = "https://qa-api-ci.quickvee.us/"
 
     
     static let ORDERS_LIST = "\(base_url)orders/order_list"
@@ -67,28 +67,28 @@ struct AppURLs {
     static let UPDATE_STORE_OPTIONS = "\(base_url)Settingapi/update_store_option"
     static let UPDATE_STORE_SETUP = "\(base_url)Settingapi/update_store_setup"
     
-    static let INVENTORY_CATEGORY_LIST = "https://qa-elasticsearch.quickvee.us/Categoryapi/category_list"
-   // static let INVENTORY_CATEGORY_LIST = "\(base_url)Categoryapi/category_list"
+    //static let INVENTORY_CATEGORY_LIST = "https://qa-elasticsearch.quickvee.us/Categoryapi/category_list"
+    static let INVENTORY_CATEGORY_LIST = "\(base_url)Categoryapi/category_list"
     static let INVENTORY_ADD_CATEGORY = "\(base_url)Categoryapi/add_category"
     static let INVENTORY_EDIT_CATEGORY = "\(base_url)Categoryapi/"
     static let INVENTORY_DELETE_CATEGORY = "\(base_url)Categoryapi/delete_category"
     static let INVENTORY_CATEGORY_BY_ID = "\(base_url)Categoryapi/get_categoryById"
     
-   //static let INVENTORY_PRODUCT_LIST = "\(base_url)Productapi/new_product_list"
-    static let INVENTORY_PRODUCT_LIST = "https://qa-elasticsearch.quickvee.us/Productapi/new_product_list"
+   static let INVENTORY_PRODUCT_LIST = "\(base_url)Productapi/new_product_list"
+   // static let INVENTORY_PRODUCT_LIST = "https://qa-elasticsearch.quickvee.us/Productapi/new_product_list"
     static let INVENTORY_PRODUCT_ADD = "\(base_url)Productapi/add_product"
     static let INVENTORY_PRODUCT_DUPLICATE = "\(base_url)Productapi/duplicate_product"
     static let INVENTORY_PRODUCT_EDIT = "\(base_url)Productapi/edit_produt"
-    static let INVENTORY_PRODUCT_BY_ID = "https://qa-elasticsearch.quickvee.us/Productapi/get_productdata_ById"
-    //static let INVENTORY_PRODUCT_BY_ID = "\(base_url)Productapi/get_productdata_ById"
+   // static let INVENTORY_PRODUCT_BY_ID = "https://qa-elasticsearch.quickvee.us/Productapi/get_productdata_ById"
+    static let INVENTORY_PRODUCT_BY_ID = "\(base_url)Productapi/get_productdata_ById"
     static let INVENTORY_UPDATE_STATUS = "\(base_url)Productapi/product_show_status_update"
     static let INVENTORY_PRODUCT_DELETE = "\(base_url)Productapi/delete_product"
     
     static let INVENTORY_ATTRIBUTE_LIST = "\(base_url)Varientsapi/varients_list"
     static let INVENTORY_ADD_ATTRIBUTE = "\(base_url)Varientsapi/add_varient"
     
-    static let INVENTORY_VARIANT_LIST = "https://qa-elasticsearch.quickvee.us/Productapi/variant_list"
-   // static let INVENTORY_VARIANT_LIST = "\(base_url)Productapi/variant_list"
+    //static let INVENTORY_VARIANT_LIST = "https://qa-elasticsearch.quickvee.us/Productapi/variant_list"
+    static let INVENTORY_VARIANT_LIST = "\(base_url)Productapi/variant_list"
     static let INVENTORY_VARIANT_LIST_PAGINATION = "\(base_url)productapi/variant_list_pagination"
     static let INVENTORY_UPDATE_PRODUCT_VARIANT = "\(base_url)productapi/update_product_variant"
     static let INVENTORY_VARIANT_BY_ID = "\(base_url)productapi/get_variantdata_ById"
