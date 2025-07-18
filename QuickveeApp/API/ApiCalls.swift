@@ -232,7 +232,7 @@ extension ApiCalls {
     
     
     func productAddCall(id: String, title: String, description: String,
-                        brand: String, tags: String, price: String,
+                        brand: String, tags: String, stores: String, price: String,
                         compare_price: String, costperItem: String,
                         margin: String, profit: String, ischargeTax: String,
                         trackqnty: String, isstockcontinue: String,
@@ -261,6 +261,7 @@ extension ApiCalls {
             "description": description,
             "brand": brand,
             "tags": tags,
+            "stores": stores,
             "price": price,
             "compare_price": compare_price,
             "costperItem": costperItem,

@@ -29,6 +29,11 @@ class FilterCategoryViewController: UIViewController {
     
     @IBOutlet weak var addBtnHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var selectView: UIView!
+    @IBOutlet weak var selectLbl: UILabel!
+    @IBOutlet weak var selectBtm: NSLayoutConstraint!
+    @IBOutlet weak var selectTop: NSLayoutConstraint!
+    
     //category arrays
     var selectCategory = [InventoryCategory]()
     var selectAddCategory = [InventoryCategory]()
@@ -65,6 +70,8 @@ class FilterCategoryViewController: UIViewController {
     
     var newBrandTag = false
     var newBrandTagName = ""
+    
+    var itsSelectAll = false
     
     weak var delegateProducts: SelectedCategoryProductsDelegate?
     weak var delegatePlus: PlusSelectedCategory?
@@ -122,7 +129,10 @@ class FilterCategoryViewController: UIViewController {
         addBtnHeight.constant = 0
         noCategoryLbl.isHidden = true
         
-        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        selectView.addGestureRecognizer(tap)
+        selectView.isUserInteractionEnabled = true
+        tap.numberOfTapsRequired = 1
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -137,6 +147,12 @@ class FilterCategoryViewController: UIViewController {
         addBtn.layer.cornerRadius = 10
         addBtn.layer.borderColor = UIColor(hexString: "#0A64F9").cgColor
         addBtn.layer.borderWidth = 1.0
+        
+        selectView.isHidden = true
+        selectLbl.isHidden = true
+        selectLbl.text = ""
+        selectBtm.constant = 0
+        selectTop.constant = 0
         
         if apiMode == "category" {
             collection.isHidden = true
@@ -157,6 +173,8 @@ class FilterCategoryViewController: UIViewController {
             selectText.text = "Select Store"
             searchBar.placeholder = "Search Store"
             noCategoryLbl.text = ""
+            selectBtm.constant = 10
+            selectTop.constant = 10
         }
         else {
             selectText.text = "Select Taxes"
@@ -509,6 +527,17 @@ class FilterCategoryViewController: UIViewController {
             }
         }
         
+        if storeArray.count > 0 {
+            selectView.isHidden = false
+            selectLbl.isHidden = false
+            selectLbl.text = "Select All"
+        }
+        else {
+            selectView.isHidden = true
+            selectLbl.isHidden = true
+            selectLbl.text = ""
+        }
+        
         its = storeArray
         subIts = storeArray
         
@@ -518,10 +547,73 @@ class FilterCategoryViewController: UIViewController {
                 
                 selectAddIts.append(select)
             }
+            
+            if storeArray.count == selectIts.count {
+                selectView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                selectView.layer.borderWidth = 1
+                selectView.layer.cornerRadius = 5.0
+                selectLbl.textColor = UIColor(named: "SelectCat")
+                itsSelectAll = true
+            }
+            else {
+                selectLbl.textColor = .black
+                selectView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+                selectView.layer.borderWidth = 1
+                selectView.layer.cornerRadius = 5.0
+                itsSelectAll = false
+            }
         }
-        
+        else {
+            selectLbl.textColor = .black
+            selectView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+            selectView.layer.borderWidth = 1
+            selectView.layer.cornerRadius = 5.0
+            itsSelectAll = false
+        }
         self.collection.isHidden = false
         self.loadingIndicator.isAnimating = false
+    }
+    
+    @objc func handleTap() {
+        
+        if selectView.layer.borderColor == UIColor(named: "SelectCat")?.cgColor {
+            selectLbl.textColor = .black
+            selectView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+            selectView.layer.cornerRadius = 5.0
+            selectView.layer.borderWidth = 1
+            itsSelectAll = false
+            
+            collection.isHidden = true
+            loadingIndicator.isHidden = true
+            
+            selectIts = []
+            tapBlue = []
+            selectAddIts = []
+           
+            collection.isHidden = false
+            loadingIndicator.isHidden = false
+            collection.reloadData()
+        }
+        else {
+            
+            selectView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+            selectView.layer.cornerRadius = 5.0
+            selectView.layer.borderWidth = 1
+            selectLbl.textColor = UIColor(named: "SelectCat")
+            itsSelectAll = true
+            
+            collection.isHidden = true
+            loadingIndicator.isHidden = true
+            
+            tapBlue = []
+            
+            for i in its {
+                tapBlue.append(i.merchant_id)
+            }
+            collection.isHidden = false
+            loadingIndicator.isHidden = false
+            collection.reloadData()
+        }
     }
     
     @IBAction func closeBtnClick(_ sender: UIButton) {
@@ -1099,7 +1191,12 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                 else if tapBlue.contains(where: {$0 == its[indexPath.row].merchant_id}) {
                     cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
                     cell.categoryName.textColor = UIColor(named: "SelectCat")
-                    selectAddIts.append(its[indexPath.row])
+                    if selectAddIts.contains(where: {$0.merchant_id == its[indexPath.row].merchant_id}) {
+                        
+                    }
+                    else {
+                        selectAddIts.append(its[indexPath.row])
+                    }
                 }
                 else {
                     cell.categoryName.textColor = .black
@@ -1157,6 +1254,10 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                 else if apiMode == "its" {
                     let id = searchIts[indexPath.row].merchant_id
                     removeIts(storeName: id)
+                    selectLbl.textColor = .black
+                    selectView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+                    selectView.layer.cornerRadius = 5.0
+                    selectView.layer.borderWidth = 1
                 }
                 else if apiMode == "tags" {
                     let title = searchBrandsTags[indexPath.row].title
@@ -1188,6 +1289,16 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     let name = searchIts[indexPath.row]
                     selectAddIts.append(name)
                     tapBlue.append(name.merchant_id)
+                    if its.count == selectAddIts.count  {
+                        itsSelectAll = true
+                        selectView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                        selectView.layer.cornerRadius = 5.0
+                        selectView.layer.borderWidth = 1
+                        selectLbl.textColor = UIColor(named: "SelectCat")
+                    }
+                    else {
+                        itsSelectAll = false
+                    }
                 }
                 else if apiMode == "tags" {
                     let name = brandsTags[indexPath.row]
@@ -1220,8 +1331,13 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     collection.reloadData()
                 }
                 else if apiMode == "its" {
+                    itsSelectAll = false
                     let id = its[indexPath.row].merchant_id
                     removeIts(storeName: id)
+                    selectLbl.textColor = .black
+                    selectView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+                    selectView.layer.cornerRadius = 5.0
+                    selectView.layer.borderWidth = 1
                 }
                 else if apiMode == "tags" {
                     let title = brandsTags[indexPath.row].title
@@ -1253,6 +1369,16 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     let name = its[indexPath.row]
                     selectAddIts.append(name)
                     tapBlue.append(name.merchant_id)
+                    if its.count == selectAddIts.count  {
+                        itsSelectAll = true
+                        selectView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                        selectView.layer.cornerRadius = 5.0
+                        selectView.layer.borderWidth = 1
+                        selectLbl.textColor = UIColor(named: "SelectCat")
+                    }
+                    else {
+                        itsSelectAll = false
+                    }
                 }
                 else if apiMode == "tags" {
                     let name = brandsTags[indexPath.row]
