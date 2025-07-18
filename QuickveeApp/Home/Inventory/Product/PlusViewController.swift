@@ -1368,6 +1368,13 @@ class PlusViewController: UIViewController {
             tags = collTag.joined(separator: ",")
         }
         
+        var smallits = [String]()
+        for cat in collIts {
+            smallits.append(cat.merchant_id)
+        }
+        
+        let itsfinal = smallits.joined(separator: ",")
+        
         guard collCat.count != 0 else{
             ToastClass.sharedToast.showToast(message: "Category not selected", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
             return
@@ -1485,7 +1492,7 @@ class PlusViewController: UIViewController {
             saveBtn.isEnabled = false
             
             ApiCalls.sharedCall.productAddCall(id: m_id, title: name, description: desc,
-                                               brand: brand, tags: tags,
+                                               brand: brand, tags: tags, stores: itsfinal,
                                                price: price,
                                                compare_price: c_compareprice,
                                                costperItem: costperitem, margin: margin,
@@ -1730,7 +1737,7 @@ class PlusViewController: UIViewController {
             saveBtn.isEnabled = false
             
             ApiCalls.sharedCall.productAddCall(id: m_id, title: name, description: desc,
-                                               brand: brand, tags: tags,
+                                               brand: brand, tags: tags, stores: itsfinal,
                                                price: "", compare_price: "",
                                                costperItem: "", margin: "", profit: "",
                                                ischargeTax: ischargeTax, trackqnty: "",

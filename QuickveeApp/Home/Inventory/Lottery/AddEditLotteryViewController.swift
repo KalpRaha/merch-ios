@@ -380,7 +380,7 @@ class AddEditLotteryViewController: UIViewController {
         loadIndicator.isAnimating = true
         
         ApiCalls.sharedCall.productAddCall(id: m_id, title: name, description: "",
-                                           brand: "", tags: "", price: price, compare_price: "0.00",
+                                           brand: "", tags: "", stores: "", price: price, compare_price: "0.00",
                                            costperItem: "0.00", margin: "0.00", profit: "0.00",
                                            ischargeTax: "0", trackqnty: track_qty, isstockcontinue: "0",
                                            quantity: quantity, collection: cat_id, isvarient: "0",

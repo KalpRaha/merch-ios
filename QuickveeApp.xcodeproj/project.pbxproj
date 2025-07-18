@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04B413D82E28EEE70002D0FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04B413D72E28EEE70002D0FE /* GoogleService-Info.plist */; };
 		50EFAD1F848666AD49C224C1 /* Pods_QuickveeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9518B79834423A2C13C0BE /* Pods_QuickveeApp.framework */; };
 		A52EAC272DF6E171007FB160 /* MissUPCCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52EAC262DF6E171007FB160 /* MissUPCCollectionViewCell.swift */; };
-		A5456A092DE6F376000BB2D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5456A082DE6F376000BB2D7 /* GoogleService-Info.plist */; };
 		A54F2B312BBAB208009B4D53 /* OrderInStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B302BBAB208009B4D53 /* OrderInStoreViewController.swift */; };
 		A54F2B332BBAB3CB009B4D53 /* OrderInStoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B322BBAB3CB009B4D53 /* OrderInStoreTableViewCell.swift */; };
 		A54F2B352BBABA1B009B4D53 /* InStoreDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B342BBABA1B009B4D53 /* InStoreDetailViewController.swift */; };
@@ -284,10 +284,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04B413D72E28EEE70002D0FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2A9518B79834423A2C13C0BE /* Pods_QuickveeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickveeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		810001DF67ED71A5175A0AB6 /* Pods-QuickveeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickveeApp.release.xcconfig"; path = "Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp.release.xcconfig"; sourceTree = "<group>"; };
 		A52EAC262DF6E171007FB160 /* MissUPCCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissUPCCollectionViewCell.swift; sourceTree = "<group>"; };
-		A5456A082DE6F376000BB2D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A54F2B302BBAB208009B4D53 /* OrderInStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInStoreViewController.swift; sourceTree = "<group>"; };
 		A54F2B322BBAB3CB009B4D53 /* OrderInStoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInStoreTableViewCell.swift; sourceTree = "<group>"; };
 		A54F2B342BBABA1B009B4D53 /* InStoreDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InStoreDetailViewController.swift; sourceTree = "<group>"; };
@@ -1289,7 +1289,7 @@
 		D2FFEF532AFE0066003400BD /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				A5456A082DE6F376000BB2D7 /* GoogleService-Info.plist */,
+				04B413D72E28EEE70002D0FE /* GoogleService-Info.plist */,
 				D2EE17C1297E46AF008D3B1B /* LoginTableViewController.swift */,
 				D2AE052E297E867100CA43DD /* RegisterTableViewController.swift */,
 				D26224E02C6327190008B757 /* StoreSwitchViewController.swift */,
@@ -1448,7 +1448,7 @@
 				D268EE5F2C8EA44500B45172 /* Manrope-Medium.ttf in Resources */,
 				D2B01B912BB3E2F900A40B93 /* RefundHeaderCell.xib in Resources */,
 				D217914D296EBC6700F77C2A /* Circular Std Bold.ttf in Resources */,
-				A5456A092DE6F376000BB2D7 /* GoogleService-Info.plist in Resources */,
+				04B413D82E28EEE70002D0FE /* GoogleService-Info.plist in Resources */,
 				D2F5AB812CE5C2270050B89C /* HeaderViewCell.xib in Resources */,
 				D2F5AB822CE5C2270050B89C /* NoOrderFoundCell.xib in Resources */,
 				D2F5AB832CE5C2270050B89C /* profileCell.xib in Resources */,
