@@ -110,7 +110,8 @@ class InventoryViewController: UIViewController {
         searchBtn.alpha = 1
         searchBar.alpha = 0
         scanUpcBtn.alpha = 1
-        syncbtn.alpha = 1
+        syncbtn.isHidden = true
+        syncbtn.alpha = 0
         backBtn.alpha = 1
         invent_lbl.alpha = 1
         searchBar.showsCancelButton = true
@@ -421,7 +422,7 @@ extension InventoryViewController : UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         
         searchBar.text = ""
-        syncbtn.alpha = 1
+        syncbtn.alpha = 0
         backBtn.alpha = 1
         invent_lbl.alpha = 1
         searchBtn.alpha = 1
@@ -858,7 +859,7 @@ extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDat
         }
         
         searchBar.text = ""
-        syncbtn.alpha = 1
+        syncbtn.alpha = 0
         backBtn.alpha = 1
         invent_lbl.alpha = 1
         searchBtn.alpha = 1
