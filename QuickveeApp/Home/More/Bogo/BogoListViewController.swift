@@ -101,6 +101,7 @@ class BogoListViewController: UIViewController {
         let response = list as! [[String: Any]]
         
         var small = [BogoModel]()
+        var smallDisable = [String]()
         var bogoItemsArr = [[String:Any]]()
         
         for items in response {
@@ -126,7 +127,19 @@ class BogoListViewController: UIViewController {
             let bogoItems = convertStringToDictionary(text: ids)
             bogoItemsArr.append(bogoItems)
             bogoDisableArr.append(disable)
-        }
+
+//            if checkDateTime(startDate: bogodeal.start_date, endDate: bogodeal.end_date, startTime: bogodeal.start_time, endTime: bogodeal.end_time){
+//                smallDisable.append("1")
+//                
+//            }
+//            else if disable == "0" {
+//                smallDisable.append("0")
+//            }
+//            else {
+//                smallDisable.append("1")
+//            }
+       }
+      //  bogoDisableArr = smallDisable
         
         if small.count == 0 {
             
@@ -470,7 +483,7 @@ class BogoListViewController: UIViewController {
             if startDateTime > currentDate {
                 return true
             }
-            else if startDateTime <= currentDate {
+            else if startDateTime < currentDate {
                 
                 if let endDateTime = df3.date(from: endDate) {
                     

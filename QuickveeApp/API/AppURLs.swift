@@ -67,7 +67,7 @@ struct AppURLs {
     static let UPDATE_STORE_OPTIONS = "\(base_url)Settingapi/update_store_option"
     static let UPDATE_STORE_SETUP = "\(base_url)Settingapi/update_store_setup"
     
-   // static let INVENTORY_CATEGORY_LIST = "https://qa-elasticsearch.quickvee.us/Categoryapi/category_list"
+    // static let INVENTORY_CATEGORY_LIST = "https://qa-elasticsearch.quickvee.us/Categoryapi/category_list"
     static let INVENTORY_CATEGORY_LIST = "\(base_url)Categoryapi/category_list"
     static let INVENTORY_ADD_CATEGORY = "\(base_url)Categoryapi/add_category"
     static let INVENTORY_EDIT_CATEGORY = "\(base_url)Categoryapi/"
@@ -75,7 +75,7 @@ struct AppURLs {
     static let INVENTORY_CATEGORY_BY_ID = "\(base_url)Categoryapi/get_categoryById"
     
    static let INVENTORY_PRODUCT_LIST = "\(base_url)Productapi/new_product_list"
-  //  static let INVENTORY_PRODUCT_LIST = "https://qa-elasticsearch.quickvee.us/Productapi/new_product_list"
+   //  static let INVENTORY_PRODUCT_LIST = "https://qa-elasticsearch.quickvee.us/Productapi/new_product_list"
     static let INVENTORY_PRODUCT_ADD = "\(base_url)Productapi/add_product"
     static let INVENTORY_PRODUCT_DUPLICATE = "\(base_url)Productapi/duplicate_product"
     static let INVENTORY_PRODUCT_EDIT = "\(base_url)Productapi/edit_produt"
@@ -168,6 +168,6 @@ struct AppURLs {
     static let ENABLE_BOGO = "\(base_url)Bogoapi/bogo_status"
     static let DELETE_BOGO = "\(base_url)Bogoapi/delete_bogo"
     
-    static let LOGURL = "https://www.quickvees.com/internet_log.php"
+    static let LOGURL = "https://www.quickvees.com/internet_log_ios.php"
 }
 
