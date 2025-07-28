@@ -53,6 +53,8 @@ class SetupVendorViewController: UIViewController {
         tableview.refreshControl = refresh
         refresh.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         
+        let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        merchant_id = id
     }
     
     

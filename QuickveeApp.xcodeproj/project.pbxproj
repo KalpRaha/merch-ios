@@ -18,6 +18,8 @@
 		D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */; };
 		D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */; };
 		D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC882AA9AB8800A216C3 /* VariantViewController.swift */; };
+		D20622852E37359F00E7F893 /* VendorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20622842E37359F00E7F893 /* VendorsViewController.swift */; };
+		D206228A2E37487600E7F893 /* VendorsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20622892E37487600E7F893 /* VendorsTableViewCell.swift */; };
 		D20784572D313127000E228A /* StockEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20784562D313127000E228A /* StockEmailViewController.swift */; };
 		D207CE8F2C3D1444006BD3B4 /* PlusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CE8E2C3D1444006BD3B4 /* PlusViewController.swift */; };
 		D207DFB62CABFC3400D18B89 /* InStoreTaxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207DFB52CABFC3400D18B89 /* InStoreTaxTableViewCell.swift */; };
@@ -159,6 +161,7 @@
 		D28604E02975516A0095BE1D /* ReportingTabsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28604DF2975516A0095BE1D /* ReportingTabsCollectionViewCell.swift */; };
 		D28621072AB065CC00AC90B4 /* AddProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28621062AB065CC00AC90B4 /* AddProductCollectionViewCell.swift */; };
 		D28765052CDE099E00840948 /* StockItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28765042CDE099E00840948 /* StockItemTableViewCell.swift */; };
+		D288CA6E2E37811F00783C92 /* AddVendorsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D288CA6D2E37811F00783C92 /* AddVendorsVC.swift */; };
 		D28D7B182BABDD860014A9BB /* CartTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28D7B172BABDD860014A9BB /* CartTableCell.swift */; };
 		D28F25F429767491002DE7A0 /* SalesOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F25F329767491002DE7A0 /* SalesOverviewViewController.swift */; };
 		D291BD6D297128D900DCD20D /* StoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291BD6C297128D900DCD20D /* StoreTableViewCell.swift */; };
@@ -297,6 +300,8 @@
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
 		D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeViewController.swift; sourceTree = "<group>"; };
 		D204CC882AA9AB8800A216C3 /* VariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantViewController.swift; sourceTree = "<group>"; };
+		D20622842E37359F00E7F893 /* VendorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorsViewController.swift; sourceTree = "<group>"; };
+		D20622892E37487600E7F893 /* VendorsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorsTableViewCell.swift; sourceTree = "<group>"; };
 		D20784562D313127000E228A /* StockEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockEmailViewController.swift; sourceTree = "<group>"; };
 		D207CE8E2C3D1444006BD3B4 /* PlusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusViewController.swift; sourceTree = "<group>"; };
 		D207DFB52CABFC3400D18B89 /* InStoreTaxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InStoreTaxTableViewCell.swift; sourceTree = "<group>"; };
@@ -439,6 +444,7 @@
 		D28604DF2975516A0095BE1D /* ReportingTabsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingTabsCollectionViewCell.swift; sourceTree = "<group>"; };
 		D28621062AB065CC00AC90B4 /* AddProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		D28765042CDE099E00840948 /* StockItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockItemTableViewCell.swift; sourceTree = "<group>"; };
+		D288CA6D2E37811F00783C92 /* AddVendorsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVendorsVC.swift; sourceTree = "<group>"; };
 		D28D7B172BABDD860014A9BB /* CartTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableCell.swift; sourceTree = "<group>"; };
 		D28F25F329767491002DE7A0 /* SalesOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesOverviewViewController.swift; sourceTree = "<group>"; };
 		D291BD6C297128D900DCD20D /* StoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTableViewCell.swift; sourceTree = "<group>"; };
@@ -620,6 +626,16 @@
 			path = Reporting;
 			sourceTree = "<group>";
 		};
+		D20622862E3747F300E7F893 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				D20622842E37359F00E7F893 /* VendorsViewController.swift */,
+				D20622892E37487600E7F893 /* VendorsTableViewCell.swift */,
+				D288CA6D2E37811F00783C92 /* AddVendorsVC.swift */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
 		D20EE8352AA5F28A00762E56 /* Inventory */ = {
 			isa = PBXGroup;
 			children = (
@@ -628,6 +644,7 @@
 				D2FFEF562AFE0186003400BD /* Category */,
 				D2FFEF582AFE01B2003400BD /* Product */,
 				D2FFEF5A2AFE0215003400BD /* Variants */,
+				D20622862E3747F300E7F893 /* Vendor */,
 				D2FFEF592AFE01C8003400BD /* Attributes */,
 				D23493B82CEF0F020046D33C /* Brands */,
 				D23493B92CEF0F2A0046D33C /* Tags */,
@@ -1553,8 +1570,10 @@
 				D24187B82C1804F200643069 /* SetupLoyaltyViewController.swift in Sources */,
 				D285ECEB2A2EF7D3009DFAE5 /* OrderOnlineTableViewCell.swift in Sources */,
 				D2EE03C52B3AB6CE001626DD /* PassCollectionViewCell.swift in Sources */,
+				D288CA6E2E37811F00783C92 /* AddVendorsVC.swift in Sources */,
 				D21711882C45171B00B4FE1F /* TagsViewController.swift in Sources */,
 				D265CF502DB76A7E00915F25 /* AddScheduleViewController.swift in Sources */,
+				D20622852E37359F00E7F893 /* VendorsViewController.swift in Sources */,
 				D2A2BF712B8D9516006796D5 /* ProgressView.swift in Sources */,
 				D27B61E42AC5790A00F753BD /* AddVariantAttributeViewController.swift in Sources */,
 				D2C0C1452C3510C000868B0F /* SetupInventoryViewController.swift in Sources */,
@@ -1653,6 +1672,7 @@
 				D2BBAD1A2C94017C00133338 /* GiftCardTableViewCell.swift in Sources */,
 				D2C1F3192C1B072700BA6388 /* QtyMixnMatchViewController.swift in Sources */,
 				D24692182A32DB46006D1904 /* TapticEngine.swift in Sources */,
+				D206228A2E37487600E7F893 /* VendorsTableViewCell.swift in Sources */,
 				D2D879862BBBB58700ECE573 /* InStoreRefundPayCell.swift in Sources */,
 				D291BD6D297128D900DCD20D /* StoreTableViewCell.swift in Sources */,
 				D2D879782BBBB06800ECE573 /* InStorePayTableCell.swift in Sources */,
