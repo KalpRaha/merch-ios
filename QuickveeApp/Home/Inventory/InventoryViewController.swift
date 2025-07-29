@@ -12,7 +12,7 @@ import BarcodeScanner
 class InventoryViewController: UIViewController {
     
     
-    var contents = ["Category", "Products", "Attributes", "Variants", "Brands", "Tags", "Stocktake", "Lottery"]
+    var contents = ["Category", "Products", "Attributes", "Variants", "PO", "Brands", "Tags", "Stocktake", "Lottery"]
     
     @IBOutlet weak var collection: UICollectionView!
     @IBOutlet weak var inventContentView: UIView!
@@ -58,6 +58,7 @@ class InventoryViewController: UIViewController {
      UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inventProduct"),
      UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inventAttribute"),
      UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inventVariant"),
+     UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inventPO"),
      UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inventBrand"),
      UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inventTags"),
      UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inventStock"),
@@ -76,8 +77,8 @@ class InventoryViewController: UIViewController {
             // nothing
         }
         else {
-            subControllers.remove(at: 7)
-            contents.remove(at: 7)
+            subControllers.remove(at: 8)
+            contents.remove(at: 8)
         }
         
         configure()
@@ -679,10 +680,9 @@ extension InventoryViewController : UIPageViewControllerDelegate {
         }
         
         else if currentIndex == 7 {
-            let indexPath = IndexPath(item: 7, section: 0)
+            let indexPath = IndexPath(item: 6, section: 0)
             collection.scrollToItem(at: indexPath, at: .left, animated: true)
         }
-        
         if currentIndex == 0 || currentIndex == 2 || currentIndex == 3 || currentIndex == 4 || currentIndex == 5 || currentIndex == 6 {
             
             let vc = subControllers[1] as! ProductsViewController
@@ -819,7 +819,7 @@ extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDat
         }
         
         else if currentIndex == 7 {
-            let indexPath = IndexPath(item: 7, section: 0)
+            let indexPath = IndexPath(item: 6, section: 0)
             collection.scrollToItem(at: indexPath, at: .left, animated: true)
         }
         

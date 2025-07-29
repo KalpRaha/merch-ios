@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04C6202B2E33750E001BF3C8 /* POViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6202A2E33750E001BF3C8 /* POViewController.swift */; };
+		04C6202D2E337636001BF3C8 /* POTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6202C2E337636001BF3C8 /* POTableViewCell.swift */; };
 		50EFAD1F848666AD49C224C1 /* Pods_QuickveeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9518B79834423A2C13C0BE /* Pods_QuickveeApp.framework */; };
 		A52EAC272DF6E171007FB160 /* MissUPCCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52EAC262DF6E171007FB160 /* MissUPCCollectionViewCell.swift */; };
 		A5456A092DE6F376000BB2D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5456A082DE6F376000BB2D7 /* GoogleService-Info.plist */; };
@@ -284,6 +286,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04C6202A2E33750E001BF3C8 /* POViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POViewController.swift; sourceTree = "<group>"; };
+		04C6202C2E337636001BF3C8 /* POTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POTableViewCell.swift; sourceTree = "<group>"; };
 		2A9518B79834423A2C13C0BE /* Pods_QuickveeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickveeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		810001DF67ED71A5175A0AB6 /* Pods-QuickveeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickveeApp.release.xcconfig"; path = "Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp.release.xcconfig"; sourceTree = "<group>"; };
 		A52EAC262DF6E171007FB160 /* MissUPCCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissUPCCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -578,6 +582,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04C620292E337412001BF3C8 /* PO */ = {
+			isa = PBXGroup;
+			children = (
+				04C6202C2E337636001BF3C8 /* POTableViewCell.swift */,
+				04C6202A2E33750E001BF3C8 /* POViewController.swift */,
+			);
+			path = PO;
+			sourceTree = "<group>";
+		};
 		7B724DED2AC7FDC683799719 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -623,16 +636,17 @@
 		D20EE8352AA5F28A00762E56 /* Inventory */ = {
 			isa = PBXGroup;
 			children = (
-				D20EE8382AA5F2F900762E56 /* InventoryCollectionViewCell.swift */,
-				D20EE8362AA5F2A800762E56 /* InventoryViewController.swift */,
-				D2FFEF562AFE0186003400BD /* Category */,
-				D2FFEF582AFE01B2003400BD /* Product */,
-				D2FFEF5A2AFE0215003400BD /* Variants */,
 				D2FFEF592AFE01C8003400BD /* Attributes */,
 				D23493B82CEF0F020046D33C /* Brands */,
-				D23493B92CEF0F2A0046D33C /* Tags */,
+				D2FFEF562AFE0186003400BD /* Category */,
+				D20EE8382AA5F2F900762E56 /* InventoryCollectionViewCell.swift */,
+				D20EE8362AA5F2A800762E56 /* InventoryViewController.swift */,
 				D23493BA2CEF0F630046D33C /* Lottery */,
+				04C620292E337412001BF3C8 /* PO */,
+				D2FFEF582AFE01B2003400BD /* Product */,
 				D252532F2CDB450900ADD70B /* Stocktake */,
+				D23493B92CEF0F2A0046D33C /* Tags */,
+				D2FFEF5A2AFE0215003400BD /* Variants */,
 			);
 			path = Inventory;
 			sourceTree = "<group>";
@@ -1469,9 +1483,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1663,6 +1681,7 @@
 				D23493D82CEF2F0B0046D33C /* OnlineOrderCell.swift in Sources */,
 				D23493D92CEF2F0B0046D33C /* FeesTableCell.swift in Sources */,
 				D23493DA2CEF2F0B0046D33C /* RefundProductCell.swift in Sources */,
+				04C6202D2E337636001BF3C8 /* POTableViewCell.swift in Sources */,
 				D23493DB2CEF2F0B0046D33C /* LoyaltyTableCell.swift in Sources */,
 				D2F5AB872CE5C2270050B89C /* profileCell.swift in Sources */,
 				D2F5AB882CE5C2270050B89C /* OrderCell.swift in Sources */,
@@ -1736,6 +1755,7 @@
 				D28604E02975516A0095BE1D /* ReportingTabsCollectionViewCell.swift in Sources */,
 				D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */,
 				D265CF542DB7B02000915F25 /* DayCollectionViewCell.swift in Sources */,
+				04C6202B2E33750E001BF3C8 /* POViewController.swift in Sources */,
 				D2DC4B962A3330F900E86A71 /* OnlineOrdersModel.swift in Sources */,
 				D2CE36A02976BFD60090A6D2 /* OrderTypesTableViewCell.swift in Sources */,
 				D2A37A422BFC941A005B59CE /* AddPurchaseQtyViewController.swift in Sources */,
