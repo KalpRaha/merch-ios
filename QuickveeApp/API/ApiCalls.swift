@@ -3411,6 +3411,121 @@ extension ApiCalls {
     
     
 }
+extension  ApiCalls {
+    
+    func getVendorList(merchant_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
+        
+        let url = AppURLs.VENDOR_PAYMENT_LIST
+        
+        let parameters: [String:Any] = [
+            "merchant_id": merchant_id,
+        ]
+        
+        print(parameters)
+        AF.request(url, method: .post, parameters: parameters).responseData { response in
+            
+            switch response.result {
+                
+            case .success(_):
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
+                    completion(true,json)
+                }
+                catch {
+                    let res = "ios_app\(response.response?.statusCode)"
+                    self.logErrorApi(merchant_id: merchant_id, response: res)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                let res = "ios_app\(response.response?.statusCode)"
+                self.logErrorApi(merchant_id: merchant_id, response: res)
+            }
+        }
+    }
+    
+    
+    func emailCkeckApi(merchant_id:String, email:String, token_id:String, login_type:String, completion:@escaping(Bool,[String:Any]) -> ()){
+        
+        let url = AppURLs.EMAIL_CHECK_VENDOR
+        
+        let parameters: [String:Any] = [
+            
+            "merchant_id": merchant_id,
+            "email": email,
+            "token_id": token_id,
+            "login_type": email,
+            
+        ]
+        
+        AF.request(url, method: .post,parameters: parameters).responseData { (response) in
+            
+            switch response.result {
+                
+            case .success(_):
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
+                    completion(true,json)
+                }
+                catch {
+                    let res = "ios_app\(response.response?.statusCode)"
+                    self.logErrorApi(merchant_id: merchant_id, response: res)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                let res = "ios_app\(response.response?.statusCode)"
+                self.logErrorApi(merchant_id: merchant_id, response: res)
+            }
+            
+            
+        }
+        
+    }
+    
+    func addVendorAPi(merchant_id:String, name:String, phone:String, email:String, created_at:String,updated_at:String,enabled:String,vendor_id:String,full_address:String,city:String,state:String,zip_code:String, completion:@escaping(Bool,[String:Any]) -> ()){
+        
+        let url = AppURLs.ADD_EDIT_VENDOR
+        
+        let parameters: [String:Any] = [
+            
+            "merchant_id": merchant_id,
+            "name": name,
+            "phone": phone,
+            "email": email,
+            "created_at": created_at,
+            "updated_at": updated_at,
+            "enabled": enabled,
+            "vendor_id": vendor_id,
+            "full_address": full_address,
+            "city": city,
+            "state": state,
+            "zip_code" :zip_code
+        ]
+        
+        AF.request(url, method: .post,parameters: parameters).responseData { (response) in
+            
+            switch response.result {
+                
+            case .success(_):
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
+                    completion(true,json)
+                }
+                catch {
+                    let res = "ios_app\(response.response?.statusCode)"
+                    self.logErrorApi(merchant_id: merchant_id, response: res)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                let res = "ios_app\(response.response?.statusCode)"
+                self.logErrorApi(merchant_id: merchant_id, response: res)
+            }
+            
+            
+        }
+        
+    }
+    
+}
 
 
 //extension  ApiCalls {

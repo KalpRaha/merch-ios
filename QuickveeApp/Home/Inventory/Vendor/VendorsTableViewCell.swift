@@ -10,11 +10,12 @@ import UIKit
 class VendorsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var bgView: UIView!
-    
     @IBOutlet weak var smallView: UIView!
-   
     @IBOutlet weak var vendorName: UILabel!
-    
+    @IBOutlet weak var payCount: UILabel!
+    @IBOutlet weak var paymentDateTime: UILabel!
+    @IBOutlet weak var payAmount: UILabel!
+   
     override func awakeFromNib() {
         super.awakeFromNib()
         
