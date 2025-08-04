@@ -13,6 +13,8 @@ class ApiCalls {
     
     static let sharedCall = ApiCalls()
     
+    var customSession: Session!
+    
     func categoryListCall(merchant_id: String, completion:@escaping(Bool,[String:Any]) -> ()){
         
         let url = AppURLs.INVENTORY_CATEGORY_LIST
@@ -314,7 +316,11 @@ extension ApiCalls {
         print(parameters)
         print(parameters)
         
-        AF.request(url, method: .post, parameters: parameters).responseData { response in
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 120
+        customSession = Session(configuration: configuration)
+
+        customSession.request(url, method: .post, parameters: parameters).responseData { response in
             
             switch response.result {
                 

@@ -160,7 +160,7 @@ class FilterCategoryViewController: UIViewController {
             setupCatApi()
             selectText.text = "Select Category"
             searchBar.placeholder = "Search Category"
-            noCategoryLbl.text = ""
+            noCategoryLbl.text = "No Category Found"
         }
         else if apiMode == "brands" || apiMode == "tags" {
             
@@ -172,14 +172,14 @@ class FilterCategoryViewController: UIViewController {
             setupStoreApi()
             selectText.text = "Select Store"
             searchBar.placeholder = "Search Store"
-            noCategoryLbl.text = ""
+            noCategoryLbl.text = "No Store Found"
             selectBtm.constant = 10
             selectTop.constant = 10
         }
         else {
             selectText.text = "Select Taxes"
             searchBar.placeholder = "Search Taxes"
-            noCategoryLbl.text = ""
+            noCategoryLbl.text = "No Tax Found"
             
             if selectTaxes.count > 0 {
                 
@@ -607,8 +607,15 @@ class FilterCategoryViewController: UIViewController {
             
             tapBlue = []
             
-            for i in its {
-                tapBlue.append(i.merchant_id)
+            if searching {
+                for i in searchIts {
+                    tapBlue.append(i.merchant_id)
+                }
+            }
+            else {
+                for i in its {
+                    tapBlue.append(i.merchant_id)
+                }
             }
             collection.isHidden = false
             loadingIndicator.isHidden = false
@@ -976,6 +983,71 @@ extension FilterCategoryViewController: UISearchBarDelegate {
                 collection.isHidden = false
                 addView.isHidden = true
                 addBtn.setTitle("+ Add New \(apiMode.dropLast())", for: .normal)
+                noCategoryLbl.isHidden = true
+            }
+        }
+        else {
+            if searching {
+                
+                if apiMode == "category" {
+                    if searchCategory.count == 0 {
+                        collection.isHidden = true
+                        addView.isHidden = false
+                        noCategoryLbl.isHidden = false
+                    }
+                    else {
+                        collection.isHidden = false
+                        addView.isHidden = true
+                        noCategoryLbl.isHidden = true
+                    }
+                }
+                else if apiMode == "its" {
+                    if searchIts.count == 0 {
+                        collection.isHidden = true
+                        addView.isHidden = false
+                        noCategoryLbl.isHidden = false
+                        
+                        selectView.isHidden = true
+                        selectLbl.isHidden = true
+                        selectLbl.text = ""
+                        selectBtm.constant = 0
+                        selectTop.constant = 0
+                    }
+                    else {
+                        collection.isHidden = false
+                        addView.isHidden = true
+                        noCategoryLbl.isHidden = true
+                        
+                        selectView.isHidden = false
+                        selectLbl.isHidden = false
+                        selectLbl.text = "Select All"
+                        selectBtm.constant = 10
+                        selectTop.constant = 10
+                    }
+                }
+                else {
+                    if searchTaxes.count == 0 {
+                        collection.isHidden = true
+                        addView.isHidden = false
+                        noCategoryLbl.isHidden = false
+                    }
+                    else {
+                        collection.isHidden = false
+                        addView.isHidden = true
+                        noCategoryLbl.isHidden = true
+                    }
+                }
+            }
+            else {
+                if apiMode == "its" {
+                    selectView.isHidden = false
+                    selectLbl.isHidden = false
+                    selectLbl.text = "Select All"
+                    selectBtm.constant = 10
+                    selectTop.constant = 10
+                }
+                collection.isHidden = false
+                addView.isHidden = true
                 noCategoryLbl.isHidden = true
             }
         }

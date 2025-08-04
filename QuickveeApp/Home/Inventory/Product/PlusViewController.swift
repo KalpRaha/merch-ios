@@ -1524,8 +1524,8 @@ class PlusViewController: UIViewController {
                 
                 if isSuccess {
                     
-                    if let list = responseData["message"] as? String {
-                        if list == "Success" {
+                    if let list = responseData["success_message"] as? String {
+                        if list.contains("Successfully") {
                             ToastClass.sharedToast.showToast(message: "Successfully created product", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                             self.loadIndicator.isAnimating = false
                             self.navigationController?.popViewController(animated: true)
