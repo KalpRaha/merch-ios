@@ -3412,6 +3412,40 @@ extension ApiCalls {
     
 }
 
+extension ApiCalls {
+    
+    func getPOList(merchant_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
+        
+        let url = AppURLs.PO_LIST
+
+        let parameters: [String:Any] = [
+            "merchant_id": merchant_id
+        ]
+        print(parameters)
+        
+        AF.request(url,method: .post,parameters: parameters).responseData {response in
+            
+            switch response.result {
+                
+            case .success(_):
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options:[]) as! [String:Any]
+                    print(json)
+                    completion(true,json)
+                }
+                catch {
+                    let res = "ios_app\(response.response?.statusCode)"
+                    self.logErrorApi(merchant_id: merchant_id, response: res)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                let res = "ios_app\(response.response?.statusCode)"
+                self.logErrorApi(merchant_id: merchant_id, response: res)
+            }
+        }
+    }
+}
+
 
 //extension  ApiCalls {
 //

@@ -792,6 +792,12 @@ struct VariantBogoModel {
     var isSelect: Bool
 }
 
+struct VariantPOModel {
+   
+    var po: InventoryVariant
+    var isSelect: Bool
+}
+
 
 struct InventoryVariantId {
     

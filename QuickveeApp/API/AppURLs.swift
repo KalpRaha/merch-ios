@@ -12,7 +12,7 @@ struct AppURLs {
     static let base_url = "https://api-ci.quickvee.us/"
     
     //test
-   // static let base_url = "https://qa-api-ci.quickvee.us/"
+//    static let base_url = "https://qa-api-ci.quickvee.us/"
 
     
     static let ORDERS_LIST = "\(base_url)orders/order_list"
@@ -167,6 +167,8 @@ struct AppURLs {
     static let ADD_BOGO = "\(base_url)Bogoapi/add_bogo"
     static let ENABLE_BOGO = "\(base_url)Bogoapi/bogo_status"
     static let DELETE_BOGO = "\(base_url)Bogoapi/delete_bogo"
+    
+    static let PO_LIST = "\(base_url)Purchase_orders_api/po_list"
     
     static let LOGURL = "https://www.quickvees.com/internet_log.php"
 }
