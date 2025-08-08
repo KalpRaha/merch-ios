@@ -179,9 +179,7 @@ class InventoryViewController: UIViewController {
             self.collection.reloadData()
         })
     }
-    
-    
-    
+ 
     @IBAction func backButtonClick(_ sender: UIButton) {
         
         let viewcontrollerArray = navigationController?.viewControllers
@@ -374,7 +372,7 @@ extension InventoryViewController : UISearchBarDelegate {
             }
             else if currentVC == 4 {
                 let vc = subControllers[4] as! VendorsViewController
-//                vc.performSearch(searchText: searchText)
+               vc.performSearch(searchText: searchText)
             }
             else if currentVC == 5 {
                 let vc = subControllers[5] as! BrandsTagsViewController
@@ -417,7 +415,7 @@ extension InventoryViewController : UISearchBarDelegate {
             }
             else if currentVC == 4 {
                 let vc = subControllers[4] as! VendorsViewController
-               // vc.performSearch(searchText: searchText)
+                vc.performSearch(searchText: searchText)
             }
             else if currentVC == 5 {
                 let vc = subControllers[5] as! BrandsTagsViewController
@@ -473,8 +471,8 @@ extension InventoryViewController : UISearchBarDelegate {
             }
             else if currentVC == 4 {
                 let vc = subControllers[4] as! VendorsViewController
-               // vc.searching = false
-               // vc.performSearch(searchText: "")
+                vc.searching = false
+                vc.performSearch(searchText: "")
             }
             else if currentVC == 5 {
                 let vc = subControllers[5] as! BrandsTagsViewController
@@ -525,8 +523,8 @@ extension InventoryViewController : UISearchBarDelegate {
             }
             else if currentVC == 4 {
                 let vc = subControllers[4] as! VendorsViewController
-               // vc.searching = false
-               // vc.performSearch(searchText: "")
+                vc.searching = false
+                vc.performSearch(searchText: "")
             }
             else if currentVC == 5 {
                 let vc = subControllers[5] as! BrandsTagsViewController

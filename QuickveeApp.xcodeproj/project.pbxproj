@@ -634,6 +634,7 @@
 			isa = PBXGroup;
 			children = (
 				D20622842E37359F00E7F893 /* VendorsViewController.swift */,
+				D2F9FDAF29D5A42900705491 /* VendorFilterViewController.swift */,
 				D20622892E37487600E7F893 /* VendorsTableViewCell.swift */,
 				D288CA6D2E37811F00783C92 /* AddVendorsVC.swift */,
 				D20EB2062E38AADC00C8C97B /* VendorDetailVC.swift */,
@@ -895,7 +896,6 @@
 			children = (
 				D220880E29D16EE2006393C2 /* AddVendorViewController.swift */,
 				D220880829D140AA006393C2 /* SetupVendorViewController.swift */,
-				D2F9FDAF29D5A42900705491 /* VendorFilterViewController.swift */,
 				D220880A29D14133006393C2 /* SetupVendorTableViewCell.swift */,
 				D220881029D192F6006393C2 /* ShowVendorViewController.swift */,
 				D220881229D1991A006393C2 /* ShowVendorTableViewCell.swift */,

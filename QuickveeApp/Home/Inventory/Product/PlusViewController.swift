@@ -256,6 +256,7 @@ class PlusViewController: UIViewController {
         
         setUI()
         
+        print(p_id)
         saveBtn.isEnabled = true
         upperView.isHidden = true
         

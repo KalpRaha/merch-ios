@@ -6,6 +6,8 @@
 //
 
 import UIKit
+
+import DropDown
 import MaterialComponents
 
 class AddVendorsVC: UIViewController {
@@ -16,24 +18,78 @@ class AddVendorsVC: UIViewController {
     @IBOutlet weak var vendorName: UITextField!
     
     
+    
+    
+    @IBOutlet weak var state: MDCOutlinedTextField!
     @IBOutlet weak var phone: UITextField!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var address: UITextField!
     @IBOutlet weak var city: UITextField!
     @IBOutlet weak var zip: UITextField!
-    @IBOutlet weak var State: UITextField!
+   
    
     @IBOutlet weak var cancelBtn: UIButton!
     
     
+   
+    @IBOutlet weak var stateDropDownBtn: UIButton!
     @IBOutlet weak var addVenderBtn: UIButton!
    
+    
+    var vendorArray = [VendorModel]()
+    var activeTextField = UITextField()
+    var vendorObj: VendorModel?
+    var mode = ""
+    
+    let menu = DropDown()
+    
+    let states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
+                  "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+                  "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+                  "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+                  "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
+    
+    
+    let loadingIndicator: ProgressView = {
+        let progress = ProgressView(colors: [.white], lineWidth: 3)
+        progress.translatesAutoresizingMaskIntoConstraints = false
+        return progress
+    }()
+    
+   // let border = UIColor(red: 188.0/255.0, green: 188.0/255.0, blue: 188.0/255.0, alpha: 1.0)
+    
+    let border = UIColor(hexString: "#E4E8EF")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         topView.addBottomShadow()
         setUI()
+        setupMenu()
+        vendorName.addTarget(self, action: #selector(updateText), for: .editingChanged)
+        phone.addTarget(self, action: #selector(updateText), for: .editingChanged)
+       
+        createCustomTextField(textField: state)
+        
+        vendorName.delegate = self
+        phone.delegate = self
+        state.delegate = self
+        phone.keyboardType = .numberPad
+        email.keyboardType = .emailAddress
+
+       
+        
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        imageView.image = UIImage(named: "down")
+        state.trailingView = imageView
+        state.trailingViewMode = .always
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    
+        setMode()
+    }
     
     
     
@@ -48,31 +104,62 @@ class AddVendorsVC: UIViewController {
     }
     
     func setMode(){
-        
-        
-    }
-    
-    func emailCheckAPiCall() {
-        
-        
-        let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
-        
-        ApiCalls.sharedCall.emailCkeckApi(merchant_id: id, email: "", token_id: "", login_type: "merchant") { isSuccess ,responseData in
+        if mode == "add"{
             
-            if isSuccess {
-                
+        }
+        else {
+            
+            vendorName.text = vendorObj?.name
+            phone.text = vendorObj?.phone
+            email.text = vendorObj?.email
+            
+            if vendorObj?.full_address == "" || vendorObj?.full_address ==  "null" {
                 
             }
             else {
+                address.text = vendorObj?.full_address
+            }
+
+            if vendorObj?.city == "" || vendorObj?.city ==  "null" {
                 
             }
+            else {
+                city.text = vendorObj?.city
+            }
             
+            if vendorObj?.zip_code == "" || vendorObj?.zip_code ==  "null" {
+                
+            }
+            else {
+                zip.text = vendorObj?.zip_code
+            }
+           
+            if vendorObj?.state == "" || vendorObj?.state ==  "null" {
+                
+            }
+            else{
+                state.text = vendorObj?.state
+            }
+ 
+        }
+    }
+    
+    
+    func setupMenu() {
+        
+        menu.dataSource = states
+        menu.backgroundColor = .white
+        menu.anchorView = stateDropDownBtn
+        menu.separatorColor = .black
+        menu.layer.cornerRadius = 10.0
+        menu.selectionAction = { index, title in
+            self.state.text = title
+            self.menu.deselectRow(at: index)
         }
         
     }
     
-    
-    func addVendorApiCall() {
+    func emailCheckAPiCall() {
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         
@@ -82,24 +169,185 @@ class AddVendorsVC: UIViewController {
             return
         }
         
-        guard let name = phone.text, name != "" else {
+        guard let phonenNumber = phone.text, phonenNumber != "",phonenNumber.count == 10  else {
             phone.isErrorView(numberOfShakes: 3, revert: true)
             ToastClass.sharedToast.showToast(message: "Enter Phone Number ", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
             return
         }
         
-        guard let name = email.text, name != "" else {
+        guard let emailId = email.text, emailId != "" else {
             email.isErrorView(numberOfShakes: 3, revert: true)
             ToastClass.sharedToast.showToast(message: "Enter valid Email address ", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
             return
         }
         
-      
+        loadingIndicator.isAnimating = true
         
+        ApiCalls.sharedCall.emailCheckApi(merchant_id: id, email: emailId, token_id: "", login_type: "merchant") { isSuccess ,responseData in
+            
+            if isSuccess {
+                print(responseData)
+                guard let list = responseData["msg"] else {
+                    return
+                }
+                self.getEmailString(response: list)
+            }
+            else {
+                print("Api Error")
+            }
+            
+        }
         
     }
     
+       
+        func getEmailString(response: Any) {
+           
+            let responsevalues = response as! String
+           
+            print(responsevalues)
+            if responsevalues == "New email." {
+               
+                    addVendorApiCall()
+               
+            }
+            else {
+                ToastClass.sharedToast.showToast(message: responsevalues, font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                DispatchQueue.main.async {
+                    self.loadingIndicator.isAnimating = false
+                }
+            }
+        }
+    
+    
+    func addVendorApiCall() {
+        
+        
+        let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        
+        guard let name = vendorName.text, name != "" else {
+            vendorName.isErrorView(numberOfShakes: 3, revert: true)
+            ToastClass.sharedToast.showToast(message: "Enter Vendor Name", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+            return
+        }
+        
+        guard let phonenNumber = phone.text, phonenNumber != "",phonenNumber.count == 10  else {
+            phone.isErrorView(numberOfShakes: 3, revert: true)
+            ToastClass.sharedToast.showToast(message: "Enter Phone Number ", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+            return
+        }
+        
+        guard let emailId = email.text, emailId != "" else {
+            email.isErrorView(numberOfShakes: 3, revert: true)
+            ToastClass.sharedToast.showToast(message: "Enter valid Email address ", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+            return
+        }
+        
+        let address = address.text ?? ""
+        let city = city.text ?? ""
+        let state = state.text ?? ""
+        let zipCode = zip.text ?? ""
+       
+        let now = Date()
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let currentDate = formatter.string(from: now)
+        
+        var vendorid = ""
+        if mode == "edit" {
+             vendorid = self.vendorObj?.vendor_id ?? ""
+        }
+        else {
+            vendorid = ""
+        }
+       
+        loadingIndicator.isAnimating = true
+        
+        ApiCalls.sharedCall.addVendorAPi(merchant_id: id, name:name , phone: phonenNumber, email: emailId, created_at: currentDate, updated_at: "", enabled: "1", vendor_id: vendorid, full_address: address, city: city, state: state, zip_code: zipCode) { isSuccess, responseData in
+            
+            
+            if isSuccess {
+                
+                let list = responseData["message"] as! String
+                ToastClass.sharedToast.showToast(message: list, font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                self.loadingIndicator.isAnimating = false
+                print(list)
+                if list == "Vendor Created Successfully." || list == "Vendor Updated Successfully." {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+            else {
+                print("Api Error")
+            }
+        }
+    }
+    
  
+//    func editVendorApiCall() {
+//        
+//        
+//        let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+//        
+//        guard let name = vendorName.text, name != "" else {
+//            vendorName.isErrorView(numberOfShakes: 3, revert: true)
+//            ToastClass.sharedToast.showToast(message: "Enter Vendor Name", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//            return
+//        }
+//        
+//        guard let phonenNumber = phone.text, phonenNumber != "",phonenNumber.count == 10  else {
+//            phone.isErrorView(numberOfShakes: 3, revert: true)
+//            ToastClass.sharedToast.showToast(message: "Enter Phone Number ", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//            return
+//        }
+//        
+//        guard let emailId = email.text, emailId != "" else {
+//            email.isErrorView(numberOfShakes: 3, revert: true)
+//            ToastClass.sharedToast.showToast(message: "Enter valid Email address ", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//            return
+//        }
+//        
+//        let address = address.text ?? ""
+//        let city = city.text ?? ""
+//        let state = state.text ?? ""
+//        let zipCode = zip.text ?? ""
+//       
+//        let now = Date()
+//
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//        let currentDate = formatter.string(from: now)
+//        
+//        let vendor_id = vendorObj?.vendor_id ?? ""
+//        
+//       
+//        loadingIndicator.isAnimating = true
+//        
+//        ApiCalls.sharedCall.addVendorAPi(merchant_id: id, name:name , phone: phonenNumber, email: emailId, created_at: currentDate, updated_at: "", enabled: "1", vendor_id: vendor_id, full_address: address, city: city, state: state, zip_code: zipCode) { isSuccess, responseData in
+//            
+//            
+//            if isSuccess {
+//                
+//                let list = responseData["message"] as! String
+//                ToastClass.sharedToast.showToast(message: list, font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//                self.loadingIndicator.isAnimating = false
+//                print(list)
+//                if list == "Vendor Created Successfully." {
+//                    self.navigationController?.popViewController(animated: true)
+//                }
+//            }
+//            else {
+//                print("Api Error")
+//            }
+//        }
+//    }
+    
+    
+    @IBAction func selectStateBtnClick(_ sender: UIButton) {
+        view.endEditing(true)
+        menu.show()
+    }
+    
     @IBAction func backBtnClick(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
@@ -113,6 +361,71 @@ class AddVendorsVC: UIViewController {
     
     
     @IBAction func addVendorBtnClick(_ sender: Any) {
-        addVendorApiCall()
+     
+        emailCheckAPiCall()
+      
+    }
+    
+   
+   
+    func createCustomTextField(textField: MDCOutlinedTextField) {
+        
+        textField.font = UIFont(name: "Manrope-SemiBold", size: 17.0)
+        textField.setOutlineColor(border, for: .normal)
+        textField.setOutlineColor(border, for: .editing)
+        textField.label.text = nil
+        textField.placeholder = "Select State"
+        
+        textField.setTextColor(.black, for: .normal)
+        textField.setTextColor(.black, for: .editing)
+    }
+    
+    private func setupUI() {
+        
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
+        
+        addVenderBtn.addSubview(loadingIndicator)
+        
+        NSLayoutConstraint.activate([
+            loadingIndicator.centerXAnchor
+                .constraint(equalTo: addVenderBtn.centerXAnchor, constant: 40),
+            loadingIndicator.centerYAnchor
+                .constraint(equalTo: addVenderBtn.centerYAnchor),
+            loadingIndicator.widthAnchor
+                .constraint(equalToConstant: 15),
+            loadingIndicator.heightAnchor
+                .constraint(equalTo: self.loadingIndicator.widthAnchor)
+        ])
+        
+    }
+}
+
+extension AddVendorsVC: UITextFieldDelegate {
+    
+    
+    @objc func updateText(textField: UITextField) {
+        var updatetext = textField.text ?? ""
+        
+        if textField == vendorName {
+           
+            if updatetext.count > 50 {
+                updatetext = String(updatetext.prefix(50))
+            }
+            
+           
+            if let last = updatetext.last, [",", "~", "/", "-", "\\"].contains(last) {
+                updatetext = String(updatetext.dropLast())
+            }
+        } else if textField == phone {
+          
+            if updatetext.count > 10 {
+                updatetext = String(updatetext.prefix(10))
+            }
+        }
+        
+       
+        textField.text = updatetext
     }
 }

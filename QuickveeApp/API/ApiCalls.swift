@@ -3444,7 +3444,7 @@ extension  ApiCalls {
     }
     
     
-    func emailCkeckApi(merchant_id:String, email:String, token_id:String, login_type:String, completion:@escaping(Bool,[String:Any]) -> ()){
+    func emailCheckApi(merchant_id:String, email:String, token_id:String, login_type:String, completion:@escaping(Bool,[String:Any]) -> ()){
         
         let url = AppURLs.EMAIL_CHECK_VENDOR
         
@@ -3501,6 +3501,9 @@ extension  ApiCalls {
             "zip_code" :zip_code
         ]
         
+        print(parameters)
+        print(parameters)
+        
         AF.request(url, method: .post,parameters: parameters).responseData { (response) in
             
             switch response.result {
@@ -3523,6 +3526,42 @@ extension  ApiCalls {
             
         }
         
+    }
+    
+    
+    func VendorPayApi(merchant_id: String, vendor_id: String,start_date_time: String, end_date_time: String, completion: @escaping (Bool, [String:Any])->Void){
+        
+        let url = AppURLs.VENDOR_PAYMENT_DETAILS
+        
+        let parameters: [String: Any] = [
+            
+            "merchant_id": merchant_id,
+            "vendor_id": vendor_id,
+            "start_date_time" : start_date_time,
+            "end_date_time" : end_date_time
+        ]
+        
+        print(parameters)
+        
+        AF.request(url,method: .post,parameters: parameters).responseData {(response) in
+            
+            switch response.result {
+                
+            case .success(_):
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
+                    completion(true,json)
+                }
+                catch {
+                    let res = "ios_app\(response.response?.statusCode)"
+                    self.logErrorApi(merchant_id: merchant_id, response: res)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                let res = "ios_app\(response.response?.statusCode)"
+                self.logErrorApi(merchant_id: merchant_id, response: res)
+            }
+        }
     }
     
 }

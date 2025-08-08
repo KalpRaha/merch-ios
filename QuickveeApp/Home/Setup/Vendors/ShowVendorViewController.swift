@@ -196,7 +196,7 @@ class ShowVendorViewController: UIViewController {
     
     @IBAction func filterBtnClick(_ sender: UIButton) {
         
-        performSegue(withIdentifier: "toVendorFilter", sender: nil)
+       // performSegue(withIdentifier: "toVendorFilter", sender: nil)
     }
     
     @IBAction func editVendorClick(_ sender: UIButton) {

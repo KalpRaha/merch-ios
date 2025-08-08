@@ -252,24 +252,7 @@ class CustomerAddEditViewController: UIViewController,  UITextFieldDelegate {
                 dobField.text = ""
             }
             
-            
-//            if let dob = custObj?.dob, dob != "<null>" && dob != "0000-00-00 00:00:00" {
-//                let inputFormatter = DateFormatter()
-//                inputFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Input format of `dob`
-//                
-//                let outputFormatter = DateFormatter()
-//                outputFormatter.dateFormat = "MM/dd/yyyy" // Desired output format
-//
-//                if let date = inputFormatter.date(from: dob) {
-//                    let formattedDOB = outputFormatter.string(from: date)
-//                    bdate = formattedDOB
-//                    isbirth = true
-//                } else {
-//                    print("Invalid")
-//                }
-//            } else {
-//                print("nil")
-//            }
+
             
             let state = custObj?.state ?? ""
             if state != ""  && state != "<null>" {
@@ -410,7 +393,9 @@ class CustomerAddEditViewController: UIViewController,  UITextFieldDelegate {
                 if list == "Customer Email ID is already exist." {
                 }
                 else {
-                    self.navigationController?.popViewController(animated: true)
+                    DispatchQueue.main.async {
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }
             }
             else {

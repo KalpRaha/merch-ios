@@ -19,7 +19,13 @@ class VendorsViewController: UIViewController {
     var vendorsArray = [VendorModel]()
     var subVendorArray = [VendorModel]()
     var vendorObj: VendorModel?
+    var searchVendorArray = [VendorModel]()
     
+    
+    
+    var vendorID = ""
+    var mode = ""
+    var searching = false
     
     let loadIndicator: ProgressView = {
         let progress = ProgressView(colors: [.systemBlue], lineWidth: 5)
@@ -40,18 +46,25 @@ class VendorsViewController: UIViewController {
   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        subVendorArray = []
+        searching = false
         VendorApiCall()
     }
     
     
     func VendorApiCall() {
        
-        let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
-
-        tableView.isHidden = true
+        
         loadIndicator.isAnimating = true
+        tableView.isHidden = true
         noVendorLbl.isHidden = true
         noVendorImage.isHidden = true
+        noVendorLbl.text = "No Vendor Found"
+        
+        
+        let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+
+     
         
         
         ApiCalls.sharedCall.getVendorList(merchant_id: id){ isSuccess, responseData in
@@ -100,9 +113,17 @@ class VendorsViewController: UIViewController {
                                      enabled: "\(res["enabled"] ?? "")")
             
            
-            vendorObj = vendor
-            small.append(vendor)
+            //vendorObj = vendor
+            if vendor.vendor_id == "" {
+                
+            }
+            else {
+                small.append(vendor)
+                
+            }
+            
         }
+     
         
         if small.count == 0 {
             tableView.isHidden = true
@@ -111,19 +132,74 @@ class VendorsViewController: UIViewController {
             tableView.isHidden = false
         }
         vendorsArray = small
+        subVendorArray = small
         tableView.reloadData()
         
     }
-     
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "toAddVendor" {
             
+            let vc = segue.destination as! AddVendorsVC
+            
+            if mode == "add" {
+                vc.mode = "add"
+            }
+            else {
+                vc.mode = "edit"
+                vc.vendorObj = vendorObj
+            }
+        }
+        else if segue.identifier == "toVendordetails" {
+            let vc = segue.destination as! VendorDetailVC
+            vc.vendor_id = vendorID
             
         }
     }
     
+    
+    func performSearch(searchText: String) {
+        
+        if searchText == "" {
+            searching = false
+            tableView.isHidden = false
+            noVendorLbl.isHidden = true
+            noVendorImage.isHidden = true
+        }
+        
+        else {
+            searching = true
+            searchVendorArray = subVendorArray.filter { $0.name.lowercased().prefix(searchText.count) == searchText.lowercased()}
+            
+            
+            if searchVendorArray.count == 0 {
+                
+                tableView.isHidden = true
+                noVendorLbl.isHidden = false
+                noVendorImage.isHidden = false
+            }
+            else {
+                tableView.isHidden = false
+                noVendorLbl.isHidden = true
+                noVendorImage.isHidden = true
+            }
+        }
+        tableView.reloadData()
+    }
+    
+    @objc func editBtnClick(_ sender: UITapGestureRecognizer) {
+        guard let view = sender.view else { return }
+           let index = view.tag
+       
+        
+        mode = "edit"
+        vendorObj = vendorsArray[index]
+        performSegue(withIdentifier: "toAddVendor", sender: nil)
+    }
+    
     @IBAction func addBtnClick(_ sender: UIButton) {
+        mode = "add"
         performSegue(withIdentifier: "toAddVendor", sender: nil)
     }
     
@@ -154,51 +230,112 @@ class VendorsViewController: UIViewController {
 
 extension VendorsViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return vendorsArray.count
+       
+        if searching {
+            return searchVendorArray.count
+        }
+        else {
+            return vendorsArray.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "VendorsTableViewCell") as! VendorsTableViewCell
-        
-        
-        
-        cell.bgView.layer.cornerRadius = 5
-        cell.bgView.clipsToBounds = true
-        cell.bgView.layer.borderWidth = 1
-        cell.bgView.layer.borderColor = UIColor(hexString: "#E5E5E5").cgColor
-        
-        cell.smallView.layer.borderWidth = 1
-        cell.smallView.layer.borderColor = UIColor(hexString: "#DFE9FF").cgColor
-        cell.smallView.layer.cornerRadius = 5
-        
-        print(vendorsArray[indexPath.row].name)
-        cell.vendorName.text = vendorsArray[indexPath.row].name
-        cell.payCount.text = "#\(vendorsArray[indexPath.row].pay_count)"
-      
-        
-        if vendorsArray[indexPath.row].recent_payment_datetime == ""  {
-            cell.paymentDateTime.text = "-"
-        }
-        else {
-            cell.paymentDateTime.text = vendorsArray[indexPath.row].recent_payment_datetime
-        }
-        
-        if vendorsArray[indexPath.row].recent_pay_amount == ""  {
-            cell.payAmount.text = "-"
-        }
-        else {
-            cell.payAmount.text = vendorsArray[indexPath.row].recent_pay_amount
-        }
-            
        
-        
-        
-        return cell
+        if searching {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "VendorsTableViewCell") as! VendorsTableViewCell
+            
+            
+            
+            cell.bgView.layer.cornerRadius = 5
+            cell.bgView.clipsToBounds = true
+            cell.bgView.layer.borderWidth = 1
+            cell.bgView.layer.borderColor = UIColor(hexString: "#E5E5E5").cgColor
+            
+            cell.smallView.layer.borderWidth = 1
+            cell.smallView.layer.borderColor = UIColor(hexString: "#DFE9FF").cgColor
+            cell.smallView.layer.cornerRadius = 5
+            
+            cell.smallView.tag = indexPath.row
+            let tap4 = UITapGestureRecognizer(target: self, action: #selector(editBtnClick))
+            tap4.numberOfTapsRequired = 1
+            cell.smallView.addGestureRecognizer(tap4)
+            cell.smallView.isUserInteractionEnabled = true
+         
+            cell.vendorName.text = searchVendorArray[indexPath.row].name
+                cell.payCount.text = "#\(searchVendorArray[indexPath.row].pay_count)"
+                
+                if searchVendorArray[indexPath.row].recent_payment_datetime == ""  {
+                    cell.paymentDateTime.text = "-"
+                }
+                else {
+                    cell.paymentDateTime.text = searchVendorArray[indexPath.row].recent_payment_datetime
+                }
+                
+                if searchVendorArray[indexPath.row].recent_pay_amount == ""  {
+                    cell.payAmount.text = "-"
+                }
+                else {
+                    cell.payAmount.text = "$\(searchVendorArray[indexPath.row].total_pay)"
+                }
+            return cell
+        }
+        else {
+    
+            let cell = tableView.dequeueReusableCell(withIdentifier: "VendorsTableViewCell") as! VendorsTableViewCell
+            
+            cell.bgView.layer.cornerRadius = 5
+            cell.bgView.clipsToBounds = true
+            cell.bgView.layer.borderWidth = 1
+            cell.bgView.layer.borderColor = UIColor(hexString: "#E5E5E5").cgColor
+            
+            cell.smallView.layer.borderWidth = 1
+            cell.smallView.layer.borderColor = UIColor(hexString: "#DFE9FF").cgColor
+            cell.smallView.layer.cornerRadius = 5
+            
+            cell.smallView.tag = indexPath.row
+            let tap4 = UITapGestureRecognizer(target: self, action: #selector(editBtnClick))
+            tap4.numberOfTapsRequired = 1
+            cell.smallView.addGestureRecognizer(tap4)
+            cell.smallView.isUserInteractionEnabled = true
+            
+            cell.vendorName.text = vendorsArray[indexPath.row].name
+            cell.payCount.text = "#\(vendorsArray[indexPath.row].pay_count)"
+            
+            if vendorsArray[indexPath.row].recent_payment_datetime == ""  {
+                cell.paymentDateTime.text = "-"
+            }
+            else {
+                cell.paymentDateTime.text = vendorsArray[indexPath.row].recent_payment_datetime
+            }
+            
+            if vendorsArray[indexPath.row].recent_pay_amount == ""  {
+                cell.payAmount.text = "-"
+            }
+            else {
+                cell.payAmount.text = "$\(vendorsArray[indexPath.row].total_pay)"
+            }
+            
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "toVendordetails", sender: nil)
-
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if searching {
+            vendorID = searchVendorArray[indexPath.row].vendor_id
+            vendorObj = searchVendorArray[indexPath.row]
+            
+            performSegue(withIdentifier: "toVendordetails", sender: nil)
+        }
+        else {
+            vendorID = vendorsArray[indexPath.row].vendor_id
+            vendorObj = vendorsArray[indexPath.row]
+            
+            performSegue(withIdentifier: "toVendordetails", sender: nil)
+        }
     }
 }
 

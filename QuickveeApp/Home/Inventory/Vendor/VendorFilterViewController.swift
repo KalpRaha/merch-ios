@@ -54,9 +54,10 @@ class VendorFilterViewController: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         
         if UserDefaults.standard.integer(forKey: "vendorDateMode") == 10 {
-            setDateOptions()
-            dateSelected()
-
+            if UserDefaults.standard.integer(forKey: "vendorDate") == 1 {
+                setDateOptions()
+                dateSelected()
+            }
         }
         else {
             setCustomOptions()
@@ -207,8 +208,10 @@ class VendorFilterViewController: UIViewController, UITextFieldDelegate {
         if mode == 0 {
             print("date")
             let viewMode = UserDefaults.standard.integer(forKey: "tempVendorDateMode")
+            print(viewMode)
             UserDefaults.standard.set(viewMode, forKey: "vendorDateMode")
             let tag = UserDefaults.standard.integer(forKey: "vendorDate")
+           // UserDefaults.standard.set(tag, forKey: "vendorDate")
             getDateTime(tag: tag)
             
         }
@@ -234,6 +237,8 @@ class VendorFilterViewController: UIViewController, UITextFieldDelegate {
             UserDefaults.standard.set("\(startDate) 00:00:00", forKey: "vendor_start_date")
             UserDefaults.standard.set("\(endDate) 23:59:59", forKey: "vendor_end_date")
         }
+        
+       // UserDefaults.standard.removeObject(forKey: "tempVendorDateMode")
         
         navigationController?.popViewController(animated: true)
     }
