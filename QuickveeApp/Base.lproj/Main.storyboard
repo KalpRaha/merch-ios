@@ -11428,7 +11428,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0J-yg-up1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7842" y="767"/>
+            <point key="canvasLocation" x="-7862" y="705"/>
         </scene>
         <!--Setup Tax View Controller-->
         <scene sceneID="rDo-hp-tyi">
@@ -12046,6 +12046,19 @@
                                             <action selector="backBtnClick:" destination="T7O-ht-vkX" eventType="touchUpInside" id="wMS-ut-tYv"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sls-Tj-zOs">
+                                        <rect key="frame" x="245" y="0.0" width="75" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="75" id="wV0-6j-rbI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <color key="tintColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Disable"/>
+                                        <connections>
+                                            <action selector="disableBtnClick:" destination="T7O-ht-vkX" eventType="touchUpInside" id="BGR-TK-bYy"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HwU-bo-c7P">
                                         <rect key="frame" x="330" y="0.0" width="45" height="45"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -12071,7 +12084,10 @@
                                     <constraint firstItem="HwU-bo-c7P" firstAttribute="leading" secondItem="uhg-43-nYt" secondAttribute="trailing" constant="10" id="HEH-yB-nql"/>
                                     <constraint firstItem="uhg-43-nYt" firstAttribute="centerY" secondItem="S4l-5D-QhU" secondAttribute="centerY" id="aXC-Uc-Suo"/>
                                     <constraint firstItem="Pqn-lk-t2F" firstAttribute="leading" secondItem="S4l-5D-QhU" secondAttribute="leading" id="c6s-eG-zJd"/>
+                                    <constraint firstItem="sls-Tj-zOs" firstAttribute="top" secondItem="S4l-5D-QhU" secondAttribute="top" id="eBq-fb-0HT"/>
                                     <constraint firstItem="uhg-43-nYt" firstAttribute="leading" secondItem="Pqn-lk-t2F" secondAttribute="trailing" constant="10" id="rJr-D0-lDb"/>
+                                    <constraint firstAttribute="bottom" secondItem="sls-Tj-zOs" secondAttribute="bottom" id="w40-2w-V3d"/>
+                                    <constraint firstItem="HwU-bo-c7P" firstAttribute="leading" secondItem="sls-Tj-zOs" secondAttribute="trailing" constant="10" id="wXZ-Rk-5vK"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vendor Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfB-yY-D7r">
@@ -12268,6 +12284,7 @@
                         <outlet property="address" destination="4SR-si-VQz" id="vOo-4w-ZB1"/>
                         <outlet property="cancelBtn" destination="ugr-L2-8oy" id="7X7-2p-hfH"/>
                         <outlet property="city" destination="k9d-oY-oTl" id="Zlh-xZ-kIk"/>
+                        <outlet property="disableBtn" destination="sls-Tj-zOs" id="YPB-o0-3u5"/>
                         <outlet property="email" destination="KEe-Xw-KLE" id="jss-fo-7b3"/>
                         <outlet property="phone" destination="3eh-Tm-BH2" id="jVD-Ye-KlL"/>
                         <outlet property="state" destination="xwl-ex-vV9" id="GhR-rU-b5U"/>
@@ -13584,6 +13601,17 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eam-LP-Jg9">
+                                                                    <rect key="frame" x="148.66666666666666" y="5" width="75" height="25"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="75" id="Wr8-JC-XyG"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                    <state key="normal" title="DISABLED">
+                                                                        <color key="titleColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </state>
+                                                                </button>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2u-kM-DQK">
                                                                     <rect key="frame" x="306.33333333333331" y="7" width="20.666666666666686" height="21"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
@@ -13593,7 +13621,10 @@
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.96078431372549022" green="0.97254901960784312" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="eam-LP-Jg9" secondAttribute="bottom" constant="5" id="6Mz-HQ-JIn"/>
                                                                 <constraint firstItem="UNf-pm-Wb0" firstAttribute="centerY" secondItem="k5g-Sk-oAg" secondAttribute="centerY" id="96Q-FB-RHj"/>
+                                                                <constraint firstItem="eam-LP-Jg9" firstAttribute="top" secondItem="k5g-Sk-oAg" secondAttribute="top" constant="5" id="RtK-NY-GQ0"/>
+                                                                <constraint firstItem="eam-LP-Jg9" firstAttribute="leading" secondItem="UNf-pm-Wb0" secondAttribute="trailing" constant="20" id="SNh-22-xse"/>
                                                                 <constraint firstAttribute="trailing" secondItem="X2u-kM-DQK" secondAttribute="trailing" constant="8" id="Stm-uS-Qu9"/>
                                                                 <constraint firstAttribute="height" constant="35" id="XVk-bZ-c0A"/>
                                                                 <constraint firstItem="UNf-pm-Wb0" firstAttribute="leading" secondItem="k5g-Sk-oAg" secondAttribute="leading" constant="8" id="kor-fS-B6a"/>
@@ -13654,6 +13685,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="bgView" destination="brb-v3-ipo" id="MQE-37-yVA"/>
+                                            <outlet property="disabledBtn" destination="eam-LP-Jg9" id="33S-Vj-F05"/>
                                             <outlet property="payAmount" destination="RB7-3o-fob" id="52H-Gm-bH2"/>
                                             <outlet property="payCount" destination="X2u-kM-DQK" id="fep-eT-b7D"/>
                                             <outlet property="paymentDateTime" destination="DTo-fF-8r2" id="rxJ-6q-6Zc"/>

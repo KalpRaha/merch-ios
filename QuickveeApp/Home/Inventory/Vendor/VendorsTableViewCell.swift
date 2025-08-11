@@ -16,15 +16,13 @@ class VendorsTableViewCell: UITableViewCell {
     @IBOutlet weak var paymentDateTime: UILabel!
     @IBOutlet weak var payAmount: UILabel!
    
+    @IBOutlet weak var disabledBtn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-       
+        self.disabledBtn.layer.borderWidth = 1
+        self.disabledBtn.layer.borderColor = UIColor(hexString: "#F55353").cgColor
+        self.disabledBtn.layer.cornerRadius = 5
     }
 
 }

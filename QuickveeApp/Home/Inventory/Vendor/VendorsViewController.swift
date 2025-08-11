@@ -262,6 +262,24 @@ extension VendorsViewController : UITableViewDataSource, UITableViewDelegate {
             cell.smallView.addGestureRecognizer(tap4)
             cell.smallView.isUserInteractionEnabled = true
          
+            
+            if searchVendorArray[indexPath.row].enabled == "1" {
+                cell.vendorName.textColor = .black
+                cell.payAmount.textColor = .black
+                cell.paymentDateTime.textColor = .black
+                cell.payCount.textColor = .black
+                cell.disabledBtn.isHidden = true
+                
+            }
+            else {
+                cell.vendorName.textColor = .lightGray
+                cell.payAmount.textColor = .lightGray
+                cell.paymentDateTime.textColor = .lightGray
+                cell.payCount.textColor = .lightGray
+                cell.disabledBtn.isHidden = false
+            }
+            
+            
             cell.vendorName.text = searchVendorArray[indexPath.row].name
                 cell.payCount.text = "#\(searchVendorArray[indexPath.row].pay_count)"
                 
@@ -299,6 +317,24 @@ extension VendorsViewController : UITableViewDataSource, UITableViewDelegate {
             cell.smallView.addGestureRecognizer(tap4)
             cell.smallView.isUserInteractionEnabled = true
             
+            if vendorsArray[indexPath.row].enabled == "1" {
+                cell.vendorName.textColor = .black
+                cell.payAmount.textColor = .black
+                cell.paymentDateTime.textColor = .black
+                cell.payCount.textColor = .black
+                cell.disabledBtn.isHidden = true
+                
+            }
+            else {
+                cell.vendorName.textColor = .lightGray
+                cell.payAmount.textColor = .lightGray
+                cell.paymentDateTime.textColor = .lightGray
+                cell.payCount.textColor = .lightGray
+                cell.disabledBtn.isHidden = false
+            }
+            
+            
+            
             cell.vendorName.text = vendorsArray[indexPath.row].name
             cell.payCount.text = "#\(vendorsArray[indexPath.row].pay_count)"
             
@@ -306,6 +342,7 @@ extension VendorsViewController : UITableViewDataSource, UITableViewDelegate {
                 cell.paymentDateTime.text = "-"
             }
             else {
+                let date = 
                 cell.paymentDateTime.text = vendorsArray[indexPath.row].recent_payment_datetime
             }
             
@@ -325,16 +362,32 @@ extension VendorsViewController : UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if searching {
+            
+            if searchVendorArray[indexPath.row].enabled == "1" {
+                performSegue(withIdentifier: "toVendordetails", sender: nil)
+            }
+            else {
+                
+            }
+            
             vendorID = searchVendorArray[indexPath.row].vendor_id
             vendorObj = searchVendorArray[indexPath.row]
             
-            performSegue(withIdentifier: "toVendordetails", sender: nil)
+           
         }
         else {
+            
+            if vendorsArray[indexPath.row].enabled == "1" {
+                performSegue(withIdentifier: "toVendordetails", sender: nil)
+            }
+            else {
+                
+            }
             vendorID = vendorsArray[indexPath.row].vendor_id
             vendorObj = vendorsArray[indexPath.row]
             
-            performSegue(withIdentifier: "toVendordetails", sender: nil)
+            
+            
         }
     }
 }

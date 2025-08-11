@@ -27,7 +27,8 @@ class AddVendorsVC: UIViewController {
     @IBOutlet weak var city: UITextField!
     @IBOutlet weak var zip: UITextField!
    
-   
+    @IBOutlet weak var disableBtn: UIButton!
+    
     @IBOutlet weak var cancelBtn: UIButton!
     
     
@@ -106,12 +107,22 @@ class AddVendorsVC: UIViewController {
     func setMode(){
         if mode == "add"{
             
+            disableBtn.isHidden = true
         }
         else {
-            
+            disableBtn.isHidden = false
+            addVenderBtn.setTitle("Update", for: .normal)
             vendorName.text = vendorObj?.name
             phone.text = vendorObj?.phone
             email.text = vendorObj?.email
+            if vendorObj?.enabled == "1" {
+                disableBtn.setTitle( "Disable", for: .normal)
+            }
+            else {
+                disableBtn.setTitle( "Enable", for: .normal)
+            }
+            
+            
             
             if vendorObj?.full_address == "" || vendorObj?.full_address ==  "null" {
                 
@@ -208,7 +219,7 @@ class AddVendorsVC: UIViewController {
             print(responsevalues)
             if responsevalues == "New email." {
                
-                    addVendorApiCall()
+                addVendorApiCall(enabled: "1")
                
             }
             else {
@@ -220,7 +231,7 @@ class AddVendorsVC: UIViewController {
         }
     
     
-    func addVendorApiCall() {
+    func addVendorApiCall(enabled: String) {
         
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
@@ -264,7 +275,7 @@ class AddVendorsVC: UIViewController {
        
         loadingIndicator.isAnimating = true
         
-        ApiCalls.sharedCall.addVendorAPi(merchant_id: id, name:name , phone: phonenNumber, email: emailId, created_at: currentDate, updated_at: "", enabled: "1", vendor_id: vendorid, full_address: address, city: city, state: state, zip_code: zipCode) { isSuccess, responseData in
+        ApiCalls.sharedCall.addVendorAPi(merchant_id: id, name:name , phone: phonenNumber, email: emailId, created_at: currentDate, updated_at: "", enabled: enabled, vendor_id: vendorid, full_address: address, city: city, state: state, zip_code: zipCode) { isSuccess, responseData in
             
             
             if isSuccess {
@@ -342,6 +353,52 @@ class AddVendorsVC: UIViewController {
 //        }
 //    }
     
+    @IBAction func disableBtnClick(_ sender: UIButton) {
+        
+        
+        if sender.currentTitle == "Disable" {
+            
+            let alertController = UIAlertController(title: "Alert", message: "Are you sure you want to Disabled Vendor ?",
+                                                    preferredStyle: .alert)
+            
+            let cancel = UIAlertAction(title: "No", style: .default) { (action:UIAlertAction!) in
+                print("Ok button tapped")
+            }
+            
+            let okAction = UIAlertAction(title: "Yes", style: .default) { (action:UIAlertAction!) in
+                
+                print("Ok button tapped")
+                self.addVendorApiCall(enabled: "0")
+               // self.loadIndicator.isAnimating = false
+             
+            }
+            
+            alertController.addAction(cancel)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion:nil)
+        }
+        else {
+            
+            let alertController = UIAlertController(title: "Alert", message: "Are you sure you want to Enabled Vendor ?",
+                                                    preferredStyle: .alert)
+            
+            
+            let cancel = UIAlertAction(title: "No", style: .default) { (action:UIAlertAction!) in
+                print("Ok button tapped")
+            }
+            
+            let okAction = UIAlertAction(title: "Yes", style: .default) { (action:UIAlertAction!) in
+                print("Ok button tapped")
+                self.addVendorApiCall(enabled: "1")
+                //self.loadIndicator.isAnimating = false
+                
+            }
+            
+            alertController.addAction(cancel)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion:nil)
+        }
+    }
     
     @IBAction func selectStateBtnClick(_ sender: UIButton) {
         view.endEditing(true)
