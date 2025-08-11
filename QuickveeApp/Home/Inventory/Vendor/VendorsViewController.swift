@@ -154,7 +154,7 @@ class VendorsViewController: UIViewController {
         else if segue.identifier == "toVendordetails" {
             let vc = segue.destination as! VendorDetailVC
             vc.vendor_id = vendorID
-            
+            vc.venor_obj = vendorObj
         }
     }
     
@@ -261,7 +261,7 @@ extension VendorsViewController : UITableViewDataSource, UITableViewDelegate {
             tap4.numberOfTapsRequired = 1
             cell.smallView.addGestureRecognizer(tap4)
             cell.smallView.isUserInteractionEnabled = true
-         
+            
             
             if searchVendorArray[indexPath.row].enabled == "1" {
                 cell.vendorName.textColor = .black
@@ -281,21 +281,23 @@ extension VendorsViewController : UITableViewDataSource, UITableViewDelegate {
             
             
             cell.vendorName.text = searchVendorArray[indexPath.row].name
-                cell.payCount.text = "#\(searchVendorArray[indexPath.row].pay_count)"
-                
-                if searchVendorArray[indexPath.row].recent_payment_datetime == ""  {
-                    cell.paymentDateTime.text = "-"
-                }
-                else {
-                    cell.paymentDateTime.text = searchVendorArray[indexPath.row].recent_payment_datetime
-                }
-                
-                if searchVendorArray[indexPath.row].recent_pay_amount == ""  {
-                    cell.payAmount.text = "-"
-                }
-                else {
-                    cell.payAmount.text = "$\(searchVendorArray[indexPath.row].total_pay)"
-                }
+            cell.payCount.text = "#\(searchVendorArray[indexPath.row].pay_count)"
+            
+            if searchVendorArray[indexPath.row].recent_payment_datetime == ""  {
+                cell.paymentDateTime.text = "-"
+            }
+            else {
+                let toast = ToastClass()
+                let date = toast.setStockDateFormat(dateStr: searchVendorArray[indexPath.row].recent_payment_datetime)
+                cell.paymentDateTime.text = "\(date)- $\(searchVendorArray[indexPath.row].recent_pay_amount)"
+            }
+            
+            if searchVendorArray[indexPath.row].recent_pay_amount == ""  {
+                cell.payAmount.text = "-"
+            }
+            else {
+                cell.payAmount.text = "$\(searchVendorArray[indexPath.row].total_pay)"
+            }
             return cell
         }
         else {
@@ -342,8 +344,10 @@ extension VendorsViewController : UITableViewDataSource, UITableViewDelegate {
                 cell.paymentDateTime.text = "-"
             }
             else {
-                let date = 
-                cell.paymentDateTime.text = vendorsArray[indexPath.row].recent_payment_datetime
+                let toast = ToastClass()
+                let date = toast.setStockDateFormat(dateStr: vendorsArray[indexPath.row].recent_payment_datetime)
+                cell.paymentDateTime.text = "\(date)- $\(vendorsArray[indexPath.row].recent_pay_amount)"
+            
             }
             
             if vendorsArray[indexPath.row].recent_pay_amount == ""  {
@@ -385,9 +389,7 @@ extension VendorsViewController : UITableViewDataSource, UITableViewDelegate {
             }
             vendorID = vendorsArray[indexPath.row].vendor_id
             vendorObj = vendorsArray[indexPath.row]
-            
-            
-            
+            print(vendorObj)
         }
     }
 }

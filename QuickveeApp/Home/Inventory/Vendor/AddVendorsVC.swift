@@ -16,10 +16,8 @@ class AddVendorsVC: UIViewController {
    
    
     @IBOutlet weak var vendorName: UITextField!
-    
-    
-    
-    
+
+    @IBOutlet weak var addTitle: UILabel!
     @IBOutlet weak var state: MDCOutlinedTextField!
     @IBOutlet weak var phone: UITextField!
     @IBOutlet weak var email: UITextField!
@@ -68,12 +66,14 @@ class AddVendorsVC: UIViewController {
         setupMenu()
         vendorName.addTarget(self, action: #selector(updateText), for: .editingChanged)
         phone.addTarget(self, action: #selector(updateText), for: .editingChanged)
-       
+        zip.addTarget(self, action: #selector(updateText), for: .editingChanged)
+        
         createCustomTextField(textField: state)
         
         vendorName.delegate = self
         phone.delegate = self
         state.delegate = self
+        zip.delegate = self
         phone.keyboardType = .numberPad
         email.keyboardType = .emailAddress
 
@@ -106,10 +106,13 @@ class AddVendorsVC: UIViewController {
     
     func setMode(){
         if mode == "add"{
-            
+            addTitle.text = "Add Vendor"
             disableBtn.isHidden = true
+            
         }
         else {
+            
+            addTitle.text = "Edit Vendor"
             disableBtn.isHidden = false
             addVenderBtn.setTitle("Update", for: .normal)
             vendorName.text = vendorObj?.name
@@ -295,63 +298,8 @@ class AddVendorsVC: UIViewController {
     }
     
  
-//    func editVendorApiCall() {
-//        
-//        
-//        let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
-//        
-//        guard let name = vendorName.text, name != "" else {
-//            vendorName.isErrorView(numberOfShakes: 3, revert: true)
-//            ToastClass.sharedToast.showToast(message: "Enter Vendor Name", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-//            return
-//        }
-//        
-//        guard let phonenNumber = phone.text, phonenNumber != "",phonenNumber.count == 10  else {
-//            phone.isErrorView(numberOfShakes: 3, revert: true)
-//            ToastClass.sharedToast.showToast(message: "Enter Phone Number ", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-//            return
-//        }
-//        
-//        guard let emailId = email.text, emailId != "" else {
-//            email.isErrorView(numberOfShakes: 3, revert: true)
-//            ToastClass.sharedToast.showToast(message: "Enter valid Email address ", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-//            return
-//        }
-//        
-//        let address = address.text ?? ""
-//        let city = city.text ?? ""
-//        let state = state.text ?? ""
-//        let zipCode = zip.text ?? ""
-//       
-//        let now = Date()
-//
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//        let currentDate = formatter.string(from: now)
-//        
-//        let vendor_id = vendorObj?.vendor_id ?? ""
-//        
-//       
-//        loadingIndicator.isAnimating = true
-//        
-//        ApiCalls.sharedCall.addVendorAPi(merchant_id: id, name:name , phone: phonenNumber, email: emailId, created_at: currentDate, updated_at: "", enabled: "1", vendor_id: vendor_id, full_address: address, city: city, state: state, zip_code: zipCode) { isSuccess, responseData in
-//            
-//            
-//            if isSuccess {
-//                
-//                let list = responseData["message"] as! String
-//                ToastClass.sharedToast.showToast(message: list, font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-//                self.loadingIndicator.isAnimating = false
-//                print(list)
-//                if list == "Vendor Created Successfully." {
-//                    self.navigationController?.popViewController(animated: true)
-//                }
-//            }
-//            else {
-//                print("Api Error")
-//            }
-//        }
-//    }
+
+
     
     @IBAction func disableBtnClick(_ sender: UIButton) {
         
@@ -479,6 +427,11 @@ extension AddVendorsVC: UITextFieldDelegate {
           
             if updatetext.count > 10 {
                 updatetext = String(updatetext.prefix(10))
+            }
+        }
+        else if textField == zip {
+            if updatetext.count > 5 {
+                updatetext = String(updatetext.prefix(5))
             }
         }
         

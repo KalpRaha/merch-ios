@@ -28,7 +28,7 @@ class VendorDetailVC: UIViewController {
     
     var  vendor_id = ""
     var vendor_Pay = [Vendors_Payment]()
-    
+    var venor_obj:VendorModel?
     
     
     override func viewDidLoad() {

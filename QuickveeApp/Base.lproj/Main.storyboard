@@ -12280,6 +12280,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="weJ-zi-EXJ"/>
                     <connections>
+                        <outlet property="addTitle" destination="uhg-43-nYt" id="Adb-pF-eYh"/>
                         <outlet property="addVenderBtn" destination="mEq-h3-MHa" id="D42-ir-bbs"/>
                         <outlet property="address" destination="4SR-si-VQz" id="vOo-4w-ZB1"/>
                         <outlet property="cancelBtn" destination="ugr-L2-8oy" id="7X7-2p-hfH"/>
