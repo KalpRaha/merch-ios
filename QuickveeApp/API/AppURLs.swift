@@ -169,6 +169,13 @@ struct AppURLs {
     static let DELETE_BOGO = "\(base_url)Bogoapi/delete_bogo"
     
     static let PO_LIST = "\(base_url)Purchase_orders_api/po_list"
+    static let PO_BY_ID = "\(base_url)Purchase_orders_api/get_po_by_id"
+    static let AUTO_PO_LIST = "\(base_url)Purchase_orders_api/auto_po_list"
+    static let SAVE_PO = "\(base_url)Purchase_orders_api/save_po"
+    static let UPDATE_PO = "\(base_url)Purchase_orders_api/update_po"
+    static let DELETE_PO = "\(base_url)Purchase_orders_api/delete_po"
+    
+    static let VENDORS_LIST = "\(base_url)app/vendor_payment_list"
     
     static let LOGURL = "https://www.quickvees.com/internet_log.php"
 }

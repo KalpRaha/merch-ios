@@ -15,7 +15,14 @@ class ItemsPOTableViewCell: UITableViewCell {
     
     @IBOutlet weak var qtyTextField: UITextField!
     @IBOutlet weak var costPerTextField: UITextField!
+    @IBOutlet weak var noteField: UITextField!
+    
+    @IBOutlet weak var qtyView: UIView!
+    @IBOutlet weak var costView: UIView!
+    @IBOutlet weak var noteView: UIView!
     
     @IBOutlet weak var qtyAfter: UILabel!
     @IBOutlet weak var total: UILabel!
+    
+    @IBOutlet weak var deleteBtn: UIButton!
 }

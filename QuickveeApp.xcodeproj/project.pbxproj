@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0413A27F2E44BDB90016A093 /* SavePOTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413A27E2E44BDB90016A093 /* SavePOTableViewCell.swift */; };
 		0432BAE32E3B9CE3000ADFFC /* ItemsPOViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0432BAE22E3B9CE3000ADFFC /* ItemsPOViewController.swift */; };
 		044B7F232E3B4ECC0072A6B8 /* AddPOViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B7F222E3B4ECC0072A6B8 /* AddPOViewController.swift */; };
 		0477560D2E3B95A300C7F973 /* ItemsPOTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477560C2E3B95A300C7F973 /* ItemsPOTableViewCell.swift */; };
+		0481E7112E43706E00A43385 /* SavePOViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481E7102E43706E00A43385 /* SavePOViewController.swift */; };
 		04950B372E3A4A1C00A7DD10 /* POSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04950B362E3A4A1C00A7DD10 /* POSelectViewController.swift */; };
 		04C6202B2E33750E001BF3C8 /* POViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6202A2E33750E001BF3C8 /* POViewController.swift */; };
 		04C6202D2E337636001BF3C8 /* POTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6202C2E337636001BF3C8 /* POTableViewCell.swift */; };
@@ -290,9 +292,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0413A27E2E44BDB90016A093 /* SavePOTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePOTableViewCell.swift; sourceTree = "<group>"; };
 		0432BAE22E3B9CE3000ADFFC /* ItemsPOViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsPOViewController.swift; sourceTree = "<group>"; };
 		044B7F222E3B4ECC0072A6B8 /* AddPOViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPOViewController.swift; sourceTree = "<group>"; };
 		0477560C2E3B95A300C7F973 /* ItemsPOTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsPOTableViewCell.swift; sourceTree = "<group>"; };
+		0481E7102E43706E00A43385 /* SavePOViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePOViewController.swift; sourceTree = "<group>"; };
 		04950B362E3A4A1C00A7DD10 /* POSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POSelectViewController.swift; sourceTree = "<group>"; };
 		04C6202A2E33750E001BF3C8 /* POViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POViewController.swift; sourceTree = "<group>"; };
 		04C6202C2E337636001BF3C8 /* POTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POTableViewCell.swift; sourceTree = "<group>"; };
@@ -593,12 +597,14 @@
 		04C620292E337412001BF3C8 /* PO */ = {
 			isa = PBXGroup;
 			children = (
-				0432BAE22E3B9CE3000ADFFC /* ItemsPOViewController.swift */,
-				0477560C2E3B95A300C7F973 /* ItemsPOTableViewCell.swift */,
+				0413A27E2E44BDB90016A093 /* SavePOTableViewCell.swift */,
 				044B7F222E3B4ECC0072A6B8 /* AddPOViewController.swift */,
+				0477560C2E3B95A300C7F973 /* ItemsPOTableViewCell.swift */,
+				0432BAE22E3B9CE3000ADFFC /* ItemsPOViewController.swift */,
+				04950B362E3A4A1C00A7DD10 /* POSelectViewController.swift */,
 				04C6202C2E337636001BF3C8 /* POTableViewCell.swift */,
 				04C6202A2E33750E001BF3C8 /* POViewController.swift */,
-				04950B362E3A4A1C00A7DD10 /* POSelectViewController.swift */,
+				0481E7102E43706E00A43385 /* SavePOViewController.swift */,
 			);
 			path = PO;
 			sourceTree = "<group>";
@@ -1563,6 +1569,7 @@
 				D2BBAD172C94017C00133338 /* GiftCardDetailViewController.swift in Sources */,
 				D22AECB1297AA22D000AA721 /* TaxesTableViewCell.swift in Sources */,
 				D26F4E762995011200716A51 /* RotationAnimation.swift in Sources */,
+				0481E7112E43706E00A43385 /* SavePOViewController.swift in Sources */,
 				D2D879742BBBB04000ECE573 /* PayRefundCell.swift in Sources */,
 				D28D7B182BABDD860014A9BB /* CartTableCell.swift in Sources */,
 				D29C2FC82AA1965700C941DB /* OrderDetailCollectionViewCell.swift in Sources */,
@@ -1760,6 +1767,7 @@
 				04950B372E3A4A1C00A7DD10 /* POSelectViewController.swift in Sources */,
 				D25D185B2CF4921500A79FDE /* CompletedCartRefundCell.swift in Sources */,
 				D217914F296ECE0700F77C2A /* HomeViewController.swift in Sources */,
+				0413A27F2E44BDB90016A093 /* SavePOTableViewCell.swift in Sources */,
 				D23E91A52CA13124002EA5AE /* TripleSalesTableViewCell.swift in Sources */,
 				D26D38A12CA41CBE00AD9309 /* ReportTableViewCell.swift in Sources */,
 				D225E7592C40DC8B007CFAF2 /* DuplicatePlusViewController.swift in Sources */,
@@ -1968,7 +1976,7 @@
 				CODE_SIGN_ENTITLEMENTS = QuickveeApp/QuickveeApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = UDXGC872R6;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1989,7 +1997,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.5;
+				MARKETING_VERSION = 3.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.merchantech;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2012,7 +2020,7 @@
 				CODE_SIGN_ENTITLEMENTS = QuickveeApp/QuickveeAppRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = UDXGC872R6;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2033,7 +2041,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.5;
+				MARKETING_VERSION = 3.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.merchantech;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
