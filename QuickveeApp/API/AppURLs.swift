@@ -9,10 +9,10 @@ import Foundation
 
 struct AppURLs {
     // live
-   // static let base_url = "https://api-ci.quickvee.us/"
+    static let base_url = "https://api-ci.quickvee.us/"
     
     //test
-    static let base_url = "https://qa-api-ci.quickvee.us/"
+//    static let base_url = "https://qa-api-ci.quickvee.us/"
 
     
     static let ORDERS_LIST = "\(base_url)orders/order_list"
@@ -178,7 +178,6 @@ struct AppURLs {
     
     static let VENDORS_LIST = "\(base_url)app/vendor_payment_list"
     
-    static let LOGURL = "https://www.quickvees.com/internet_log.php"
     static let LOGURL = "https://www.quickvees.com/internet_log_ios.php"
 }
 
