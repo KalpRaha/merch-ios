@@ -823,6 +823,21 @@ class DuplicatePlusViewController: UIViewController {
     }
     
     
+    @IBAction func homeBtnClick(_ sender: UIButton) {
+        
+        var destiny = 0
+        
+        let viewcontrollerArray = navigationController?.viewControllers
+        
+        if let destinationIndex = viewcontrollerArray!.firstIndex(where: { $0 is HomeViewController }) {
+            destiny = destinationIndex
+        }
+        
+        navigationController?.popToViewController(viewcontrollerArray![destiny], animated: true)
+    }
+    
+    
+    
     @IBAction func saveBtnClick(_ sender: UIButton) {
         
         validateDupParams()

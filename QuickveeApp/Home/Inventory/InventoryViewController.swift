@@ -11,8 +11,7 @@ import BarcodeScanner
 
 class InventoryViewController: UIViewController {
     
-    
-    var contents = ["Category", "Products", "Attributes", "Variants", "Purchase Orders", "Brands", "Tags", "Stocktake", "Lottery"]
+    var contents = ["Category", "Products", "Attributes", "Variants", "Purchase Orders", "Vendors", "Brands", "Tags", "Stocktake", "Lottery"]
     
     @IBOutlet weak var collection: UICollectionView!
     @IBOutlet weak var inventContentView: UIView!
@@ -59,6 +58,7 @@ class InventoryViewController: UIViewController {
      UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inventAttribute"),
      UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inventVariant"),
      UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inventPO"),
+     UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inventVendors"),
      UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inventBrand"),
      UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inventTags"),
      UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inventStock"),
@@ -77,8 +77,8 @@ class InventoryViewController: UIViewController {
             // nothing
         }
         else {
-            subControllers.remove(at: 8)
-            contents.remove(at: 8)
+            subControllers.remove(at: 9)
+            contents.remove(at: 9)
         }
         
         configure()
@@ -111,7 +111,8 @@ class InventoryViewController: UIViewController {
         searchBtn.alpha = 1
         searchBar.alpha = 0
         scanUpcBtn.alpha = 1
-        syncbtn.alpha = 1
+        syncbtn.isHidden = true
+        syncbtn.alpha = 0
         backBtn.alpha = 1
         invent_lbl.alpha = 1
         searchBar.showsCancelButton = true
@@ -178,9 +179,7 @@ class InventoryViewController: UIViewController {
             self.collection.reloadData()
         })
     }
-    
-    
-    
+ 
     @IBAction func backButtonClick(_ sender: UIButton) {
         
         let viewcontrollerArray = navigationController?.viewControllers
@@ -263,12 +262,18 @@ class InventoryViewController: UIViewController {
                 vc.searchMode = true
             }
             else if currentVC == 4 {
-                searchBar.placeholder = "Search Brands"
+                searchBar.placeholder = "Search Purchase Order"
             }
             else if currentVC == 5 {
-                searchBar.placeholder = "Search Tags"
+                searchBar.placeholder = "Search Vendors"
             }
             else if currentVC == 6 {
+                searchBar.placeholder = "Search Brands"
+            }
+            else if currentVC == 7 {
+                searchBar.placeholder = "Search Tags"
+            }
+            else if currentVC == 8 {
                 searchBar.placeholder = "Search Stock"
             }
             else {
@@ -293,9 +298,15 @@ class InventoryViewController: UIViewController {
                 vc.searchMode = true
             }
             else if currentVC == 4 {
-                searchBar.placeholder = "Search Brands"
+                searchBar.placeholder = "Search Purchase Order"
             }
             else if currentVC == 5 {
+                searchBar.placeholder = "Search Vendor"
+            }
+            else if currentVC == 6 {
+                searchBar.placeholder = "Search Brands"
+            }
+            else if currentVC == 7 {
                 searchBar.placeholder = "Search Tags"
             }
             else {
@@ -370,19 +381,23 @@ extension InventoryViewController : UISearchBarDelegate {
                 vc.performSearch(searchText: searchText)
             }
             else if currentVC == 5 {
-                let vc = subControllers[5] as! BrandsTagsViewController
-                vc.performSearch(searchText: searchText)
+                let vc = subControllers[5] as! VendorsViewController
+               vc.performSearch(searchText: searchText)
             }
             else if currentVC == 6 {
-                let vc = subControllers[6] as! TagsViewController
+                let vc = subControllers[6] as! BrandsTagsViewController
                 vc.performSearch(searchText: searchText)
             }
             else if currentVC == 7 {
-                let vc = subControllers[7] as! StockTakeViewController
+                let vc = subControllers[7] as! TagsViewController
+                vc.performSearch(searchText: searchText)
+            }
+            else if currentVC == 8 {
+                let vc = subControllers[8] as! StockTakeViewController
                 vc.performSearch(searchText: searchText)
             }
             else {
-                let vc = subControllers[8] as! LotteryViewController
+                let vc = subControllers[9] as! LotteryViewController
                 vc.performSearch(searchText: searchText)
           
             }
@@ -413,15 +428,19 @@ extension InventoryViewController : UISearchBarDelegate {
                 vc.performSearch(searchText: searchText)
             }
             else if currentVC == 5 {
-                let vc = subControllers[5] as! BrandsTagsViewController
+            let vc = subControllers[5] as! VendorsViewController
                 vc.performSearch(searchText: searchText)
             }
             else if currentVC == 6 {
-                let vc = subControllers[6] as! TagsViewController
+                let vc = subControllers[6] as! BrandsTagsViewController
+                vc.performSearch(searchText: searchText)
+            }
+            else if currentVC == 7 {
+                let vc = subControllers[7] as! TagsViewController
                 vc.performSearch(searchText: searchText)
             }
             else {
-                let vc = subControllers[7] as! StockTakeViewController
+                let vc = subControllers[8] as! StockTakeViewController
                 vc.performSearch(searchText: searchText)
             }
         }
@@ -430,7 +449,7 @@ extension InventoryViewController : UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         
         searchBar.text = ""
-        syncbtn.alpha = 1
+        syncbtn.alpha = 0
         backBtn.alpha = 1
         invent_lbl.alpha = 1
         searchBtn.alpha = 1
@@ -470,26 +489,30 @@ extension InventoryViewController : UISearchBarDelegate {
                 vc.performSearch(searchText: "")
             }
             else if currentVC == 5 {
-                let vc = subControllers[5] as! BrandsTagsViewController
+                let vc = subControllers[5] as! VendorsViewController
                 vc.searching = false
                 vc.performSearch(searchText: "")
             }
             else if currentVC == 6 {
-                let vc = subControllers[6] as! TagsViewController
+                let vc = subControllers[6] as! BrandsTagsViewController
                 vc.searching = false
                 vc.performSearch(searchText: "")
             }
             else if currentVC == 7 {
-                let vc = subControllers[7] as! StockTakeViewController
+                let vc = subControllers[7] as! TagsViewController
+                vc.searching = false
+                vc.performSearch(searchText: "")
+            }
+            else if currentVC == 8 {
+                let vc = subControllers[8] as! StockTakeViewController
                 vc.searching = false
                 vc.performSearch(searchText: "")
             }
             else {
-                let vc = subControllers[8] as! LotteryViewController
+                let vc = subControllers[9] as! LotteryViewController
                 vc.searching = false
                 vc.performSearch(searchText: "")
-                
-                
+          
             }
         }
         
@@ -523,17 +546,22 @@ extension InventoryViewController : UISearchBarDelegate {
                 vc.performSearch(searchText: "")
             }
             else if currentVC == 5 {
-                let vc = subControllers[5] as! BrandsTagsViewController
+                let vc = subControllers[5] as! VendorsViewController
                 vc.searching = false
                 vc.performSearch(searchText: "")
             }
             else if currentVC == 6 {
-                let vc = subControllers[6] as! TagsViewController
+                let vc = subControllers[6] as! BrandsTagsViewController
+                vc.searching = false
+                vc.performSearch(searchText: "")
+            }
+            else if currentVC == 7 {
+                let vc = subControllers[7] as! TagsViewController
                 vc.searching = false
                 vc.performSearch(searchText: "")
             }
             else {
-                let vc = subControllers[7] as! StockTakeViewController
+                let vc = subControllers[8] as! StockTakeViewController
                 vc.searching = false
                 vc.performSearch(searchText: "")
             }
@@ -876,7 +904,7 @@ extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDat
         }
         
         searchBar.text = ""
-        syncbtn.alpha = 1
+        syncbtn.alpha = 0
         backBtn.alpha = 1
         invent_lbl.alpha = 1
         searchBtn.alpha = 1

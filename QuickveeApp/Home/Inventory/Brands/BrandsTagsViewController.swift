@@ -151,7 +151,6 @@ class BrandsTagsViewController: UIViewController {
         vc.mode = "add"
         
         present(vc, animated: true)
-        
     }
     
     

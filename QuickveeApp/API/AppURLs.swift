@@ -9,10 +9,10 @@ import Foundation
 
 struct AppURLs {
     // live
-    static let base_url = "https://api-ci.quickvee.us/"
+   // static let base_url = "https://api-ci.quickvee.us/"
     
     //test
-//    static let base_url = "https://qa-api-ci.quickvee.us/"
+    static let base_url = "https://qa-api-ci.quickvee.us/"
 
     
     static let ORDERS_LIST = "\(base_url)orders/order_list"
@@ -44,6 +44,7 @@ struct AppURLs {
     static let COUPON_DELETE = "\(base_url)Couponapi_live/delete_coupon"
     
     static let ADD_EDIT_VENDOR = "\(base_url)app/add_edit_vendor"
+    static let EMAIL_CHECK_VENDOR = "\(base_url)Vendor_api/vendor_email_check"
     static let VENDOR_PAYMENT_LIST = "\(base_url)app/vendor_payment_list"
     static let VENDOR_BY_ID = "\(base_url)app/get_vendorById"
     static let VENDOR_PAYMENT_DETAILS = "\(base_url)app/vendor_payment_report"
@@ -67,7 +68,7 @@ struct AppURLs {
     static let UPDATE_STORE_OPTIONS = "\(base_url)Settingapi/update_store_option"
     static let UPDATE_STORE_SETUP = "\(base_url)Settingapi/update_store_setup"
     
-   // static let INVENTORY_CATEGORY_LIST = "https://qa-elasticsearch.quickvee.us/Categoryapi/category_list"
+    // static let INVENTORY_CATEGORY_LIST = "https://qa-elasticsearch.quickvee.us/Categoryapi/category_list"
     static let INVENTORY_CATEGORY_LIST = "\(base_url)Categoryapi/category_list"
     static let INVENTORY_ADD_CATEGORY = "\(base_url)Categoryapi/add_category"
     static let INVENTORY_EDIT_CATEGORY = "\(base_url)Categoryapi/"
@@ -75,7 +76,7 @@ struct AppURLs {
     static let INVENTORY_CATEGORY_BY_ID = "\(base_url)Categoryapi/get_categoryById"
     
    static let INVENTORY_PRODUCT_LIST = "\(base_url)Productapi/new_product_list"
-  //  static let INVENTORY_PRODUCT_LIST = "https://qa-elasticsearch.quickvee.us/Productapi/new_product_list"
+   //  static let INVENTORY_PRODUCT_LIST = "https://qa-elasticsearch.quickvee.us/Productapi/new_product_list"
     static let INVENTORY_PRODUCT_ADD = "\(base_url)Productapi/add_product"
     static let INVENTORY_PRODUCT_DUPLICATE = "\(base_url)Productapi/duplicate_product"
     static let INVENTORY_PRODUCT_EDIT = "\(base_url)Productapi/edit_produt"
@@ -178,5 +179,6 @@ struct AppURLs {
     static let VENDORS_LIST = "\(base_url)app/vendor_payment_list"
     
     static let LOGURL = "https://www.quickvees.com/internet_log.php"
+    static let LOGURL = "https://www.quickvees.com/internet_log_ios.php"
 }
 
