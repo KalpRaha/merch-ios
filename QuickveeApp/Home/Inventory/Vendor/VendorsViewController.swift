@@ -25,6 +25,7 @@ class VendorsViewController: UIViewController {
     
     var vendorID = ""
     var mode = ""
+    var vendor_name = ""
     var searching = false
     
     let loadIndicator: ProgressView = {
@@ -137,26 +138,7 @@ class VendorsViewController: UIViewController {
         
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "toAddVendor" {
-            
-            let vc = segue.destination as! AddVendorsVC
-            
-            if mode == "add" {
-                vc.mode = "add"
-            }
-            else {
-                vc.mode = "edit"
-                vc.vendorObj = vendorObj
-            }
-        }
-        else if segue.identifier == "toVendordetails" {
-            let vc = segue.destination as! VendorDetailVC
-            vc.vendor_id = vendorID
-            vc.venor_obj = vendorObj
-        }
-    }
+    
     
     
     func performSearch(searchText: String) {
@@ -203,7 +185,28 @@ class VendorsViewController: UIViewController {
         performSegue(withIdentifier: "toAddVendor", sender: nil)
     }
     
-   
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "toAddVendor" {
+            
+            let vc = segue.destination as! AddVendorsVC
+            
+            if mode == "add" {
+                vc.mode = "add"
+            }
+            else {
+                vc.mode = "edit"
+                vc.vendorObj = vendorObj
+            }
+        }
+        else if segue.identifier == "toVendordetails" {
+            let vc = segue.destination as! VendorDetailVC
+            vc.vendor_id = vendorID
+            vc.venor_obj = vendorObj
+            print(vendor_name)
+            vc.vendor_name = vendor_name
+        }
+    }
     
     
     private func setupUI() {
@@ -367,6 +370,10 @@ extension VendorsViewController : UITableViewDataSource, UITableViewDelegate {
         
         if searching {
             
+            
+            vendorID = searchVendorArray[indexPath.row].vendor_id
+            vendorObj = searchVendorArray[indexPath.row]
+            vendor_name = searchVendorArray[indexPath.row].name
             if searchVendorArray[indexPath.row].enabled == "1" {
                 performSegue(withIdentifier: "toVendordetails", sender: nil)
             }
@@ -374,22 +381,19 @@ extension VendorsViewController : UITableViewDataSource, UITableViewDelegate {
                 
             }
             
-            vendorID = searchVendorArray[indexPath.row].vendor_id
-            vendorObj = searchVendorArray[indexPath.row]
-            
-           
         }
         else {
             
+            
+            vendorID = vendorsArray[indexPath.row].vendor_id
+            vendorObj = vendorsArray[indexPath.row]
+            vendor_name = vendorsArray[indexPath.row].name
             if vendorsArray[indexPath.row].enabled == "1" {
                 performSegue(withIdentifier: "toVendordetails", sender: nil)
             }
             else {
                 
             }
-            vendorID = vendorsArray[indexPath.row].vendor_id
-            vendorObj = vendorsArray[indexPath.row]
-            print(vendorObj)
         }
     }
 }

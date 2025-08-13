@@ -39,6 +39,7 @@ class AddVendorsVC: UIViewController {
     var activeTextField = UITextField()
     var vendorObj: VendorModel?
     var mode = ""
+    var vendorId = ""
     
     let menu = DropDown()
     
@@ -83,12 +84,14 @@ class AddVendorsVC: UIViewController {
         imageView.image = UIImage(named: "down")
         state.trailingView = imageView
         state.trailingViewMode = .always
+        
+        vendorId = vendorObj?.vendor_id ?? ""
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-    
+        print(vendorId)
         setMode()
     }
     
@@ -175,6 +178,12 @@ class AddVendorsVC: UIViewController {
     
     func emailCheckAPiCall() {
         
+        if mode == "edit" {
+                
+            addVendorApiCall(enabled: "1", vendorId: vendorId)
+            }
+        
+        
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         
         guard let name = vendorName.text, name != "" else {
@@ -204,7 +213,12 @@ class AddVendorsVC: UIViewController {
                 guard let list = responseData["msg"] else {
                     return
                 }
-                self.getEmailString(response: list)
+                if self.mode == "edit" {
+                    
+                }
+                else {
+                    self.getEmailString(response: list)
+                }
             }
             else {
                 print("Api Error")
@@ -222,8 +236,7 @@ class AddVendorsVC: UIViewController {
             print(responsevalues)
             if responsevalues == "New email." {
                
-                addVendorApiCall(enabled: "1")
-               
+                addVendorApiCall(enabled: "1", vendorId: "")
             }
             else {
                 ToastClass.sharedToast.showToast(message: responsevalues, font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
@@ -234,7 +247,7 @@ class AddVendorsVC: UIViewController {
         }
     
     
-    func addVendorApiCall(enabled: String) {
+    func addVendorApiCall(enabled: String, vendorId: String) {
         
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
@@ -269,16 +282,11 @@ class AddVendorsVC: UIViewController {
         let currentDate = formatter.string(from: now)
         
         var vendorid = ""
-        if mode == "edit" {
-             vendorid = self.vendorObj?.vendor_id ?? ""
-        }
-        else {
-            vendorid = ""
-        }
+        
        
         loadingIndicator.isAnimating = true
         
-        ApiCalls.sharedCall.addVendorAPi(merchant_id: id, name:name , phone: phonenNumber, email: emailId, created_at: currentDate, updated_at: "", enabled: enabled, vendor_id: vendorid, full_address: address, city: city, state: state, zip_code: zipCode) { isSuccess, responseData in
+        ApiCalls.sharedCall.addVendorAPi(merchant_id: id, name:name , phone: phonenNumber, email: emailId, created_at: currentDate, updated_at: "", enabled: enabled, vendor_id:vendorId , full_address: address, city: city, state: state, zip_code: zipCode) { isSuccess, responseData in
             
             
             if isSuccess {
@@ -316,7 +324,8 @@ class AddVendorsVC: UIViewController {
             let okAction = UIAlertAction(title: "Yes", style: .default) { (action:UIAlertAction!) in
                 
                 print("Ok button tapped")
-                self.addVendorApiCall(enabled: "0")
+                print(self.vendorId)
+                self.addVendorApiCall(enabled: "0", vendorId: self.vendorId)
                // self.loadIndicator.isAnimating = false
              
             }
@@ -337,7 +346,7 @@ class AddVendorsVC: UIViewController {
             
             let okAction = UIAlertAction(title: "Yes", style: .default) { (action:UIAlertAction!) in
                 print("Ok button tapped")
-                self.addVendorApiCall(enabled: "1")
+                self.addVendorApiCall(enabled: "1", vendorId: self.vendorId)
                 //self.loadIndicator.isAnimating = false
                 
             }
@@ -359,9 +368,17 @@ class AddVendorsVC: UIViewController {
     
     @IBAction func homeBtnClick(_ sender: UIButton) {
         
-    }
-    @IBAction func cancelBtnClick(_ sender: UIButton) {
+        let viewcontrollerArray = navigationController?.viewControllers
+        var destiny = 0
+        if let destinationIndex = viewcontrollerArray!.firstIndex(where: { $0 is HomeViewController }) {
+            destiny = destinationIndex
+        }
+        navigationController?.popToViewController(viewcontrollerArray![destiny], animated: true)
         
+    }
+    
+    @IBAction func cancelBtnClick(_ sender: UIButton) {
+        dismiss(animated: true)
     }
     
     

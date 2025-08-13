@@ -677,11 +677,6 @@
 		D20EE8352AA5F28A00762E56 /* Inventory */ = {
 			isa = PBXGroup;
 			children = (
-				D20EE8382AA5F2F900762E56 /* InventoryCollectionViewCell.swift */,
-				D20EE8362AA5F2A800762E56 /* InventoryViewController.swift */,
-				D2FFEF562AFE0186003400BD /* Category */,
-				D2FFEF582AFE01B2003400BD /* Product */,
-				D2FFEF5A2AFE0215003400BD /* Variants */,
 				D20622862E3747F300E7F893 /* Vendor */,
 				D2FFEF592AFE01C8003400BD /* Attributes */,
 				D23493B82CEF0F020046D33C /* Brands */,
@@ -2009,7 +2004,7 @@
 				CODE_SIGN_ENTITLEMENTS = QuickveeApp/QuickveeApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = UDXGC872R6;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2053,7 +2048,7 @@
 				CODE_SIGN_ENTITLEMENTS = QuickveeApp/QuickveeAppRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = UDXGC872R6;
 				GENERATE_INFOPLIST_FILE = YES;

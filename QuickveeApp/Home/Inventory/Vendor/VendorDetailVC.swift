@@ -27,6 +27,7 @@ class VendorDetailVC: UIViewController {
     @IBOutlet weak var bottomTotalView: UIView!
     
     var  vendor_id = ""
+    var vendor_name = ""
     var vendor_Pay = [Vendors_Payment]()
     var venor_obj:VendorModel?
     
@@ -43,7 +44,7 @@ class VendorDetailVC: UIViewController {
         super.viewWillAppear(animated)
         
         print(vendor_id)
-        
+        titel.text = vendor_name
         
         if UserDefaults.standard.integer(forKey: "vendorDateMode") == 10 {
             if UserDefaults.standard.integer(forKey: "vendorDate") == 1 {
@@ -165,11 +166,19 @@ class VendorDetailVC: UIViewController {
         performSegue(withIdentifier: "toVendorFilter", sender: nil)
         
     }
+    
     @IBAction func backBtnClick(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
+    
     @IBAction func homeBtnClick(_ sender: Any) {
-        
+       
+        let viewcontrollerArray = navigationController?.viewControllers
+        var destiny = 0
+        if let destinationIndex = viewcontrollerArray!.firstIndex(where: { $0 is HomeViewController }) {
+            destiny = destinationIndex
+        }
+        navigationController?.popToViewController(viewcontrollerArray![destiny], animated: true)
     }
 }
 
