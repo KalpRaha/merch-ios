@@ -13,6 +13,10 @@ protocol PODelegate: AnyObject {
     func getPOVendor(vendor: [VendorsPO])
 }
 
+protocol VendorNameEmailDelegate: AnyObject {
+    func getNameEmail(name: String, email: String)
+}
+
 class AddPOViewController: UIViewController {
 
     @IBOutlet weak var vendorName: MDCOutlinedTextField!
@@ -22,6 +26,8 @@ class AddPOViewController: UIViewController {
     @IBOutlet weak var vendorEmail: MDCOutlinedTextField!
     
     @IBOutlet weak var addVendorBtn: UIButton!
+    @IBOutlet weak var addVendorBtnWidth: NSLayoutConstraint!
+    @IBOutlet weak var addVendorBtnTrail: NSLayoutConstraint!
     
     @IBOutlet weak var innerView: UIView!
     @IBOutlet weak var topView: UIView!
@@ -33,9 +39,20 @@ class AddPOViewController: UIViewController {
     var mode = ""
     var vendadd: VendorPO?
     
-    var addPODetails: PODetails?
+    var addPODetails: VendorPO?
     
     var activeTextField = UITextField()
+    
+    var vendorSelectMode = ""
+    var newVendorId = ""
+    
+    weak var delegate: ChangeVendorDelegate?
+    
+    let loadIndicator: ProgressView = {
+        let progress = ProgressView(colors: [.systemBlue], lineWidth: 5)
+        progress.translatesAutoresizingMaskIntoConstraints = false
+        return progress
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,16 +113,21 @@ class AddPOViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        setupUI()
+        
         if mode == "add" {
+            addVendorBtnWidth.constant = 54
+            addVendorBtnTrail.constant = 10
         }
         else {
         
-            vendorName.text = addPODetails?.vendor_name
-            issueDate.text = addPODetails?.issued_date
+            vendorName.text = addPODetails?.name
+            issueDate.text = addPODetails?.issue_date
             stockDate.text = addPODetails?.stock_date
             referenceDate.text = addPODetails?.reference
-            vendorEmail.text = addPODetails?.email
-            
+            vendorEmail.text = addPODetails?.vendor_email
+            addVendorBtnWidth.constant = 0
+            addVendorBtnTrail.constant = 0
             vendorName.isEnabled = false
         }
     }
@@ -150,7 +172,11 @@ class AddPOViewController: UIViewController {
     
     @IBAction func addVendorBtnClick(_ sender: UIButton) {
         
-        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "addinventvendor") as! AddVendorsVC
+        vc.mode = "poadd"
+        vc.delegate = self
+        present(vc, animated: true)
     }
     
     
@@ -162,20 +188,29 @@ class AddPOViewController: UIViewController {
             return
         }
         
-        guard let vemail = vendorEmail.text, vemail != "" else {
-            vendorEmail.isError(numberOfShakes: 3, revert: true)
-            ToastClass.sharedToast.showToast(message: "Please Enter Vendor Email", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-            return
-        }
+        let vemail = vendorEmail.text ?? ""
         
-        let v_id = selectArray[0].vendor_id
+        var v_id = ""
+        if vendorSelectMode == "old" {
+            v_id = selectArray[0].vendor_id
+        }
+        else {
+            v_id = newVendorId
+        }
         let v_issue = issueDate.text ?? ""
         let v_stock = stockDate.text ?? ""
         let v_reference = referenceDate.text ?? ""
         
         vendadd = VendorPO(id: v_id, name: vname, issue_date: v_issue, stock_date: v_stock, reference: v_reference, vendor_email: vemail)
-        mode = "add"
-        performSegue(withIdentifier: "toSelectPO", sender: nil)
+        
+        if mode == "add" {
+            performSegue(withIdentifier: "toSelectPO", sender: nil)
+        }
+        else {
+            dismiss(animated: true) {
+                self.delegate?.didChangeVendor(vendor: self.vendadd!)
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -183,6 +218,61 @@ class AddPOViewController: UIViewController {
         let vc = segue.destination as! POSelectViewController
         vc.mode = mode
         vc.vendor = vendadd
+    }
+    
+    func vendorCheck(name: String, email: String) {
+        
+        let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        
+        loadIndicator.isAnimating = true
+        
+        ApiCalls.sharedCall.getVendorList(merchant_id: m_id) { isSuccess, responseData in
+            
+            if isSuccess {
+                
+                guard let list = responseData["result"] else {
+                    self.loadIndicator.isAnimating = false
+                    return
+                }
+                self.getResponseValues(list: list, name: name, email: email)
+            }
+            else {
+                self.loadIndicator.isAnimating = false
+            }
+        }
+    }
+    
+    func getResponseValues(list: Any, name: String, email: String) {
+        
+        let response = list as! [[String: Any]]
+                
+        for res in response {
+            
+            let vendor = VendorModel(vendor_id: "\(res["vendor_id"] ?? "")",
+                                     name: "\(res["name"] ?? "")",
+                                     phone:"\(res["phone"] ?? "")" ,
+                                     email: "\(res["email"] ?? "")",
+                                     city: "\(res["city"] ?? "")",
+                                     state: "\(res["state"] ?? "")",
+                                     zip_code: "\(res["zip_code"] ?? "")",
+                                     full_address: "\(res["full_address"] ?? "")",
+                                     pay_count: "\(res["pay_count"] ?? "")",
+                                     total_pay: "\(res["total_pay"] ?? "")",
+                                     recent_pay_amount: "\(res["recent_pay_amount"] ?? "")",
+                                     recent_payment_datetime: "\(res["recent_payment_datetime"] ?? "")",
+                                     enabled: "\(res["enabled"] ?? "")")
+            
+            if vendor.email == email {
+                vendorName.text = vendor.name
+                vendorEmail.text = vendor.email
+                newVendorId = vendor.vendor_id
+                loadIndicator.isAnimating = false
+                break
+            }
+            else {
+                loadIndicator.isAnimating = false
+            }
+        }
     }
 }
 
@@ -192,6 +282,7 @@ extension AddPOViewController: PODelegate {
         selectArray = vendor
         if vendor.count > 0 {
             let vend = vendor[0]
+            vendorSelectMode = "old"
             vendorName.text = vend.name
             vendorEmail.text = vend.email
         }
@@ -201,6 +292,14 @@ extension AddPOViewController: PODelegate {
         }
         createCustomTextField(textField: vendorName)
         createCustomTextField(textField: vendorEmail)
+    }
+}
+
+extension AddPOViewController: VendorNameEmailDelegate {
+    
+    func getNameEmail(name: String, email: String) {
+        vendorSelectMode = "new"
+        vendorCheck(name: name, email: email)
     }
 }
 
@@ -215,6 +314,27 @@ extension AddPOViewController: UITextFieldDelegate {
 }
 
 extension AddPOViewController {
+    
+    private func setupUI() {
+        
+        if #available(iOS 13.0, *) {
+            
+            overrideUserInterfaceStyle = .light
+        }
+        
+        view.addSubview(loadIndicator)
+        
+        NSLayoutConstraint.activate([
+            loadIndicator.centerXAnchor
+                .constraint(equalTo: view.centerXAnchor, constant: 0),
+            loadIndicator.centerYAnchor
+                .constraint(equalTo: view.centerYAnchor),
+            loadIndicator.widthAnchor
+                .constraint(equalToConstant: 40),
+            loadIndicator.heightAnchor
+                .constraint(equalTo: self.loadIndicator.widthAnchor)
+        ])
+    }
     
     func createCustomTextField(textField: MDCOutlinedTextField) {
         

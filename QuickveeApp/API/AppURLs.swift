@@ -9,10 +9,10 @@ import Foundation
 
 struct AppURLs {
     // live
-  //  static let base_url = "https://api-ci.quickvee.us/"
+    static let base_url = "https://api-ci.quickvee.us/"
     
     //test
-    static let base_url = "https://qa-api-ci.quickvee.us/"
+//    static let base_url = "https://qa-api-ci.quickvee.us/"
 
     
     static let ORDERS_LIST = "\(base_url)orders/order_list"
@@ -175,6 +175,8 @@ struct AppURLs {
     static let SAVE_PO = "\(base_url)Purchase_orders_api/save_po"
     static let UPDATE_PO = "\(base_url)Purchase_orders_api/update_po"
     static let DELETE_PO = "\(base_url)Purchase_orders_api/delete_po"
+    static let VOID_PO = "\(base_url)Purchase_orders_api/void_po"
+    static let RECEIVE_PO = "\(base_url)Purchase_orders_api/recieve_po"
     
     static let VENDORS_LIST = "\(base_url)app/vendor_payment_list"
     

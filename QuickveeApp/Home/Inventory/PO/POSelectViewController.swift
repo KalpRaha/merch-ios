@@ -131,32 +131,31 @@ class POSelectViewController: UIViewController {
         
         var miniSelect = [VariantPOModel]()
         
-        if mode == "add" {
-                        
-            for editvar in variantList {
+        for selectItem in poSelectedVariants {
+            miniSelect.append(VariantPOModel(po: selectItem, isSelect: true))
+        }
+        
+        for editvar in variantList {
+            
+            if editvar.isvarient == "1" {
                 
-                if editvar.isvarient == "1" {
-                    
-                    if poSelectedVariants.contains(where: {$0.var_id == editvar.var_id}) {
-                        miniSelect.append(VariantPOModel(po: editvar, isSelect: true))
-                    }
-                    else {
-                        miniSelect.append(VariantPOModel(po: editvar, isSelect: false))
-                    }
+                if poSelectedVariants.contains(where: {$0.var_id == editvar.var_id}) {
                 }
                 else {
-                    
-                    if poSelectedVariants.contains(where: {$0.id == editvar.id}) {
-                        miniSelect.append(VariantPOModel(po: editvar, isSelect: true))
-                    }
-                    else {
-                        miniSelect.append(VariantPOModel(po: editvar, isSelect: false))
-                    }
+                    miniSelect.append(VariantPOModel(po: editvar, isSelect: false))
                 }
-                
-                variantPOList = miniSelect
-                subVariantPOList = miniSelect
             }
+            else {
+                
+                if poSelectedVariants.contains(where: {$0.id == editvar.id}) {
+                }
+                else {
+                    miniSelect.append(VariantPOModel(po: editvar, isSelect: false))
+                }
+            }
+            
+            variantPOList = miniSelect
+            subVariantPOList = miniSelect
         }
     }
     
@@ -258,11 +257,10 @@ class POSelectViewController: UIViewController {
         }
         else {
             dismiss(animated: true) {
-                self.selectDelegate?.didSelectVariant(variant: self.poSelectedVariants,
-                                                      revreqQtyArr: self.reqQtySelArr, revCostArr: self.costSelArr,
-                                                      revNoteArr: self.noteSelArr, revAfterQtyArr: self.afterQtySelArr,
-                                                      revTotalArr: self.totalSelArr, revOrderItemArr: self.orderItemSelArr,
-                                                      revStatusArr: self.statusSelArr)
+                self.selectDelegate?.didSelectVariant(variant: self.poSelectedVariants, revreqQtyArr: self.reqQtySelArr,
+                                                      revCostArr: self.costSelArr, revNoteArr: self.noteSelArr,
+                                                      revAfterQtyArr: self.afterQtySelArr, revTotalArr: self.totalSelArr,
+                                                      revOrderItemArr: self.orderItemSelArr, revStatusArr: self.statusSelArr)
             }
         }
     }
@@ -301,15 +299,22 @@ class POSelectViewController: UIViewController {
 extension POSelectViewController: BarcodeScannerCodeDelegate, BarcodeScannerErrorDelegate, BarcodeScannerDismissalDelegate {
     
     func scanner(_ controller: BarcodeScanner.BarcodeScannerViewController, didCaptureCode code: String, type: String) {
+        
+        searchBar.text = code
+        
+        searchBar.becomeFirstResponder()
+        controller.dismiss(animated: true)
         performSearch(searchText: code)
     }
     
     func scanner(_ controller: BarcodeScanner.BarcodeScannerViewController, didReceiveError error: any Error) {
         print("failed")
+        controller.dismiss(animated: true)
     }
     
     func scannerDidDismiss(_ controller: BarcodeScanner.BarcodeScannerViewController) {
         print("failed")
+        controller.dismiss(animated: true)
     }
 }
 
@@ -497,12 +502,12 @@ extension POSelectViewController: UITableViewDelegate, UITableViewDataSource {
                 selectSubVariant(match: variant, offset: true)
                 poSelectedVariants.append(variant.po)
                 reqQtySelArr.append("")
-                costSelArr.append("")
+                costSelArr.append(variant.po.costperItem)
                 afterQtySelArr.append("")
                 totalSelArr.append("")
                 noteSelArr.append("")
                 orderItemSelArr.append("")
-                statusSelArr.append("")
+                statusSelArr.append("0")
             }
             else {
                 
@@ -528,12 +533,12 @@ extension POSelectViewController: UITableViewDelegate, UITableViewDataSource {
                 selectSubVariant(match: variant, offset: true)
                 poSelectedVariants.append(variant.po)
                 reqQtySelArr.append("")
-                costSelArr.append("")
+                costSelArr.append(variant.po.costperItem)
                 afterQtySelArr.append("")
                 totalSelArr.append("")
                 noteSelArr.append("")
                 orderItemSelArr.append("")
-                statusSelArr.append("")
+                statusSelArr.append("0")
             }
             else {
                 

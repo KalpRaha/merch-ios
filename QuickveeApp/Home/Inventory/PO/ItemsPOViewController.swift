@@ -8,9 +8,14 @@
 import UIKit
 
 protocol POSelectDelegate: AnyObject {
-    func didSelectVariant(variant: [InventoryVariant], revreqQtyArr: [String], revCostArr: [String],
-                          revNoteArr: [String], revAfterQtyArr: [String], revTotalArr: [String],
+    func didSelectVariant(variant: [InventoryVariant], revreqQtyArr: [String],
+                          revCostArr: [String], revNoteArr: [String],
+                          revAfterQtyArr: [String], revTotalArr: [String],
                           revOrderItemArr: [String], revStatusArr: [String])
+}
+
+protocol ChangeVendorDelegate: AnyObject {
+    func didChangeVendor(vendor: VendorPO)
 }
 
 class ItemsPOViewController: UIViewController {
@@ -30,8 +35,8 @@ class ItemsPOViewController: UIViewController {
     
     @IBOutlet weak var menu: UIView!
     @IBOutlet weak var emailLbl: UILabel!
-
-    var activeTextField = UITextField()
+    
+    weak var delegate: POSelectDelegate?
     
     var poSelectedVariants = [InventoryVariant]()
     var variantList = [InventoryVariant]()
@@ -55,6 +60,7 @@ class ItemsPOViewController: UIViewController {
     
     var fullAddedPOList = [InventoryVariant]()
     var fullAddedReqQtyArr = [String]()
+
     var fullAddedCostArr = [String]()
     var fullAddedNoteArr = [String]()
     var fullAddedAfterQtyArr = [String]()
@@ -64,7 +70,10 @@ class ItemsPOViewController: UIViewController {
     var fullAddedStatusArr = [String]()
     
     var itemslist = [POItems]()
-    var poVarList = [InventoryVariant]()
+    
+    private var isSymbolOnRight = false
+    
+    weak var saveDelegate: SavePOViewControllerDelegate?
     
     let loadingIndicator: ProgressView = {
         let progress = ProgressView(colors: [.systemBlue], lineWidth: 5)
@@ -106,6 +115,8 @@ class ItemsPOViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        UserDefaults.standard.set(0, forKey: "modal_screen")
+        
         if mode == "add" {
             editLbl.text = ""
             saveDraft.text = "Save Draft"
@@ -115,10 +126,17 @@ class ItemsPOViewController: UIViewController {
             autoBtn.setTitle("Auto PO", for: .normal)
             autoBtn.setTitleColor(.black, for: .normal)
             autoBtn.layer.borderColor = UIColor.black.cgColor
+            threeBtns.isHidden = true
         }
         else if mode == "edit" {
             editLbl.text = "Edit"
+            threeBtns.isHidden = false
             setupApi()
+        }
+        else {
+            saveBtn.setTitle("Save", for: .normal)
+            autoBtn.setTitle("Back", for: .normal)
+            vendorName.text = vendorSelect?.name
         }
     }
     
@@ -150,7 +168,7 @@ class ItemsPOViewController: UIViewController {
     func getResponseValues(list: Any) {
         
         let response = list as! [String: Any]
-                
+        
         let details = PODetails(id: "\(response["id"] ?? "")", merchant_id: "\(response["merchant_id"] ?? "")",
                                 admin_id: "\(response["admin_id"] ?? "")", po_number: "\(response["po_number"] ?? "")",
                                 vendor_id: "\(response["vendor_id"] ?? "")", vendor_names: "\(response["vendor_names"] ?? "")",
@@ -165,31 +183,22 @@ class ItemsPOViewController: UIViewController {
         
         bigDetails = details
         
+        vendorSelect = VendorPO(id: details.vendor_id, name: details.vendor_name,
+                                issue_date: details.issued_date, stock_date: details.stock_date,
+                                reference: details.reference, vendor_email: details.email)
+        
         vendorName.text = details.vendor_name
         vendor_id = details.vendor_id
-
-        if details.is_draft == "1" {
-            saveDraft.text = "Save Draft"
-            saveDraft.textColor = UIColor(named: "SelectCat")
-            saveBtn.setTitle("Save", for: .normal)
-            autoBtn.setTitle("Delete", for: .normal)
-            autoBtn.setTitleColor(UIColor(named: "deletBorder"), for: .normal)
-            autoBtn.layer.borderColor = UIColor(named: "deletBorder")?.cgColor
-            threeBtns.isHidden = true
-            searchBtn.isHidden = false
-            threeBtnWidth.constant = 0
-        }
-        else {
-            saveDraft.text = "Void"
-            saveDraft.textColor = UIColor(named: "deletBorder")
-            saveBtn.setTitle("Save", for: .normal)
-            autoBtn.setTitle("Edit PO", for: .normal)
-            autoBtn.setTitleColor(.black, for: .normal)
-            autoBtn.layer.borderColor = UIColor.black.cgColor
-            threeBtns.isHidden = false
-            searchBtn.isHidden = true
-            threeBtnWidth.constant = 50
-        }
+        
+        saveDraft.text = "Save Draft"
+        saveDraft.textColor = UIColor(named: "SelectCat")
+        saveBtn.setTitle("Create", for: .normal)
+        autoBtn.setTitle("Delete", for: .normal)
+        autoBtn.setTitleColor(UIColor(named: "deletBorder"), for: .normal)
+        autoBtn.layer.borderColor = UIColor(named: "deletBorder")?.cgColor
+        threeBtns.isHidden = true
+        searchBtn.isHidden = false
+        threeBtnWidth.constant = 0
         
         getItems(items: details.order_items)
     }
@@ -219,6 +228,7 @@ class ItemsPOViewController: UIViewController {
             smallitems.append(poitem)
             
             reqQtyArr.append(poitem.required_qty)
+            
             costArr.append(poitem.cost_per_item)
             noteArr.append(poitem.note)
             afterQtyArr.append(poitem.after_qty)
@@ -296,9 +306,66 @@ class ItemsPOViewController: UIViewController {
             }
         }
         
-        poVarList = smallVarList
+        poSelectedVariants = smallVarList
         
-        poVarList.append(contentsOf: fullAddedPOList)
+        poSelectedVariants.append(contentsOf: fullAddedPOList)
+        reqQtyArr.append(contentsOf: fullAddedReqQtyArr)
+        costArr.append(contentsOf: fullAddedCostArr)
+        noteArr.append(contentsOf: fullAddedNoteArr)
+        afterQtyArr.append(contentsOf: fullAddedAfterQtyArr)
+        totalArr.append(contentsOf: fullAddedTotalArr)
+        
+        orderItemArr.append(contentsOf: fullAddedOrderItemArr)
+        statusArr.append(contentsOf: fullAddedStatusArr)
+        
+        DispatchQueue.main.async {
+            self.loadingIndicator.isAnimating = false
+            self.tableview.isHidden = false
+            self.tableview.reloadData()
+        }
+    }
+    
+    func getResponseValuesAuto(list: Any){
+        
+        let response = list as! [[String: Any]]
+        var small = [POAutoItem]()
+        
+        for item in response {
+            
+            let auto = POAutoItem(product_id: "\(item["product_id"] ?? "")", product_title: "\(item["product_title"] ?? "")",
+                                  item_qty: "\(item["item_qty"] ?? "")", reorder_level: "\(item["reorder_level"] ?? "")",
+                                  reorder_qty: "\(item["reorder_qty"] ?? "")", costperItem: "\(item["costperItem"] ?? "")",
+                                  upc: "\(item["upc"] ?? "")", prefferd_vendor: "\(item["prefferd_vendor"] ?? "")",
+                                  assigned_vendors: "\(item["assigned_vendors"] ?? "")", variant_id: "\(item["variant_id"] ?? "")",
+                                  variant_title: "\(item["variant_title"] ?? "")", preferd_vendor_cost: "\(item["preferd_vendor_cost"] ?? "")")
+            
+            small.append(auto)
+        }
+        getAutoPOVariants(small: small)
+    }
+    
+    func getAutoPOVariants(small: [POAutoItem]) {
+        
+        var smallVarList = [InventoryVariant]()
+        
+        for variant in variantList {
+            
+            if variant.isvarient == "1" {
+                
+                if small.contains(where: {$0.variant_id == variant.var_id}) {
+                    smallVarList.append(variant)
+                }
+            }
+            else {
+                if small.contains(where: {$0.product_id == variant.id}) {
+                    smallVarList.append(variant)
+                }
+            }
+        }
+        
+        poSelectedVariants.append(contentsOf: smallVarList)
+        
+        poSelectedVariants.append(contentsOf: fullAddedPOList)
         reqQtyArr.append(contentsOf: fullAddedReqQtyArr)
         costArr.append(contentsOf: fullAddedCostArr)
         noteArr.append(contentsOf: fullAddedNoteArr)
@@ -317,11 +384,22 @@ class ItemsPOViewController: UIViewController {
     
     @objc func editClick() {
         
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyBoard.instantiateViewController(withIdentifier: "addpo") as! AddPOViewController
-        vc.addPODetails = bigDetails!
-        vc.mode = mode
-        present(vc, animated: true)
+        let modal = UserDefaults.standard.integer(forKey: "modal_screen")
+        
+        if modal == 0 {
+            
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyBoard.instantiateViewController(withIdentifier: "addpo") as! AddPOViewController
+            
+            let vendor = VendorPO(id: vendorSelect?.id ?? "", name: vendorSelect?.name ?? "",
+                                  issue_date: vendorSelect?.issue_date ?? "", stock_date: vendorSelect?.stock_date ?? "",
+                                  reference: vendorSelect?.reference ?? "", vendor_email: vendorSelect?.vendor_email ?? "")
+            vc.addPODetails = vendor
+            vc.mode = mode
+            vc.delegate = self
+            
+            present(vc, animated: true)
+        }
     }
     
     @objc func saveDraftClick() {
@@ -359,6 +437,18 @@ class ItemsPOViewController: UIViewController {
                         var_id = ""
                     }
                     
+                    for a in reqQtyArr {
+                        
+                        guard a != "" else {
+                            ToastClass.sharedToast.showToast(message: "Add Quantity for all variants",
+                                                             font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                            return
+                        }
+                    }
+                    
+                    tableview.isHidden = true
+                    loadingIndicator.isAnimating = true
+                    
                     let req = reqQtyArr[item]
                     let cost = costArr[item]
                     let total = totalArr[item]
@@ -371,23 +461,64 @@ class ItemsPOViewController: UIViewController {
                     
                     smallAdd.append(pos)
                 }
+                
+                do {
+                    let encoder = JSONEncoder()
+                    encoder.outputFormatting = .prettyPrinted  // Makes the output readable
+                    let jsonData = try encoder.encode(smallAdd) // Wrap the object in an array for consistency with the provided JSON structure
+                    
+                    // Convert the encoded JSON into a string for display or further processing
+                    if let jsonString = String(data: jsonData, encoding: .utf8) {
+                        final_json = jsonString
+                    }
+                } catch {
+                    print("Error encoding JSON: \(error)")
+                }
+                
+                ApiCalls.sharedCall.savePO(merchant_id: m_id, admin_id: m_id, vendor_id: v_id,
+                                           issue_date: i_d, stock_date: s_d, reference: r_f,
+                                           vendor_email: v_e, order_items: final_json, is_draft: "1",
+                                           created_at: i_d) { isSuccess, responseData in
+                    
+                    if isSuccess {
+                        ToastClass.sharedToast.showToast(message: "Draft Created Successfully", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                        self.tableview.isHidden = false
+                        self.loadingIndicator.isAnimating = false
+                        self.home()
+                    }
+                    else {
+                        print("Api Error")
+                    }
+                }
             }
             else {
                 
                 var smallAdd = [EditPO]()
                 
-                for item in 0..<poVarList.count {
+                for item in 0..<poSelectedVariants.count {
                     
-                    p_id = poVarList[item].id
+                    p_id = poSelectedVariants[item].id
                     
-                    if poVarList[item].isvarient == "1" {
-                        upc = poVarList[item].var_upc
-                        var_id = poVarList[item].var_id
+                    if poSelectedVariants[item].isvarient == "1" {
+                        upc = poSelectedVariants[item].var_upc
+                        var_id = poSelectedVariants[item].var_id
                     }
                     else {
-                        upc = poVarList[item].upc
+                        upc = poSelectedVariants[item].upc
                         var_id = ""
                     }
+                    
+                    for a in reqQtyArr {
+                        
+                        guard a != "" else {
+                            ToastClass.sharedToast.showToast(message: "Add Quantity for all variants",
+                                                             font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                            return
+                        }
+                    }
+                    
+                    tableview.isHidden = true
+                    loadingIndicator.isAnimating = true
                     
                     let req = reqQtyArr[item]
                     let cost = costArr[item]
@@ -428,6 +559,8 @@ class ItemsPOViewController: UIViewController {
                     
                     if isSuccess {
                         ToastClass.sharedToast.showToast(message: "Draft Updated Successfully", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                        self.tableview.isHidden = false
+                        self.loadingIndicator.isAnimating = false
                         self.home()
                     }
                     else {
@@ -439,14 +572,6 @@ class ItemsPOViewController: UIViewController {
         else {
             
         }
-    }
-    
-    func roundOf(item : String) -> Double {
-        
-        let doub = Double(item) ?? 0.00
-        let div = (100 * doub) / 100
-        print(div)
-        return div
     }
     
     func calQtyAfter(qty: String, req: String) -> String {
@@ -496,7 +621,16 @@ class ItemsPOViewController: UIViewController {
         
         vc.selectDelegate = self
         vc.mode = mode
-        vc.poSelectedVariants = poVarList
+        vc.poSelectedVariants = poSelectedVariants
+        
+        vc.reqQtySelArr = reqQtyArr
+        vc.costSelArr = costArr
+        vc.noteSelArr = noteArr
+        vc.afterQtySelArr = afterQtyArr
+        vc.totalSelArr = totalArr
+        vc.orderItemSelArr = orderItemArr
+        vc.statusSelArr = statusArr
+        
         present(vc, animated: true)
     }
     
@@ -516,21 +650,25 @@ class ItemsPOViewController: UIViewController {
         
         let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         
-        
         if sender.titleLabel?.text == "Auto PO" {
             
-            ApiCalls.sharedCall.autoPOList(merchant_id: m_id, admin_id: m_id, vendor_id: vendor_id) { isSuccess, responseData in
+            loadingIndicator.isAnimating = true
+            tableview.isHidden = true
+            
+            let v = vendorSelect?.id ?? ""
+            
+            ApiCalls.sharedCall.autoPOList(merchant_id: m_id, admin_id: m_id, vendor_id: v) { isSuccess, responseData in
                 
                 if isSuccess {
-                    
-                    if let status = responseData["status"], status as! Int == 1  {
-                       
-                        let msg = responseData["message"] as? String ?? ""
-                        ToastClass.sharedToast.showToast(message: msg,
-                                                         font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
-                        self.navigationController?.popViewController(animated: true)
+                    print(responseData)
+                    if let data = responseData["result"] {
+                        self.getResponseValuesAuto(list: data)
                     }
                     else {
+                        ToastClass.sharedToast.showToast(message: "No Product List Found",
+                                                         font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+                        self.loadingIndicator.isAnimating = false
+                        self.tableview.isHidden = false
                         print("Api Error")
                     }
                 }
@@ -543,35 +681,43 @@ class ItemsPOViewController: UIViewController {
             
             let emp_id = UserDefaults.standard.string(forKey: "emp_po_id") ?? ""
             
-            ApiCalls.sharedCall.deletePO(merchant_id: m_id, employee_id: emp_id, po_id: id) { isSuccess, responseData in
+            let alertController = UIAlertController(title: "Alert", message: "Are you sure you want to delete this PO?", preferredStyle: .alert)
+            
+            let cancel = UIAlertAction(title: "No", style: .default) { (action:UIAlertAction!) in
+                self.dismiss(animated: true)
+            }
+            
+            let okAction = UIAlertAction(title: "Yes", style: .default) { (action:UIAlertAction!) in
                 
-                if isSuccess {
+                print("Ok button tapped")
+                
+                ApiCalls.sharedCall.deletePO(merchant_id: m_id, employee_id: emp_id, po_id: self.id) { isSuccess, responseData in
                     
-                    if let status = responseData["status"], status as! Int == 1  {
-                       
-                        let msg = responseData["message"] as? String ?? ""
-                        ToastClass.sharedToast.showToast(message: msg,
-                                                         font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
-                        self.navigationController?.popViewController(animated: true)
+                    if isSuccess {
+                        
+                        if let status = responseData["status"], status as! Int == 1  {
+                           
+                            let msg = responseData["message"] as? String ?? ""
+                            ToastClass.sharedToast.showToast(message: msg,
+                                                             font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                        else {
+                            print("Api Error")
+                        }
                     }
                     else {
                         print("Api Error")
                     }
                 }
-                else {
-                    print("Api Error")
-                }
             }
+            
+            alertController.addAction(cancel)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion:nil)
         }
         else {
-            
-            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyBoard.instantiateViewController(withIdentifier: "poselect") as! POSelectViewController
-            
-            vc.selectDelegate = self
-            vc.mode = mode
-            vc.poSelectedVariants = poSelectedVariants
-            present(vc, animated: true)
+            dismiss(animated: true)
         }
     }
     
@@ -591,7 +737,7 @@ class ItemsPOViewController: UIViewController {
         var var_id = ""
         var p_id = ""
         
-        if sender.titleLabel?.text == "Create" {
+        if mode == "add" {
             
             var smallAdd = [AddPO]()
             
@@ -606,6 +752,15 @@ class ItemsPOViewController: UIViewController {
                 else {
                     upc = poSelectedVariants[item].upc
                     var_id = ""
+                }
+                
+                for a in reqQtyArr {
+                    
+                    guard a != "" else {
+                        ToastClass.sharedToast.showToast(message: "Add Quantity for all variants",
+                                                         font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                        return
+                    }
                 }
                 
                 let req = reqQtyArr[item]
@@ -651,19 +806,35 @@ class ItemsPOViewController: UIViewController {
         }
         else {
             
+            let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+            var final_json = ""
+            
+            var upc = ""
+            var var_id = ""
+            var p_id = ""
+            
             var smallAdd = [EditPO]()
             
-            for item in 0..<poVarList.count {
+            for item in 0..<poSelectedVariants.count {
                 
-                p_id = poVarList[item].id
+                p_id = poSelectedVariants[item].id
                 
-                if poVarList[item].isvarient == "1" {
-                    upc = poVarList[item].var_upc
-                    var_id = poVarList[item].var_id
+                if poSelectedVariants[item].isvarient == "1" {
+                    upc = poSelectedVariants[item].var_upc
+                    var_id = poSelectedVariants[item].var_id
                 }
                 else {
-                    upc = poVarList[item].upc
+                    upc = poSelectedVariants[item].upc
                     var_id = ""
+                }
+                
+                for a in reqQtyArr {
+                    
+                    guard a != "" else {
+                        ToastClass.sharedToast.showToast(message: "Add Quantity for all variants",
+                                                         font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                        return
+                    }
                 }
                 
                 let req = reqQtyArr[item]
@@ -697,16 +868,25 @@ class ItemsPOViewController: UIViewController {
             
             let po_id = bigDetails?.id ?? ""
             let r_status = bigDetails?.received_status ?? ""
+            let upd_at = bigDetails?.updated_at ?? ""
             
             ApiCalls.sharedCall.updatePO(merchant_id: m_id, admin_id: m_id, po_id: po_id,
                                          issue_date: i_d, stock_date: s_d, reference: r_f,
                                          vendor_email: v_e, order_items: final_json, is_draft: "0",
-                                         received_status: r_status, updated_at: i_d) { isSuccess, responseData in
+                                         received_status: r_status, updated_at: upd_at) { isSuccess, responseData in
                 
                 if isSuccess {
                     
                     ToastClass.sharedToast.showToast(message: "PO Updated Successfully", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                    self.home()
+                    
+                    if self.mode == "edit" {
+                        self.home()
+                    }
+                    else {
+                        self.dismiss(animated: true) {
+                            self.saveDelegate?.savePOItem()
+                        }
+                    }
                 }
                 else {
                     print("Api Error")
@@ -717,53 +897,80 @@ class ItemsPOViewController: UIViewController {
     
     @IBAction func deleteClickBtn(_ sender: UIButton) {
         
-        loadingIndicator.isAnimating = true
-        tableview.isHidden = true
+        let alertController = UIAlertController(title: "Alert", message: "Are you sure you want to delete this item?", preferredStyle: .alert)
         
-        let tag = sender.tag
-        
-        if mode == "add" {
-            poSelectedVariants.remove(at: tag)
-        }
-        else {
-            poVarList.remove(at: tag)
+        let cancel = UIAlertAction(title: "No", style: .default) { (action:UIAlertAction!) in
+            self.dismiss(animated: true)
         }
         
-        loadingIndicator.isAnimating = false
-        tableview.isHidden = false
-        tableview.reloadData()
+        let okAction = UIAlertAction(title: "Yes", style: .default) { (action:UIAlertAction!) in
+            
+            print("Ok button tapped")
+            
+            self.loadingIndicator.isAnimating = true
+            self.tableview.isHidden = true
+            
+            let tag = sender.tag
+            self.poSelectedVariants.remove(at: tag)
+            self.reqQtyArr.remove(at: tag)
+            self.costArr.remove(at: tag)
+            self.noteArr.remove(at: tag)
+            self.afterQtyArr.remove(at: tag)
+            self.totalArr.remove(at: tag)
+            self.orderItemArr.remove(at: tag)
+            self.statusArr.remove(at: tag)
+            
+            self.loadingIndicator.isAnimating = false
+            self.tableview.isHidden = false
+            self.tableview.reloadData()
+        }
+        
+        alertController.addAction(cancel)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion:nil)
     }
     
     
     @IBAction func backBtnClick(_ sender: UIButton) {
         
-        navigationController?.popViewController(animated: true)
+        if mode == "add" || mode == "edit" {
+            navigationController?.popViewController(animated: true)
+        }
+        else {
+            dismiss(animated: true)
+        }
     }
     
     
     @IBAction func homeBtnClick(_ sender: UIButton) {
         
-        var destiny = 0
-        
-        let viewcontrollerArray = navigationController?.viewControllers
-        
-        if let destinationIndex = viewcontrollerArray!.firstIndex(where: { $0 is HomeViewController }) {
-            destiny = destinationIndex
+        if mode == "add" || mode == "edit" {
+            var destiny = 0
+            
+            let viewcontrollerArray = navigationController?.viewControllers
+            
+            if let destinationIndex = viewcontrollerArray!.firstIndex(where: { $0 is HomeViewController }) {
+                destiny = destinationIndex
+            }
+            
+            navigationController?.popToViewController(viewcontrollerArray![destiny], animated: true)
         }
-        
-        navigationController?.popToViewController(viewcontrollerArray![destiny], animated: true)
+        else {
+            dismiss(animated: true)
+        }
     }
 }
 
 extension ItemsPOViewController: POSelectDelegate {
     
-    func didSelectVariant(variant: [InventoryVariant], revreqQtyArr: [String], revCostArr: [String],
-                          revNoteArr: [String], revAfterQtyArr: [String], revTotalArr: [String],
+    func didSelectVariant(variant: [InventoryVariant], revreqQtyArr: [String],
+                          revCostArr: [String], revNoteArr: [String],
+                          revAfterQtyArr: [String], revTotalArr: [String],
                           revOrderItemArr: [String], revStatusArr: [String]) {
-                
+        
         if variant.count > 0 {
             
-            poVarList = variant
+            poSelectedVariants = variant
             reqQtyArr = revreqQtyArr
             costArr = revCostArr
             noteArr = revNoteArr
@@ -780,23 +987,18 @@ extension ItemsPOViewController: POSelectDelegate {
     }
 }
 
+extension ItemsPOViewController: ChangeVendorDelegate {
+    
+    func didChangeVendor(vendor: VendorPO) {
+        vendorSelect = vendor
+        vendorName.text = vendor.name
+    }
+}
+
 extension ItemsPOViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        let index = IndexPath(row: textField.tag, section: 0)
-        
-        let cell = tableview.cellForRow(at: index) as! ItemsPOTableViewCell
-        
-        if textField == cell.qtyTextField {
-            activeTextField = textField
-        }
-        else if textField == cell.costPerTextField {
-            activeTextField = textField
-        }
-        else {
-            activeTextField = textField
-        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -807,90 +1009,103 @@ extension ItemsPOViewController: UITextFieldDelegate {
         
         if textField == cell.qtyTextField {
             
-            if mode == "add" {
-                
-                let req_qty = cell.qtyTextField.text ?? ""
-                let qty = poSelectedVariants[textField.tag].quantity
-                
-                let cost = cell.costPerTextField.text ?? ""
-                
-                let req_int = Int(req_qty) ?? 0
-                let qty_int = Int(qty) ?? 0
-                
-                let req_doub = Double(req_qty) ?? 0.0
-                let cost_doub = Double(cost) ?? 0.0
-                
-                let qtyAfter = qty_int + req_int
-                let total = req_doub * cost_doub
-                
-                cell.qtyAfter.text = "Qty After: \(qtyAfter)"
-                cell.total.text = "Total: $\(total)"
-                
-                reqQtyArr[textField.tag] = req_qty
-                afterQtyArr[textField.tag] = "\(qtyAfter)"
-                totalArr[textField.tag] = "\(total)"
-            }
-            else {
-                
-                let req_qty = cell.qtyTextField.text ?? ""
-                let qty = poVarList[textField.tag].quantity
-                
-                let cost = cell.costPerTextField.text ?? ""
-                
-                let req_int = Int(req_qty) ?? 0
-                let qty_int = Int(qty) ?? 0
-                
-                let req_doub = Double(req_qty) ?? 0.0
-                let cost_doub = Double(cost) ?? 0.0
-                
-                let qtyAfter = qty_int + req_int
-                let total = req_doub * cost_doub
-                
-                cell.qtyAfter.text = "Qty After: \(qtyAfter)"
-                cell.total.text = "Total: $\(total)"
-                
-                reqQtyArr[textField.tag] = req_qty
-                afterQtyArr[textField.tag] = "\(qtyAfter)"
-                totalArr[textField.tag] = "\(total)"
-            }
+            let req_qty = cell.qtyTextField.text ?? ""
+            let qty = poSelectedVariants[textField.tag].quantity
+            
+            let cost = cell.costPerTextField.text ?? ""
+            
+            let cost_str = cost.replacingOccurrences(of: "$", with: "")
+            
+            let req_int = Int(req_qty) ?? 0
+            let qty_int = Int(qty) ?? 0
+            
+            let req_doub = Double(req_qty) ?? 0.0
+            let cost_doub = Double(cost_str) ?? 0.0
+            
+            let qtyAfter = qty_int + req_int
+            let total = req_doub * cost_doub
+            
+            cell.qtyAfter.text = "Qty After: \(qtyAfter)"
+            
+            let totoal = String(format: "%.02f", roundOf(item: "\(total)"))
+            
+            cell.total.text = "Total: $\(totoal)"
+            totalArr[textField.tag] = "\(totoal)"
+            
+            reqQtyArr[textField.tag] = req_qty
+            afterQtyArr[textField.tag] = "\(qtyAfter)"
         }
         else if textField == cell.costPerTextField {
             
-            if mode == "add" {
-                
-                let req_qty = cell.qtyTextField.text ?? ""
-                let cost = cell.costPerTextField.text ?? ""
-                
-                let req_doub = Double(req_qty) ?? 0.0
-                let cost_doub = Double(cost) ?? 0.0
-                
-                let total = req_doub * cost_doub
-                
-                costArr[textField.tag] = cost
-                
-                cell.total.text = "Total: $\(total)"
-                totalArr[textField.tag] = "\(total)"
-            }
-            else {
-                
-                let req_qty = cell.qtyTextField.text ?? ""
-                let cost = cell.costPerTextField.text ?? ""
-                                
-                let req_doub = Double(req_qty) ?? 0.0
-                let cost_doub = Double(cost) ?? 0.0
-                
-                let total = req_doub * cost_doub
-                
-                costArr[textField.tag] = cost
-                
-                cell.total.text = "Total: $\(total)"
-                
-                totalArr[textField.tag] = "\(total)"
-            }
+            let req_qty = cell.qtyTextField.text ?? ""
+            let cost = cell.costPerTextField.text ?? ""
+            
+            let cost_str = cost.replacingOccurrences(of: "$", with: "")
+            
+            let req_doub = Double(req_qty) ?? 0.0
+            let cost_doub = Double(cost_str) ?? 0.0
+            
+            let total = req_doub * cost_doub
+            
+            costArr[textField.tag] = cost_str
+            
+            let totoal = String(format: "%.02f", roundOf(item: "\(total)"))
+            
+            cell.total.text = "Total: $\(totoal)"
+            totalArr[textField.tag] = "\(totoal)"
         }
         else {
             let note = cell.noteField.text ?? ""
             noteArr[textField.tag] = note
+        }
+    }
+    
+    @objc func updateTextField(textField: UITextField) {
+        
+        var cleanedAmount = ""
+        
+        for character in textField.text ?? "" {
+            if character.isNumber {
+                cleanedAmount.append(character)
+            }
+        }
+        
+        if isSymbolOnRight {
+            cleanedAmount = String(cleanedAmount.dropLast())
+        }
+        
+        if Double(cleanedAmount) ?? 00000 > 99999999 {
+            cleanedAmount = String(cleanedAmount.dropLast())
+        }
+        
+        let amount = Double(cleanedAmount) ?? 0.0
+        let amountAsDouble = (amount / 100.0)
+        var amountAsString = String(amountAsDouble)
+        if cleanedAmount.last == "0" {
+            amountAsString.append("0")
+        }
+        textField.text = "$\(amountAsString)"
+        
+        if textField.text == "000" {
+            textField.text = ""
+        }
+    }
+    
+    func roundOf(item : String) -> Double {
+        
+        var itemDollar = ""
+        
+        if item.starts(with: "$") || item.starts(with: "-") {
+            itemDollar = String(item.dropFirst())
+            let doub = Double(itemDollar) ?? 0.00
+            let div = (100 * doub) / 100
+            return div
+        }
+        else {
+            let doub = Double(item) ?? 0.00
+            let div = (100 * doub) / 100
+            print(div)
+            return div
         }
     }
     
@@ -903,9 +1118,9 @@ extension ItemsPOViewController: UITextFieldDelegate {
         
         NSLayoutConstraint.activate([
             loadingIndicator.centerXAnchor
-                .constraint(equalTo: view.centerXAnchor, constant: 0),
+                .constraint(equalTo: tableview.centerXAnchor, constant: 0),
             loadingIndicator.centerYAnchor
-                .constraint(equalTo: view.centerYAnchor),
+                .constraint(equalTo: tableview.centerYAnchor),
             loadingIndicator.widthAnchor
                 .constraint(equalToConstant: 40),
             loadingIndicator.heightAnchor
@@ -917,13 +1132,7 @@ extension ItemsPOViewController: UITextFieldDelegate {
 extension ItemsPOViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if mode == "add" {
-            return poSelectedVariants.count
-        }
-        else {
-            return poVarList.count
-        }
+        return poSelectedVariants.count
     }
     
     
@@ -931,22 +1140,22 @@ extension ItemsPOViewController: UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ItemsPOTableViewCell
         
+        let item = poSelectedVariants[indexPath.row]
+        
         if mode == "add" {
-            
-            let item = poSelectedVariants[indexPath.row]
             
             cell.name.text = item.title
             
             cell.qtyTextField.text = ""
             
             if item.isvarient == "1" {
-                cell.costPerTextField.text = costArr[indexPath.row]
                 cell.upc.text = "UPC: \(item.var_upc)"
             }
             else {
-                cell.costPerTextField.text = costArr[indexPath.row]
                 cell.upc.text = "UPC: \(item.upc)"
             }
+            
+            cell.costPerTextField.text = "$\(costArr[indexPath.row])"
             
             cell.noteField.text = noteArr[indexPath.row]
             
@@ -956,23 +1165,34 @@ extension ItemsPOViewController: UITableViewDataSource, UITableViewDelegate {
         
         else {
             
-            let item = poVarList[indexPath.row]
-            
             cell.name.text = item.title
             
             if item.isvarient == "1" {
-                cell.costPerTextField.text = costArr[indexPath.row]
                 cell.upc.text = "UPC: \(item.var_upc)"
             }
             else {
-                cell.costPerTextField.text = costArr[indexPath.row]
                 cell.upc.text = "UPC: \(item.upc)"
+            }
+            
+            cell.costPerTextField.text = "$\(costArr[indexPath.row])"
+            
+            let status = statusArr[indexPath.row]
+            
+            if status == "0" || status == "1" {
+                cell.qtyTextField.isEnabled = true
+                cell.costPerTextField.isEnabled = true
+                cell.noteField.isEnabled = true
+            }
+            else {
+                cell.qtyTextField.isEnabled = false
+                cell.costPerTextField.isEnabled = false
+                cell.noteField.isEnabled = false
             }
             
             cell.qtyTextField.text = reqQtyArr[indexPath.row]
             
             cell.noteField.text = noteArr[indexPath.row]
-                    
+            
             cell.qtyAfter.text = "Qty After: \(afterQtyArr[indexPath.row])"
             cell.total.text = "Total: $\(totalArr[indexPath.row])"
         }
@@ -988,6 +1208,7 @@ extension ItemsPOViewController: UITableViewDataSource, UITableViewDelegate {
         cell.costPerTextField.borderStyle = .none
         cell.costPerTextField.delegate = self
         cell.costPerTextField.keyboardType = .numberPad
+        cell.costPerTextField.addTarget(self, action: #selector(updateTextField), for: .editingChanged)
         
         cell.costView.layer.borderColor = UIColor(hexString: "#D0D0D0").cgColor
         cell.costView.layer.borderWidth = 1
@@ -1004,9 +1225,10 @@ extension ItemsPOViewController: UITableViewDataSource, UITableViewDelegate {
         cell.costPerTextField.tag = indexPath.row
         cell.qtyTextField.tag = indexPath.row
         cell.noteField.tag = indexPath.row
+        cell.qtyAfter.tag = indexPath.row
+        cell.total.tag = indexPath.row
         
         return cell
         
     }
-    
 }

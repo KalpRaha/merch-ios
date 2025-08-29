@@ -41,6 +41,8 @@ class AddVendorsVC: UIViewController {
     var mode = ""
     var vendorId = ""
     
+    weak var delegate: VendorNameEmailDelegate?
+    
     let menu = DropDown()
     
     let states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
@@ -108,7 +110,7 @@ class AddVendorsVC: UIViewController {
     }
     
     func setMode(){
-        if mode == "add"{
+        if mode == "add" || mode == "poadd"{
             addTitle.text = "Add Vendor"
             disableBtn.isHidden = true
             
@@ -240,9 +242,7 @@ class AddVendorsVC: UIViewController {
             }
             else {
                 ToastClass.sharedToast.showToast(message: responsevalues, font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                DispatchQueue.main.async {
                     self.loadingIndicator.isAnimating = false
-                }
             }
         }
     
@@ -296,7 +296,14 @@ class AddVendorsVC: UIViewController {
                 self.loadingIndicator.isAnimating = false
                 print(list)
                 if list == "Vendor Created Successfully." || list == "Vendor Updated Successfully." {
-                    self.navigationController?.popViewController(animated: true)
+                    if self.mode == "poadd" {
+                        self.dismiss(animated: true) {
+                            self.delegate?.getNameEmail(name: name, email: emailId)
+                        }
+                    }
+                    else {
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }
             }
             else {
@@ -363,22 +370,37 @@ class AddVendorsVC: UIViewController {
     }
     
     @IBAction func backBtnClick(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
+        if mode == "poadd" {
+            dismiss(animated: true)
+        }
+        else {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func homeBtnClick(_ sender: UIButton) {
         
-        let viewcontrollerArray = navigationController?.viewControllers
-        var destiny = 0
-        if let destinationIndex = viewcontrollerArray!.firstIndex(where: { $0 is HomeViewController }) {
-            destiny = destinationIndex
+        if mode == "poadd" {
+            dismiss(animated: true)
         }
-        navigationController?.popToViewController(viewcontrollerArray![destiny], animated: true)
+        else {
+            let viewcontrollerArray = navigationController?.viewControllers
+            var destiny = 0
+            if let destinationIndex = viewcontrollerArray!.firstIndex(where: { $0 is HomeViewController }) {
+                destiny = destinationIndex
+            }
+            navigationController?.popToViewController(viewcontrollerArray![destiny], animated: true)
+        }
         
     }
     
     @IBAction func cancelBtnClick(_ sender: UIButton) {
-        dismiss(animated: true)
+        if mode == "poadd" {
+            dismiss(animated: true)
+        }
+        else {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     

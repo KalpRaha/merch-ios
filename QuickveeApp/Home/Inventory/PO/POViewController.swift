@@ -9,7 +9,7 @@ import UIKit
 
 protocol POListDelegate: AnyObject {
     
-    func getPOVendors(vendors: [VendorsPO])
+    func getPOVendors(vendors: [VendorsPO], status: [String])
 }
 
 class POListViewController: UIViewController {
@@ -17,8 +17,11 @@ class POListViewController: UIViewController {
     @IBOutlet weak var tableview: UITableView!
     
     @IBOutlet weak var filterBtn: UIButton!
-    @IBOutlet weak var filterLbl: UILabel!
     @IBOutlet weak var lblSelCat: UILabel!
+    
+    @IBOutlet weak var noDataView: UIView!
+    @IBOutlet weak var noDataImg: UIButton!
+    @IBOutlet weak var noDataLbl: UILabel!
     
     var polist = [PO]()
     var subPOlist = [PO]()
@@ -26,7 +29,7 @@ class POListViewController: UIViewController {
     
     var filterList = [PO]()
     var selectArray = [VendorsPO]()
-    
+    var selectPOStatus = [String]()
     var isFilter = false
     var mode = ""
     var po_id = ""
@@ -43,18 +46,16 @@ class POListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(openVendors))
-        filterLbl.addGestureRecognizer(tap)
-        filterLbl.isUserInteractionEnabled = true
-        tap.numberOfTapsRequired = 1
-        
         tableview.showsVerticalScrollIndicator = false
+        lblSelCat.layer.cornerRadius = 5
+        lblSelCat.layer.masksToBounds = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         subPOlist = []
+        setupUI()
         setUpApi()
     }
     
@@ -62,6 +63,9 @@ class POListViewController: UIViewController {
         
         tableview.isHidden = true
         loadingIndicator.isHidden = true
+        noDataView.isHidden = true
+        noDataImg.isHidden = true
+        noDataLbl.isHidden = true
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         
@@ -76,15 +80,26 @@ class POListViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.loadingIndicator.isAnimating = false
                         self.tableview.isHidden = false
+                        self.noDataView.isHidden = true
+                        self.noDataImg.isHidden = true
+                        self.noDataLbl.isHidden = true
                         self.tableview.reloadData()
                     }
                 }
                 else {
                     print("Api Error")
+                    self.loadingIndicator.isAnimating = false
+                    self.noDataView.isHidden = false
+                    self.noDataImg.isHidden = false
+                    self.noDataLbl.isHidden = false
                 }
             }
             else {
                 print("Api Error")
+                self.loadingIndicator.isAnimating = false
+                self.noDataView.isHidden = false
+                self.noDataImg.isHidden = false
+                self.noDataLbl.isHidden = false
             }
         }
     }
@@ -129,25 +144,46 @@ class POListViewController: UIViewController {
         tableview.reloadData()
     }
     
-    @objc func openVendors() {
-        openVendor()
-    }
-    
-    func openVendor() {
+    func setupStatusFilterApi(status: String) {
         
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyBoard.instantiateViewController(withIdentifier: "filtercategory") as! FilterCategoryViewController
-        vc.catMode = "POVc"
-        vc.delegateVendorsSelected = self
-        vc.selectVendors = selectArray
-        print(vc.selectVendors)
-        vc.apiMode = "vendors"
+        var smallPO = [PO]()
         
-        present(vc, animated: true, completion: {
-            vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
-        })
+        for po in polist {
+            
+            if status == "Active" {
+                if po.received_status == "0" && po.is_draft == "0" && po.is_void == "0" {
+                    smallPO.append(po)
+                }
+            }
+            else if status == "Partial" {
+                if po.received_status == "1" && po.is_draft == "0" && po.is_void == "0" {
+                    smallPO.append(po)
+                }
+            }
+            else if status == "Received" {
+                if po.received_status == "2" && po.is_draft == "0" && po.is_void == "0" {
+                    smallPO.append(po)
+                }
+            }
+            else if status == "Void" {
+                if po.is_void == "1" {
+                    smallPO.append(po)
+                }
+            }
+            else {
+                if po.is_draft == "1" {
+                    smallPO.append(po)
+                }
+            }
+        }
+        
+        filterList = smallPO
+        subPOlist = smallPO
+        
+        tableview.isHidden = false
+        loadingIndicator.isAnimating = false
+        tableview.reloadData()
     }
-    
     
     func performSearch(searchText: String) {
         
@@ -165,19 +201,54 @@ class POListViewController: UIViewController {
             searching = true
             
             if selectArray.count == 0 {
-                searchPOlist = subPOlist.filter { $0.po_number.lowercased().contains(searchText.lowercased())
+                searchPOlist = subPOlist.filter { $0.po_number.lowercased().contains(searchText.lowercased())}
+                if searchPOlist.count == 0 {
+                    tableview.isHidden = true
+                    noDataView.isHidden = false
+                    noDataImg.isHidden = false
+                    noDataLbl.isHidden = false
+                }
+                else {
+                    tableview.isHidden = false
+                    noDataView.isHidden = true
+                    noDataImg.isHidden = true
+                    noDataLbl.isHidden = true
+                    tableview.reloadData()
                 }
             }
             
             else {
                 filterList = subPOlist.filter { $0.po_number.lowercased().contains(searchText.lowercased())}
+                if filterList.count == 0 {
+                    tableview.isHidden = true
+                    noDataView.isHidden = false
+                    noDataImg.isHidden = false
+                    noDataLbl.isHidden = false
+                }
+                else {
+                    tableview.isHidden = false
+                    noDataView.isHidden = true
+                    noDataImg.isHidden = true
+                    noDataLbl.isHidden = true
+                    tableview.reloadData()
+                }
             }
-            tableview.reloadData()
         }
     }
     
     @IBAction func filterBtnClick(_ sender: UIButton) {
-        openVendor()
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "filtercategory") as! FilterCategoryViewController
+        vc.catMode = "POVc"
+        vc.delegateVendorsSelected = self
+        vc.selectVendors = selectArray
+        vc.selectPOStatus = selectPOStatus
+        vc.apiMode = "vendors"
+        
+        present(vc, animated: true, completion: {
+            vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
+        })
     }
     
     
@@ -208,13 +279,19 @@ class POListViewController: UIViewController {
 
 extension POListViewController: POListDelegate {
     
-    func getPOVendors(vendors: [VendorsPO]) {
+    func getPOVendors(vendors: [VendorsPO], status: [String]) {
         selectArray = vendors
+        selectPOStatus = status
         
-        if selectArray.count == 0 {
+        if selectArray.count == 0 && selectPOStatus.count == 0 {
             isFilter = false
             setUpApi()
             lblSelCat.text = ""
+        }
+        else if selectPOStatus.count > 0 {
+            isFilter = true
+            setupStatusFilterApi(status: selectPOStatus[0])
+            lblSelCat.text = "   \(selectPOStatus.count)   "
         }
         else {
             isFilter = true
@@ -308,9 +385,23 @@ extension POListViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 cell.qtyValue.text = po.total_qty
                 cell.costValue.text = po.total_cost
-                cell.dueDateValue.text = po.received_at
-                cell.updatedValue.text = po.updated_at
-                cell.receivedValue.text = po.received_at
+                cell.dueDateValue.text = "-"
+                
+                let date1 = po.updated_at.split(separator: " ")[0]
+                let datestr1 = String(date1)
+                var upd1 = ToastClass.sharedToast.setCouponsDateFormat(dateStr: datestr1)
+                if upd1 == "" {
+                    upd1 = "-"
+                }
+                cell.updatedValue.text = upd1
+                
+                let date2 = po.received_at.split(separator: " ")[0]
+                let datestr2 = String(date2)
+                var upd2 = ToastClass.sharedToast.setCouponsDateFormat(dateStr: datestr2)
+                if upd2 == "" {
+                    upd2 = "-"
+                }
+                cell.receivedValue.text = upd2
                 
                 cell.bgView.layer.borderColor = UIColor(hexString: "#DEDEDE").cgColor
                 cell.bgView.layer.borderWidth = 1
@@ -348,9 +439,29 @@ extension POListViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 cell.qtyValue.text = po.total_qty
                 cell.costValue.text = po.total_cost
-                cell.dueDateValue.text = po.received_at
-                cell.updatedValue.text = po.updated_at
-                cell.receivedValue.text = po.received_at
+                cell.dueDateValue.text = "-"
+                
+                let date1 = po.updated_at.split(separator: " ")[0]
+                let datestr1 = String(date1)
+                let upd1 = ToastClass.sharedToast.setCouponsDateFormat(dateStr: datestr1)
+                if upd1 == "" {
+                    let date = po.created_at.split(separator: " ")[0]
+                    let datestr = String(date)
+                    let upd = ToastClass.sharedToast.setCouponsDateFormat(dateStr: datestr)
+                    cell.updatedValue.text = upd
+                }
+                else {
+                    cell.updatedValue.text = upd1
+                }
+                
+                
+                let date2 = po.received_at.split(separator: " ")[0]
+                let datestr2 = String(date2)
+                var upd2 = ToastClass.sharedToast.setCouponsDateFormat(dateStr: datestr2)
+                if upd2 == "" {
+                    upd2 = "-"
+                }
+                cell.receivedValue.text = upd2
                 
                 cell.bgView.layer.borderColor = UIColor(hexString: "#DEDEDE").cgColor
                 cell.bgView.layer.borderWidth = 1
@@ -391,9 +502,28 @@ extension POListViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 cell.qtyValue.text = po.total_qty
                 cell.costValue.text = po.total_cost
-                cell.dueDateValue.text = po.received_at
-                cell.updatedValue.text = po.updated_at
-                cell.receivedValue.text = po.received_at
+                cell.dueDateValue.text = "-"
+                
+                let date1 = po.updated_at.split(separator: " ")[0]
+                let datestr1 = String(date1)
+                let upd1 = ToastClass.sharedToast.setCouponsDateFormat(dateStr: datestr1)
+                if upd1 == "" {
+                    let date = po.created_at.split(separator: " ")[0]
+                    let datestr = String(date)
+                    let upd = ToastClass.sharedToast.setCouponsDateFormat(dateStr: datestr)
+                    cell.updatedValue.text = upd
+                }
+                else {
+                    cell.updatedValue.text = upd1
+                }
+                
+                let date2 = po.received_at.split(separator: " ")[0]
+                let datestr2 = String(date2)
+                var upd2 = ToastClass.sharedToast.setCouponsDateFormat(dateStr: datestr2)
+                if upd2 == "" {
+                    upd2 = "-"
+                }
+                cell.receivedValue.text = upd2
                 
                 cell.bgView.layer.borderColor = UIColor(hexString: "#DEDEDE").cgColor
                 cell.bgView.layer.borderWidth = 1
@@ -431,9 +561,28 @@ extension POListViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 cell.qtyValue.text = po.total_qty
                 cell.costValue.text = po.total_cost
-                cell.dueDateValue.text = po.received_at
-                cell.updatedValue.text = po.updated_at
-                cell.receivedValue.text = po.received_at
+                cell.dueDateValue.text = "-"
+                
+                let date1 = po.updated_at.split(separator: " ")[0]
+                let datestr1 = String(date1)
+                let upd1 = ToastClass.sharedToast.setCouponsDateFormat(dateStr: datestr1)
+                if upd1 == "" {
+                    let date = po.created_at.split(separator: " ")[0]
+                    let datestr = String(date)
+                    let upd = ToastClass.sharedToast.setCouponsDateFormat(dateStr: datestr)
+                    cell.updatedValue.text = upd
+                }
+                else {
+                    cell.updatedValue.text = upd1
+                }
+                
+                let date2 = po.received_at.split(separator: " ")[0]
+                let datestr2 = String(date2)
+                var upd2 = ToastClass.sharedToast.setCouponsDateFormat(dateStr: datestr2)
+                if upd2 == "" {
+                    upd2 = "-"
+                }
+                cell.receivedValue.text = upd2
                 
                 cell.bgView.layer.borderColor = UIColor(hexString: "#DEDEDE").cgColor
                 cell.bgView.layer.borderWidth = 1
@@ -457,11 +606,11 @@ extension POListViewController: UITableViewDelegate, UITableViewDataSource {
                 po_id = po.id
                 name = po.vendor_name
                 
-                if po.is_void == "1" || po.received_status == "2" {
-                    performSegue(withIdentifier: "toEditPO", sender: nil)
+                if po.is_draft == "1" {
+                    performSegue(withIdentifier: "toEditDraftPO", sender: nil)
                 }
                 else {
-                    performSegue(withIdentifier: "toEditDraftPO", sender: nil)
+                    performSegue(withIdentifier: "toEditPO", sender: nil)
                 }
             }
             else {
@@ -469,11 +618,11 @@ extension POListViewController: UITableViewDelegate, UITableViewDataSource {
                 po_id = po.id
                 name = po.vendor_name
                 
-                if po.is_void == "1" || po.received_status == "2" {
-                    performSegue(withIdentifier: "toEditPO", sender: nil)
+                if po.is_draft == "1" {
+                    performSegue(withIdentifier: "toEditDraftPO", sender: nil)
                 }
                 else {
-                    performSegue(withIdentifier: "toEditDraftPO", sender: nil)
+                    performSegue(withIdentifier: "toEditPO", sender: nil)
                 }
             }
         }
@@ -483,11 +632,11 @@ extension POListViewController: UITableViewDelegate, UITableViewDataSource {
                 po_id = po.id
                 name = po.vendor_name
                 
-                if po.is_void == "1" || po.received_status == "2" {
-                    performSegue(withIdentifier: "toEditPO", sender: nil)
+                if po.is_draft == "1" {
+                    performSegue(withIdentifier: "toEditDraftPO", sender: nil)
                 }
                 else {
-                    performSegue(withIdentifier: "toEditDraftPO", sender: nil)
+                    performSegue(withIdentifier: "toEditPO", sender: nil)
                 }
             }
             else {
@@ -495,11 +644,11 @@ extension POListViewController: UITableViewDelegate, UITableViewDataSource {
                 po_id = po.id
                 name = po.vendor_name
                 
-                if po.is_void == "1" || po.received_status == "2" {
-                    performSegue(withIdentifier: "toEditPO", sender: nil)
+                if po.is_draft == "1" {
+                    performSegue(withIdentifier: "toEditDraftPO", sender: nil)
                 }
                 else {
-                    performSegue(withIdentifier: "toEditDraftPO", sender: nil)
+                    performSegue(withIdentifier: "toEditPO", sender: nil)
                 }
             }
         }
@@ -638,4 +787,18 @@ struct EditPO: Encodable {
     let after_qty: String
 }
 
-//{"product_id":"1356902","variant_id":"","required_qty":"1","cost_per_item":"9.99","total_pricing":9.99,"upc":"WPGRMSRMD","note":"Notes 1","after_qty":31}
+struct POAutoItem {
+    
+    let product_id: String
+    let product_title: String
+    let item_qty: String
+    let reorder_level: String
+    let reorder_qty: String
+    let costperItem: String
+    let upc: String
+    let prefferd_vendor: String
+    let assigned_vendors: String
+    let variant_id: String
+    let variant_title: String
+    let preferd_vendor_cost: String
+}

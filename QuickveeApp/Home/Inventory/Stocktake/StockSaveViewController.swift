@@ -161,7 +161,8 @@ class StockSaveViewController: UIViewController {
             note.append(stockItem.note)
             stockItemId.append(stockItem.id)
         }
-        
+        print(small.count)
+        print(small)
         stockDraftList = small
         subStockDraftList = small
         
@@ -226,7 +227,7 @@ class StockSaveViewController: UIViewController {
                 }
             }
             else {
-                if stockDraftList.contains(where: {$0.product_id == variant.id}) {
+                if stockDraftList.contains(where: {$0.product_name == variant.title}) {
                     smallVarList.append(variant)
                 }
             }
