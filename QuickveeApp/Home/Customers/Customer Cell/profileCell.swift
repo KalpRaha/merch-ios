@@ -17,6 +17,7 @@ class profileCell: UITableViewCell {
     @IBOutlet weak var storeCreditView: UIView!
     @IBOutlet weak var addressView: UIView!
    
+    @IBOutlet weak var deletBtn: UIButton!
     @IBOutlet weak var editBtn: UIButton!
     @IBOutlet weak var bdateView: UIView!
     @IBOutlet weak var storeCreditValueLbl: UILabel!

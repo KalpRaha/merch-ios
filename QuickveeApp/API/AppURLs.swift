@@ -9,10 +9,10 @@ import Foundation
 
 struct AppURLs {
     // live
-    static let base_url = "https://api-ci.quickvee.us/"
+  //  static let base_url = "https://api-ci.quickvee.us/"
     
     //test
-   // static let base_url = "https://qa-api-ci.quickvee.us/"
+    static let base_url = "https://qa-api-ci.quickvee.us/"
 
     
     static let ORDERS_LIST = "\(base_url)orders/order_list"
@@ -147,14 +147,15 @@ struct AppURLs {
     static let GIFT_CARD_ADD_REMOVE = "\(base_url)Gift_Ebt_api/adjust_giftcard"
     
     static let CUSTOMERS_LIST = "\(base_url)Customer_merchant_api/new_customer_list"
+    static let CUSTOMERS_MERGE = "\(base_url)Group_management/merge_customers"
     static let CUSTOMERS_PAID_REFUND_MERCHANT_LIST = "\(base_url)Customer_merchant_api/new_mrtwise_customer_list_api"
     static let FIND_CUSTOMER = "\(base_url)App/find_customer"
-    
     static let DELETE_CUSTOMERS = "\(base_url)Customer_merchant_api/delete_customer"
     static let DISABLE_CUSTOMERS = "\(base_url)Customer_merchant_api/disable_customer"
     static let ADD_CUSTOMERS = "\(base_url)App/save_customer_details"
     static let CUSTOMERS_ADD_REMOVE_LOYALTY_POINTS = "\(base_url)Loyalty_program_api/loyality_point_transaction"
     static let LOYALTY_PROGRAM_LIST = "\(base_url)Loyalty_program_api/loyalty_program_list"
+    
     
     static let STOCKTAKE_LIST = "\(base_url)Stocktake_api/stocktake_list"
     static let STOCK_BY_ID = "\(base_url)Stocktake_api/get_stocktake_details_by_id"

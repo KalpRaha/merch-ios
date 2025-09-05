@@ -19,7 +19,8 @@ class CustomerInfoVC: UIViewController {
     @IBOutlet weak var homeBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var disableBtn: UIButton!
-    @IBOutlet weak var deleteBtn: UIButton!
+  
+    @IBOutlet weak var mergeBtn: UIButton!
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -35,6 +36,8 @@ class CustomerInfoVC: UIViewController {
     var bdate = ""
     var isbirth = false
     var custObj: FindCustModel?
+    var customerList = [CustomersModel]()
+    
     
     var custViewbg : UIColor?
     var inicolor : UIColor?
@@ -107,8 +110,10 @@ class CustomerInfoVC: UIViewController {
     }
     
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         tableView.isHidden = true
         indicator.isAnimating = true
         setUI()
@@ -127,9 +132,9 @@ class CustomerInfoVC: UIViewController {
     func findCustAPICall() {
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
         
-        
-        ApiCalls.sharedCall.findCustomers(merchant_id: id, email: email, phone_no: phone) { isSuccess, response in
+        ApiCalls.sharedCall.findCustomers(merchant_id: id, email: email, phone_no: phone, group_id: group_id) { isSuccess, response in
             
             if isSuccess {
                 
@@ -220,7 +225,7 @@ class CustomerInfoVC: UIViewController {
         
         disableBtn.layer.borderWidth = 1
         disableBtn.layer.borderColor = UIColor.black.cgColor
-        deleteBtn.layer.cornerRadius = 5
+        mergeBtn.layer.cornerRadius = 5
         disableBtn.layer.cornerRadius  = 5
     }
   
@@ -299,10 +304,12 @@ class CustomerInfoVC: UIViewController {
     func customerDeleteAPi() {
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
+        
         
         loadingIndicator.isAnimating = true
         
-        ApiCalls.sharedCall.deleteCustomers(merchant_id: id, customer_id: custId ){ isSuccess,responseData in
+        ApiCalls.sharedCall.deleteCustomers(merchant_id: id, customer_id: custId, group_id: "" ){ isSuccess,responseData in
             
             if isSuccess {
                 // let list = responseData as? [String:Any]
@@ -322,10 +329,11 @@ class CustomerInfoVC: UIViewController {
     func disableCustomerAPi(isdisable: String) {
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
         
         loadIndicator.isAnimating = true
         
-        ApiCalls.sharedCall.disableCustomers(merchant_id: id, customer_id: custId, is_disabled: isdisable){ isSuccess, responseData in
+        ApiCalls.sharedCall.disableCustomers(merchant_id: id, customer_id: custId, is_disabled: isdisable, group_id: group_id){ isSuccess, responseData in
             
             if isSuccess {
                 if isdisable == "0" {
@@ -342,12 +350,18 @@ class CustomerInfoVC: UIViewController {
         }
     }
 
+    @IBAction func mergeBtnClick(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "toCustomerMerge", sender: nil)
+        
+    }
     
     func loyaltyPointApi() {
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
         
-        ApiCalls.sharedCall.getLoyaltyProgramList(merchant_id: id){ isSuccess, responseData in
+        ApiCalls.sharedCall.getLoyaltyProgramList(merchant_id: id, group_id: group_id){ isSuccess, responseData in
             
             if isSuccess {
                 
@@ -395,10 +409,12 @@ class CustomerInfoVC: UIViewController {
     func paidRefundOrderCustAPI() {
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
+        
         
         ApiCalls.sharedCall.getCustomerPaidRefundOrderList(merchant_id: id, customer_id: custId,
                                                            order_id: "", order_status: "paid",
-                                                           is_refunded: isrefunded, page_no: 1, limit: 10){ isSuccess, responseData in
+                                                           is_refunded: isrefunded, page_no: 1, limit: 10, group_id: group_id){ isSuccess, responseData in
             
             if isSuccess {
                 
@@ -680,6 +696,34 @@ class CustomerInfoVC: UIViewController {
     }
     
     
+    @objc func deletBtnClick() {
+       
+        if UserDefaults.standard.bool(forKey: "lock_delete_customer") {
+            ToastClass.sharedToast.showToast(message: "Access Denied", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+
+        }
+        else {
+            let alertController = UIAlertController(title: "Alert", message: "Are you sure you want to delete this Customer ?",
+                                                    preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "No", style: .default) { (action:UIAlertAction!) in
+                print("Ok button tapped")
+            }
+            
+            let okAction = UIAlertAction(title: "Yes", style: .default) { (action:UIAlertAction!) in
+                print("Ok button tapped")
+                self.customerDeleteAPi()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.loadingIndicator.isAnimating = false
+                }
+            }
+            
+            alertController.addAction(cancel)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion:nil)
+        }
+        
+        
+    }
     
     
     @objc func editBtnClick() {
@@ -715,6 +759,12 @@ class CustomerInfoVC: UIViewController {
         else if segue.identifier == "toCloseOrder" {
             let vc = segue.destination as! NewOrderRefundDetailVC
             vc.order_id = orderId
+        }
+        else if segue.identifier == "toCustomerMerge" {
+            let vc = segue.destination as! CustomerMergeViewController
+            vc.custObj = custObj
+           
+        
         }
     }
    
@@ -798,33 +848,6 @@ class CustomerInfoVC: UIViewController {
         }
     }
     
-    @IBAction func deleteBtnClick(_ sender: UIButton) {
-        
-        if UserDefaults.standard.bool(forKey: "lock_delete_customer") {
-            ToastClass.sharedToast.showToast(message: "Access Denied", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-
-        }
-        else {
-            let alertController = UIAlertController(title: "Alert", message: "Are you sure you want to delete this Customer ?",
-                                                    preferredStyle: .alert)
-            let cancel = UIAlertAction(title: "No", style: .default) { (action:UIAlertAction!) in
-                print("Ok button tapped")
-            }
-            
-            let okAction = UIAlertAction(title: "Yes", style: .default) { (action:UIAlertAction!) in
-                print("Ok button tapped")
-                self.customerDeleteAPi()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.loadingIndicator.isAnimating = false
-                }
-            }
-            
-            alertController.addAction(cancel)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion:nil)
-        }
-    }
-    
     
  
     func performSearch(searchText: String) {
@@ -880,18 +903,18 @@ class CustomerInfoVC: UIViewController {
         ])
         
         
-        deleteBtn.addSubview(loadingIndicator)
-        
-        NSLayoutConstraint.activate([
-            loadingIndicator.centerXAnchor
-                .constraint(equalTo: deleteBtn.centerXAnchor, constant: 65),
-            loadingIndicator.centerYAnchor
-                .constraint(equalTo: deleteBtn.centerYAnchor),
-            loadingIndicator.widthAnchor
-                .constraint(equalToConstant: 15),
-            loadingIndicator.heightAnchor
-                .constraint(equalTo: self.loadingIndicator.widthAnchor)
-        ])
+//        deleteBtn.addSubview(loadingIndicator)
+//        
+//        NSLayoutConstraint.activate([
+//            loadingIndicator.centerXAnchor
+//                .constraint(equalTo: deleteBtn.centerXAnchor, constant: 65),
+//            loadingIndicator.centerYAnchor
+//                .constraint(equalTo: deleteBtn.centerYAnchor),
+//            loadingIndicator.widthAnchor
+//                .constraint(equalToConstant: 15),
+//            loadingIndicator.heightAnchor
+//                .constraint(equalTo: self.loadingIndicator.widthAnchor)
+//        ])
         
         view.addSubview(indicator)
         
@@ -926,11 +949,12 @@ class CustomerInfoVC: UIViewController {
                 else {
                     
                     let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+                    let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
                     
                     page += 1
                    
                     
-                    ApiCalls.sharedCall.getCustomerPaidRefundOrderList(merchant_id: id, customer_id: custId, order_id: "", order_status: "paid", is_refunded:isrefunded, page_no: page, limit: 10) { isSuccess, responseData in
+                    ApiCalls.sharedCall.getCustomerPaidRefundOrderList(merchant_id: id, customer_id: custId, order_id: "", order_status: "paid", is_refunded:isrefunded, page_no: page, limit: 10, group_id: group_id) { isSuccess, responseData in
                         
                         
                         if isSuccess {
@@ -1140,6 +1164,11 @@ extension CustomerInfoVC: UITableViewDelegate, UITableViewDataSource {
             tap4.numberOfTapsRequired = 1
             cell.editBtn.addGestureRecognizer(tap4)
             cell.editBtn.isUserInteractionEnabled = true
+            
+            let tap5 = UITapGestureRecognizer(target: self, action: #selector(deletBtnClick))
+            tap5.numberOfTapsRequired = 1
+            cell.deletBtn.addGestureRecognizer(tap5)
+            cell.deletBtn.isUserInteractionEnabled = true
             
             
             return cell

@@ -142,6 +142,7 @@
 		D268EE5F2C8EA44500B45172 /* Manrope-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D268EE5B2C8EA44500B45172 /* Manrope-Medium.ttf */; };
 		D268EE602C8EA44500B45172 /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D268EE5C2C8EA44500B45172 /* Manrope-Bold.ttf */; };
 		D268EE612C8EA44500B45172 /* Manrope-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D268EE5D2C8EA44500B45172 /* Manrope-SemiBold.ttf */; };
+		D26930AD2E6599AE00C3339B /* CustomerMergeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26930AC2E6599AE00C3339B /* CustomerMergeTableViewCell.swift */; };
 		D26D38A12CA41CBE00AD9309 /* ReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26D38A02CA41CBE00AD9309 /* ReportTableViewCell.swift */; };
 		D26F4E74299500A700716A51 /* StrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26F4E73299500A700716A51 /* StrokeAnimation.swift */; };
 		D26F4E762995011200716A51 /* RotationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26F4E752995011200716A51 /* RotationAnimation.swift */; };
@@ -275,6 +276,7 @@
 		D2F5AB862CE5C2270050B89C /* HeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F5AB792CE5C2270050B89C /* HeaderViewCell.swift */; };
 		D2F5AB872CE5C2270050B89C /* profileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F5AB7F2CE5C2270050B89C /* profileCell.swift */; };
 		D2F5AB882CE5C2270050B89C /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F5AB7D2CE5C2270050B89C /* OrderCell.swift */; };
+		D2F6E9862E61AF9300BBAD99 /* CustomerMergeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F6E9852E61AF9300BBAD99 /* CustomerMergeViewController.swift */; };
 		D2F712F12CD09205004DA3DE /* CustomerDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F712F02CD09205004DA3DE /* CustomerDetailsCell.swift */; };
 		D2F808722C44EC2F00613E1C /* BrandsTagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F808712C44EC2F00613E1C /* BrandsTagsViewController.swift */; };
 		D2F98F35297E56D200094F37 /* SalesOverviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F98F34297E56D200094F37 /* SalesOverviewTableViewCell.swift */; };
@@ -422,6 +424,7 @@
 		D268EE5B2C8EA44500B45172 /* Manrope-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Medium.ttf"; sourceTree = "<group>"; };
 		D268EE5C2C8EA44500B45172 /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
 		D268EE5D2C8EA44500B45172 /* Manrope-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-SemiBold.ttf"; sourceTree = "<group>"; };
+		D26930AC2E6599AE00C3339B /* CustomerMergeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerMergeTableViewCell.swift; sourceTree = "<group>"; };
 		D26D38A02CA41CBE00AD9309 /* ReportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewCell.swift; sourceTree = "<group>"; };
 		D26F4E73299500A700716A51 /* StrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeAnimation.swift; sourceTree = "<group>"; };
 		D26F4E752995011200716A51 /* RotationAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationAnimation.swift; sourceTree = "<group>"; };
@@ -557,6 +560,7 @@
 		D2F5AB7E2CE5C2270050B89C /* OrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
 		D2F5AB7F2CE5C2270050B89C /* profileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileCell.swift; sourceTree = "<group>"; };
 		D2F5AB802CE5C2270050B89C /* profileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = profileCell.xib; sourceTree = "<group>"; };
+		D2F6E9852E61AF9300BBAD99 /* CustomerMergeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerMergeViewController.swift; sourceTree = "<group>"; };
 		D2F712F02CD09205004DA3DE /* CustomerDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDetailsCell.swift; sourceTree = "<group>"; };
 		D2F808712C44EC2F00613E1C /* BrandsTagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsTagsViewController.swift; sourceTree = "<group>"; };
 		D2F98F34297E56D200094F37 /* SalesOverviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesOverviewTableViewCell.swift; sourceTree = "<group>"; };
@@ -993,6 +997,8 @@
 				D235A0252CD0C1C300A81941 /* CustomerTableViewCell.swift */,
 				D235A0262CD0C1C300A81941 /* CustomerViewController.swift */,
 				D235A0282CD0C1C300A81941 /* PointBalanceDetailVC.swift */,
+				D2F6E9852E61AF9300BBAD99 /* CustomerMergeViewController.swift */,
+				D26930AC2E6599AE00C3339B /* CustomerMergeTableViewCell.swift */,
 			);
 			path = Customers;
 			sourceTree = "<group>";
@@ -1652,6 +1658,7 @@
 				D2D2791C2AE61ADB001DD908 /* CustomFlowLayout.swift in Sources */,
 				D2BBAD1A2C94017C00133338 /* GiftCardTableViewCell.swift in Sources */,
 				D2C1F3192C1B072700BA6388 /* QtyMixnMatchViewController.swift in Sources */,
+				D2F6E9862E61AF9300BBAD99 /* CustomerMergeViewController.swift in Sources */,
 				D24692182A32DB46006D1904 /* TapticEngine.swift in Sources */,
 				D2D879862BBBB58700ECE573 /* InStoreRefundPayCell.swift in Sources */,
 				D291BD6D297128D900DCD20D /* StoreTableViewCell.swift in Sources */,
@@ -1665,6 +1672,7 @@
 				D23493D72CEF2F0B0046D33C /* OrderSummaryCell.swift in Sources */,
 				D257E0C32D278A1F004DF787 /* InStoreProductLotteryCell.swift in Sources */,
 				D23493D82CEF2F0B0046D33C /* OnlineOrderCell.swift in Sources */,
+				D26930AD2E6599AE00C3339B /* CustomerMergeTableViewCell.swift in Sources */,
 				D23493D92CEF2F0B0046D33C /* FeesTableCell.swift in Sources */,
 				D23493DA2CEF2F0B0046D33C /* RefundProductCell.swift in Sources */,
 				D23493DB2CEF2F0B0046D33C /* LoyaltyTableCell.swift in Sources */,

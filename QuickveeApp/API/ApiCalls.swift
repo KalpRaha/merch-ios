@@ -1395,7 +1395,7 @@ extension ApiCalls {
     func getOrderList(merchant_id: String, order_list_type: String, order_status: String,
                       order_0: String, order_1: String, start_date: String, end_date: String,
                       min_amt: String, max_amt: String, search_value: String, paid: Int,
-                      page_no: Int, limit: Int, completion:@escaping(Bool,[String:Any]) -> ()) {
+                      page_no: Int, limit: Int,group_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.ORDERS_LIST
         
@@ -1413,7 +1413,8 @@ extension ApiCalls {
          "order_status": order_status,
          "is_paid": paid,
          "page_no": page_no,
-         "limit": limit]
+         "limit": limit,
+         "group_id": group_id ]
         
         
         
@@ -1441,7 +1442,7 @@ extension ApiCalls {
     }
     
     func getOrderList(merchant_id: String, order_list_type: String,
-                      page_no: Int, limit: Int,
+                      page_no: Int, limit: Int,group_id: String,
                       completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.ORDERS_LIST
@@ -1451,9 +1452,10 @@ extension ApiCalls {
         ["merchant_id": merchant_id,
          "order_list_type": order_list_type,
          "page_no": page_no,
-         "limit": limit]
+         "limit": limit,
+         "group_id":group_id]
         
-        
+        group_id
         
         AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default).responseData { (response) in
             switch response.result {
@@ -1476,7 +1478,7 @@ extension ApiCalls {
         }
     }
     
-    func getOrderList(merchant_id: String, order_list_type: String, order_status: String, paid: Int,
+    func getOrderList(merchant_id: String, order_list_type: String, order_status: String, paid: Int,group_id: String,
                       completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.ORDERS_LIST
@@ -1486,7 +1488,8 @@ extension ApiCalls {
         ["merchant_id": merchant_id,
          "order_list_type": order_list_type,
          "order_status": order_status,
-         "is_paid": paid]
+         "is_paid": paid,
+         "group_id": group_id ]
         
         print(parameters)
         print(parameters)
@@ -1514,8 +1517,7 @@ extension ApiCalls {
         }
     }
     
-    func getOrderListStore(merchant_id: String, order_list_type: String, order_status: String, paid: Int, search: String,
-                           completion:@escaping(Bool,[String:Any]) -> ()) {
+    func getOrderListStore(merchant_id: String, order_list_type: String, order_status: String, paid: Int, search: String,group_id: String,completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.ORDERS_LIST
         
@@ -1525,7 +1527,8 @@ extension ApiCalls {
          "order_list_type": order_list_type,
          "order_status": order_status,
          "is_paid": paid,
-         "search_value": search]
+         "search_value": search,
+         "group_id":group_id]
         
         print(parameters)
         print(parameters)
@@ -1584,7 +1587,7 @@ extension ApiCalls {
         }
     }
     
-    func getOrderStatus(merchant_id: String, order_id: String, status: String,
+    func getOrderStatus(merchant_id: String, order_id: String, status: String,group_id: String,
                         completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.ORDERS_STATUS
@@ -1593,7 +1596,8 @@ extension ApiCalls {
         
         ["merchant_id": merchant_id,
          "order_id": order_id,
-         "status": status
+         "status": status,
+         "group_id": group_id
         ]
         
         print(parameters)
@@ -1623,13 +1627,15 @@ extension ApiCalls {
     
     
     
-    func newOrderCount(merchant_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
+    func newOrderCount(merchant_id: String,group_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.NEW_ORDERS_COUNT
         
         let parameters : [String: Any] =
         
-        ["merchant_id": merchant_id]
+        ["merchant_id": merchant_id,
+         "group_id": group_id
+        ]
         
         print(parameters)
         print(parameters)
@@ -1701,13 +1707,14 @@ extension ApiCalls {
 extension ApiCalls {
     
     
-    func getLoyaltyProgramList(merchant_id: String, completion: @escaping(Bool,[String:Any]) -> ()) {
+    func getLoyaltyProgramList(merchant_id: String,group_id: String, completion: @escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.LOYALTY_LIST
         
         let parameters : [String: Any] =
         
-        ["merchant_id": merchant_id]
+        ["merchant_id": merchant_id,
+         "group_id": group_id]
         
         print(parameters)
         print(parameters)
@@ -1736,7 +1743,7 @@ extension ApiCalls {
     
     func updateLoyaltyProgram(merchant_id: String, admin_id: String,
                               current_points: String, points_per_dollar: String, redemption_value: String,
-                              min_points_redemption: String, enable_loyalty: String, enable_promotion_id: String,
+                              min_points_redemption: String, enable_loyalty: String, enable_promotion_id: String,group_id: String,
                               completion: @escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.UPDATE_LOYALTY_PROGRAM
@@ -1750,7 +1757,8 @@ extension ApiCalls {
             "points_per_dollar": points_per_dollar,
             "redemption_value": redemption_value,
             "min_points_redemption": min_points_redemption,
-            "enable_promotion_id": enable_promotion_id
+            "enable_promotion_id": enable_promotion_id,
+            "group_id": group_id
         ]
         
         print(parameters)
@@ -1779,14 +1787,15 @@ extension ApiCalls {
     }
     
     
-    func getBonusById(merchant_id: String, promotion_id: String, completion: @escaping(Bool,[String:Any]) -> ()) {
+    func getBonusById(merchant_id: String, promotion_id: String,group_id: String, completion: @escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.BONUS_BY_ID
         
         let parameters : [String: Any] =
         
         ["merchant_id": merchant_id,
-         "promotion_id": promotion_id
+         "promotion_id": promotion_id,
+         "group_id": group_id
         ]
         
         AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default).responseData { (response) in
@@ -1814,7 +1823,7 @@ extension ApiCalls {
     
     func updateBonus(merchant_id: String, promotion_id: String, admin_id: String, enable_promotion: String,
                      current_points: String, promotion_name: String, bonus_points: String,
-                     start_date: String, end_date: String, completion: @escaping(Bool,[String:Any]) -> ()) {
+                     start_date: String, end_date: String,group_id: String, completion: @escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.BONUS_UPDATE
         
@@ -1827,7 +1836,8 @@ extension ApiCalls {
             "promotion_name": promotion_name,
             "bonus_points": bonus_points,
             "start_date": start_date,
-            "end_date": end_date
+            "end_date": end_date,
+            "group_id": group_id
         ]
         
         print(parameters)
@@ -1856,14 +1866,15 @@ extension ApiCalls {
     }
     
     
-    func deleteBonusPoint(merchant_id: String, promotion_id: String, completion: @escaping(Bool,[String:Any]) -> ()) {
+    func deleteBonusPoint(merchant_id: String, promotion_id: String, group_id: String, completion: @escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.DELETE_BONUS
         
         let parameters : [String: Any] =
         
         ["merchant_id": merchant_id,
-         "promotion_id": promotion_id
+         "promotion_id": promotion_id,
+         "group_id" : group_id
         ]
         
         print(parameters)
@@ -2573,14 +2584,15 @@ extension ApiCalls {
 
 extension ApiCalls {
     
-    func getCustomers(merchant_id: String, page_no: Int,limit: Int, completion:@escaping(Bool,[String:Any]) -> ()) {
+    func getCustomers(merchant_id: String, page_no: Int,limit: Int,group_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.CUSTOMERS_LIST
         
         let parameters: [String:Any] = [
             "merchant_id": merchant_id,
             "page_no": page_no,
-            "limit": limit
+            "limit": limit,
+            "group_id": group_id
         ]
         
         print(parameters)
@@ -2609,14 +2621,50 @@ extension ApiCalls {
     }
     
     
-    func findCustomers(merchant_id: String,email: String,phone_no: String, completion:@escaping(Bool,[String:Any]) -> ()) {
+    func getMergeCustomers(merchant_id: String, page_no: Int, group_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
+        
+        let url = AppURLs.CUSTOMERS_LIST
+        
+        let parameters: [String:Any] = [
+            "merchant_id": merchant_id,
+            "page_no": page_no,
+            "group_id": group_id
+        ]
+        
+        print(parameters)
+        print(parameters)
+        
+        AF.request(url, method: .post, parameters: parameters).responseData { response in
+            
+            switch response.result {
+                
+            case .success(_):
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
+                    print(json)
+                    completion(true,json)
+                }
+                catch {
+                    let res = "ios_app\(response.response?.statusCode)"
+                    self.logErrorApi(merchant_id: merchant_id, response: res)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                let res = "ios_app\(response.response?.statusCode)"
+                self.logErrorApi(merchant_id: merchant_id, response: res)
+            }
+        }
+    }
+    
+    func findCustomers(merchant_id: String,email: String,phone_no: String,group_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.FIND_CUSTOMER
         
         let parameters: [String:Any] = [
             "merchant_id": merchant_id,
             "email":email,
-            "phone_no" : phone_no
+            "phone_no" : phone_no,
+            "group_id": group_id
         ]
         
         print(parameters)
@@ -2651,7 +2699,7 @@ extension ApiCalls {
                              email: String,phone_no: String,address_line_1: String,
                              address_line_2: String,state: String,
                              city: String,pincode: String,dob: String,notes: String,
-                             customer_id: String, order_id: String,note: String,
+                             customer_id: String, order_id: String,note: String,group_id: String,
                              completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.ADD_CUSTOMERS
@@ -2672,6 +2720,7 @@ extension ApiCalls {
             "order_id": order_id,
             "pincode"  :pincode,
             "note": note,
+            "group_id": group_id
         ]
         
         print(parameters)
@@ -2701,13 +2750,14 @@ extension ApiCalls {
     }
     
     
-    func deleteCustomers(merchant_id: String,customer_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
+    func deleteCustomers(merchant_id: String,customer_id: String,group_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.DELETE_CUSTOMERS
         
         let parameters: [String:Any] = [
             "merchant_id": merchant_id,
             "customer_id": customer_id,
+            "group_id" : group_id
         ]
         
         AF.request(url, method: .post, parameters: parameters).responseData { response in
@@ -2733,14 +2783,15 @@ extension ApiCalls {
     
     
     
-    func disableCustomers(merchant_id: String,customer_id: String,is_disabled: String, completion:@escaping(Bool,[String:Any]) -> ()) {
+    func disableCustomers(merchant_id: String,customer_id: String,is_disabled: String,group_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.DISABLE_CUSTOMERS
         
         let parameters: [String:Any] = [
             "merchant_id": merchant_id,
             "customer_id": customer_id,
-            "is_disabled" :  is_disabled
+            "is_disabled" :  is_disabled,
+            "group_id": group_id
         ]
         
         AF.request(url, method: .post, parameters: parameters).responseData { response in
@@ -2764,7 +2815,7 @@ extension ApiCalls {
         }
     }
     
-    func getCustomerPaidRefundOrderList(merchant_id: String,customer_id: String,order_id: String, order_status: String,is_refunded: String,page_no: Int,limit: Int,completion:@escaping(Bool,[String:Any]) -> ()) {
+    func getCustomerPaidRefundOrderList(merchant_id: String,customer_id: String,order_id: String, order_status: String,is_refunded: String,page_no: Int,limit: Int,group_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.CUSTOMERS_PAID_REFUND_MERCHANT_LIST
         
@@ -2777,6 +2828,7 @@ extension ApiCalls {
             "is_refunded":is_refunded,
             "page_no": page_no,
             "limit": limit,
+            "group_id" : group_id
         ]
         print(parameters)
         print(parameters)
@@ -2882,14 +2934,15 @@ extension ApiCalls {
         }
     }
     
-    func searchCustomers(merchant_id: String, name: String, phone: String,  completion:@escaping(Bool,[String:Any]) -> ()) {
+    func searchCustomers(merchant_id: String, name: String, phone: String,group_id: String,  completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.CUSTOMERS_LIST
         
         let parameters: [String:Any] = [
             "merchant_id": merchant_id,
             "name": name,
-            "phone_no": phone
+            "phone_no": phone,
+            "group_id": group_id
         ]
         
         AF.request(url, method: .post, parameters: parameters).responseData { response in
@@ -2913,16 +2966,53 @@ extension ApiCalls {
         }
     }
     
+    
+    func mergeCustomers(merchant_id: String, primary_customer_id: String, secondary_customer_id: String,emp_id: String, group_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
+        
+        let url = AppURLs.CUSTOMERS_MERGE
+        
+        let parameters: [String:Any] = [
+            "merchant_id": merchant_id,
+            "primary_customer_id": primary_customer_id,
+            "secondary_customer_id": secondary_customer_id,
+            "emp_id" : emp_id,
+            "group_id": group_id
+        ]
+        
+        AF.request(url, method: .post, parameters: parameters).responseData { response in
+            
+            switch response.result {
+                
+            case .success(_):
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
+                    completion(true,json)
+                }
+                catch {
+                    let res = "ios_app\(response.response?.statusCode)"
+                    self.logErrorApi(merchant_id: merchant_id, response: res)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                let res = "ios_app\(response.response?.statusCode)"
+                self.logErrorApi(merchant_id: merchant_id, response: res)
+            }
+        }
+    }
+    
+    
+    
 }
 
 extension ApiCalls {
     
-    func getGiftCardList(merchant_id: String, completion:@escaping(Bool,[String:Any]) -> ()){
+    func getGiftCardList(merchant_id: String,group_id: String, completion:@escaping(Bool,[String:Any]) -> ()){
         
         let url = AppURLs.GIFT_CARD_LIST
         
         let parameters: [String:Any] = [
-            "merchant_id": merchant_id
+            "merchant_id": merchant_id,
+            "group_id" :group_id
         ]
         
         AF.request(url, method: .post, parameters: parameters).responseData { response in
@@ -2949,7 +3039,7 @@ extension ApiCalls {
     
     func giftCardAddRemoveAPiCall(merchant_id: String, number: String, user_id: String, amount: String,
                                   emp_id: String, created_at: String, location: String, type: String,
-                                  desc: String, order_id: String, completion:@escaping(Bool,[String:Any]) -> ()){
+                                  desc: String, order_id: String,group_id: String, completion:@escaping(Bool,[String:Any]) -> ()){
         
         let url = AppURLs.GIFT_CARD_ADD_REMOVE
         
@@ -2963,7 +3053,8 @@ extension ApiCalls {
             "location": location,
             "type": type,
             "desc": desc,
-            "order_id": order_id
+            "order_id": order_id,
+            "group_id": group_id
         ]
         
         print(parameters)

@@ -95,8 +95,10 @@ class CreateBonusViewController: UIViewController {
             titleLbl.text = "Edit Loyalty"
             
             let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+            let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
             
-            ApiCalls.sharedCall.getBonusById(merchant_id: id, promotion_id: promotion_id) { isSuccess, responseData in
+            
+            ApiCalls.sharedCall.getBonusById(merchant_id: id, promotion_id: promotion_id, group_id: group_id) { isSuccess, responseData in
                 
                 if isSuccess {
                     
@@ -270,6 +272,8 @@ class CreateBonusViewController: UIViewController {
             loadingIndicator.isAnimating = true
             
             let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+            let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
+            
             
             var promo_id = ""
             
@@ -335,7 +339,7 @@ class CreateBonusViewController: UIViewController {
             ApiCalls.sharedCall.updateBonus(merchant_id: id, promotion_id: promo_id, admin_id: "",
                                             enable_promotion: checkSwitch(), current_points: current,
                                             promotion_name: name, bonus_points: bonus,
-                                            start_date: sdate, end_date: edate) { isSuccess, responseData in
+                                            start_date: sdate, end_date: edate, group_id: group_id) { isSuccess, responseData in
                 
                 if isSuccess {
                     self.loadingIndicator.isAnimating = false
@@ -372,6 +376,7 @@ class CreateBonusViewController: UIViewController {
                 loadingIndicator.isAnimating = true
                 
                 let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+                let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
                 
                 var promo_id = ""
                 
@@ -438,7 +443,7 @@ class CreateBonusViewController: UIViewController {
                 ApiCalls.sharedCall.updateBonus(merchant_id: id, promotion_id: promo_id, admin_id: "",
                                                 enable_promotion: checkSwitch(), current_points: current,
                                                 promotion_name: name, bonus_points: bonus,
-                                                start_date: sdate, end_date: edate) { isSuccess, responseData in
+                                                start_date: sdate, end_date: edate, group_id: group_id) { isSuccess, responseData in
                     
                     if isSuccess {
                         self.loadingIndicator.isAnimating = false
@@ -470,11 +475,12 @@ class CreateBonusViewController: UIViewController {
             print("Ok button tapped")
             
             let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+            let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
             
             self.loadIndicator.isAnimating = true
             
             ApiCalls.sharedCall.deleteBonusPoint(merchant_id: id,
-                                                 promotion_id: self.promotion_id) { isSuccess, responseData in
+                                                 promotion_id: self.promotion_id, group_id: "") { isSuccess, responseData in
                 
                 if isSuccess {
                     

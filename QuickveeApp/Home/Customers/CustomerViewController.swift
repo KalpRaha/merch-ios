@@ -77,6 +77,7 @@ class CustomerViewController: UIViewController {
     func customerslistAPI() {
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
         
         tableview.isHidden = true
         loadIndicator.isAnimating = true
@@ -85,7 +86,7 @@ class CustomerViewController: UIViewController {
         
         page = 1
         
-        ApiCalls.sharedCall.getCustomers(merchant_id: id, page_no: page, limit: 10) { isSuccess, responseData in
+        ApiCalls.sharedCall.getCustomers(merchant_id: id, page_no: page, limit: 10, group_id: group_id) { isSuccess, responseData in
             
             if isSuccess {
                 
@@ -105,6 +106,9 @@ class CustomerViewController: UIViewController {
             }
         }
     }
+    
+    
+    
     
     func getResponseValues(list: Any) {
         
@@ -300,6 +304,7 @@ class CustomerViewController: UIViewController {
             vc.phone = c_phone
             vc.custViewbg = custbgcolor
             vc.inicolor = initialColor
+            
         }
     }
     
@@ -308,13 +313,15 @@ class CustomerViewController: UIViewController {
     func searchApi(name: String, phone: String) {
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
+
         
         tableview.isHidden = true
         loadIndicator.isAnimating = true
         noCustomerLbl.isHidden = true
         noCustomerImage.isHidden = true
         
-        ApiCalls.sharedCall.searchCustomers(merchant_id: id, name: name, phone: phone){ isSuccess, responseData in
+        ApiCalls.sharedCall.searchCustomers(merchant_id: id, name: name, phone: phone, group_id: group_id){ isSuccess, responseData in
             
             if isSuccess {
                 
@@ -370,7 +377,7 @@ class CustomerViewController: UIViewController {
         else {
             
             let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
-            
+            let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
             
             if let visiblePaths = tableview.indexPathsForVisibleRows,
                visiblePaths.contains([0, customerList.count - 1]) {
@@ -378,7 +385,7 @@ class CustomerViewController: UIViewController {
                 
                 page += 1
                 
-                ApiCalls.sharedCall.getCustomers(merchant_id: id, page_no: page, limit: 10) {isSuccess, responseData in
+                ApiCalls.sharedCall.getCustomers(merchant_id: id, page_no: page, limit: 10, group_id: group_id) {isSuccess, responseData in
                     
                     if isSuccess {
                          

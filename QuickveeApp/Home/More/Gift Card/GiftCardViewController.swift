@@ -87,8 +87,9 @@ class GiftCardViewController: UIViewController {
         
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
         
-        ApiCalls.sharedCall.getGiftCardList(merchant_id: id) { isSuccess, responseData in
+        ApiCalls.sharedCall.getGiftCardList(merchant_id: id, group_id: group_id) { isSuccess, responseData in
             
             if isSuccess {
                 

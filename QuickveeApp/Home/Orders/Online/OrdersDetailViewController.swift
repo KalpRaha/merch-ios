@@ -1568,9 +1568,11 @@ class OrdersDetailViewController: UIViewController {
         else {
             
             let merchant_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+            let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
+
             let od = order_id ?? ""
             
-            ApiCalls.sharedCall.getOrderStatus(merchant_id: merchant_id, order_id: od, status: "1")
+            ApiCalls.sharedCall.getOrderStatus(merchant_id: merchant_id, order_id: od, status: "1", group_id: group_id)
             { isSuccess, responseData in
                 
                 if isSuccess {
@@ -1684,9 +1686,11 @@ class OrdersDetailViewController: UIViewController {
         else {
             
             let merchant_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+            let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
+
             let od = order_id ?? ""
             
-            ApiCalls.sharedCall.getOrderStatus(merchant_id: merchant_id, order_id: od, status: "2") { isSuccess, responseData in
+            ApiCalls.sharedCall.getOrderStatus(merchant_id: merchant_id, order_id: od, status: "2", group_id: group_id) { isSuccess, responseData in
                 
                 if isSuccess {
                     
@@ -1805,6 +1809,8 @@ class OrdersDetailViewController: UIViewController {
         else {
             var readystatus = ""
             let merchant_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+            let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
+
             let od = order_id ?? ""
             
             if order_method == "pickup" || order_method == "Pickup" {
@@ -1814,7 +1820,7 @@ class OrdersDetailViewController: UIViewController {
                 readystatus = "6"
             }
             
-            ApiCalls.sharedCall.getOrderStatus(merchant_id: merchant_id, order_id: od, status: readystatus) { isSuccess, responseData in
+            ApiCalls.sharedCall.getOrderStatus(merchant_id: merchant_id, order_id: od, status: readystatus, group_id: group_id) { isSuccess, responseData in
                 
                 if isSuccess {
                     
@@ -1930,6 +1936,8 @@ class OrdersDetailViewController: UIViewController {
             if order_method == "pickup" || order_method == "Pickup"{
                 var status = ""
                 let merchant_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+                let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
+
                 let od = order_id ?? ""
                 
                 if order_method == "pickup" || order_method == "Pickup"{
@@ -1939,7 +1947,7 @@ class OrdersDetailViewController: UIViewController {
                     status = "3"
                 }
                 
-                ApiCalls.sharedCall.getOrderStatus(merchant_id: merchant_id, order_id: od, status: status) { isSuccess, responseData in
+                ApiCalls.sharedCall.getOrderStatus(merchant_id: merchant_id, order_id: od, status: status, group_id: group_id) { isSuccess, responseData in
                     
                     if isSuccess {
                         
@@ -2057,6 +2065,8 @@ class OrdersDetailViewController: UIViewController {
                 else {
                     var status = ""
                     let merchant_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+                    let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
+
                     let od = order_id ?? ""
                     
                     if order_method ==  "pickup" || order_method ==  "Pickup" {
@@ -2066,7 +2076,7 @@ class OrdersDetailViewController: UIViewController {
                         status = "3"
                     }
                     
-                    ApiCalls.sharedCall.getOrderStatus(merchant_id: merchant_id, order_id: od, status: status) { isSuccess, responseData in
+                    ApiCalls.sharedCall.getOrderStatus(merchant_id: merchant_id, order_id: od, status: status, group_id: group_id) { isSuccess, responseData in
                         
                         if isSuccess {
                             
@@ -2187,8 +2197,10 @@ class OrdersDetailViewController: UIViewController {
             if   self.order_method == "pickup" || self.order_method == "Pickup"  {
                 
                 let merchant_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+                let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
+
                 let od = order_id ?? ""
-                ApiCalls.sharedCall.getOrderStatus(merchant_id: merchant_id, order_id: od, status: "4") { isSuccess, responseData in
+                ApiCalls.sharedCall.getOrderStatus(merchant_id: merchant_id, order_id: od, status: "4", group_id: group_id) { isSuccess, responseData in
                     
                     if isSuccess {
                         
@@ -2256,8 +2268,10 @@ class OrdersDetailViewController: UIViewController {
                 else {
                     
                     let merchant_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+                    let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
+
                     let od = order_id ?? ""
-                    ApiCalls.sharedCall.getOrderStatus(merchant_id: merchant_id, order_id: od, status: "4") { isSuccess, responseData in
+                    ApiCalls.sharedCall.getOrderStatus(merchant_id: merchant_id, order_id: od, status: "4", group_id: group_id) { isSuccess, responseData in
                         
                         if isSuccess {
                             

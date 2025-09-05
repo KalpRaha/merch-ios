@@ -100,8 +100,9 @@ class SetupLoyaltyViewController: UIViewController {
     func setupApi() {
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
         
-        ApiCalls.sharedCall.getLoyaltyProgramList(merchant_id: id) { isSuccess, responseData in
+        ApiCalls.sharedCall.getLoyaltyProgramList(merchant_id: id, group_id: group_id) { isSuccess, responseData in
             
             if isSuccess {
                 self.getResponseValues(response: responseData["loyalty_program_data"] ?? [:])
@@ -348,6 +349,8 @@ class SetupLoyaltyViewController: UIViewController {
         else {
             
             let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+            let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
+
             
             guard let points = pointsAwarded.text, points != "" else {
                 pointsAwarded.isError(numberOfShakes: 3, revert: true)
@@ -374,7 +377,7 @@ class SetupLoyaltyViewController: UIViewController {
             ApiCalls.sharedCall.updateLoyaltyProgram(merchant_id: id, admin_id: "", current_points: current,
                                                      points_per_dollar: points, redemption_value: redem,
                                                      min_points_redemption: minPoints, enable_loyalty: checkLoyaltySwitch(),
-                                                     enable_promotion_id: enable_promo) { isSuccess, responseData in
+                                                     enable_promotion_id: enable_promo, group_id: group_id) { isSuccess, responseData in
                 
                 if isSuccess {
                     

@@ -197,6 +197,8 @@ class AddGiftCardViewController: UIViewController, UITextFieldDelegate {
     func addRemoveApiCall() {
        
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
+        
         numTextfield = numbertextField.text ?? ""
        
         let amt = String(numTextfield.dropFirst())
@@ -215,7 +217,7 @@ class AddGiftCardViewController: UIViewController, UITextFieldDelegate {
         ApiCalls.sharedCall.giftCardAddRemoveAPiCall(merchant_id: id, number: number,
                                                      user_id: user_Id, amount: amt, emp_id: emp_id,
                                                      created_at: created, location: "GiftCardHistory",
-                                                     type: type, desc: "", order_id: "null"){ isSuccess,responseData in
+                                                     type: type, desc: "", order_id: "null", group_id: group_id){ isSuccess,responseData in
             
             if isSuccess {
                

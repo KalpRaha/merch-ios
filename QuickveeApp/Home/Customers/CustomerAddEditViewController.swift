@@ -349,6 +349,7 @@ class CustomerAddEditViewController: UIViewController,  UITextFieldDelegate {
     func addCustomerAPiCall() {
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
         
        // let nameRegex = "^[a-zA-Z ]+$"
         
@@ -398,7 +399,7 @@ class CustomerAddEditViewController: UIViewController,  UITextFieldDelegate {
                                                 address_line_2: suits, state: state, city: city,
                                                 pincode: zip, dob: db, notes: notes,
                                                 customer_id: custId, order_id: "",
-                                                note: notes) { isSuccess, responseData in
+                                                note: notes, group_id: group_id) { isSuccess, responseData in
             
             
             

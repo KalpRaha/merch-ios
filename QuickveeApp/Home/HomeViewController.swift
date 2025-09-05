@@ -433,6 +433,18 @@ class HomeViewController: UIViewController {
         
         let response = responseValues as! [String:Any]
         
+        
+        if let groupId = response["group_id"] {
+               print(groupId)
+              
+               UserDefaults.standard.set(groupId, forKey: "group_id")
+           } else {
+               print("No group_id")
+           }
+        
+        
+       
+        
         let enable = response["enable_order_number"] as! String
         
         if enable == "1" {
@@ -525,8 +537,9 @@ class HomeViewController: UIViewController {
     func setupCount() {
         
         let merch = merchant_id ?? ""
+        let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
         
-        ApiCalls.sharedCall.newOrderCount(merchant_id: merch) { isSuccess, responseData in
+        ApiCalls.sharedCall.newOrderCount(merchant_id: merch, group_id: group_id) { isSuccess, responseData in
             
             if isSuccess {
                 
@@ -536,8 +549,6 @@ class HomeViewController: UIViewController {
                 
                 self.new_count = res as? String ?? "0"
                 self.collection.reloadData()
-               
-               
             }
             else{
                 print("Api Error")

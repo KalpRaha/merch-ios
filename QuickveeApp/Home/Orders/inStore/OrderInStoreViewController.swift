@@ -93,6 +93,7 @@ class OrderInStoreViewController: UIViewController {
         underView.isHidden = true
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
         
         var start_date = ""
         var end_date = ""
@@ -145,7 +146,7 @@ class OrderInStoreViewController: UIViewController {
         ApiCalls.sharedCall.getOrderList(merchant_id: id, order_list_type: "instore", order_status: order_status,
                                          order_0: "", order_1: "", start_date: start_date, end_date: end_date,
                                          min_amt: min_amt, max_amt: max_amt, search_value: "", paid: 1, page_no: 1,
-                                         limit: 10) { isSuccess, responseData in
+                                         limit: 10, group_id: group_id) { isSuccess, responseData in
             
             
             
@@ -330,10 +331,10 @@ class OrderInStoreViewController: UIViewController {
     func searchApi(list_type: String, order_status: String, search: String) {
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
-        
+        let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
         
         ApiCalls.sharedCall.getOrderListStore(merchant_id: id, order_list_type: list_type, order_status: order_status,
-                                              paid: 1, search: search) { isSuccess, responseData in
+                                              paid: 1, search: search, group_id: group_id) { isSuccess, responseData in
             
             
             
@@ -574,7 +575,8 @@ class OrderInStoreViewController: UIViewController {
                visiblePaths.contains([0, orderArray.count - 1]) {
                 
                 let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
-                
+                let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
+               
                 var start_date = ""
                 var end_date = ""
                 var min_amt = ""
@@ -635,7 +637,7 @@ class OrderInStoreViewController: UIViewController {
                                                  start_date: start_date, end_date: end_date,
                                                  min_amt: min_amt, max_amt: max_amt, search_value: "",
                                                  paid: 1, page_no: page,
-                                                 limit: 10) { isSuccess, responseData in
+                                                 limit: 10, group_id: group_id) { isSuccess, responseData in
                     
                     if isSuccess {
                         
