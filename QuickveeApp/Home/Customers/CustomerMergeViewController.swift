@@ -179,6 +179,7 @@ class CustomerMergeViewController: UIViewController {
                     self.tableView.reloadData()
                 }
                 ToastClass.sharedToast.showToast(message: list as! String, font: .systemFont(ofSize: 12))
+                self.navigationController?.popViewController(animated: true)
             }
             else {
                 
