@@ -14,6 +14,12 @@ protocol AddMixnMatchDelegate: AnyObject {
     func setSelectedMixVariants(mix: [VariantMixMatchModel], price: String, is_percent: String)
 }
 
+protocol AddMixnMatchStoresDelegate: AnyObject {
+    
+    func setSelectedStores(reverseStores: [Store])
+}
+
+
 class AddMixnMatchViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -22,6 +28,13 @@ class AddMixnMatchViewController: UIViewController {
     @IBOutlet weak var qtyTextfield: MDCOutlinedTextField!
     
     @IBOutlet weak var discountTextfield: MDCOutlinedTextField!
+    @IBOutlet weak var collection: UICollectionView!
+    @IBOutlet weak var collHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var copyLbl: UILabel!
+    @IBOutlet weak var copyTop: NSLayoutConstraint!
+    @IBOutlet weak var copyBottom: NSLayoutConstraint!
+    
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var doneBtn: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -33,6 +46,10 @@ class AddMixnMatchViewController: UIViewController {
     @IBOutlet weak var addVarientLbl: UILabel!
     
     @IBOutlet weak var viewsView: UIView!
+    
+    @IBOutlet weak var collView: UIView!
+    
+    @IBOutlet weak var variantsView: UIView!
     @IBOutlet weak var dollerBtn: UIButton!
     @IBOutlet weak var percentBtn: UIButton!
     
@@ -53,6 +70,8 @@ class AddMixnMatchViewController: UIViewController {
     var selectedAllEditIds = [String]()
     var widthArr = [String]()
     
+    var collMts = [Store]()
+    
     weak var delegate: AddMixnMatchDelegate?
     
     var price = ""
@@ -71,6 +90,9 @@ class AddMixnMatchViewController: UIViewController {
     var e_m_id = ""
     // var e_price = ""
     var edit_dollre_price = ""
+    
+    var tableContentSizeObservation: NSKeyValueObservation?
+    var collectionContentSizeObservation: NSKeyValueObservation?
     
     
     let loadingIndicator: ProgressView = {
@@ -94,7 +116,7 @@ class AddMixnMatchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         
         setupUI()
         qtyTextfield.delegate = self
@@ -106,8 +128,21 @@ class AddMixnMatchViewController: UIViewController {
         
         dealNameTextfield.autocapitalizationType = .words
         
-        tableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
+        collection.layer.borderColor = UIColor(named: "borderColor")?.cgColor
+        collection.layer.borderWidth = 1.0
+        collection.layer.cornerRadius = 5.0
         
+        let colLay = CustomFlowLayout()
+        collection.collectionViewLayout = colLay
+        colLay.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        
+        let its_tap = UITapGestureRecognizer(target: self, action: #selector(openMtsScreen))
+        collection.addGestureRecognizer(its_tap)
+        its_tap.numberOfTapsRequired = 1
+        collection.isUserInteractionEnabled = true
+        
+        tableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
+        collection.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
     }
     
     
@@ -115,9 +150,20 @@ class AddMixnMatchViewController: UIViewController {
                                change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         tableView.layer.removeAllAnimations()
         tableHeight.constant = tableView.contentSize.height
-        scrollHeight.constant = viewsView.bounds.size.height + 80 + tableHeight.constant
+        scrollHeight.constant = viewsView.bounds.size.height + collView.bounds.size.height + variantsView.bounds.size.height + tableHeight.constant + 60
         UIView.animate(withDuration: 0.5) {
             self.updateViewConstraints()
+        }
+    }
+    
+    func setCollHeight() {
+        
+        let height = collection.collectionViewLayout.collectionViewContentSize.height
+        if height <= 50 {
+            collHeight.constant = 50
+        }
+        else {
+            collHeight.constant = height
         }
     }
 
@@ -163,6 +209,13 @@ class AddMixnMatchViewController: UIViewController {
             discountTextfield.text = amount
             edit_dollre_price = discountTextfield.text ?? ""
             getWidth()
+            
+            copyTop.constant = 20
+            copyBottom.constant = 10
+            copyLbl.isHidden = false
+            copyLbl.text = "Copy to Stores"
+            collection.isHidden = false
+            collHeight.constant = 50
             // getAddVariant()
             //            tableHeight.constant = CGFloat(130 * variantArray.count)
             //            scrollHeight.constant = viewsView.bounds.size.height + 80 + tableHeight.constant
@@ -200,6 +253,12 @@ class AddMixnMatchViewController: UIViewController {
             
             tableView.isHidden = true
             Indicator.isAnimating = true
+            copyTop.constant = 0
+            copyBottom.constant = 0
+            copyLbl.isHidden = true
+            copyLbl.text = ""
+            collection.isHidden = true
+            collHeight.constant = 0
             variantListApi()
             
         }
@@ -264,6 +323,20 @@ class AddMixnMatchViewController: UIViewController {
         btnStack.layer.cornerRadius = 5
         dollerBtn.layer.cornerRadius = 5
         percentBtn.layer.cornerRadius = 5
+    }
+    
+    @objc func openMtsScreen() {
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "filtercategory") as! FilterCategoryViewController
+        
+        vc.delegateMixStores = self
+        vc.catMode = "mixMatchStores"
+        vc.selectIts = collMts
+        vc.apiMode = "mts"
+        present(vc, animated: true, completion: {
+            vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
+        })
     }
     
     func getAddVariant() {
@@ -549,6 +622,12 @@ class AddMixnMatchViewController: UIViewController {
     }
     
     
+    @IBAction func mtsCloseBtnClick(_ sender: UIButton) {
+        collMts.remove(at: sender.tag)
+        collection.reloadData()
+    }
+    
+    
     @IBAction func closeBtnClick(_ sender: UIButton) {
         let index = sender.tag
         if searching {
@@ -763,6 +842,19 @@ class AddMixnMatchViewController: UIViewController {
         let s_qty = qtyTextfield.text ?? ""
         let desc = descriptionTextField.text ?? ""
         
+        var stores = ""
+        var storearr = [String]()
+        if mode == "add" {
+            
+            for store in collMts {
+                storearr.append(store.merchant_id)
+            }
+            stores = storearr.joined(separator: ",")
+        }
+        else {
+            stores = ""
+        }
+        
         print(is_percent)
         
         var m_id = ""
@@ -780,7 +872,7 @@ class AddMixnMatchViewController: UIViewController {
         
         ApiCalls.sharedCall.addMixnMatchPricingApiCall(
             merchant_id: id, items_id: items_id, deal_name: d_name, min_qty: s_qty,
-            is_percent: is_percent, discount: price, is_enable: "1", description: desc, mix_id: m_id)
+            is_percent: is_percent, discount: price, is_enable: "1", description: desc, mix_id: m_id, stores: stores)
         { isSuccess, responseData in
             
             
@@ -1231,6 +1323,26 @@ extension AddMixnMatchViewController : UITableViewDelegate , UITableViewDataSour
     }
 }
 
+extension AddMixnMatchViewController: UICollectionViewDelegate, UICollectionViewDataSource  {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        collMts.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collection.dequeueReusableCell(withReuseIdentifier: "mtscell", for: indexPath) as! PlusCollCollectionViewCell
+        
+        cell.catPlusLbl.text = collMts[indexPath.row].store_name
+        cell.borderview.layer.cornerRadius = 5.0
+        cell.closeBtn.tag = indexPath.row
+        
+        setCollHeight()
+        
+        return cell
+    }
+}
+
 
 extension AddMixnMatchViewController : UITextFieldDelegate  {
  
@@ -1320,5 +1432,12 @@ extension AddMixnMatchViewController: SelectMixnMatchDelegate {
             //        scrollHeight.constant = viewsView.bounds.size.height + 80 +  tableHeight.constant
             //        view.layoutIfNeeded()
         
+    }
+}
+
+extension AddMixnMatchViewController: AddMixnMatchStoresDelegate {
+    func setSelectedStores(reverseStores: [Store]) {
+        collMts = reverseStores
+        collection.reloadData()
     }
 }

@@ -18,6 +18,11 @@ protocol AddScheduleDelegate: AnyObject {
     func setScheduleData(data: AddSchedule)
 }
 
+protocol AddBogoStoresDelegate: AnyObject {
+    
+    func setSelectedStores(reverseStores: [Store])
+}
+
 class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var topView: UIView!
@@ -43,6 +48,9 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var collection: UICollectionView!
+    
+    @IBOutlet weak var collHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollHeight: NSLayoutConstraint!
     
     @IBOutlet weak var tableHeight: NSLayoutConstraint!
@@ -50,8 +58,13 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var createTitle: UILabel!
     
     @IBOutlet weak var viewsview: UIView!
-        
+    @IBOutlet weak var storeView: UIView!
+    @IBOutlet weak var btnView: UIView!
     
+    @IBOutlet weak var copyLbl: UILabel!
+    @IBOutlet weak var copyTop: NSLayoutConstraint!
+    @IBOutlet weak var copyBtm: NSLayoutConstraint!
+    @IBOutlet weak var collBottom: NSLayoutConstraint!
     private var isSymbolOnRight = false
     
     var mode = ""
@@ -71,6 +84,8 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
     var searchVarArray = [VariantBogoModel]()
     
     var varient_List = [BogoVariantModel]()
+    
+    var collBts = [Store]()
     
     var activeTextField = UITextField()
     var selectedAllEditIds = [String]()
@@ -205,8 +220,22 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
+        collection.layer.borderColor = UIColor(named: "borderColor")?.cgColor
+        collection.layer.borderWidth = 1.0
+        collection.layer.cornerRadius = 5.0
+        
+        let colLay = CustomFlowLayout()
+        collection.collectionViewLayout = colLay
+        colLay.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        
+        let its_tap = UITapGestureRecognizer(target: self, action: #selector(openBtsScreen))
+        collection.addGestureRecognizer(its_tap)
+        its_tap.numberOfTapsRequired = 1
+        collection.isUserInteractionEnabled = true
         
         tableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
+        collection.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
+
         
         let scheduleGest = UITapGestureRecognizer(target: self, action: #selector(addScheduleBtnClick))
         addScheduleLbl.isUserInteractionEnabled = true
@@ -239,6 +268,14 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             percentBtn.setImage(UIImage(named: "PercentSymbol"), for: .normal)
             
             discountperItemTextfield.label.text = "Discount Per Item ($)"
+            
+            copyLbl.text = "Copy to Stores"
+            copyLbl.isHidden = false
+            copyTop.constant = 10
+            copyBtm.constant = 10
+            collBottom.constant = 10
+            collection.isHidden = false
+            collHeight.constant = 50
         }
         else {
             
@@ -271,6 +308,14 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
                 dollerBtn.setImage(UIImage(named: "dollerGrey"), for: .normal)
                 dollarAmt = ""
             }
+            
+            copyLbl.text = ""
+            copyLbl.isHidden = true
+            copyTop.constant = 0
+            copyBtm.constant = 0
+            collBottom.constant = 0
+            collection.isHidden = true
+            collHeight.constant = 0
             
             let buy_qty = bogoObj?.buy_qty
             let free_qty = bogoObj?.free_qty
@@ -332,6 +377,31 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
         discountperItemTextfield.addTarget(self, action: #selector(updateTextField), for: .editingChanged)
         qtyTextfield.addTarget(self, action: #selector(updateText), for: .editingChanged)
         discountQtyTextfield.addTarget(self, action: #selector(updateText), for: .editingChanged)
+    }
+    
+    @objc func openBtsScreen() {
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "filtercategory") as! FilterCategoryViewController
+        
+        vc.delegateBogoStores = self
+        vc.catMode = "bogoStores"
+        vc.selectIts = collBts
+        vc.apiMode = "bts"
+        present(vc, animated: true, completion: {
+            vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
+        })
+    }
+    
+    func setCollHeight() {
+        
+        let height = collection.collectionViewLayout.collectionViewContentSize.height
+        if height <= 50 {
+            collHeight.constant = 50
+        }
+        else {
+            collHeight.constant = height
+        }
     }
     
     
@@ -471,6 +541,19 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         
+        var stores = ""
+        var storearr = [String]()
+        if mode == "add" {
+            
+            for store in collBts {
+                storearr.append(store.merchant_id)
+            }
+            stores = storearr.joined(separator: ",")
+        }
+        else {
+            stores = ""
+        }
+        
         let d_name = dealNameTextfield.text ?? ""
         let price = discountperItemTextfield.text ?? ""
         let buy_qty = qtyTextfield.text ?? ""
@@ -607,7 +690,7 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
                                            full_day: full, start_time: startTime,
                                            end_time: endTime, repeat_type: no_repeat,
                                            weekly_days: week, monthly_dates: "",
-                                           id: bogo_id) { isSuccess, responseData in
+                                           id: bogo_id, stores: stores) { isSuccess, responseData in
             
             if isSuccess {
                 
@@ -750,6 +833,13 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             sender.thumbTintColor = .white
         }
         
+    }
+    
+    
+    @IBAction func btsCloseBtnClick(_ sender: UIButton) {
+        
+        collBts.remove(at: sender.tag)
+        collection.reloadData()
     }
     
     @IBAction func closeBtnClick(_ sender: UIButton) {
@@ -1258,7 +1348,7 @@ extension CreateBOGODealViewController {
                                change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         tableView.layer.removeAllAnimations()
         tableHeight.constant = tableView.contentSize.height
-        scrollHeight.constant = viewsview.bounds.size.height + 80 + tableHeight.constant
+        scrollHeight.constant = viewsview.bounds.size.height + storeView.bounds.size.height + btnView.bounds.size.height + tableHeight.constant + 50
         UIView.animate(withDuration: 0.5) {
             self.updateViewConstraints()
         }
@@ -1447,6 +1537,26 @@ extension CreateBOGODealViewController : UITableViewDelegate, UITableViewDataSou
     }
 }
 
+extension CreateBOGODealViewController: UICollectionViewDelegate, UICollectionViewDataSource  {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        collBts.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collection.dequeueReusableCell(withReuseIdentifier: "btscell", for: indexPath) as! PlusCollCollectionViewCell
+        
+        cell.catPlusLbl.text = collBts[indexPath.row].store_name
+        cell.borderview.layer.cornerRadius = 5.0
+        cell.closeBtn.tag = indexPath.row
+        
+        setCollHeight()
+        
+        return cell
+    }
+}
+
 extension CreateBOGODealViewController : SelectBogoDelegate {
     
     func addSelectedBogoVariants(arr: [VariantBogoModel]) {
@@ -1463,5 +1573,12 @@ extension CreateBOGODealViewController : SelectBogoDelegate {
         }
         tableView.reloadData()
         
+    }
+}
+
+extension CreateBOGODealViewController: AddBogoStoresDelegate {
+    func setSelectedStores(reverseStores: [Store]) {
+        collBts = reverseStores
+        collection.reloadData()
     }
 }

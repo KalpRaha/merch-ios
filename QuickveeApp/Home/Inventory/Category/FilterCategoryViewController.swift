@@ -83,6 +83,9 @@ class FilterCategoryViewController: UIViewController {
     weak var delegateBogoSelected: SelectedCategoryProductsDelegate?
     weak var delegateCouponSelected: SelectedCategoryProductsDelegate?
     
+    weak var delegateMixStores: AddMixnMatchStoresDelegate?
+    weak var delegateBogoStores: AddBogoStoresDelegate?
+    
     weak var delegateBrandTagsSelected: BrandsTagsAddDelegate?
     
     
@@ -166,7 +169,7 @@ class FilterCategoryViewController: UIViewController {
             
             setupBrandsApi()
         }
-        else if apiMode == "its" {
+        else if apiMode == "its" || apiMode == "mts" || apiMode == "bts" {
             collection.isHidden = true
             loadingIndicator.isAnimating = true
             setupStoreApi()
@@ -766,6 +769,36 @@ class FilterCategoryViewController: UIViewController {
             }
         }
         
+        else if catMode == "mixMatchStores" {
+            
+            loadingIndicator.isAnimating = true
+            selectIts = []
+            tapBlue = []
+            selectAddIts = []
+            collection.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.loadingIndicator.isAnimating = false
+                self.delegateMixStores?.setSelectedStores(reverseStores: [])
+                self.dismiss(animated: true)
+            }
+        }
+        
+        else if catMode == "bogoStores" {
+            
+            loadingIndicator.isAnimating = true
+            selectIts = []
+            tapBlue = []
+            selectAddIts = []
+            collection.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.loadingIndicator.isAnimating = false
+                self.delegateBogoStores?.setSelectedStores(reverseStores: [])
+                self.dismiss(animated: true)
+            }
+        }
+        
         else {
             loadingIndicator.isAnimating = true
             selectCategory = []
@@ -862,6 +895,18 @@ class FilterCategoryViewController: UIViewController {
             dismiss(animated: true)
         }
         
+        else if catMode == "mixMatchStores" {
+            
+            delegateMixStores?.setSelectedStores(reverseStores: selectAddIts)
+            dismiss(animated: true)
+        }
+        
+        else if catMode == "bogoStores" {
+            
+            delegateBogoStores?.setSelectedStores(reverseStores: selectAddIts)
+            dismiss(animated: true)
+        }
+        
         else {
             
             delegateVariants?.getProductsCategory(categoryArray: selectAddCategory)
@@ -947,7 +992,7 @@ extension FilterCategoryViewController: UISearchBarDelegate {
                 searchBrandsTags = subBrandsTags.filter { $0.title.lowercased().prefix(searchText.count) == searchText.lowercased() }
                 searching = true
             }
-            else if apiMode == "its" {
+            else if apiMode == "its" || apiMode == "mts" || apiMode == "bts" {
                 searchIts = subIts.filter { $0.store_name.lowercased().prefix(searchText.count) == searchText.lowercased() }
                 searching = true
             }
@@ -1001,7 +1046,7 @@ extension FilterCategoryViewController: UISearchBarDelegate {
                         noCategoryLbl.isHidden = true
                     }
                 }
-                else if apiMode == "its" {
+                else if apiMode == "its" || apiMode == "mts" || apiMode == "bts" {
                     if searchIts.count == 0 {
                         collection.isHidden = true
                         addView.isHidden = false
@@ -1039,7 +1084,7 @@ extension FilterCategoryViewController: UISearchBarDelegate {
                 }
             }
             else {
-                if apiMode == "its" {
+                if apiMode == "its" || apiMode == "mts" || apiMode == "bts" {
                     selectView.isHidden = false
                     selectLbl.isHidden = false
                     selectLbl.text = "Select All"
@@ -1088,7 +1133,7 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
             else if apiMode == "brands" || apiMode == "tags" {
                 return searchBrandsTags.count
             }
-            else if apiMode == "its" {
+            else if apiMode == "its" || apiMode == "mts" || apiMode == "bts" {
                 return searchIts.count
             }
             else {
@@ -1103,7 +1148,7 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
             else if apiMode == "brands" || apiMode == "tags" {
                 return brandsTags.count
             }
-            else if apiMode == "its" {
+            else if apiMode == "its" || apiMode == "mts" || apiMode == "bts" {
                 return its.count
             }
             else {
@@ -1163,7 +1208,7 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
                 }
             }
-            else if apiMode == "its" {
+            else if apiMode == "its" || apiMode == "mts" || apiMode == "bts" {
                 
                 cell.categoryName.text = searchIts[indexPath.row].store_name
                 
@@ -1251,7 +1296,7 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
                 }
             }
-            else if apiMode == "its" {
+            else if apiMode == "its" || apiMode == "mts" || apiMode == "bts" {
                 
                 cell.categoryName.text = its[indexPath.row].store_name
                 
@@ -1323,7 +1368,7 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     selectBrandsTags = []
                     collection.reloadData()
                 }
-                else if apiMode == "its" {
+                else if apiMode == "its" || apiMode == "mts" || apiMode == "bts" {
                     let id = searchIts[indexPath.row].merchant_id
                     removeIts(storeName: id)
                     selectLbl.textColor = .black
@@ -1357,7 +1402,7 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     tapBlue = [name.title]
                     collection.reloadData()
                 }
-                else if apiMode == "its" {
+                else if apiMode == "its" || apiMode == "mts" || apiMode == "bts" {
                     let name = searchIts[indexPath.row]
                     selectAddIts.append(name)
                     tapBlue.append(name.merchant_id)
@@ -1402,7 +1447,7 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     selectBrandsTags = []
                     collection.reloadData()
                 }
-                else if apiMode == "its" {
+                else if apiMode == "its" || apiMode == "mts" || apiMode == "bts" {
                     itsSelectAll = false
                     let id = its[indexPath.row].merchant_id
                     removeIts(storeName: id)
@@ -1437,7 +1482,7 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     tapBlue = [name.title]
                     collection.reloadData()
                 }
-                else if apiMode == "its" {
+                else if apiMode == "its" || apiMode == "mts" || apiMode == "bts" {
                     let name = its[indexPath.row]
                     selectAddIts.append(name)
                     tapBlue.append(name.merchant_id)
