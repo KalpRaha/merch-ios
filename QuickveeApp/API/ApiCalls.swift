@@ -13,6 +13,8 @@ class ApiCalls {
     
     static let sharedCall = ApiCalls()
     
+    var customSession: Session!
+    
     func categoryListCall(merchant_id: String, completion:@escaping(Bool,[String:Any]) -> ()){
         
         let url = AppURLs.INVENTORY_CATEGORY_LIST
@@ -232,7 +234,7 @@ extension ApiCalls {
     
     
     func productAddCall(id: String, title: String, description: String,
-                        brand: String, tags: String, price: String,
+                        brand: String, tags: String, stores: String, price: String,
                         compare_price: String, costperItem: String,
                         margin: String, profit: String, ischargeTax: String,
                         trackqnty: String, isstockcontinue: String,
@@ -261,6 +263,7 @@ extension ApiCalls {
             "description": description,
             "brand": brand,
             "tags": tags,
+            "stores": stores,
             "price": price,
             "compare_price": compare_price,
             "costperItem": costperItem,
@@ -313,7 +316,11 @@ extension ApiCalls {
         print(parameters)
         print(parameters)
         
-        AF.request(url, method: .post, parameters: parameters).responseData { response in
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 120
+        customSession = Session(configuration: configuration)
+
+        customSession.request(url, method: .post, parameters: parameters).responseData { response in
             
             switch response.result {
                 
@@ -2255,7 +2262,8 @@ extension ApiCalls {
     
     func addMixnMatchPricingApiCall(merchant_id: String, items_id: String, deal_name: String,
                                     min_qty: String, is_percent:String ,
-                                    discount : String, is_enable: String, description: String , mix_id: String ,completion:@escaping(Bool,[String:Any]) -> ()){
+                                    discount : String, is_enable: String, description: String , mix_id: String ,
+                                    stores: String, completion:@escaping(Bool,[String:Any]) -> ()){
         
         let url = AppURLs.ADD_MIX_N_MATCH_PRICING
         
@@ -2268,7 +2276,8 @@ extension ApiCalls {
             "discount" :discount,
             "is_enable" :is_enable,
             "description" : description,
-            "mix_id":mix_id
+            "mix_id":mix_id,
+            "stores": stores
         ]
         print(parameters)
         
@@ -3334,7 +3343,7 @@ extension ApiCalls {
                         use_with_coupon: String, buy_qty: String, free_qty: String, discount: String,
                         discount_type: String, items: String, start_date: String, end_date: String,
                         full_day: String, start_time: String, end_time: String, repeat_type: String,
-                        weekly_days: String, monthly_dates: String, id: String,
+                        weekly_days: String, monthly_dates: String, id: String, stores: String,
                         completion:@escaping(Bool,[String:Any]) -> ()){
         
         let url = AppURLs.ADD_BOGO
@@ -3358,7 +3367,8 @@ extension ApiCalls {
             "repeat_type": repeat_type,
             "weekly_days": weekly_days,
             "monthly_dates": monthly_dates,
-            "id":id
+            "id":id,
+            "stores": stores
         ]
         
         print(parameters)
