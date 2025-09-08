@@ -285,10 +285,12 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OTh-8p-uR2">
-                            <rect key="frame" x="247.66666666666663" y="234" width="49" height="16"/>
+                            <rect key="frame" x="247.66666666666663" y="234" width="103" height="16"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" title="Delete"/>
+                            <state key="normal" title="Delete Profile">
+                                <color key="titleColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
