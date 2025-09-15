@@ -441,6 +441,23 @@ class BogoListViewController: UIViewController {
         return [:]
     }
     
+    
+    
+//    func convertStringToDictionary(text: String) -> Any? {
+//        guard let data = text.data(using: .utf8) else {
+//            print("Invalid UTF-8 string.")
+//            return nil
+//        }
+//        
+//        do {
+//            let json = try JSONSerialization.jsonObject(with: data, options: [])
+//            return json
+//        } catch {
+//            print("Failed to parse JSON: \(error)")
+//            return nil
+//        }
+//    }
+    
     func startEndDateFormat(date: String) -> String {
         
         let dateFormat1 = DateFormatter()

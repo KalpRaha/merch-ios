@@ -163,6 +163,7 @@ class AddRemoveCustViewController: UIViewController {
         if mode == "Add" {
             
             if numbertextField.text != "" {
+                
                 addRemovePointsAPI()
             }
             else {
@@ -193,8 +194,21 @@ class AddRemoveCustViewController: UIViewController {
     }
     
     func addRemovePointsAPI() {
-        let num = numbertextField.text ?? ""
-       
+        
+        guard let numText = numbertextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+              let numValue = Double(numText), numValue > 0 else {
+            
+            ToastClass.sharedToast.showToast(
+                message: "Please enter a valid points",
+                font: UIFont(name: "Manrope-SemiBold", size: 14.0)!
+            )
+            return
+        }
+        
+        
+        
+        //let numText = numbertextField.text ?? ""
+        print(numText)
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         let emp_id = UserDefaults.standard.string(forKey: "emp_po_id") ?? ""
@@ -205,11 +219,11 @@ class AddRemoveCustViewController: UIViewController {
         
         if mode == "Add" {
             
-            credit = num
+            credit = numText
             debit = ""
         }
         else {
-            debit = num
+            debit = numText
             credit = ""
         }
 

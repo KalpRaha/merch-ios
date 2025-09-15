@@ -38,6 +38,9 @@ class CustomerMergeViewController: UIViewController {
     var secondary_cust_Id = ""
     var primary_cust_Id = ""
     
+    var secondaryEmail = ""
+    
+    
     var isSelect = false
     
     let loadingIndicator: ProgressView = {
@@ -73,7 +76,7 @@ class CustomerMergeViewController: UIViewController {
    
     func setdata() {
          
-        let fName = custObj?.f_name ?? ""
+        let fName = custObj?.name ?? ""
         let emailid = custObj?.email ?? ""
         let phone_no = custObj?.phone ?? ""
         
@@ -156,6 +159,14 @@ class CustomerMergeViewController: UIViewController {
     
     func mergeCustAPiCall() {
         
+        let primaryEmail = custObj?.email ?? ""
+        
+        guard  primaryEmail != secondaryEmail else {
+            ToastClass.sharedToast.showToast(message: "Please Select Right Customer", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+            return
+        }
+        
+        
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         let emp_id = UserDefaults.standard.string(forKey: "emp_po_id") ?? ""
         let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
@@ -172,17 +183,25 @@ class CustomerMergeViewController: UIViewController {
                    
                     return
                 }
-                print(list)
-                DispatchQueue.main.asyncAfter(deadline: .now() +  1.0) {
+                //print(list)
+               
+                if list as! String == "Merchant ID, primary customer ID, and secondary customer ID are all required." {
                     self.loadingIndicator.isAnimating = false
-                    self.secondary_cust_Id = ""
-                    self.tableView.reloadData()
+                    ToastClass.sharedToast.showToast(message: "Customer not found in list ", font: .systemFont(ofSize: 12))
                 }
-                ToastClass.sharedToast.showToast(message: list as! String, font: .systemFont(ofSize: 12))
-                self.navigationController?.popViewController(animated: true)
+                else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() +  1.0) {
+                        self.loadingIndicator.isAnimating = false
+                        self.secondary_cust_Id = ""
+                        self.tableView.reloadData()
+                    }
+                    ToastClass.sharedToast.showToast(message: list as! String, font: .systemFont(ofSize: 12))
+                    self.navigationController?.popViewController(animated: true)
+                }
+               
             }
             else {
-                
+                print("error")
             }
             
         }
@@ -228,8 +247,10 @@ class CustomerMergeViewController: UIViewController {
     
     
     @IBAction func cancelBtnClick(_ sender: UIButton) {
-        self.secondary_cust_Id = ""
-        self.tableView.reloadData()
+//        self.secondary_cust_Id = ""
+//        self.tableView.reloadData()
+        
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func mergeBtnClick(_ sender: UIButton) {
@@ -377,13 +398,15 @@ extension CustomerMergeViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if searching {
-            secondary_cust_Id = customerList[indexPath.row].customer_id
+            secondary_cust_Id = searchCustomerListArray[indexPath.row].customer_id
+            secondaryEmail = searchCustomerListArray[indexPath.row].email
             print(secondary_cust_Id)
         
             tableView.reloadData()
         }
         else {
             secondary_cust_Id = customerList[indexPath.row].customer_id
+            secondaryEmail = customerList[indexPath.row].email
             print(secondary_cust_Id)
         
             tableView.reloadData()

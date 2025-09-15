@@ -61,6 +61,9 @@ class PassCodeViewController: UIViewController, WKNavigationDelegate {
     let numberarray3 = ["", "0", ""]
     
     var webview = WKWebView()
+    
+    //https://quickvee.com/merchants/login
+    //https://qa-admin-panel.quickvee.us/login
     var page = URL(string: "https://quickvee.com/merchants/login")
     
     override func viewDidLoad() {

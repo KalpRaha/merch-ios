@@ -1075,7 +1075,7 @@ extension CustomerInfoVC: UITableViewDelegate, UITableViewDataSource {
             cell.profileName.text = cust.name.capitalized
             
             cell.pontBalanceValueLbl.text = p_Value
-            cell.storeCreditValueLbl.text = cust.total_store_credit
+            cell.storeCreditValueLbl.text = "$\(cust.total_store_credit)"
             cell.EmailVaslueLbl.text = cust.email
             
             if loyaltyPoint?.enable_loyalty == "0" {
