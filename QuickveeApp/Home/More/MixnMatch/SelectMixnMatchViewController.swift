@@ -52,7 +52,7 @@ class SelectMixnMatchViewController: UIViewController {
     
     var mixSelectedVariants = [VariantMixMatchModel]()
     var submixSelectedVariants = [VariantMixMatchModel]()
-    
+    var mts = [Store]()
     
     var mixCategory = [InventoryCategory]()
     var currentCategoryId: String?
@@ -479,6 +479,7 @@ class SelectMixnMatchViewController: UIViewController {
             vc.variantArray = mixSelectedVariants
             vc.mode = mode
             vc.is_percent = isperc
+            vc.collMts = mts
             vc.delegate = self
             
         }
@@ -895,11 +896,11 @@ class SelectMixnMatchViewController: UIViewController {
 
 extension SelectMixnMatchViewController: AddMixnMatchDelegate {
     
-    func setSelectedMixVariants(mix: [VariantMixMatchModel], price: String,  is_percent: String) {
+    func setSelectedMixVariants(mix: [VariantMixMatchModel], price: String,  is_percent: String, stores: [Store]) {
 
         self.price = price
         self.isperc = is_percent
-        
+        mts = stores
         
         setDisabledVariants(Addprice: self.price, isperc: isperc)
         mixSelectedVariants = mix

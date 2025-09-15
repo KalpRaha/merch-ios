@@ -42,6 +42,7 @@ class SalesNewViewController: UIViewController {
         webViewConfiguration.userContentController.add(self, name: "navigateTo")
         webViewConfiguration.userContentController.add(self, name: "loginbtn")
         webViewConfiguration.userContentController.add(self, name: "dropdownSelected")
+        webViewConfiguration.userContentController.add(self, name: "backButtonTapped")
         
         webview = WKWebView(frame: CGRect(origin: CGPoint.zero, size: .zero), configuration: webViewConfiguration)
         
@@ -1438,6 +1439,39 @@ class SalesNewViewController: UIViewController {
                 
             }
             
+            let scriptback = """
+            (function() {
+                function showBackButton() {
+                    var backButton = document.getElementById('ios-order-summary-back-button');
+                    if (backButton) {
+                        backButton.classList.remove('hidden');
+                        var parent = backButton.parentElement;
+                        if (parent) {
+                            parent.classList.remove('hidden');
+                        }
+
+                        // Optional: Add a click listener that sends a message to Swift
+                        backButton.addEventListener('click', function() {
+                            window.webkit.messageHandlers.backButtonTapped.postMessage(null);
+                        });
+                    }
+                }
+
+                // Run once immediately in case element already exists
+                showBackButton();
+
+                // Observe DOM for dynamic changes
+                var observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        showBackButton();
+                    });
+                });
+
+                observer.observe(document.body, { childList: true, subtree: true });
+            })();
+            """
+            webView.evaluateJavaScript(scriptback, completionHandler: nil)
+            
             self.webview.evaluateJavaScript("var style = document.createElement('style'); style.innerHTML = '.Orders-for-android { display: none; }'; document.head.appendChild(style);")
             { res, error in
             }
@@ -1793,6 +1827,10 @@ extension SalesNewViewController: WKScriptMessageHandler {
 //                    self.webview.isHidden = false
 //                }
 //            }
+        }
+        
+        else if message.name == "backButtonTapped" {
+            webview.goBack()
         }
     }
 }

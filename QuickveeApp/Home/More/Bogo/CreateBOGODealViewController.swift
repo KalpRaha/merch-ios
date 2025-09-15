@@ -129,6 +129,14 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             addScheduleLbl.text = "Add Schedule +"
             activeLbl.text = "No Schedule Set"
             repeatLbl.text = ""
+            
+            copyLbl.text = "Copy to Stores"
+            copyLbl.isHidden = false
+            copyTop.constant = 10
+            copyBtm.constant = 10
+            collBottom.constant = 10
+            collection.isHidden = false
+            collHeight.constant = 50
         }
         else {
             var sdate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: bogoObj?.start_date ?? "")
@@ -218,6 +226,14 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             else {
                 repeatLbl.text = "Repeats On (Weekly) \(wdays)"
             }
+            
+            copyLbl.text = ""
+            copyLbl.isHidden = true
+            copyTop.constant = 0
+            copyBtm.constant = 0
+            collBottom.constant = 0
+            collection.isHidden = true
+            collHeight.constant = 0
         }
         
         collection.layer.borderColor = UIColor(named: "borderColor")?.cgColor
@@ -268,14 +284,6 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             percentBtn.setImage(UIImage(named: "PercentSymbol"), for: .normal)
             
             discountperItemTextfield.label.text = "Discount Per Item ($)"
-            
-            copyLbl.text = "Copy to Stores"
-            copyLbl.isHidden = false
-            copyTop.constant = 10
-            copyBtm.constant = 10
-            collBottom.constant = 10
-            collection.isHidden = false
-            collHeight.constant = 50
         }
         else {
             
@@ -308,14 +316,6 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
                 dollerBtn.setImage(UIImage(named: "dollerGrey"), for: .normal)
                 dollarAmt = ""
             }
-            
-            copyLbl.text = ""
-            copyLbl.isHidden = true
-            copyTop.constant = 0
-            copyBtm.constant = 0
-            collBottom.constant = 0
-            collection.isHidden = true
-            collHeight.constant = 0
             
             let buy_qty = bogoObj?.buy_qty
             let free_qty = bogoObj?.free_qty
@@ -391,17 +391,6 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
         present(vc, animated: true, completion: {
             vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
         })
-    }
-    
-    func setCollHeight() {
-        
-        let height = collection.collectionViewLayout.collectionViewContentSize.height
-        if height <= 50 {
-            collHeight.constant = 50
-        }
-        else {
-            collHeight.constant = height
-        }
     }
     
     
@@ -1348,7 +1337,19 @@ extension CreateBOGODealViewController {
                                change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         tableView.layer.removeAllAnimations()
         tableHeight.constant = tableView.contentSize.height
-        scrollHeight.constant = viewsview.bounds.size.height + storeView.bounds.size.height + btnView.bounds.size.height + tableHeight.constant + 50
+        if mode == "add" {
+            if collection.collectionViewLayout.collectionViewContentSize.height <= 50 {
+                collHeight.constant = 50
+            }
+            else {
+                collHeight.constant = collection.collectionViewLayout.collectionViewContentSize.height
+            }
+            scrollHeight.constant = viewsview.bounds.size.height + collHeight.constant + btnView.bounds.size.height + tableHeight.constant + 100
+        }
+        else {
+            collHeight.constant = 0
+            scrollHeight.constant = viewsview.bounds.size.height + collHeight.constant + btnView.bounds.size.height + tableHeight.constant + 50
+        }
         UIView.animate(withDuration: 0.5) {
             self.updateViewConstraints()
         }
@@ -1550,8 +1551,6 @@ extension CreateBOGODealViewController: UICollectionViewDelegate, UICollectionVi
         cell.catPlusLbl.text = collBts[indexPath.row].store_name
         cell.borderview.layer.cornerRadius = 5.0
         cell.closeBtn.tag = indexPath.row
-        
-        setCollHeight()
         
         return cell
     }

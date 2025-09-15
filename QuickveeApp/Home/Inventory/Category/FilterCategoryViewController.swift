@@ -520,6 +520,7 @@ class FilterCategoryViewController: UIViewController {
         }
         
         let stores = UserDefaults.standard.string(forKey: "assigned_store") ?? ""
+        let current_store = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         
         var storeArray = [Store]()
         
@@ -529,6 +530,8 @@ class FilterCategoryViewController: UIViewController {
                 storeArray.append(store)
             }
         }
+        
+        storeArray.removeAll(where: { $0.merchant_id.lowercased() == current_store.lowercased()})
         
         if storeArray.count > 0 {
             selectView.isHidden = false

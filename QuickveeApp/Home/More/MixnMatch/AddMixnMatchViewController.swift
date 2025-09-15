@@ -11,7 +11,7 @@ import BarcodeScanner
 
 protocol AddMixnMatchDelegate: AnyObject {
     
-    func setSelectedMixVariants(mix: [VariantMixMatchModel], price: String, is_percent: String)
+    func setSelectedMixVariants(mix: [VariantMixMatchModel], price: String, is_percent: String, stores: [Store])
 }
 
 protocol AddMixnMatchStoresDelegate: AnyObject {
@@ -34,6 +34,7 @@ class AddMixnMatchViewController: UIViewController {
     @IBOutlet weak var copyLbl: UILabel!
     @IBOutlet weak var copyTop: NSLayoutConstraint!
     @IBOutlet weak var copyBottom: NSLayoutConstraint!
+    @IBOutlet weak var collBottom: NSLayoutConstraint!
     
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var doneBtn: UIButton!
@@ -141,6 +142,27 @@ class AddMixnMatchViewController: UIViewController {
         its_tap.numberOfTapsRequired = 1
         collection.isUserInteractionEnabled = true
         
+        if mode == "add" {
+            copyTop.constant = 10
+            copyBottom.constant = 10
+            copyLbl.isHidden = false
+            copyLbl.text = "Copy to Stores"
+            collection.isHidden = false
+            collHeight.constant = 50
+            collBottom.constant = 10
+        }
+        else {
+            tableView.isHidden = true
+            Indicator.isAnimating = true
+            copyTop.constant = 0
+            copyBottom.constant = 0
+            copyLbl.isHidden = true
+            copyLbl.text = ""
+            collection.isHidden = true
+            collHeight.constant = 0
+            collBottom.constant = 0
+        }
+        
         tableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
         collection.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
     }
@@ -150,20 +172,21 @@ class AddMixnMatchViewController: UIViewController {
                                change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         tableView.layer.removeAllAnimations()
         tableHeight.constant = tableView.contentSize.height
-        scrollHeight.constant = viewsView.bounds.size.height + collView.bounds.size.height + variantsView.bounds.size.height + tableHeight.constant + 60
-        UIView.animate(withDuration: 0.5) {
-            self.updateViewConstraints()
-        }
-    }
-    
-    func setCollHeight() {
-        
-        let height = collection.collectionViewLayout.collectionViewContentSize.height
-        if height <= 50 {
-            collHeight.constant = 50
+        if mode == "add" {
+            if collection.collectionViewLayout.collectionViewContentSize.height <= 50 {
+                collHeight.constant = 50
+            }
+            else {
+                collHeight.constant = collection.collectionViewLayout.collectionViewContentSize.height
+            }
+            scrollHeight.constant = viewsView.bounds.size.height + collHeight.constant + variantsView.bounds.size.height + tableHeight.constant + 110
         }
         else {
-            collHeight.constant = height
+            collHeight.constant = 0
+            scrollHeight.constant = viewsView.bounds.size.height + collHeight.constant + variantsView.bounds.size.height + tableHeight.constant + 60
+        }
+        UIView.animate(withDuration: 0.5) {
+            self.updateViewConstraints()
         }
     }
 
@@ -209,13 +232,6 @@ class AddMixnMatchViewController: UIViewController {
             discountTextfield.text = amount
             edit_dollre_price = discountTextfield.text ?? ""
             getWidth()
-            
-            copyTop.constant = 20
-            copyBottom.constant = 10
-            copyLbl.isHidden = false
-            copyLbl.text = "Copy to Stores"
-            collection.isHidden = false
-            collHeight.constant = 50
             // getAddVariant()
             //            tableHeight.constant = CGFloat(130 * variantArray.count)
             //            scrollHeight.constant = viewsView.bounds.size.height + 80 + tableHeight.constant
@@ -251,14 +267,6 @@ class AddMixnMatchViewController: UIViewController {
             cancelBtn.layer.borderWidth = 1
             cancelBtn.layer.borderColor = UIColor.red.cgColor
             
-            tableView.isHidden = true
-            Indicator.isAnimating = true
-            copyTop.constant = 0
-            copyBottom.constant = 0
-            copyLbl.isHidden = true
-            copyLbl.text = ""
-            collection.isHidden = true
-            collHeight.constant = 0
             variantListApi()
             
         }
@@ -572,7 +580,7 @@ class AddMixnMatchViewController: UIViewController {
             
             UserDefaults.standard.set(0, forKey: "modal_screen")
             print(edit_dollre_price)
-            delegate?.setSelectedMixVariants(mix: variantArray, price: edit_dollre_price, is_percent: is_percent)
+            delegate?.setSelectedMixVariants(mix: variantArray, price: edit_dollre_price, is_percent: is_percent, stores: collMts)
             navigationController?.popViewController(animated: true)
         }
         else {
@@ -969,7 +977,7 @@ class AddMixnMatchViewController: UIViewController {
         UserDefaults.standard.set(0, forKey: "modal_screen")
         print(variantArray)
         if mode == "add" {
-            delegate?.setSelectedMixVariants(mix: variantArray, price: price, is_percent: is_percent)
+            delegate?.setSelectedMixVariants(mix: variantArray, price: price, is_percent: is_percent, stores: collMts)
         }
         navigationController?.popViewController(animated: true)
     }
@@ -1336,8 +1344,6 @@ extension AddMixnMatchViewController: UICollectionViewDelegate, UICollectionView
         cell.catPlusLbl.text = collMts[indexPath.row].store_name
         cell.borderview.layer.cornerRadius = 5.0
         cell.closeBtn.tag = indexPath.row
-        
-        setCollHeight()
         
         return cell
     }
