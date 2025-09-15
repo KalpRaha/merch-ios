@@ -983,16 +983,21 @@ class NewOrderRefundDetailVC: UIViewController {
         
         
         let dateTime = formattedDate
-        
-        let dateComponents = dateTime.split(separator: " ")
-      
-        let date = String(dateComponents[0])
-        let time = String(dateComponents[1])
-        let timeaa = String(dateComponents[2])
-    
-        
-        dateValueLbl.text = date
-        timeValueLbl.text = "\(time) \(timeaa)"
+        if dateTime == "" {
+            
+        }
+        else {
+            
+            let dateComponents = dateTime.split(separator: " ")
+            
+            let date = String(dateComponents[0])
+            let time = String(dateComponents[1])
+            let timeaa = String(dateComponents[2])
+            
+            
+            dateValueLbl.text = date
+            timeValueLbl.text = "\(time) \(timeaa)"
+        }
         
         orderIdValue.text = order.order_id
         ordertypeValueLbl.text = order.order_method.uppercased()
