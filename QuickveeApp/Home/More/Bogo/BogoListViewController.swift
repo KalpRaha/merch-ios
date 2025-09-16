@@ -432,7 +432,7 @@ class BogoListViewController: UIViewController {
         
         if let data = text.data(using: .utf8) {
             do {
-                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String:Any]
+                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any] ?? [:]
                 return json
             } catch {
                 print("Something went wrong")

@@ -52,6 +52,7 @@ class CustomerMergeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
         setupUI()
         profileView.layer.cornerRadius = 23
         cancelBtn.layer.cornerRadius = 5
@@ -298,6 +299,11 @@ extension CustomerMergeViewController : UISearchBarDelegate {
     }
     
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.secondary_cust_Id = ""
+        self.tableView.reloadData()
+        searchBar.resignFirstResponder()
+    }
 }
 
 extension CustomerMergeViewController: UITableViewDelegate, UITableViewDataSource {
