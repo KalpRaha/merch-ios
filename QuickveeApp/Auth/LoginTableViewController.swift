@@ -366,8 +366,7 @@ class LoginTableViewController: UITableViewController {
                     }
                     else {
                         let jsonDict = json["result"]
-                        self.getLoginResponse(response: jsonDict!)
-                        
+                        self.getLoginResponse (response: jsonDict!, emp_response: json["is_employee"])
                     }
                     break
                 }
@@ -382,7 +381,10 @@ class LoginTableViewController: UITableViewController {
         }
     }
   
-    func getLoginResponse(response: Any) {
+    func getLoginResponse(response: Any, emp_response: Any) {
+        
+        let emp_res = emp_response as! Int
+        
         
         responseDict = response as! [String:Any]
         print(responseDict)
@@ -397,6 +399,8 @@ class LoginTableViewController: UITableViewController {
         UserDefaults.standard.set(email, forKey: "merchant_email")
         UserDefaults.standard.set(pass, forKey: "merchant_password")
         UserDefaults.standard.set(store, forKey: "store_name_webview")
+        
+        UserDefaults.standard.set(emp_res, forKey: "login_emp_res")
         
         print(responseDict)
         

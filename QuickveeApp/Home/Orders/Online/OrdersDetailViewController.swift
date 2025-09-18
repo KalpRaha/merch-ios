@@ -2831,6 +2831,7 @@ struct Cart_Data {
     let note: String
     let userData: String
     let taxRates: String
+    let mix_match_amt: String
     let bogo_discount: String
     let default_tax_amount: String
     let other_taxes_amount: String
@@ -2889,6 +2890,7 @@ struct CouponCode {
     let coupon_code: String
     let coupon_code_amt: String
     let bogo_discount: String
+    let mix_match_discount: String
     let loyalty_point_earned: String
     let loyalty_point_amt_earned: String
     let loyalty_point_amt_spent: String

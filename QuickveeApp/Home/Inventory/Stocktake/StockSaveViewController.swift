@@ -226,7 +226,7 @@ class StockSaveViewController: UIViewController {
                 }
             }
             else {
-                if stockDraftList.contains(where: {$0.product_id == variant.id}) {
+                if stockDraftList.contains(where: {$0.product_name == variant.title}) {
                     smallVarList.append(variant)
                 }
             }

@@ -185,10 +185,13 @@ class HomeViewController: UIViewController {
         
         let email = UserDefaults.standard.string(forKey: "merchant_email") ?? ""
         let password = UserDefaults.standard.string(forKey: "merchant_password") ?? ""
+        let emp_log = UserDefaults.standard.string(forKey: "login_emp_res") ?? ""
+        
         
         let parameters: [String: Any] = [
             "email_id": email,
-            "password": password
+            "password": password,
+            "employee_login": emp_log
         ]
         
         print(parameters)

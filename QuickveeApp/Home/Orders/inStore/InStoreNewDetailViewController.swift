@@ -516,6 +516,7 @@ class InStoreNewDetailViewController: UIViewController {
         couponCode = CouponCode(coupon_code: "\(coupon_dict["coupon_code"] ?? "")",
                                 coupon_code_amt: "\(coupon_dict["coupon_code_amt"] ?? "")",
                                 bogo_discount: "\(coupon_dict["bogo_discount"] ?? "")",
+                                mix_match_discount: "\(coupon_dict["mix_match_discount"] ?? "")",
                                 loyalty_point_earned: "\(coupon_dict["loyalty_point_earned"] ?? "")",
                                 loyalty_point_amt_earned: "\(coupon_dict["loyalty_point_amt_earned"] ?? "")",
                                 loyalty_point_amt_spent: "\(coupon_dict["loyalty_point_amt_spent"] ?? "")",
@@ -567,6 +568,8 @@ class InStoreNewDetailViewController: UIViewController {
         let coupon_code_amt = couponCode?.coupon_code_amt ?? "0.00"
         
         let bogo_discount = couponCode?.bogo_discount ?? "0.00"
+        
+        let mixmatch_discount = couponCode?.mix_match_discount ?? "0.00"
         
         var points_earned = couponCode?.loyalty_point_earned ?? "0.00"
         let points_amt_earned = couponCode?.loyalty_point_amt_earned ?? "0.00"
@@ -6251,7 +6254,7 @@ class InStoreNewDetailViewController: UIViewController {
                 
                 smallcart.append(Cart_Data(line_item_id: "", variant_id: "", category_id: "",
                                            cost_price: "", name: "", is_bulk_price: "", bulk_price_id: "",
-                                           qty: "", note: "Lottery", userData: "", taxRates: "", bogo_discount: "", default_tax_amount: "",
+                                           qty: "", note: "Lottery", userData: "", taxRates: "", mix_match_amt: "", bogo_discount: "", default_tax_amount: "",
                                            other_taxes_amount: "", other_taxes_desc: "", is_refunded: "",
                                            refund_amount: "", refund_qty: "", id: "", img: "", price: "",
                                            discount_amt: "0.00", coupon_code_amt: "", is_lottery: "", discount_rate: "",
@@ -6267,7 +6270,7 @@ class InStoreNewDetailViewController: UIViewController {
                 
                 smallcart.append(Cart_Data(line_item_id: "", variant_id: "", category_id: "",
                                            cost_price: "", name: "", is_bulk_price: "", bulk_price_id: "",
-                                           qty: "", note: "Lottery Scratcher", userData: "", taxRates: "", bogo_discount: "",
+                                           qty: "", note: "Lottery Scratcher", userData: "", taxRates: "", mix_match_amt: "", bogo_discount: "",
                                            default_tax_amount: "",
                                            other_taxes_amount: "", other_taxes_desc: "", is_refunded: "",
                                            refund_amount: "", refund_qty: "", id: "", img: "", price: "",
@@ -6298,6 +6301,7 @@ class InStoreNewDetailViewController: UIViewController {
                                      bulk_price_id: "\(res["bulk_price_id"] ?? "")",
                                      qty: "\(res["qty"] ?? "")", note: "\(res["note"] ?? "")",
                                      userData: "\(res["userData"] ?? "")", taxRates: "\(res["taxRates"] ?? "")",
+                                     mix_match_amt: "\(res["mix_match_amt"] ?? "")",
                                      bogo_discount: "\(res["bogo_discount"] ?? "")",
                                      default_tax_amount: "\(res["default_tax_amount"] ?? "")",
                                      other_taxes_amount: "\(res["other_taxes_amount"] ?? "")",
@@ -7623,6 +7627,12 @@ extension InStoreNewDetailViewController: UITableViewDelegate, UITableViewDataSo
                     
                     cell.itemDiscount.text = "Bogo Deal(-$\(String(format: "%.02f", roundOf(item: cart.bogo_discount))))"
                 }
+                else if cart.mix_match_amt != "0.0" && cart.mix_match_amt != "0.00" &&
+                            cart.mix_match_amt != "-0.00" && cart.mix_match_amt != "-0.0" &&
+                            cart.mix_match_amt != "0" && cart.mix_match_amt != "",cart.mix_match_amt != "<null>" {
+                    print(cart.mix_match_amt)
+                    cell.itemDiscount.text = "Mix N' Match Deal(-$\(String(format: "%.02f", roundOf(item: cart.mix_match_amt))))"
+                }
                 
                 else {
                     
@@ -7686,6 +7696,7 @@ extension InStoreNewDetailViewController: UITableViewDelegate, UITableViewDataSo
                 
                 cell.itemRefDiscountLbl.text = "Bogo Deal(-$\(String(format: "%.02f", roundOf(item: cart.bogo_discount))))"
             }
+            
             
             else {
                 
