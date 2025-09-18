@@ -569,7 +569,7 @@ class InStoreNewDetailViewController: UIViewController {
         
         let bogo_discount = couponCode?.bogo_discount ?? "0.00"
         
-        let mixmatch_discount = couponCode?.mix_match_discount ?? "0.00"
+        let mix_match_discount = couponCode?.mix_match_discount ?? "0.00"
         
         var points_earned = couponCode?.loyalty_point_earned ?? "0.00"
         let points_amt_earned = couponCode?.loyalty_point_amt_earned ?? "0.00"
@@ -708,32 +708,95 @@ class InStoreNewDetailViewController: UIViewController {
             if bogo_discount != "0.0" && bogo_discount != "0.00" && bogo_discount != "-0.00"
                 && bogo_discount != "-0.0" && bogo_discount != "0" && bogo_discount != ""  {
                 
-                let doub_coupon_amt = Double(coupon_code_amt) ?? 0.00
-                let doub_bogo_discount = Double(bogo_discount) ?? 0.00
+                if mix_match_discount != "0.0" && mix_match_discount != "0.00" && mix_match_discount != "-0.00"
+                    && mix_match_discount != "-0.0" && mix_match_discount != "0" && mix_match_discount != ""  {
+                    
+                    let doub_coupon_amt = Double(coupon_code_amt) ?? 0.00
+                    let doub_bogo_discount = Double(bogo_discount) ?? 0.00
+                    let doub_mix_match_discount = Double(mix_match_discount) ?? 0.00
+                    
+                    let total = doub_coupon_amt + doub_bogo_discount + doub_mix_match_discount
+                    
+                    grossLabel.append("Discounts")
+                    grossValue.append("\(total)")
+                }
                 
-                let total = doub_coupon_amt + doub_bogo_discount
-                
-                grossLabel.append("Discounts")
-                grossValue.append("\(total)")
+                else {
+                    
+                    let doub_coupon_amt = Double(coupon_code_amt) ?? 0.00
+                    let doub_bogo_discount = Double(bogo_discount) ?? 0.00
+                    
+                    let total = doub_coupon_amt + doub_bogo_discount
+                    
+                    grossLabel.append("Discounts")
+                    grossValue.append("\(total)")
+                }
             }
-            
             else {
-                grossLabel.append("Discounts")
-                grossValue.append(coupon_code_amt)
+                
+                if mix_match_discount != "0.0" && mix_match_discount != "0.00" && mix_match_discount != "-0.00"
+                    && mix_match_discount != "-0.0" && mix_match_discount != "0" && mix_match_discount != ""  {
+                    
+                    let doub_coupon_amt = Double(coupon_code_amt) ?? 0.00
+                    let doub_mix_match_discount = Double(mix_match_discount) ?? 0.00
+                    
+                    let total = doub_coupon_amt + doub_mix_match_discount
+                    
+                    grossLabel.append("Discounts")
+                    grossValue.append("\(total)")
+                }
+                
+                else {
+                    
+                    grossLabel.append("Discounts")
+                    grossValue.append(coupon_code_amt)
+                }
             }
         }
         else {
-            
             if bogo_discount != "0.0" && bogo_discount != "0.00" && bogo_discount != "-0.00"
                 && bogo_discount != "-0.0" && bogo_discount != "0" && bogo_discount != ""  {
                 
-                grossLabel.append("Discounts")
-                grossValue.append(bogo_discount)
+                if mix_match_discount != "0.0" && mix_match_discount != "0.00" && mix_match_discount != "-0.00"
+                    && mix_match_discount != "-0.0" && mix_match_discount != "0" && mix_match_discount != ""  {
+                    
+                    let doub_bogo_discount = Double(bogo_discount) ?? 0.00
+                    let doub_mix_match_discount = Double(mix_match_discount) ?? 0.00
+                    
+                    let total = doub_bogo_discount + doub_mix_match_discount
+                    
+                    grossLabel.append("Discounts")
+                    grossValue.append("\(total)")
+                }
+                
+                else {
+                    
+                    let doub_bogo_discount = Double(bogo_discount) ?? 0.00
+                    
+                    let total = doub_bogo_discount
+                    
+                    grossLabel.append("Discounts")
+                    grossValue.append("\(total)")
+                }
             }
-            
             else {
-                grossLabel.append("Discounts")
-                grossValue.append("0.00")
+                
+                if mix_match_discount != "0.0" && mix_match_discount != "0.00" && mix_match_discount != "-0.00"
+                    && mix_match_discount != "-0.0" && mix_match_discount != "0" && mix_match_discount != ""  {
+                    
+                    let doub_mix_match_discount = Double(mix_match_discount) ?? 0.00
+                    
+                    let total = doub_mix_match_discount
+                    
+                    grossLabel.append("Discounts")
+                    grossValue.append("\(total)")
+                }
+                
+                else {
+                    
+                    grossLabel.append("Discounts")
+                    grossValue.append("0.00")
+                }
             }
         }
         
