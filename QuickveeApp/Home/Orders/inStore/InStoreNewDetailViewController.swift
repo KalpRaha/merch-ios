@@ -7141,17 +7141,25 @@ class InStoreNewDetailViewController: UIViewController {
     
     func calTotalPrice(onePrice: String, qty: String,
                        discount: String, bogo_dis: String,
-                       overide: String) -> Double {
+                       mix_dis: String, overide: String) -> Double {
+        var new_mix_dis = ""
+        if mix_dis.starts(with: "-") {
+            new_mix_dis = String(mix_dis.dropFirst())
+        }
+        else {
+            new_mix_dis = mix_dis
+        }
         
         let price = Double(onePrice) ?? 0.00
         let quant = Double(qty) ?? 0.00
         let dis = Double(discount) ?? 0.00
         let b_dis = Double(bogo_dis) ?? 0.00
         let over = Double(overide) ?? 0.00
+        let m_dis = Double(new_mix_dis) ?? 0.00
         
         let total = price * quant
         
-        let dis_price = total - dis - b_dis - over
+        let dis_price = total - dis - b_dis - over - m_dis
         
         return roundOf(item: String(dis_price))
     }
@@ -7721,7 +7729,7 @@ extension InStoreNewDetailViewController: UITableViewDelegate, UITableViewDataSo
                     }
                 }
                 
-                cell.totalPrice.text = "$\(String(format: "%.02f", calTotalPrice(onePrice: cart.inventory_price, qty: cart.qty, discount: cart.discount_amt, bogo_dis: cart.bogo_discount, overide: cart.adjust_price)))"
+                cell.totalPrice.text = "$\(String(format: "%.02f", calTotalPrice(onePrice: cart.inventory_price, qty: cart.qty, discount: cart.discount_amt, bogo_dis: cart.bogo_discount, mix_dis: cart.mix_match_amt, overide: cart.adjust_price)))"
                 
                 return cell
             }
@@ -7760,6 +7768,12 @@ extension InStoreNewDetailViewController: UITableViewDelegate, UITableViewDataSo
                 cell.itemRefDiscountLbl.text = "Bogo Deal(-$\(String(format: "%.02f", roundOf(item: cart.bogo_discount))))"
             }
             
+            else if cart.mix_match_amt != "0.0" && cart.mix_match_amt != "0.00" &&
+                        cart.mix_match_amt != "-0.00" && cart.mix_match_amt != "-0.0" &&
+                        cart.mix_match_amt != "0" && cart.mix_match_amt != "",cart.mix_match_amt != "<null>" {
+
+                cell.itemRefDiscountLbl.text = "Mix N' Match Deal(-$\(String(format: "%.02f", roundOf(item: cart.mix_match_amt))))"
+            }
             
             else {
                 
@@ -7786,7 +7800,7 @@ extension InStoreNewDetailViewController: UITableViewDelegate, UITableViewDataSo
                 }
             }
             
-            cell.payRefTotalPrice.text = "$\(String(format: "%.02f", calTotalPrice(onePrice: cart.inventory_price, qty: cart.refund_qty, discount: cart.discount_amt, bogo_dis: cart.bogo_discount, overide: cart.adjust_price)))"
+            cell.payRefTotalPrice.text = "$\(String(format: "%.02f", calTotalPrice(onePrice: cart.inventory_price, qty: cart.refund_qty, discount: cart.discount_amt, bogo_dis: cart.bogo_discount, mix_dis: cart.mix_match_amt, overide: cart.adjust_price)))"
             
             return cell
             
