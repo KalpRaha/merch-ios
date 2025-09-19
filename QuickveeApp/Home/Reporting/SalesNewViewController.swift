@@ -82,7 +82,7 @@ class SalesNewViewController: UIViewController {
             //"https://backend.quickvee.com/login"
             //https://qa-admin-panel.quickvee.us/login
             //https://quickvee.com/merchants/login
-            if urlString == "https://quickvee.com/merchants/login" {
+            if urlString == "https://quickvee.org/merchants/login" {
                 
                 self.loadingIndicator.isAnimating = true
                 self.webview.isHidden = true
@@ -134,7 +134,7 @@ class SalesNewViewController: UIViewController {
         //"https://awsbackend.quickvee.com/login"
         //https://qa-admin-panel.quickvee.us/login
         //https://quickvee.com/merchants/login
-        if webview.url!.absoluteString == "https://quickvee.com/merchants/login" {
+        if webview.url!.absoluteString == "https://quickvee.org/merchants/login" {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 
@@ -158,7 +158,7 @@ class SalesNewViewController: UIViewController {
                                         (function() {
                                         
                                             function loginClick() {
-                                                var loginClick = document.querySelector('.MuittonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.customer-btn.css-1hw9j7s');
+                                                var loginClick = document.querySelector('.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.customer-btn.css-sghohy-MuiButtonBase-root-MuiButton-root');
                                         
                                                 if (loginClick) {
                                                     loginClick.addEventListener('click', function() {
@@ -184,7 +184,7 @@ class SalesNewViewController: UIViewController {
                                             
                                             if error == nil {
                                                 
-                                                self.webview.evaluateJavaScript("document.querySelector('.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.customer-btn.css-1hw9j7s').click()") { res, error in
+                                                self.webview.evaluateJavaScript("document.querySelector('.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.customer-btn.css-sghohy-MuiButtonBase-root-MuiButton-root').click()") { res, error in
                                                     
                                                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                                         
@@ -1851,3 +1851,4 @@ extension SalesNewViewController: WKUIDelegate {
         self.present(alert, animated: true, completion: nil)
     }
 }
+//'.MuittonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.customer-btn.css-1hw9j7s'

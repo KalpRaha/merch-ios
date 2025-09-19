@@ -64,7 +64,7 @@ class PassCodeViewController: UIViewController, WKNavigationDelegate {
     
     //https://quickvee.com/merchants/login
     //https://qa-admin-panel.quickvee.us/login
-    var page = URL(string: "https://quickvee.com/merchants/login")
+    var page = URL(string: "https://quickvee.org/merchants/login")
     
     override func viewDidLoad() {
         super.viewDidLoad()
