@@ -352,8 +352,13 @@ class CustomerInfoVC: UIViewController {
 
     @IBAction func mergeBtnClick(_ sender: UIButton) {
         
-        performSegue(withIdentifier: "toCustomerMerge", sender: nil)
-        
+        if UserDefaults.standard.bool(forKey: "lock_merge_customer") {
+            ToastClass.sharedToast.showToast(message: "Access Denied", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+            
+        }
+        else {
+            performSegue(withIdentifier: "toCustomerMerge", sender: nil)
+        }
     }
     
     func loyaltyPointApi() {

@@ -869,6 +869,13 @@ class LockPassCodeViewController: UIViewController {
         else {
             UserDefaults.standard.set(true, forKey: "lock_disable_customer")
         }
+    
+        if per_array.contains("MM") {
+            UserDefaults.standard.set(false, forKey: "lock_merge_customer")
+        }
+        else {
+            UserDefaults.standard.set(true, forKey: "lock_merge_customer")
+        }
         
         if per_array.contains("RU") {
             UserDefaults.standard.set(false, forKey: "lock_delete_customer")

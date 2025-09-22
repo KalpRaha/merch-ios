@@ -24,6 +24,7 @@ class StockSaveViewController: UIViewController {
     @IBOutlet weak var saveDraftLbl: UILabel!
     @IBOutlet weak var searchBtn: UIButton!
     
+    @IBOutlet weak var topView: UIView!
     
     @IBOutlet weak var stockName: UILabel!
     
@@ -373,6 +374,7 @@ class StockSaveViewController: UIViewController {
                 
                 tableview.isHidden = true
                 loadingIndicator.isAnimating = true
+                topView.isHidden = true
                 
                 ApiCalls.sharedCall.saveStockTake(merchant_id: id,
                                                   employee_id: emp_id,
@@ -391,6 +393,7 @@ class StockSaveViewController: UIViewController {
                         
                         self.loadingIndicator.isAnimating = false
                         self.tableview.isHidden = false
+                        self.topView.isHidden = false
                         
                         ToastClass.sharedToast.showToast(message: msg as! String,
                                                          font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
@@ -406,6 +409,9 @@ class StockSaveViewController: UIViewController {
                         self.navigationController?.popToViewController(viewcontrollerArray![destiny], animated: true)
                     }
                     else {
+                        self.loadingIndicator.isAnimating = false
+                        self.tableview.isHidden = false
+                        self.topView.isHidden = false
                     }
                 }
             }
@@ -513,6 +519,7 @@ class StockSaveViewController: UIViewController {
                     
                     tableview.isHidden = true
                     loadingIndicator.isAnimating = true
+                    topView.isHidden = true
                     
                     ApiCalls.sharedCall.saveStockTake(merchant_id: id,
                                                       employee_id: emp_id,
@@ -531,6 +538,7 @@ class StockSaveViewController: UIViewController {
                             
                             self.loadingIndicator.isAnimating = false
                             self.tableview.isHidden = false
+                            self.topView.isHidden = false
                             
                             ToastClass.sharedToast.showToast(message: msg as! String,
                                                              font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
@@ -547,7 +555,9 @@ class StockSaveViewController: UIViewController {
                             
                         }
                         else {
-                            
+                            self.loadingIndicator.isAnimating = false
+                            self.tableview.isHidden = false
+                            self.topView.isHidden = false
                         }
                     }
                 }

@@ -151,19 +151,15 @@ class HomeViewController: UIViewController {
         return adv_id
     }
     
-    
     @objc func lockClick() {
-        
         dropView.isHidden = true
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "lockPass") as! LockPassCodeViewController
         vc.updateDelegate = self
-        
+        vc.isModalInPresentation = true
         UserDefaults.standard.set("home", forKey: "lockSource")
-        present(vc, animated: true, completion: {
-            vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
-        })
-    }
+        present(vc, animated: true)
+      }
     
     @objc func logClick() {
         

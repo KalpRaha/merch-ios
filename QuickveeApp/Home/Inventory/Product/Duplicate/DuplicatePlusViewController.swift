@@ -2128,11 +2128,11 @@ extension DuplicatePlusViewController: UITableViewDelegate, UITableViewDataSourc
             cell.costPerItem.label.text = "Cost Per Item"
             cell.margin.label.text = "Margin(%)"
             cell.profit.label.text = "Profit($)"
-            cell.qty.label.text = "QTY"
+            cell.qty.label.text = "Current Quantity"
             cell.customCode.label.text = "Custom Code"
             cell.upcCode.label.text = "UPC Code"
-            cell.reorderQty.label.text = "Reorder Qty"
-            cell.reorderLevel.label.text = "Reorder Level"
+            cell.reorderQty.label.text = "Restock Amount"
+            cell.reorderLevel.label.text = "Reorder Point"
             
             cell.price.keyboardType = .numberPad
             cell.comparePrice.keyboardType = .numberPad
