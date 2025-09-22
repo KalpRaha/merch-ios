@@ -130,13 +130,24 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             activeLbl.text = "No Schedule Set"
             repeatLbl.text = ""
             
-            copyLbl.text = "Copy to Stores"
-            copyLbl.isHidden = false
-            copyTop.constant = 10
-            copyBtm.constant = 10
-            collBottom.constant = 10
-            collection.isHidden = false
-            collHeight.constant = 50
+            if UserDefaults.standard.bool(forKey: "multi_store_access") {
+                copyLbl.text = "Copy to Stores"
+                copyLbl.isHidden = false
+                copyTop.constant = 10
+                copyBtm.constant = 10
+                collBottom.constant = 10
+                collection.isHidden = false
+                collHeight.constant = 50
+            }
+            else {
+                copyLbl.text = ""
+                copyLbl.isHidden = true
+                copyTop.constant = 0
+                copyBtm.constant = 0
+                collBottom.constant = 0
+                collection.isHidden = true
+                collHeight.constant = 0
+            }
         }
         else {
             var sdate = ToastClass.sharedToast.setCouponsDateFormat(dateStr: bogoObj?.start_date ?? "")
@@ -1344,7 +1355,13 @@ extension CreateBOGODealViewController {
             else {
                 collHeight.constant = collection.collectionViewLayout.collectionViewContentSize.height
             }
-            scrollHeight.constant = viewsview.bounds.size.height + collHeight.constant + btnView.bounds.size.height + tableHeight.constant + 100
+            if UserDefaults.standard.bool(forKey: "multi_store_access") {
+                scrollHeight.constant = viewsview.bounds.size.height + collHeight.constant + btnView.bounds.size.height + tableHeight.constant + 100
+            }
+            else {
+                collHeight.constant = 0
+                scrollHeight.constant = viewsview.bounds.size.height + collHeight.constant + btnView.bounds.size.height + tableHeight.constant + 50
+            }
         }
         else {
             collHeight.constant = 0

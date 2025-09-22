@@ -837,19 +837,37 @@ class PlusViewController: UIViewController {
         var var_count = variantsArray.count
         
         if var_count == 0 || var_count == 1 {
-            
+            var opt_choice = false
             if mode == "add" {
                 scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 706 + 36.33
                 if productOptions.count == 3 {
+                    opt_choice = false
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
                 }
                 else {
                     scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 776 + 36.33
+                    opt_choice = true
                     addVarBtn.isHidden = false
                     addVarBtnHeight.constant = 50
                     addVarTop.constant = 20
+                }
+                
+                if !UserDefaults.standard.bool(forKey: "multi_store_access") {
+                    
+                    if opt_choice {
+                        scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 776 + 36.33
+                    }
+                    else {
+                        scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 706 + 36.33
+                    }
+                    addVarBtn.isHidden = true
+                    addVarBtnHeight.constant = 0
+                    addVarTop.constant = 0
+                    itsColl.isHidden = true
+                    itsCollHeight.constant = 0
+                    itsLabel.text = ""
                 }
             }
             
@@ -866,18 +884,38 @@ class PlusViewController: UIViewController {
         }
         else {
             var_count = variantsArray.count - 1
+            var opt_choice = false
             if mode == "add" {
                 if productOptions.count == 3 {
+                    opt_choice = false
                     scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
                 }
                 else {
+                    opt_choice = true
                     scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33
                     addVarBtn.isHidden = false
                     addVarBtnHeight.constant = 50
                     addVarTop.constant = 20
+                }
+                
+                if !UserDefaults.standard.bool(forKey: "multi_store_access") {
+                    
+                    if opt_choice {
+                        scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33
+                    }
+                    else {
+                        scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33
+                    }
+                    
+                    addVarBtn.isHidden = true
+                    addVarBtnHeight.constant = 0
+                    addVarTop.constant = 0
+                    itsColl.isHidden = true
+                    itsCollHeight.constant = 0
+                    itsLabel.text = ""
                 }
             }
             
@@ -2675,8 +2713,8 @@ extension PlusViewController: UITextFieldDelegate {
                     let price_doub = Double(price) ?? 0.00
                     
                     if cost_per_doub == 0.00 {
-                        let profit = ""
-                        let margin = ""
+                        let profit = price_doub - cost_per_doub
+                        let margin = (profit / price_doub) * 100
                         variantsArray[index.section].margin = String(format: "%.2f", margin)
                         variantsArray[index.section].profit = String(format: "%.2f", profit)
                         
@@ -2832,15 +2870,15 @@ extension PlusViewController: UITextFieldDelegate {
                         
                         if price_doub < 0 || price_doub == 0.00 || price_doub < 0 || price_doub < 0.00 {
                             editProd?.costperItem = String(format: "%.2f", cost_per_item_doub)
-                            editProd?.margin = "0.00"
-                            editProd?.profit = "0.00"
+                            editProd?.margin = String(format: "%.2f", margin)
+                            editProd?.profit = String(format: "%.2f", profit)
                         }
                         else {
                             if cost_per_item_doub < 0 || cost_per_item_doub == 0.00 || cost_per_item_doub < 0 || cost_per_item_doub < 0.00 {
                                 
                                 editProd?.costperItem = "0.00"
-                                editProd?.margin = "0.00"
-                                editProd?.profit = "0.00"
+                                editProd?.margin = String(format: "%.2f", margin)
+                                editProd?.profit = String(format: "%.2f", profit)
                                 
                             }
                             
@@ -2868,14 +2906,14 @@ extension PlusViewController: UITextFieldDelegate {
                         
                         if cost_per_item_doub < 0 || cost_per_item_doub == 0.00 || cost_per_item_doub < 0 || cost_per_item_doub < 0.00 {
                             
-                            editProd?.margin = "0.00"
-                            editProd?.profit = "0.00"
+                            editProd?.margin = String(format: "%.2f", margin)
+                            editProd?.profit = String(format: "%.2f", profit)
                         }
                         else {
                             
                             if price_doub < 0 || price_doub == 0.00 || price_doub < 0 || price_doub < 0.00 {
-                                editProd?.margin = "0.00"
-                                editProd?.profit = "0.00"
+                                editProd?.margin = String(format: "%.2f", margin)
+                                editProd?.profit = String(format: "%.2f", profit)
                             }
                             else {
                                 editProd?.margin = String(format: "%.2f", margin)
@@ -2975,15 +3013,15 @@ extension PlusViewController: UITextFieldDelegate {
                         
                         if price_doub < 0 || price_doub == 0.00 || price_doub < 0 || price_doub < 0.00 {
                             variantsArray[index.section].costperItem = String(format: "%.2f", cost_per_item_doub)
-                            variantsArray[index.section].margin = "0.00"
-                            variantsArray[index.section].profit = "0.00"
+                            variantsArray[index.section].margin = String(format: "%.2f", margin)
+                            variantsArray[index.section].profit = String(format: "%.2f", profit)
                         }
                         else {
                             if cost_per_item_doub < 0 || cost_per_item_doub == 0.00 || cost_per_item_doub < 0 || cost_per_item_doub < 0.00 {
                                 
                                 variantsArray[index.section].costperItem = "0.00"
-                                variantsArray[index.section].margin = "0.00"
-                                variantsArray[index.section].profit = "0.00"
+                                variantsArray[index.section].margin = String(format: "%.2f", margin)
+                                variantsArray[index.section].profit = String(format: "%.2f", profit)
                                 
                             }
                             
@@ -3013,14 +3051,14 @@ extension PlusViewController: UITextFieldDelegate {
                         
                         if cost_per_item_doub < 0 || cost_per_item_doub == 0.00 || cost_per_item_doub < 0 || cost_per_item_doub < 0.00 {
                             
-                            variantsArray[index.section].margin = "0.00"
-                            variantsArray[index.section].profit = "0.00"
+                            variantsArray[index.section].margin = String(format: "%.2f", margin)
+                            variantsArray[index.section].profit = String(format: "%.2f", profit)
                         }
                         else {
                             
                             if price_doub < 0 || price_doub == 0.00 || price_doub < 0 || price_doub < 0.00 {
-                                variantsArray[index.section].margin = "0.00"
-                                variantsArray[index.section].profit = "0.00"
+                                variantsArray[index.section].margin = String(format: "%.2f", margin)
+                                variantsArray[index.section].profit = String(format: "%.2f", profit)
                             }
                             else {
                                 variantsArray[index.section].margin = String(format: "%.2f", margin)
@@ -4205,18 +4243,38 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 let tax = taxCollHeight.constant
                 let its = itsCollHeight.constant
                 
+                var opt_choice = false
+                
                 if mode == "add" {
                     scrollHeight.constant = 614 + cat + tag + its + tax + attHeight.constant + 706 + 36.33
                     if productOptions.count == 3 {
+                        opt_choice = false
                         addVarBtn.isHidden = true
                         addVarBtnHeight.constant = 0
                         addVarTop.constant = 0
                     }
                     else {
+                        opt_choice = true
                         scrollHeight.constant = 614 + cat + tag + its + tax + attHeight.constant + 776 + 36.33
                         addVarBtn.isHidden = false
                         addVarBtnHeight.constant = 50
                         addVarTop.constant = 20
+                    }
+                    
+                    if !UserDefaults.standard.bool(forKey: "multi_store_access") {
+                        
+                        if opt_choice {
+                            scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 776 + 36.33
+                        }
+                        else {
+                            scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 706 + 36.33
+                        }
+                        addVarBtn.isHidden = true
+                        addVarBtnHeight.constant = 0
+                        addVarTop.constant = 0
+                        itsColl.isHidden = true
+                        itsCollHeight.constant = 0
+                        itsLabel.text = ""
                     }
                 }
                 else {
@@ -4243,15 +4301,18 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 let tax = taxCollHeight.constant
                 let its = itsCollHeight.constant
                 
+                var opt_choice = false
                 
                 if mode == "add" {
                     scrollHeight.constant = 614 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33
                     if productOptions.count == 3 {
+                        opt_choice = false
                         addVarBtn.isHidden = true
                         addVarBtnHeight.constant = 0
                         addVarTop.constant = 0
                     }
                     else {
+                        opt_choice = true
                         scrollHeight.constant = 614 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33
                         addVarBtn.isHidden = false
                         addVarBtnHeight.constant = 50
@@ -4260,6 +4321,22 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 else {
                     scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count) + 20
+                    addVarBtn.isHidden = true
+                    addVarBtnHeight.constant = 0
+                    addVarTop.constant = 0
+                    itsColl.isHidden = true
+                    itsCollHeight.constant = 0
+                    itsLabel.text = ""
+                }
+                
+                if !UserDefaults.standard.bool(forKey: "multi_store_access") {
+                    
+                    if opt_choice {
+                        scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 776 + 36.33
+                    }
+                    else {
+                        scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 706 + 36.33
+                    }
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0

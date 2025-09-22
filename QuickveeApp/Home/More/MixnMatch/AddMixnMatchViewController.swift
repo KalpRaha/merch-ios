@@ -143,13 +143,25 @@ class AddMixnMatchViewController: UIViewController {
         collection.isUserInteractionEnabled = true
         
         if mode == "add" {
-            copyTop.constant = 10
-            copyBottom.constant = 10
-            copyLbl.isHidden = false
-            copyLbl.text = "Copy to Stores"
-            collection.isHidden = false
-            collHeight.constant = 50
-            collBottom.constant = 10
+            
+            if UserDefaults.standard.bool(forKey: "multi_store_access") {
+                copyTop.constant = 10
+                copyBottom.constant = 10
+                copyLbl.isHidden = false
+                copyLbl.text = "Copy to Stores"
+                collection.isHidden = false
+                collHeight.constant = 50
+                collBottom.constant = 10
+            }
+            else {
+                copyTop.constant = 0
+                copyBottom.constant = 0
+                copyLbl.isHidden = true
+                copyLbl.text = ""
+                collection.isHidden = true
+                collHeight.constant = 0
+                collBottom.constant = 0
+            }
         }
         else {
             tableView.isHidden = true
@@ -179,7 +191,13 @@ class AddMixnMatchViewController: UIViewController {
             else {
                 collHeight.constant = collection.collectionViewLayout.collectionViewContentSize.height
             }
-            scrollHeight.constant = viewsView.bounds.size.height + collHeight.constant + variantsView.bounds.size.height + tableHeight.constant + 110
+            if UserDefaults.standard.bool(forKey: "multi_store_access") {
+                scrollHeight.constant = viewsView.bounds.size.height + collHeight.constant + variantsView.bounds.size.height + tableHeight.constant + 110
+            }
+            else {
+                collHeight.constant = 0
+                scrollHeight.constant = viewsView.bounds.size.height + collHeight.constant + variantsView.bounds.size.height + tableHeight.constant + 60
+            }
         }
         else {
             collHeight.constant = 0

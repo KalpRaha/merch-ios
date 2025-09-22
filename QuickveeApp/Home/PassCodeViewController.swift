@@ -394,6 +394,14 @@ class PassCodeViewController: UIViewController, WKNavigationDelegate {
                 UserDefaults.standard.set(enable_backend, forKey: "backend_access_webview")
                 UserDefaults.standard.set(assigned_store, forKey: "assigned_store")
                 
+                let assign_array = assigned_store.components(separatedBy: ",")
+                
+                if assign_array.count > 1 {
+                    UserDefaults.standard.set(true, forKey: "multi_store_access")
+                }
+                else {
+                    UserDefaults.standard.set(false, forKey: "multi_store_access")
+                }
                 break
             }
         }
