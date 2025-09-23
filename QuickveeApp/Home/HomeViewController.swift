@@ -156,6 +156,7 @@ class HomeViewController: UIViewController {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "lockPass") as! LockPassCodeViewController
         vc.updateDelegate = self
+        vc.modalPresentationStyle = .overCurrentContext
         vc.isModalInPresentation = true
         UserDefaults.standard.set("home", forKey: "lockSource")
         present(vc, animated: true)

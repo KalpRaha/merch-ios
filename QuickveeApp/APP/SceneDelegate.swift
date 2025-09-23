@@ -64,47 +64,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             if let mainTabController = storyboard.instantiateViewController(withIdentifier: "lockPass") as?  LockPassCodeViewController {
                 
+                mainTabController.modalPresentationStyle = .overCurrentContext
+                mainTabController.isModalInPresentation = true
+                UserDefaults.standard.set("scene", forKey: "lockSource")
+                
                 if let rootViewController = window?.windowScene?.windows.first?.rootViewController {
-                    rootViewController.modalPresentationStyle = .overCurrentContext
-                    UserDefaults.standard.set("scene", forKey: "lockSource")
-                    rootViewController.present(mainTabController, animated: true, completion: {
-                        mainTabController.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
-                    })
+                    rootViewController.present(mainTabController, animated: true)
                 }
             }
         }
-        
-        
-        
-        
-        
-        //            if UserDefaults.standard.bool(forKey: "notification_received") {
-        //
-        //                if let mainTabController = storyboard.instantiateViewController(withIdentifier: "passScreen") as? PassCodeViewController {
-        //
-        //                    if let rootViewController = window?.windowScene?.windows.first?.rootViewController {
-        //                        rootViewController.modalPresentationStyle = .overCurrentContext
-        //                        UserDefaults.standard.set(true, forKey: "notificationscene")
-        //                        rootViewController.present(mainTabController, animated: true, completion: {
-        //                            mainTabController.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
-        //                        })
-        //                    }
-        //                }
-        //            }
-        //
-        //            else {
-        //
-        //                if let mainTabController = storyboard.instantiateViewController(withIdentifier: "lockPass") as?  LockPassCodeViewController {
-        //
-        //                    if let rootViewController = window?.windowScene?.windows.first?.rootViewController {
-        //                        rootViewController.modalPresentationStyle = .overCurrentContext
-        //                        UserDefaults.standard.set("scene", forKey: "lockSource")
-        //                        rootViewController.present(mainTabController, animated: true, completion: {
-        //                            mainTabController.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
-        //                        })
-        //                    }
-        //                }
-        //            }
     }
     
     
