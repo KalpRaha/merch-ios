@@ -247,9 +247,11 @@ class HomeViewController: UIViewController {
                               store_name: "\(response["store_name"] ?? "")",
                               login_store_name: "\(response["login_store_name"] ?? "")",
                               a_address_line_1: "\(response["a_address_line_1"] ?? "")",
-                              a_address_line_2: "\(response["a_address_line_2"] ?? "")")
+                              a_address_line_2: "\(response["a_address_line_2"] ?? "")", status: "\(response["status"] ?? "")")
             
-            storeList.append(store)
+            if store.status == "2" {
+                storeList.append(store)
+            }
         }
         
         let stores = UserDefaults.standard.string(forKey: "assigned_store") ?? ""

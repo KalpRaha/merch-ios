@@ -305,5 +305,5 @@ struct Store {
     let login_store_name:String
     let a_address_line_1:String
     let a_address_line_2:String
-    
+    let status: String
 }
