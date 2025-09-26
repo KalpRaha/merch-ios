@@ -158,7 +158,7 @@ class SalesNewViewController: UIViewController {
                                         (function() {
                                         
                                             function loginClick() {
-                                                var loginClick = document.querySelector('.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.customer-btn.css-sghohy-MuiButtonBase-root-MuiButton-root');
+                                                var loginClick = document.querySelector('.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.customer-btn.css-1hw9j7s');
                                         
                                                 if (loginClick) {
                                                     loginClick.addEventListener('click', function() {
@@ -184,7 +184,7 @@ class SalesNewViewController: UIViewController {
                                             
                                             if error == nil {
                                                 
-                                                self.webview.evaluateJavaScript("document.querySelector('.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.customer-btn.css-sghohy-MuiButtonBase-root-MuiButton-root').click()") { res, error in
+                                                self.webview.evaluateJavaScript("document.querySelector('.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.customer-btn.css-1hw9j7s').click()") { res, error in
                                                     
                                                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                                         
