@@ -236,7 +236,7 @@ class AddMixnMatchViewController: UIViewController {
                 
             }
             else {
-                amount = price.replacingOccurrences(of: "$", with: "")
+                amount = price.replacingOccurrences(of: "%", with: "")
                 descriptionTextField.text = "Buy \(qty ) Get \(amount)% off Each"
                 percentBtn.backgroundColor = UIColor.init(hexString: "#0A64F9")
                 dollerBtn.backgroundColor = UIColor.init(hexString: "#EEEEEE")
