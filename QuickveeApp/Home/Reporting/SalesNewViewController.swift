@@ -302,7 +302,36 @@ class SalesNewViewController: UIViewController {
                                                             }
                                                         })
                                                         
-                                                        
+                                                        let jsbogo = """
+                                                          (function() {
+                                                          const hideBOGODiv = () => {
+                                                            const link = document.querySelector('a[href="/merchants/promotions/bogo-pricing"]');
+                                                            if (link && link.parentElement) {
+                                                              link.parentElement.style.display = 'none';
+                                                            }
+                                                          };
+                                                          
+                                                          // Run once immediately
+                                                          hideBOGODiv();
+                                                          
+                                                          // Set up the observer
+                                                          const observer = new MutationObserver((mutationsList) => {
+                                                            for (const mutation of mutationsList) {
+                                                              if (mutation.type === 'childList') {
+                                                                hideBOGODiv();
+                                                              }
+                                                            }
+                                                          });
+                                                          
+                                                          observer.observe(document.body, { childList: true, subtree: true});})();
+                                                        """
+                                                        self.webview.evaluateJavaScript(jsbogo, completionHandler: { (result, error) in
+                                                            if let error = error {
+                                                                print("JavaScript injection failed: \(error.localizedDescription)")
+                                                            } else {
+                                                                print("JavaScript injected successfully")
+                                                            }
+                                                        })
                                                         //
                                                         //                                                        if self.webview.url!.absoluteString !=
                                                         //
