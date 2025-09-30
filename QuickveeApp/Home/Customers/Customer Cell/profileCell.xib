@@ -166,7 +166,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hb6-6T-Zif">
-                            <rect key="frame" x="461" y="466" width="0.0" height="0.0"/>
+                            <rect key="frame" x="124" y="466" width="337" height="0.0"/>
                             <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -299,6 +299,7 @@
                         <constraint firstItem="OTh-8p-uR2" firstAttribute="leading" secondItem="sPE-xD-Zqx" secondAttribute="trailing" constant="5" id="1nT-bl-cT9"/>
                         <constraint firstItem="qgw-Ak-VET" firstAttribute="leading" secondItem="Vt0-fB-qTt" secondAttribute="leading" constant="10" id="2HM-4S-tO0"/>
                         <constraint firstItem="jSe-nT-45k" firstAttribute="leading" secondItem="Vt0-fB-qTt" secondAttribute="leading" constant="10" id="8qO-gX-UhT"/>
+                        <constraint firstItem="Hb6-6T-Zif" firstAttribute="leading" secondItem="jdt-Ya-LOH" secondAttribute="trailing" constant="10" id="ECp-79-OsO"/>
                         <constraint firstItem="WBG-o8-w3n" firstAttribute="centerX" secondItem="Vt0-fB-qTt" secondAttribute="centerX" id="Fcl-Na-4CH"/>
                         <constraint firstItem="OTh-8p-uR2" firstAttribute="top" secondItem="WBG-o8-w3n" secondAttribute="bottom" constant="10" id="K5C-8c-LC0"/>
                         <constraint firstAttribute="trailing" secondItem="MbB-tN-X2x" secondAttribute="trailing" constant="20" id="LDT-5l-Gsf"/>

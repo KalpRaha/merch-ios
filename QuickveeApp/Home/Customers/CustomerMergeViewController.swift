@@ -382,8 +382,8 @@ extension CustomerMergeViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.customerName.textColor = UIColor.black
                 cell.email.textColor = UIColor.black
                 cell.phoneNumber.textColor = UIColor.black
-                cell.emailImage.image = UIImage(named: "phoneblack")
-                cell.phoneImage.image = UIImage(named: "emailblack")
+                cell.emailImage.image = UIImage(named: "emailblack")
+                cell.phoneImage.image = UIImage(named: "phoneblack")
                 
             }
             else {
@@ -393,8 +393,8 @@ extension CustomerMergeViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.customerName.textColor = UIColor(hexString: "#818181")
                 cell.email.textColor =  UIColor(hexString: "#818181")
                 cell.phoneNumber.textColor = UIColor(hexString: "#818181")
-                cell.emailImage.image = UIImage(named: "phone_grey")
-                cell.phoneImage.image = UIImage(named: "email_grey(5)")
+                cell.emailImage.image = UIImage(named: "email_grey(5)")
+                cell.phoneImage.image = UIImage(named: "phone_grey")
             }
             
             return cell

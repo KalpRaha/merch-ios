@@ -371,6 +371,28 @@ class CustomerAddEditViewController: UIViewController,  UITextFieldDelegate {
             return
         }
         
+        guard let email = emailField.text, email != "",
+              validateEmailAddress(email: email) else {
+            emailField.isError(numberOfShakes: 3, revert: true)
+            return
+        }
+        func validateEmail(email: String) -> Bool {
+            
+            let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+            return NSPredicate(format:"SELF MATCHES %@", emailRegEx).evaluate(with: email)
+        }
+        
+        func validateEmailAddress(email: String) -> Bool {
+            
+            if email != "" && validateEmail(email: email) {
+                return true
+            }
+            
+            else {
+                return false
+            }
+        }
+        
         guard let mobile = mobileField.text, mobile != "", mobile.count == 10 else {
             mobileField.isError(numberOfShakes: 3, revert: true)
             ToastClass.sharedToast.showToast(message: "Enter mobile number", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
