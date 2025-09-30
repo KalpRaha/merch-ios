@@ -1518,15 +1518,15 @@ class SalesNewViewController: UIViewController {
             //                }
             //            }
             
-            if UserDefaults.standard.bool(forKey: "lock_customer") {
-                self.webview.evaluateJavaScript("var style = document.createElement('style'); style.innerHTML = '.Customer-for-android { pointer-events: none; opacity: 0.5;}'; document.head.appendChild(style);")
-                { res, error in
-                }
-            }
-            
-            self.webview.evaluateJavaScript("var style = document.createElement('style'); style.innerHTML = '.Mix-And-Match-Pricing-for-android { display: none; }'; document.head.appendChild(style);")
-            { res, error in
-            }
+//            if UserDefaults.standard.bool(forKey: "lock_customer") {
+//                self.webview.evaluateJavaScript("var style = document.createElement('style'); style.innerHTML = '.Customer-for-android { pointer-events: none; opacity: 0.5;}'; document.head.appendChild(style);")
+//                { res, error in
+//                }
+//            }
+//            
+//            self.webview.evaluateJavaScript("var style = document.createElement('style'); style.innerHTML = '.Mix-And-Match-Pricing-for-android { display: none; }'; document.head.appendChild(style);")
+//            { res, error in
+//            }
             
             
             let jsCode = """
