@@ -192,7 +192,7 @@ class SalesNewViewController: UIViewController {
                                                         
                                                         let script = """
                                                                 var observer = new MutationObserver(function(mutationsList, observer) {
-                                                                    var img = document.querySelector('img[src="/merchants/static/media/UserLogo.147f8363b761bbcbe01823d6b2f9a0c7.svg"]');
+                                                                    var img = document.querySelector('img[src="/merchants/static/media/UserLogo.58ba10be96a7ef5617db1c9c133afed7.svg"]');
                                                                     if (img) {
                                                                         img.style.display = 'none';
                                                                           // Stop observing after the element is found
@@ -255,7 +255,7 @@ class SalesNewViewController: UIViewController {
                                                         // quickvee logo
                                                         let scriptee = """
                                                                 var observer = new MutationObserver(function(mutationsList, observer) {
-                                                                    var img = document.querySelector('img[src="/merchants/static/media/Qlogo.93f94457a43968c938eb7b732891c26b.svg"]');
+                                                                    var img = document.querySelector('img[src="/merchants/static/media/Qlogo.3dd2b6a2ca2ae5a4ffa0f09d0832c02c.svg"]');
                                                                     if (img) {
                                                                         img.style.display = 'none';
                                                                           // Stop observing after the element is found
@@ -273,6 +273,34 @@ class SalesNewViewController: UIViewController {
                                                                 print("JavaScript executed successfully")
                                                             }
                                                         }
+                                                        
+                                                        let js = """
+                                                                (function() {
+                                                                    const targetClass = 'Customer-for-android';
+                                                                    const hideElement = () => {
+                                                                        const el = document.querySelector('.' + targetClass);
+                                                                        if (el && el.parentElement) {
+                                                                            el.parentElement.style.display = 'none';
+                                                                        }
+                                                                    };
+                                                                
+                                                                    hideElement();
+                                                                
+                                                                    const observer = new MutationObserver(() => {
+                                                                        hideElement();
+                                                                    });
+                                                                
+                                                                    observer.observe(document.body, { childList: true, subtree: true });
+                                                                })();
+                                                                """
+                                                        
+                                                        self.webview.evaluateJavaScript(js, completionHandler: { (result, error) in
+                                                            if let error = error {
+                                                                print("JavaScript injection failed: \(error.localizedDescription)")
+                                                            } else {
+                                                                print("JavaScript injected successfully")
+                                                            }
+                                                        })
                                                         
                                                         
                                                         //
