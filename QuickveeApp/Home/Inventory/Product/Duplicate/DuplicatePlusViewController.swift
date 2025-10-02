@@ -25,6 +25,8 @@ class DuplicatePlusViewController: UIViewController {
     @IBOutlet weak var dupTagColl: UICollectionView!
     @IBOutlet weak var dupTaxesColl: UICollectionView!
     
+    @IBOutlet weak var newCatLbl: UILabel!
+    
     @IBOutlet weak var dupcatcollHeight: NSLayoutConstraint!
     @IBOutlet weak var duptagCollHeight: NSLayoutConstraint!
     @IBOutlet weak var duptaxCollHeight: NSLayoutConstraint!
@@ -163,6 +165,11 @@ class DuplicatePlusViewController: UIViewController {
         dupCatColl.addGestureRecognizer(cat_tap)
         cat_tap.numberOfTapsRequired = 1
         dupCatColl.isUserInteractionEnabled = true
+        
+        let new_cat_tap = UITapGestureRecognizer(target: self, action: #selector(openNewCatScreen))
+        newCatLbl.addGestureRecognizer(new_cat_tap)
+        new_cat_tap.numberOfTapsRequired = 1
+        newCatLbl.isUserInteractionEnabled = true
         
         let brand_tap = UITapGestureRecognizer(target: self, action: #selector(openBrandScreen))
         dupBrandView.addGestureRecognizer(brand_tap)
@@ -441,6 +448,19 @@ class DuplicatePlusViewController: UIViewController {
         present(vc, animated: true, completion: {
             vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
         })
+    }
+    
+    @objc func openNewCatScreen() {
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "addView") as! AddViewController
+        
+        vc.addTitleText = "Add"
+        vc.titleText = "Add Category"
+        vc.mode = "product"
+        vc.delegate = self
+        
+        present(vc, animated: true)
     }
     
     @objc func openBrandScreen() {
@@ -1984,6 +2004,16 @@ extension DuplicatePlusViewController: PlusAttributeVariant {
         dupAttTable.reloadData()
         dupVariantsTable.reloadData()
         setCollHeight(coll: dupAttTable)
+    }
+}
+
+extension DuplicatePlusViewController: AddNewCategoryDelegate {
+    
+    func getNewCategory(category: InventoryCategory) {
+        
+        dupProdCat.append(category)
+        dupCatColl.reloadData()
+        setCollHeight(coll: dupCatColl)
     }
 }
 

@@ -30,6 +30,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     let lotteryAddArray = ["Lottery"]
     
     var inventCategory: InventoryCategory?
+    weak var delegate: AddNewCategoryDelegate?
     
     let loadingIndicator: ProgressView = {
         let progress = ProgressView(colors: [.white], lineWidth: 3)
@@ -40,6 +41,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     var titleText = ""
     var addTitleText = ""
     var cat_id = ""
+    var mode = ""
     
     var coll_id = ""
     var cat_status = ""
@@ -244,6 +246,39 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         activeTextField.text = updatetext
     }
     
+    func getCategory(id: String) {
+        
+        loadingIndicator.isAnimating = true
+        
+        ApiCalls.sharedCall.categoryListById(id: id) { isSuccess, responseData in
+            
+            if isSuccess {
+                guard let list = responseData["category_data"] else {
+                    return
+                }
+                
+                let response = list as! [String:Any]
+                
+                let category = InventoryCategory(id: "\(response["id"] ?? "")", title: "\(response["title"] ?? "")",
+                                                 description: "\(response["description"] ?? "")", categoryBanner: "\(response["categoryBanner"] ?? "")",
+                                                 show_online: "\(response["show_online"] ?? "")", show_status: "\(response["show_status"] ?? "")",
+                                                 cat_show_status: "\(response["cat_show_status"] ?? "")", is_lottery: "\(response["is_lottery"] ?? "")",
+                                                 alternateName: "\(response["alternateName"] ?? "")",
+                                                 merchant_id: "\(response["merchant_id"] ?? "")", is_deleted: "\(response["is_deleted"] ?? "")",
+                                                 user_id: "\(response["user_id"] ?? "")", created_on: "\(response["created_on"] ?? "")",
+                                                 updated_on: "\(response["updated_on"] ?? "")", admin_id: "\(response["admin_id"] ?? "")",
+                                                 use_point: "\(response["use_point"] ?? "")", earn_point: "\(response["earn_point"] ?? "")")
+                
+                self.dismiss(animated: true) {
+                    self.delegate?.getNewCategory(category: category)
+                }
+            }
+            else {
+                print("Api Error")
+            }
+        }
+    }
+    
     @IBAction func saveBtnClick(_ sender: UIButton) {
         
         if UserDefaults.standard.bool(forKey: "lock_disable_category") {
@@ -340,7 +375,13 @@ class AddViewController: UIViewController, UITextFieldDelegate {
                             if  list == "Category Created" {
                                 ToastClass.sharedToast.showToast(message: list, font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                                 self.loadingIndicator.isAnimating = false
-                                self.goBack()
+                                if self.mode == "product" {
+                                    let id = responseData["result"] as? Int ?? 0
+                                    self.getCategory(id: "\(id)")
+                                }
+                                else {
+                                    self.goBack()
+                                }
                                 
                             }else if list == "Category title already exist." {
                                 ToastClass.sharedToast.showToast(message: "Category already exists", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
@@ -374,7 +415,12 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func closeBtn(_ sender: UIButton) {
         
-        goBack()
+        if mode == "product" {
+            dismiss(animated: true)
+        }
+        else {
+            goBack()
+        }
     }
 }
 

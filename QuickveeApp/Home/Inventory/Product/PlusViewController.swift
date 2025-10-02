@@ -20,6 +20,11 @@ protocol PlusAttributeVariant : AnyObject {
     func getAddedAtttributes(optName: String, optValue: String, newEdit: [String])
 }
 
+protocol AddNewCategoryDelegate: AnyObject {
+    
+    func getNewCategory(category: InventoryCategory)
+}
+
 //Add Product View Controller
 class PlusViewController: UIViewController {
     
@@ -38,6 +43,8 @@ class PlusViewController: UIViewController {
     
     @IBOutlet weak var productField: UITextField!
     @IBOutlet weak var descField: UITextField!
+    
+    @IBOutlet weak var newCategoryLbl: UILabel!
     
     @IBOutlet weak var brandView: UIView!
     
@@ -216,6 +223,11 @@ class PlusViewController: UIViewController {
         catColl.addGestureRecognizer(cat_tap)
         cat_tap.numberOfTapsRequired = 1
         catColl.isUserInteractionEnabled = true
+        
+        let new_cat_tap = UITapGestureRecognizer(target: self, action: #selector(openNewCatScreen))
+        newCategoryLbl.addGestureRecognizer(new_cat_tap)
+        new_cat_tap.numberOfTapsRequired = 1
+        newCategoryLbl.isUserInteractionEnabled = true
         
         let tag_tap = UITapGestureRecognizer(target: self, action: #selector(openTagScreen))
         tagColl.addGestureRecognizer(tag_tap)
@@ -945,6 +957,19 @@ class PlusViewController: UIViewController {
         present(vc, animated: true, completion: {
             vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
         })
+    }
+    
+    @objc func openNewCatScreen() {
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "addView") as! AddViewController
+        
+        vc.addTitleText = "Add"
+        vc.titleText = "Add Category"
+        vc.mode = "product"
+        vc.delegate = self
+        
+        present(vc, animated: true)
     }
     
     @objc func openBrandScreen() {
@@ -2623,6 +2648,16 @@ extension PlusViewController: PlusAttributeVariant {
         attTable.reloadData()
         variantsTable.reloadData()
         setCollHeight(coll: attTable)
+    }
+}
+
+extension PlusViewController: AddNewCategoryDelegate {
+    
+    func getNewCategory(category: InventoryCategory) {
+        
+        collCat.append(category)
+        catColl.reloadData()
+        setCollHeight(coll: catColl)
     }
 }
 
