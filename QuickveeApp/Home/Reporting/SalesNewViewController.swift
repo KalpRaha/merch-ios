@@ -158,7 +158,7 @@ class SalesNewViewController: UIViewController {
                                         (function() {
                                         
                                             function loginClick() {
-                                                var loginClick = document.querySelector('.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.customer-btn.css-1hw9j7s');
+                                                var loginClick = [...document.querySelectorAll('button')].find(btn => btn.textContent.trim() === 'Login');
                                         
                                                 if (loginClick) {
                                                     loginClick.addEventListener('click', function() {
@@ -184,7 +184,11 @@ class SalesNewViewController: UIViewController {
                                             
                                             if error == nil {
                                                 
-                                                self.webview.evaluateJavaScript("document.querySelector('.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.customer-btn.css-1hw9j7s').click()") { res, error in
+                                                let js = """
+                                                        [...document.querySelectorAll("button")].find(btn => btn.textContent.trim() === "Login")?.click();
+                                                        """
+                                                
+                                                self.webview.evaluateJavaScript(js) { res, error in
                                                     
                                                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                                         
@@ -221,7 +225,7 @@ class SalesNewViewController: UIViewController {
                                                                 });
                                                                 observer.observe(document.body, { childList: true, subtree: true });
                                                                 """
-                                
+                                                        
                                                         // Inject the JavaScript into the WebView
                                                         self.webview.evaluateJavaScript(scripted) { (result, error) in
                                                             if let error = error {
@@ -242,7 +246,7 @@ class SalesNewViewController: UIViewController {
                                                                 });
                                                                 observer.observe(document.body, { childList: true, subtree: true });
                                                                 """
-                                
+                                                        
                                                         // Inject the JavaScript into the WebView
                                                         self.webview.evaluateJavaScript(scripte) { (result, error) in
                                                             if let error = error {
