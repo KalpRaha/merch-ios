@@ -41722,7 +41722,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="22F-q3-Zo0" userLabel="grand view">
-                                                <rect key="frame" x="0.0" y="955.5" width="414" height="67"/>
+                                                <rect key="frame" x="0.0" y="955.5" width="414" height="58"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grand Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ch-xv-Rx0">
                                                         <rect key="frame" x="20" y="10" width="93.5" height="21"/>
@@ -41730,14 +41730,14 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pne-an-cCd">
-                                                        <rect key="frame" x="20" y="36" width="42" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Net Sale + Tax + Other Fees" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pne-an-cCd">
+                                                        <rect key="frame" x="20" y="36" width="137.5" height="12"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7a0-iU-Xsa">
-                                                        <rect key="frame" x="394" y="33.5" width="0.0" height="0.0"/>
+                                                        <rect key="frame" x="394" y="29" width="0.0" height="0.0"/>
                                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -41755,7 +41755,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z9m-zH-OUq" userLabel="tender View">
-                                                <rect key="frame" x="0.0" y="1032.5" width="414" height="40.5"/>
+                                                <rect key="frame" x="0.0" y="1023.5" width="414" height="40.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tenders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZO4-Ef-TK7">
                                                         <rect key="frame" x="20" y="11.5" width="53" height="17.5"/>
@@ -41780,7 +41780,7 @@
                                                 </constraints>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3er-C5-mWB">
-                                                <rect key="frame" x="0.0" y="1073" width="414" height="42"/>
+                                                <rect key="frame" x="0.0" y="1064" width="414" height="42"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="42" id="skh-uR-SES"/>
@@ -41855,7 +41855,7 @@
                                                 </connections>
                                             </tableView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VqI-ME-rYI" userLabel="Total Pay View">
-                                                <rect key="frame" x="0.0" y="1115" width="414" height="44.5"/>
+                                                <rect key="frame" x="0.0" y="1106" width="414" height="44.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1BR-d4-jjF">
                                                         <rect key="frame" x="20" y="12" width="38" height="21"/>
@@ -41880,19 +41880,19 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cash/Change Due to Customer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZq-5S-YPo">
-                                                <rect key="frame" x="20" y="1169.5" width="253" height="21"/>
+                                                <rect key="frame" x="20" y="1160.5" width="253" height="21"/>
                                                 <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjf-Q7-lfy">
-                                                <rect key="frame" x="394" y="1169.5" width="0.0" height="0.0"/>
+                                                <rect key="frame" x="394" y="1160.5" width="0.0" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q1s-xO-hkE">
-                                                <rect key="frame" x="0.0" y="1200.5" width="414" height="91"/>
+                                                <rect key="frame" x="0.0" y="1191.5" width="414" height="91"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Refunds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAc-6q-NWL">
                                                         <rect key="frame" x="20" y="10" width="82" height="30.5"/>
@@ -41940,7 +41940,7 @@
                                                 </constraints>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LKb-OD-5hc">
-                                                <rect key="frame" x="0.0" y="1291.5" width="414" height="40"/>
+                                                <rect key="frame" x="0.0" y="1282.5" width="414" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="5He-EN-RWG"/>
@@ -42033,7 +42033,7 @@
                                                 </connections>
                                             </tableView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UFN-uA-pGn">
-                                                <rect key="frame" x="0.0" y="1331.5" width="414" height="45"/>
+                                                <rect key="frame" x="0.0" y="1322.5" width="414" height="45"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oUa-oU-OFl">
                                                         <rect key="frame" x="20" y="12" width="38" height="21"/>
@@ -42066,7 +42066,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GkA-cR-kA5" userLabel="After Refund View">
-                                                <rect key="frame" x="0.0" y="1386.5" width="414" height="63"/>
+                                                <rect key="frame" x="0.0" y="1377.5" width="414" height="63"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Grand Total After Refund" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6tF-0F-qYo">
                                                         <rect key="frame" x="20" y="10" width="199.5" height="24.666666666666671"/>
@@ -42100,7 +42100,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gSl-gN-U0E">
-                                                <rect key="frame" x="0.0" y="1449.5" width="414" height="50.5"/>
+                                                <rect key="frame" x="0.0" y="1440.5" width="414" height="50.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loyalty Points" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVn-wx-Ren">
                                                         <rect key="frame" x="10" y="12.5" width="139" height="26"/>
@@ -42127,7 +42127,7 @@
                                                 </constraints>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Lcy-da-XHm">
-                                                <rect key="frame" x="0.0" y="1500" width="414" height="100"/>
+                                                <rect key="frame" x="0.0" y="1491" width="414" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="6qH-Nk-R77"/>
@@ -42194,7 +42194,7 @@
                                                 </connections>
                                             </tableView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bsg-ld-BGD">
-                                                <rect key="frame" x="0.0" y="1600" width="414" height="44.5"/>
+                                                <rect key="frame" x="0.0" y="1591" width="414" height="44.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ve-yN-rJX">
                                                         <rect key="frame" x="20" y="12" width="38" height="21"/>
@@ -42219,27 +42219,27 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customer Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVo-WD-PLO">
-                                                <rect key="frame" x="10" y="1654.5" width="170" height="26"/>
+                                                <rect key="frame" x="10" y="1645.5" width="170" height="26"/>
                                                 <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="22"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Feq-eS-jZS" userLabel="blueidentity">
-                                                <rect key="frame" x="10" y="1687.5" width="170" height="3"/>
+                                                <rect key="frame" x="10" y="1678.5" width="170" height="3"/>
                                                 <color key="backgroundColor" red="0.039215686270000001" green="0.3921568627" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="3" id="Gfq-2Y-Urm"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9YK-Ae-dzs" userLabel="underidentity">
-                                                <rect key="frame" x="10" y="1690.5" width="394" height="1"/>
+                                                <rect key="frame" x="10" y="1681.5" width="394" height="1"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="wj4-7L-cPf"/>
                                                 </constraints>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="v96-1e-4t8">
-                                                <rect key="frame" x="0.0" y="1701.5" width="414" height="136"/>
+                                                <rect key="frame" x="0.0" y="1692.5" width="414" height="136"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="136" id="gUu-i2-FLR"/>

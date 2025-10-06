@@ -5228,7 +5228,7 @@ class InStoreNewRefundViewController: UIViewController {
             
             let price_pay_doub = Double(price_pay) ?? 0.00 //23.79
             
-            if tax_def_pay != "" && tax_def_pay != "0.00" && tax_def_pay != "0.0" {
+            if tax_def_pay != "" && tax_def_pay != "0.00" && tax_def_pay != "0.0" && tax_def_pay != "0" {
                 
                 let index = tax_order_sum_array.firstIndex(where: { $0.tax_name == "DefaultTax"}) ?? 0
                 let amt = tax_order_sum_array[index].tax_amount
