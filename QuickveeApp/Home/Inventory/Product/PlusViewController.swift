@@ -37,7 +37,17 @@ class PlusViewController: UIViewController {
     @IBOutlet weak var upcLbl: UILabel!
     
     @IBOutlet weak var productField: UITextField!
-    @IBOutlet weak var descField: UITextField!
+//    @IBOutlet weak var descField: UITextField!
+    
+    @IBOutlet weak var customView: UIView!
+    @IBOutlet weak var customTextView: NoMenuTextView!
+    @IBOutlet weak var descColl: UICollectionView!
+    
+    @IBOutlet weak var leftSideBtn: UIButton!
+    @IBOutlet weak var rightSideBtn: UIButton!
+    
+    @IBOutlet weak var leftBtnWide: NSLayoutConstraint!
+    @IBOutlet weak var rightBtnWide: NSLayoutConstraint!
     
     @IBOutlet weak var brandView: UIView!
     
@@ -127,6 +137,22 @@ class PlusViewController: UIViewController {
     var arrOptVl2 = [String]()
     var arrOptVl3 = [String]()
     
+    var optionsButtons = [UIImage(systemName: "arrow.uturn.backward"), UIImage(systemName: "arrow.uturn.forward"), UIImage(systemName: "bold"),
+                          UIImage(systemName: "italic"), UIImage(systemName: "textformat.subscript"), UIImage(systemName: "textformat.superscript"),
+                          UIImage(systemName: "strikethrough"), UIImage(systemName: "underline"), UIImage(systemName: "1.square"),
+                          UIImage(systemName: "2.square"), UIImage(systemName: "3.square"), UIImage(systemName: "4.square"),
+                          UIImage(systemName: "5.square"), UIImage(systemName: "6.square"), UIImage(systemName: "increase.indent"),
+                          UIImage(systemName: "decrease.indent"), UIImage(systemName: "text.alignleft"), UIImage(systemName: "text.aligncenter"),
+                          UIImage(systemName: "text.alignright"), UIImage(systemName: "list.bullet"), UIImage(systemName: "list.number"), UIImage(systemName: "quote.opening")]
+    
+    var undoManagerInstance = UndoManager()
+    var isBold = false
+    var isItalic = false
+    var headingNumber = 0
+    var isPara = false
+    var head = 0
+    var placeholderText = "Enter Custom Product Description"
+                          
     var prod_purchaseQty = ""
     var variantsArray = [ProductById]()
     var editProd: ProductById?
@@ -153,15 +179,17 @@ class PlusViewController: UIViewController {
         super.viewDidLoad()
         
         productField.layer.borderColor = UIColor(hexString: "#E4E8EF").cgColor
-        descField.layer.borderColor = UIColor(hexString: "#E4E8EF").cgColor
-        
+        customView.layer.borderColor = UIColor(hexString: "#E4E8EF").cgColor
+        customView.layer.borderWidth = 1.0
         
         productField.autocapitalizationType = .words
-        descField.autocapitalizationType = .sentences
+        customTextView.autocapitalizationType = .sentences
         
         productField.placeholder = "Enter Name"
         selectBrandLbl.text = "Select Brand"
-        descField.placeholder = "Enter Product Description"
+        customTextView.text = placeholderText
+        customTextView.textColor = UIColor.lightGray
+        customTextView.delegate = self
         
         productField.smartDashesType = .no
         
@@ -264,6 +292,15 @@ class PlusViewController: UIViewController {
             variantsTable.sectionHeaderTopPadding = 0
         } else {
             // Fallback on earlier versions
+        }
+        
+        leftBtnWide.constant = 0
+        rightBtnWide.constant = 0
+        
+        if mode == "add" {
+            customTextView.typingAttributes = [
+                .font: UIFont(name: "TimesNewRomanPSMT", size: 14)!
+            ]
         }
         
         topview.addBottomShadow()
@@ -471,29 +508,61 @@ class PlusViewController: UIViewController {
 
            let htmlString = prod.description
 
-           if let data = htmlString.data(using: .utf8) {
-               do {
-                   let attributedString = try NSAttributedString(data: data, options: [
-                       .documentType: NSAttributedString.DocumentType.html,
-                       .characterEncoding: String.Encoding.utf8.rawValue
-                   ], documentAttributes: nil)
+        if let data = htmlString.data(using: .utf8) {
+            do {
+                let attributedString = try NSAttributedString(data: data, options: [
+                    .documentType: NSAttributedString.DocumentType.html,
+                    .characterEncoding: String.Encoding.utf8.rawValue
+                ], documentAttributes: nil)
+                
+                attributedString.enumerateAttribute(.font, in: NSRange(location: 0, length: attributedString.length), options: []) { value, range, _ in
+                    if let font = value as? UIFont {
+                        print("Font: \(font.fontName), size: \(font.pointSize), range: \(range)")
+                    }
+                }
 
-                  
-                   let mutableAttributedString = NSMutableAttributedString(attributedString: attributedString)
-                   let paragraphStyle = NSMutableParagraphStyle()
-                   paragraphStyle.lineBreakMode = .byTruncatingTail
-                   paragraphStyle.alignment = .left
+//                let mutableAttributedString = NSMutableAttributedString(attributedString: attributedString)
+//
+//                // Your base font
+//                let baseFont = UIFont.systemFont(ofSize: 14)
 
-                   mutableAttributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: mutableAttributedString.length))
+                // Replace existing fonts while preserving traits (bold/italic)
+//                mutableAttributedString.enumerateAttribute(.font, in: NSRange(location: 0, length: mutableAttributedString.length)) { value, range, _ in
+//                    if let oldFont = value as? UIFont {
+//                        var traits = oldFont.fontDescriptor.symbolicTraits
+//                        if let descriptor = baseFont.fontDescriptor.withSymbolicTraits(traits) {
+//                            let newFont = UIFont(descriptor: descriptor, size: baseFont.pointSize)
+//                            mutableAttributedString.addAttribute(.font, value: newFont, range: range)
+//                        } else {
+//                            // Fallback if symbolic traits failed
+//                            mutableAttributedString.addAttribute(.font, value: baseFont, range: range)
+//                        }
+//                    } else {
+//                        // No font? Apply base font
+//                        mutableAttributedString.addAttribute(.font, value: baseFont, range: range)
+//                    }
+//                }
 
-                  
-                   descField.attributedText = mutableAttributedString
+//                 Apply paragraph style
+//                let paragraphStyle = NSMutableParagraphStyle()
+//                paragraphStyle.lineBreakMode = .byTruncatingTail
+//                paragraphStyle.alignment = .left
+//
+//                mutableAttributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: mutableAttributedString.length))
+//
+                if attributedString.string.isEmpty {
+                    customTextView.text = placeholderText
+                    customTextView.textColor = .lightGray
+                }
+                else {
+                    customTextView.attributedText = attributedString
+                }
 
+            } catch {
+                print("Error parsing HTML: \(error)")
+            }
+        }
 
-               } catch {
-                   print("Error parsing HTML: \(error)")
-               }
-           }
        }
 
  
@@ -839,7 +908,7 @@ class PlusViewController: UIViewController {
         if var_count == 0 || var_count == 1 {
             var opt_choice = false
             if mode == "add" {
-                scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 706 + 36.33
+                scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + 36.33
                 if productOptions.count == 3 {
                     opt_choice = false
                     addVarBtn.isHidden = true
@@ -847,7 +916,7 @@ class PlusViewController: UIViewController {
                     addVarTop.constant = 0
                 }
                 else {
-                    scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 776 + 36.33
+                    scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + 36.33
                     opt_choice = true
                     addVarBtn.isHidden = false
                     addVarBtnHeight.constant = 50
@@ -857,10 +926,10 @@ class PlusViewController: UIViewController {
                 if !UserDefaults.standard.bool(forKey: "multi_store_access") {
                     
                     if opt_choice {
-                        scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 776 + 36.33
+                        scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33
                     }
                     else {
-                        scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 706 + 36.33
+                        scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33
                     }
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
@@ -873,7 +942,7 @@ class PlusViewController: UIViewController {
             
             else {
                 //771 = 826
-                scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 751 + 20
+                scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 751 + 20
                 addVarBtn.isHidden = true
                 addVarBtnHeight.constant = 0
                 addVarTop.constant = 0
@@ -888,14 +957,14 @@ class PlusViewController: UIViewController {
             if mode == "add" {
                 if productOptions.count == 3 {
                     opt_choice = false
-                    scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33
+                    scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
                 }
                 else {
                     opt_choice = true
-                    scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33
+                    scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33
                     addVarBtn.isHidden = false
                     addVarBtnHeight.constant = 50
                     addVarTop.constant = 20
@@ -904,10 +973,10 @@ class PlusViewController: UIViewController {
                 if !UserDefaults.standard.bool(forKey: "multi_store_access") {
                     
                     if opt_choice {
-                        scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33
+                        scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33
                     }
                     else {
-                        scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33
+                        scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33
                     }
                     
                     addVarBtn.isHidden = true
@@ -921,7 +990,7 @@ class PlusViewController: UIViewController {
             
             else {
                 //771 = 826
-                scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 751 + CGFloat(50 * var_count) + 20
+                scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 751 + CGFloat(50 * var_count) + 20
                 addVarBtn.isHidden = true
                 addVarBtnHeight.constant = 0
                 addVarTop.constant = 0
@@ -1393,8 +1462,8 @@ class PlusViewController: UIViewController {
             return
         }
         
-        let desc = descField.text ?? ""
-        
+        let desc = wrapTextInHTML()
+        print(desc)
         let brand = brandName.text ?? ""
         
         var tags = ""
@@ -1854,8 +1923,540 @@ class PlusViewController: UIViewController {
 
         return openingTags + encodedText + closingTags
     }
-
     
+    func toggleFontTrait(_ trait: UIFontDescriptor.SymbolicTraits, tag: Int) {
+        let range = customTextView.selectedRange
+        guard range.length > 0 else { return }
+
+        let attributedText = NSMutableAttributedString(attributedString: customTextView.attributedText)
+        let previousText = NSAttributedString(attributedString: customTextView.attributedText)
+        
+        undoManagerInstance.registerUndo(withTarget: self) { target in
+            target.customTextView.attributedText = previousText
+            target.customTextView.selectedRange = range
+        }
+
+        attributedText.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
+            let currentFont = (value as? UIFont) ?? UIFont.systemFont(ofSize: 16)
+            var traits = currentFont.fontDescriptor.symbolicTraits
+            
+            if tag == 2 {
+                isBold.toggle()
+            }
+            else {
+                isItalic.toggle()
+            }
+
+            if traits.contains(trait) {
+                traits.remove(trait)
+            } else {
+                traits.insert(trait)
+            }
+
+            if let newDescriptor = currentFont.fontDescriptor.withSymbolicTraits(traits) {
+                let newFont = UIFont(descriptor: newDescriptor, size: currentFont.pointSize)
+                attributedText.addAttribute(.font, value: newFont, range: subrange)
+            }
+        }
+
+        customTextView.attributedText = attributedText
+        customTextView.selectedRange = range
+    }
+    
+    func toggleAttribute(_ attribute: NSAttributedString.Key, value: Any) {
+        let nsRange = customTextView.selectedRange
+        guard nsRange.length > 0 else { return }
+
+        let oldText = NSAttributedString(attributedString: customTextView.attributedText)
+
+        let attributedText = NSMutableAttributedString(attributedString: customTextView.attributedText)
+
+        var shouldRemove = true
+        // Check if *all* characters in range have the attribute with the given value
+        attributedText.enumerateAttribute(attribute, in: nsRange, options: []) { currentValue, _, stop in
+            if let currentValue = currentValue as? NSObject, let value = value as? NSObject {
+                if currentValue != value {
+                    shouldRemove = false
+                    stop.pointee = true
+                }
+            } else {
+                shouldRemove = false
+                stop.pointee = true
+            }
+        }
+
+        if shouldRemove {
+            // Remove attribute
+            attributedText.removeAttribute(attribute, range: nsRange)
+        } else {
+            // Add attribute
+            attributedText.addAttribute(attribute, value: value, range: nsRange)
+        }
+
+        customTextView.attributedText = attributedText
+        customTextView.selectedRange = nsRange
+
+        undoManagerInstance.registerUndo(withTarget: self) { target in
+            target.customTextView.attributedText = oldText
+            target.customTextView.selectedRange = nsRange
+        }
+    }
+    
+    func toggleHeaderPreservingTraits(headerLevel: Int?) {
+        let nsRange = customTextView.selectedRange
+        guard nsRange.length > 0 else { return }
+
+        let oldText = NSAttributedString(attributedString: customTextView.attributedText)
+        let attributedText = NSMutableAttributedString(attributedString: customTextView.attributedText)
+
+        var shouldRemoveHeader = true
+        var expectedHeaderFont: UIFont?
+        var heady = headerLevel
+
+        if head == heady {
+            heady = 0 // Toggle off
+        }
+
+        // Determine target font size based on header level
+        if let headerLevel = heady {
+            var fontSize: CGFloat
+            switch headerLevel {
+            case 1:
+                headingNumber = 1
+                fontSize = 26
+            case 2:
+                headingNumber = 2
+                fontSize = 24
+            case 3:
+                headingNumber = 3
+                fontSize = 22
+            case 4:
+                headingNumber = 4
+                fontSize = 20
+            case 5:
+                headingNumber = 5
+                fontSize = 18
+            case 6:
+                headingNumber = 6
+                fontSize = 16
+            default:
+                headingNumber = 0
+                fontSize = 14
+            }
+            expectedHeaderFont = UIFont.systemFont(ofSize: fontSize)
+            head = headerLevel
+
+            // Check if current fonts already match header
+            if let headerFont = expectedHeaderFont {
+                attributedText.enumerateAttribute(.font, in: nsRange, options: []) { value, _, stop in
+                    if let font = value as? UIFont {
+                        if abs(font.pointSize - headerFont.pointSize) > 0.1 {
+                            shouldRemoveHeader = false
+                            stop.pointee = true
+                        }
+                    } else {
+                        shouldRemoveHeader = false
+                        stop.pointee = true
+                    }
+                }
+            } else {
+                shouldRemoveHeader = false
+            }
+        } else {
+            shouldRemoveHeader = false
+        }
+
+        // Apply fonts
+        attributedText.enumerateAttribute(.font, in: nsRange, options: []) { value, subrange, _ in
+            let currentFont = (value as? UIFont) ?? UIFont.systemFont(ofSize: 14)
+            var newFont: UIFont
+
+            if shouldRemoveHeader {
+                // === TOGGLE OFF HEADER ===
+                let baseFont = UIFont.systemFont(ofSize: 14)
+                var traits: UIFontDescriptor.SymbolicTraits = []
+
+                if isBold { traits.insert(.traitBold) }
+                if isItalic { traits.insert(.traitItalic) }
+
+                if let descriptor = baseFont.fontDescriptor.withSymbolicTraits(traits) {
+                    newFont = UIFont(descriptor: descriptor, size: 14)
+                } else {
+                    newFont = baseFont
+                }
+
+            } else {
+                // === TOGGLE ON HEADER ===
+                guard let expectedHeaderFont = expectedHeaderFont else { return }
+
+                var traits: UIFontDescriptor.SymbolicTraits = []
+
+                if isBold { traits.insert(.traitBold) }
+                if isItalic { traits.insert(.traitItalic) }
+
+                if let descriptor = expectedHeaderFont.fontDescriptor.withSymbolicTraits(traits) {
+                    newFont = UIFont(descriptor: descriptor, size: expectedHeaderFont.pointSize)
+                } else {
+                    newFont = expectedHeaderFont
+                }
+            }
+
+            attributedText.addAttribute(.font, value: newFont, range: subrange)
+        }
+
+        customTextView.attributedText = attributedText
+        customTextView.selectedRange = nsRange
+
+        undoManagerInstance.registerUndo(withTarget: self) { target in
+            target.customTextView.attributedText = oldText
+            target.customTextView.selectedRange = nsRange
+        }
+    }
+    
+    func toggleTextAlignment(_ alignment: NSTextAlignment) {
+        let selectedRange = customTextView.selectedRange
+        guard selectedRange.length > 0 else { return }
+
+        let oldAttributedText = NSAttributedString(attributedString: customTextView.attributedText)
+        let attributedText = NSMutableAttributedString(attributedString: customTextView.attributedText)
+
+        var shouldRemoveAlignment = true
+
+        // Determine if we need to toggle the alignment off
+        attributedText.enumerateAttribute(.paragraphStyle, in: selectedRange, options: []) { value, _, stop in
+            if let style = value as? NSParagraphStyle {
+                if style.alignment != alignment {
+                    shouldRemoveAlignment = false
+                    stop.pointee = true
+                }
+            } else {
+                shouldRemoveAlignment = false
+                stop.pointee = true
+            }
+        }
+
+        // Apply the new paragraph style
+        attributedText.enumerateAttribute(.paragraphStyle, in: selectedRange, options: []) { value, range, _ in
+            let currentStyle = (value as? NSMutableParagraphStyle) ?? NSMutableParagraphStyle()
+            let newStyle = currentStyle.mutableCopy() as! NSMutableParagraphStyle
+
+            newStyle.alignment = shouldRemoveAlignment ? .natural : alignment
+            attributedText.addAttribute(.paragraphStyle, value: newStyle, range: range)
+        }
+
+        // Update the textView
+        customTextView.attributedText = attributedText
+        customTextView.selectedRange = selectedRange
+
+        // Register undo
+        undoManagerInstance.registerUndo(withTarget: self) { target in
+            target.customTextView.attributedText = oldAttributedText
+            target.customTextView.selectedRange = selectedRange
+        }
+    }
+    
+    func convertSelectedLinesToBullets(in textView: UITextView) {
+        let selectedRange = textView.selectedRange
+        let originalText = textView.text ?? ""
+        let textNSString = originalText as NSString
+        
+        // Get full lines containing selection (in case it spans multiple lines)
+        let startLineRange = textNSString.lineRange(for: NSRange(location: selectedRange.location, length: 0))
+        let endLineRange = textNSString.lineRange(for: NSRange(location: selectedRange.upperBound, length: 0))
+        let linesRange = NSRange(location: startLineRange.location, length: endLineRange.upperBound - startLineRange.location)
+        
+        // Extract selected text from that range
+        let selectedText = textNSString.substring(with: linesRange)
+        
+        // Split selected text into sentences using "." as delimiter
+        let sentences = selectedText.components(separatedBy: ".")
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+        
+        // Add bullets to each sentence
+        let bulletedSentences = sentences.map { "•\t\($0)." } // Add period back
+        let bulletedText = bulletedSentences.joined(separator: "\n")
+        
+        // Replace in UITextView
+        if let textRange = Range(linesRange, in: originalText) {
+            let updatedText = originalText.replacingCharacters(in: textRange, with: bulletedText)
+            
+            // Register undo
+            let previousText = originalText
+            let previousRange = selectedRange
+            
+            undoManagerInstance.registerUndo(withTarget: textView) { target in
+                target.text = previousText
+                target.selectedRange = previousRange
+            }
+            
+            textView.text = updatedText
+            textView.selectedRange = NSRange(location: linesRange.location, length: (bulletedText as NSString).length)
+        }
+    }
+
+
+    func convertSelectedSentencesToNumberedBullets(in textView: UITextView) {
+        let selectedRange = textView.selectedRange
+        let originalText = textView.text ?? ""
+        let textNSString = originalText as NSString
+
+        // Get full lines containing selection
+        let startLineRange = textNSString.lineRange(for: NSRange(location: selectedRange.location, length: 0))
+        let endLineRange = textNSString.lineRange(for: NSRange(location: selectedRange.upperBound, length: 0))
+        let linesRange = NSRange(location: startLineRange.location, length: endLineRange.upperBound - startLineRange.location)
+
+        // Extract selected text
+        let selectedText = textNSString.substring(with: linesRange)
+
+        // Split into sentences by period
+        let sentences = selectedText.components(separatedBy: ".")
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+
+        // Add numbered bullets
+        let numberedSentences = sentences.enumerated().map { index, sentence in
+            "\(index + 1).\t\(sentence)."
+        }
+        let numberedText = numberedSentences.joined(separator: "\n")
+
+        // Replace in UITextView
+        if let textRange = Range(linesRange, in: originalText) {
+            let updatedText = originalText.replacingCharacters(in: textRange, with: numberedText)
+
+            // Register undo
+            let previousText = originalText
+            let previousRange = selectedRange
+
+            undoManagerInstance.registerUndo(withTarget: textView) { target in
+                target.text = previousText
+                target.selectedRange = previousRange
+            }
+
+            textView.text = updatedText
+            textView.selectedRange = NSRange(location: linesRange.location, length: (numberedText as NSString).length)
+        }
+    }
+
+    func indentSelectedLinesWithTab(in textView: UITextView) {
+        let selectedRange = textView.selectedRange
+        let originalText = textView.text ?? ""
+        let textNSString = originalText as NSString
+
+        // Expand selection to full lines
+        let startLineRange = textNSString.lineRange(for: NSRange(location: selectedRange.location, length: 0))
+        let endLineRange = textNSString.lineRange(for: NSRange(location: selectedRange.upperBound, length: 0))
+        let fullLinesRange = NSRange(location: startLineRange.location, length: endLineRange.upperBound - startLineRange.location)
+
+        let selectedText = textNSString.substring(with: fullLinesRange)
+        let lines = selectedText.components(separatedBy: .newlines)
+
+        // Indent each non-empty line with a tab
+        let indentedLines = lines.map { line in
+            line.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? line : "\t" + line
+        }
+
+        let indentedText = indentedLines.joined(separator: "\n")
+
+        // Replace text and register undo
+        if let rangeInText = Range(fullLinesRange, in: originalText) {
+            let newText = originalText.replacingCharacters(in: rangeInText, with: indentedText)
+
+            let previousText = originalText
+            let previousRange = selectedRange
+
+            undoManagerInstance.registerUndo(withTarget: textView) { target in
+                target.text = previousText
+                target.selectedRange = previousRange
+            }
+
+            textView.text = newText
+
+            // Update selection to reflect indented text
+            let newLength = (indentedText as NSString).length
+            textView.selectedRange = NSRange(location: fullLinesRange.location, length: newLength)
+        }
+    }
+    
+    func outdentSelectedLines(in textView: UITextView) {
+        let selectedRange = textView.selectedRange
+        let originalText = textView.text ?? ""
+        let textNSString = originalText as NSString
+
+        // Expand selection to full lines
+        let startLineRange = textNSString.lineRange(for: NSRange(location: selectedRange.location, length: 0))
+        let endLineRange = textNSString.lineRange(for: NSRange(location: selectedRange.upperBound, length: 0))
+        let fullLinesRange = NSRange(location: startLineRange.location, length: endLineRange.upperBound - startLineRange.location)
+
+        let selectedText = textNSString.substring(with: fullLinesRange)
+        let lines = selectedText.components(separatedBy: .newlines)
+
+        // Remove one level of indent (either a tab or 4 spaces)
+        let outdentedLines = lines.map { line in
+            if line.hasPrefix("\t") {
+                return String(line.dropFirst())
+            } else if line.hasPrefix("    ") {
+                return String(line.dropFirst(4))
+            } else {
+                return line
+            }
+        }
+
+        let outdentedText = outdentedLines.joined(separator: "\n")
+
+        // Replace and register undo
+        if let rangeInText = Range(fullLinesRange, in: originalText) {
+            let newText = originalText.replacingCharacters(in: rangeInText, with: outdentedText)
+
+            let previousText = originalText
+            let previousRange = selectedRange
+
+            undoManagerInstance.registerUndo(withTarget: textView) { target in
+                target.text = previousText
+                target.selectedRange = previousRange
+            }
+
+            textView.text = newText
+
+            // Update selection
+            let newLength = (outdentedText as NSString).length
+            textView.selectedRange = NSRange(location: fullLinesRange.location, length: newLength)
+        }
+    }
+    
+    func wrapTextInHTML() -> String {
+        
+        let fullString = customTextView.attributedText.string
+        let words = fullString.components(separatedBy: .whitespacesAndNewlines).filter { !$0.isEmpty }
+        var resultText = ""
+        
+        // We'll keep track of position in string to get the right range
+        var position = 0
+        
+        for word in words {
+            // Find range of current word starting from 'position'
+            if let range = fullString.range(of: word, options: [], range: fullString.index(fullString.startIndex, offsetBy: position)..<fullString.endIndex) {
+                let nsRange = NSRange(range, in: fullString)
+                
+                position = nsRange.location + nsRange.length
+                
+                // Get attributes for this word's range
+                let attributes = customTextView.attributedText.attributes(at: nsRange.location, longestEffectiveRange: nil, in: nsRange)
+                
+                // Extract font attribute
+                if let font = attributes[.font] as? UIFont {
+                    let fontDescriptor = font.fontDescriptor
+                    
+                    // Check for traits
+                    let isBold = fontDescriptor.symbolicTraits.contains(.traitBold)
+                    let isItalic = fontDescriptor.symbolicTraits.contains(.traitItalic)
+                    let fontSize = font.pointSize
+                    
+                    let underlineStyle = attributes[.underlineStyle] as? Int ?? 0
+                    let isUnderlined = underlineStyle != 0
+                    
+                    let strikethroughStyle = attributes[.strikethroughStyle] as? Int ?? 0
+                    let isStrikethrough = strikethroughStyle != 0
+                    
+                    let baselineOffset = attributes[.baselineOffset] as? NSNumber
+                    let isSuperscript = (baselineOffset?.doubleValue ?? 0) > 0
+                    let isSubscript = (baselineOffset?.doubleValue ?? 0) < 0
+                    
+                    var r1 = ""
+                    var r2 = ""
+                    
+                    let numberedBulletPattern = #"^\d+\.$"#
+                    let isBullet = word.hasPrefix("•")
+                    let isNumberedBullet = word.range(of: numberedBulletPattern, options: .regularExpression) != nil
+                    
+                    var prefix = ""
+                    if isBullet || isNumberedBullet {
+                        prefix = "<br>"
+                    }
+                    
+                    if isItalic {
+                        if isBold {
+                            r1 = "<strong><i>\(word )</i></strong>"
+                        }
+                        else {
+                            r1 = "<i>\(word )</i>"
+                        }
+                    }
+                    else {
+                        if isBold {
+                            r1 = "<strong>\(word )</strong>"
+                        }
+                        else {
+                            r1 = "\(word) "
+                        }
+                    }
+                    
+                    if isSuperscript {
+                        r1 = "<sup>\(r1 )</sup>"
+                    }
+
+                    if isSubscript {
+                        r1 = "<sub>\(r1 )</sub>"
+                    }
+                    
+                    if isUnderlined {
+                        r1 = "<u>\(r1 )</u>"
+                    }
+                    
+                    if isStrikethrough {
+                        r1 = "<strike>\(r1)</strike>"
+                    }
+                    
+                    if fontSize == 26 {
+                        r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
+                    }
+                    else if fontSize == 24 {
+                        r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
+                    }
+                    else if fontSize == 22 {
+                        r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
+                    }
+                    else if fontSize == 20 {
+                        r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
+                    }
+                    else if fontSize == 18 {
+                        r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
+                    }
+                    else if fontSize == 16 {
+                        r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
+                    }
+                    else {
+                        r2 = "\(r1) "
+                    }
+                    resultText +=  prefix + r2
+                }
+                else {
+                    resultText += "\(word) "
+                }
+            }
+        }
+        
+        var alignmentStyle = "text-align: left;" // default
+        
+        if let paragraphStyle = customTextView.attributedText.attribute(.paragraphStyle, at: 0, effectiveRange: nil) as? NSParagraphStyle {
+            switch paragraphStyle.alignment {
+            case .center:
+                alignmentStyle = "text-align: center;"
+            case .right:
+                alignmentStyle = "text-align: right;"
+            case .justified:
+                alignmentStyle = "text-align: justify;"
+            default:
+                alignmentStyle = "text-align: left;"
+            }
+        }
+        
+        // Wrap all text with alignment div
+        let alignedHTML = "<div style=\"\(alignmentStyle)\">\(resultText)</div>"
+        
+        return alignedHTML
+    }
+
     func validateEditParams() {
         
         let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
@@ -1866,10 +2467,12 @@ class PlusViewController: UIViewController {
         }
         
        
-        let desc =  cleanAndWrapHtml(originalHtml: editProd?.description ?? "", userEditedText: descField.text ?? "")
+//        let desc =  cleanAndWrapHtml(originalHtml: editProd?.description ?? "", userEditedText: customTextView.text ?? "")
         
-      
-       
+        let desc = wrapTextInHTML()
+        
+        print(desc)
+        
         let brand = brandName.text ?? ""
         
         var tags = ""
@@ -2315,6 +2918,22 @@ class PlusViewController: UIViewController {
     }
     
     
+    @IBAction func leftBtnClick(_ sender: UIButton) {
+        leftBtnWide.constant = 0
+        rightBtnWide.constant = 0
+        let index = IndexPath(item: 0, section: 0)
+        descColl.scrollToItem(at: index, at: .left, animated: true)
+    }
+    
+    
+    @IBAction func rightBtnClick(_ sender: UIButton) {
+        leftBtnWide.constant = 0
+        rightBtnWide.constant = 0
+        let index = IndexPath(item: 19, section: 0)
+        descColl.scrollToItem(at: index, at: .right, animated: true)
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "toDuplicate" {
@@ -2324,7 +2943,8 @@ class PlusViewController: UIViewController {
             let brand = brandName.text ?? ""
             vc.dupBrandNameLbl = brand
             
-            let desc = descField.text ?? ""
+            let desc = customTextView.attributedText ?? NSAttributedString(string: "")
+            print(desc)
             vc.dupProdDesc = desc
             
             if variantsArray.count == 0 {
@@ -3449,6 +4069,23 @@ extension PlusViewController: UITextFieldDelegate {
     }
 }
 
+extension PlusViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == placeholderText {
+            textView.text = ""
+            textView.textColor = .black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = placeholderText
+            textView.textColor = .lightGray
+        }
+    }
+}
+
 extension PlusViewController: BarcodeScannerCodeDelegate, BarcodeScannerDismissalDelegate,
                               BarcodeScannerErrorDelegate {
     
@@ -3598,6 +4235,10 @@ extension PlusViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return missVariants.count
         }
         
+        else if collectionView == descColl {
+            return optionsButtons.count
+        }
+        
         else {
             
             return collTax.count
@@ -3659,6 +4300,18 @@ extension PlusViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return cell
         }
         
+        else if collectionView == descColl {
+            
+            
+            let cell = descColl.dequeueReusableCell(withReuseIdentifier: "desccell", for: indexPath) as! DescOptionsCollectionViewCell
+            
+            cell.option.image = optionsButtons[indexPath.row]
+            
+            cell.option.tag = indexPath.row
+            
+            return cell
+        }
+        
         else {
             
             let cell = taxesColl.dequeueReusableCell(withReuseIdentifier: "taxcell", for: indexPath) as! PlusCollCollectionViewCell
@@ -3670,6 +4323,79 @@ extension PlusViewController: UICollectionViewDelegate, UICollectionViewDataSour
             setCollHeight(coll: taxesColl)
             
             return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if collectionView == descColl {
+            
+            if indexPath.row == 0 {
+                undoManagerInstance.undo()
+            }
+            else if indexPath.row == 1 {
+                undoManagerInstance.redo()
+            }
+            else if indexPath.row == 2 {
+                toggleFontTrait(.traitBold, tag: 2)
+            }
+            else if indexPath.row == 3 {
+                toggleFontTrait(.traitItalic, tag: 3)
+            }
+            else if indexPath.row == 4 {
+                toggleAttribute(.baselineOffset, value: -8)
+            }
+            else if indexPath.row == 5 {
+                toggleAttribute(.baselineOffset, value: 8)
+            }
+            else if indexPath.row == 6 {
+                toggleAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue)
+            }
+            else if indexPath.row == 7 {
+                toggleAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue)
+            }
+            else if indexPath.row == 8 {
+                toggleHeaderPreservingTraits(headerLevel: 1)
+            }
+            else if indexPath.row == 9 {
+                toggleHeaderPreservingTraits(headerLevel: 2)
+            }
+            else if indexPath.row == 10 {
+                toggleHeaderPreservingTraits(headerLevel: 3)
+            }
+            else if indexPath.row == 11 {
+                toggleHeaderPreservingTraits(headerLevel: 4)
+            }
+            else if indexPath.row == 12 {
+                toggleHeaderPreservingTraits(headerLevel: 5)
+            }
+            else if indexPath.row == 13 {
+                toggleHeaderPreservingTraits(headerLevel: 6)
+            }
+            else if indexPath.row == 14 {
+                indentSelectedLinesWithTab(in: customTextView)
+            }
+            else if indexPath.row == 15 {
+                outdentSelectedLines(in: customTextView)
+            }
+            else if indexPath.row == 16 {
+                toggleTextAlignment(.left)
+            }
+            else if indexPath.row == 17 {
+                toggleTextAlignment(.center)
+            }
+            else if indexPath.row == 18 {
+                toggleTextAlignment(.right)
+            }
+            else if indexPath.row == 19 {
+                convertSelectedLinesToBullets(in: customTextView)
+            }
+            else if indexPath.row == 20 {
+                convertSelectedSentencesToNumberedBullets(in: customTextView)
+            }
+            else if indexPath.row == 21 {
+                toggleHeaderPreservingTraits(headerLevel: 7)
+            }
         }
     }
 }
@@ -4212,14 +4938,14 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 //                let tax = taxCollHeight.constant - 50
                 //
                 //                if mode == "add" {
-                //                    scrollHeight.constant = 614 + cat + tax + attHeight.constant + 150
+                //                    scrollHeight.constant = 734 + cat + tax + attHeight.constant + 150
                 //                    if productOptions.count == 3 {
                 //                        addVarBtn.isHidden = true
                 //                        addVarBtnHeight.constant = 0
                 //                        addVarTop.constant = 0
                 //                    }
                 //                    else {
-                //                        scrollHeight.constant = 614 + cat + tax + attHeight.constant + 220
+                //                        scrollHeight.constant = 734 + cat + tax + attHeight.constant + 220
                 //                        addVarBtn.isHidden = false
                 //                        addVarBtnHeight.constant = 50
                 //                        addVarTop.constant = 20
@@ -4227,7 +4953,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 //                }
                 //                else {
                 //                    //771 = 826
-                //                    scrollHeight.constant = 614 + cat + tax + attHeight.constant + 195
+                //                    scrollHeight.constant = 734 + cat + tax + attHeight.constant + 195
                 //                    addVarBtn.isHidden = true
                 //                    addVarBtnHeight.constant = 0
                 //                    addVarTop.constant = 0
@@ -4246,7 +4972,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 var opt_choice = false
                 
                 if mode == "add" {
-                    scrollHeight.constant = 614 + cat + tag + its + tax + attHeight.constant + 706 + 36.33
+                    scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + 706 + 36.33
                     if productOptions.count == 3 {
                         opt_choice = false
                         addVarBtn.isHidden = true
@@ -4255,7 +4981,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     else {
                         opt_choice = true
-                        scrollHeight.constant = 614 + cat + tag + its + tax + attHeight.constant + 776 + 36.33
+                        scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + 776 + 36.33
                         addVarBtn.isHidden = false
                         addVarBtnHeight.constant = 50
                         addVarTop.constant = 20
@@ -4264,10 +4990,10 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                     if !UserDefaults.standard.bool(forKey: "multi_store_access") {
                         
                         if opt_choice {
-                            scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 776 + 36.33
+                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33
                         }
                         else {
-                            scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 706 + 36.33
+                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33
                         }
                         addVarBtn.isHidden = true
                         addVarBtnHeight.constant = 0
@@ -4279,7 +5005,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 else {
                     //771 = 826
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 751 + 20
+                    scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 751 + 20
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
@@ -4304,7 +5030,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 var opt_choice = false
                 
                 if mode == "add" {
-                    scrollHeight.constant = 614 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33
+                    scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33
                     if productOptions.count == 3 {
                         opt_choice = false
                         addVarBtn.isHidden = true
@@ -4313,14 +5039,14 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     else {
                         opt_choice = true
-                        scrollHeight.constant = 614 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33
+                        scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33
                         addVarBtn.isHidden = false
                         addVarBtnHeight.constant = 50
                         addVarTop.constant = 20
                     }
                 }
                 else {
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count) + 20
+                    scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count) + 20
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
@@ -4332,10 +5058,10 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 if !UserDefaults.standard.bool(forKey: "multi_store_access") {
                     
                     if opt_choice {
-                        scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 776 + 36.33
+                        scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33
                     }
                     else {
-                        scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 706 + 36.33
+                        scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33
                     }
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
@@ -4407,7 +5133,7 @@ extension PlusViewController {
             loadingIndicator.centerXAnchor
                 .constraint(equalTo: scrollView.centerXAnchor, constant: 0),
             loadingIndicator.centerYAnchor
-                .constraint(equalTo: scrollView.centerYAnchor),
+                .constraint(equalTo: scrollView.centerYAnchor, constant: 50),
             loadingIndicator.widthAnchor
                 .constraint(equalToConstant: 40),
             loadingIndicator.heightAnchor
@@ -4543,4 +5269,9 @@ struct AddProduct {
     var varreorder_qty: String
     var varreorder_level: String
     var varreorder_cost: String
+}
+
+
+class NoMenuTextView: UITextView {
+    
 }
