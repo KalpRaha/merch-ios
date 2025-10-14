@@ -3182,7 +3182,9 @@ extension ApiCalls {
             case .success(_):
                 do {
                     let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
+                    print(json)
                     completion(true,json)
+                    print(json)
                 }
                 catch {
                     let res = "ios_app\(response.response?.statusCode)"

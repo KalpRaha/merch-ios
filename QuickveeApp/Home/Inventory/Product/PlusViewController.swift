@@ -130,7 +130,7 @@ class PlusViewController: UIViewController {
     var prod_purchaseQty = ""
     var variantsArray = [ProductById]()
     var editProd: ProductById?
-    
+    var editVarr: ProductById?
     var unsel_var_array = [String]()
     
     var vari_id = ""
@@ -428,6 +428,7 @@ class PlusViewController: UIViewController {
         prod_purchaseQty = purQuantity
         
         isVarient = editProd?.isvarient ?? ""
+        print(isVarient)
         
         inflateView(prod: productEdit)
         
@@ -679,6 +680,9 @@ class PlusViewController: UIViewController {
                                      cotegory: "\(vars["cotegory"] ?? "")", reorder_level: "\(vars["reorder_level"] ?? "")",
                                      env: "\(vars["env"] ?? "")", variant: "\(vars["variant"] ?? "")", reorder_qty: "\(vars["reorder_qty"] ?? "")", purchase_qty: "\(vars["purchase_qty"] ?? "")")
             
+            
+            
+            editVarr = varArr
             small_var.append(varArr)
         }
         variantsArray = small_var
@@ -873,7 +877,7 @@ class PlusViewController: UIViewController {
             
             else {
                 //771 = 826
-                scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 751 + 20
+                scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 820 + 20
                 addVarBtn.isHidden = true
                 addVarBtnHeight.constant = 0
                 addVarTop.constant = 0
@@ -921,7 +925,7 @@ class PlusViewController: UIViewController {
             
             else {
                 //771 = 826
-                scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 751 + CGFloat(50 * var_count) + 20
+                scrollHeight.constant = 614 + cat + tag + tax + its + attHeight.constant + 826 + CGFloat(50 * var_count) + 20
                 addVarBtn.isHidden = true
                 addVarBtnHeight.constant = 0
                 addVarTop.constant = 0
@@ -1371,6 +1375,21 @@ class PlusViewController: UIViewController {
         else {
             validateEditParams()
         }
+    }
+    
+    @objc func stocktakeBtnClick() {
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "StocktakeProductVC") as! StocktakeProductViewController
+        vc.editProd = editProd
+        vc.editVarr = editVarr
+        let transition = CATransition()
+        transition.duration = 0.7
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.moveIn
+        transition.subtype = CATransitionSubtype.fromTop
+        self.navigationController?.view.layer.add(transition, forKey: nil)
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
     func showMissingUPCView(missarray: [String]) {
@@ -3867,6 +3886,13 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             //edit
             else {
                 
+                cell.stocktakeBtn.layer.cornerRadius = 5
+                
+                let tap1 = UITapGestureRecognizer(target: self, action: #selector(stocktakeBtnClick))
+                tap1.numberOfTapsRequired = 1
+                cell.stocktakeBtn.addGestureRecognizer(tap1)
+                cell.stocktakeBtn.isUserInteractionEnabled = true
+                
                 let cost_method = UserDefaults.standard.string(forKey: "cost_method")
                 //avg is enabled
                 
@@ -4246,7 +4272,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 var opt_choice = false
                 
                 if mode == "add" {
-                    scrollHeight.constant = 614 + cat + tag + its + tax + attHeight.constant + 706 + 36.33
+                    scrollHeight.constant = 624 + cat + tag + its + tax + attHeight.constant + 706 + 36.33
                     if productOptions.count == 3 {
                         opt_choice = false
                         addVarBtn.isHidden = true
@@ -4255,7 +4281,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     else {
                         opt_choice = true
-                        scrollHeight.constant = 614 + cat + tag + its + tax + attHeight.constant + 776 + 36.33
+                        scrollHeight.constant = 624 + cat + tag + its + tax + attHeight.constant + 776 + 36.33
                         addVarBtn.isHidden = false
                         addVarBtnHeight.constant = 50
                         addVarTop.constant = 20
@@ -4264,10 +4290,10 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                     if !UserDefaults.standard.bool(forKey: "multi_store_access") {
                         
                         if opt_choice {
-                            scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 776 + 36.33
+                            scrollHeight.constant = 624 + cat + tag + tax + attHeight.constant + 776 + 36.33
                         }
                         else {
-                            scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 706 + 36.33
+                            scrollHeight.constant = 624 + cat + tag + tax + attHeight.constant + 706 + 36.33
                         }
                         addVarBtn.isHidden = true
                         addVarBtnHeight.constant = 0
@@ -4279,7 +4305,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 else {
                     //771 = 826
-                    scrollHeight.constant = 614 + cat + tag + tax + attHeight.constant + 751 + 20
+                    scrollHeight.constant = 624 + cat + tag + tax + attHeight.constant + 751 + 20
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0

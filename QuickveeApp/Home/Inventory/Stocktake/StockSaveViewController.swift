@@ -372,10 +372,14 @@ class StockSaveViewController: UIViewController {
                     final_dis += Double(dis_total) ?? 0.00
                 }
                 
+                    print(final_json)
+                    
                 tableview.isHidden = true
                 loadingIndicator.isAnimating = true
                 topView.isHidden = true
                 
+                    
+                    
                 ApiCalls.sharedCall.saveStockTake(merchant_id: id,
                                                   employee_id: emp_id,
                                                   total_qty: "\(total_new_Qty)",
@@ -745,6 +749,8 @@ class StockSaveViewController: UIViewController {
                         let newQty = Int(addNewQty[fill]) ?? 0
                         
                         let discrepancy_per = Int(discrepancyAdd[fill]) ?? 0
+                        
+                        print(discrepancy_per)
                         
                         let cost = cpi_doub * Double(discrepancy_per)
                         var cost_str = String(cost)

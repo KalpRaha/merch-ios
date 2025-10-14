@@ -44,6 +44,7 @@ class AddEditLotteryViewController: UIViewController {
     var track_check = ""
     
     private var isSymbolOnRight = false
+   
     var activeTextField = UITextField()
     
     var lotteryProduct: ProductById?
