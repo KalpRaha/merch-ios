@@ -163,7 +163,7 @@ class PlusViewController: UIViewController {
     var prod_purchaseQty = ""
     var variantsArray = [ProductById]()
     var editProd: ProductById?
-    
+    var editVarr: ProductById?
     var unsel_var_array = [String]()
     
     var vari_id = ""
@@ -760,6 +760,9 @@ class PlusViewController: UIViewController {
                                      cotegory: "\(vars["cotegory"] ?? "")", reorder_level: "\(vars["reorder_level"] ?? "")",
                                      env: "\(vars["env"] ?? "")", variant: "\(vars["variant"] ?? "")", reorder_qty: "\(vars["reorder_qty"] ?? "")", purchase_qty: "\(vars["purchase_qty"] ?? "")")
             
+            
+            
+            editVarr = varArr
             small_var.append(varArr)
         }
         variantsArray = small_var
@@ -1465,6 +1468,21 @@ class PlusViewController: UIViewController {
         else {
             validateEditParams()
         }
+    }
+    
+    @objc func stocktakeBtnClick() {
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "StocktakeProductVC") as! StocktakeProductViewController
+        vc.editProd = editProd
+        vc.editVarr = editVarr
+        let transition = CATransition()
+        transition.duration = 0.7
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.moveIn
+        transition.subtype = CATransitionSubtype.fromTop
+        self.navigationController?.view.layer.add(transition, forKey: nil)
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
     func showMissingUPCView(missarray: [String]) {
@@ -4627,6 +4645,13 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             
             //edit
             else {
+                
+                cell.stocktakeBtn.layer.cornerRadius = 5
+                
+                let tap1 = UITapGestureRecognizer(target: self, action: #selector(stocktakeBtnClick))
+                tap1.numberOfTapsRequired = 1
+                cell.stocktakeBtn.addGestureRecognizer(tap1)
+                cell.stocktakeBtn.isUserInteractionEnabled = true
                 
                 let cost_method = UserDefaults.standard.string(forKey: "cost_method")
                 //avg is enabled

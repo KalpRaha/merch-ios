@@ -711,7 +711,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="env-eR-gnK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1451" y="-1381"/>
+            <point key="canvasLocation" x="2091" y="-654"/>
         </scene>
         <!--Plus View Controller-->
         <scene sceneID="3ac-Lt-uMg">
@@ -1405,14 +1405,14 @@
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="hVJ-ey-3CT" customClass="ProductVariantTableViewCell" customModule="QuickveeApp" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="50" width="414" height="693"/>
+                                                                <rect key="frame" x="0.0" y="50" width="414" height="742"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hVJ-ey-3CT" id="uVQ-K7-Ret">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="693"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="742"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pqE-Wk-SgY">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="693"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="742"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aVP-nd-e6a">
                                                                                     <rect key="frame" x="10" y="20" width="394" height="0.0"/>
@@ -1439,19 +1439,36 @@
                                                                                         </view>
                                                                                     </subviews>
                                                                                 </stackView>
-                                                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sju-Aa-ees" userLabel="First Stack">
-                                                                                    <rect key="frame" x="10" y="40" width="394" height="0.0"/>
+                                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sju-Aa-ees" userLabel="First Stack">
+                                                                                    <rect key="frame" x="10" y="90" width="394" height="111"/>
                                                                                     <subviews>
-                                                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="45e-wF-uvW" customClass="MDCOutlinedTextField">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="192" height="0.0"/>
+                                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="45e-wF-uvW" customClass="MDCOutlinedTextField">
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="394" height="50.5"/>
                                                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                         </view>
-                                                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yhb-aJ-5ar" customClass="MDCOutlinedTextField">
-                                                                                            <rect key="frame" x="202" y="0.0" width="192" height="0.0"/>
+                                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yhb-aJ-5ar" customClass="MDCOutlinedTextField">
+                                                                                            <rect key="frame" x="0.0" y="60.5" width="394" height="50.5"/>
                                                                                             <subviews>
-                                                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="poX-mv-Vqz">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="192" height="0.0"/>
+                                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="poX-mv-Vqz">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="394" height="50.5"/>
+                                                                                                    <subviews>
+                                                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77X-k8-q1T">
+                                                                                                            <rect key="frame" x="286" y="8" width="100" height="34.5"/>
+                                                                                                            <color key="backgroundColor" name="SelectCat"/>
+                                                                                                            <constraints>
+                                                                                                                <constraint firstAttribute="width" constant="100" id="MQe-R1-cia"/>
+                                                                                                            </constraints>
+                                                                                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                                                            <state key="normal" title="Stocktake"/>
+                                                                                                        </button>
+                                                                                                    </subviews>
                                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                    <constraints>
+                                                                                                        <constraint firstAttribute="trailing" secondItem="77X-k8-q1T" secondAttribute="trailing" constant="8" id="MVS-ew-CzE"/>
+                                                                                                        <constraint firstAttribute="bottom" secondItem="77X-k8-q1T" secondAttribute="bottom" constant="8" id="aXz-kZ-L6F"/>
+                                                                                                        <constraint firstItem="77X-k8-q1T" firstAttribute="top" secondItem="poX-mv-Vqz" secondAttribute="top" constant="8" id="o5k-pN-2n0"/>
+                                                                                                    </constraints>
                                                                                                 </view>
                                                                                             </subviews>
                                                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1464,8 +1481,8 @@
                                                                                         </view>
                                                                                     </subviews>
                                                                                 </stackView>
-                                                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sjF-MJ-EJ9" userLabel="Second Stack">
-                                                                                    <rect key="frame" x="10" y="60" width="394" height="0.0"/>
+                                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sjF-MJ-EJ9" userLabel="Second Stack">
+                                                                                    <rect key="frame" x="10" y="221" width="394" height="50"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bWj-ip-Exx" customClass="MDCOutlinedTextField">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="192" height="0.0"/>
@@ -1501,8 +1518,8 @@
                                                                                         </view>
                                                                                     </subviews>
                                                                                 </stackView>
-                                                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="0Fh-z3-Oyn" userLabel="Fourth Stack ">
-                                                                                    <rect key="frame" x="10" y="80" width="394" height="0.0"/>
+                                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="0Fh-z3-Oyn" userLabel="Fourth Stack ">
+                                                                                    <rect key="frame" x="10" y="291" width="394" height="50"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MZN-FH-A2X" customClass="MDCOutlinedTextField">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="189.5" height="0.0"/>
@@ -1514,12 +1531,12 @@
                                                                                         </view>
                                                                                     </subviews>
                                                                                 </stackView>
-                                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CVO-CL-CcS" customClass="MDCOutlinedTextField">
-                                                                                    <rect key="frame" x="10" y="100" width="394" height="0.0"/>
+                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CVO-CL-CcS" customClass="MDCOutlinedTextField">
+                                                                                    <rect key="frame" x="10" y="361" width="394" height="0.0"/>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 </view>
-                                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ze0-az-4Ce" customClass="MDCOutlinedTextField">
-                                                                                    <rect key="frame" x="10" y="120" width="394" height="0.0"/>
+                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ze0-az-4Ce" customClass="MDCOutlinedTextField">
+                                                                                    <rect key="frame" x="10" y="381" width="394" height="26"/>
                                                                                     <subviews>
                                                                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKW-lH-kY8">
                                                                                             <rect key="frame" x="341" y="1" width="52" height="0.0"/>
@@ -1542,7 +1559,7 @@
                                                                                     </constraints>
                                                                                 </view>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cbv-uu-Z0i">
-                                                                                    <rect key="frame" x="10" y="371" width="30" height="33"/>
+                                                                                    <rect key="frame" x="10" y="432" width="30" height="30"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                                     <state key="normal">
@@ -1553,13 +1570,13 @@
                                                                                     </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m3y-e5-hmr">
-                                                                                    <rect key="frame" x="50" y="377.5" width="106.5" height="20.5"/>
+                                                                                    <rect key="frame" x="50" y="438.5" width="97" height="17.5"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9a-HS-9HJ">
-                                                                                    <rect key="frame" x="10" y="424" width="30" height="33"/>
+                                                                                    <rect key="frame" x="10" y="482" width="30" height="30"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                                     <state key="normal">
@@ -1570,13 +1587,13 @@
                                                                                     </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue selling when out of stock" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RSx-3z-he5">
-                                                                                    <rect key="frame" x="50" y="430.5" width="251.5" height="20.5"/>
+                                                                                    <rect key="frame" x="50" y="488.5" width="231.5" height="17.5"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="txG-ut-bk8">
-                                                                                    <rect key="frame" x="10" y="477" width="30" height="33"/>
+                                                                                    <rect key="frame" x="10" y="532" width="30" height="30"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                                     <state key="normal">
@@ -1587,13 +1604,13 @@
                                                                                     </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26G-xU-9UF">
-                                                                                    <rect key="frame" x="50" y="483.5" width="64" height="20.5"/>
+                                                                                    <rect key="frame" x="50" y="538.5" width="62" height="17.5"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bnx-NG-gbr">
-                                                                                    <rect key="frame" x="10" y="530" width="30" height="33"/>
+                                                                                    <rect key="frame" x="10" y="582" width="30" height="30"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                                     <state key="normal">
@@ -1604,26 +1621,27 @@
                                                                                     </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDR-qz-MaF">
-                                                                                    <rect key="frame" x="50" y="536.5" width="54" height="20.5"/>
+                                                                                    <rect key="frame" x="50" y="588.5" width="50" height="17.5"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1pq-Yv-ZRO">
-                                                                                    <rect key="frame" x="10" y="583" width="30" height="34"/>
+                                                                                    <rect key="frame" x="10" y="632" width="30" height="34"/>
                                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                                     <connections>
                                                                                         <action selector="foodStampableClick:" destination="b1F-uP-tpI" eventType="touchUpInside" id="O4i-gl-oqJ"/>
                                                                                     </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Stampable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Yj-LR-bhk">
-                                                                                    <rect key="frame" x="50" y="590" width="117.5" height="20.5"/>
+
+                                                                                    <rect key="frame" x="50" y="640.5" width="111.5" height="17.5"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Rqd-v5-eD3">
-                                                                                    <rect key="frame" x="10" y="637" width="394" height="45"/>
+                                                                                    <rect key="frame" x="10" y="686" width="394" height="45"/>
                                                                                     <subviews>
                                                                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZi-cB-Jvb">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="192" height="33"/>
@@ -1655,7 +1673,7 @@
                                                                                     </constraints>
                                                                                 </stackView>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3w4-fH-9yH">
-                                                                                    <rect key="frame" x="10" y="692" width="394" height="1"/>
+                                                                                    <rect key="frame" x="10" y="741" width="394" height="1"/>
                                                                                     <color key="backgroundColor" name="borderColor"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="1" id="EhD-p9-NCA"/>
@@ -1743,6 +1761,7 @@
                                                                     <outlet property="salesHistoryBtn" destination="HRd-75-Ng2" id="rch-Xk-SZo"/>
                                                                     <outlet property="scanBtn" destination="mKW-lH-kY8" id="Prp-9g-jB7"/>
                                                                     <outlet property="selling" destination="X9a-HS-9HJ" id="38H-YN-f97"/>
+                                                                    <outlet property="stocktakeBtn" destination="77X-k8-q1T" id="wna-dt-KiB"/>
                                                                     <outlet property="trackQty" destination="Cbv-uu-Z0i" id="aRM-FB-aLl"/>
                                                                     <outlet property="upcCode" destination="ze0-az-4Ce" id="QcR-Db-Iq8"/>
                                                                 </connections>
@@ -1880,7 +1899,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uP4-VT-xdO">
-                                <rect key="frame" x="189" y="108" width="215" height="101"/>
+                                <rect key="frame" x="199" y="108" width="205" height="101"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ID6-Vu-KQW">
                                         <rect key="frame" x="0.0" y="0.0" width="215" height="50"/>
@@ -1965,11 +1984,11 @@
                                 </constraints>
                             </view>
                             <view alpha="0.34999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3c-2v-9th">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="553.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="556.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fXN-RY-ZcY">
-                                <rect key="frame" x="0.0" y="553.5" width="414" height="294.5"/>
+                                <rect key="frame" x="0.0" y="556.5" width="414" height="291.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The following product variants are missing UPC fields:-" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ze9-IL-JzQ">
                                         <rect key="frame" x="0.0" y="10" width="414" height="19.5"/>
@@ -2149,7 +2168,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Rj-NL-9l4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-95" y="-1381"/>
+            <point key="canvasLocation" x="-190" y="-1390"/>
         </scene>
         <!--Duplicate Plus View Controller-->
         <scene sceneID="RKG-p8-GJd">
@@ -3167,11 +3186,11 @@
                                 </constraints>
                             </view>
                             <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ysy-S8-cJ4">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="543.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="546.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eu1-fK-ieR">
-                                <rect key="frame" x="0.0" y="543.5" width="414" height="294.5"/>
+                                <rect key="frame" x="0.0" y="546.5" width="414" height="291.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The following product variants are missing UPC fields:-" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CM9-ga-26P">
                                         <rect key="frame" x="0.0" y="10" width="414" height="19.5"/>
@@ -3334,6 +3353,228 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kCm-0X-mJL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="689" y="-1381"/>
+        </scene>
+        <!--Stocktake Product View Controller-->
+        <scene sceneID="Jjj-vs-IyR">
+            <objects>
+                <viewController storyboardIdentifier="StocktakeProductVC" id="89x-MF-p2v" customClass="StocktakeProductViewController" customModule="QuickveeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6I7-Vt-s61">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WnU-gj-26Q">
+                                <rect key="frame" x="0.0" y="246" width="414" height="650"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stocktake" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SoS-BB-VH8">
+                                        <rect key="frame" x="10" y="11.5" width="370" height="21"/>
+                                        <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="18"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBz-Er-j9D">
+                                        <rect key="frame" x="380" y="10" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="4At-eO-HDv"/>
+                                            <constraint firstAttribute="width" constant="24" id="lno-WB-ON5"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="vendor_close"/>
+                                        <connections>
+                                            <action selector="crossBtnClick:" destination="89x-MF-p2v" eventType="touchUpInside" id="t40-GM-ltU"/>
+                                        </connections>
+                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="BZd-ON-JdS">
+                                        <rect key="frame" x="15" y="570" width="384" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZD-mB-Wfi">
+                                                <rect key="frame" x="0.0" y="0.0" width="182" height="50"/>
+                                                <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="15"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="cancelBtnClick:" destination="89x-MF-p2v" eventType="touchUpInside" id="04V-YV-1gu"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSn-WU-0Tb">
+                                                <rect key="frame" x="202" y="0.0" width="182" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="15"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Save">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="saveBtnClick:" destination="89x-MF-p2v" eventType="touchUpInside" id="7k0-ol-c4j"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="NlW-fS-5d1"/>
+                                        </constraints>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hVW-3L-mKh">
+                                        <rect key="frame" x="0.0" y="44" width="414" height="2"/>
+                                        <color key="backgroundColor" red="0.87058823529411766" green="0.87058823529411766" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="2" id="5I7-OU-0c8"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lost Mary MO5000 Miami Mint" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncd-2C-H6X">
+                                        <rect key="frame" x="30" y="66" width="233" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UPC: 1096852" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1H-sF-ltD">
+                                        <rect key="frame" x="30" y="93.5" width="97.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oIu-w1-jEC" userLabel="currentView">
+                                        <rect key="frame" x="30" y="140.5" width="354" height="50"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHr-hQ-cML">
+                                                <rect key="frame" x="344" y="25" width="0.0" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Qty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1FX-5L-rU3">
+                                                <rect key="frame" x="10" y="16.5" width="76" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.36862745098039218" green="0.36862745098039218" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="1FX-5L-rU3" firstAttribute="leading" secondItem="oIu-w1-jEC" secondAttribute="leading" constant="10" id="2aw-fC-YZx"/>
+                                            <constraint firstItem="1FX-5L-rU3" firstAttribute="centerY" secondItem="YHr-hQ-cML" secondAttribute="centerY" id="DH1-ad-mSt"/>
+                                            <constraint firstAttribute="height" constant="50" id="Hi4-G1-udI"/>
+                                            <constraint firstItem="1FX-5L-rU3" firstAttribute="centerY" secondItem="oIu-w1-jEC" secondAttribute="centerY" id="Iiu-BL-heR"/>
+                                            <constraint firstAttribute="trailing" secondItem="YHr-hQ-cML" secondAttribute="trailing" constant="10" id="m5L-XF-jGH"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Qty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Em-6O-tLJ">
+                                        <rect key="frame" x="30" y="210.5" width="66" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oyJ-Hl-ygh" customClass="MDCOutlinedTextField" customModule="QuickveeApp" customModuleProvider="target">
+                                        <rect key="frame" x="30" y="241" width="354" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="aYU-Ob-ltX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7EC-te-3ID">
+                                        <rect key="frame" x="30" y="391" width="35" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.36862745098039218" green="0.36862745098039218" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6CV-a2-Tup">
+                                        <rect key="frame" x="30" y="430.5" width="354" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="bxm-s6-8B7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6nX-qI-PNd" userLabel="discreView">
+                                        <rect key="frame" x="30" y="311" width="354" height="50"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discrepancy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGR-HT-cd7">
+                                                <rect key="frame" x="10" y="16.5" width="80.5" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.36862745098039218" green="0.36862745098039218" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wi2-aU-STN">
+                                                <rect key="frame" x="344" y="25" width="0.0" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <color key="textColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="OGR-HT-cd7" firstAttribute="centerY" secondItem="6nX-qI-PNd" secondAttribute="centerY" id="1Y3-Jc-6AK"/>
+                                            <constraint firstAttribute="trailing" secondItem="wi2-aU-STN" secondAttribute="trailing" constant="10" id="CxB-sW-cYf"/>
+                                            <constraint firstItem="OGR-HT-cd7" firstAttribute="leading" secondItem="6nX-qI-PNd" secondAttribute="leading" constant="10" id="L2J-4m-Rm8"/>
+                                            <constraint firstAttribute="height" constant="50" id="MG3-xG-GTw"/>
+                                            <constraint firstItem="wi2-aU-STN" firstAttribute="centerY" secondItem="OGR-HT-cd7" secondAttribute="centerY" id="fdq-2J-iLS"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="7EC-te-3ID" firstAttribute="leading" secondItem="WnU-gj-26Q" secondAttribute="leading" constant="30" id="1IL-0h-7DT"/>
+                                    <constraint firstItem="VBz-Er-j9D" firstAttribute="top" secondItem="WnU-gj-26Q" secondAttribute="top" constant="10" id="1ap-t4-cLM"/>
+                                    <constraint firstItem="6CV-a2-Tup" firstAttribute="leading" secondItem="WnU-gj-26Q" secondAttribute="leading" constant="30" id="2OG-mg-vw0"/>
+                                    <constraint firstItem="ncd-2C-H6X" firstAttribute="top" secondItem="hVW-3L-mKh" secondAttribute="bottom" constant="20" id="34K-1A-j8C"/>
+                                    <constraint firstAttribute="height" constant="650" id="6LC-3E-STr"/>
+                                    <constraint firstItem="oyJ-Hl-ygh" firstAttribute="leading" secondItem="WnU-gj-26Q" secondAttribute="leading" constant="30" id="7QC-XK-BwD"/>
+                                    <constraint firstAttribute="bottom" secondItem="BZd-ON-JdS" secondAttribute="bottom" constant="30" id="CjM-fi-CKN"/>
+                                    <constraint firstItem="oIu-w1-jEC" firstAttribute="top" secondItem="C1H-sF-ltD" secondAttribute="bottom" constant="30" id="CyS-wy-Bcv"/>
+                                    <constraint firstItem="6CV-a2-Tup" firstAttribute="top" secondItem="7EC-te-3ID" secondAttribute="bottom" constant="20" id="EVa-NG-wpz"/>
+                                    <constraint firstItem="2Em-6O-tLJ" firstAttribute="leading" secondItem="WnU-gj-26Q" secondAttribute="leading" constant="30" id="GGo-KU-zbe"/>
+                                    <constraint firstItem="VBz-Er-j9D" firstAttribute="leading" secondItem="SoS-BB-VH8" secondAttribute="trailing" id="Gau-bD-o2v"/>
+                                    <constraint firstItem="6nX-qI-PNd" firstAttribute="leading" secondItem="WnU-gj-26Q" secondAttribute="leading" constant="30" id="IyK-xG-cgU"/>
+                                    <constraint firstItem="SoS-BB-VH8" firstAttribute="centerY" secondItem="VBz-Er-j9D" secondAttribute="centerY" id="K8c-Pt-Ucq"/>
+                                    <constraint firstItem="oyJ-Hl-ygh" firstAttribute="top" secondItem="2Em-6O-tLJ" secondAttribute="bottom" constant="10" id="KVb-H9-S1T"/>
+                                    <constraint firstItem="SoS-BB-VH8" firstAttribute="leading" secondItem="WnU-gj-26Q" secondAttribute="leading" constant="10" id="Lzl-fg-Qfi"/>
+                                    <constraint firstItem="7EC-te-3ID" firstAttribute="top" secondItem="6nX-qI-PNd" secondAttribute="bottom" constant="30" id="OeD-FO-dek"/>
+                                    <constraint firstItem="hVW-3L-mKh" firstAttribute="leading" secondItem="WnU-gj-26Q" secondAttribute="leading" id="Osq-5W-Egy"/>
+                                    <constraint firstAttribute="trailing" secondItem="BZd-ON-JdS" secondAttribute="trailing" constant="15" id="UcO-xZ-BjI"/>
+                                    <constraint firstAttribute="trailing" secondItem="6nX-qI-PNd" secondAttribute="trailing" constant="30" id="Ufu-9c-XQd"/>
+                                    <constraint firstItem="BZd-ON-JdS" firstAttribute="leading" secondItem="WnU-gj-26Q" secondAttribute="leading" constant="15" id="UpJ-gw-60s"/>
+                                    <constraint firstItem="C1H-sF-ltD" firstAttribute="top" secondItem="ncd-2C-H6X" secondAttribute="bottom" constant="8" id="Y0H-sy-GTM"/>
+                                    <constraint firstAttribute="trailing" secondItem="hVW-3L-mKh" secondAttribute="trailing" id="YVN-JZ-5wG"/>
+                                    <constraint firstAttribute="trailing" secondItem="VBz-Er-j9D" secondAttribute="trailing" constant="10" id="bOj-30-O6v"/>
+                                    <constraint firstItem="oIu-w1-jEC" firstAttribute="leading" secondItem="WnU-gj-26Q" secondAttribute="leading" constant="30" id="bib-PE-cOW"/>
+                                    <constraint firstItem="ncd-2C-H6X" firstAttribute="leading" secondItem="WnU-gj-26Q" secondAttribute="leading" constant="30" id="iju-Q8-Fyz"/>
+                                    <constraint firstItem="hVW-3L-mKh" firstAttribute="top" secondItem="VBz-Er-j9D" secondAttribute="bottom" constant="10" id="kvf-f6-5vp"/>
+                                    <constraint firstItem="6nX-qI-PNd" firstAttribute="top" secondItem="oyJ-Hl-ygh" secondAttribute="bottom" constant="20" id="oML-KH-6aY"/>
+                                    <constraint firstItem="C1H-sF-ltD" firstAttribute="leading" secondItem="WnU-gj-26Q" secondAttribute="leading" constant="30" id="pey-Ys-rPG"/>
+                                    <constraint firstItem="2Em-6O-tLJ" firstAttribute="top" secondItem="oIu-w1-jEC" secondAttribute="bottom" constant="20" id="unp-m0-zJ5"/>
+                                    <constraint firstAttribute="trailing" secondItem="oyJ-Hl-ygh" secondAttribute="trailing" constant="30" id="waA-2U-V7Z"/>
+                                    <constraint firstAttribute="trailing" secondItem="oIu-w1-jEC" secondAttribute="trailing" constant="30" id="wih-8X-epX"/>
+                                    <constraint firstAttribute="trailing" secondItem="6CV-a2-Tup" secondAttribute="trailing" constant="30" id="zPD-Qz-c5W"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ziA-Xg-oFv"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="WnU-gj-26Q" firstAttribute="leading" secondItem="ziA-Xg-oFv" secondAttribute="leading" id="6oq-Td-ulg"/>
+                            <constraint firstAttribute="bottom" secondItem="WnU-gj-26Q" secondAttribute="bottom" id="9RN-0s-AGz"/>
+                            <constraint firstAttribute="trailing" secondItem="WnU-gj-26Q" secondAttribute="trailing" id="X64-rs-gOW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Vco-LQ-4k1"/>
+                    <connections>
+                        <outlet property="bgView" destination="WnU-gj-26Q" id="aEI-GN-1RP"/>
+                        <outlet property="cancelBtn" destination="VZD-mB-Wfi" id="Jkx-TH-YUj"/>
+                        <outlet property="currentQtyValue" destination="YHr-hQ-cML" id="WT8-6U-hHm"/>
+                        <outlet property="currentView" destination="oIu-w1-jEC" id="Yjo-6w-jqL"/>
+                        <outlet property="descrepancyView" destination="6nX-qI-PNd" id="HTk-XO-UP7"/>
+                        <outlet property="descrepantyValue" destination="wi2-aU-STN" id="Wuh-oj-mBD"/>
+                        <outlet property="newQty" destination="oyJ-Hl-ygh" id="TYo-jD-fEU"/>
+                        <outlet property="noteTextField" destination="6CV-a2-Tup" id="Ofe-LY-d7x"/>
+                        <outlet property="producName" destination="ncd-2C-H6X" id="LnU-ta-f4v"/>
+                        <outlet property="saveBtn" destination="GSn-WU-0Tb" id="8AD-JU-nqX"/>
+                        <outlet property="upc" destination="C1H-sF-ltD" id="a3y-po-RJx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wmc-XQ-Ydu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1428.985507246377" y="-1373.4375"/>
         </scene>
         <!--Products View Controller-->
         <scene sceneID="8aC-d2-JZX">
@@ -4833,11 +5074,11 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zg5-2y-jcV" customClass="MDCOutlinedTextField">
-                                <rect key="frame" x="10" y="156" width="394" height="37"/>
+                                <rect key="frame" x="10" y="156" width="394" height="33"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kYI-uH-6mQ">
-                                <rect key="frame" x="10" y="156" width="394" height="37"/>
+                                <rect key="frame" x="10" y="156" width="394" height="33"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Manrope-Medium" family="Manrope" pointSize="18"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -4849,7 +5090,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Variant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STp-hP-8FD">
-                                <rect key="frame" x="10" y="203" width="112.5" height="25"/>
+                                <rect key="frame" x="10" y="199" width="108" height="21"/>
                                 <fontDescription key="fontDescription" name="Manrope-Medium" family="Manrope" pointSize="18"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -5643,7 +5884,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v1a-Y2-9th">
-                                                                            <rect key="frame" x="10" y="-132" width="30" height="0.0"/>
+                                                                            <rect key="frame" x="10" y="-129" width="30" height="0.0"/>
                                                                             <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                             <state key="normal">
@@ -5654,13 +5895,13 @@
                                                                             </connections>
                                                                         </button>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xw8-h0-vjd">
-                                                                            <rect key="frame" x="50" y="-142.5" width="106.5" height="20.5"/>
+                                                                            <rect key="frame" x="50" y="-138" width="97" height="17.5"/>
                                                                             <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ci8-Oc-X8w">
-                                                                            <rect key="frame" x="10" y="-112" width="30" height="0.0"/>
+                                                                            <rect key="frame" x="10" y="-109" width="30" height="0.0"/>
                                                                             <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                             <state key="normal">
@@ -5671,13 +5912,13 @@
                                                                             </connections>
                                                                         </button>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue selling when out of stock" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGm-1o-Fjg">
-                                                                            <rect key="frame" x="50" y="-122.5" width="251.5" height="20.5"/>
+                                                                            <rect key="frame" x="50" y="-118" width="231.5" height="17.5"/>
                                                                             <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yyC-Pe-q65">
-                                                                            <rect key="frame" x="10" y="-92" width="30" height="0.0"/>
+                                                                            <rect key="frame" x="10" y="-89" width="30" height="0.0"/>
                                                                             <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                             <state key="normal">
@@ -7424,7 +7665,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eu0-9c-DsQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1465" y="-695"/>
+            <point key="canvasLocation" x="1374" y="-670"/>
         </scene>
         <!--Orders View Controller-->
         <scene sceneID="3jO-J5-sQ9">
@@ -7613,7 +7854,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l4p-xw-DX1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2665" y="-478"/>
+            <point key="canvasLocation" x="2801" y="-494"/>
         </scene>
         <!--Order Online View Controller-->
         <scene sceneID="Nwc-Be-a8F">

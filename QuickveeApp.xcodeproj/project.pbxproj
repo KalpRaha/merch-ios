@@ -203,6 +203,7 @@
 		D2B269E52A6113EC002D140A /* RootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B269E42A6113EC002D140A /* RootTableViewController.swift */; };
 		D2B4D4F82AA04EE400828B40 /* FilterNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B4D4F72AA04EE400828B40 /* FilterNewViewController.swift */; };
 		D2B5656C2B76318400318E4E /* BulkDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B5656B2B76318400318E4E /* BulkDetailCell.swift */; };
+		D2B7CD792E965E6C00B224D7 /* StocktakeProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7CD782E965E6C00B224D7 /* StocktakeProductViewController.swift */; };
 		D2BBAD172C94017C00133338 /* GiftCardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BBAD132C94017C00133338 /* GiftCardDetailViewController.swift */; };
 		D2BBAD182C94017C00133338 /* AddGiftCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BBAD142C94017C00133338 /* AddGiftCardViewController.swift */; };
 		D2BBAD192C94017C00133338 /* GiftCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BBAD152C94017C00133338 /* GiftCardViewController.swift */; };
@@ -488,6 +489,7 @@
 		D2B269E42A6113EC002D140A /* RootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTableViewController.swift; sourceTree = "<group>"; };
 		D2B4D4F72AA04EE400828B40 /* FilterNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterNewViewController.swift; sourceTree = "<group>"; };
 		D2B5656B2B76318400318E4E /* BulkDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulkDetailCell.swift; sourceTree = "<group>"; };
+		D2B7CD782E965E6C00B224D7 /* StocktakeProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocktakeProductViewController.swift; sourceTree = "<group>"; };
 		D2BBAD132C94017C00133338 /* GiftCardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiftCardDetailViewController.swift; sourceTree = "<group>"; };
 		D2BBAD142C94017C00133338 /* AddGiftCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGiftCardViewController.swift; sourceTree = "<group>"; };
 		D2BBAD152C94017C00133338 /* GiftCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiftCardViewController.swift; sourceTree = "<group>"; };
@@ -1337,6 +1339,7 @@
 				D20A596C2C3D466400470349 /* PlusCollCollectionViewCell.swift */,
 				D2615A842AAECB6700EAA1F2 /* AddProductViewController.swift */,
 				D27B61E32AC5790A00F753BD /* AddVariantAttributeViewController.swift */,
+				D2B7CD782E965E6C00B224D7 /* StocktakeProductViewController.swift */,
 				D236333E2B4BB9B2009FFAF1 /* ThreeDotsCell.xib */,
 				D2A2BF752B8D9749006796D5 /* BulkPricing */,
 				D2A2BF772B8D9806006796D5 /* Duplicate */,
@@ -1605,6 +1608,7 @@
 				D2C0BF4E29EFAF17005EAC0E /* SetupHelper.swift in Sources */,
 				D2F9FDB029D5A42900705491 /* VendorFilterViewController.swift in Sources */,
 				D20C727129F0F29200DD635D /* NaviViewController.swift in Sources */,
+				D2B7CD792E965E6C00B224D7 /* StocktakeProductViewController.swift in Sources */,
 				D2B20BC72C2C0FF700A5DDD2 /* EmployeesViewController.swift in Sources */,
 				D20930942B47B4F0007CDAE8 /* SalesRecordTableViewCell.swift in Sources */,
 				D25D18612CF495A400A79FDE /* CompletedTendersCell.swift in Sources */,

@@ -40,4 +40,5 @@ class ProductVariantTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lineView: UIView!
     
+    @IBOutlet weak var stocktakeBtn: UIButton!
 }
