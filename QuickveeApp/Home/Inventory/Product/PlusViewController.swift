@@ -130,7 +130,6 @@ class PlusViewController: UIViewController {
     var prod_purchaseQty = ""
     var variantsArray = [ProductById]()
     var editProd: ProductById?
-    var editVarr: ProductById?
     var unsel_var_array = [String]()
     
     var vari_id = ""
@@ -682,7 +681,7 @@ class PlusViewController: UIViewController {
             
             
             
-            editVarr = varArr
+            
             small_var.append(varArr)
         }
         variantsArray = small_var
@@ -1377,20 +1376,22 @@ class PlusViewController: UIViewController {
         }
     }
     
-    @objc func stocktakeBtnClick() {
-        
+    @IBAction func stocktakeBtnClick(_ sender: UIButton) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "StocktakeProductVC") as! StocktakeProductViewController
-        vc.editProd = editProd
-        vc.editVarr = editVarr
-        let transition = CATransition()
-        transition.duration = 0.7
-        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        transition.type = CATransitionType.moveIn
-        transition.subtype = CATransitionSubtype.fromTop
-        self.navigationController?.view.layer.add(transition, forKey: nil)
-        self.navigationController?.pushViewController(vc, animated: false)
+        if variantsArray.count == 0 {
+            vc.varrObject = editProd
+        }
+        else {
+            vc.varrObject = variantsArray[sender.tag]
+        }
+        vc.delegatestock = self
+        vc.modalPresentationStyle = .overFullScreen
+        vc.view.backgroundColor = UIColor.black
+        present(vc, animated: true)
+        
     }
+ 
     
     func showMissingUPCView(missarray: [String]) {
         
@@ -3790,6 +3791,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             cell.customCode.tag = indexPath.section
             cell.upcCode.tag = indexPath.section
             cell.instantBtn.tag = indexPath.section
+            cell.stocktakeBtn.tag = indexPath.section
             cell.salesHistoryBtn.tag = indexPath.section
             cell.reorderQty.tag = indexPath.section
             cell.reorderLevel.tag = indexPath.section
@@ -3888,10 +3890,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 cell.stocktakeBtn.layer.cornerRadius = 5
                 
-                let tap1 = UITapGestureRecognizer(target: self, action: #selector(stocktakeBtnClick))
-                tap1.numberOfTapsRequired = 1
-                cell.stocktakeBtn.addGestureRecognizer(tap1)
-                cell.stocktakeBtn.isUserInteractionEnabled = true
+             
                 
                 let cost_method = UserDefaults.standard.string(forKey: "cost_method")
                 //avg is enabled
@@ -4569,4 +4568,11 @@ struct AddProduct {
     var varreorder_qty: String
     var varreorder_level: String
     var varreorder_cost: String
+}
+
+extension PlusViewController: StocktakeProductViewControllerprotocol {
+    func setProduct() {
+        setUpProductApiId()
+    }
+ 
 }
