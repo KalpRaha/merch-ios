@@ -4,9 +4,13 @@
 //
 //  Created by Pallavi on 08/10/25.
 //
+protocol StocktakeProductViewControllerprotocol: AnyObject {
+    func setProduct()
+}
 
 import UIKit
 import MaterialComponents
+import IQKeyboardManagerSwift
 
 class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
 
@@ -34,11 +38,12 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var bgView: UIView!
     
     var editProd: ProductById?
-    var editVarr: ProductById?
+    var varrObject: ProductById?
     
     var activeTextField = UITextField()
     var descrepancy = ""
     
+    weak var delegatestock: StocktakeProductViewControllerprotocol?
     
     let loadingIndicator: ProgressView = {
         let progress = ProgressView(colors: [.white], lineWidth: 3)
@@ -56,8 +61,9 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
         setUI()
         newQty.delegate = self
         
-       
-        
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+//        tapGesture.cancelsTouchesInView = false
+//        view.addGestureRecognizer(tapGesture)
     }
     
     
@@ -99,21 +105,19 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
     
     func setData() {
      
-        if editProd?.isvarient == "0" {
-            
-            producName.text = editProd?.title
-            upc.text = editProd?.upc
-            currentQtyValue.text = editProd?.quantity
-            descrepantyValue.text = "0"
+        if varrObject?.isvarient == "0" {
+            producName.text = varrObject?.title
         }
         else {
-            producName.text = editVarr?.variant
-            upc.text = editVarr?.upc
-            currentQtyValue.text = editVarr?.quantity
-            descrepantyValue.text = "0"
+            producName.text = varrObject?.variant
         }
         
-    
+            
+            upc.text = varrObject?.upc
+            currentQtyValue.text = varrObject?.quantity
+        
+            descrepantyValue.text = "0"
+        
     }
     
     
@@ -149,29 +153,24 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
         note_per = noteTextField.text ?? ""
         
         
-        if editProd?.isvarient == "0" {
-            upc = editProd?.upc ?? ""
-            category_id = editProd?.cotegory ?? ""
-            product_name = editProd?.title ?? ""
-            product_id = editProd?.id ?? ""
-            var_id = ""
-            variant = editProd?.variant ?? ""
-            current_qty = editProd?.quantity ?? ""
-            discre_cost = calculateDescCost(descrepancy: descrepancy, costper: editProd?.costperItem ?? "")
-            print(discre_cost)
-        }
-        else {
-            upc = editVarr?.upc ?? ""
-            category_id = editProd?.cotegory ?? ""
-            var_id = editVarr?.id ?? ""
-            product_name = editVarr?.title ?? ""
-            product_id = ""
-            variant = editVarr?.variant ?? ""
-            current_qty = editVarr?.quantity ?? ""
-            discre_cost = calculateDescCost(descrepancy: descrepancy, costper: editVarr?.costperItem ?? "")
-            print(discre_cost)
-        }
         
+            upc = varrObject?.upc ?? ""
+            category_id = varrObject?.cotegory ?? ""
+            product_name = varrObject?.title ?? ""
+            product_id = varrObject?.id ?? ""
+            var_id = varrObject?.id ?? ""
+            print(var_id)
+            variant = varrObject?.variant ?? ""
+            print(variant)
+            current_qty = varrObject?.quantity ?? ""
+            discre_cost = calculateDescCost(descrepancy: descrepancy, costper: varrObject?.costperItem ?? "")
+            print(discre_cost)
+    
+        if varrObject?.isvarient == "0" {
+            var_id = ""
+        }else {
+            
+        }
         
         
 
@@ -181,7 +180,7 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
                              variant: variant,
                              current_qty: current_qty,
                              new_qty: new_qty, discrepancy: descrepancy,
-                             discrepancy_cost: discre_cost, stocktake_item_id: "", note: note_per)
+                             discrepancy_cost:"0", stocktake_item_id: "", note: note_per)
         
         items.append(save)
         
@@ -202,8 +201,9 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
         }
         
         loadingIndicator.isAnimating = true
+        print(new_qty)
         
-        ApiCalls.sharedCall.saveStockTake(merchant_id: id, employee_id: emp_id, total_qty: new_qty, total_discrepancy: descrepancy, total_discrepancy_cost: discre_cost, status: "1", datetime: dateFormat, stocktake_items: final_json , stocktake_id: ""){ isSuccess, response in
+        ApiCalls.sharedCall.saveStockTake(merchant_id: id, employee_id: emp_id, total_qty: new_qty, total_discrepancy: descrepancy, total_discrepancy_cost: "0", status: "0", datetime: dateFormat, stocktake_items: final_json , stocktake_id: ""){ isSuccess, response in
             
             if isSuccess {
                 
@@ -215,15 +215,9 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
                                                  font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    
-                    let transition = CATransition()
-                    transition.duration = 0.7
-                    transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-                    transition.type = CATransitionType.reveal
-                    transition.subtype = CATransitionSubtype.fromBottom
-                    self.navigationController?.view.layer.add(transition, forKey: nil)
-                    
-                    self.navigationController?.popViewController(animated: false)
+                    self.dismiss(animated: true) {
+                        self.delegatestock?.setProduct()
+                    }
                 }
                 
                 
@@ -236,29 +230,36 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    
+//    @objc func dismissKeyboard() {
+//        view.endEditing(true)
+//    }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-       
+        
         if textField == newQty {
             
             let newqty = newQty.text ?? ""
             var currentQty = ""
-           
-            if editProd?.isvarient == "0" {
-                 currentQty = editProd?.quantity ?? ""
-            }
-            else {
-                currentQty = editVarr?.quantity ?? ""
-            }
+            
+            currentQty = varrObject?.quantity ?? ""
             
             let currentDouble = Int(currentQty) ?? 0
             let newDouble = Int(newqty) ?? 0
             let discrepancy = newDouble - currentDouble
             print(discrepancy)
             descrepancy = "\(discrepancy)"
-            descrepantyValue.text = "\(discrepancy)"
-            let total = String(discrepancy)
+            
+            
+            if descrepancy.contains("-"){
+                descrepantyValue.textColor = .red
+                descrepantyValue.text = "\(discrepancy)"
+            }
+            else {
+                descrepantyValue.textColor = UIColor(hexString: "#15AE5D")
+                descrepantyValue.text = "+\(discrepancy)"
+            }
+                
+            //let total = String(discrepancy)
         }
         
     }
@@ -290,37 +291,17 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
      
     @IBAction func crossBtnClick(_ sender: UIButton) {
         
-          let transition = CATransition()
-          transition.duration = 0.7
-          transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-          transition.type = CATransitionType.reveal
-          transition.subtype = CATransitionSubtype.fromBottom
-          navigationController?.view.layer.add(transition, forKey: nil)
-          
-          navigationController?.popViewController(animated: false)
+       dismiss(animated: true)
     }
     
     @IBAction func cancelBtnClick(_ sender: UIButton) {
-        let transition = CATransition()
-        transition.duration = 0.7
-        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        transition.type = CATransitionType.reveal
-        transition.subtype = CATransitionSubtype.fromBottom
-        navigationController?.view.layer.add(transition, forKey: nil)
-        
-        navigationController?.popViewController(animated: false)
-        
+        dismiss(animated: true)
     }
     
     @IBAction func saveBtnClick(_ sender: UIButton) {
         stockSaveApiCall()
     }
-    
-    
-    
-    
-    
-    
+   
      private func setupUI() {
          if #available(iOS 13.0, *) {
              overrideUserInterfaceStyle = .light
