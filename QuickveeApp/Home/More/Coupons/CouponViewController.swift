@@ -545,3 +545,5 @@ struct Coupon {
     let category_id: String
     let coupon_type: String
 }
+
+
