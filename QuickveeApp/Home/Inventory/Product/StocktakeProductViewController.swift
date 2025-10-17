@@ -61,9 +61,7 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
         setUI()
         newQty.delegate = self
         
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-//        tapGesture.cancelsTouchesInView = false
-//        view.addGestureRecognizer(tapGesture)
+
     }
     
     
@@ -253,13 +251,15 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
             if descrepancy.contains("-"){
                 descrepantyValue.textColor = .red
                 descrepantyValue.text = "\(discrepancy)"
+            }else if descrepancy.contains("0"){
+                descrepantyValue.textColor = .black
+                descrepantyValue.text = "\(discrepancy)"
             }
             else {
                 descrepantyValue.textColor = UIColor(hexString: "#15AE5D")
                 descrepantyValue.text = "+\(discrepancy)"
             }
                 
-            //let total = String(discrepancy)
         }
         
     }
@@ -299,7 +299,13 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func saveBtnClick(_ sender: UIButton) {
-        stockSaveApiCall()
+        if UserDefaults.standard.bool(forKey: "lock_edit_stocktake") {
+            
+            ToastClass.sharedToast.showToast(message: "Access Denied", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+        }
+        else {
+            stockSaveApiCall()
+        }
     }
    
      private func setupUI() {

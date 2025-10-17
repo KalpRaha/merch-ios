@@ -323,6 +323,12 @@ class StockItemsViewController: UIViewController {
         }
         
         else {
+          
+            self.loadingIndicator.isAnimating = true
+            self.voidBtn.isHidden = true
+            self.emailBtn.isHidden = true
+            self.tableview.isHidden = true
+            
             
             let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
             
@@ -336,6 +342,8 @@ class StockItemsViewController: UIViewController {
                     }
                     
                     self.loadingIndicator.isAnimating = false
+                    self.voidBtn.isHidden = false
+                    self.emailBtn.isHidden = false
                     self.tableview.isHidden = false
                     
                     ToastClass.sharedToast.showToast(message: msg as! String,
