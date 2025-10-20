@@ -285,10 +285,7 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
         }
         activeTextField.text = updatetext
     }
-    
-    
-    
-     
+   
     @IBAction func crossBtnClick(_ sender: UIButton) {
         
        dismiss(animated: true)
@@ -299,13 +296,7 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func saveBtnClick(_ sender: UIButton) {
-        if UserDefaults.standard.bool(forKey: "lock_edit_stocktake") {
-            
-            ToastClass.sharedToast.showToast(message: "Access Denied", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-        }
-        else {
-            stockSaveApiCall()
-        }
+        stockSaveApiCall()
     }
    
      private func setupUI() {

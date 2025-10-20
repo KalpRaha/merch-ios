@@ -3365,7 +3365,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WnU-gj-26Q">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="841"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="783"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stocktake" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SoS-BB-VH8">
                                         <rect key="frame" x="10" y="11.5" width="370" height="21"/>
@@ -3516,7 +3516,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="BZd-ON-JdS">
-                                <rect key="frame" x="10" y="841" width="394" height="45"/>
+                                <rect key="frame" x="10" y="783" width="394" height="45"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZD-mB-Wfi">
                                         <rect key="frame" x="0.0" y="0.0" width="187" height="45"/>
@@ -3556,7 +3556,7 @@
                             <constraint firstAttribute="trailing" secondItem="WnU-gj-26Q" secondAttribute="trailing" id="X64-rs-gOW"/>
                             <constraint firstItem="BZd-ON-JdS" firstAttribute="leading" secondItem="6I7-Vt-s61" secondAttribute="leading" constant="10" id="Yc1-4e-jiL"/>
                             <constraint firstItem="WnU-gj-26Q" firstAttribute="top" secondItem="6I7-Vt-s61" secondAttribute="top" id="asD-w7-wh0"/>
-                            <constraint firstAttribute="bottom" secondItem="BZd-ON-JdS" secondAttribute="bottom" constant="10" id="wkM-bf-nPU"/>
+                            <constraint firstItem="ziA-Xg-oFv" firstAttribute="bottom" secondItem="BZd-ON-JdS" secondAttribute="bottom" id="wkM-bf-nPU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Vco-LQ-4k1"/>

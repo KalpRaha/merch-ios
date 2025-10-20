@@ -483,15 +483,20 @@ class DuplicatePlusViewController: UIViewController {
     
     @objc func openNewCatScreen() {
         
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyBoard.instantiateViewController(withIdentifier: "addView") as! AddViewController
-        
-        vc.addTitleText = "Add"
-        vc.titleText = "Add Category"
-        vc.mode = "product"
-        vc.delegate = self
-        
-        present(vc, animated: true)
+        if UserDefaults.standard.bool(forKey: "lock_add_category") {
+            ToastClass.sharedToast.showToast(message: "Access Denied",
+                                             font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+        } else {
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyBoard.instantiateViewController(withIdentifier: "addView") as! AddViewController
+            
+            vc.addTitleText = "Add"
+            vc.titleText = "Add Category"
+            vc.mode = "product"
+            vc.delegate = self
+            
+            present(vc, animated: true)
+        }
     }
     
     @objc func openBrandScreen() {
