@@ -169,6 +169,8 @@ class PlusViewController: UIViewController {
     var varname = ""
     var isVarient = ""
     
+    var stock_cell_index = 0
+    
     let loadIndicator: ProgressView = {
         let progress = ProgressView(colors: [.white], lineWidth: 3)
         progress.translatesAutoresizingMaskIntoConstraints = false
@@ -1485,11 +1487,13 @@ class PlusViewController: UIViewController {
             let vc = storyBoard.instantiateViewController(withIdentifier: "StocktakeProductVC") as! StocktakeProductViewController
             if variantsArray.count == 0 {
                 vc.varrObject = editProd
+                stock_cell_index = 0
             }
             else {
                 vc.varrObject = variantsArray[sender.tag]
+                stock_cell_index = sender.tag
             }
-            vc.delegatestock = self
+            vc.delegateStock = self
             present(vc, animated: true)
         }
     }
@@ -5343,8 +5347,17 @@ class NoMenuTextView: UITextView {
     
 }
 
-extension PlusViewController: StocktakeProductViewControllerprotocol {
-    func setProduct() {
-        setUpProductApiId()
+extension PlusViewController: StocktakeProductDelegate {
+    func setProductStocktake(new_qty: String) {
+        
+        let index = IndexPath(row: 0, section: stock_cell_index)
+        let cell = variantsTable.cellForRow(at: index) as! ProductVariantTableViewCell
+        if variantsArray.count == 0 {
+            editProd?.quantity = new_qty
+        }
+        else {
+            variantsArray[index.section].quantity = new_qty
+        }
+        cell.qty.text = new_qty
     }
 }

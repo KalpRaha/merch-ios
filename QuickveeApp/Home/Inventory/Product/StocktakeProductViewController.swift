@@ -4,8 +4,8 @@
 //
 //  Created by Pallavi on 08/10/25.
 //
-protocol StocktakeProductViewControllerprotocol: AnyObject {
-    func setProduct()
+protocol StocktakeProductDelegate: AnyObject {
+    func setProductStocktake(new_qty: String)
 }
 
 import UIKit
@@ -43,7 +43,8 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
     var activeTextField = UITextField()
     var descrepancy = ""
     
-    weak var delegatestock: StocktakeProductViewControllerprotocol?
+    weak var delegateStock: StocktakeProductDelegate?
+    var updated_new_qty = ""
     
     let loadingIndicator: ProgressView = {
         let progress = ProgressView(colors: [.white], lineWidth: 3)
@@ -60,7 +61,6 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
         setupUI()
         setUI()
         newQty.delegate = self
-        
 
     }
     
@@ -102,7 +102,7 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
     
     
     func setData() {
-     
+        
         if varrObject?.isvarient == "0" {
             producName.text = varrObject?.title
         }
@@ -110,12 +110,10 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
             producName.text = varrObject?.variant
         }
         
-            
-            upc.text = varrObject?.upc
-            currentQtyValue.text = varrObject?.quantity
-        
-            descrepantyValue.text = "0"
-        
+        upc.text = varrObject?.upc
+        currentQtyValue.text = varrObject?.quantity
+        updated_new_qty = varrObject?.quantity ?? ""
+        descrepantyValue.text = "0"
     }
     
     
@@ -199,7 +197,6 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
         }
         
         loadingIndicator.isAnimating = true
-        print(new_qty)
         
         ApiCalls.sharedCall.saveStockTake(merchant_id: id, employee_id: emp_id, total_qty: new_qty, total_discrepancy: descrepancy, total_discrepancy_cost: "0", status: "0", datetime: dateFormat, stocktake_items: final_json , stocktake_id: ""){ isSuccess, response in
             
@@ -212,13 +209,9 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
                 ToastClass.sharedToast.showToast(message: msg as! String,
                                                  font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.dismiss(animated: true) {
-                        self.delegatestock?.setProduct()
-                    }
+                self.dismiss(animated: true) {
+                    self.delegateStock?.setProductStocktake(new_qty: self.updated_new_qty)
                 }
-                
-                
             }
             else {
                 print("error")
@@ -283,6 +276,7 @@ class StocktakeProductViewController: UIViewController, UITextFieldDelegate {
                 updatetext = String(updatetext.dropLast())
             }
         }
+        updated_new_qty = updatetext
         activeTextField.text = updatetext
     }
    
