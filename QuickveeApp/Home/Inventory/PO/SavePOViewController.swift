@@ -582,8 +582,8 @@ extension SavePOViewController: UITableViewDataSource, UITableViewDelegate {
                                 
         cell.noteField.text = noteArr[indexPath.row]
         
-        cell.qtyAfter.text = afterQtyArr[indexPath.row]
-        cell.total.text = "$\(totalArr[indexPath.row])"
+        cell.qtyAfter.text = "Qty After: \(afterQtyArr[indexPath.row])"
+        cell.total.text = "Total: $\(totalArr[indexPath.row])"
         
         cell.qtyTextField.borderStyle = .none
         cell.qtyTextField.delegate = self
