@@ -356,12 +356,94 @@ class SavePOViewController: UIViewController {
     
     @IBAction func receiveBtnClick(_ sender: UIButton) {
         
+        let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         
-//        ApiCalls.sharedCall.receivePO(merchant_id: <#T##String#>, admin_id: <#T##String#>, po_id: <#T##String#>, issue_date: <#T##String#>, stock_date: <#T##String#>, reference: <#T##String#>, vendor_email: <#T##String#>, order_items: <#T##String#>, is_draft: <#T##String#>, received_status: <#T##String#>, updated_at: <#T##String#>, completion: <#T##(Bool, [String : Any]) -> ()#>)
+        var final_json = ""
         
-//        {"merchant_id":"VIK175871CA","admin_id":"VIK175871CA","vendor_id":"883","vendor_name":"Drew","po_id":"9188","po_number":"PO0068","product_id":"1480611","variant_id":"0","required_qty":"10","recieved_qty":"10","recieved_status":"0","pending_qty":"10","cost_per_item":"10.00","total_pricing":"100","upc":"00002837","note":"","created_at":"2025-08-25 17:15:22","updated_at":"2025-08-25 17:17:42","after_qty":15,"zoho_invoice_id":null,"product_title":"Juicy J Love 69 Dispo 7k","product_qty":"5","variant_title":null,"variant_qty":null,"item_fullname":"Juicy J Love 69 Dispo 7k","item_qty":"5","newPendingQty":"10","newReceivedQty":"10","toReceiveQty":"10","isChecked":true,"po_item_id":"115423"}
+        var upc = ""
+        var var_id = ""
+        var p_id = ""
         
+        let v_id = vendorSave?.id ?? ""
+        let i_d = vendorSave?.issue_date ?? ""
+        let s_d = vendorSave?.stock_date ?? ""
+        let r_f = vendorSave?.reference ?? ""
+        let v_e = vendorSave?.vendor_email ?? ""
         
+        var smallAdd = [EditPO]()
+        
+        for item in 0..<saveSelectedVariants.count {
+            
+            p_id = saveSelectedVariants[item].id
+            
+            if saveSelectedVariants[item].isvarient == "1" {
+                upc = saveSelectedVariants[item].var_upc
+                var_id = saveSelectedVariants[item].var_id
+            }
+            else {
+                upc = saveSelectedVariants[item].upc
+                var_id = ""
+            }
+            
+            for a in reqQtyArr {
+                
+                guard a != "" else {
+                    ToastClass.sharedToast.showToast(message: "Add Quantity for all variants",
+                                                     font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                    return
+                }
+            }
+            
+            tableview.isHidden = true
+            loadingIndicator.isAnimating = true
+            
+            let req = reqQtyArr[item]
+            let cost = costArr[item]
+            let total = totalArr[item]
+            let note = noteArr[item]
+            let afterQty = afterQtyArr[item]
+            
+            let order_items = orderItemArr[item]
+            let status = statusArr[item]
+            
+            let pos = EditPO(order_item_id: order_items, product_id: p_id, variant_id: var_id,
+                             required_qty: req, recieved_status: status, cost_per_item: cost,
+                             total_pricing: total, upc: upc, note: note, after_qty: afterQty)
+            
+            smallAdd.append(pos)
+        }
+        
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted  // Makes the output readable
+            let jsonData = try encoder.encode(smallAdd) // Wrap the object in an array for consistency with the provided JSON structure
+            
+            // Convert the encoded JSON into a string for display or further processing
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                final_json = jsonString
+            }
+        } catch {
+            print("Error encoding JSON: \(error)")
+        }
+        
+        let r_status = bigDetails?.received_status ?? ""
+        
+        ApiCalls.sharedCall.receivePO(merchant_id: m_id, admin_id: m_id, po_id: id, issue_date: i_d,
+                                      stock_date: s_d, reference: r_f,
+                                      vendor_email: v_e, order_items: final_json, is_draft: "0",
+                                      received_status: r_status, updated_at: i_d) { isSuccess, responseData in
+            
+            if isSuccess {
+                
+                ToastClass.sharedToast.showToast(message: "PO Updated Successfully", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                self.home()
+            }
+            else {
+                print("Api Error")
+            }
+        }
+        
+        //        {"merchant_id":"VIK175871CA","admin_id":"VIK175871CA","vendor_id":"883","vendor_name":"Drew","po_id":"9188","po_number":"PO0068","product_id":"1480611","variant_id":"0","required_qty":"10","recieved_qty":"10","recieved_status":"0","pending_qty":"10","cost_per_item":"10.00","total_pricing":"100","upc":"00002837","note":"","created_at":"2025-08-25 17:15:22","updated_at":"2025-08-25 17:17:42","after_qty":15,"zoho_invoice_id":null,"product_title":"Juicy J Love 69 Dispo 7k","product_qty":"5","variant_title":null,"variant_qty":null,"item_fullname":"Juicy J Love 69 Dispo 7k","item_qty":"5","newPendingQty":"10","newReceivedQty":"10","toReceiveQty":"10","isChecked":true,"po_item_id":"115423"}
     }
     
     
