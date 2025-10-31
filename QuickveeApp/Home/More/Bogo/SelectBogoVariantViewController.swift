@@ -13,6 +13,11 @@ protocol SelectBogoDelegate: AnyObject {
     func addSelectedBogoVariants(arr: [VariantBogoModel])
 }
 
+//protocol SelectCouponDelegate: AnyObject {
+//    
+//    func addSelectedCouponVariants(arr: [VariantBogoModel])
+//}
+
 
 class SelectBogoVariantViewController: UIViewController  {
     
@@ -58,6 +63,8 @@ class SelectBogoVariantViewController: UIViewController  {
     
     var bogo_mix_exist_ids = [String]()
     
+    
+    var mode_Type = ""
     var mode = ""
     var disc_amt = ""
     
@@ -70,7 +77,7 @@ class SelectBogoVariantViewController: UIViewController  {
     var discount_type = ""
     
     weak var adddelegate: SelectBogoDelegate?
-    
+   // weak var adddelegate: SelectCouponDelegate?
     
     let loadingIndicator: ProgressView = {
         let progress = ProgressView(colors: [.systemBlue], lineWidth: 5)
@@ -123,6 +130,11 @@ class SelectBogoVariantViewController: UIViewController  {
         cancelBtn.layer.cornerRadius = 5
         cancelBtn.layer.borderWidth = 1
         cancelBtn.layer.borderColor = UIColor.black.cgColor
+        
+        if mode_Type == "coupon" {
+            bogotitle.text = "Add Product"
+        }
+        
         
     }
     
@@ -711,9 +723,16 @@ class SelectBogoVariantViewController: UIViewController  {
         loadIndicator.isAnimating = true
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.adddelegate?.addSelectedBogoVariants(arr: self.bogoSelectedVariants)
+            
+            if self.mode_Type == "coupon" {
+                self.adddelegate?.addSelectedBogoVariants(arr: self.bogoSelectedVariants)
+            }
+            else {
+                self.adddelegate?.addSelectedBogoVariants(arr: self.bogoSelectedVariants)
+            }
             self.loadIndicator.isAnimating = false
             self.dismiss(animated: true)
+           
         }
     }
     

@@ -40,6 +40,8 @@ struct AppURLs {
     static let EDIT_COUPON = "\(base_url)Couponapi_live/edit_coupon"
     static let ADD_COUPON = "\(base_url)Couponapi_live/add_coupon"
     static let GET_COUPON_DETAILS = "\(base_url)Couponapi_live/get_coupon_details"
+    static let GET_COUPON_LIST = "\(base_url)Couponapi_live/get_coupon_list"
+    
     static let COUPON_SHOW_ONLINE = "\(base_url)Couponapi_live/show_online"
     static let COUPON_DELETE = "\(base_url)Couponapi_live/delete_coupon"
     

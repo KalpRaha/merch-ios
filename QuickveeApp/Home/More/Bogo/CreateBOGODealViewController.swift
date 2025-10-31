@@ -417,6 +417,7 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
             }else{
                 small.append([variantArray[id].bogo.product_id:[""]])
             }
+            print(small)
         }
         return small
     }

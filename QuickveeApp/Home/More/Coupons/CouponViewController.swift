@@ -20,11 +20,22 @@ class CouponViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var couponLabel: UILabel!
     
+    @IBOutlet weak var orderlevelbtn: UIButton!
+    
+    @IBOutlet weak var itemLevelBtn: UIButton!
+    
+    
+    @IBOutlet weak var orderLevelView: UIView!
+    
+    @IBOutlet weak var itemlevelView: UIView!
+   
     var mode = 0
     var editCoupon: CouponEdit?
     var coupon_id: String?
-    
+    let tabs = ["Order Level", "Item Level"]
     var couponArray = [Coupon]()
+    var couponOrderArray = [Coupon]()
+    var couponitemArray = [Coupon]()
     
     let refresh = UIRefreshControl()
     var category_Id = ""
@@ -45,6 +56,7 @@ class CouponViewController: UIViewController {
         tableview.showsVerticalScrollIndicator = false
         topView.addBottomShadow()
         tableview.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,9 +80,13 @@ class CouponViewController: UIViewController {
         splitViewController?.view.backgroundColor = .lightGray
         
         loadingIndicator.isAnimating = true
-        
+        itemLevelBtn.setTitleColor(UIColor(hexString: "#777777"), for: .normal)
+        itemlevelView.backgroundColor = UIColor.systemGray6
         setupApi()
+       
     }
+    
+   
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -90,6 +106,13 @@ class CouponViewController: UIViewController {
                 vc.couponNameArray = couponArray
             }
         }
+        else {
+            let vc = segue.destination as! AddItemLevelCouponViewController
+            
+            if mode == 1 {
+                
+            }
+        }
     }
     
     @objc func pullToRefresh() {
@@ -99,9 +122,11 @@ class CouponViewController: UIViewController {
         
     }
     
+
+    
     func setupApi() {
         
-        let url = AppURLs.GET_COUPON_DETAILS
+        let url = AppURLs.GET_COUPON_LIST
         
         let parameters: [String:Any] = [
             "merchant_id": merchant_id ?? ""
@@ -114,7 +139,7 @@ class CouponViewController: UIViewController {
                 do {
                     let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
                     print(json)
-                    self.responseValues(responseValue: json["result"]!)
+                    self.responseValues(responseValue: json["data"]!)
                     
                     DispatchQueue.main.async {
                         self.tableview.reloadData()
@@ -172,55 +197,9 @@ class CouponViewController: UIViewController {
     
     func responseValues(responseValue: Any) {
         
-        var couponArr = [Coupon]()
-        
-        if AppURLs.GET_COUPON_DETAILS.contains("sandbox") {
-            
-            let response = responseValue as? [String: Any] ?? [:]
-            
-            if response.count == 0 {
-                tableview.isHidden = true
-                
-                noCouponView.isHidden = false
-                floatButton.isHidden = true
-                loadingIndicator.isAnimating = false
-            }
-            
-            else {
-                
-                for (_, value) in response {
-                    
-                    let val = value as! [String:Any]
-                    
-                    
-                    let coupon = Coupon(id: "\(val["id"] ?? "")", list_online: "\(val["list_online"] ?? "")", m_id: "\(val["m_id"] ?? "")",
-                                        admin_id: "\(val["admin_id"] ?? "")", name: "\(val["name"] ?? "")",
-                                        min_amount: "\(val["min_amount"] ?? "")", flag: "\(val["flag"] ?? "")",
-                                        discount: "\(val["discount"] ?? "")",
-                                        date_valid: "\(val["date_valid"] ?? "")", date_expire: "\(val["date_expire"] ?? "")",
-                                        time_valid: "\(val["time_valid"] ?? "")", time_expire: "\(val["time_expire"] ?? "")",
-                                        enable_limit: "\(val["enable_limit"] ?? "")", count_limit: "\(val["count_limit"] ?? "")",
-                                        show_online: "\(val["show_online"] ?? "")", create_at: "\(val["create_at"] ?? "")",
-                                        update_at: "\(val["update_at"] ?? "")", maximum_discount: "\(val["maximum_discount"] ?? "")",
-                                        description: "\(val["description"] ?? "")", category_id: "\(val["category_id"] ?? "")",
-                                        coupon_type: "\(val["coupon_type"] ?? "")")
-                    
-                    couponArr.append(coupon)
-                }
-                couponArray = couponArr
-                
-                tableview.isHidden = false
-                
-                floatButton.isHidden = false
-                noCouponView.isHidden = true
-                loadingIndicator.isAnimating = false
-                
-            }
-        }
-        
-        //live
-        
-        else {
+      //  var couponOrderArr = [Coupon]()
+      //  var couponitemArr = [Coupon]()
+
             
             let response = responseValue as? [[String: Any]] ?? [[:]]
             
@@ -237,22 +216,45 @@ class CouponViewController: UIViewController {
                 
                 for res in response {
                     
-                    let coupon = Coupon(id: "\(res["id"] ?? "")", list_online: "\(res["list_online"] ?? "")",
-                                        m_id: "\(res["m_id"] ?? "")",
-                                        admin_id: "\(res["admin_id"] ?? "")", name: "\(res["name"] ?? "")",
-                                        min_amount: "\(res["min_amount"] ?? "")", flag: "\(res["flag"] ?? "")",
-                                        discount: "\(res["discount"] ?? "")",
-                                        date_valid: "\(res["date_valid"] ?? "")", date_expire: "\(res["date_expire"] ?? "")",
-                                        time_valid: "\(res["time_valid"] ?? "")", time_expire: "\(res["time_expire"] ?? "")",
-                                        enable_limit: "\(res["enable_limit"] ?? "")", count_limit: "\(res["count_limit"] ?? "")",
-                                        show_online: "\(res["show_online"] ?? "")", create_at: "\(res["create_at"] ?? "")",
-                                        update_at: "\(res["update_at"] ?? "")", maximum_discount: "\(res["maximum_discount"] ?? "")",
-                                        description: "\(res["description"] ?? "")", category_id: "\(res["category_id"] ?? "")",
-                                        coupon_type: "\(res["coupon_type"] ?? "")")
-                    couponArr.append(coupon)
+                    let coupon = Coupon (id: "\(res["id"] ?? "")",
+                                         list_online: "\(res["list_online"] ?? "")",
+                                         m_id: "\(res["m_id"] ?? "")",
+                                         admin_id: "\(res["admin_id"] ?? "")",
+                                         name: "\(res["name"] ?? "")",
+                                         min_amount: "\(res["min_amount"] ?? "")",
+                                         flag: "\(res["flag"] ?? "")",
+                                         discount: "\(res["discount"] ?? "")",
+                                         date_valid: "\(res["date_valid"] ?? "")",
+                                         date_expire: "\(res["date_expire"] ?? "")",
+                                         time_valid: "\(res["time_valid"] ?? "")",
+                                         time_expire: "\(res["time_expire"] ?? "")",
+                                         enable_limit: "\(res["enable_limit"] ?? "")",
+                                         count_limit: "\(res["count_limit"] ?? "")",
+                                         show_online: "\(res["show_online"] ?? "")",
+                                         create_at: "\(res["create_at"] ?? "")",
+                                         update_at: "\(res["update_at"] ?? "")",
+                                         maximum_discount: "\(res["maximum_discount"] ?? "")",
+                                         description: "\(res["description"] ?? "")",
+                                         category_id: "\(res["category_id"] ?? "")",
+                                         coupon_type: "\(res["coupon_type"] ?? "")",
+                                         employee_id: "\(res["employee_id"] ?? "")",
+                                         updated_timestamp: "\(res["employee_id"] ?? "")",
+                                         type: "\(res["type"] ?? "")",
+                                         is_disabled: "\(res["enable_limit"] ?? "")")
+
+                    if coupon.type == "0" {
+                        
+                        couponOrderArray.append(coupon)
+                    }else {
+                        couponitemArray.append(coupon)
+                    }
+                    
                 }
                 
-                couponArray = couponArr
+                //list_online = couponOrderArr
+                couponArray = couponOrderArray
+                orderLevelView.backgroundColor = UIColor(named: "SelectCat")
+                 
                 
                 loadingIndicator.isAnimating = false
                 tableview.isHidden = false
@@ -261,7 +263,7 @@ class CouponViewController: UIViewController {
                 noCouponView.isHidden = true
                 
             }
-        }
+      
     }
     
  
@@ -272,27 +274,38 @@ class CouponViewController: UIViewController {
     
     
     @IBAction func clickAddClick(_ sender: UIButton) {
-        if UserDefaults.standard.bool(forKey: "lock_add_coupon") {
-            ToastClass.sharedToast.showToast(message: "Access Denied",
-                                             font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+       
+        if couponArray.contains(where: { $0.type == "0" }) {
+            if UserDefaults.standard.bool(forKey: "lock_add_coupon") {
+                ToastClass.sharedToast.showToast(message: "Access Denied",
+                                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+            }
+            else {
+                mode = 0
+                performSegue(withIdentifier: "toAddCoupon", sender: nil)
+            }
         }
         else {
-            
             mode = 0
-            performSegue(withIdentifier: "toAddCoupon", sender: nil)
+            performSegue(withIdentifier: "toaddItemLevel", sender: nil)
         }
     }
     
     @IBAction func floatBtnClick(_ sender: UIButton) {
        
-        if UserDefaults.standard.bool(forKey: "lock_add_coupon") {
-            ToastClass.sharedToast.showToast(message: "Access Denied",
-                                             font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+        if couponArray.contains(where: { $0.type == "0" }) {
+            if UserDefaults.standard.bool(forKey: "lock_add_coupon") {
+                ToastClass.sharedToast.showToast(message: "Access Denied",
+                                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+            }
+            else {
+                mode = 0
+                performSegue(withIdentifier: "toAddCoupon", sender: nil)
+            }
         }
         else {
-            
             mode = 0
-            performSegue(withIdentifier: "toAddCoupon", sender: nil)
+            performSegue(withIdentifier: "toaddItemLevel", sender: nil)
         }
     }
     
@@ -313,6 +326,27 @@ class CouponViewController: UIViewController {
         else {
             dismiss(animated: true)
         }
+    }
+    
+    
+    @IBAction func orderLevelBtnClick(_ sender: UIButton) {
+        
+        itemLevelBtn.setTitleColor(UIColor(hexString: "#777777"), for: .normal)
+        orderlevelbtn.setTitleColor(UIColor(hexString: "#0A64F9"), for: .normal)
+        orderLevelView.backgroundColor = UIColor(hexString: "#0A64F9")
+        itemlevelView.backgroundColor = .clear
+        couponArray = couponOrderArray
+        tableview.reloadData()
+    }
+    
+    @IBAction func itemLevelBtnClick(_ sender: UIButton) {
+       
+        orderlevelbtn.setTitleColor(UIColor(hexString: "#777777"), for: .normal)
+        itemLevelBtn.setTitleColor(UIColor(hexString: "#0A64F9"), for: .normal)
+        itemlevelView.backgroundColor = UIColor(named: "SelectCat")
+        orderLevelView.backgroundColor = .clear
+        couponArray = couponitemArray
+        tableview.reloadData()
     }
     
     
@@ -421,12 +455,34 @@ extension CouponViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         cell.validity.text = "Validity"
-        cell.minOrder.text = "Min Order Amt"
+        
         
         cell.validityDate.text =
         "\(startEndDateFormat(date: coupon.date_valid)) - \(startEndDateFormat(date: coupon.date_expire))"
         
-        cell.minOrderAmt.text = "\u{0024}\(coupon.min_amount)"
+        
+        
+        if coupon.type == "0" {
+            cell.minOrder.text = "Min Order Amt"
+            cell.minOrderAmt.text = "\u{0024}\(coupon.min_amount)"
+        }
+        else {
+            
+            if coupon.type == "1" {
+                cell.minOrder.text = "Coupon type"
+                cell.minOrderAmt.text = "Universal Coupon"
+                cell.maxOrder.isHidden = true
+                cell.maxOrderAmt.isHidden = true
+            }
+            else {
+                cell.minOrder.text = "Coupon type"
+                cell.minOrderAmt.text = "Specific Item Coupon"
+                cell.maxOrder.isHidden = true
+                cell.maxOrderAmt.isHidden = true
+            }
+        }
+        
+        
         
         cell.borderView.layer.cornerRadius = 10
         cell.borderView.layer.borderColor = UIColor(red: 222.0/255.0, green: 222.0/255.0, blue: 222.0/255.0, alpha: 1.0).cgColor
@@ -464,17 +520,26 @@ extension CouponViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if UserDefaults.standard.bool(forKey: "lock_edit_coupon") {
-            ToastClass.sharedToast.showToast(message: "Access Denied",
-                                             font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+        if couponArray[indexPath.row].type == "0" {
+            if UserDefaults.standard.bool(forKey: "lock_edit_coupon") {
+                ToastClass.sharedToast.showToast(message: "Access Denied",
+                                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+            }
+            else {
+                mode = 1
+                coupon_id = couponArray[indexPath.row].id
+                validateEditParameters(tag: indexPath.row)
+                performSegue(withIdentifier: "toAddCoupon", sender: nil)
+            }
         }
-        else {
+        else{
             mode = 1
-            coupon_id = couponArray[indexPath.row].id
-            validateEditParameters(tag: indexPath.row)
-            performSegue(withIdentifier: "toAddCoupon", sender: nil)
+            performSegue(withIdentifier: "toaddItemLevel", sender: nil)
         }
+        
     }
+    
+    
 }
 
 extension CouponViewController {
@@ -544,6 +609,11 @@ struct Coupon {
     let description: String
     let category_id: String
     let coupon_type: String
+    let employee_id: String
+    let updated_timestamp: String
+    let type: String
+    let is_disabled: String
+   
 }
 
 

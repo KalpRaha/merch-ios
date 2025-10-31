@@ -203,6 +203,7 @@
 		D2B269E52A6113EC002D140A /* RootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B269E42A6113EC002D140A /* RootTableViewController.swift */; };
 		D2B4D4F82AA04EE400828B40 /* FilterNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B4D4F72AA04EE400828B40 /* FilterNewViewController.swift */; };
 		D2B5656C2B76318400318E4E /* BulkDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B5656B2B76318400318E4E /* BulkDetailCell.swift */; };
+		D2B974C42EAB7B32003D8DB4 /* AddItemLevelCouponViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B974C32EAB7B32003D8DB4 /* AddItemLevelCouponViewController.swift */; };
 		D2BBAD172C94017C00133338 /* GiftCardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BBAD132C94017C00133338 /* GiftCardDetailViewController.swift */; };
 		D2BBAD182C94017C00133338 /* AddGiftCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BBAD142C94017C00133338 /* AddGiftCardViewController.swift */; };
 		D2BBAD192C94017C00133338 /* GiftCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BBAD152C94017C00133338 /* GiftCardViewController.swift */; };
@@ -488,6 +489,7 @@
 		D2B269E42A6113EC002D140A /* RootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTableViewController.swift; sourceTree = "<group>"; };
 		D2B4D4F72AA04EE400828B40 /* FilterNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterNewViewController.swift; sourceTree = "<group>"; };
 		D2B5656B2B76318400318E4E /* BulkDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulkDetailCell.swift; sourceTree = "<group>"; };
+		D2B974C32EAB7B32003D8DB4 /* AddItemLevelCouponViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemLevelCouponViewController.swift; sourceTree = "<group>"; };
 		D2BBAD132C94017C00133338 /* GiftCardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiftCardDetailViewController.swift; sourceTree = "<group>"; };
 		D2BBAD142C94017C00133338 /* AddGiftCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGiftCardViewController.swift; sourceTree = "<group>"; };
 		D2BBAD152C94017C00133338 /* GiftCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiftCardViewController.swift; sourceTree = "<group>"; };
@@ -817,6 +819,7 @@
 				D26636B929BB056800B8A5FC /* CouponTableViewCell.swift */,
 				D27624C42C589E7A0019EB2B /* CouponCategoryViewController.swift */,
 				D27624C62C589F410019EB2B /* CouponCategoryCell.swift */,
+				D2B974C32EAB7B32003D8DB4 /* AddItemLevelCouponViewController.swift */,
 			);
 			path = Coupons;
 			sourceTree = "<group>";
@@ -1636,6 +1639,7 @@
 				D2A2BF722B8D9516006796D5 /* ProgressShapeLayer.swift in Sources */,
 				D27A8D132D114EA4003AAE33 /* InStoreNewRefundViewController.swift in Sources */,
 				D21A0DC329A4863E00DC36CC /* SetupViewController.swift in Sources */,
+				D2B974C42EAB7B32003D8DB4 /* AddItemLevelCouponViewController.swift in Sources */,
 				D25D18592CF491DE00A79FDE /* CompletedCartOnlineCell.swift in Sources */,
 				D2A87AAB2D156D300008C417 /* CompletedTaxCell 2.swift in Sources */,
 				D235A02A2CD0C1C300A81941 /* CustomerViewController.swift in Sources */,
