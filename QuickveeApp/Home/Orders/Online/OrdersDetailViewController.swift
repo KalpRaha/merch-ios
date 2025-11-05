@@ -1286,7 +1286,9 @@ class OrdersDetailViewController: UIViewController {
                                           vendor_id: "\(cartItem["vendor_id"] ?? "" )",
                                           vendor_name: "\(cartItem["vendor_name"] ?? "" )",
                                           brand_name: "\(cartItem["brand_name"] ?? "" )",
-                                          brand_id: "\(cartItem["brand_id"] ?? "" )")
+                                          brand_id: "\(cartItem["brand_id"] ?? "" )",
+                                          bogo_id: "\(cartItem["bogo_id"] ?? "" )",
+                                          custom_discount_amt: "\(cartItem["custom_discount_amt"] ?? "" )")
             
             
             
@@ -2704,6 +2706,8 @@ struct CartdataRef {
     var vendor_name: String
     var brand_name: String
     var brand_id: String
+    var bogo_id: String
+    var custom_discount_amt: String
 }
 
 struct Ordersummery {

@@ -1234,7 +1234,9 @@ class OrderRefundDetailViewController: UIViewController {
                                           vendor_id: "\(cartItem["vendor_id"] ?? "" )",
                                           vendor_name: "\(cartItem["vendor_name"] ?? "" )",
                                           brand_name: "\(cartItem["brand_name"] ?? "" )",
-                                          brand_id: "\(cartItem["brand_id"] ?? "" )")
+                                          brand_id: "\(cartItem["brand_id"] ?? "" )",
+                                         bogo_id: "\(cartItem["bogo_id"] ?? "" )",
+                                            custom_discount_amt: "\(cartItem["custom_discount_amt"] ?? "" )")
             
             
             if cart_detail.is_refunded == "1" {

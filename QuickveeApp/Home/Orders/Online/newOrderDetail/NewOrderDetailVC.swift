@@ -149,6 +149,7 @@ class NewOrderDetailVC: UIViewController {
     var tipRefDetail =  ""
     var ncaRefDetails = ""
     var mode = ""
+    var custom_discount = ""
     
     var orderDetail: OrderDetail?
 
@@ -884,6 +885,20 @@ class NewOrderDetailVC: UIViewController {
         return refAmt
     }
     
+    func calCustDisc(custom_discount_amts: [Cartdata]) -> String {
+            var doub_amt = Double()
+            
+            for discount in custom_discount_amts {
+                let doub = Double(discount.custom_discount_amt) ?? 0.00
+                doub_amt += doub
+            }
+       
+            let cusdis = String(format: "%.2f", doub_amt)
+            
+            return cusdis
+        }
+    
+    
     func calDisc(coupon_code: String,bogo_discount: String) -> String {
        
         let c_code =  roundOf(item: coupon_code)
@@ -1260,11 +1275,12 @@ class NewOrderDetailVC: UIViewController {
         //OrderSummary
    
         var smallarrSummary = [Grand]()
-        
-        smallarrSummary.append(Grand(cash: "Loyalty Points Redeemed (\(points_applied_Round))", cashValue: String(format: "%.02f", roundOf(item: points_amt_spent ))))
-        smallarrSummary.append(Grand(cash: "Discount", cashValue: String(format: "%.02f", roundOf(item: discount))))
-    
-        arrOfOrderSummary = smallarrSummary
+               
+               smallarrSummary.append(Grand(cash: "Loyalty Points Redeemed (\(points_applied_Round))", cashValue: String(format: "%.02f", roundOf(item: points_amt_spent ))))
+               smallarrSummary.append(Grand(cash: "Discount", cashValue: String(format: "%.02f", roundOf(item: discount))))
+               smallarrSummary.append(Grand(cash: "Coupon", cashValue: coupon_code))
+               smallarrSummary.append(Grand(cash: "Custom Discount", cashValue: String(format: "%.02f", roundOf(item: custom_discount))))
+               arrOfOrderSummary = smallarrSummary
      
         var smallLoyalty = [GrandLoyalty]()
         
@@ -1360,7 +1376,9 @@ class NewOrderDetailVC: UIViewController {
                                        vendor_id: "\(cartItem["vendor_id"] ?? "" )",
                                        vendor_name: "\(cartItem["vendor_name"] ?? "" )",
                                        brand_name: "\(cartItem["brand_name"] ?? "" )",
-                                       brand_id: "\(cartItem["brand_id"] ?? "" )")
+                                       brand_id: "\(cartItem["brand_id"] ?? "" )",
+                                       bogo_id: "\(cartItem["bogo_id"] ?? "" )",
+                                       custom_discount_amt: "\(cartItem["custom_discount_amt"] ?? "" )")
             
             
             taxCart.append(cart_detail)
@@ -1470,6 +1488,9 @@ class NewOrderDetailVC: UIViewController {
         
         arrofCartData = smallcart
         arrofCartRefundData = smallcartRef
+        
+        var cust_discount = calCustDisc(custom_discount_amts: smallcart)
+        custom_discount = "\(cust_discount)"
         
     
         let totalSmallCartQty = smallcart.reduce(0) { result, item in
@@ -2967,18 +2988,23 @@ extension NewOrderDetailVC : UITableViewDelegate , UITableViewDataSource {
             
         }
         else if tableView == orderSummaryTableView {
-            
-            let cell = orderSummaryTableView.dequeueReusableCell(withIdentifier: "OrderSummaryCell", for: indexPath) as! OrderSummaryCell
-            
-            cell.nameLbl.text = arrOfOrderSummary[indexPath.row].cash
-            cell.valueLbl.text = "-$\(arrOfOrderSummary[indexPath.row].cashValue)"
-            
-            
-            let selectedBackgroundView = UIView()
-            selectedBackgroundView.backgroundColor = UIColor.clear
-            cell.selectedBackgroundView = selectedBackgroundView
-            return cell
-        }
+                   
+                   let cell = orderSummaryTableView.dequeueReusableCell(withIdentifier: "OrderSummaryCell", for: indexPath) as! OrderSummaryCell
+                   
+                   cell.nameLbl.text = arrOfOrderSummary[indexPath.row].cash
+                   if arrOfOrderSummary[indexPath.row].cash == "Coupon" {
+                       cell.valueLbl.text = "\(arrOfOrderSummary[indexPath.row].cashValue)"
+                   }else {
+                       cell.valueLbl.text = "-$\(arrOfOrderSummary[indexPath.row].cashValue)"
+                   }
+                  
+                   
+                   
+                   let selectedBackgroundView = UIView()
+                   selectedBackgroundView.backgroundColor = UIColor.clear
+                   cell.selectedBackgroundView = selectedBackgroundView
+                   return cell
+               }
         
         else if tableView == taxTableView {
             
@@ -3175,7 +3201,8 @@ struct Cartdata {
     var vendor_name: String
     var brand_name: String
     var brand_id: String
-    
+    var bogo_id: String
+    var custom_discount_amt: String
 }
 
 
