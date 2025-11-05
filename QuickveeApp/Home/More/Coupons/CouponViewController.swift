@@ -37,8 +37,12 @@ class CouponViewController: UIViewController {
     var couponOrderArray = [Coupon]()
     var couponitemArray = [Coupon]()
     
+    var couponItemEditArray :Coupon?
+    
     let refresh = UIRefreshControl()
     var category_Id = ""
+    
+    var itemsIds = ""
     
     
     let loadingIndicator: ProgressView = {
@@ -100,7 +104,6 @@ class CouponViewController: UIViewController {
                 vc.merchant_id = merchant_id
                 vc.couponNameArray = couponArray
             }
-            
             else {
                 vc.merchant_id = merchant_id
                 vc.couponNameArray = couponArray
@@ -110,7 +113,12 @@ class CouponViewController: UIViewController {
             let vc = segue.destination as! AddItemLevelCouponViewController
             
             if mode == 1 {
-                
+                vc.mode = "edit"
+                vc.itemsEditIds = itemsIds
+                vc.couponItemArray = couponItemEditArray
+            }
+            else {
+                vc.mode = "add"
             }
         }
     }
@@ -240,6 +248,7 @@ class CouponViewController: UIViewController {
                                          employee_id: "\(res["employee_id"] ?? "")",
                                          updated_timestamp: "\(res["employee_id"] ?? "")",
                                          type: "\(res["type"] ?? "")",
+                                         items: "\(res["items"] ?? "")",
                                          is_disabled: "\(res["enable_limit"] ?? "")")
 
                     if coupon.type == "0" {
@@ -252,6 +261,7 @@ class CouponViewController: UIViewController {
                 }
                 
                 //list_online = couponOrderArr
+                print(couponOrderArray)
                 couponArray = couponOrderArray
                 orderLevelView.backgroundColor = UIColor(named: "SelectCat")
                  
@@ -534,6 +544,10 @@ extension CouponViewController: UITableViewDataSource, UITableViewDelegate {
         }
         else{
             mode = 1
+            itemsIds = couponArray[indexPath.row].items
+            print(itemsIds)
+            couponItemEditArray = couponArray[indexPath.row]
+            print(couponItemEditArray)
             performSegue(withIdentifier: "toaddItemLevel", sender: nil)
         }
         
@@ -612,6 +626,7 @@ struct Coupon {
     let employee_id: String
     let updated_timestamp: String
     let type: String
+    let items: String
     let is_disabled: String
    
 }

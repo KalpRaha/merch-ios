@@ -28351,7 +28351,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="OOd-V3-g9o"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L2x-Bs-CHQ">
@@ -28365,7 +28365,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="8Ks-Da-gqh"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discount Percentage (%)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9E-2O-1AZ">
@@ -28379,7 +28379,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="ZCr-wD-snS"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ksS-hM-wgK">
@@ -28432,12 +28432,12 @@
                                                 <subviews>
                                                     <textField opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Start Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HYI-dy-4RO">
                                                         <rect key="frame" x="0.0" y="0.0" width="192" height="50"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Start Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vtc-Sb-gVh">
                                                         <rect key="frame" x="202" y="0.0" width="192" height="50"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
@@ -28474,11 +28474,11 @@
                                                     <constraint firstAttribute="height" constant="100" id="feo-XK-Ym0"/>
                                                 </constraints>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CreatBogoDealCell" rowHeight="100" id="7Xl-Hh-YTt" customClass="CreatBogoDealCell" customModule="QuickveeApp" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="50" width="414" height="100"/>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CreatBogoDealCell" rowHeight="132" id="7Xl-Hh-YTt" customClass="CreatBogoDealCell" customModule="QuickveeApp" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="50" width="414" height="132"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7Xl-Hh-YTt" id="fJT-5Z-g2z">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="132"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" ambiguous="YES" text="lab" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jYE-6J-ctx" userLabel="titleLbl">
@@ -28506,7 +28506,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8c-f8-6Tz">
-                                                                    <rect key="frame" x="384" y="40" width="20" height="20"/>
+                                                                    <rect key="frame" x="384" y="56" width="20" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="20" id="8rg-sl-6Bw"/>
                                                                         <constraint firstAttribute="width" secondItem="t8c-f8-6Tz" secondAttribute="height" multiplier="1:1" id="gDW-L4-8q7"/>
@@ -28653,9 +28653,11 @@
                         <outlet property="dollerBtn" destination="2Dp-1F-ZGo" id="ywj-Ya-4Hq"/>
                         <outlet property="endDate" destination="vtc-Sb-gVh" id="ceA-gy-fmR"/>
                         <outlet property="percentBtn" destination="Or6-Za-ciX" id="nbu-tW-n3s"/>
+                        <outlet property="scrollHeight" destination="KwB-pr-dDL" id="HjO-fg-QDo"/>
                         <outlet property="specificItemView" destination="ZLz-Tq-9hC" id="GsF-qw-rzp"/>
                         <outlet property="specificLbl" destination="wfk-lQ-Rs9" id="igs-oa-kBl"/>
                         <outlet property="startDate" destination="HYI-dy-4RO" id="Bqg-3V-aWJ"/>
+                        <outlet property="tableHeight" destination="feo-XK-Ym0" id="isP-NG-g8D"/>
                         <outlet property="tableview" destination="ASl-mu-jib" id="jdc-MS-x9A"/>
                         <outlet property="topView" destination="xqk-Yd-o6q" id="wJn-ZY-PXd"/>
                         <outlet property="universalLbl" destination="1iM-3W-epp" id="wJs-OU-bGh"/>
@@ -28664,7 +28666,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FIO-1d-cmT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1704" y="3095"/>
+            <point key="canvasLocation" x="1702.8985507246377" y="3094.4196428571427"/>
         </scene>
         <!--Add Coupon View Controller-->
         <scene sceneID="lSY-2W-OOh">

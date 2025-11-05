@@ -24,11 +24,7 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var percentBtn: UIButton!
    
     @IBOutlet weak var dollerBtn: UIButton!
-    
-    
-    
    
-    
     @IBOutlet weak var cancelBtn: UIButton!
     
     @IBOutlet weak var addBtn: UIButton!
@@ -40,25 +36,33 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var startDate: UITextField!
     
     @IBOutlet weak var endDate: UITextField!
-   
-    
+  
     @IBOutlet weak var addVariantBtn: UIButton!
    
     @IBOutlet weak var tableview: UITableView!
    
+    @IBOutlet weak var scrollHeight: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var tableHeight: NSLayoutConstraint!
+    
     var varient_List = [BogoVariantModel]()
     var variantArray = [VariantBogoModel]()
     var subvarArray =  [VariantBogoModel]()
     var selectedAllEditIds = [String]()
+    
+    var couponItemArray :Coupon?
    
     var activeTextField = UITextField()
     
     var itemsEditIds = ""
+    var mode = ""
+    var coupon_type = ""
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //tableview.isHidden = true
         setUI()
        
         
@@ -72,15 +76,20 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
         tap2.numberOfTapsRequired = 1
         specificItemView.isUserInteractionEnabled = true
         
-        
+        tableview.delegate = self
+        tableview.dataSource = self
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        variantListApi()
+        setMode()
+        print("$$\(itemsEditIds)")
     }
     
     func setUI(){
-        
-        tableview.delegate = self
-        tableview.dataSource = self
-        
-        
+       
         universalView.layer.borderWidth = 1
         universalView.layer.borderColor = UIColor(hexString: "#ECEFF3").cgColor
         specificItemView.layer.borderWidth = 1
@@ -98,7 +107,23 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-   
+    func setMode(){
+        if mode == "edit" {
+            
+            couponCodeTextfield.text = couponItemArray?.name
+            descriptionText.text = couponItemArray?.description
+            startDate.text = couponItemArray?.date_valid
+            endDate.text = couponItemArray?.date_expire
+            discountText.text = couponItemArray?.discount
+          
+            
+        }
+        else {
+            
+            
+        }
+    }
+  
     func getvarId() -> [[String:[String]]] {
         
         var small = [[String:[String]]]()
@@ -116,18 +141,18 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
         return small
     }
    
-    func validateData() {
-        
-        if variantArray.count == 0 {
-            ToastClass.sharedToast.showToast(message: "Please Select At least 1 Product Varient",
-                                             font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-        }
-        else {
-        
-            setDataMix()
-        }
-        
-    }
+//    func validateData() {
+//        
+//        if variantArray.count == 0 {
+//            ToastClass.sharedToast.showToast(message: "Please Select At least 1 Product Varient",
+//                                             font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//        }
+//        else {
+//        
+//            setDataMix()
+//        }
+//        
+//    }
     
     func setDataMix() {
         
@@ -197,6 +222,8 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
         specificItemView.layer.borderColor = UIColor(hexString: "#ECEFF3").cgColor
         universalLbl.textColor = UIColor(hexString: "#0A64F9")
         specificLbl.textColor = UIColor.black
+        tableview.isHidden = true
+        
     }
     
     @objc func specificItemViewClick() {
@@ -206,6 +233,7 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
         universalView.layer.borderColor = UIColor(hexString: "#ECEFF3").cgColor
         specificLbl.textColor = UIColor(hexString: "#0A64F9")
         universalLbl.textColor = UIColor.black
+        tableview.isHidden = false
     }
     
     @IBAction func backBtnClick(_ sender: UIButton) {
@@ -234,7 +262,7 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func addBtnClick(_ sender: UIButton) {
-        validateData()
+       // validateData()
     }
     
     @IBAction func closeBtnClick(_ sender: UIButton) {
@@ -254,12 +282,9 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
         let vc = storyBoard.instantiateViewController(withIdentifier: "selectBogoVariant") as! SelectBogoVariantViewController
         
         vc.mode_Type = "coupon"
-        //vc.bogo_mix_exist_ids = bogo_mix_exist_ids
-        //vc.disc_amt = dollarAmt
-       // vc.bogoSelectedVariants = variantArray
         vc.adddelegate = self
         
-        vc.modalPresentationStyle = .fullScreen
+        //vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: {
             vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
         })
@@ -331,10 +356,14 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
             }
         }
         varient_List = small
-        getEditItemsIds()
-        
-        getEditVarients(list: varient_List)
-        
+        print(varient_List)
+        if couponItemArray?.type == "2" {
+            getEditItemsIds()
+            getEditVarients(list: varient_List)
+        }
+        else {
+            tableview.isHidden = true
+        }
     }
     
     
@@ -384,12 +413,16 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
         
         
         subvarArray = variantArray
-        
+        print(subvarArray)
         
         DispatchQueue.main.async {
            // self.viewsview.isHidden = false
            // self.indicator.isAnimating = false
             self.tableview.reloadData()
+            self.tableHeight.constant = CGFloat(100 * self.variantArray.count)
+            let table = self.tableHeight.constant
+            
+            self.scrollHeight.constant = table + 700
         }
     }
     
@@ -404,6 +437,7 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
             print("yes")
         }
     }
+    
     
     func showAlert(title: String, message: String) {
         
@@ -589,6 +623,7 @@ extension AddItemLevelCouponViewController : UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
         let cell = tableView.dequeueReusableCell(withIdentifier: "CreatBogoDealCell", for: indexPath) as! CreatBogoDealCell
         
         let variant = variantArray[indexPath.row]
@@ -630,16 +665,14 @@ extension AddItemLevelCouponViewController : SelectBogoDelegate {
         
         print(arr)
         variantArray = arr
+        print("@@\(variantArray)")
+        
         subvarArray = arr
         
-        if variantArray.count == 0 {
-           // searchBar.isHidden = true
-            
-        }
-        else {
-           // searchBar.isHidden = false
-        }
-        tableview.reloadData()
+        DispatchQueue.main.async {
+              
+                self.tableview.reloadData()
+            }
         
     }
 }
