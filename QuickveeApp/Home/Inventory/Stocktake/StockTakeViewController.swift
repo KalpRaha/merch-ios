@@ -266,6 +266,7 @@ extension StockTakeViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             cell.empName.text = "Performed By"
+
             let name = stock.employee_name
             if name == "<null>" {
                 cell.empNameValue.text = "-"
