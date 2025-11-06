@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YYL-Zd-4hb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YYL-Zd-4hb">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <accessibilityOverrides isEnabled="YES"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12683,22 +12683,8 @@
                                     <constraint firstItem="SJc-xp-TRG" firstAttribute="leading" secondItem="Sh4-BX-vv2" secondAttribute="leading" constant="10" id="jWz-73-bRa"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v0w-jq-b9S">
-                                <rect key="frame" x="380" y="182" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="3MB-uR-WLg"/>
-                                    <constraint firstAttribute="width" constant="24" id="rqe-eJ-J56"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="filter">
-                                    <color key="titleColor" red="0.074509803920000006" green="0.074509803920000006" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="filterBtnClick:" destination="POm-ff-tqJ" eventType="touchUpInside" id="KIM-mC-R6q"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="FkT-KN-bWE">
-                                <rect key="frame" x="0.0" y="216" width="414" height="587"/>
+                                <rect key="frame" x="0.0" y="182" width="414" height="621"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="nLl-1n-T29" customClass="StockAddTableViewCell" customModule="QuickveeApp" customModuleProvider="target">
@@ -12830,165 +12816,39 @@
                                     <constraint firstItem="OnC-WR-OhU" firstAttribute="leading" secondItem="tr9-1J-GQL" secondAttribute="leading" id="yk8-lW-MID"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPo-my-hW7">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="848"/>
-                                <subviews>
-                                    <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UNc-rB-KGM">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="682.5"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W5Q-a9-cvO">
-                                        <rect key="frame" x="0.0" y="682.5" width="414" height="165.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter By:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2R5-7L-EVa">
-                                                <rect key="frame" x="10" y="20" width="62" height="20.5"/>
-                                                <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="15"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fXE-7K-xmm">
-                                                <rect key="frame" x="10" y="60.5" width="394" height="50"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJy-dJ-Ree">
-                                                        <rect key="frame" x="0.0" y="0.0" width="124.5" height="50"/>
-                                                        <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="15"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="Category">
-                                                            <color key="titleColor" red="0.074509803920000006" green="0.074509803920000006" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="categoryFilterClick:" destination="POm-ff-tqJ" eventType="touchUpInside" id="sru-sk-dsr"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cQ1-8s-bdm">
-                                                        <rect key="frame" x="134.5" y="0.0" width="125" height="50"/>
-                                                        <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="15"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="Brand">
-                                                            <color key="titleColor" red="0.074509803920000006" green="0.074509803920000006" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="brandFilterClick:" destination="POm-ff-tqJ" eventType="touchUpInside" id="pMG-9Z-e2d"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVh-rr-pK2">
-                                                        <rect key="frame" x="269.5" y="0.0" width="124.5" height="50"/>
-                                                        <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="15"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="Tag">
-                                                            <color key="titleColor" red="0.074509803920000006" green="0.074509803920000006" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="tagFilterClick:" destination="POm-ff-tqJ" eventType="touchUpInside" id="qyi-Ah-evH"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="Sst-uC-see"/>
-                                                </constraints>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nad-ly-1kq">
-                                                <rect key="frame" x="10" y="120.5" width="394" height="45"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oB6-Jc-9Ye">
-                                                        <rect key="frame" x="0.0" y="0.0" width="192" height="45"/>
-                                                        <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="15"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="Cancel">
-                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="cancelFilterBtnClick:" destination="POm-ff-tqJ" eventType="touchUpInside" id="8og-XT-VEc"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="87x-WD-qaj">
-                                                        <rect key="frame" x="202" y="0.0" width="192" height="45"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="15"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="Apply"/>
-                                                        <connections>
-                                                            <action selector="applyFilterBtnClick:" destination="POm-ff-tqJ" eventType="touchUpInside" id="vDz-CV-9xb"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="45" id="0Hm-Sl-2AR"/>
-                                                </constraints>
-                                            </stackView>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="nad-ly-1kq" secondAttribute="trailing" constant="10" id="2to-9L-arW"/>
-                                            <constraint firstItem="2R5-7L-EVa" firstAttribute="leading" secondItem="W5Q-a9-cvO" secondAttribute="leading" constant="10" id="8JB-Z4-x3O"/>
-                                            <constraint firstAttribute="trailing" secondItem="fXE-7K-xmm" secondAttribute="trailing" constant="10" id="Jkg-LW-6w9"/>
-                                            <constraint firstItem="nad-ly-1kq" firstAttribute="leading" secondItem="W5Q-a9-cvO" secondAttribute="leading" constant="10" id="Nrt-HL-bvG"/>
-                                            <constraint firstItem="fXE-7K-xmm" firstAttribute="top" secondItem="2R5-7L-EVa" secondAttribute="bottom" constant="20" id="QIE-QV-RZ7"/>
-                                            <constraint firstItem="2R5-7L-EVa" firstAttribute="top" secondItem="W5Q-a9-cvO" secondAttribute="top" constant="20" id="RQ1-oS-Rrg"/>
-                                            <constraint firstItem="nad-ly-1kq" firstAttribute="top" secondItem="fXE-7K-xmm" secondAttribute="bottom" constant="10" id="ayE-Cw-ORx"/>
-                                            <constraint firstAttribute="bottom" secondItem="nad-ly-1kq" secondAttribute="bottom" id="ecw-xK-tb0"/>
-                                            <constraint firstItem="fXE-7K-xmm" firstAttribute="leading" secondItem="W5Q-a9-cvO" secondAttribute="leading" constant="10" id="yso-eJ-w6a"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="W5Q-a9-cvO" secondAttribute="bottom" id="898-wU-Zwe"/>
-                                    <constraint firstAttribute="trailing" secondItem="UNc-rB-KGM" secondAttribute="trailing" id="9Fb-W0-1Xu"/>
-                                    <constraint firstItem="W5Q-a9-cvO" firstAttribute="centerX" secondItem="ZPo-my-hW7" secondAttribute="centerX" id="JGw-BG-UNi"/>
-                                    <constraint firstItem="UNc-rB-KGM" firstAttribute="leading" secondItem="ZPo-my-hW7" secondAttribute="leading" id="aMi-ow-hN3"/>
-                                    <constraint firstAttribute="trailing" secondItem="W5Q-a9-cvO" secondAttribute="trailing" id="oFb-HL-zNd"/>
-                                    <constraint firstItem="UNc-rB-KGM" firstAttribute="top" secondItem="ZPo-my-hW7" secondAttribute="top" id="ocZ-ue-BIq"/>
-                                    <constraint firstItem="W5Q-a9-cvO" firstAttribute="leading" secondItem="ZPo-my-hW7" secondAttribute="leading" id="qQm-Dy-VLP"/>
-                                    <constraint firstItem="W5Q-a9-cvO" firstAttribute="top" secondItem="UNc-rB-KGM" secondAttribute="bottom" id="qdP-yD-kc3"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6KC-MZ-g28"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6KC-MZ-g28" firstAttribute="bottom" secondItem="ZPo-my-hW7" secondAttribute="bottom" id="0Iu-s9-YQw"/>
                             <constraint firstItem="6KC-MZ-g28" firstAttribute="trailing" secondItem="ceY-HB-NDJ" secondAttribute="trailing" constant="10" id="0ei-Dv-qig"/>
                             <constraint firstItem="ceY-HB-NDJ" firstAttribute="leading" secondItem="5Dg-fK-rQa" secondAttribute="trailing" constant="5" id="1nX-Wu-TYq"/>
                             <constraint firstItem="ceY-HB-NDJ" firstAttribute="top" secondItem="5Dg-fK-rQa" secondAttribute="top" id="5Ng-Wh-WjZ"/>
-                            <constraint firstItem="FkT-KN-bWE" firstAttribute="top" secondItem="v0w-jq-b9S" secondAttribute="bottom" constant="10" id="85H-v5-wWk"/>
                             <constraint firstItem="Sh4-BX-vv2" firstAttribute="centerY" secondItem="xIv-Gr-1qY" secondAttribute="centerY" id="8xy-oN-sZI"/>
                             <constraint firstItem="1kU-B8-dYa" firstAttribute="top" secondItem="FkT-KN-bWE" secondAttribute="bottom" id="EMA-rY-rNc"/>
                             <constraint firstItem="Sh4-BX-vv2" firstAttribute="centerX" secondItem="xIv-Gr-1qY" secondAttribute="centerX" id="H6q-4I-8br"/>
                             <constraint firstItem="tr9-1J-GQL" firstAttribute="top" secondItem="6KC-MZ-g28" secondAttribute="top" id="K6r-PN-07q"/>
                             <constraint firstItem="6KC-MZ-g28" firstAttribute="trailing" secondItem="FkT-KN-bWE" secondAttribute="trailing" id="KMn-zE-8om"/>
                             <constraint firstItem="6KC-MZ-g28" firstAttribute="bottom" secondItem="1kU-B8-dYa" secondAttribute="bottom" id="LSE-GJ-Bhq"/>
-                            <constraint firstItem="6KC-MZ-g28" firstAttribute="trailing" secondItem="v0w-jq-b9S" secondAttribute="trailing" constant="10" id="P3J-C5-eko"/>
                             <constraint firstItem="5Dg-fK-rQa" firstAttribute="bottom" secondItem="ceY-HB-NDJ" secondAttribute="bottom" id="P8t-xi-2cZ"/>
-                            <constraint firstItem="6KC-MZ-g28" firstAttribute="trailing" secondItem="ZPo-my-hW7" secondAttribute="trailing" id="PPT-j2-5Zu"/>
                             <constraint firstItem="tr9-1J-GQL" firstAttribute="leading" secondItem="6KC-MZ-g28" secondAttribute="leading" id="Pkj-6G-lzn"/>
-                            <constraint firstItem="ZPo-my-hW7" firstAttribute="top" secondItem="xIv-Gr-1qY" secondAttribute="top" id="Vxb-Zh-fQM"/>
                             <constraint firstItem="5Dg-fK-rQa" firstAttribute="top" secondItem="tr9-1J-GQL" secondAttribute="bottom" constant="10" id="Wtw-5y-t3I"/>
                             <constraint firstItem="5Dg-fK-rQa" firstAttribute="leading" secondItem="6KC-MZ-g28" secondAttribute="leading" constant="5" id="XAf-3I-JUb"/>
                             <constraint firstItem="1kU-B8-dYa" firstAttribute="leading" secondItem="6KC-MZ-g28" secondAttribute="leading" constant="10" id="g1g-cD-3M7"/>
                             <constraint firstItem="FkT-KN-bWE" firstAttribute="leading" secondItem="6KC-MZ-g28" secondAttribute="leading" id="lYv-aN-kMg"/>
-                            <constraint firstItem="v0w-jq-b9S" firstAttribute="top" secondItem="5Dg-fK-rQa" secondAttribute="bottom" constant="10" id="o7X-FD-xv2"/>
                             <constraint firstItem="6KC-MZ-g28" firstAttribute="trailing" secondItem="tr9-1J-GQL" secondAttribute="trailing" id="oMZ-hD-rGT"/>
-                            <constraint firstItem="ZPo-my-hW7" firstAttribute="leading" secondItem="6KC-MZ-g28" secondAttribute="leading" id="tc8-Ol-m8v"/>
+                            <constraint firstItem="FkT-KN-bWE" firstAttribute="top" secondItem="5Dg-fK-rQa" secondAttribute="bottom" constant="10" id="pWi-zh-FBa"/>
                             <constraint firstItem="6KC-MZ-g28" firstAttribute="trailing" secondItem="1kU-B8-dYa" secondAttribute="trailing" constant="10" id="wEj-7G-MBk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vAm-WR-B7F"/>
                     <connections>
-                        <outlet property="applyFilterBtn" destination="87x-WD-qaj" id="wY0-cR-xKA"/>
-                        <outlet property="brandBtn" destination="cQ1-8s-bdm" id="yUJ-Io-rZl"/>
                         <outlet property="cancelBtn" destination="Meo-BF-dYM" id="7rd-dq-vhR"/>
-                        <outlet property="cancelFilterBtn" destination="oB6-Jc-9Ye" id="qAq-Lh-36U"/>
-                        <outlet property="categoryBtn" destination="dJy-dJ-Ree" id="8gj-tg-wIA"/>
-                        <outlet property="filterBlackView" destination="ZPo-my-hW7" id="FrD-Fn-m4c"/>
-                        <outlet property="filterInnerView" destination="W5Q-a9-cvO" id="0Dd-7V-9Pn"/>
-                        <outlet property="filterStack" destination="fXE-7K-xmm" id="frh-Ug-UXW"/>
                         <outlet property="nextBtn" destination="qix-KX-ZLa" id="MFO-G9-R5L"/>
                         <outlet property="noVarLbl" destination="SJc-xp-TRG" id="Ehd-UP-ymB"/>
                         <outlet property="noVariantView" destination="Sh4-BX-vv2" id="8FF-U3-4vZ"/>
                         <outlet property="scanBtn" destination="ceY-HB-NDJ" id="egQ-uR-IoZ"/>
                         <outlet property="searchBar" destination="5Dg-fK-rQa" id="vQC-yB-Vku"/>
                         <outlet property="tablview" destination="FkT-KN-bWE" id="2MQ-Sf-6Nh"/>
-                        <outlet property="tagBtn" destination="KVh-rr-pK2" id="uuY-iO-oWp"/>
                         <outlet property="topview" destination="tr9-1J-GQL" id="cIG-z1-iCU"/>
                         <segue destination="7n2-fZ-9fx" kind="show" identifier="toStockSave" id="UfE-A6-dPb"/>
                     </connections>
@@ -21636,9 +21496,9 @@
                                                             <color key="textColor" red="0.44705882349999998" green="0.44705882349999998" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oeM-Ir-uFD">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oeM-Ir-uFD">
                                                             <rect key="frame" x="15" y="40" width="0.0" height="0.0"/>
-                                                            <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="14"/>
+                                                            <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="13"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -21648,9 +21508,9 @@
                                                             <color key="textColor" red="0.44705882349999998" green="0.44705882349999998" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvb-Dd-boN">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvb-Dd-boN">
                                                             <rect key="frame" x="388" y="40" width="0.0" height="0.0"/>
-                                                            <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="14"/>
+                                                            <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="13"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -41690,11 +41550,11 @@
             <objects>
                 <viewController id="H7z-1M-jJm" customClass="InStoreNewRefundViewController" customModule="QuickveeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cfL-S4-MJm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="848"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLz-Pz-RaZ">
-                                <rect key="frame" x="0.0" y="200" width="414" height="696"/>
+                                <rect key="frame" x="0.0" y="98" width="414" height="750"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IkP-wq-fGw">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="2000"/>
@@ -43014,7 +42874,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="weB-IL-koF"/>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ps9-aw-UTR">
-                                <rect key="frame" x="0.0" y="150" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQp-9c-2B3">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -43509,11 +43369,11 @@
             <objects>
                 <viewController id="tsN-bT-uoc" customClass="InStoreNewDetailViewController" customModule="QuickveeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OTL-jo-l36">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="848"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZl-hq-BFZ">
-                                <rect key="frame" x="0.0" y="200" width="414" height="696"/>
+                                <rect key="frame" x="0.0" y="98" width="414" height="750"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="93r-yu-sCU">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="2000"/>
@@ -44839,7 +44699,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="Jdi-IJ-F53"/>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="49K-uX-QWg">
-                                <rect key="frame" x="0.0" y="150" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrh-vg-pfU">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -46474,8 +46334,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="79S-AN-vcT"/>
-        <segue reference="A2Y-M7-eWr"/>
+        <segue reference="IOr-Nq-axb"/>
+        <segue reference="ROB-6A-JkF"/>
         <segue reference="tUV-1f-0QC"/>
         <segue reference="u8i-O8-kkS"/>
         <segue reference="44M-DD-teR"/>
@@ -46597,19 +46457,19 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.2196078431372549" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="underPageBackgroundColor">
             <color red="0.70980392156862748" green="0.71764705882352942" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
