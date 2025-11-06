@@ -50,7 +50,7 @@ class CustomerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.showsCancelButton = true
-        searchBar.placeholder = "Search Customer"
+        searchBar.placeholder = "Search Customer by phone number, name or email."
         searchBar.searchBarStyle = .minimal
         searchBar.delegate = self
         searchBtn.alpha = 1
@@ -212,15 +212,24 @@ class CustomerViewController: UIViewController {
             searching = true
             var name = ""
             var phone = ""
+            var email = ""
             
             if searchText.isNumber {
                 phone = searchText
             }
             else {
-                name = searchText
+                let trimmed = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+                let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}$"
+                let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+                if emailPredicate.evaluate(with: trimmed) {
+                    email = searchText
+                }
+                else {
+                    name = searchText
+                }
             }
             
-            searchApi(name: name, phone: phone)
+            searchApi(name: name, phone: phone, email: email)
         }
     }
     
@@ -310,7 +319,7 @@ class CustomerViewController: UIViewController {
     
     
     
-    func searchApi(name: String, phone: String) {
+    func searchApi(name: String, phone: String, email: String) {
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         let group_id = UserDefaults.standard.string(forKey: "group_id") ?? ""
@@ -321,7 +330,7 @@ class CustomerViewController: UIViewController {
         noCustomerLbl.isHidden = true
         noCustomerImage.isHidden = true
         
-        ApiCalls.sharedCall.searchCustomers(merchant_id: id, name: name, phone: phone, group_id: group_id){ isSuccess, responseData in
+        ApiCalls.sharedCall.searchCustomers(merchant_id: id, name: name, email: email, phone: phone, group_id: group_id){ isSuccess, responseData in
             
             if isSuccess {
                 
@@ -471,8 +480,9 @@ extension CustomerViewController: UITableViewDelegate, UITableViewDataSource {
         cell.customName.text = customerList[indexPath.row].name.capitalized
         
         let mobileNumber = customerList[indexPath.row].phone
-        let formattedNumber = formatPhoneNumber(mobileNumber)
-        cell.customNumber.text = formattedNumber
+//        let formattedNumber = formatPhoneNumber(mobileNumber)
+        let num = ToastClass.sharedToast.formatPhoneNumber(mobileNumber)
+        cell.customNumber.text = num
         
         
         if customerList[indexPath.row].is_disabled == "1" {

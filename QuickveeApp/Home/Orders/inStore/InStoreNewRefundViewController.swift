@@ -4974,7 +4974,8 @@ class InStoreNewRefundViewController: UIViewController {
             }
             else {
                 smallName.append("Mobile")
-                smallValue.append(cust_phone)
+                let num = ToastClass.sharedToast.formatPhoneNumber(cust_phone)
+                smallValue.append(num)
             }
         }
         else if cust_phone == "" || cust_phone.contains("null") {
@@ -4982,13 +4983,15 @@ class InStoreNewRefundViewController: UIViewController {
             }
             else {
                 smallName.append("Mobile")
-                smallValue.append(delivery_phn)
+                let num = ToastClass.sharedToast.formatPhoneNumber(delivery_phn)
+                smallValue.append(num)
             }
         }
         
         else {
             smallName.append("Mobile")
-            smallValue.append(delivery_phn)
+            let num = ToastClass.sharedToast.formatPhoneNumber(delivery_phn)
+            smallValue.append(num)
         }
         
         if smallName.count == 0 {

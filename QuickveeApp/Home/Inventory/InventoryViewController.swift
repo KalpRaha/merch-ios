@@ -269,7 +269,7 @@ class InventoryViewController: UIViewController {
                 searchBar.placeholder = "Search Tags"
             }
             else if currentVC == 6 {
-                searchBar.placeholder = "Search Stock"
+                searchBar.placeholder = "Search Stocktake"
             }
             else {
                 searchBar.placeholder = "Search Lottery"
@@ -299,7 +299,7 @@ class InventoryViewController: UIViewController {
                 searchBar.placeholder = "Search Tags"
             }
             else {
-                searchBar.placeholder = "Search Stock"
+                searchBar.placeholder = "Search Stocktake"
             }
         }
         

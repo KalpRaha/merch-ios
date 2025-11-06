@@ -45,6 +45,7 @@ class FilterCategoryViewController: UIViewController {
     //brandstags arrays
     var selectBrandsTags = [String]()
     var selectAddBrandsTags = [String]()
+    var selectAddTagsStock = [String]()
     
     var brandsTags = [BrandsTags]()
     var subBrandsTags = [BrandsTags]()
@@ -88,6 +89,7 @@ class FilterCategoryViewController: UIViewController {
     
     weak var delegateBrandTagsSelected: BrandsTagsAddDelegate?
     
+    weak var delegateStockTakeAdd: SelectedCategoryBrandsTagsProductsDelegate?
     
     var catMode = ""
     var apiMode = ""
@@ -98,6 +100,7 @@ class FilterCategoryViewController: UIViewController {
     var bogoVarientList = [BogoVariantModel]()
     var variantList = [InventoryVariant]()
     
+    var stockFilter = ""
     
     let loadingIndicator: ProgressView = {
         let progress = ProgressView(colors: [.systemBlue], lineWidth: 5)
@@ -282,6 +285,12 @@ class FilterCategoryViewController: UIViewController {
                 }
             }
             
+            else if catMode == "StockVc" {
+                if category.is_lottery == "0" {
+                    smallres.append(category)
+                }
+            }
+            
             else if catMode == "couponVc" {
                 
             }
@@ -323,6 +332,7 @@ class FilterCategoryViewController: UIViewController {
     func removeTags(tagName: String) {
         
         selectAddBrandsTags.removeAll(where: {$0 == tagName})
+        selectAddTagsStock.removeAll(where: {$0 == tagName})
         tapBlue.removeAll(where: {$0 == tagName})
     }
     
@@ -422,6 +432,7 @@ class FilterCategoryViewController: UIViewController {
             else {
                 for select in selectBrandsTags {
                     selectAddBrandsTags.append(select)
+                    selectAddTagsStock.append(select)
                 }
             }
         }
@@ -661,6 +672,10 @@ class FilterCategoryViewController: UIViewController {
             dismiss(animated: true)
         }
         
+        else if catMode == "StockVc" {
+            dismiss(animated: true)
+        }
+        
         else {
             dismiss(animated: true)
         }
@@ -804,6 +819,20 @@ class FilterCategoryViewController: UIViewController {
             }
         }
         
+        else if catMode == "StockVc" {
+            loadingIndicator.isAnimating = true
+            selectCategory = []
+            tapBlue = []
+            selectAddCategory = []
+            collection.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.loadingIndicator.isAnimating = false
+                self.delegateStockTakeAdd?.getProductsCategoryBrandTag(categoryArray: [], brandArray: [], tagArray: [], filter: self.stockFilter)
+                self.dismiss(animated: true)
+            }
+        }
+        
         else {
             loadingIndicator.isAnimating = true
             selectCategory = []
@@ -912,6 +941,11 @@ class FilterCategoryViewController: UIViewController {
             dismiss(animated: true)
         }
         
+        else if catMode == "StockVc" {
+            delegateStockTakeAdd?.getProductsCategoryBrandTag(categoryArray: selectAddCategory, brandArray: selectAddBrandsTags, tagArray: selectAddTagsStock, filter: self.stockFilter)
+            dismiss(animated: true)
+        }
+        
         else {
             
             delegateVariants?.getProductsCategory(categoryArray: selectAddCategory)
@@ -976,6 +1010,7 @@ extension FilterCategoryViewController: BrandsTagsAddDelegate {
         newBrandTagName = brandtag
         newBrandTag = true
         selectAddBrandsTags = []
+        selectAddTagsStock = []
         setupBrandsApi()
     }
 }
@@ -1295,6 +1330,7 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
                     cell.categoryName.textColor = UIColor(named: "SelectCat")
                     selectAddBrandsTags.append(brandsTags[indexPath.row].title)
+                    selectAddTagsStock.append(brandsTags[indexPath.row].title)
                 }
                 else {
                     cell.categoryName.textColor = .black
@@ -1425,6 +1461,7 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                 else if apiMode == "tags" {
                     let name = brandsTags[indexPath.row]
                     selectAddBrandsTags.append(name.title)
+                    selectAddTagsStock.append(name.title)
                     tapBlue.append(name.title)
                 }
                 else {
@@ -1505,6 +1542,7 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                 else if apiMode == "tags" {
                     let name = brandsTags[indexPath.row]
                     selectAddBrandsTags.append(name.title)
+                    selectAddTagsStock.append(name.title)
                     tapBlue.append(name.title)
                 }
                 else {

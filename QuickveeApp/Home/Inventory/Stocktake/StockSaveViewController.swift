@@ -26,6 +26,10 @@ class StockSaveViewController: UIViewController {
     
     @IBOutlet weak var topView: UIView!
     
+    @IBOutlet weak var employeeName: UILabel!
+    @IBOutlet weak var empTop: NSLayoutConstraint!
+    @IBOutlet weak var empBottom: NSLayoutConstraint!
+    
     @IBOutlet weak var stockName: UILabel!
     
     var stockItemsList = [InventoryVariant]()
@@ -88,6 +92,10 @@ class StockSaveViewController: UIViewController {
         if mode == "add" {
             searchBtn.isHidden = true
             stockName.text = "Create Stocktake"
+            empTop.constant = 0
+            empBottom.constant = 0
+            employeeName.isHidden = true
+            employeeName.text = ""
         }
         else {
             
@@ -129,10 +137,21 @@ class StockSaveViewController: UIViewController {
                           status: "\(res["status"] ?? "")", send_email: "\(res["send_email"] ?? "")",
                           merchant_id: "\(res["merchant_id"] ?? "")", employee_id: "\(res["employee_id"] ?? "")",
                           created_at: "\(res["created_at"] ?? "")", updated_at: "\(res["updated_at"] ?? "")",
-                          stocktake_item: res["stocktake_item"])
+                          employee_name: "\(res["employee_name"] ?? "")", stocktake_item: res["stocktake_item"])
         
         stockName.text = "Stocktake -\(stock.st_id)"
+        empTop.constant = 10
+        empBottom.constant = 10
+        employeeName.isHidden = false
         
+        let name = stock.employee_name
+        
+        if name == "<null>" {
+            employeeName.text = "Employee Name: -"
+        }
+        else {
+            employeeName.text = "Employee Name: \(name)"
+        }
         
         getStockItems(item: stock.stocktake_item)
     }
@@ -195,8 +214,7 @@ class StockSaveViewController: UIViewController {
         
         for res in response {
             
-            let variant = InventoryVariant(id: "\(res["id"] ?? "")", costperItem: "\(res["costperItem"] ?? "")",
-                                           title: "\(res["title"] ?? "")",
+            let variant = InventoryVariant(id: "\(res["id"] ?? "")", costperItem: "\(res["costperItem"] ?? "")", title: "\(res["title"] ?? "")",
                                            isvarient: "\(res["isvarient"] ?? "")", upc: "\(res["upc"] ?? "")",
                                            cotegory: "\(res["cotegory"] ?? "")",
                                            var_id: "\(res["var_id"] ?? "")",
@@ -204,7 +222,8 @@ class StockSaveViewController: UIViewController {
                                            quantity: "\(res["quantity"] ?? "")", price: "\(res["price"] ?? "")",
                                            custom_code: "\(res["custom_code"] ?? "")", variant: "\(res["variant"] ?? "")",
                                            var_price: "\(res["var_price"] ?? "")", is_lottery: "\(res["is_lottery"] ?? "")",
-                                           var_costperItem: "\(res["var_costperItem"] ?? "")")
+                                           var_costperItem: "\(res["var_costperItem"] ?? "")", brand: "\(res["brand"] ?? "")",
+                                           brand_id: "\(res["brand_id"] ?? "")", tags: "\(res["tags"] ?? "")")
             
             small.append(variant)
         }

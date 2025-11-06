@@ -702,15 +702,15 @@ extension OrderInStoreViewController: UITableViewDelegate, UITableViewDataSource
             
             
             if order.delivery_phn == "" && order.customer_phone == "" {
-                cell.inStoreMobileValue.text = "xxxxxxxxxx"
+                cell.inStoreMobileValue.text = "(xxx) xxx-xxxx"
             }
             
             else if order.delivery_phn == "" && order.customer_phone == "<null>" {
-                cell.inStoreMobileValue.text = "xxxxxxxxxx"
+                cell.inStoreMobileValue.text = "(xxx) xxx-xxxx"
             }
             
             else if order.delivery_phn == "<null>" && order.customer_phone == "" {
-                cell.inStoreMobileValue.text = "xxxxxxxxxx"
+                cell.inStoreMobileValue.text = "(xxx) xxx-xxxx"
             }
             
             else if order.delivery_phn == "<null>" && order.customer_phone == "<null>" {
@@ -720,10 +720,12 @@ extension OrderInStoreViewController: UITableViewDelegate, UITableViewDataSource
             else {
                 
                 if order.delivery_phn == "" {
-                    cell.inStoreMobileValue.text = order.customer_phone
+                    let num = ToastClass.sharedToast.formatPhoneNumber(order.customer_phone)
+                    cell.inStoreMobileValue.text = num
                 }
                 else {
-                    cell.inStoreMobileValue.text = order.delivery_phn
+                    let num = ToastClass.sharedToast.formatPhoneNumber(order.delivery_phn)
+                    cell.inStoreMobileValue.text = num
                 }
             }
             
@@ -864,15 +866,15 @@ extension OrderInStoreViewController: UITableViewDelegate, UITableViewDataSource
             
             
             if order.delivery_phn == "" && order.customer_phone == "" {
-                cell.inStoreMobileValue.text = "xxxxxxxxxx"
+                cell.inStoreMobileValue.text = "(xxx) xxx-xxxx"
             }
             
             else if order.delivery_phn == "" && order.customer_phone == "<null>" {
-                cell.inStoreMobileValue.text = "xxxxxxxxxx"
+                cell.inStoreMobileValue.text = "(xxx) xxx-xxxx"
             }
             
             else if order.delivery_phn == "<null>" && order.customer_phone == "" {
-                cell.inStoreMobileValue.text = "xxxxxxxxxx"
+                cell.inStoreMobileValue.text = "(xxx) xxx-xxxx"
             }
             
             else if order.delivery_phn == "<null>" && order.customer_phone == "<null>" {
@@ -882,10 +884,12 @@ extension OrderInStoreViewController: UITableViewDelegate, UITableViewDataSource
             else {
                 
                 if order.delivery_phn == "" {
-                    cell.inStoreMobileValue.text = order.customer_phone
+                    let num = ToastClass.sharedToast.formatPhoneNumber(order.customer_phone)
+                    cell.inStoreMobileValue.text = num
                 }
                 else {
-                    cell.inStoreMobileValue.text = order.delivery_phn
+                    let num = ToastClass.sharedToast.formatPhoneNumber(order.delivery_phn)
+                    cell.inStoreMobileValue.text = num
                 }
             }
             

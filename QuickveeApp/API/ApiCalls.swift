@@ -2943,13 +2943,14 @@ extension ApiCalls {
         }
     }
     
-    func searchCustomers(merchant_id: String, name: String, phone: String,group_id: String,  completion:@escaping(Bool,[String:Any]) -> ()) {
+    func searchCustomers(merchant_id: String, name: String, email: String, phone: String, group_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.CUSTOMERS_LIST
         
         let parameters: [String:Any] = [
             "merchant_id": merchant_id,
             "name": name,
+            "email": email,
             "phone_no": phone,
             "group_id": group_id
         ]

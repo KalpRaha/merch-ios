@@ -101,7 +101,7 @@ class StockTakeViewController: UIViewController {
                                   total_discrepancy: "\(res["total_discrepancy"] ?? "")", status: "\(res["status"] ?? "")",
                                   send_email: "\(res["send_email"] ?? "")", merchant_id: "\(res["merchant_id"] ?? "")",
                                   employee_id: "\(res["employee_id"] ?? "")", created_at: "\(res["created_at"] ?? "")",
-                                  updated_at: "\(res["updated_at"] ?? "")")
+                                  updated_at: "\(res["updated_at"] ?? "")", employee_name: "\(res["employee_name"] ?? "")")
             small.append(stock)
         }
         stockList = small
@@ -223,15 +223,15 @@ extension StockTakeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        let cell = tableview.dequeueReusableCell(withIdentifier: "stock", for: indexPath) as! StockTableViewCell
+        
         if searching {
-            
-            let cell = tableview.dequeueReusableCell(withIdentifier: "stock", for: indexPath) as! StockTableViewCell
             
             let stock = searchStockList[indexPath.row]
             
             cell.stockName.text = stock.st_id
             let ordDate = ToastClass.sharedToast.setStockDateFormat(dateStr:  stock.created_at)
-           
+            
             cell.stockDate.text = ordDate
             
             //cell.stockDate.text = stock.created_at
@@ -251,7 +251,7 @@ extension StockTakeViewController: UITableViewDelegate, UITableViewDataSource {
             else {
                 cell.stockStatus.text = "Void"
                 cell.stockStatus.textColor = UIColor(hexString: "#F55353")
-
+                
             }
             
             cell.stockQtyValue.text = stock.total_qty
@@ -265,21 +265,17 @@ extension StockTakeViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.stockDisValue.text = "+$\(cost)"
             }
             
-            cell.uppperview.layer.cornerRadius = 10
-            cell.uppperview.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-            
-            cell.borderView.layer.cornerRadius = 10
-            cell.borderView.layer.shadowColor =  UIColor(red: 0, green: 0, blue: 0, alpha: 0.09).cgColor
-            cell.borderView.layer.shadowOpacity = 1
-            cell.borderView.layer.shadowOffset = CGSize.zero
-            cell.borderView.layer.shadowRadius = 3
-            
-            return cell
+            cell.empName.text = "Employee Name"
+            let name = stock.employee_name
+            if name == "<null>" {
+                cell.empNameValue.text = "-"
+            }
+            else {
+                cell.empNameValue.text = name
+            }
         }
         
         else {
-            
-            let cell = tableview.dequeueReusableCell(withIdentifier: "stock", for: indexPath) as! StockTableViewCell
             
             let stock = stockList[indexPath.row]
             
@@ -313,7 +309,7 @@ extension StockTakeViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.stockQtyValue.text = stock.total_qty
                         
-            var cost = stock.total_discrepancy_cost
+            let cost = stock.total_discrepancy_cost
             
             if cost == "0.00" {
                 cell.stockDisValue.text = "$0.00"
@@ -322,17 +318,27 @@ extension StockTakeViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.stockDisValue.text = "+$\(cost)"
             }
             
-            cell.uppperview.layer.cornerRadius = 10
-            cell.uppperview.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+            cell.empName.text = "Employee Name"
             
-            cell.borderView.layer.cornerRadius = 10
-            cell.borderView.layer.shadowColor =  UIColor(red: 0, green: 0, blue: 0, alpha: 0.09).cgColor
-            cell.borderView.layer.shadowOpacity = 1
-            cell.borderView.layer.shadowOffset = CGSize.zero
-            cell.borderView.layer.shadowRadius = 3
-            
-            return cell
+            let name = stock.employee_name
+            if name == "<null>" {
+                cell.empNameValue.text = "-"
+            }
+            else {
+                cell.empNameValue.text = name
+            }
         }
+        
+        cell.uppperview.layer.cornerRadius = 10
+        cell.uppperview.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        cell.borderView.layer.cornerRadius = 10
+        cell.borderView.layer.shadowColor =  UIColor(red: 0, green: 0, blue: 0, alpha: 0.09).cgColor
+        cell.borderView.layer.shadowOpacity = 1
+        cell.borderView.layer.shadowOffset = CGSize.zero
+        cell.borderView.layer.shadowRadius = 3
+        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -375,6 +381,7 @@ struct StockTake {
     let employee_id: String
     let created_at: String
     let updated_at: String
+    let employee_name: String
 }
 //        0 = completed
 //        1 = draft

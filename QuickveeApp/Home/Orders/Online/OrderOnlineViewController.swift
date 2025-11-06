@@ -1271,7 +1271,8 @@ extension OrderOnlineViewController: UITableViewDelegate, UITableViewDataSource 
             }
             
             cell.mobileLbl.text = "Mobile:"
-            cell.mobNumber.text = order.delivery_phn
+            let num = ToastClass.sharedToast.formatPhoneNumber(order.delivery_phn)
+            cell.mobNumber.text = num
             
             cell.orderIdLbl.text = "Order ID:"
             cell.orderIdValue.text = order.order_id
@@ -1530,7 +1531,8 @@ extension OrderOnlineViewController: UITableViewDelegate, UITableViewDataSource 
             }
             
             cell.mobileLbl.text = "Mobile:"
-            cell.mobNumber.text = order.delivery_phn
+            let num = ToastClass.sharedToast.formatPhoneNumber(order.delivery_phn)
+            cell.mobNumber.text = num
             
             cell.orderIdLbl.text = "Order ID:"
             cell.orderIdValue.text = order.order_id

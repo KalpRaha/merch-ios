@@ -28,5 +28,7 @@ class StockTableViewCell: UITableViewCell {
     
     @IBOutlet weak var uppperview: UIView!
     
+    @IBOutlet weak var empName: UILabel!
     
+    @IBOutlet weak var empNameValue: UILabel!
 }

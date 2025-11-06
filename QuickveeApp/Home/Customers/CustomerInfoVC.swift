@@ -230,10 +230,10 @@ class CustomerInfoVC: UIViewController {
     }
   
    
-    func formatPhoneNumber(_ number: String) -> String {
-        let formattedNumber = number.replacingOccurrences(of: "(\\d{3})(\\d{3})(\\d{4})", with: "$1-$2-$3", options: .regularExpression, range: nil)
-        return formattedNumber
-    }
+//    func formatPhoneNumber(_ number: String) -> String {
+//        let formattedNumber = number.replacingOccurrences(of: "(\\d{3})(\\d{3})(\\d{4})", with: "$1-$2-$3", options: .regularExpression, range: nil)
+//        return formattedNumber
+//    }
     
     
  
@@ -1109,8 +1109,8 @@ extension CustomerInfoVC: UITableViewDelegate, UITableViewDataSource {
                 
             }
             let mobileNumber = cust.phone
-            let formattedNumber = formatPhoneNumber(mobileNumber)
-            cell.mobileValueLbl.text = formattedNumber
+            let num = ToastClass.sharedToast.formatPhoneNumber(mobileNumber)
+            cell.mobileValueLbl.text = num
             
             
             if cust.address_line_1 != "<null>" && cust.address_line_1 != "" {

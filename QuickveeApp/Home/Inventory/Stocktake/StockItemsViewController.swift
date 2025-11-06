@@ -24,6 +24,7 @@ class StockItemsViewController: UIViewController {
     @IBOutlet weak var stackItems: UIStackView!
     @IBOutlet weak var stackItemHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var empName: UILabel!
     
     var stock_id = ""
     var stock_status = ""
@@ -112,7 +113,7 @@ class StockItemsViewController: UIViewController {
                           status: "\(res["status"] ?? "")", send_email: "\(res["send_email"] ?? "")",
                           merchant_id: "\(res["merchant_id"] ?? "")", employee_id: "\(res["employee_id"] ?? "")",
                           created_at: "\(res["created_at"] ?? "")", updated_at: "\(res["updated_at"] ?? "")",
-                          stocktake_item: res["stocktake_item"])
+                          employee_name: "\(res["employee_name"] ?? "")", stocktake_item: res["stocktake_item"])
         
         stockName.text = "Stocktake -\(stock.st_id)"
         
@@ -165,6 +166,15 @@ class StockItemsViewController: UIViewController {
         
         totalDiscrepancy.text = discrepancyEmail
         totalDisCost.text = costEmail
+        
+        let name = stock.employee_name
+        
+        if name == "<null>" {
+            empName.text = "Employee Name: -"
+        }
+        else {
+            empName.text = "Employee Name: \(name)"
+        }
         
         getStockItems(item: stock.stocktake_item)
     }
@@ -247,7 +257,8 @@ class StockItemsViewController: UIViewController {
                                            quantity: "\(res["quantity"] ?? "")", price: "\(res["price"] ?? "")",
                                            custom_code: "\(res["custom_code"] ?? "")", variant: "\(res["variant"] ?? "")",
                                            var_price: "\(res["var_price"] ?? "")", is_lottery: "\(res["is_lottery"] ?? "")",
-                                           var_costperItem: "\(res["var_costperItem"] ?? "")")
+                                           var_costperItem: "\(res["var_costperItem"] ?? "")", brand: "\(res["brand"] ?? "")",
+                                           brand_id: "\(res["brand_id"] ?? "")", tags: "\(res["tags"] ?? "")")
             
             small.append(variant)
         }
@@ -655,6 +666,7 @@ struct Stock {
     let employee_id: String
     let created_at: String
     let updated_at: String
+    let employee_name: String
     let stocktake_item: Any
 }
 

@@ -166,7 +166,8 @@ class VariantViewController: UIViewController {
                                            quantity: "\(res["quantity"] ?? "")", price: "\(res["price"] ?? "")",
                                            custom_code: "\(res["custom_code"] ?? "")", variant: "\(res["variant"] ?? "")",
                                            var_price: "\(res["var_price"] ?? "")", is_lottery: "\(res["is_lottery"] ?? "")",
-                                           var_costperItem: "\(res["var_costperItem"] ?? "")")
+                                           var_costperItem: "\(res["var_costperItem"] ?? "")", brand: "\(res["brand"] ?? "")",
+                                           brand_id: "\(res["brand_id"] ?? "")", tags: "\(res["tags"] ?? "")")
             
             
             smallres.append(variant)
@@ -205,7 +206,8 @@ class VariantViewController: UIViewController {
                                                    quantity: "\(res["quantity"] ?? "")", price: "\(res["price"] ?? "")",
                                                    custom_code: "\(res["custom_code"] ?? "")", variant: "\(res["variant"] ?? "")",
                                                    var_price: "\(res["var_price"] ?? "")", is_lottery: "\(res["is_lottery"] ?? "")",
-                                                   var_costperItem: "\(res["var_costperItem"] ?? "")")
+                                                   var_costperItem: "\(res["var_costperItem"] ?? "")", brand: "\(res["brand"] ?? "")",
+                                                   brand_id: "\(res["brand_id"] ?? "")", tags: "\(res["tags"] ?? "")")
                     
                     
                     
@@ -264,7 +266,8 @@ class VariantViewController: UIViewController {
                                            quantity: "\(res["quantity"] ?? "")", price: "\(res["price"] ?? "")",
                                            custom_code: "\(res["custom_code"] ?? "")", variant: "\(res["variant"] ?? "")",
                                            var_price: "\(res["var_price"] ?? "")", is_lottery: "\(res["is_lottery"] ?? "")",
-                                           var_costperItem: "\(res["var_costperItem"] ?? "")")
+                                           var_costperItem: "\(res["var_costperItem"] ?? "")", brand: "\(res["brand"] ?? "")",
+                                           brand_id: "\(res["brand_id"] ?? "")", tags: "\(res["tags"] ?? "")")
             
             variantArr.append(variant)
             
@@ -758,6 +761,9 @@ struct InventoryVariant {
     let var_price: String
     let is_lottery: String
     let var_costperItem: String
+    let brand: String
+    let brand_id: String
+    let tags: String
 }
 
 struct MixVariantModel {

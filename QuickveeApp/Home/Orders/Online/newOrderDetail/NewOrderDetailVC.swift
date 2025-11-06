@@ -1135,7 +1135,8 @@ class NewOrderDetailVC: UIViewController {
         ordertypeValueLbl.textColor = UIColor(hexString: "#CE590B")
         
         nameValueLbl.text = order.deliver_name
-        phoneValueLbl.text = order.delivery_phn
+        let num = ToastClass.sharedToast.formatPhoneNumber(order.delivery_phn)
+        phoneValueLbl.text = num
         emailValueLbl.text = order.email
         customerValue.text = order.customer_id
         

@@ -128,6 +128,20 @@ extension ToastClass {
         }
         return ""
     }
+    
+    func formatPhoneNumber(_ number: String) -> String {
+        // Remove any non-digit characters
+        let digits = number.filter { $0.isNumber }
+        
+        // Ensure it's exactly 10 digits
+        guard digits.count == 10 else { return number }
+        
+        let areaCode = digits.prefix(3)
+        let middle = digits.dropFirst(3).prefix(3)
+        let last = digits.suffix(4)
+        
+        return "(\(areaCode)) \(middle)-\(last)"
+    }
 }
 
 extension UIColor {
