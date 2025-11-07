@@ -78,12 +78,16 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
         
         tableview.delegate = self
         tableview.dataSource = self
+        
+        universalViewClick()
+        
+        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        variantListApi()
+       
         setMode()
         print("$$\(itemsEditIds)")
     }
@@ -104,18 +108,28 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
         startDate.delegate = self
         endDate.delegate = self
         addVariantBtn.layer.cornerRadius = 10
+        universalView.layer.cornerRadius = 5
+        specificItemView.layer.cornerRadius = 5
     }
     
     
     func setMode(){
         if mode == "edit" {
-            
-            couponCodeTextfield.text = couponItemArray?.name
-            descriptionText.text = couponItemArray?.description
-            startDate.text = couponItemArray?.date_valid
-            endDate.text = couponItemArray?.date_expire
-            discountText.text = couponItemArray?.discount
-          
+         
+            if couponItemArray?.type == "1" {
+                couponCodeTextfield.text = couponItemArray?.name
+                descriptionText.text = couponItemArray?.description
+                startDate.text = couponItemArray?.date_valid
+                endDate.text = couponItemArray?.date_expire
+                discountText.text = couponItemArray?.discount
+            }
+            else {
+                couponCodeTextfield.text = couponItemArray?.name
+                descriptionText.text = couponItemArray?.description
+                startDate.text = couponItemArray?.date_valid
+                endDate.text = couponItemArray?.date_expire
+                discountText.text = couponItemArray?.discount
+            }
             
         }
         else {
@@ -234,6 +248,7 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
         specificLbl.textColor = UIColor(hexString: "#0A64F9")
         universalLbl.textColor = UIColor.black
         tableview.isHidden = false
+        variantListApi()
     }
     
     @IBAction func backBtnClick(_ sender: UIButton) {
