@@ -596,13 +596,14 @@ class NewOrderRefundDetailVC: UIViewController {
         
     }
     
-    func calculateNetSale(subtotal: String, LPR: String, discount :String)  -> String {
+    func calculateNetSale(subtotal: String, c_code_amt: String,LPR: String, discount :String)  -> String {
         
         let sub = roundOf(item: subtotal)
+        let c_c_amt = roundOf(item: c_code_amt)
         let lpr = roundOf(item: LPR)
         let dis = roundOf(item: discount)
         
-        let net = sub - lpr - dis
+        let net = sub - c_c_amt - lpr - dis
         let netSale = String(format:"%.02f", net)
         return String(netSale)
     }
@@ -677,12 +678,12 @@ class NewOrderRefundDetailVC: UIViewController {
         return String(store_credit)
     }
     
-    func calDisc(coupon_code: String,bogo_discount: String) -> String {
+    func calDisc(bogo_discount: String) -> String {
        
-        let c_code =  roundOf(item: coupon_code)
+       
         let bogo_disc = roundOf(item: bogo_discount)
         
-        let Totaldisc =  c_code + bogo_disc
+        let Totaldisc =  bogo_disc
        
         let  total_discount = String(format: "%.2f", Totaldisc)
         
@@ -1142,9 +1143,9 @@ class NewOrderRefundDetailVC: UIViewController {
         
         
         
-        var discount = calDisc(coupon_code: coupon_code_amt, bogo_discount: bogo_discount)
+        let discount = calDisc( bogo_discount: bogo_discount)
         
-        let net = calculateNetSale(subtotal: order.subtotal, LPR: points_amt_spent, discount: discount)
+        let net = calculateNetSale(subtotal: order.subtotal, c_code_amt: coupon_code_amt, LPR: points_amt_spent, discount: discount)
         netSaleValue.text = "$\(net)"
         
         netSale = "\(net)"
@@ -1164,12 +1165,15 @@ class NewOrderRefundDetailVC: UIViewController {
         
         
         var smallarrSummary = [Grand]()
-               
-               smallarrSummary.append(Grand(cash: "Loyalty Points Redeemed (\(points_applied_Round))", cashValue: String(format: "%.02f", roundOf(item: points_amt_spent ))))
-               smallarrSummary.append(Grand(cash: "Discount", cashValue: String(format: "%.02f", roundOf(item: discount))))
-               smallarrSummary.append(Grand(cash: "Coupon", cashValue: coupon_code))
-               smallarrSummary.append(Grand(cash: "Custom Discount", cashValue: String(format: "%.02f", roundOf(item: custom_discount))))
-               arrOfOrderSummary = smallarrSummary
+        
+        smallarrSummary.append(Grand(cash: "Loyalty Points Redeemed (\(points_applied_Round))", cashValue: String(format: "%.02f", roundOf(item: points_amt_spent ))))
+        smallarrSummary.append(Grand(cash: "Discount", cashValue: String(format: "%.02f", roundOf(item: discount))))
+        if coupon_code_amt != "0.0" && coupon_code_amt != "0.00" && coupon_code_amt != "-0.0" &&
+            coupon_code_amt != "-0.00" && coupon_code_amt != "0" && coupon_code_amt != "" {
+            smallarrSummary.append(Grand(cash: "Coupon(\(coupon_code))", cashValue:  coupon_code_amt))
+        }
+        // smallarrSummary.append(Grand(cash: "Custom Discount", cashValue: String(format: "%.02f", roundOf(item: custom_discount))))
+        arrOfOrderSummary = smallarrSummary
         
         
         let smallLoyalty = [GrandLoyalty]()

@@ -730,13 +730,14 @@ class NewOrderDetailVC: UIViewController {
         return String(final_price)
     }
     
-    func calculateNetSale(subtotal: String, LPR: String, discount :String)  -> String {
+    func calculateNetSale(subtotal: String,c_code_amt: String, LPR: String, discount :String)  -> String {
         
         let sub = roundOf(item: subtotal)
+        let c_code_a = roundOf(item: c_code_amt)
         let lpr = roundOf(item: LPR)
         let dis = roundOf(item: discount)
         
-        let net = sub - lpr - dis
+        let net = sub - c_code_a - lpr - dis
         let netSale = String(format:"%.02f", net)
         return String(netSale)
     }
@@ -899,12 +900,12 @@ class NewOrderDetailVC: UIViewController {
         }
     
     
-    func calDisc(coupon_code: String,bogo_discount: String) -> String {
+    func calDisc(bogo_discount: String) -> String {
        
-        let c_code =  roundOf(item: coupon_code)
+       // let c_code =  roundOf(item: coupon_code)
         let bogo_disc = roundOf(item: bogo_discount)
         
-        let Totaldisc =  c_code + bogo_disc
+        let Totaldisc =  bogo_disc
         
         let  total_discount = String(format: "%.2f", Totaldisc)
         
@@ -1202,6 +1203,8 @@ class NewOrderDetailVC: UIViewController {
         couponCode = c_code
   
         let coupon_code = couponCode?.coupon_code ?? ""
+        print(coupon_code)
+        
         let coupon_code_amt = couponCode?.coupon_code_amt ?? ""
         
         let points_earned = couponCode?.loyalty_point_earned ?? ""
@@ -1216,11 +1219,11 @@ class NewOrderDetailVC: UIViewController {
         let points_applied_Round = String(format: "%.02f", roundOf(item: points_applied ))
         let bogo_discount = couponCode?.bogo_discount ?? ""
    
-        var discount = calDisc(coupon_code: coupon_code_amt, bogo_discount: bogo_discount)
+        let discount = calDisc(bogo_discount: bogo_discount)
         
         //net sel
        
-        let net = calculateNetSale(subtotal: order.subtotal, LPR: points_amt_spent, discount: discount)
+        let net = calculateNetSale(subtotal: order.subtotal, c_code_amt: coupon_code_amt, LPR: points_amt_spent, discount: discount)
  
         netSaleValue.text = "$\(net)"
         
@@ -1273,15 +1276,20 @@ class NewOrderDetailVC: UIViewController {
         arrOfFees = smallfees
         
         //OrderSummary
-   
+        
         var smallarrSummary = [Grand]()
-               
-               smallarrSummary.append(Grand(cash: "Loyalty Points Redeemed (\(points_applied_Round))", cashValue: String(format: "%.02f", roundOf(item: points_amt_spent ))))
-               smallarrSummary.append(Grand(cash: "Discount", cashValue: String(format: "%.02f", roundOf(item: discount))))
-               smallarrSummary.append(Grand(cash: "Coupon", cashValue: coupon_code))
-               smallarrSummary.append(Grand(cash: "Custom Discount", cashValue: String(format: "%.02f", roundOf(item: custom_discount))))
-               arrOfOrderSummary = smallarrSummary
-     
+        
+        smallarrSummary.append(Grand(cash: "Loyalty Points Redeemed (\(points_applied_Round))", cashValue: String(format: "%.02f", roundOf(item: points_amt_spent ))))
+        smallarrSummary.append(Grand(cash: "Discount", cashValue: String(format: "%.02f", roundOf(item: discount))))
+        if coupon_code_amt != "0.0" && coupon_code_amt != "0.00" && coupon_code_amt != "-0.0" &&
+            coupon_code_amt != "-0.00" && coupon_code_amt != "0" && coupon_code_amt != "" {
+            
+            smallarrSummary.append(Grand(cash: "Coupon(\(coupon_code))", cashValue: coupon_code_amt ))
+            
+        }
+        //smallarrSummary.append(Grand(cash: "Custom Discount", cashValue: String(format: "%.02f", roundOf(item: custom_discount))))
+        arrOfOrderSummary = smallarrSummary
+        
         var smallLoyalty = [GrandLoyalty]()
         
         if points_earned != "0.0" && points_earned != "0.00" && points_earned != "-0.0" &&
@@ -2988,23 +2996,25 @@ extension NewOrderDetailVC : UITableViewDelegate , UITableViewDataSource {
             
         }
         else if tableView == orderSummaryTableView {
-                   
-                   let cell = orderSummaryTableView.dequeueReusableCell(withIdentifier: "OrderSummaryCell", for: indexPath) as! OrderSummaryCell
-                   
-                   cell.nameLbl.text = arrOfOrderSummary[indexPath.row].cash
-                   if arrOfOrderSummary[indexPath.row].cash == "Coupon" {
-                       cell.valueLbl.text = "\(arrOfOrderSummary[indexPath.row].cashValue)"
-                   }else {
-                       cell.valueLbl.text = "-$\(arrOfOrderSummary[indexPath.row].cashValue)"
-                   }
-                  
-                   
-                   
-                   let selectedBackgroundView = UIView()
-                   selectedBackgroundView.backgroundColor = UIColor.clear
-                   cell.selectedBackgroundView = selectedBackgroundView
-                   return cell
-               }
+            
+            let cell = orderSummaryTableView.dequeueReusableCell(withIdentifier: "OrderSummaryCell", for: indexPath) as! OrderSummaryCell
+            
+            cell.nameLbl.text = arrOfOrderSummary[indexPath.row].cash
+            if arrOfOrderSummary[indexPath.row].cash == "Coupon" {
+                cell.valueLbl.text = "\(arrOfOrderSummary[indexPath.row].cashValue)"
+           
+            }
+            else {
+                cell.valueLbl.text = "-$\(arrOfOrderSummary[indexPath.row].cashValue)"
+            }
+            
+            
+            
+            let selectedBackgroundView = UIView()
+            selectedBackgroundView.backgroundColor = UIColor.clear
+            cell.selectedBackgroundView = selectedBackgroundView
+            return cell
+        }
         
         else if tableView == taxTableView {
             
