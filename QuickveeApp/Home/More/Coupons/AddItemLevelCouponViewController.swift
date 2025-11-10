@@ -79,9 +79,7 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
         tableview.delegate = self
         tableview.dataSource = self
         
-        universalViewClick()
-        
-        
+  
     }
     
     
@@ -90,6 +88,14 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
        
         setMode()
         print("$$\(itemsEditIds)")
+        
+        if couponItemArray?.type == "2" {
+            specificItemViewClick()
+            variantListApi()
+        }
+        else {
+            universalViewClick()
+        }
     }
     
     func setUI(){
@@ -372,13 +378,10 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
         }
         varient_List = small
         print(varient_List)
-        if couponItemArray?.type == "2" {
+       
             getEditItemsIds()
             getEditVarients(list: varient_List)
-        }
-        else {
-            tableview.isHidden = true
-        }
+       
     }
     
     
