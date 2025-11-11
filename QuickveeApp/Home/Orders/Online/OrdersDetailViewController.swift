@@ -2863,6 +2863,7 @@ struct Cart_Data {
     let vendor_name: String
     let brand_name: String
     let brand_id: String
+    let custom_discount_amt: String
 }
 
 struct Split_Data {

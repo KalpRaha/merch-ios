@@ -1159,7 +1159,7 @@ class InStoreRefundViewController: UIViewController {
                                  vendor_id: "\(res["vendor_id"] ?? "")",
                                  vendor_name: "\(res["vendor_name"] ?? "")",
                                  brand_name: "\(res["brand_name"] ?? "")",
-                                 brand_id: "\(res["brand_id"] ?? "")")
+                                 brand_id: "\(res["brand_id"] ?? "")", custom_discount_amt: "\(res["custom_discount_amt"] ?? "")")
             
             if cart.is_refunded == "1" {
                 if smallrefcart.count != 0 {

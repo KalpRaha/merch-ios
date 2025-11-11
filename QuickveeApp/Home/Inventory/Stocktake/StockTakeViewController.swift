@@ -104,8 +104,8 @@ class StockTakeViewController: UIViewController {
                                   updated_at: "\(res["updated_at"] ?? "")", employee_name: "\(res["employee_name"] ?? "")")
             small.append(stock)
         }
-        stockList = small
-        subStockList = small
+        stockList = small.reversed()
+        subStockList = stockList
         
         if stockList.count == 0 {
            
@@ -265,7 +265,7 @@ extension StockTakeViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.stockDisValue.text = "+$\(cost)"
             }
             
-            cell.empName.text = "Employee Name"
+            cell.empName.text = "Performed By"
             let name = stock.employee_name
             if name == "<null>" {
                 cell.empNameValue.text = "-"
@@ -318,7 +318,7 @@ extension StockTakeViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.stockDisValue.text = "+$\(cost)"
             }
             
-            cell.empName.text = "Employee Name"
+            cell.empName.text = "Performed By"
             
             let name = stock.employee_name
             if name == "<null>" {

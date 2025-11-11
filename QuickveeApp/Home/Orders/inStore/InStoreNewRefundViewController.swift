@@ -5017,6 +5017,7 @@ class InStoreNewRefundViewController: UIViewController {
         let smallres = cart as! [[String:Any]]
         var smallcart = [Cart_Data]()
         var smallrefcart = [Cart_Data]()
+        var custom_discount_small = [String]()
         
         var taxcart = [Cart_Data]()
         
@@ -5061,7 +5062,7 @@ class InStoreNewRefundViewController: UIViewController {
                                  vendor_id: "\(res["vendor_id"] ?? "")",
                                  vendor_name: "\(res["vendor_name"] ?? "")",
                                  brand_name: "\(res["brand_name"] ?? "")",
-                                 brand_id: "\(res["brand_id"] ?? "")")
+                                 brand_id: "\(res["brand_id"] ?? "")", custom_discount_amt: "\(res["custom_discount_amt"] ?? "")")
             
             taxcart.append(cart)
             
@@ -5181,6 +5182,19 @@ class InStoreNewRefundViewController: UIViewController {
             else {
                 smallrefcart.append(cart)
             }
+            
+            custom_discount_small.append(cart.custom_discount_amt)
+        }
+        
+        let customdis = calculateRefCustomDiscount(discountArr: custom_discount_small)
+        let coupon_code = couponCode?.coupon_code ?? ""
+        
+        if customdis != "0.0" && customdis != "0.00" && customdis != "-0.0" && customdis != "-0.00" &&
+            customdis != "0" && customdis != "" && handleZero(value: customdis) {
+            grossRefundLabel.append("Coupon")
+            grossRefundValue.append(coupon_code)
+            grossRefundLabel.append("Coupon Discount")
+            grossRefundValue.append(String(format: "%.02f", roundOf(item: customdis)))
         }
         
         let tax = orderDetailRefund?.tax ?? "0.00"
@@ -5379,6 +5393,24 @@ class InStoreNewRefundViewController: UIViewController {
         let calc_amt = amt1 - amt2
         return String(calc_amt)
         
+    }
+    
+    func calculateRefCustomDiscount(discountArr: [String]) -> String {
+        
+        var total = 0.00
+        
+        for pay in discountArr {
+            
+            for item in pay {
+                var itemDollar = String(item)
+                if itemDollar.starts(with: "$") {
+                    itemDollar.removeFirst()
+                }
+                total += Double(itemDollar) ?? 0.00
+            }
+        }
+        print(total)
+        return String(total)
     }
     
     func calculateGrandTotal() -> String {

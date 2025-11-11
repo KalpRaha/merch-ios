@@ -70,7 +70,7 @@ class SetupLoyaltyViewController: UIViewController {
         createCustomTextField(textField: minPoints)
         
         pointsAwarded.label.text = "$1 = "
-        pointsRedem.label.text = "1 Point = "
+        pointsRedem.label.text = "1 Point = $"
         minPoints.label.text = "Minimum Points Redemption"
         
         updateBtn.layer.cornerRadius = 10

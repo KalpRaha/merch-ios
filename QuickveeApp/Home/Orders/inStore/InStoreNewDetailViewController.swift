@@ -6305,6 +6305,7 @@ class InStoreNewDetailViewController: UIViewController {
         let smallres = cart as! [[String:Any]]
         var smallcart = [Cart_Data]()
         var smallrefcart = [Cart_Data]()
+        var custom_discount_small = [String]()
         
         var taxcart = [Cart_Data]()
         
@@ -6327,7 +6328,7 @@ class InStoreNewDetailViewController: UIViewController {
                                            adjust_price: "", use_point: "", earn_point: "", lp_discount_amt: "",
                                            other_taxes_rate_desc: "", other_taxes_refund_desc: "",
                                            default_tax_refund_amount: "", other_taxes_refund_amount: "",
-                                           inventory_price: total_lottery, vendor_id: "", vendor_name: "", brand_name: "", brand_id: ""))
+                                           inventory_price: total_lottery, vendor_id: "", vendor_name: "", brand_name: "", brand_id: "", custom_discount_amt: ""))
             }
             
             if isCartScratcher == "1" {
@@ -6344,7 +6345,7 @@ class InStoreNewDetailViewController: UIViewController {
                                            adjust_price: "", use_point: "", earn_point: "", lp_discount_amt: "",
                                            other_taxes_rate_desc: "", other_taxes_refund_desc: "",
                                            default_tax_refund_amount: "", other_taxes_refund_amount: "",
-                                           inventory_price: total_lottery, vendor_id: "", vendor_name: "", brand_name: "", brand_id: ""))
+                                           inventory_price: total_lottery, vendor_id: "", vendor_name: "", brand_name: "", brand_id: "", custom_discount_amt: ""))
             }
             
             countItems = smallcart.count
@@ -6394,7 +6395,7 @@ class InStoreNewDetailViewController: UIViewController {
                                      vendor_id: "\(res["vendor_id"] ?? "")",
                                      vendor_name: "\(res["vendor_name"] ?? "")",
                                      brand_name: "\(res["brand_name"] ?? "")",
-                                     brand_id: "\(res["brand_id"] ?? "")")
+                                     brand_id: "\(res["brand_id"] ?? "")", custom_discount_amt: "\(res["custom_discount_amt"] ?? "")")
                 
                 taxcart.append(cart)
                 
@@ -6511,7 +6512,20 @@ class InStoreNewDetailViewController: UIViewController {
                 else {
                     smallcart.append(cart)
                 }
+                
+                custom_discount_small.append(cart.custom_discount_amt)
             }
+        }
+        
+        let customdis = calculateCustomDiscount(discountArr: custom_discount_small)
+        let coupon_code = couponCode?.coupon_code ?? ""
+        
+        if customdis != "0.0" && customdis != "0.00" && customdis != "-0.0" && customdis != "-0.00" &&
+            customdis != "0" && customdis != "" && handleZero(value: customdis) {
+            grossLabel.append("Coupon")
+            grossValue.append(coupon_code)
+            grossLabel.append("Coupon Discount")
+            grossValue.append(String(format: "%.02f", roundOf(item: customdis)))
         }
         
         let tax = orderDetail?.tax ?? "0.00"
@@ -7267,6 +7281,24 @@ class InStoreNewDetailViewController: UIViewController {
         let total = amt_doub - ref_amt_doub
         return String(total)
         
+    }
+    
+    func calculateCustomDiscount(discountArr: [String]) -> String {
+        
+        var total = 0.00
+        
+        for pay in discountArr {
+            
+            for item in pay {
+                var itemDollar = String(item)
+                if itemDollar.starts(with: "$") {
+                    itemDollar.removeFirst()
+                }
+                total += Double(itemDollar) ?? 0.00
+            }
+        }
+        print(total)
+        return String(total)
     }
     
     func calculateTotalTender(amt: [String]) -> String {
