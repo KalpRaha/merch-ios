@@ -644,105 +644,51 @@ class InStoreNewRefundViewController: UIViewController {
             grossRefundLabel.append("Loyalty Points Redeemed(\(points_applied))")
             grossRefundValue.append("0.00")
         }
-        
-        if coupon_code_amt != "0.0" && coupon_code_amt != "0.00" && coupon_code_amt != "-0.00"
-            && coupon_code_amt != "-0.0" && coupon_code_amt != "0" && coupon_code_amt != ""  {
+                
+        if bogo_discount != "0.0" && bogo_discount != "0.00" && bogo_discount != "-0.00"
+            && bogo_discount != "-0.0" && bogo_discount != "0" && bogo_discount != ""  {
             
-            if bogo_discount != "0.0" && bogo_discount != "0.00" && bogo_discount != "-0.00"
-                && bogo_discount != "-0.0" && bogo_discount != "0" && bogo_discount != ""  {
+            if mix_match_discount != "0.0" && mix_match_discount != "0.00" && mix_match_discount != "-0.00"
+                && mix_match_discount != "-0.0" && mix_match_discount != "0" && mix_match_discount != ""  {
                 
-                if mix_match_discount != "0.0" && mix_match_discount != "0.00" && mix_match_discount != "-0.00"
-                    && mix_match_discount != "-0.0" && mix_match_discount != "0" && mix_match_discount != ""  {
-                    
-                    let doub_coupon_amt = Double(coupon_code_amt) ?? 0.00
-                    let doub_bogo_discount = Double(bogo_discount) ?? 0.00
-                    let doub_mix_match_discount = Double(mix_match_discount) ?? 0.00
-                    
-                    let total = doub_coupon_amt + doub_bogo_discount + doub_mix_match_discount
-                    
-                    grossRefundLabel.append("Discounts")
-                    grossRefundValue.append("\(total)")
-                }
+                let doub_bogo_discount = Double(bogo_discount) ?? 0.00
+                let doub_mix_match_discount = Double(mix_match_discount) ?? 0.00
                 
-                else {
-                    
-                    let doub_coupon_amt = Double(coupon_code_amt) ?? 0.00
-                    let doub_bogo_discount = Double(bogo_discount) ?? 0.00
-                    
-                    let total = doub_coupon_amt + doub_bogo_discount
-                    
-                    grossRefundLabel.append("Discounts")
-                    grossRefundValue.append("\(total)")
-                }
+                let total = doub_bogo_discount + doub_mix_match_discount
+                
+                grossRefundLabel.append("Discounts")
+                grossRefundValue.append("\(total)")
             }
+            
             else {
                 
-                if mix_match_discount != "0.0" && mix_match_discount != "0.00" && mix_match_discount != "-0.00"
-                    && mix_match_discount != "-0.0" && mix_match_discount != "0" && mix_match_discount != ""  {
-                    
-                    let doub_coupon_amt = Double(coupon_code_amt) ?? 0.00
-                    let doub_mix_match_discount = Double(mix_match_discount) ?? 0.00
-                    
-                    let total = doub_coupon_amt + doub_mix_match_discount
-                    
-                    grossRefundLabel.append("Discounts")
-                    grossRefundValue.append("\(total)")
-                }
+                let doub_bogo_discount = Double(bogo_discount) ?? 0.00
                 
-                else {
-                    
-                    grossRefundLabel.append("Discounts")
-                    grossRefundValue.append(coupon_code_amt)
-                }
+                let total = doub_bogo_discount
+                
+                grossRefundLabel.append("Discounts")
+                grossRefundValue.append("\(total)")
             }
         }
         else {
-            if bogo_discount != "0.0" && bogo_discount != "0.00" && bogo_discount != "-0.00"
-                && bogo_discount != "-0.0" && bogo_discount != "0" && bogo_discount != ""  {
+            
+            if mix_match_discount != "0.0" && mix_match_discount != "0.00" && mix_match_discount != "-0.00"
+                && mix_match_discount != "-0.0" && mix_match_discount != "0" && mix_match_discount != ""  {
                 
-                if mix_match_discount != "0.0" && mix_match_discount != "0.00" && mix_match_discount != "-0.00"
-                    && mix_match_discount != "-0.0" && mix_match_discount != "0" && mix_match_discount != ""  {
-                    
-                    let doub_bogo_discount = Double(bogo_discount) ?? 0.00
-                    let doub_mix_match_discount = Double(mix_match_discount) ?? 0.00
-                    
-                    let total = doub_bogo_discount + doub_mix_match_discount
-                    
-                    grossRefundLabel.append("Discounts")
-                    grossRefundValue.append("\(total)")
-                }
+                let doub_mix_match_discount = Double(mix_match_discount) ?? 0.00
                 
-                else {
-                    
-                    let doub_bogo_discount = Double(bogo_discount) ?? 0.00
-                    
-                    let total = doub_bogo_discount
-                    
-                    grossRefundLabel.append("Discounts")
-                    grossRefundValue.append("\(total)")
-                }
+                let total = doub_mix_match_discount
+                
+                grossRefundLabel.append("Discounts")
+                grossRefundValue.append("\(total)")
             }
+            
             else {
                 
-                if mix_match_discount != "0.0" && mix_match_discount != "0.00" && mix_match_discount != "-0.00"
-                    && mix_match_discount != "-0.0" && mix_match_discount != "0" && mix_match_discount != ""  {
-                    
-                    let doub_mix_match_discount = Double(mix_match_discount) ?? 0.00
-                    
-                    let total = doub_mix_match_discount
-                    
-                    grossRefundLabel.append("Discounts")
-                    grossRefundValue.append("\(total)")
-                }
-                
-                else {
-                    
-                    grossRefundLabel.append("Discounts")
-                    grossRefundValue.append("0.00")
-                }
+                grossRefundLabel.append("Discounts")
+                grossRefundValue.append("0.00")
             }
         }
-        
         
         if total_ref == "0.00" {
             netValue.text = "$\(String(format: "%.02f", roundRefOf(item: "\(total_ref)")))"
@@ -5187,14 +5133,45 @@ class InStoreNewRefundViewController: UIViewController {
         }
         
         let customdis = calculateRefCustomDiscount(discountArr: custom_discount_small)
-        let coupon_code = couponCode?.coupon_code ?? ""
+        let coupon_code_amt = couponCode?.coupon_code_amt ?? "0.00"
         
         if customdis != "0.0" && customdis != "0.00" && customdis != "-0.0" && customdis != "-0.00" &&
             customdis != "0" && customdis != "" && handleZero(value: customdis) {
-            grossRefundLabel.append("Coupon")
-            grossRefundValue.append(coupon_code)
-            grossRefundLabel.append("Coupon Discount")
-            grossRefundValue.append(String(format: "%.02f", roundOf(item: customdis)))
+            
+            let coup_doub = Double(coupon_code_amt) ?? 0.00
+            let custom_discount_doub = Double(customdis) ?? 0.00
+            
+            let total_coupon_discount = coup_doub - custom_discount_doub
+            
+            if total_coupon_discount == 0.00 {
+                grossRefundLabel.append("Custom Discount")
+                grossRefundValue.append(String(format: "%.02f", roundOf(item: customdis)))
+            }
+            else {
+                grossRefundLabel.append("Coupon(\(couponCode?.coupon_code ?? ""))")
+                grossRefundValue.append(String(format: "%.02f", roundOf(item: "\(total_coupon_discount)")))
+                
+                netValue.text = "$\(String(format: "%.02f", roundOf(item: "\(calculateTotalNetSales(values: grossRefundValue))")))"
+                
+                grossRefundLabel.append("Custom Discount")
+                grossRefundValue.append(String(format: "%.02f", roundOf(item: customdis)))
+            }
+            
+            var net = netValue.text ?? "0.00"
+            net.removeFirst()
+            let net_doub = Double(net) ?? 0.00
+            let net_after_custom_discount = net_doub - custom_discount_doub
+            netValue.text = "$\(String(format: "%.02f", roundOf(item: "\(net_after_custom_discount)")))"
+        }
+        else {
+            if coupon_code_amt != "0.0" && coupon_code_amt != "0.00" && coupon_code_amt != "-0.00"
+                && coupon_code_amt != "-0.0" && coupon_code_amt != "0" && coupon_code_amt != "" && couponCode?.coupon_code ?? "" != "Discount"  {
+                
+                grossRefundLabel.append("Coupon(\(couponCode?.coupon_code ?? ""))")
+                grossRefundValue.append(coupon_code_amt)
+                
+                netValue.text = "$\(String(format: "%.02f", roundOf(item: "\(calculateTotalNetSales(values: grossRefundValue))")))"
+            }
         }
         
         let tax = orderDetailRefund?.tax ?? "0.00"
@@ -5401,13 +5378,11 @@ class InStoreNewRefundViewController: UIViewController {
         
         for pay in discountArr {
             
-            for item in pay {
-                var itemDollar = String(item)
-                if itemDollar.starts(with: "$") {
-                    itemDollar.removeFirst()
-                }
-                total += Double(itemDollar) ?? 0.00
+            var itemDollar = String(pay)
+            if itemDollar.starts(with: "$") {
+                itemDollar.removeFirst()
             }
+            total += Double(itemDollar) ?? 0.00
         }
         print(total)
         return String(total)
@@ -5912,15 +5887,20 @@ class InStoreNewRefundViewController: UIViewController {
     
     func calculateTotalNetSales(values: [String]) -> String {
         
-        var total = 0.00
+        _ = 0.00
         
         let loyal = values[0]
         let dis = values[1]
+        var coup = "0.00"
+        if values.count > 2 {
+            coup = values[2]
+        }
         
         let loyal_doub = Double(loyal) ?? 0.00
         let dis_doub = Double(dis) ?? 0.00
+        let coup_doub = Double(coup) ?? 0.00
         
-        if loyal_doub == 0.00 && dis_doub == 0.00 {
+        if loyal_doub == 0.00 && dis_doub == 0.00 && coup_doub == 0.00 {
             var gross = grossValue.text ?? "0.00"
             if gross.starts(with: "$") {
                 gross.removeFirst()
@@ -5928,19 +5908,7 @@ class InStoreNewRefundViewController: UIViewController {
             return String(gross)
         }
         
-        else if loyal_doub == 0.00 {
-            
-            var gross = grossValue.text ?? "0.00"
-            if gross.starts(with: "$") {
-                gross.removeFirst()
-            }
-            let gross_doub = Double(gross) ?? 0.00
-            
-            let net = gross_doub - dis_doub
-            return String(net)
-        }
-        
-        else if dis_doub == 0.00 {
+        else if dis_doub == 0.00 && coup_doub == 0.00 {
             
             var gross = grossValue.text ?? "0.00"
             if gross.starts(with: "$") {
@@ -5952,6 +5920,66 @@ class InStoreNewRefundViewController: UIViewController {
             return String(net)
         }
         
+        else if loyal_doub == 0.00 && coup_doub == 0.00 {
+            
+            var gross = grossValue.text ?? "0.00"
+            if gross.starts(with: "$") {
+                gross.removeFirst()
+            }
+            let gross_doub = Double(gross) ?? 0.00
+            
+            let net = gross_doub - dis_doub
+            return String(net)
+        }
+        
+        else if loyal_doub == 0.00 && dis_doub == 0.00 {
+            
+            var gross = grossValue.text ?? "0.00"
+            if gross.starts(with: "$") {
+                gross.removeFirst()
+            }
+            let gross_doub = Double(gross) ?? 0.00
+            
+            let net = gross_doub - coup_doub
+            return String(net)
+        }
+        
+        else if loyal_doub == 0.00 {
+            
+            var gross = grossValue.text ?? "0.00"
+            if gross.starts(with: "$") {
+                gross.removeFirst()
+            }
+            let gross_doub = Double(gross) ?? 0.00
+            
+            let net = gross_doub - (dis_doub + coup_doub)
+            return String(net)
+        }
+        
+        else if dis_doub == 0.00 {
+            
+            var gross = grossValue.text ?? "0.00"
+            if gross.starts(with: "$") {
+                gross.removeFirst()
+            }
+            let gross_doub = Double(gross) ?? 0.00
+            
+            let net = gross_doub - (loyal_doub + coup_doub)
+            return String(net)
+        }
+        
+        else if coup_doub == 0.00 {
+            
+            var gross = grossValue.text ?? "0.00"
+            if gross.starts(with: "$") {
+                gross.removeFirst()
+            }
+            let gross_doub = Double(gross) ?? 0.00
+            
+            let net = gross_doub - (loyal_doub + dis_doub)
+            return String(net)
+        }
+        
         else {
             
             var gross = grossValue.text ?? "0.00"
@@ -5960,7 +5988,7 @@ class InStoreNewRefundViewController: UIViewController {
             }
             let gross_doub = Double(gross) ?? 0.00
             
-            let net = (gross_doub - (loyal_doub + dis_doub))
+            let net = (gross_doub - (loyal_doub + dis_doub + coup_doub))
             return String(net)
         }
     }

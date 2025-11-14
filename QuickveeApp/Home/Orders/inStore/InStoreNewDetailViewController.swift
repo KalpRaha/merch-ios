@@ -702,104 +702,50 @@ class InStoreNewDetailViewController: UIViewController {
             grossValue.append("0.00")
         }
         
-        if coupon_code_amt != "0.0" && coupon_code_amt != "0.00" && coupon_code_amt != "-0.00"
-            && coupon_code_amt != "-0.0" && coupon_code_amt != "0" && coupon_code_amt != ""  {
+        if bogo_discount != "0.0" && bogo_discount != "0.00" && bogo_discount != "-0.00"
+            && bogo_discount != "-0.0" && bogo_discount != "0" && bogo_discount != ""  {
             
-            if bogo_discount != "0.0" && bogo_discount != "0.00" && bogo_discount != "-0.00"
-                && bogo_discount != "-0.0" && bogo_discount != "0" && bogo_discount != ""  {
+            if mix_match_discount != "0.0" && mix_match_discount != "0.00" && mix_match_discount != "-0.00"
+                && mix_match_discount != "-0.0" && mix_match_discount != "0" && mix_match_discount != ""  {
                 
-                if mix_match_discount != "0.0" && mix_match_discount != "0.00" && mix_match_discount != "-0.00"
-                    && mix_match_discount != "-0.0" && mix_match_discount != "0" && mix_match_discount != ""  {
-                    
-                    let doub_coupon_amt = Double(coupon_code_amt) ?? 0.00
-                    let doub_bogo_discount = Double(bogo_discount) ?? 0.00
-                    let doub_mix_match_discount = Double(mix_match_discount) ?? 0.00
-                    
-                    let total = doub_coupon_amt + doub_bogo_discount + doub_mix_match_discount
-                    
-                    grossLabel.append("Discounts")
-                    grossValue.append("\(total)")
-                }
+                let doub_bogo_discount = Double(bogo_discount) ?? 0.00
+                let doub_mix_match_discount = Double(mix_match_discount) ?? 0.00
                 
-                else {
-                    
-                    let doub_coupon_amt = Double(coupon_code_amt) ?? 0.00
-                    let doub_bogo_discount = Double(bogo_discount) ?? 0.00
-                    
-                    let total = doub_coupon_amt + doub_bogo_discount
-                    
-                    grossLabel.append("Discounts")
-                    grossValue.append("\(total)")
-                }
+                let total = doub_bogo_discount + doub_mix_match_discount
+                
+                grossLabel.append("Discounts")
+                grossValue.append("\(total)")
             }
+            
             else {
                 
-                if mix_match_discount != "0.0" && mix_match_discount != "0.00" && mix_match_discount != "-0.00"
-                    && mix_match_discount != "-0.0" && mix_match_discount != "0" && mix_match_discount != ""  {
-                    
-                    let doub_coupon_amt = Double(coupon_code_amt) ?? 0.00
-                    let doub_mix_match_discount = Double(mix_match_discount) ?? 0.00
-                    
-                    let total = doub_coupon_amt + doub_mix_match_discount
-                    
-                    grossLabel.append("Discounts")
-                    grossValue.append("\(total)")
-                }
+                let doub_bogo_discount = Double(bogo_discount) ?? 0.00
                 
-                else {
-                    
-                    grossLabel.append("Discounts")
-                    grossValue.append(coupon_code_amt)
-                }
+                let total = doub_bogo_discount
+                
+                grossLabel.append("Discounts")
+                grossValue.append("\(total)")
             }
         }
         else {
-            if bogo_discount != "0.0" && bogo_discount != "0.00" && bogo_discount != "-0.00"
-                && bogo_discount != "-0.0" && bogo_discount != "0" && bogo_discount != ""  {
+            
+            if mix_match_discount != "0.0" && mix_match_discount != "0.00" && mix_match_discount != "-0.00"
+                && mix_match_discount != "-0.0" && mix_match_discount != "0" && mix_match_discount != ""  {
                 
-                if mix_match_discount != "0.0" && mix_match_discount != "0.00" && mix_match_discount != "-0.00"
-                    && mix_match_discount != "-0.0" && mix_match_discount != "0" && mix_match_discount != ""  {
-                    
-                    let doub_bogo_discount = Double(bogo_discount) ?? 0.00
-                    let doub_mix_match_discount = Double(mix_match_discount) ?? 0.00
-                    
-                    let total = doub_bogo_discount + doub_mix_match_discount
-                    
-                    grossLabel.append("Discounts")
-                    grossValue.append("\(total)")
-                }
+                let doub_mix_match_discount = Double(mix_match_discount) ?? 0.00
                 
-                else {
-                    
-                    let doub_bogo_discount = Double(bogo_discount) ?? 0.00
-                    
-                    let total = doub_bogo_discount
-                    
-                    grossLabel.append("Discounts")
-                    grossValue.append("\(total)")
-                }
+                let total = doub_mix_match_discount
+                
+                grossLabel.append("Discounts")
+                grossValue.append("\(total)")
             }
+            
             else {
                 
-                if mix_match_discount != "0.0" && mix_match_discount != "0.00" && mix_match_discount != "-0.00"
-                    && mix_match_discount != "-0.0" && mix_match_discount != "0" && mix_match_discount != ""  {
-                    
-                    let doub_mix_match_discount = Double(mix_match_discount) ?? 0.00
-                    
-                    let total = doub_mix_match_discount
-                    
-                    grossLabel.append("Discounts")
-                    grossValue.append("\(total)")
-                }
-                
-                else {
-                    
-                    grossLabel.append("Discounts")
-                    grossValue.append("0.00")
-                }
+                grossLabel.append("Discounts")
+                grossValue.append("0.00")
             }
         }
-        
         
         netAmt.text = "$\(String(format: "%.02f", roundOf(item: "\(calculateTotalNetSales(values: grossValue))")))"
         
@@ -6518,14 +6464,45 @@ class InStoreNewDetailViewController: UIViewController {
         }
         
         let customdis = calculateCustomDiscount(discountArr: custom_discount_small)
-        let coupon_code = couponCode?.coupon_code ?? ""
+        let coupon_code_amt = couponCode?.coupon_code_amt ?? "0.00"
         
         if customdis != "0.0" && customdis != "0.00" && customdis != "-0.0" && customdis != "-0.00" &&
             customdis != "0" && customdis != "" && handleZero(value: customdis) {
-            grossLabel.append("Coupon")
-            grossValue.append(coupon_code)
-            grossLabel.append("Coupon Discount")
-            grossValue.append(String(format: "%.02f", roundOf(item: customdis)))
+            
+            let coup_doub = Double(coupon_code_amt) ?? 0.00
+            let custom_discount_doub = Double(customdis) ?? 0.00
+            
+            let total_coupon_discount = coup_doub - custom_discount_doub
+            
+            if total_coupon_discount == 0.00 {
+                grossLabel.append("Custom Discount")
+                grossValue.append(String(format: "%.02f", roundOf(item: customdis)))
+            }
+            else {
+                grossLabel.append("Coupon(\(couponCode?.coupon_code ?? ""))")
+                grossValue.append(String(format: "%.02f", roundOf(item: "\(total_coupon_discount)")))
+                
+                netAmt.text = "$\(String(format: "%.02f", roundOf(item: "\(calculateTotalNetSales(values: grossValue))")))"
+                
+                grossLabel.append("Custom Discount")
+                grossValue.append(String(format: "%.02f", roundOf(item: customdis)))
+            }
+            
+            var net = netAmt.text ?? "0.00"
+            net.removeFirst()
+            let net_doub = Double(net) ?? 0.00
+            let net_after_custom_discount = net_doub - custom_discount_doub
+            netAmt.text = "$\(String(format: "%.02f", roundOf(item: "\(net_after_custom_discount)")))"
+        }
+        else {
+            if coupon_code_amt != "0.0" && coupon_code_amt != "0.00" && coupon_code_amt != "-0.00"
+                && coupon_code_amt != "-0.0" && coupon_code_amt != "0" && coupon_code_amt != "" && couponCode?.coupon_code ?? "" != "Discount"  {
+                
+                grossLabel.append("Coupon(\(couponCode?.coupon_code ?? ""))")
+                grossValue.append(coupon_code_amt)
+                
+                netAmt.text = "$\(String(format: "%.02f", roundOf(item: "\(calculateTotalNetSales(values: grossValue))")))"
+            }
         }
         
         let tax = orderDetail?.tax ?? "0.00"
@@ -7288,16 +7265,12 @@ class InStoreNewDetailViewController: UIViewController {
         var total = 0.00
         
         for pay in discountArr {
-            
-            for item in pay {
-                var itemDollar = String(item)
-                if itemDollar.starts(with: "$") {
-                    itemDollar.removeFirst()
-                }
-                total += Double(itemDollar) ?? 0.00
+            var itemDollar = String(pay)
+            if itemDollar.starts(with: "$") {
+                itemDollar.removeFirst()
             }
+            total += Double(itemDollar) ?? 0.00
         }
-        print(total)
         return String(total)
     }
     
@@ -7318,11 +7291,16 @@ class InStoreNewDetailViewController: UIViewController {
         
         let loyal = values[0]
         let dis = values[1]
+        var coup = "0.00"
+        if values.count > 2 {
+            coup = values[2]
+        }
         
         let loyal_doub = Double(loyal) ?? 0.00
         let dis_doub = Double(dis) ?? 0.00
+        let coup_doub = Double(coup) ?? 0.00
         
-        if loyal_doub == 0.00 && dis_doub == 0.00 {
+        if loyal_doub == 0.00 && dis_doub == 0.00 && coup_doub == 0.00 {
             var gross = grossAmt.text ?? "0.00"
             if gross.starts(with: "$") {
                 gross.removeFirst()
@@ -7330,19 +7308,7 @@ class InStoreNewDetailViewController: UIViewController {
             return String(gross)
         }
         
-        else if loyal_doub == 0.00 {
-            
-            var gross = grossAmt.text ?? "0.00"
-            if gross.starts(with: "$") {
-                gross.removeFirst()
-            }
-            let gross_doub = Double(gross) ?? 0.00
-            
-            let net = gross_doub - dis_doub
-            return String(net)
-        }
-        
-        else if dis_doub == 0.00 {
+        else if dis_doub == 0.00 && coup_doub == 0.00 {
             
             var gross = grossAmt.text ?? "0.00"
             if gross.starts(with: "$") {
@@ -7354,6 +7320,66 @@ class InStoreNewDetailViewController: UIViewController {
             return String(net)
         }
         
+        else if loyal_doub == 0.00 && coup_doub == 0.00 {
+            
+            var gross = grossAmt.text ?? "0.00"
+            if gross.starts(with: "$") {
+                gross.removeFirst()
+            }
+            let gross_doub = Double(gross) ?? 0.00
+            
+            let net = gross_doub - dis_doub
+            return String(net)
+        }
+        
+        else if loyal_doub == 0.00 && dis_doub == 0.00 {
+            
+            var gross = grossAmt.text ?? "0.00"
+            if gross.starts(with: "$") {
+                gross.removeFirst()
+            }
+            let gross_doub = Double(gross) ?? 0.00
+            
+            let net = gross_doub - coup_doub
+            return String(net)
+        }
+        
+        else if loyal_doub == 0.00 {
+            
+            var gross = grossAmt.text ?? "0.00"
+            if gross.starts(with: "$") {
+                gross.removeFirst()
+            }
+            let gross_doub = Double(gross) ?? 0.00
+            
+            let net = gross_doub - (dis_doub + coup_doub)
+            return String(net)
+        }
+        
+        else if dis_doub == 0.00 {
+            
+            var gross = grossAmt.text ?? "0.00"
+            if gross.starts(with: "$") {
+                gross.removeFirst()
+            }
+            let gross_doub = Double(gross) ?? 0.00
+            
+            let net = gross_doub - (loyal_doub + coup_doub)
+            return String(net)
+        }
+        
+        else if coup_doub == 0.00 {
+            
+            var gross = grossAmt.text ?? "0.00"
+            if gross.starts(with: "$") {
+                gross.removeFirst()
+            }
+            let gross_doub = Double(gross) ?? 0.00
+            
+            let net = gross_doub - (loyal_doub + dis_doub)
+            return String(net)
+        }
+        
         else {
             
             var gross = grossAmt.text ?? "0.00"
@@ -7362,7 +7388,7 @@ class InStoreNewDetailViewController: UIViewController {
             }
             let gross_doub = Double(gross) ?? 0.00
             
-            let net = (gross_doub - (loyal_doub + dis_doub))
+            let net = (gross_doub - (loyal_doub + dis_doub + coup_doub))
             return String(net)
         }
     }
@@ -7855,7 +7881,7 @@ extension InStoreNewDetailViewController: UITableViewDelegate, UITableViewDataSo
         else if tableView == grossTable {
             
             let cell = grossTable.dequeueReusableCell(withIdentifier: "ordercell", for: indexPath) as! InStoreOrderSumCell
-            
+            print(grossLabel)
             cell.orderLbl.text = "\(grossLabel[indexPath.row])"
             cell.orderLblValue.text = "-$\(String(format: "%.2f", roundOf(item: grossValue[indexPath.row])))"
             cell.orderLblValue.textColor = UIColor(hexString: "#E61F1F")
