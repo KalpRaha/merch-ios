@@ -58,15 +58,17 @@ class SelectBogoVariantViewController: UIViewController  {
     var categoryVariantList = [VariantBogoModel]()
     
     var bogoSelectedVariants = [VariantBogoModel]()
+    var couponSelectedVariants = [VariantBogoModel]()
     
     var bogoCategory = [InventoryCategory]()
     
     var bogo_mix_exist_ids = [String]()
-    
+    var coupon_exist_ids = [String]()
     
     var mode_Type = ""
     var mode = ""
     var disc_amt = ""
+    var coupdisc_amt = ""
     
     var searchSelectAllMode = false
     var selectAllMode = false
@@ -135,7 +137,7 @@ class SelectBogoVariantViewController: UIViewController  {
             bogotitle.text = "Add Product"
         }
         
-        
+       print(couponSelectedVariants)
     }
     
     func variantListApi() {
@@ -225,93 +227,179 @@ class SelectBogoVariantViewController: UIViewController  {
     func setDisabledVariants() {
         
         let amount = disc_amt
+        let c_amount = coupdisc_amt
         
         for variant in variantList {
             
-            if variant.isvarient == "1" {
+            if mode_Type == "coupon" {
                 
-                if bogo_mix_exist_ids.contains(where:{ $0 == variant.var_id}) {
+                if variant.isvarient == "1" {
                     
-                }
-                else {
-                    
-                    let checkless = checkPrice(varamt: variant.var_price, textAmt: String(amount))
-                    
-                    if checkless {
+                    if coupon_exist_ids.contains(where:{ $0 == variant.var_id}) {
                         
                     }
                     else {
                         
-                        sort_by_price.append(variant)
+                        let checkless = checkPrice(varamt: variant.var_price, textAmt: String(c_amount))
+                        
+                        if checkless {
+                            
+                        }
+                        else {
+                            
+                            sort_by_price.append(variant)
+                        }
+                        
                     }
+                }
+                else {
                     
+                    if coupon_exist_ids.contains(where:{ $0 == variant.product_id}) {
+                        
+                    }
+                    else {
+                        
+                        let checkless = checkPrice(varamt: variant.price, textAmt: String(c_amount))
+                        
+                        if checkless {
+                            
+                        }
+                        else {
+                            
+                            sort_by_price.append(variant)
+                        }
+                        
+                    }
                 }
             }
             else {
                 
-                if bogo_mix_exist_ids.contains(where:{ $0 == variant.product_id}) {
+                if variant.isvarient == "1" {
                     
-                }
-                else {
-                    
-                    let checkless = checkPrice(varamt: variant.price, textAmt: String(amount))
-                    
-                    if checkless {
+                    if bogo_mix_exist_ids.contains(where:{ $0 == variant.var_id}) {
                         
                     }
                     else {
                         
-                        sort_by_price.append(variant)
+                        let checkless = checkPrice(varamt: variant.var_price, textAmt: String(amount))
+                        
+                        if checkless {
+                            
+                        }
+                        else {
+                            
+                            sort_by_price.append(variant)
+                        }
+                        
                     }
+                }
+                else {
                     
+                    if bogo_mix_exist_ids.contains(where:{ $0 == variant.product_id}) {
+                        
+                    }
+                    else {
+                        
+                        let checkless = checkPrice(varamt: variant.price, textAmt: String(amount))
+                        
+                        if checkless {
+                            
+                        }
+                        else {
+                            
+                            sort_by_price.append(variant)
+                        }
+                        
+                    }
                 }
             }
         }
-        
         self.setCheckVariants()
     }
     
     func setCheckVariants() {
         
         var miniSelect = bogoSelectedVariants
+        var miniCoupSelect = couponSelectedVariants
         
         for editvar in sort_by_price {
             
-            if editvar.isvarient == "1" {
+            if mode_Type == "coupon" {
                 
-                if bogoSelectedVariants.contains(where: {$0.bogo.var_id == editvar.var_id}) {
+                
+                if editvar.isvarient == "1" {
+                    
+                    if couponSelectedVariants.contains(where: {$0.bogo.var_id == editvar.var_id}) {
+                    }
+                    else {
+                        miniCoupSelect.append(VariantBogoModel(bogo: editvar, isSelect: false))
+                    }
                 }
                 else {
-                    miniSelect.append(VariantBogoModel(bogo: editvar, isSelect: false))
+                    
+                    if couponSelectedVariants.contains(where: {$0.bogo.product_id == editvar.product_id}) {
+                    }
+                    else {
+                        miniCoupSelect.append(VariantBogoModel(bogo: editvar, isSelect: false))
+                    }
                 }
-            }
-            else {
                 
-                if bogoSelectedVariants.contains(where: {$0.bogo.product_id == editvar.product_id}) {
-                }
-                else {
-                    miniSelect.append(VariantBogoModel(bogo: editvar, isSelect: false))
-                }
-            }
-            
-            variantBoGoList = miniSelect
-            subVariantBoGoList = miniSelect
-            categoryVariantList = miniSelect
-            
-            if subVariantBoGoList.count > 0 {
+                variantBoGoList = miniCoupSelect
+                subVariantBoGoList = miniCoupSelect
+                categoryVariantList = miniCoupSelect
                 
-                if subVariantBoGoList.allSatisfy({$0.isSelect == true}) {
-                    imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
+                if subVariantBoGoList.count > 0 {
+                    
+                    if subVariantBoGoList.allSatisfy({$0.isSelect == true}) {
+                        imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
+                    }
+                    else {
+                        imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+                    }
                 }
                 else {
                     imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
                 }
             }
             else {
-                imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+                
+            
+                if editvar.isvarient == "1" {
+                    
+                    if bogoSelectedVariants.contains(where: {$0.bogo.var_id == editvar.var_id}) {
+                    }
+                    else {
+                        miniSelect.append(VariantBogoModel(bogo: editvar, isSelect: false))
+                    }
+                }
+                else {
+                    
+                    if bogoSelectedVariants.contains(where: {$0.bogo.product_id == editvar.product_id}) {
+                    }
+                    else {
+                        miniSelect.append(VariantBogoModel(bogo: editvar, isSelect: false))
+                    }
+                }
+                
+                variantBoGoList = miniSelect
+                subVariantBoGoList = miniSelect
+                categoryVariantList = miniSelect
+                
+                if subVariantBoGoList.count > 0 {
+                    
+                    if subVariantBoGoList.allSatisfy({$0.isSelect == true}) {
+                        imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)
+                    }
+                    else {
+                        imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+                    }
+                }
+                else {
+                    imageCheckBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+                }
+                
+                
             }
-            
-            
             
         }
     }
@@ -329,23 +417,47 @@ class SelectBogoVariantViewController: UIViewController  {
     
     @IBAction func backBtnClick(_ sender: UIButton) {
         
-        if bogoSelectedVariants.count == 0 {
-            dismiss(animated: true)
+        if mode_Type == "coupon" {
+            
+            if couponSelectedVariants.count == 0 {
+                dismiss(animated: true)
+            }
+            else {
+                
+                let alertController = UIAlertController(title: "Alert", message: "Are you sure you want Exit?", preferredStyle: .alert)
+                
+                let cancel = UIAlertAction(title: "No", style: .default) { (action:UIAlertAction!) in
+                }
+                let okAction = UIAlertAction(title: "Yes", style: .default) { (action:UIAlertAction!) in
+                    
+                    self.dismiss(animated: true)
+                }
+                
+                alertController.addAction(cancel)
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion:nil)
+            }
         }
         else {
             
-            let alertController = UIAlertController(title: "Alert", message: "Are you sure you want Exit?", preferredStyle: .alert)
-            
-            let cancel = UIAlertAction(title: "No", style: .default) { (action:UIAlertAction!) in
+            if bogoSelectedVariants.count == 0 {
+                dismiss(animated: true)
             }
-            let okAction = UIAlertAction(title: "Yes", style: .default) { (action:UIAlertAction!) in
+            else {
                 
-                self.dismiss(animated: true)
+                let alertController = UIAlertController(title: "Alert", message: "Are you sure you want Exit?", preferredStyle: .alert)
+                
+                let cancel = UIAlertAction(title: "No", style: .default) { (action:UIAlertAction!) in
+                }
+                let okAction = UIAlertAction(title: "Yes", style: .default) { (action:UIAlertAction!) in
+                    
+                    self.dismiss(animated: true)
+                }
+                
+                alertController.addAction(cancel)
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion:nil)
             }
-            
-            alertController.addAction(cancel)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion:nil)
         }
     }
     
@@ -531,11 +643,23 @@ class SelectBogoVariantViewController: UIViewController  {
     
     func unSelectVarient(match: VariantBogoModel) {
         
-        if match.bogo.isvarient == "1" {
-            bogoSelectedVariants.removeAll(where: {$0.bogo.var_id == match.bogo.var_id})
+        if mode_Type == "coupon" {
+            
+            if match.bogo.isvarient == "1" {
+                couponSelectedVariants.removeAll(where: {$0.bogo.var_id == match.bogo.var_id})
+            }
+            else {
+                couponSelectedVariants.removeAll(where: {$0.bogo.product_id == match.bogo.product_id})
+            }
         }
         else {
-            bogoSelectedVariants.removeAll(where: {$0.bogo.product_id == match.bogo.product_id})
+            
+            if match.bogo.isvarient == "1" {
+                bogoSelectedVariants.removeAll(where: {$0.bogo.var_id == match.bogo.var_id})
+            }
+            else {
+                bogoSelectedVariants.removeAll(where: {$0.bogo.product_id == match.bogo.product_id})
+            }
         }
     }
     
@@ -587,12 +711,26 @@ class SelectBogoVariantViewController: UIViewController  {
     
     func selectBogoSelectedVariant(match: VariantBogoModel, offset: Bool) {
         
-        if match.bogo.isvarient == "1" {
+        if mode_Type == "coupon" {
             
-            bogoSelectedVariants.removeAll(where: {$0.bogo.var_id == match.bogo.var_id})
+            if match.bogo.isvarient == "1" {
+                
+                couponSelectedVariants.removeAll(where: {$0.bogo.var_id == match.bogo.var_id})
+            }
+            else {
+                couponSelectedVariants.removeAll(where: {$0.bogo.product_id == match.bogo.product_id})
+            }
+            
         }
         else {
-            bogoSelectedVariants.removeAll(where: {$0.bogo.product_id == match.bogo.product_id})
+            
+            if match.bogo.isvarient == "1" {
+                
+                bogoSelectedVariants.removeAll(where: {$0.bogo.var_id == match.bogo.var_id})
+            }
+            else {
+                bogoSelectedVariants.removeAll(where: {$0.bogo.product_id == match.bogo.product_id})
+            }
         }
     }
     
@@ -621,6 +759,7 @@ class SelectBogoVariantViewController: UIViewController  {
             }
         }
         bogoSelectedVariants = smallFilter
+        couponSelectedVariants = smallFilter
     }
     
     func filterBogoCategoryVariant(match: [VariantBogoModel]) -> [VariantBogoModel] {
@@ -724,8 +863,9 @@ class SelectBogoVariantViewController: UIViewController  {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             
+            print(self.couponSelectedVariants)
             if self.mode_Type == "coupon" {
-                self.adddelegate?.addSelectedBogoVariants(arr: self.bogoSelectedVariants)
+                self.adddelegate?.addSelectedBogoVariants(arr: self.couponSelectedVariants)
             }
             else {
                 self.adddelegate?.addSelectedBogoVariants(arr: self.bogoSelectedVariants)
@@ -1033,6 +1173,10 @@ extension SelectBogoVariantViewController: UITableViewDelegate, UITableViewDataS
                         
                         cell.checkMarkImage.image = UIImage(named: "check inventory")
                     }
+                    else if couponSelectedVariants.contains(where: {$0.bogo.var_id == currentVarId}) {
+                        
+                        cell.checkMarkImage.image = UIImage(named: "check inventory")
+                    }
                     else {
                         
                         cell.checkMarkImage.image = UIImage(named: "uncheck inventory")
@@ -1059,6 +1203,10 @@ extension SelectBogoVariantViewController: UITableViewDelegate, UITableViewDataS
                         cell.checkMarkImage.image = UIImage(named: "check inventory")
                     }
                     else if bogoSelectedVariants.contains(where: {$0.bogo.product_id == currentProdId}) {
+                        
+                        cell.checkMarkImage.image = UIImage(named: "check inventory")
+                    }
+                    else if couponSelectedVariants.contains(where: {$0.bogo.product_id == currentProdId}) {
                         
                         cell.checkMarkImage.image = UIImage(named: "check inventory")
                     }
@@ -1128,7 +1276,12 @@ extension SelectBogoVariantViewController: UITableViewDelegate, UITableViewDataS
                 variant.isSelect = true
                 selectSubVariant(match: variant, offset: true)
                 selectCategoryVariant(match: variant, offset: true)
-                bogoSelectedVariants.append(variant)
+                if mode_Type == "coupon" {
+                    couponSelectedVariants.append(variant)
+                }
+                else {
+                    bogoSelectedVariants.append(variant)
+                }
                 
                 if subVariantBoGoList.allSatisfy({$0.isSelect == true}) {
                     imageCheckBtn.setImage(UIImage(named: "check inventory"), for: .normal)

@@ -71,7 +71,7 @@ class AddCouponViewController: UIViewController, UITextFieldDelegate {
     
     var editCoupondetails: CouponEdit?
     var setmode: Int?
-    var id: String?
+    var coupon_id = ""
     var merchant_id: String?
     
     var couponNameArray = [Coupon]()
@@ -464,161 +464,212 @@ class AddCouponViewController: UIViewController, UITextFieldDelegate {
         
         loadIndicator.isAnimating = true
         
-        if setmode == 1 {
+//        if setmode == 1 {
+//            
+//            let change_start_date = ToastClass.sharedToast.setCouponlistDate(dateStr: start_date)
+//            
+//            let change_end_date = ToastClass.sharedToast.setCouponlistDate(dateStr: end_date)
+//            
+//            setupEditApi(is_online: is_online, list_online: list_online, id: id ?? "",
+//                         coupon_code: coupon_code, desc: desc,
+//                         min_amt: min_amt, enable_redemption: enable_redemption,
+//                         redemption: redemption, flag: flag,
+//                         max_dis: max_disc_amt, dis_percent: dis_percent,
+//                         start_date: change_start_date, end_date: change_end_date,
+//                         start_time: "", end_time: "",
+//                         category_id: "",coupon_type: "0", product_data: "")
+//        }
+//        else {
+//            
+//            
+//            let change_start_date = ToastClass.sharedToast.setCouponlistDate(dateStr: start_date)
+//            
+//            
+//            let change_end_date = ToastClass.sharedToast.setCouponlistDate(dateStr: end_date)
+//           
+//            
+//            setupApi(is_online: is_online, list_online: list_online, coupon_code: coupon_code,
+//                     desc: desc, min_amt: min_amt,
+//                     enable_redemption: enable_redemption,
+//                     redemption: redemption, flag: flag,
+//                     max_dis: max_disc_amt, dis_percent: dis_percent,
+//                     start_date: change_start_date, end_date: change_end_date,
+//                     start_time: "", end_time: "",
+//                     category_id: "", coupon_type: "0", product_data: "")
+//        }
+        
+        let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        
+        if  setmode == 1 {
+            
             
             let change_start_date = ToastClass.sharedToast.setCouponlistDate(dateStr: start_date)
-            
             let change_end_date = ToastClass.sharedToast.setCouponlistDate(dateStr: end_date)
             
-            setupEditApi(is_online: is_online, list_online: list_online, id: id ?? "",
-                         coupon_code: coupon_code, desc: desc,
-                         min_amt: min_amt, enable_redemption: enable_redemption,
-                         redemption: redemption, flag: flag,
-                         max_dis: max_disc_amt, dis_percent: dis_percent,
-                         start_date: change_start_date, end_date: change_end_date,
-                         start_time: "", end_time: "",
-                         category_id: "",coupon_type: "0", product_data: "")
-        }
-        else {
-            
-            
-            let change_start_date = ToastClass.sharedToast.setCouponlistDate(dateStr: start_date)
-            
-            
-            let change_end_date = ToastClass.sharedToast.setCouponlistDate(dateStr: end_date)
-           
-            
-            setupApi(is_online: is_online, list_online: list_online, coupon_code: coupon_code,
-                     desc: desc, min_amt: min_amt,
-                     enable_redemption: enable_redemption,
-                     redemption: redemption, flag: flag,
-                     max_dis: max_disc_amt, dis_percent: dis_percent,
-                     start_date: change_start_date, end_date: change_end_date,
-                     start_time: "", end_time: "",
-                     category_id: "", coupon_type: "0", product_data: "")
-        }
-    }
+            ApiCalls.sharedCall.editCoupanCall(coupon_id: coupon_id, merchant_id: id, is_online: is_online, coupon_code: coupon_code, description: desc, min_order_amount: min_amt, enable_redemption_limit: enable_redemption, redemption_limit: redemption, flag: flag, discount: dis_percent, max_discount_amount: max_disc_amt, start_date: change_start_date, end_date: change_end_date, start_time: "", end_time: "", category_id: "", coupon_type: "0", items: "", list_online: list_online, type: "0") { isSuccess, responseData in
+                
+                if isSuccess {
     
-    func setupEditApi(is_online: String, list_online: String, id: String, coupon_code: String, 
-                      desc: String, min_amt: String, enable_redemption: String,
-                      redemption: String, flag: String, max_dis: String, dis_percent:String, 
-                      start_date: String, end_date: String, start_time: String, end_time: String,
-                      category_id: String,coupon_type: String, product_data: String) {
-        
-        let url = AppURLs.EDIT_COUPON
-        
-        let parameters: [String:Any] = [
-            "coupon_id": id,
-            "merchant_id": merchant_id!,
-            "is_online" : is_online, //0
-            "list_online": list_online,
-            "coupon_code": coupon_code, //Test
-            "description": desc, //
-            "min_order_amount": min_amt,
-            "enable_redemption_limit": enable_redemption, //0
-            "redemption_limit": redemption, //
-            "flag": flag, // 0
-            "discount": dis_percent,
-            "max_discount_amount": max_dis,
-            "start_date": start_date,
-            "end_date": end_date,
-            "start_time": start_time,
-            "end_time": end_time,
-            "category_id": category_id,
-            "coupon_type": coupon_type,
-            "product_data": product_data
-        ]
-        
-        print(parameters)
-        print(parameters)
-        
-        AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default).responseData { (response) in
-            switch response.result {
-                
-            case .success(_):
-                do {
-                    let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
-                    print(json)
-                    self.loadIndicator.isAnimating = false
-                    ToastClass.sharedToast.showToast(message: "  Updated Successfully", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                    self.goBack()
-                }
-                catch {
+                    let msg = responseData["message"] as? String ?? ""
                     
-                }
-                
-                break
-                
-            case .failure(let error):
-                print(error.localizedDescription)
-                
-            }
-        }
-    }
-    
-    func setupApi(is_online: String, list_online: String, coupon_code: String, desc: String, 
-                  min_amt: String, enable_redemption: String, redemption: String,
-                  flag: String, max_dis: String, dis_percent:String, start_date: String,
-                  end_date: String, start_time: String, end_time: String,
-                  category_id: String, coupon_type: String, product_data: String) {
-        
-        let url = AppURLs.ADD_COUPON
-        
-        let parameters: [String:Any] = [
-            "merchant_id": merchant_id ?? "",
-            "is_online" : is_online, //0
-            "list_online": list_online,
-            "coupon_code": coupon_code, //Test
-            "description": desc, //
-            "min_order_amount": min_amt,
-            "enable_redemption_limit": enable_redemption, //0
-            "redemption_limit": redemption, //
-            "flag": flag, // 0
-            "discount": dis_percent,
-            "max_discount_amount": max_dis,
-            "start_date": start_date,
-            "end_date": end_date,
-            "start_time": start_time,
-            "end_time": end_time,
-            "category_id": category_id,
-            "coupon_type": coupon_type,
-            "product_data": product_data
-        ]
-         
-        print(parameters)
-        print(parameters)
-        
-        AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default).responseData { (response) in
-            switch response.result {
-                
-            case .success(_):
-                do {
-                    let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
-                    print(json)
                     self.loadIndicator.isAnimating = false
-                    ToastClass.sharedToast.showToast(message: "  Updated Successfully", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                    
-                    var destiny = 0
-                    let viewcontrollerArray = self.navigationController?.viewControllers
-                    if let destinationIndex = viewcontrollerArray!.firstIndex(where: { $0 is CouponViewController }) {
-                        destiny = destinationIndex
+                    ToastClass.sharedToast.showToast(message: msg,
+                                                     font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                    if msg == "Coupon updated successfully."  {
+                        self.navigationController?.popViewController(animated: true)
                     }
-                    
-                    self.navigationController?.popToViewController(viewcontrollerArray![destiny], animated: true)
-                    //self.goBack()
                 }
-                catch {
-                    
+                else {
+                    print("API Error")
                 }
-                
-                break
-                
-            case .failure(let error):
-                print(error.localizedDescription)
-                
             }
         }
+        else{
+            
+            let change_start_date = ToastClass.sharedToast.setCouponlistDate(dateStr: start_date)
+            let change_end_date = ToastClass.sharedToast.setCouponlistDate(dateStr: end_date)
+            
+            ApiCalls.sharedCall.addCoupanCall(merchant_id: id, is_online: is_online, coupon_code: coupon_code, description: desc, min_order_amount: min_amt, enable_redemption_limit: enable_redemption, redemption_limit: redemption, flag: flag, discount: dis_percent, max_discount_amount: max_disc_amt, start_date: change_start_date, end_date: change_end_date, start_time: "", end_time: "", category_id: "", coupon_type: "0", items: "", list_online: list_online, type: "0") { isSuccess, responseData in
+                
+                if isSuccess {
+    
+                    let msg = responseData["message"] as? String ?? ""
+                    
+                    self.loadIndicator.isAnimating = false
+                    ToastClass.sharedToast.showToast(message: msg,
+                                                     font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                    if msg == "Coupon added successfully."  {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+                else {
+                    print("API Error")
+                }
+            }
+                
+        }
     }
+//    
+//    func setupEditApi(is_online: String, list_online: String, id: String, coupon_code: String, 
+//                      desc: String, min_amt: String, enable_redemption: String,
+//                      redemption: String, flag: String, max_dis: String, dis_percent:String, 
+//                      start_date: String, end_date: String, start_time: String, end_time: String,
+//                      category_id: String,coupon_type: String, product_data: String) {
+//        
+//        let url = AppURLs.EDIT_COUPON
+//        
+//        let parameters: [String:Any] = [
+//            "coupon_id": id,
+//            "merchant_id": merchant_id!,
+//            "is_online" : is_online, //0
+//            "list_online": list_online,
+//            "coupon_code": coupon_code, //Test
+//            "description": desc, //
+//            "min_order_amount": min_amt,
+//            "enable_redemption_limit": enable_redemption, //0
+//            "redemption_limit": redemption, //
+//            "flag": flag, // 0
+//            "discount": dis_percent,
+//            "max_discount_amount": max_dis,
+//            "start_date": start_date,
+//            "end_date": end_date,
+//            "start_time": start_time,
+//            "end_time": end_time,
+//            "category_id": category_id,
+//            "coupon_type": coupon_type,
+//            "product_data": product_data
+//        ]
+//        
+//        print(parameters)
+//        print(parameters)
+//        
+//        AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default).responseData { (response) in
+//            switch response.result {
+//                
+//            case .success(_):
+//                do {
+//                    let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
+//                    print(json)
+//                    self.loadIndicator.isAnimating = false
+//                    ToastClass.sharedToast.showToast(message: "  Updated Successfully", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//                    self.goBack()
+//                }
+//                catch {
+//                    
+//                }
+//                
+//                break
+//                
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//                
+//            }
+//        }
+//    }
+//    
+//    func setupApi(is_online: String, list_online: String, coupon_code: String, desc: String, 
+//                  min_amt: String, enable_redemption: String, redemption: String,
+//                  flag: String, max_dis: String, dis_percent:String, start_date: String,
+//                  end_date: String, start_time: String, end_time: String,
+//                  category_id: String, coupon_type: String, product_data: String) {
+//        
+//        let url = AppURLs.ADD_COUPON
+//        
+//        let parameters: [String:Any] = [
+//            "merchant_id": merchant_id ?? "",
+//            "is_online" : is_online, //0
+//            "list_online": list_online,
+//            "coupon_code": coupon_code, //Test
+//            "description": desc, //
+//            "min_order_amount": min_amt,
+//            "enable_redemption_limit": enable_redemption, //0
+//            "redemption_limit": redemption, //
+//            "flag": flag, // 0
+//            "discount": dis_percent,
+//            "max_discount_amount": max_dis,
+//            "start_date": start_date,
+//            "end_date": end_date,
+//            "start_time": start_time,
+//            "end_time": end_time,
+//            "category_id": category_id,
+//            "coupon_type": coupon_type,
+//            "product_data": product_data
+//        ]
+//         
+//        print(parameters)
+//        print(parameters)
+//        
+//        AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default).responseData { (response) in
+//            switch response.result {
+//                
+//            case .success(_):
+//                do {
+//                    let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
+//                    print(json)
+//                    self.loadIndicator.isAnimating = false
+//                    ToastClass.sharedToast.showToast(message: "  Updated Successfully", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//                    
+//                    var destiny = 0
+//                    let viewcontrollerArray = self.navigationController?.viewControllers
+//                    if let destinationIndex = viewcontrollerArray!.firstIndex(where: { $0 is CouponViewController }) {
+//                        destiny = destinationIndex
+//                    }
+//                    
+//                    self.navigationController?.popToViewController(viewcontrollerArray![destiny], animated: true)
+//                    //self.goBack()
+//                }
+//                catch {
+//                    
+//                }
+//                
+//                break
+//                
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//                
+//            }
+//        }
+//    }
     
     @objc func enableCouponOnline(enableSwitch: UISwitch) {
         view.endEditing(true)
@@ -968,7 +1019,7 @@ class AddCouponViewController: UIViewController, UITextFieldDelegate {
                     
                     if couponNameArray[i].name.lowercased() == name.lowercased() {
                         
-                        if couponNameArray[i].id == id {
+                        if couponNameArray[i].id == coupon_id {
                             return true
                         }
                         return false
@@ -1090,7 +1141,7 @@ class AddCouponViewController: UIViewController, UITextFieldDelegate {
             }
             else {
                 
-                let del_id = id ?? ""
+                let del_id = coupon_id ?? ""
                 showDeleteAlert(id: del_id)
             }
             
@@ -1182,6 +1233,7 @@ class AddCouponViewController: UIViewController, UITextFieldDelegate {
         }
         return false
     }
+    
 }
 
 

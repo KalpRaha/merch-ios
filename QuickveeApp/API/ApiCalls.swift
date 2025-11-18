@@ -3514,6 +3514,132 @@ extension ApiCalls {
 }
 
 
+extension  ApiCalls {
+    
+    func addCoupanCall(merchant_id: String, is_online: String, coupon_code: String, description: String,
+                       min_order_amount: String, enable_redemption_limit: String, redemption_limit: String,
+                       flag: String, discount: String, max_discount_amount:String, start_date: String,
+                       end_date: String, start_time: String, end_time: String,
+                       category_id: String, coupon_type: String, items: String,list_online:String, type: String,
+                       completion:@escaping(Bool,[String:Any]) -> ()) {
+        
+        let url = AppURLs.ADD_COUPON
+        
+        let parameters: [String:Any] = [
+            "merchant_id": merchant_id,
+            "is_online": is_online,
+            "coupon_code": coupon_code,
+            "description": description,
+            "min_order_amount": min_order_amount,
+            "enable_redemption_limit": enable_redemption_limit,
+            "redemption_limit": redemption_limit,
+            "flag": flag,
+            "discount": discount,
+            "max_discount_amount":max_discount_amount,
+            "start_date": start_date,
+            "end_date": end_date,
+            "start_time": start_time,
+            "end_time": end_time,
+            "category_id": category_id,
+            "coupon_type": coupon_type,
+            "items": items,
+            "list_online":list_online,
+            "type":type
+        ]
+        
+        print(parameters)
+        print(parameters)
+        
+        AF.request(url,method: .post,parameters: parameters).responseData {response in
+            
+            
+            switch response.result {
+                
+            case .success(_):
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options:[]) as! [String:Any]
+                    print(json)
+                    completion(true,json)
+                }
+                catch {
+                    let res = "ios_app\(response.response?.statusCode)"
+                    self.logErrorApi(merchant_id: merchant_id, response: res)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                let res = "ios_app\(response.response?.statusCode)"
+                self.logErrorApi(merchant_id: merchant_id, response: res)
+            }
+            
+        }
+        
+    }
+    
+    
+    
+    
+    
+    func editCoupanCall(coupon_id: String,merchant_id: String, is_online: String, coupon_code: String, description: String,
+                       min_order_amount: String, enable_redemption_limit: String, redemption_limit: String,
+                       flag: String, discount: String, max_discount_amount:String, start_date: String,
+                       end_date: String, start_time: String, end_time: String,
+                       category_id: String, coupon_type: String, items: String,list_online:String, type: String,
+                       completion:@escaping(Bool,[String:Any]) -> ()) {
+        
+        let url = AppURLs.EDIT_COUPON
+        
+        let parameters: [String:Any] = [
+            "coupon_id": coupon_id,
+            "merchant_id": merchant_id,
+            "is_online": is_online,
+            "coupon_code": coupon_code,
+            "description": description,
+            "min_order_amount": min_order_amount,
+            "enable_redemption_limit": enable_redemption_limit,
+            "redemption_limit": redemption_limit,
+            "flag": flag,
+            "discount": discount,
+            "max_discount_amount":max_discount_amount,
+            "start_date": start_date,
+            "end_date": end_date,
+            "start_time": start_time,
+            "end_time": end_time,
+            "category_id": category_id,
+            "coupon_type": coupon_type,
+            "items": items,
+            "list_online":list_online,
+            "type":type
+        ]
+        
+        print(parameters)
+        print(parameters)
+        
+        AF.request(url,method: .post,parameters: parameters).responseData {response in
+            
+            
+            switch response.result {
+                
+            case .success(_):
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options:[]) as! [String:Any]
+                    print(json)
+                    completion(true,json)
+                }
+                catch {
+                    let res = "ios_app\(response.response?.statusCode)"
+                    self.logErrorApi(merchant_id: merchant_id, response: res)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                let res = "ios_app\(response.response?.statusCode)"
+                self.logErrorApi(merchant_id: merchant_id, response: res)
+            }
+            
+        }
+        
+    }
+}
+
 //extension  ApiCalls {
 //
 //    func productLotteryCall(id: String,title: String,price: String,  upc: String, trackqnty: String,

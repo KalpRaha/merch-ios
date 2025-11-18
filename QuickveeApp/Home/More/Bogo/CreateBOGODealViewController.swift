@@ -881,12 +881,13 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
         discountperItemTextfield.text = ""
         discountperItemTextfield.label.text = "Discount Per Item ($)"
         discount_type = "2"
-        dollarAmt = ""
+        
     }
     
     
     @IBAction func AddVarientBtnClick(_ sender: UIButton) {
         
+        print(bogo_mix_exist_ids)
         guard let disc = discountperItemTextfield.text, disc != "", disc != "0.00" else {
             ToastClass.sharedToast.showToast(message: "Enter Amount",
                                              font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
@@ -899,6 +900,7 @@ class CreateBOGODealViewController: UIViewController, UITextFieldDelegate {
         
         vc.mode = mode
         vc.bogo_mix_exist_ids = bogo_mix_exist_ids
+        print(dollarAmt)
         vc.disc_amt = dollarAmt
         vc.bogoSelectedVariants = variantArray
         vc.adddelegate = self
