@@ -59,6 +59,8 @@ class SavePOViewController: UIViewController {
     
     var vendorSave: VendorPO?
     var bigDetails: PODetails?
+    
+    var activeTextField = UITextField()
         
     let loadingIndicator: ProgressView = {
         let progress = ProgressView(colors: [.systemBlue], lineWidth: 5)
@@ -413,6 +415,12 @@ class SavePOViewController: UIViewController {
             smallAdd.append(pos)
         }
         
+        guard smallAdd.count != 0 else {
+            ToastClass.sharedToast.showToast(message: "Please Select Atleast One Product Variant",
+                                             font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+            return
+        }
+        
         do {
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted  // Makes the output readable
@@ -510,7 +518,7 @@ extension SavePOViewController: SavePOViewControllerDelegate {
 extension SavePOViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
+        activeTextField = textField
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -603,6 +611,22 @@ extension SavePOViewController: UITextFieldDelegate {
         }
     }
     
+    @objc func updateText(textField: UITextField) {
+        
+        let index = IndexPath(row: textField.tag, section: 0)
+        let cell = tableview.cellForRow(at: index) as! ItemsPOTableViewCell
+        
+        var updatetext = textField.text ?? ""
+        
+        if textField == cell.qtyTextField {
+            
+            if updatetext.count > 6 {
+                updatetext = String(updatetext.dropLast())
+            }
+        }
+        activeTextField.text = updatetext
+    }
+    
     func roundOf(item : String) -> Double {
         
         var itemDollar = ""
@@ -670,6 +694,7 @@ extension SavePOViewController: UITableViewDataSource, UITableViewDelegate {
         cell.qtyTextField.borderStyle = .none
         cell.qtyTextField.delegate = self
         cell.qtyTextField.keyboardType = .numberPad
+        cell.qtyTextField.addTarget(self, action: #selector(updateText), for: .editingChanged)
         
         cell.qtyView.layer.borderColor = UIColor(hexString: "#D0D0D0").cgColor
         cell.qtyView.layer.borderWidth = 1

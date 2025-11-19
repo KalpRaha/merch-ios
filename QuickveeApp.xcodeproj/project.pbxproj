@@ -15,6 +15,7 @@
 		04950B372E3A4A1C00A7DD10 /* POSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04950B362E3A4A1C00A7DD10 /* POSelectViewController.swift */; };
 		04C6202B2E33750E001BF3C8 /* POViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6202A2E33750E001BF3C8 /* POViewController.swift */; };
 		04C6202D2E337636001BF3C8 /* POTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6202C2E337636001BF3C8 /* POTableViewCell.swift */; };
+		04DE1C2D2ECB0D44009D01B6 /* QuickAddPOViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE1C2C2ECB0D44009D01B6 /* QuickAddPOViewController.swift */; };
 		50EFAD1F848666AD49C224C1 /* Pods_QuickveeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9518B79834423A2C13C0BE /* Pods_QuickveeApp.framework */; };
 		A52EAC272DF6E171007FB160 /* MissUPCCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52EAC262DF6E171007FB160 /* MissUPCCollectionViewCell.swift */; };
 		A5456A092DE6F376000BB2D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5456A082DE6F376000BB2D7 /* GoogleService-Info.plist */; };
@@ -305,6 +306,7 @@
 		04950B362E3A4A1C00A7DD10 /* POSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POSelectViewController.swift; sourceTree = "<group>"; };
 		04C6202A2E33750E001BF3C8 /* POViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POViewController.swift; sourceTree = "<group>"; };
 		04C6202C2E337636001BF3C8 /* POTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POTableViewCell.swift; sourceTree = "<group>"; };
+		04DE1C2C2ECB0D44009D01B6 /* QuickAddPOViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickAddPOViewController.swift; sourceTree = "<group>"; };
 		2A9518B79834423A2C13C0BE /* Pods_QuickveeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickveeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		810001DF67ED71A5175A0AB6 /* Pods-QuickveeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickveeApp.release.xcconfig"; path = "Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp.release.xcconfig"; sourceTree = "<group>"; };
 		A52EAC262DF6E171007FB160 /* MissUPCCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissUPCCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -607,6 +609,7 @@
 		04C620292E337412001BF3C8 /* PO */ = {
 			isa = PBXGroup;
 			children = (
+				04DE1C2C2ECB0D44009D01B6 /* QuickAddPOViewController.swift */,
 				0413A27E2E44BDB90016A093 /* SavePOTableViewCell.swift */,
 				044B7F222E3B4ECC0072A6B8 /* AddPOViewController.swift */,
 				0477560C2E3B95A300C7F973 /* ItemsPOTableViewCell.swift */,
@@ -1720,6 +1723,7 @@
 				D2D879862BBBB58700ECE573 /* InStoreRefundPayCell.swift in Sources */,
 				D291BD6D297128D900DCD20D /* StoreTableViewCell.swift in Sources */,
 				D2D879782BBBB06800ECE573 /* InStorePayTableCell.swift in Sources */,
+				04DE1C2D2ECB0D44009D01B6 /* QuickAddPOViewController.swift in Sources */,
 				D2BBAD192C94017C00133338 /* GiftCardViewController.swift in Sources */,
 				D2F5AB852CE5C2270050B89C /* NoOrderFoundCell.swift in Sources */,
 				D2F5AB862CE5C2270050B89C /* HeaderViewCell.swift in Sources */,

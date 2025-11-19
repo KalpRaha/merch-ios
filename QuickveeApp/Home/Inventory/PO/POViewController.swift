@@ -384,7 +384,7 @@ extension POListViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 
                 cell.qtyValue.text = po.total_qty
-                cell.costValue.text = po.total_cost
+                cell.costValue.text = "$\(po.total_cost)"
                 cell.dueDateValue.text = "-"
                 
                 let date1 = po.updated_at.split(separator: " ")[0]
@@ -438,7 +438,7 @@ extension POListViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 
                 cell.qtyValue.text = po.total_qty
-                cell.costValue.text = po.total_cost
+                cell.costValue.text = "$\(po.total_cost)"
                 cell.dueDateValue.text = "-"
                 
                 let date1 = po.updated_at.split(separator: " ")[0]
@@ -501,7 +501,7 @@ extension POListViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 
                 cell.qtyValue.text = po.total_qty
-                cell.costValue.text = po.total_cost
+                cell.costValue.text = "$\(po.total_cost)"
                 cell.dueDateValue.text = "-"
                 
                 let date1 = po.updated_at.split(separator: " ")[0]
@@ -560,7 +560,7 @@ extension POListViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 
                 cell.qtyValue.text = po.total_qty
-                cell.costValue.text = po.total_cost
+                cell.costValue.text = "$\(po.total_cost)"
                 cell.dueDateValue.text = "-"
                 
                 let date1 = po.updated_at.split(separator: " ")[0]

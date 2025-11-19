@@ -8,6 +8,10 @@
 import UIKit
 import BarcodeScanner
 
+protocol AddQuickPODelegate: AnyObject {
+    func addProduct(mode: Int, category: [InventoryCategory])
+}
+
 class POSelectViewController: UIViewController {
     
     @IBOutlet weak var tableview: UITableView!
@@ -19,6 +23,8 @@ class POSelectViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var scanBtn: UIButton!
+    
+    @IBOutlet weak var noProductView: UIView!
     
     var variantList = [InventoryVariant]()
     
@@ -41,6 +47,8 @@ class POSelectViewController: UIViewController {
     
     var orderItemSelArr = [String]()
     var statusSelArr = [String]()
+    
+    var pomode = 0
     
     weak var selectDelegate: POSelectDelegate?
     
@@ -74,6 +82,7 @@ class POSelectViewController: UIViewController {
     func variantListApi() {
         
         let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        noProductView.isHidden = true
         tableview.isHidden = true
         loadingIndicator.isAnimating = true
         
@@ -276,6 +285,18 @@ class POSelectViewController: UIViewController {
         self.present(vc, animated: true)
     }
     
+    
+    @IBAction func addBtnClick(_ sender: UIButton) {
+        
+        view.endEditing(true)
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "quick") as! QuickAddPOViewController
+        vc.prodName = searchBar.text ?? ""
+        vc.delegate = self
+        
+        present(vc, animated: true)
+    }
+    
     private func setupUI() {
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
@@ -293,6 +314,40 @@ class POSelectViewController: UIViewController {
             loadingIndicator.heightAnchor
                 .constraint(equalTo: self.loadingIndicator.widthAnchor)
         ])
+    }
+}
+
+extension POSelectViewController: AddQuickPODelegate {
+    
+    func addProduct(mode: Int, category: [InventoryCategory]) {
+        
+        if mode == 1 {
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyBoard.instantiateViewController(withIdentifier: "filtercategory") as! FilterCategoryViewController
+            
+            vc.delegatePOSelected = self
+            vc.catMode = "poQuickVc"
+            vc.selectCategory = category
+            vc.apiMode = "category"
+            present(vc, animated: true)
+        }
+        else {
+            variantListApi()
+        }
+    }
+}
+
+extension POSelectViewController: SelectedCategoryProductsDelegate {
+    
+    func getProductsCategory(categoryArray: [InventoryCategory]) {
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "quick") as! QuickAddPOViewController
+        
+        vc.categoryPO = categoryArray
+        vc.prodName = searchBar.text ?? ""
+        vc.delegate = self
+        self.present(vc, animated: true)
     }
 }
 
@@ -328,6 +383,15 @@ extension POSelectViewController : UISearchBarDelegate {
         
         if searchText == "" {
             searching = false
+            
+            if variantPOList.count == 0 {
+                tableview.isHidden = true
+                noProductView.isHidden = false
+            }
+            else {
+                tableview.isHidden = false
+                noProductView.isHidden = true
+            }
         }
         else {
             searching = true
@@ -340,6 +404,15 @@ extension POSelectViewController : UISearchBarDelegate {
                 let isVariantUPCMatch = product.po.var_upc.lowercased() == searchTextLowercased
                 
                 return isTitleMatch || isUPCMatch || isVariantTitle || isVariantUPCMatch })
+            
+            if searchVariantPOList.count == 0 {
+                tableview.isHidden = true
+                noProductView.isHidden = false
+            }
+            else {
+                tableview.isHidden = false
+                noProductView.isHidden = true
+            }
         }
         tableview.reloadData()
     }

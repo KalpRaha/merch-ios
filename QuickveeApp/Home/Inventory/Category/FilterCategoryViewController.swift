@@ -30,6 +30,7 @@ class FilterCategoryViewController: UIViewController {
     
     @IBOutlet weak var addView: UIView!
     
+    @IBOutlet weak var searchBarHeight: NSLayoutConstraint!
     @IBOutlet weak var addBtnHeight: NSLayoutConstraint!
     
     //category arrays
@@ -85,6 +86,8 @@ class FilterCategoryViewController: UIViewController {
     weak var delegateMixSelected: SelectedCategoryProductsDelegate?
     weak var delegateBogoSelected: SelectedCategoryProductsDelegate?
     weak var delegateCouponSelected: SelectedCategoryProductsDelegate?
+    
+    weak var delegatePOSelected: SelectedCategoryProductsDelegate?
     
     weak var delegateBrandTagsSelected: BrandsTagsAddDelegate?
     
@@ -162,6 +165,8 @@ class FilterCategoryViewController: UIViewController {
         selectVendor.isHidden = true
         selectStatus.isHidden = true
         selectText.isHidden = false
+        searchBar.isHidden = false
+        searchBarHeight.constant = 50
         
         addBtn.setTitle("Add New", for: .normal)
         addBtn.layer.cornerRadius = 10
@@ -199,6 +204,8 @@ class FilterCategoryViewController: UIViewController {
                 selectVendor.isHidden = false
                 selectStatus.isHidden = false
                 selectVendor.textColor = UIColor(named: "SelectCat")
+                searchBar.isHidden = true
+                searchBarHeight.constant = 0
             }
             searchBar.placeholder = "Search Vendor"
             noCategoryLbl.text = "No Vendor Found"
@@ -315,6 +322,12 @@ class FilterCategoryViewController: UIViewController {
                 
                 if category.is_lottery == "1" {
                     
+                    smallres.append(category)
+                }
+            }
+            
+            else if catMode == "poQuickVc" {
+                if category.is_lottery == "0" {
                     smallres.append(category)
                 }
             }
@@ -587,6 +600,10 @@ class FilterCategoryViewController: UIViewController {
             dismiss(animated: true)
         }
         
+        else if catMode == "poQuickVc" {
+            dismiss(animated: true)
+        }
+        
         else {
             dismiss(animated: true)
         }
@@ -731,6 +748,21 @@ class FilterCategoryViewController: UIViewController {
             }
         }
         
+        else if catMode == "poQuickVc" {
+            
+            loadingIndicator.isAnimating = true
+            selectCategory = []
+            tapBlue = []
+            selectAddCategory = []
+            collection.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.loadingIndicator.isAnimating = false
+                self.delegatePOSelected?.getProductsCategory(categoryArray: [])
+                self.dismiss(animated: true)
+            }
+        }
+        
         else {
             loadingIndicator.isAnimating = true
             selectCategory = []
@@ -839,6 +871,13 @@ class FilterCategoryViewController: UIViewController {
             
             delegateLottery?.getProductsCategory(categoryArray: selectAddCategory)
             dismiss(animated: true)
+        }
+        
+        else if catMode == "poQuickVc" {
+            
+            self.dismiss(animated: true) {
+                self.delegatePOSelected?.getProductsCategory(categoryArray: self.selectAddCategory)
+            }
         }
         
         else {

@@ -72,6 +72,7 @@ class ItemsPOViewController: UIViewController {
     var itemslist = [POItems]()
     
     private var isSymbolOnRight = false
+    var activeTextField = UITextField()
     
     weak var saveDelegate: SavePOViewControllerDelegate?
     
@@ -127,6 +128,8 @@ class ItemsPOViewController: UIViewController {
             autoBtn.setTitleColor(.black, for: .normal)
             autoBtn.layer.borderColor = UIColor.black.cgColor
             threeBtns.isHidden = true
+            threeBtnWidth.constant = 0
+            searchBtn.isHidden = true
         }
         else if mode == "edit" {
             editLbl.text = "Edit"
@@ -462,6 +465,12 @@ class ItemsPOViewController: UIViewController {
                     smallAdd.append(pos)
                 }
                 
+                guard smallAdd.count != 0 else {
+                    ToastClass.sharedToast.showToast(message: "Please Select Atleast One Product Variant",
+                                                     font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                    return
+                }
+                
                 do {
                     let encoder = JSONEncoder()
                     encoder.outputFormatting = .prettyPrinted  // Makes the output readable
@@ -534,6 +543,12 @@ class ItemsPOViewController: UIViewController {
                                      total_pricing: total, upc: upc, note: note, after_qty: afterQty)
                     
                     smallAdd.append(pos)
+                }
+                
+                guard smallAdd.count != 0 else {
+                    ToastClass.sharedToast.showToast(message: "Please Select Atleast One Product Variant",
+                                                     font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                    return
                 }
                 
                 do {
@@ -776,6 +791,12 @@ class ItemsPOViewController: UIViewController {
                 smallAdd.append(pos)
             }
             
+            guard smallAdd.count != 0 else {
+                ToastClass.sharedToast.showToast(message: "Please Select Atleast One Product Variant",
+                                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                return
+            }
+            
             do {
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = .prettyPrinted  // Makes the output readable
@@ -851,6 +872,12 @@ class ItemsPOViewController: UIViewController {
                                  total_pricing: total, upc: upc, note: note, after_qty: afterQty)
                 
                 smallAdd.append(pos)
+            }
+            
+            guard smallAdd.count != 0 else {
+                ToastClass.sharedToast.showToast(message: "Please Select Atleast One Product Variant",
+                                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                return
             }
             
             do {
@@ -998,7 +1025,7 @@ extension ItemsPOViewController: ChangeVendorDelegate {
 extension ItemsPOViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
+        activeTextField = textField
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -1089,6 +1116,22 @@ extension ItemsPOViewController: UITextFieldDelegate {
         if textField.text == "000" {
             textField.text = ""
         }
+    }
+    
+    @objc func updateText(textField: UITextField) {
+        
+        let index = IndexPath(row: textField.tag, section: 0)
+        let cell = tableview.cellForRow(at: index) as! ItemsPOTableViewCell
+        
+        var updatetext = textField.text ?? ""
+        
+        if textField == cell.qtyTextField {
+            
+            if updatetext.count > 6 {
+                updatetext = String(updatetext.dropLast())
+            }
+        }
+        activeTextField.text = updatetext
     }
     
     func roundOf(item : String) -> Double {
@@ -1200,6 +1243,7 @@ extension ItemsPOViewController: UITableViewDataSource, UITableViewDelegate {
         cell.qtyTextField.borderStyle = .none
         cell.qtyTextField.delegate = self
         cell.qtyTextField.keyboardType = .numberPad
+        cell.qtyTextField.addTarget(self, action: #selector(updateText), for: .editingChanged)
         
         cell.qtyView.layer.borderColor = UIColor(hexString: "#D0D0D0").cgColor
         cell.qtyView.layer.borderWidth = 1
