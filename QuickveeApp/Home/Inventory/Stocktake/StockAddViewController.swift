@@ -671,7 +671,16 @@ extension StockAddViewController: SelectedCategoryBrandsTagsProductsDelegate {
             categoryVariantList = semi_variants
         }
         
-        tablview.isHidden = false
+        if categoryVariantList.count == 0 {
+            tablview.isHidden = true
+            noVarLbl.isHidden = false
+            noVariantView.isHidden = false
+        }
+        else {
+            tablview.isHidden = false
+            noVarLbl.isHidden = true
+            noVariantView.isHidden = true
+        }
         loadingIndicator.isAnimating = false
         tablview.reloadData()
     }

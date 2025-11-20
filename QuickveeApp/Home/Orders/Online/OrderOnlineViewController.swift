@@ -1096,7 +1096,14 @@ extension OrderOnlineViewController: UITableViewDelegate, UITableViewDataSource 
                 cell.statusTopConstraint.constant = 10
                 cell.statusBottomConstraint.constant = 10
                 cell.statusView.layer.cornerRadius = 5
-                cell.statusLbl.text = order.live_status
+                
+                let status = order.live_status
+                if status == "Shipped" {
+                    cell.statusLbl.text = "Out for Delivery"
+                }
+                else {
+                    cell.statusLbl.text = order.live_status
+                }
              
                 let ordDate = ToastClass.sharedToast.setDateFormat(dateStr: order.date_time)
                 cell.orderDateTime.text = ordDate
@@ -1319,7 +1326,14 @@ extension OrderOnlineViewController: UITableViewDelegate, UITableViewDataSource 
                 cell.statusTopConstraint.constant = 10
                 cell.statusBottomConstraint.constant = 10
                 cell.statusView.layer.cornerRadius = 5
-                cell.statusLbl.text = order.live_status
+                
+                let status = order.live_status
+                if status == "Shipped" {
+                    cell.statusLbl.text = "Out for Delivery"
+                }
+                else {
+                    cell.statusLbl.text = order.live_status
+                }
                 
                 
                 let ordDate = ToastClass.sharedToast.setDateFormat(dateStr: order.date_time)
@@ -1492,7 +1506,14 @@ extension OrderOnlineViewController: UITableViewDelegate, UITableViewDataSource 
                 if orderArray.count == online_amt.count {
                     cell.refundPriceLbl.text = "$\(online_amt[indexPath.row])"
                 }
-                cell.newOrderLbl.text = order.live_status
+                
+                let status = order.live_status
+                if status == "Shipped" {
+                    cell.newOrderLbl.text = "Out for Delivery"
+                }
+                else {
+                    cell.newOrderLbl.text = order.live_status
+                }
                
                 let ordDate = ToastClass.sharedToast.setDateFormat(dateStr: order.date_time)
                 cell.orderDateTime.text = ordDate

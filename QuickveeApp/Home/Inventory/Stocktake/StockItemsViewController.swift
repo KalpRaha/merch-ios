@@ -167,10 +167,10 @@ class StockItemsViewController: UIViewController {
         totalDiscrepancy.text = discrepancyEmail
         totalDisCost.text = costEmail
         
+        let e_id = stock.employee_id
         let name = stock.employee_name
-        
-        if name == "<null>" {
-            empName.text = "Employee Name: -"
+        if e_id == "0" {
+            empName.text = "Employee Name: Admin"
         }
         else {
             empName.text = "Employee Name: \(name)"
@@ -437,6 +437,7 @@ extension StockItemsViewController: MFMailComposeViewControllerDelegate {
     func emailContent(tableHtml: String) -> String {
         
         let storeName = UserDefaults.standard.string(forKey: "store_name") ?? ""
+        let name = UserDefaults.standard.string(forKey: "merchant_name") ?? ""
         let storeAddress = "230 Sterling dr, Tracy, CA 95391"
         
         let date = Date()
@@ -496,6 +497,12 @@ extension StockItemsViewController: MFMailComposeViewControllerDelegate {
                                             <td></td>
                                             <td style="text-align:right; margin-left: 30px;">
                                                 <b>Stocktake Number: \(stockTakeNumber)</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="text-align:right; margin-left: 30px;">
+                                                <b>Performed by: \(name)</b>
                                             </td>
                                         </tr>
                                         <tr>

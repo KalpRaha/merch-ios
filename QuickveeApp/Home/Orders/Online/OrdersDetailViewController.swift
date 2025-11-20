@@ -275,11 +275,16 @@ class OrdersDetailViewController: UIViewController {
             lbl3.font = UIFont(name: "Manrope-SemiBold", size: 10.0)
             lbl3.textColor = UIColor.init(hexString: "#CECECE")
             
-            let lbl4 = UILabel(frame: CGRect(x: ((mainWidth - (3 * width/8))), y: btn4.frame.maxY + 5, width: btn4.frame.size.width, height: 19))
-            lbl4.text = "Shipped"
+            let lbl4 = UILabel(frame: CGRect(x: ((mainWidth - (3 * width/8))), y: btn4.frame.maxY + 5, width: btn4.frame.size.width, height: 0))
+            lbl4.text = "Out for\nDelivery"
             lbl4.textAlignment = .center
             lbl4.font = UIFont(name: "Manrope-SemiBold", size: 10.0)
             lbl4.textColor = UIColor.init(hexString: "#CECECE")
+            lbl4.numberOfLines = 0
+            lbl4.lineBreakMode = .byWordWrapping
+            lbl4.minimumScaleFactor = 0.5
+            lbl4.sizeToFit()
+            lbl4.frame.size.width = btn4.frame.width
             
             let lbl5 = UILabel(frame: CGRect(x: (mainWidth - ((width/8) + 20)), y: btn5.frame.maxY + 5, width: btn5.frame.size.width, height: 19))
             lbl5.text = "Delivered"
@@ -2012,7 +2017,7 @@ class OrdersDetailViewController: UIViewController {
                             
                             
                             let shippedlbl = self.labels[3]
-                            shippedlbl.text = "Shipped"
+                            shippedlbl.text = "Out for\nDelivery"
                             shippedlbl.textColor = UIColor.black
                             
                             let delLbl = self.labels[4]
@@ -2140,7 +2145,7 @@ class OrdersDetailViewController: UIViewController {
                                 
                                 
                                 let shippedlbl = self.labels[3]
-                                shippedlbl.text = "Shipped"
+                                shippedlbl.text = "Out for\nDelivery"
                                 shippedlbl.textColor = UIColor.black
                                 
                                 let delLbl = self.labels[4]
@@ -2218,7 +2223,7 @@ class OrdersDetailViewController: UIViewController {
                         
                         
                         let shippedlbl = self.labels[3]
-                        shippedlbl.text = "Shipped"
+                        shippedlbl.text = "Out for\nDelivery"
                         shippedlbl.textColor = UIColor.init(hexString: "CECECE")
                         
                         let delLbl = self.labels[4]
@@ -2289,7 +2294,7 @@ class OrdersDetailViewController: UIViewController {
                             
                             
                             let shippedlbl = self.labels[3]
-                            shippedlbl.text = "Shipped"
+                            shippedlbl.text = "Out for\nDelivery"
                             shippedlbl.textColor = UIColor.init(hexString: "CECECE")
                             
                             let delLbl = self.labels[4]
