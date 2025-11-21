@@ -101,7 +101,7 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
        
         setMode()
-     
+        coup_type = "universal"
         
         if couponItemArray?.type == "2" {
             specificItemViewClick()
@@ -113,10 +113,7 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//       // universalView.applySideAndBottomShadow()
-//    }
+
     
     func setUI(){
         
@@ -199,6 +196,8 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
                 couponCodeText.text = couponItemArray?.name
                 descriptionText.text = couponItemArray?.description
                 discountText.text = couponItemArray?.discount
+                enableRedemptionText.text = couponItemArray?.enable_limit
+                addVariantBtn.isHidden = true
                 
                 let start_date = ToastClass.sharedToast.setCouponsDateFormat(dateStr: couponItemArray?.date_valid ?? "")
            
@@ -209,15 +208,15 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
                 endDate.text = end_date
                 
                 
-                if couponItemArray?.enable_limit == "0" || couponItemArray?.enable_limit == "" {
-                    enableRedemptionText.isHidden = true
+                if couponItemArray?.enable_limit == "1"  {
+                    enableRedemptionText.isHidden = false
                     enableRedemptionSwitch.isOn = true
-                    redemptionHeight.constant = 0
+                    redemptionHeight.constant = 50
                     
                 }else {
-                    enableRedemptionText.isHidden = false
+                    enableRedemptionText.isHidden = true
                     enableRedemptionSwitch.isOn = false
-                    redemptionHeight.constant = 50
+                    redemptionHeight.constant = 0
                 }
                 
                 
@@ -226,6 +225,8 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
                 couponCodeText.text = couponItemArray?.name
                 descriptionText.text = couponItemArray?.description
                 discountText.text = couponItemArray?.discount
+                maximumDiscText.text = couponItemArray?.maximum_discount
+                print(couponItemArray?.enable_limit)
                 enableRedemptionText.text = couponItemArray?.enable_limit
                 addVariantBtn.isHidden = false
                 dollarAmt = discountText.text!
@@ -273,6 +274,13 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
             enableRedemptionText.isHidden = true
             enableRedemptionSwitch.isOn = false
             redemptionHeight.constant = 0
+            
+            if coup_type == "coup_type" {
+                universalView.applySideOnlyShadow()
+            }
+            else {
+                
+            }
         }
     }
   
@@ -412,9 +420,7 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
                 
             }
         }
-        
-        
-        
+     
         guard let start_date = startDate.text, start_date != "" else {
             
             startDate.isError(numberOfShakes: 3, revert: true)
@@ -454,17 +460,7 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
                     let change_start_date = ToastClass.sharedToast.setCouponlistDate(dateStr: start_date)
                     let change_end_date = ToastClass.sharedToast.setCouponlistDate(dateStr: end_date)
                     
-                    print(id)
-                    print(is_online)
-                    print(coupon_code)
-                    print(desc)
-                    
-                    print(enable_redemption)
-                    print(redemption)
-                    print(flag)
-                    print(dis_percent)
-                    print(change_start_date)
-                    print(change_end_date)
+                  
                     
                     ApiCalls.sharedCall.addCoupanCall(merchant_id: id, is_online: is_online, coupon_code: coupon_code, description: desc, min_order_amount:dis_percent , enable_redemption_limit: enable_redemption, redemption_limit: redemption, flag: flag, discount: dis_percent, max_discount_amount: max_disc_amt, start_date: change_start_date, end_date: change_end_date, start_time: "", end_time: "", category_id: "", coupon_type: "0", items: itemsString, list_online: list_online, type: type) { isSuccess, responseData in
                         
@@ -490,17 +486,6 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
                 let change_start_date = ToastClass.sharedToast.setCouponlistDate(dateStr: start_date)
                 let change_end_date = ToastClass.sharedToast.setCouponlistDate(dateStr: end_date)
                 
-                print(id)
-                print(is_online)
-                print(coupon_code)
-                print(desc)
-                
-                print(enable_redemption)
-                print(redemption)
-                print(flag)
-                print(dis_percent)
-                print(change_start_date)
-                print(change_end_date)
                 
                 ApiCalls.sharedCall.addCoupanCall(merchant_id: id, is_online: is_online, coupon_code: coupon_code, description: desc, min_order_amount:dis_percent , enable_redemption_limit: enable_redemption, redemption_limit: redemption, flag: flag, discount: dis_percent, max_discount_amount: max_disc_amt, start_date: change_start_date, end_date: change_end_date, start_time: "", end_time: "", category_id: "", coupon_type: "0", items: "", list_online: list_online, type: type) { isSuccess, responseData in
                     
@@ -674,8 +659,8 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
         percentBtn.isHidden = true
         dollerBtn.isHidden = true
         addVariantBtn.isHidden = true
-       
-        
+        universalView.applySideOnlyShadow()
+        specificItemView.removeShadow()
     }
     
     @objc func specificItemViewClick() {
@@ -693,7 +678,8 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
         percentBtn.isHidden = false
         dollerBtn.isHidden = false
         addVariantBtn.isHidden = false
-       
+        specificItemView.applySideOnlyShadow()
+        universalView.removeShadow()
         
         if mode == "edit" {
             variantListApi()
@@ -708,6 +694,7 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func percentBtnClick(_ sender: UIButton) {
+        
         if discountText.text == "" || discountText.text == "0.00"  {
             
             percentBtn.backgroundColor = UIColor.init(hexString: "#0A64F9")
@@ -732,6 +719,7 @@ class AddItemLevelCouponViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func dollerBtnClick(_ sender: UIButton) {
+        
         dollerBtn.backgroundColor = UIColor.init(hexString: "#0A64F9")
         percentBtn.backgroundColor = UIColor.init(hexString: "#EEEEEE")
         percentBtn.setImage(UIImage(named: "PercentSymbol"), for: .normal)
@@ -1178,7 +1166,10 @@ extension AddItemLevelCouponViewController {
                     }
                 }
                 else {
-                    if Double(cleanedAmount) ?? 00000 > 9999 {
+//                    if Double(cleanedAmount) ?? 00000 > 9999 {
+//                        cleanedAmount = String(cleanedAmount.dropLast())
+//                    }
+                    if Double(cleanedAmount) ?? 0.00 > 10000 {
                         cleanedAmount = String(cleanedAmount.dropLast())
                     }
                 }
@@ -1525,3 +1516,23 @@ extension AddItemLevelCouponViewController : SelectBogoDelegate {
 }
 
 
+extension UIView {
+    func applySideOnlyShadow(
+        opacity: Float = 0.35,
+        radius: CGFloat = 6,
+        shadowSize: CGFloat = 6
+    ) {
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor(red: 0x0A/255, green: 0x64/255, blue: 0xF9/255, alpha: 1).cgColor
+        layer.shadowOpacity = opacity
+        layer.shadowRadius = radius
+        layer.shadowOffset = .zero
+        
+    }
+    
+    func removeShadow() {
+        layer.shadowOpacity = 0
+        layer.shadowRadius = 0
+        layer.shadowOffset = .zero
+    }
+}

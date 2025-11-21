@@ -32,7 +32,7 @@ class CouponViewController: UIViewController {
     var mode = 0
     var editCoupon: CouponEdit?
     var coupon_id = ""
-    let tabs = ["Order Level", "Item Level"]
+    //let tabs = ["Order Level", "Item Level"]
     var couponArray = [Coupon]()
     var couponOrderArray = [Coupon]()
     var couponitemArray = [Coupon]()
@@ -66,9 +66,9 @@ class CouponViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        noCouponView.isHidden = true
-        tableview.isHidden = true
-        floatButton.isHidden = true
+       // noCouponView.isHidden = true
+       // tableview.isHidden = true
+       // floatButton.isHidden = true
         orderSelect = true
         setupUI()
         
@@ -86,8 +86,12 @@ class CouponViewController: UIViewController {
         
         loadingIndicator.isAnimating = true
         itemLevelBtn.setTitleColor(UIColor(hexString: "#777777"), for: .normal)
+        orderlevelbtn.setTitleColor(UIColor(hexString: "#0A64F9"), for: .normal)
+        orderLevelView.backgroundColor = UIColor(hexString: "#0A64F9")
         itemlevelView.backgroundColor = UIColor.systemGray6
         setupApi()
+        print(couponOrderArray)
+        
        
     }
     
@@ -219,8 +223,6 @@ class CouponViewController: UIViewController {
             tableview.isHidden = true
             loadingIndicator.isAnimating = false
             
-            noCouponView.isHidden = false
-            floatButton.isHidden = true
             
         }
         
@@ -273,8 +275,14 @@ class CouponViewController: UIViewController {
             loadingIndicator.isAnimating = false
             tableview.isHidden = false
             
-            floatButton.isHidden = false
-            noCouponView.isHidden = true
+            if couponOrderArray.isEmpty {
+                noCouponView.isHidden = false
+                floatButton.isHidden = true
+                tableview.isHidden = true
+                
+            } else {
+         
+            }
             
         }
         
@@ -289,7 +297,7 @@ class CouponViewController: UIViewController {
     
     @IBAction func clickAddClick(_ sender: UIButton) {
        
-        if couponArray.contains(where: { $0.type == "0" }) {
+        if orderSelect {
             if UserDefaults.standard.bool(forKey: "lock_add_coupon") {
                 ToastClass.sharedToast.showToast(message: "Access Denied",
                                                  font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
@@ -352,10 +360,19 @@ class CouponViewController: UIViewController {
         couponArray = couponOrderArray
         orderSelect = true
         tableview.reloadData()
+        if couponArray.isEmpty {
+            noCouponView.isHidden = false
+            floatButton.isHidden = true
+            tableview.isHidden = true
+        } else {
+            noCouponView.isHidden = true
+            floatButton.isHidden = false
+            tableview.isHidden = false
+        }
     }
     
     @IBAction func itemLevelBtnClick(_ sender: UIButton) {
-       
+        
         orderlevelbtn.setTitleColor(UIColor(hexString: "#777777"), for: .normal)
         itemLevelBtn.setTitleColor(UIColor(hexString: "#0A64F9"), for: .normal)
         itemlevelView.backgroundColor = UIColor(named: "SelectCat")
@@ -363,6 +380,16 @@ class CouponViewController: UIViewController {
         couponArray = couponitemArray
         orderSelect = false
         tableview.reloadData()
+        
+        if couponArray.isEmpty {
+            noCouponView.isHidden = false
+            floatButton.isHidden = true
+            tableview.isHidden = true
+        } else {
+            noCouponView.isHidden = true
+            floatButton.isHidden = false
+            tableview.isHidden = false
+        }
     }
     
     
