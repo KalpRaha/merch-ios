@@ -344,6 +344,7 @@ class AddCouponViewController: UIViewController, UITextFieldDelegate {
             
             if dis_per == "100.00" {
                 is_online = "0"
+                list_online = "0"
             }
             print(dis_percent)
         }
@@ -634,6 +635,7 @@ class AddCouponViewController: UIViewController, UITextFieldDelegate {
             if discountPercentText.text == "100.00" {
                 
                 enableSwitch.isOn = false
+                listOnlineSwitch.isOn = false
                 ToastClass.sharedToast.showToast(message: "Show Online is Disabled for 100% Coupon",
                                                  font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
             }
@@ -662,11 +664,34 @@ class AddCouponViewController: UIViewController, UITextFieldDelegate {
     @objc func enableListOnline(enableSwitch: UISwitch) {
         view.endEditing(true)
         
-        if enableSwitch.isOn {
-            enableSwitch.isOn = true
+        if discountAmtUnder.isHidden {
+            
+            if discountPercentText.text == "100.00" {
+                
+                enableSwitch.isOn = false
+                listOnlineSwitch.isOn = false
+                ToastClass.sharedToast.showToast(message: "List Online is Disabled for 100% Coupon",
+                                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+            }
+            else {
+                
+                if enableSwitch.isOn {
+                    enableSwitch.isOn = true
+                }
+                else {
+                    enableSwitch.isOn = false
+                }
+            }
         }
+        
         else {
-            enableSwitch.isOn = false
+            
+            if enableSwitch.isOn {
+                enableSwitch.isOn = true
+            }
+            else {
+                enableSwitch.isOn = false
+            }
         }
     }
     
@@ -1152,7 +1177,8 @@ class AddCouponViewController: UIViewController, UITextFieldDelegate {
                 if discountPercentText.text == "100.00" {
                     
                     showOnlineSwitch.isOn = false
-                    ToastClass.sharedToast.showToast(message: "Show Online is Disabled for 100% Coupon", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                    listOnlineSwitch.isOn = false
+                    ToastClass.sharedToast.showToast(message: "Show Online and List Online is Disabled for 100% Coupon", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                     maxDiscountTextField.isHidden = true
                     maxDiscountHeight.constant = 0
                     maxDiscountBottom.constant = 0
