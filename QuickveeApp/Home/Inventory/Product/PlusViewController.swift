@@ -925,7 +925,7 @@ class PlusViewController: UIViewController {
             var opt_choice = false
             if mode == "add" {
                 if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                    scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + 36.33 + 14.5
+                    scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + 30.83
                 }
                 else {
                     scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + 36.33 + 70.5
@@ -938,7 +938,7 @@ class PlusViewController: UIViewController {
                 }
                 else {
                     if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                        scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + 36.33 + 14.5
+                        scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + 30.83
                     }
                     else {
                         scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + 36.33 + 70.5
@@ -953,7 +953,7 @@ class PlusViewController: UIViewController {
                     
                     if opt_choice {
                         if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33 + 14.5
+                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 30.83
                         }
                         else {
                             scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33 + 70.5
@@ -961,7 +961,7 @@ class PlusViewController: UIViewController {
                     }
                     else {
                         if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33 + 14.5
+                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 30.83
                         }
                         else {
                             scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33 + 70.5
@@ -979,7 +979,7 @@ class PlusViewController: UIViewController {
             else {
                 //771 = 826
                 if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                    scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 751 + 20 + 14.5
+                    scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 751 + 14.5
                 }
                 else {
                     scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 751 + 20 + 70.5
@@ -999,7 +999,7 @@ class PlusViewController: UIViewController {
                 if productOptions.count == 3 {
                     opt_choice = false
                     if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                        scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33 + 14.5
+                        scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 30.83
                     }
                     else {
                         scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33 + 70.5
@@ -1011,7 +1011,7 @@ class PlusViewController: UIViewController {
                 else {
                     opt_choice = true
                     if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                        scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33 + 14.5
+                        scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 30.83
                     }
                     else {
                         scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33 + 70.5
@@ -1025,7 +1025,7 @@ class PlusViewController: UIViewController {
                     
                     if opt_choice {
                         if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                            scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33 + 14.5
+                            scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 30.83
                         }
                         else {
                             scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33 + 70.5
@@ -1033,7 +1033,7 @@ class PlusViewController: UIViewController {
                     }
                     else {
                         if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                            scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33 + 14.5
+                            scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 30.83
                         }
                         else {
                             scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33 + 70.5
@@ -1052,7 +1052,7 @@ class PlusViewController: UIViewController {
             else {
                 //771 = 826
                 if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                    scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 751 + CGFloat(50 * var_count) + 20 + 14.5
+                    scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 751 + CGFloat(50 * var_count) + 14.5
                 }
                 else {
                     scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 751 + CGFloat(50 * var_count) + 20 + 70.5
@@ -4867,10 +4867,12 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
                 cell.costStack.isHidden = true
                 cell.costStackHeight.constant = 0
+                cell.costStackTop.constant = 0
             }
             else {
                 cell.costStack.isHidden = false
                 cell.costStackHeight.constant = 56
+                cell.costStackTop.constant = 20
             }
             
             return cell
@@ -5104,7 +5106,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 if mode == "add" {
                     if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                        scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + 706 + 36.33 + 14.5
+                        scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + 706 + 30.83
                     }
                     else {
                         scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + 706 + 36.33 + 70.5
@@ -5118,7 +5120,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                     else {
                         opt_choice = true
                         if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                            scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + 776 + 36.33 + 14.5
+                            scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + 776 + 30.83
                         }
                         else {
                             scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + 776 + 36.33 + 70.5
@@ -5132,7 +5134,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                         
                         if opt_choice {
                             if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                                scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33 + 14.5
+                                scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 30.83
                             }
                             else {
                                 scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33 + 70.5
@@ -5140,7 +5142,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                         }
                         else {
                             if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                                scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33 + 14.5
+                                scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 30.83
                             }
                             else {
                                 scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33 + 70.5
@@ -5157,7 +5159,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 else {
                     //771 = 826
                     if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                        scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 751 + 20 + 14.5
+                        scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 751 + 14.5
                     }
                     else {
                         scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 751 + 20 + 70.5
@@ -5187,7 +5189,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 if mode == "add" {
                     if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                        scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33 + 14.5
+                        scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 30.83
                     }
                     else {
                         scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33 + 70.5
@@ -5201,7 +5203,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                     else {
                         opt_choice = true
                         if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                            scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33 + 14.5
+                            scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 30.83
                         }
                         else {
                             scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33 + 70.5
@@ -5213,7 +5215,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 else {
                     if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                        scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count) + 20 + 14.5
+                        scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count) + 14.5
                     }
                     else {
                         scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count) + 20 + 70.5
@@ -5230,7 +5232,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     if opt_choice {
                         if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33 + 14.5
+                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 30.83
                         }
                         else {
                             scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33 + 70.5
@@ -5238,7 +5240,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     else {
                         if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
-                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33 + 14.5
+                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 30.83
                         }
                         else {
                             scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33 + 70.5

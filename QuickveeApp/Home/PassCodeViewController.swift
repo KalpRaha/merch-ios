@@ -1008,10 +1008,10 @@ class PassCodeViewController: UIViewController, WKNavigationDelegate {
         }
         
         if per_array.contains("HC") {
-            UserDefaults.standard.set(false, forKey: "lock_hide_cost")
+            UserDefaults.standard.set(true, forKey: "lock_hide_cost")
         }
         else {
-            UserDefaults.standard.set(true, forKey: "lock_hide_cost")
+            UserDefaults.standard.set(false, forKey: "lock_hide_cost")
         }
         
         //stocktake

@@ -1751,6 +1751,7 @@
                                                                     <outlet property="costPerItem" destination="gjS-r8-av1" id="XII-g0-VeL"/>
                                                                     <outlet property="costStack" destination="aVP-nd-e6a" id="JZz-Pu-6ca"/>
                                                                     <outlet property="costStackHeight" destination="Eq0-38-YRs" id="TYh-cj-eyd"/>
+                                                                    <outlet property="costStackTop" destination="o5p-D2-tIO" id="5qz-dC-m8j"/>
                                                                     <outlet property="customCode" destination="CVO-CL-CcS" id="U99-Jc-ZUQ"/>
                                                                     <outlet property="disable" destination="bnx-NG-gbr" id="RMz-3E-knL"/>
                                                                     <outlet property="foodstampable" destination="1pq-Yv-ZRO" id="cMc-f4-Fs6"/>
@@ -2754,23 +2755,23 @@
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="4Jp-pE-nC9" customClass="ProductVariantTableViewCell" customModule="QuickveeApp" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="50" width="414" height="628"/>
+                                                                <rect key="frame" x="0.0" y="50" width="414" height="634"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Jp-pE-nC9" id="xGe-d8-x7Y">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="628"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="634"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpl-S8-Var">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="628"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="634"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Bgo-zj-Th3">
-                                                                                    <rect key="frame" x="10" y="20" width="394" height="50"/>
+                                                                                    <rect key="frame" x="10" y="20" width="394" height="56"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJj-R2-tu0" customClass="MDCOutlinedTextField">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="192" height="50"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="192" height="56"/>
                                                                                             <subviews>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IAb-sS-akp">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="192" height="50"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="192" height="56"/>
                                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 </view>
                                                                                             </subviews>
@@ -2783,13 +2784,16 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sd9-7O-6oH" customClass="MDCOutlinedTextField">
-                                                                                            <rect key="frame" x="202" y="0.0" width="192" height="50"/>
+                                                                                            <rect key="frame" x="202" y="0.0" width="192" height="56"/>
                                                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                         </view>
                                                                                     </subviews>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="height" constant="56" id="7cE-Sw-efR"/>
+                                                                                    </constraints>
                                                                                 </stackView>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xQj-kf-fER" userLabel="First Stack">
-                                                                                    <rect key="frame" x="10" y="90" width="394" height="50"/>
+                                                                                    <rect key="frame" x="10" y="96" width="394" height="50"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pgC-lm-uj0" customClass="MDCOutlinedTextField">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="192" height="50"/>
@@ -2815,7 +2819,7 @@
                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </stackView>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HUP-z9-xOi" userLabel="Second Stack">
-                                                                                    <rect key="frame" x="10" y="160" width="394" height="50"/>
+                                                                                    <rect key="frame" x="10" y="166" width="394" height="50"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sLZ-Qo-11p" customClass="MDCOutlinedTextField">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="192" height="50"/>
@@ -2853,7 +2857,7 @@
                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </stackView>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="brj-TK-ZGF" userLabel="Fourth Stack ">
-                                                                                    <rect key="frame" x="10" y="230" width="394" height="50"/>
+                                                                                    <rect key="frame" x="10" y="236" width="394" height="50"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lcK-EX-Ngy" customClass="MDCOutlinedTextField">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="189.5" height="50"/>
@@ -2866,11 +2870,11 @@
                                                                                     </subviews>
                                                                                 </stackView>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h8M-lj-OSD" customClass="MDCOutlinedTextField">
-                                                                                    <rect key="frame" x="10" y="300" width="394" height="0.0"/>
+                                                                                    <rect key="frame" x="10" y="306" width="394" height="0.0"/>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Az3-gG-lZg" customClass="MDCOutlinedTextField">
-                                                                                    <rect key="frame" x="10" y="320" width="394" height="26"/>
+                                                                                    <rect key="frame" x="10" y="326" width="394" height="26"/>
                                                                                     <subviews>
                                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Dm-Hu-eVE">
                                                                                             <rect key="frame" x="341" y="1" width="52" height="24"/>
@@ -2893,7 +2897,7 @@
                                                                                     </constraints>
                                                                                 </view>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EiY-d4-Tcp">
-                                                                                    <rect key="frame" x="10" y="371" width="30" height="33"/>
+                                                                                    <rect key="frame" x="10" y="377" width="30" height="33"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                                     <state key="normal">
@@ -2904,13 +2908,13 @@
                                                                                     </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Na5-hA-AIf">
-                                                                                    <rect key="frame" x="50" y="377.5" width="106.5" height="20.5"/>
+                                                                                    <rect key="frame" x="50" y="383.5" width="106.5" height="20.5"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q93-8T-FZC">
-                                                                                    <rect key="frame" x="10" y="424" width="30" height="33"/>
+                                                                                    <rect key="frame" x="10" y="430" width="30" height="33"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                                     <state key="normal">
@@ -2921,13 +2925,13 @@
                                                                                     </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue selling when out of stock" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nGT-xd-3aM">
-                                                                                    <rect key="frame" x="50" y="430.5" width="251.5" height="20.5"/>
+                                                                                    <rect key="frame" x="50" y="436.5" width="251.5" height="20.5"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zba-KQ-U9L">
-                                                                                    <rect key="frame" x="10" y="477" width="30" height="33"/>
+                                                                                    <rect key="frame" x="10" y="483" width="30" height="33"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                                     <state key="normal">
@@ -2938,13 +2942,13 @@
                                                                                     </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="joM-Az-YVI">
-                                                                                    <rect key="frame" x="50" y="483.5" width="64" height="20.5"/>
+                                                                                    <rect key="frame" x="50" y="489.5" width="64" height="20.5"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAA-qM-MNT">
-                                                                                    <rect key="frame" x="10" y="530" width="30" height="33"/>
+                                                                                    <rect key="frame" x="10" y="536" width="30" height="33"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                                     <state key="normal">
@@ -2955,26 +2959,26 @@
                                                                                     </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPC-fC-wly">
-                                                                                    <rect key="frame" x="50" y="536.5" width="54" height="20.5"/>
+                                                                                    <rect key="frame" x="50" y="542.5" width="54" height="20.5"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OHU-rX-oId">
-                                                                                    <rect key="frame" x="10" y="583" width="30" height="34"/>
+                                                                                    <rect key="frame" x="10" y="589" width="30" height="34"/>
                                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                                     <connections>
                                                                                         <action selector="dubFoodClick:" destination="7wl-4k-oD5" eventType="touchUpInside" id="Cby-jF-Nns"/>
                                                                                     </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Stampable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yO-dY-Kik">
-                                                                                    <rect key="frame" x="50" y="590" width="117.5" height="20.5"/>
+                                                                                    <rect key="frame" x="50" y="596" width="117.5" height="20.5"/>
                                                                                     <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lcR-cS-ssV" userLabel="Line View">
-                                                                                    <rect key="frame" x="10" y="627" width="394" height="1"/>
+                                                                                    <rect key="frame" x="10" y="633" width="394" height="1"/>
                                                                                     <color key="backgroundColor" name="borderColor"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="1" id="UfC-9y-qLn"/>
@@ -3042,6 +3046,9 @@
                                                                     <outlet property="comparePrice" destination="pgC-lm-uj0" id="5xm-cC-jtx"/>
                                                                     <outlet property="costItemInner" destination="IAb-sS-akp" id="FDr-oZ-hcZ"/>
                                                                     <outlet property="costPerItem" destination="TJj-R2-tu0" id="Ktt-zJ-MiK"/>
+                                                                    <outlet property="costStack" destination="Bgo-zj-Th3" id="Xmd-mN-JZ8"/>
+                                                                    <outlet property="costStackHeight" destination="7cE-Sw-efR" id="HNN-4c-Iee"/>
+                                                                    <outlet property="costStackTop" destination="IXa-Mh-Hip" id="wsj-pm-efw"/>
                                                                     <outlet property="customCode" destination="h8M-lj-OSD" id="IzV-rC-Kyd"/>
                                                                     <outlet property="disable" destination="GAA-qM-MNT" id="H8k-HG-Fra"/>
                                                                     <outlet property="foodstampable" destination="OHU-rX-oId" id="GrS-mS-TsU"/>
@@ -46607,19 +46614,19 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.2196078431372549" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="underPageBackgroundColor">
             <color red="0.70980392156862748" green="0.71764705882352942" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

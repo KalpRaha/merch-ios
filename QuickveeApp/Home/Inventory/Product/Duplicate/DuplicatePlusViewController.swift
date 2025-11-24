@@ -435,13 +435,23 @@ class DuplicatePlusViewController: UIViewController {
         if var_count == 0 || var_count == 1 {
             
             if dupProdOptions.count == 3 {
-                dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 656
+                if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                    dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 580
+                }
+                else {
+                    dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 656
+                }
                 dupAddVarBtn.isHidden = true
                 dupAddBtnHeight.constant = 0
                 dupAddBtnTop.constant = 0
             }
             else {
-                dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 726
+                if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                    dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 650
+                }
+                else {
+                    dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 726
+                }
                 dupAddVarBtn.isHidden = false
                 dupAddBtnHeight.constant = 50
                 dupAddBtnTop.constant = 20
@@ -451,13 +461,23 @@ class DuplicatePlusViewController: UIViewController {
             
             var_count -= 1
             if dupProdOptions.count == 3 {
-                dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 656 + CGFloat(50 * var_count)
+                if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                    dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 580 + CGFloat(50 * var_count)
+                }
+                else {
+                    dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 656 + CGFloat(50 * var_count)
+                }
                 dupAddVarBtn.isHidden = true
                 dupAddBtnHeight.constant = 0
                 dupAddBtnTop.constant = 0
             }
             else {
-                dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 726 + CGFloat(50 * var_count)
+                if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                    dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 650 + CGFloat(50 * var_count)
+                }
+                else {
+                    dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 726 + CGFloat(50 * var_count)
+                }
                 dupAddVarBtn.isHidden = false
                 dupAddBtnHeight.constant = 50
                 dupAddBtnTop.constant = 20
@@ -3128,13 +3148,23 @@ extension DuplicatePlusViewController: UITableViewDelegate, UITableViewDataSourc
                 dupisSelectedData[tagView].toggle()
                 
                 if dupProdOptions.count == 3 {
-                    dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 656
+                    if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                        dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 580
+                    }
+                    else {
+                        dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 656
+                    }
                     dupAddVarBtn.isHidden = true
                     dupAddBtnHeight.constant = 0
                     dupAddBtnTop.constant = 0
                 }
                 else {
-                    dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 726
+                    if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                        dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 650
+                    }
+                    else {
+                        dupScrollHeight.constant = 768 + cat + tag + tax + dupattHeight.constant + 726
+                    }
                     dupAddVarBtn.isHidden = false
                     dupAddBtnHeight.constant = 50
                     dupAddBtnTop.constant = 20
@@ -3154,13 +3184,23 @@ extension DuplicatePlusViewController: UITableViewDelegate, UITableViewDataSourc
                 dupisSelectedData[tagView].toggle()
                 
                 if dupProdOptions.count == 3 {
-                    dupScrollHeight.constant = 788 + cat + tag + tax + dupattHeight.constant + CGFloat(50 * var_count)
+                    if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                        dupScrollHeight.constant = 788 + cat + tag + tax + dupattHeight.constant + CGFloat(50 * var_count) - 76
+                    }
+                    else {
+                        dupScrollHeight.constant = 788 + cat + tag + tax + dupattHeight.constant + CGFloat(50 * var_count)
+                    }
                     dupAddVarBtn.isHidden = true
                     dupAddBtnHeight.constant = 0
                     dupAddBtnTop.constant = 0
                 }
                 else {
-                    dupScrollHeight.constant = 788 + cat + tag + tax + dupattHeight.constant + CGFloat(50 * var_count)
+                    if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                        
+                    }
+                    else {
+                        dupScrollHeight.constant = 788 + cat + tag + tax + dupattHeight.constant + CGFloat(50 * var_count) - 76
+                    }
                     dupAddVarBtn.isHidden = false
                     dupAddBtnHeight.constant = 50
                     dupAddBtnTop.constant = 20
