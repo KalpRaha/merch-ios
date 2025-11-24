@@ -423,7 +423,7 @@ class AddCouponViewController: UIViewController, UITextFieldDelegate {
             
             if checkMaxDiscount(max: dis_percent) {
                 
-                guard let max_dis = maxDiscountTextField.text, max_dis != "" else {
+                guard let max_dis = maxDiscountTextField.text else {
                     maxDiscountTextField.isError(numberOfShakes: 3, revert: true)
                     let button = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
                     button.setImage(UIImage(named: "warning"), for: .normal)
@@ -432,7 +432,13 @@ class AddCouponViewController: UIViewController, UITextFieldDelegate {
                     button.addTarget(self, action: #selector(checkMinAmtLess), for: .touchUpInside)
                     return
                 }
-                max_disc_amt = max_dis
+                
+                if max_dis == "" {
+                    max_disc_amt = "0.00"
+                }
+                else {
+                    max_disc_amt = max_dis
+                }
             }
             else {
                 max_disc_amt = "0.00"
