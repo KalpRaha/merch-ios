@@ -476,7 +476,7 @@ class AddCouponViewController: UIViewController, UITextFieldDelegate {
                          redemption: redemption, flag: flag,
                          max_dis: max_disc_amt, dis_percent: dis_percent,
                          start_date: change_start_date, end_date: change_end_date,
-                         start_time: "", end_time: "",
+                         start_time: "00:00:00", end_time: "23:59:00",
                          category_id: "",coupon_type: "0", product_data: "")
         }
         else {
@@ -494,7 +494,7 @@ class AddCouponViewController: UIViewController, UITextFieldDelegate {
                      redemption: redemption, flag: flag,
                      max_dis: max_disc_amt, dis_percent: dis_percent,
                      start_date: change_start_date, end_date: change_end_date,
-                     start_time: "", end_time: "",
+                     start_time: "00:00:00", end_time: "23:59:00",
                      category_id: "", coupon_type: "0", product_data: "")
         }
     }
@@ -522,8 +522,8 @@ class AddCouponViewController: UIViewController, UITextFieldDelegate {
             "max_discount_amount": max_dis,
             "start_date": start_date,
             "end_date": end_date,
-            "start_time": start_time,
-            "end_time": end_time,
+            "start_time": "00:00:00",
+            "end_time": "23:59:00",
             "category_id": category_id,
             "coupon_type": coupon_type,
             "product_data": product_data
@@ -578,8 +578,8 @@ class AddCouponViewController: UIViewController, UITextFieldDelegate {
             "max_discount_amount": max_dis,
             "start_date": start_date,
             "end_date": end_date,
-            "start_time": start_time,
-            "end_time": end_time,
+            "start_time": "00:00:00",
+            "end_time": "23:59:00",
             "category_id": category_id,
             "coupon_type": coupon_type,
             "product_data": product_data
