@@ -924,7 +924,12 @@ class PlusViewController: UIViewController {
         if var_count == 0 || var_count == 1 {
             var opt_choice = false
             if mode == "add" {
-                scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + 36.33 + 70.5
+                if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                    scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + 36.33 + 14.5
+                }
+                else {
+                    scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + 36.33 + 70.5
+                }
                 if productOptions.count == 3 {
                     opt_choice = false
                     addVarBtn.isHidden = true
@@ -932,7 +937,12 @@ class PlusViewController: UIViewController {
                     addVarTop.constant = 0
                 }
                 else {
-                    scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + 36.33 + 70.5
+                    if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                        scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + 36.33 + 14.5
+                    }
+                    else {
+                        scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + 36.33 + 70.5
+                    }
                     opt_choice = true
                     addVarBtn.isHidden = false
                     addVarBtnHeight.constant = 50
@@ -942,10 +952,20 @@ class PlusViewController: UIViewController {
                 if !UserDefaults.standard.bool(forKey: "multi_store_access") {
                     
                     if opt_choice {
-                        scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33 + 70.5
+                        if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33 + 14.5
+                        }
+                        else {
+                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33 + 70.5
+                        }
                     }
                     else {
-                        scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33 + 70.5
+                        if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33 + 14.5
+                        }
+                        else {
+                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33 + 70.5
+                        }
                     }
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
@@ -958,7 +978,12 @@ class PlusViewController: UIViewController {
             
             else {
                 //771 = 826
-                scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 751 + 20 + 70.5
+                if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                    scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 751 + 20 + 14.5
+                }
+                else {
+                    scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 751 + 20 + 70.5
+                }
                 addVarBtn.isHidden = true
                 addVarBtnHeight.constant = 0
                 addVarTop.constant = 0
@@ -973,14 +998,24 @@ class PlusViewController: UIViewController {
             if mode == "add" {
                 if productOptions.count == 3 {
                     opt_choice = false
-                    scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33 + 70.5
+                    if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                        scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33 + 14.5
+                    }
+                    else {
+                        scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33 + 70.5
+                    }
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
                 }
                 else {
                     opt_choice = true
-                    scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33 + 70.5
+                    if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                        scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33 + 14.5
+                    }
+                    else {
+                        scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33 + 70.5
+                    }
                     addVarBtn.isHidden = false
                     addVarBtnHeight.constant = 50
                     addVarTop.constant = 20
@@ -989,10 +1024,20 @@ class PlusViewController: UIViewController {
                 if !UserDefaults.standard.bool(forKey: "multi_store_access") {
                     
                     if opt_choice {
-                        scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33 + 70.5
+                        if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                            scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33 + 14.5
+                        }
+                        else {
+                            scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 776 + CGFloat(50 * var_count) + 36.33 + 70.5
+                        }
                     }
                     else {
-                        scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33 + 70.5
+                        if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                            scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33 + 14.5
+                        }
+                        else {
+                            scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 706 + CGFloat(50 * var_count) + 36.33 + 70.5
+                        }
                     }
                     
                     addVarBtn.isHidden = true
@@ -1006,7 +1051,12 @@ class PlusViewController: UIViewController {
             
             else {
                 //771 = 826
-                scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 751 + CGFloat(50 * var_count) + 20 + 70.5
+                if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                    scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 751 + CGFloat(50 * var_count) + 20 + 14.5
+                }
+                else {
+                    scrollHeight.constant = 734 + cat + tag + tax + its + attHeight.constant + 751 + CGFloat(50 * var_count) + 20 + 70.5
+                }
                 addVarBtn.isHidden = true
                 addVarBtnHeight.constant = 0
                 addVarTop.constant = 0
@@ -4814,6 +4864,15 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.salesHeight.constant = 45
             }
             
+            if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                cell.costStack.isHidden = true
+                cell.costStackHeight.constant = 0
+            }
+            else {
+                cell.costStack.isHidden = false
+                cell.costStackHeight.constant = 56
+            }
+            
             return cell
         }
         else {
@@ -5044,7 +5103,12 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 var opt_choice = false
                 
                 if mode == "add" {
-                    scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + 706 + 36.33 + 70.5
+                    if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                        scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + 706 + 36.33 + 14.5
+                    }
+                    else {
+                        scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + 706 + 36.33 + 70.5
+                    }
                     if productOptions.count == 3 {
                         opt_choice = false
                         addVarBtn.isHidden = true
@@ -5053,7 +5117,12 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     else {
                         opt_choice = true
-                        scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + 776 + 36.33 + 70.5
+                        if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                            scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + 776 + 36.33 + 14.5
+                        }
+                        else {
+                            scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + 776 + 36.33 + 70.5
+                        }
                         addVarBtn.isHidden = false
                         addVarBtnHeight.constant = 50
                         addVarTop.constant = 20
@@ -5062,10 +5131,20 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                     if !UserDefaults.standard.bool(forKey: "multi_store_access") {
                         
                         if opt_choice {
-                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33 + 70.5
+                            if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                                scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33 + 14.5
+                            }
+                            else {
+                                scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33 + 70.5
+                            }
                         }
                         else {
-                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33 + 70.5
+                            if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                                scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33 + 14.5
+                            }
+                            else {
+                                scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33 + 70.5
+                            }
                         }
                         addVarBtn.isHidden = true
                         addVarBtnHeight.constant = 0
@@ -5077,7 +5156,12 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 else {
                     //771 = 826
-                    scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 751 + 20 + 70.5
+                    if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                        scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 751 + 20 + 14.5
+                    }
+                    else {
+                        scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 751 + 20 + 70.5
+                    }
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
@@ -5102,7 +5186,12 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 var opt_choice = false
                 
                 if mode == "add" {
-                    scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33 + 70.5
+                    if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                        scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33 + 14.5
+                    }
+                    else {
+                        scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33 + 70.5
+                    }
                     if productOptions.count == 3 {
                         opt_choice = false
                         addVarBtn.isHidden = true
@@ -5111,14 +5200,24 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     else {
                         opt_choice = true
-                        scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33 + 70.5
+                        if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                            scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33 + 14.5
+                        }
+                        else {
+                            scrollHeight.constant = 734 + cat + tag + its + tax + attHeight.constant + CGFloat(50 * var_count) + 36.33 + 70.5
+                        }
                         addVarBtn.isHidden = false
                         addVarBtnHeight.constant = 50
                         addVarTop.constant = 20
                     }
                 }
                 else {
-                    scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count) + 20 + 70.5
+                    if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                        scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count) + 20 + 14.5
+                    }
+                    else {
+                        scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + CGFloat(50 * var_count) + 20 + 70.5
+                    }
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0
                     addVarTop.constant = 0
@@ -5130,10 +5229,20 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 if !UserDefaults.standard.bool(forKey: "multi_store_access") {
                     
                     if opt_choice {
-                        scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33 + 70.5
+                        if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33 + 14.5
+                        }
+                        else {
+                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 776 + 36.33 + 70.5
+                        }
                     }
                     else {
-                        scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33 + 70.5
+                        if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33 + 14.5
+                        }
+                        else {
+                            scrollHeight.constant = 734 + cat + tag + tax + attHeight.constant + 706 + 36.33 + 70.5
+                        }
                     }
                     addVarBtn.isHidden = true
                     addVarBtnHeight.constant = 0

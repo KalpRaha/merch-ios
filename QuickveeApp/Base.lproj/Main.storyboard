@@ -1438,6 +1438,9 @@
                                                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                         </view>
                                                                                     </subviews>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="height" constant="56" id="Eq0-38-YRs"/>
+                                                                                    </constraints>
                                                                                 </stackView>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sju-Aa-ees" userLabel="First Stack">
                                                                                     <rect key="frame" x="10" y="90" width="394" height="0.0"/>
@@ -1746,6 +1749,8 @@
                                                                     <outlet property="comparePrice" destination="45e-wF-uvW" id="SY6-na-paK"/>
                                                                     <outlet property="costItemInner" destination="Enl-yQ-Va2" id="GEH-mR-xxg"/>
                                                                     <outlet property="costPerItem" destination="gjS-r8-av1" id="XII-g0-VeL"/>
+                                                                    <outlet property="costStack" destination="aVP-nd-e6a" id="JZz-Pu-6ca"/>
+                                                                    <outlet property="costStackHeight" destination="Eq0-38-YRs" id="TYh-cj-eyd"/>
                                                                     <outlet property="customCode" destination="CVO-CL-CcS" id="U99-Jc-ZUQ"/>
                                                                     <outlet property="disable" destination="bnx-NG-gbr" id="RMz-3E-knL"/>
                                                                     <outlet property="foodstampable" destination="1pq-Yv-ZRO" id="cMc-f4-Fs6"/>
@@ -46486,7 +46491,7 @@
         <segue reference="44M-DD-teR"/>
         <segue reference="Eyu-JW-VW2"/>
         <segue reference="SeS-H7-xfm"/>
-        <segue reference="BX0-qg-734"/>
+        <segue reference="Kdt-YW-Tde"/>
         <segue reference="UfE-A6-dPb"/>
         <segue reference="vbg-HO-Xhb"/>
         <segue reference="0XF-Ao-PWs"/>
