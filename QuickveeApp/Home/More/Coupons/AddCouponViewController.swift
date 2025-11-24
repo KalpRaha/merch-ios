@@ -578,8 +578,8 @@ class AddCouponViewController: UIViewController, UITextFieldDelegate {
             "max_discount_amount": max_dis,
             "start_date": start_date,
             "end_date": end_date,
-            "start_time": start_time,
-            "end_time": end_time,
+            "start_time": "00:00:00",
+            "end_time": "23:59:00",
             "category_id": category_id,
             "coupon_type": coupon_type,
             "product_data": product_data

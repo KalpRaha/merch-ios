@@ -1007,6 +1007,13 @@ class PassCodeViewController: UIViewController, WKNavigationDelegate {
             UserDefaults.standard.set(true, forKey: "lock_delete_lottery")
         }
         
+        if per_array.contains("HC") {
+            UserDefaults.standard.set(false, forKey: "lock_hide_cost")
+        }
+        else {
+            UserDefaults.standard.set(true, forKey: "lock_hide_cost")
+        }
+        
         //stocktake
         
         if per_array.contains("AK") {

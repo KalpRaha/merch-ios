@@ -4498,14 +4498,14 @@
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="9kO-XZ-7pD">
-                                                <rect key="frame" x="15" y="30" width="384" height="50"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="9kO-XZ-7pD">
+                                                <rect key="frame" x="15" y="30" width="384" height="63"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h08-UN-CaC" customClass="MDCOutlinedTextField">
-                                                        <rect key="frame" x="0.0" y="0.0" width="184.5" height="50"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h08-UN-CaC" customClass="MDCOutlinedTextField">
+                                                        <rect key="frame" x="0.0" y="0.0" width="184.5" height="63"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nga-Yb-xPJ">
-                                                                <rect key="frame" x="0.0" y="-44" width="184.5" height="128"/>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nga-Yb-xPJ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="184.5" height="63"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </view>
                                                         </subviews>
@@ -4517,11 +4517,14 @@
                                                             <constraint firstAttribute="trailing" secondItem="nga-Yb-xPJ" secondAttribute="trailing" id="ltC-yr-VFM"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kgs-1b-eIu" customClass="MDCOutlinedTextField">
-                                                        <rect key="frame" x="199.5" y="0.0" width="184.5" height="50"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kgs-1b-eIu" customClass="MDCOutlinedTextField">
+                                                        <rect key="frame" x="199.5" y="0.0" width="184.5" height="63"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="63" id="4BT-sm-stX"/>
+                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="10i-cH-axF">
                                                 <rect key="frame" x="15" y="150" width="384" height="128"/>
@@ -4903,6 +4906,8 @@
                         <outlet property="customCode" destination="wTe-Hd-F0C" id="ObE-QY-mOE"/>
                         <outlet property="disable" destination="Q44-if-R3u" id="25p-yK-DTf"/>
                         <outlet property="disableLbl" destination="cKO-Sj-ERC" id="LnT-bY-hvy"/>
+                        <outlet property="firstStack" destination="9kO-XZ-7pD" id="p4H-J0-coO"/>
+                        <outlet property="firstStackHeight" destination="4BT-sm-stX" id="S5J-tA-05G"/>
                         <outlet property="foodStampable" destination="4an-HL-5te" id="gwV-1v-rO0"/>
                         <outlet property="instantPO" destination="Tp3-HN-HOE" id="hBO-M1-Gjc"/>
                         <outlet property="margin" destination="EES-Ar-XxX" id="egr-G3-6kX"/>
@@ -46481,7 +46486,7 @@
         <segue reference="44M-DD-teR"/>
         <segue reference="Eyu-JW-VW2"/>
         <segue reference="SeS-H7-xfm"/>
-        <segue reference="Kdt-YW-Tde"/>
+        <segue reference="BX0-qg-734"/>
         <segue reference="UfE-A6-dPb"/>
         <segue reference="vbg-HO-Xhb"/>
         <segue reference="0XF-Ao-PWs"/>
@@ -46597,19 +46602,19 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.2196078431372549" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="underPageBackgroundColor">
             <color red="0.70980392156862748" green="0.71764705882352942" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

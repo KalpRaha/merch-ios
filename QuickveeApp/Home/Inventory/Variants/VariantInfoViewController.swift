@@ -55,6 +55,10 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var salesBtn: UIButton!
     @IBOutlet weak var scanBtn: UIButton!
     
+    @IBOutlet weak var firstStack: UIStackView!
+    
+    @IBOutlet weak var firstStackHeight: NSLayoutConstraint!
+    
     var activeTextField = UITextField()
     
     let loadingIndicator: ProgressView = {
@@ -430,7 +434,15 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
         checkIDlBL.font = fontText
         disableLbl.text = "Disable"
         disableLbl.font = fontText
-    
+        
+        if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+            firstStack.isHidden = true
+            firstStackHeight.constant = 0
+        }
+        else {
+            firstStack.isHidden = false
+            firstStackHeight.constant = 63
+        }
     }
     
     func checkQuant() -> String {
