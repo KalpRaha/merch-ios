@@ -77,6 +77,13 @@ class StockItemsViewController: UIViewController {
         emailBtn.layer.borderColor = UIColor.black.cgColor
         emailBtn.layer.borderWidth = 1
         
+        if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+            totalDCView.isHidden = true
+        }
+        else {
+            totalDCView.isHidden = false
+        }
+        
     }
     
     
@@ -651,6 +658,19 @@ extension StockItemsViewController: UITableViewDelegate, UITableViewDataSource {
         }
        
         cell.noteValue.text = item.note
+        
+        if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+            cell.discrepancyCostLbl.isHidden = true
+            cell.disCostValue.isHidden = true
+            cell.discrepancyCostLbl.text = ""
+            cell.disCostValue.text = ""
+            cell.disCostTop.constant = 0
+        }
+        else {
+            cell.discrepancyCostLbl.isHidden = false
+            cell.disCostValue.isHidden = false
+            cell.disCostTop.constant = 10
+        }
         
         return cell
     }

@@ -41,8 +41,4 @@ class ProductVariantTableViewCell: UITableViewCell {
     @IBOutlet weak var lineView: UIView!
     
     @IBOutlet weak var stocktakeBtn: UIButton!
-    
-    @IBOutlet weak var costStack: UIStackView!
-    @IBOutlet weak var costStackHeight: NSLayoutConstraint!
-    @IBOutlet weak var costStackTop: NSLayoutConstraint!
 }

@@ -18,10 +18,13 @@ class StockItemTableViewCell: UITableViewCell {
     
     @IBOutlet weak var newQtyValue: UILabel!
     
+    @IBOutlet weak var discrepancyCostLbl: UILabel!
+    
     @IBOutlet weak var discrepancyValue: UILabel!
     
     @IBOutlet weak var disCostValue: UILabel!
     
     @IBOutlet weak var noteValue: UILabel!
     
+    @IBOutlet weak var disCostTop: NSLayoutConstraint!
 }

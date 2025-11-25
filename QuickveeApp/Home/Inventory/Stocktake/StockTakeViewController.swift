@@ -332,6 +332,19 @@ extension StockTakeViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         
+        if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+            cell.stockDis.isHidden = true
+            cell.stockDisValue.isHidden = true
+            cell.stockDisTop.constant = 0
+            cell.stockDis.text = ""
+            cell.stockDisValue.text = ""
+        }
+        else {
+            cell.stockDis.isHidden = false
+            cell.stockDisValue.isHidden = false
+            cell.stockDisTop.constant = 10
+        }
+        
         cell.uppperview.layer.cornerRadius = 10
         cell.uppperview.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         

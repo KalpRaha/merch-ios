@@ -31,4 +31,6 @@ class StockTableViewCell: UITableViewCell {
     @IBOutlet weak var empName: UILabel!
     
     @IBOutlet weak var empNameValue: UILabel!
+    
+    @IBOutlet weak var stockDisTop: NSLayoutConstraint!
 }
