@@ -1161,75 +1161,115 @@ extension OrderOnlineViewController: UITableViewDelegate, UITableViewDataSource 
                 cell.deliveryLbl.text = firstChar + restOfString
             }
             
-            else if UserDefaults.standard.string(forKey: "modeOnlineSelected") == "closed" {
-                
-                cell.statusLbl.isHidden = true
-                cell.ststusViewHeight.constant = 0
-                cell.statusBtn.isHidden = true
-                cell.statusPrice.isHidden = true
-                cell.statusTopConstraint.constant = 0
-                cell.statusBottomConstraint.constant = 0
-                cell.statusView.layer.cornerRadius = 0
-                // cell.orderDateTime.text = order.merchant_time
-                
-                let ordDate = ToastClass.sharedToast.setDateFormat(dateStr: order.date_time)
-                cell.orderDateTime.text = ordDate
-                
-                
-                cell.refundPriceLbl.isHidden = false
-                
-                if orderArray.count == ref_amt.count {
-                    cell.refundPriceLbl.text = "$\(ref_amt[indexPath.row])"
-                }
-                
-                
-                if order.live_status == "Refunded" {
-                    cell.newOrderLbl.text = "Refunded"
-                    cell.newOrderLbl.textColor = UIColor(named: "shippedcolor")
-                }
-                else if order.live_status == "Cancelled" {
-                    cell.newOrderLbl.text = "Cancelled"
-                    cell.newOrderLbl.textColor = UIColor(named: "deletBorder")
-                }
-                else if order.live_status == "Completed" {
-                   
-                    if order.payment_id == "Cash" {
-                        cell.newOrderLbl.text = "Paid"
-                        cell.newOrderLbl.textColor = UIColor(named: "Compeletetext")
-                    }
-                    else {
-                        cell.newOrderLbl.text = "Completed"
-                        cell.newOrderLbl.textColor = UIColor(named: "packing")
-                    }
-                }
-                else {
+                else if UserDefaults.standard.string(forKey: "modeOnlineSelected") == "closed" {
                     
-                }
-                
-//                if order.live_status == "Refunded" ||  order.live_status == "Cancelled" {
-//                    cell.newOrderLbl.textColor = UIColor(named: "deletBorder")
-//                }
-//                else if order.live_status == "Completed" {
-//                   
-//                }
-//                else {
-//                    cell.newOrderLbl.textColor = UIColor(named: "Compeletetext")
-//                }
-                
-                
-                if order.order_method == "pickup" || order.order_method == "Pickup" {
-                    cell.deliveryLbl.textColor = UIColor(named: "deletBorder")
-                }else {
-                    cell.deliveryLbl.textColor = UIColor(named: "SelectCat")
+                    cell.statusLbl.isHidden = true
+                    cell.ststusViewHeight.constant = 0
+                    cell.statusBtn.isHidden = true
+                    cell.statusPrice.isHidden = true
+                    cell.statusTopConstraint.constant = 0
+                    cell.statusBottomConstraint.constant = 0
+                    cell.statusView.layer.cornerRadius = 0
+                    // cell.orderDateTime.text = order.merchant_time
                     
+                    let ordDate = ToastClass.sharedToast.setDateFormat(dateStr: order.date_time)
+                    cell.orderDateTime.text = ordDate
+                    
+                    
+                    cell.refundPriceLbl.isHidden = false
+                    
+                    if orderArray.count == ref_amt.count {
+                        let amt = Double(orderArray[indexPath.row].amt) ?? 0.00
+                        let ref = Double(order.refund_amount) ?? 0.00
+                        let refu_amt = amt - ref
+                        
+                            if amt > ref {
+                                if refu_amt == 0.00  {
+                                    cell.refundPriceLbl.text = "$\(ref_amt[indexPath.row])"
+                                }
+                                else {
+                                    cell.refundPriceLbl.text = "$\(String(format: "%.2f",refu_amt))"
+                                }
+                            }
+                        else {
+                            cell.refundPriceLbl.text = "$\(ref_amt[indexPath.row])"
+                        }
+                    }
+                    
+                    
+                    if order.live_status == "Refunded" {
+                        cell.newOrderLbl.text = "Refunded"
+                        cell.newOrderLbl.textColor = UIColor(named: "shippedcolor")
+                    }
+                    else if order.live_status == "Cancelled" {
+                        cell.newOrderLbl.text = "Cancelled"
+                        cell.newOrderLbl.textColor = UIColor(named: "deletBorder")
+                    }
+                    else if order.live_status == "Completed" ||  order.live_status == "Delivered" {
+                        let amt = Double(orderArray[indexPath.row].amt) ?? 0.00
+                        let ref = Double(order.refund_amount) ?? 0.00
+                        if order.order_method == "pickup" ||  order.order_method == "Pickup" {
+                            if amt > ref {
+                                if ref == 0.00 {
+                                    if order.payment_id == "Cash" {
+                                        cell.newOrderLbl.text = "Paid"
+                                        cell.newOrderLbl.textColor = UIColor(named: "Compeletetext")
+                                    }
+                                    else {
+                                        cell.newOrderLbl.text = "Completed"
+                                        cell.newOrderLbl.textColor = UIColor(named: "borderRed")
+                                    }
+                                }
+                                else {
+                                    cell.newOrderLbl.text = "Partial Refunded"
+                                    cell.newOrderLbl.textColor = UIColor(named: "packing")
+                                }
+                            }
+                        }
+                        else {
+                            if amt > ref {
+                                if ref == 0.00 {
+                                    if order.payment_id == "Cash" {
+                                        cell.newOrderLbl.text = "Paid"
+                                        cell.newOrderLbl.textColor = UIColor(named: "Compeletetext")
+                                    }
+                                    else {
+                                        cell.newOrderLbl.text = "Delivered"
+                                        cell.newOrderLbl.textColor = UIColor(named: "pickup")
+                                    }
+                                }
+                                else {
+                                    cell.newOrderLbl.text = "Partial Refunded"
+                                    cell.newOrderLbl.textColor = UIColor(named: "packing")
+                                }
+                            }
+                        }
+                    }
+                    
+    //                if order.live_status == "Refunded" ||  order.live_status == "Cancelled" {
+    //                    cell.newOrderLbl.textColor = UIColor(named: "deletBorder")
+    //                }
+    //                else if order.live_status == "Completed" {
+    //
+    //                }
+    //                else {
+    //                    cell.newOrderLbl.textColor = UIColor(named: "Compeletetext")
+    //                }
+                    
+                    
+                    if order.order_method == "pickup" || order.order_method == "Pickup" {
+                        cell.deliveryLbl.textColor = UIColor(named: "deletBorder")
+                    }else {
+                        cell.deliveryLbl.textColor = UIColor(named: "SelectCat")
+                        
+                    }
+                    
+                    let orderMethod = order.order_method
+                    let firstChar = orderMethod.prefix(1).uppercased()
+                    let restOfString = orderMethod.dropFirst()
+                    cell.deliveryLbl.text = firstChar + restOfString
+                    cell.shadowView.layer.borderColor = UIColor(named: "orderonlineBorder")?.cgColor
                 }
-                
-                let orderMethod = order.order_method
-                let firstChar = orderMethod.prefix(1).uppercased()
-                let restOfString = orderMethod.dropFirst()
-                cell.deliveryLbl.text = firstChar + restOfString
-                cell.shadowView.layer.borderColor = UIColor(named: "orderonlineBorder")?.cgColor
-            }
             
             else {
                 
@@ -1427,7 +1467,21 @@ extension OrderOnlineViewController: UITableViewDelegate, UITableViewDataSource 
                 cell.refundPriceLbl.isHidden = false
                 
                 if orderArray.count == ref_amt.count {
-                    cell.refundPriceLbl.text = "$\(ref_amt[indexPath.row])"
+                    let amt = Double(orderArray[indexPath.row].amt) ?? 0.00
+                    let ref = Double(order.refund_amount) ?? 0.00
+                    let refu_amt = amt - ref
+                    
+                        if amt > ref {
+                            if refu_amt == 0.00  {
+                                cell.refundPriceLbl.text = "$\(ref_amt[indexPath.row])"
+                            }
+                            else {
+                                cell.refundPriceLbl.text = "$\(String(format: "%.2f",refu_amt))"
+                            }
+                        }
+                    else {
+                        cell.refundPriceLbl.text = "$\(ref_amt[indexPath.row])"
+                    }
                 }
                 
                // cell.newOrderLbl.text = order.live_status
@@ -1454,27 +1508,44 @@ extension OrderOnlineViewController: UITableViewDelegate, UITableViewDataSource 
                     cell.newOrderLbl.textColor = UIColor(named: "deletBorder")
                 }
                 else if order.live_status == "Completed" ||  order.live_status == "Delivered" {
+                    let amt = Double(orderArray[indexPath.row].amt) ?? 0.00
+                    let ref = Double(order.refund_amount) ?? 0.00
                     if order.order_method == "pickup" ||  order.order_method == "Pickup" {
-                        if order.payment_id == "Cash" {
-                            cell.newOrderLbl.text = "Paid"
-                            cell.newOrderLbl.textColor = UIColor(named: "Compeletetext")
-                        }
-                        else {
-                            cell.newOrderLbl.text = "Completed"
-                            cell.newOrderLbl.textColor = UIColor(named: "packing")
+                        if amt > ref {
+                            if ref == 0.00 {
+                                if order.payment_id == "Cash" {
+                                    cell.newOrderLbl.text = "Paid"
+                                    cell.newOrderLbl.textColor = UIColor(named: "Compeletetext")
+                                }
+                                else {
+                                    cell.newOrderLbl.text = "Completed"
+                                    cell.newOrderLbl.textColor = UIColor(named: "borderRed")
+                                }
+                            }
+                            else {
+                                cell.newOrderLbl.text = "Partial Refunded"
+                                cell.newOrderLbl.textColor = UIColor(named: "packing")
+                            }
                         }
                     }
                     else {
-                        if order.payment_id == "Cash" {
-                            cell.newOrderLbl.text = "Paid"
-                            cell.newOrderLbl.textColor = UIColor(named: "Compeletetext")
-                        }
-                        else {
-                            cell.newOrderLbl.text = "Delivered"
-                            cell.newOrderLbl.textColor = UIColor(named: "packing")
+                        if amt > ref {
+                            if ref == 0.00 {
+                                if order.payment_id == "Cash" {
+                                    cell.newOrderLbl.text = "Paid"
+                                    cell.newOrderLbl.textColor = UIColor(named: "Compeletetext")
+                                }
+                                else {
+                                    cell.newOrderLbl.text = "Delivered"
+                                    cell.newOrderLbl.textColor = UIColor(named: "pickup")
+                                }
+                            }
+                            else {
+                                cell.newOrderLbl.text = "Partial Refunded"
+                                cell.newOrderLbl.textColor = UIColor(named: "packing")
+                            }
                         }
                     }
-                    
                 }
      
                 if order.order_method == "pickup" ||  order.order_method == "Pickup" {

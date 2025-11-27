@@ -67,6 +67,9 @@ class OrderInStoreViewController: UIViewController {
         if UserDefaults.standard.string(forKey: "modeSelected") == "paid" {
             buttonShadow(tag: 1)
         }
+        else if UserDefaults.standard.string(forKey: "modeSelected") == "partial" {
+            buttonShadow(tag: 3)
+        }
         else {
             buttonShadow(tag: 2)
         }
@@ -80,6 +83,9 @@ class OrderInStoreViewController: UIViewController {
         
         if UserDefaults.standard.string(forKey: "modeSelected") == "paid" {
             buttonShadow(tag: 1)
+        }
+        else if UserDefaults.standard.string(forKey: "modeSelected") == "partial" {
+            buttonShadow(tag: 3)
         }
         else {
             buttonShadow(tag: 2)
@@ -109,6 +115,27 @@ class OrderInStoreViewController: UIViewController {
             let max = UserDefaults.standard.string(forKey: "valid_order_paid_max_amt") ?? ""
             
             if UserDefaults.standard.string(forKey: "paid_per_day") == "1" {
+                start_date = start
+                end_date = start
+            }
+            
+            else {
+                start_date = start
+                end_date = end
+            }
+            
+            min_amt = min
+            max_amt = max
+        }
+        else if order_status == "partial_refunded" {
+            
+            let start = UserDefaults.standard.string(forKey: "valid_order_partial_start_date") ?? ""
+            let end = UserDefaults.standard.string(forKey: "valid_order_partial_end_date") ?? ""
+            
+            let min = UserDefaults.standard.string(forKey: "valid_order_partial_min_amt") ?? ""
+            let max = UserDefaults.standard.string(forKey: "valid_order_partial_max_amt") ?? ""
+            
+            if UserDefaults.standard.string(forKey: "partial_per_day") == "1" {
                 start_date = start
                 end_date = start
             }
@@ -439,7 +466,7 @@ class OrderInStoreViewController: UIViewController {
     
     func buttonShadow(tag: Int) {
         
-        for i in 1...2 {
+        for i in 1...3 {
             
             if i == tag {
                 let button = view.viewWithTag(i) as! UIButton
@@ -475,9 +502,51 @@ class OrderInStoreViewController: UIViewController {
             UserDefaults.standard.set("", forKey: "valid_order_refund_min_amt")
             UserDefaults.standard.set("", forKey: "valid_order_refund_max_amt")
             
+            UserDefaults.standard.set("", forKey: "temp_order_partial_start_date")
+            UserDefaults.standard.set("", forKey: "temp_order_partial_end_date")
+            
+            UserDefaults.standard.set("", forKey: "temp_order_partial_min_amt")
+            UserDefaults.standard.set("", forKey: "temp_order_partial_max_amt")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_partial_start_date")
+            UserDefaults.standard.set("", forKey: "valid_order_partial_end_date")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_partial_min_amt")
+            UserDefaults.standard.set("", forKey: "valid_order_partial_max_amt")
+            
             page = 1
             setupApi(order_status: "paid")
             
+        }
+        else if tag == 3 {
+            UserDefaults.standard.set("partial", forKey: "modeSelected")
+            
+            UserDefaults.standard.set("", forKey: "temp_order_paid_start_date")
+            UserDefaults.standard.set("", forKey: "temp_order_paid_end_date")
+            
+            UserDefaults.standard.set("", forKey: "temp_order_paid_min_amt")
+            UserDefaults.standard.set("", forKey: "temp_order_paid_max_amt")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_paid_start_date")
+            UserDefaults.standard.set("", forKey: "valid_order_paid_end_date")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_paid_min_amt")
+            UserDefaults.standard.set("", forKey: "valid_order_paid_max_amt")
+            
+            UserDefaults.standard.set("", forKey: "temp_order_refund_start_date")
+            UserDefaults.standard.set("", forKey: "temp_order_refund_end_date")
+            
+            UserDefaults.standard.set("", forKey: "temp_order_refund_min_amt")
+            UserDefaults.standard.set("", forKey: "temp_order_refund_max_amt")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_refund_start_date")
+            UserDefaults.standard.set("", forKey: "valid_order_refund_end_date")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_refund_min_amt")
+            UserDefaults.standard.set("", forKey: "valid_order_refund_max_amt")
+            
+            page = 1
+            setupApi(order_status: "partial_refunded")
         }
         else {
             UserDefaults.standard.set("refunded", forKey: "modeSelected")
@@ -493,6 +562,18 @@ class OrderInStoreViewController: UIViewController {
             
             UserDefaults.standard.set("", forKey: "valid_order_paid_min_amt")
             UserDefaults.standard.set("", forKey: "valid_order_paid_max_amt")
+            
+            UserDefaults.standard.set("", forKey: "temp_order_partial_start_date")
+            UserDefaults.standard.set("", forKey: "temp_order_partial_end_date")
+            
+            UserDefaults.standard.set("", forKey: "temp_order_partial_min_amt")
+            UserDefaults.standard.set("", forKey: "temp_order_partial_max_amt")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_partial_start_date")
+            UserDefaults.standard.set("", forKey: "valid_order_partial_end_date")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_partial_min_amt")
+            UserDefaults.standard.set("", forKey: "valid_order_partial_max_amt")
             
             page = 1
             setupApi(order_status: "refunded")
@@ -513,6 +594,9 @@ class OrderInStoreViewController: UIViewController {
                 if UserDefaults.standard.string(forKey: "modeSelected") == "paid" {
                     searchApi(list_type: "instore", order_status: "paid", search: searchText)
                 }
+                else if UserDefaults.standard.string(forKey: "modeSelected") == "partial" {
+                    searchApi(list_type: "instore", order_status: "partial_refunded", search: searchText)
+                }
                 else {
                     searchApi(list_type: "instore", order_status: "refunded", search: searchText)
                 }
@@ -522,6 +606,9 @@ class OrderInStoreViewController: UIViewController {
         else {
             if UserDefaults.standard.string(forKey: "modeSelected") == "paid" {
                 setupApi(order_status: "paid")
+            }
+            else if UserDefaults.standard.string(forKey: "modeSelected") == "partial" {
+                setupApi(order_status: "partial_refunded")
             }
             else {
                 setupApi(order_status: "refunded")
@@ -596,6 +683,29 @@ class OrderInStoreViewController: UIViewController {
                     let max = UserDefaults.standard.string(forKey: "valid_order_paid_max_amt") ?? ""
                     
                     if UserDefaults.standard.string(forKey: "paid_per_day") == "1" {
+                        start_date = start
+                        end_date = start
+                    }
+                    
+                    else {
+                        start_date = start
+                        end_date = end
+                    }
+                    
+                    min_amt = min
+                    max_amt = max
+                }
+                else if UserDefaults.standard.string(forKey: "modeSelected") == "partial" {
+                    
+                    status = "partial_refunded"
+                    
+                    let start = UserDefaults.standard.string(forKey: "valid_order_partial_start_date") ?? ""
+                    let end = UserDefaults.standard.string(forKey: "valid_order_partial_end_date") ?? ""
+                    
+                    let min = UserDefaults.standard.string(forKey: "valid_order_partial_min_amt") ?? ""
+                    let max = UserDefaults.standard.string(forKey: "valid_order_partial_max_amt") ?? ""
+                    
+                    if UserDefaults.standard.string(forKey: "partial_per_day") == "1" {
                         start_date = start
                         end_date = start
                     }
@@ -738,7 +848,7 @@ extension OrderInStoreViewController: UITableViewDelegate, UITableViewDataSource
                 cell.inStoreDate.text = formattedDate
             }
             
-            if UserDefaults.standard.string(forKey: "modeSelected") == "paid" {
+            if UserDefaults.standard.string(forKey: "modeSelected") == "paid" || UserDefaults.standard.string(forKey: "modeSelected") == "partial_refunded"  {
                 
                 if order.refund_amount != "0.0" && order.refund_amount != "0.00" && order.refund_amount != "-0.0" &&
                     order.refund_amount != "-0.00" && order.refund_amount != "0" && order.refund_amount != "" {
@@ -791,7 +901,12 @@ extension OrderInStoreViewController: UITableViewDelegate, UITableViewDataSource
             
             print(couponCodeArray[indexPath.row].employee_name)
             addViewShadow(view: cell.shadowView)
-            cell.inStoreive.text = order.live_status.capitalized
+            if UserDefaults.standard.string(forKey: "modeSelected") == "partial" {
+                cell.inStoreive.text = "Partial Refunded"
+            }
+            else {
+                cell.inStoreive.text = order.live_status.capitalized
+            }
             
             if order.payment_id == "Cash" {
                 cell.inStorePayment.text = "Paid - Cash"
@@ -901,7 +1016,7 @@ extension OrderInStoreViewController: UITableViewDelegate, UITableViewDataSource
                 cell.inStoreDate.text = formattedDate
             }
             
-            if UserDefaults.standard.string(forKey: "modeSelected") == "paid" {
+            if UserDefaults.standard.string(forKey: "modeSelected") == "paid" || UserDefaults.standard.string(forKey: "modeSelected") == "partial" {
                 
                 if order.refund_amount != "0.0" && order.refund_amount != "0.00" && order.refund_amount != "-0.0" &&
                     order.refund_amount != "-0.00" && order.refund_amount != "0" && order.refund_amount != "" {
@@ -944,8 +1059,12 @@ extension OrderInStoreViewController: UITableViewDelegate, UITableViewDataSource
                 
                 cell.inStoreAmount.text = "$\(String(format: "%.02f", roundOf(item: amount)))"
             }
-            
-            cell.inStoreive.text = order.live_status
+            if UserDefaults.standard.string(forKey: "modeSelected") == "partial" {
+                cell.inStoreive.text = "Partial Refunded"
+            }
+            else {
+                cell.inStoreive.text = order.live_status
+            }
             
             if order.payment_id == "Cash" {
                 cell.inStorePayment.text = "Paid - Cash"
@@ -1005,7 +1124,7 @@ extension OrderInStoreViewController: UITableViewDelegate, UITableViewDataSource
         
         let modeSelected = UserDefaults.standard.string(forKey: "modeSelected") ?? ""
         
-        if modeSelected == "paid" {
+        if modeSelected == "paid" || modeSelected == "partial" {
             performSegue(withIdentifier: "toStoreStatus", sender: nil)
         }
         

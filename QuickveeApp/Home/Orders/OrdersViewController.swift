@@ -427,6 +427,18 @@ extension OrdersViewController: UICollectionViewDelegate, UICollectionViewDataSo
             UserDefaults.standard.set("", forKey: "valid_order_paid_min_amt")
             UserDefaults.standard.set("", forKey: "valid_order_paid_max_amt")
             
+            UserDefaults.standard.set("", forKey: "temp_order_partial_start_date")
+            UserDefaults.standard.set("", forKey: "temp_order_partial_end_date")
+            
+            UserDefaults.standard.set("", forKey: "temp_order_partial_min_amt")
+            UserDefaults.standard.set("", forKey: "temp_order_partial_max_amt")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_partial_start_date")
+            UserDefaults.standard.set("", forKey: "valid_order_partial_end_date")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_partial_min_amt")
+            UserDefaults.standard.set("", forKey: "valid_order_partial_max_amt")
+            
             UserDefaults.standard.set("", forKey: "temp_order_refund_start_date")
             UserDefaults.standard.set("", forKey: "temp_order_refund_end_date")
             

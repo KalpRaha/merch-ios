@@ -263,10 +263,39 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
             maximumAmount.text = "$\(max)"
         }
         
+        else if filterMode == "partial" {
+            startDate.text = UserDefaults.standard.string(forKey: "valid_order_partial_start_date")
+            
+            if UserDefaults.standard.string(forKey: "partial_per_day") ==  "1" {
+                endDate.text = UserDefaults.standard.string(forKey: "valid_order_partial_start_date")
+            }
+            else {
+                endDate.text = UserDefaults.standard.string(forKey: "valid_order_partial_end_date")
+            }
+            
+            perDayDate.text = UserDefaults.standard.string(forKey: "valid_order_partial_start_date")
+            
+            var min = UserDefaults.standard.string(forKey: "valid_order_partial_min_amt") ?? "0.0"
+            var max = UserDefaults.standard.string(forKey: "valid_order_partial_max_amt") ?? "850.0"
+            
+            if min == "" {
+                min = "0"
+            }
+            if max == "" {
+                max = "850"
+            }
+            
+            rangeSlider.selectedMinValue = Double(min) ?? 0.0
+            rangeSlider.selectedMaxValue = Double(max) ?? 850.0
+            
+            minimumAmount.text = "$\(min)"
+            maximumAmount.text = "$\(max)"
+        }
+        
         else {
             startDate.text = UserDefaults.standard.string(forKey: "valid_order_refund_start_date")
             
-            if UserDefaults.standard.string(forKey: "paid_per_day") ==  "1" {
+            if UserDefaults.standard.string(forKey: "refund_per_day") ==  "1" {
                 endDate.text = UserDefaults.standard.string(forKey: "valid_order_refund_start_date")
             }
             else {
@@ -313,6 +342,22 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 
                 UserDefaults.standard.set("", forKey: "valid_order_paid_min_amt")
                 UserDefaults.standard.set("", forKey: "valid_order_paid_max_amt")
+                
+            }
+            
+            else if filterMode == "partial" {
+                
+                UserDefaults.standard.set("", forKey: "temp_order_partial_start_date")
+                UserDefaults.standard.set("", forKey: "temp_order_partial_end_date")
+                
+                UserDefaults.standard.set("", forKey: "temp_order_partial_min_amt")
+                UserDefaults.standard.set("", forKey: "temp_order_partial_max_amt")
+                
+                UserDefaults.standard.set("", forKey: "valid_order_partial_start_date")
+                UserDefaults.standard.set("", forKey: "valid_order_partial_end_date")
+                
+                UserDefaults.standard.set("", forKey: "valid_order_partial_min_amt")
+                UserDefaults.standard.set("", forKey: "valid_order_partial_max_amt")
                 
             }
             
@@ -554,6 +599,9 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 }
                 else if self.filterMode == "paid" {
                     UserDefaults.standard.set(max, forKey: "temp_order_paid_max_amt")
+                }
+                else if self.filterMode == "partial" {
+                    UserDefaults.standard.set(max, forKey: "temp_order_partial_max_amt")
                 }
                 else {
                     UserDefaults.standard.set(max, forKey: "temp_order_refund_max_amt")
@@ -840,6 +888,22 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 dismissTransition()
             }
             
+            else if filterMode == "partial" {
+                let temp_start = UserDefaults.standard.string(forKey: "temp_order_partial_start_date") ?? ""
+                let temp_end = UserDefaults.standard.string(forKey: "temp_order_partial_end_date") ?? ""
+                
+                let temp_min = UserDefaults.standard.string(forKey: "temp_order_partial_min_amt") ?? ""
+                let temp_max = UserDefaults.standard.string(forKey: "temp_order_partial_max_amt") ?? ""
+                
+                UserDefaults.standard.set(temp_start, forKey: "valid_order_partial_start_date")
+                UserDefaults.standard.set(temp_end, forKey: "valid_order_partial_end_date")
+                
+                UserDefaults.standard.set(temp_min, forKey: "valid_order_partial_min_amt")
+                UserDefaults.standard.set(temp_max, forKey: "valid_order_partial_max_amt")
+                
+                dismissTransition()
+            }
+            
             else {
                 let temp_start = UserDefaults.standard.string(forKey: "temp_order_refund_start_date") ?? ""
                 let temp_end = UserDefaults.standard.string(forKey: "temp_order_refund_end_date") ?? ""
@@ -947,6 +1011,22 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                     
                     UserDefaults.standard.set(temp_min, forKey: "valid_order_paid_min_amt")
                     UserDefaults.standard.set(temp_max, forKey: "valid_order_paid_max_amt")
+                    
+                    dismissTransition()
+                }
+                
+                else if filterMode == "partial" {
+                    let temp_start = UserDefaults.standard.string(forKey: "temp_order_partial_start_date") ?? ""
+                    let temp_end = UserDefaults.standard.string(forKey: "temp_order_partial_end_date") ?? ""
+                    
+                    let temp_min = UserDefaults.standard.string(forKey: "temp_order_partial_min_amt") ?? ""
+                    let temp_max = UserDefaults.standard.string(forKey: "temp_order_partial_max_amt") ?? ""
+                    
+                    UserDefaults.standard.set(temp_start, forKey: "valid_order_partial_start_date")
+                    UserDefaults.standard.set(temp_end, forKey: "valid_order_partial_end_date")
+                    
+                    UserDefaults.standard.set(temp_min, forKey: "valid_order_partial_min_amt")
+                    UserDefaults.standard.set(temp_max, forKey: "valid_order_partial_max_amt")
                     
                     dismissTransition()
                 }
@@ -1122,6 +1202,10 @@ extension OrderFilterViewController: RangeSeekSliderDelegate {
                 UserDefaults.standard.set(min, forKey: "temp_order_paid_min_amt")
                 UserDefaults.standard.set(max, forKey: "temp_order_paid_max_amt")
             }
+            else if filterMode == "partial" {
+                UserDefaults.standard.set(min, forKey: "temp_order_partial_min_amt")
+                UserDefaults.standard.set(max, forKey: "temp_order_partial_max_amt")
+            }
             else {
                 UserDefaults.standard.set(min, forKey: "temp_order_refund_min_amt")
                 UserDefaults.standard.set(max, forKey: "temp_order_refund_max_amt")
@@ -1163,6 +1247,9 @@ extension OrderFilterViewController {
             else if filterMode == "paid" {
                 UserDefaults.standard.set("0", forKey: "paid_per_day")
             }
+            else if filterMode == "partial" {
+                UserDefaults.standard.set("0", forKey: "partial_per_day")
+            }
             else {
                 UserDefaults.standard.set("0", forKey: "refund_per_day")
             }
@@ -1186,6 +1273,9 @@ extension OrderFilterViewController {
             
             else if filterMode == "paid" {
                 UserDefaults.standard.set("1", forKey: "paid_per_day")
+            }
+            else if filterMode == "partial" {
+                UserDefaults.standard.set("1", forKey: "partial_per_day")
             }
             else {
                 UserDefaults.standard.set("1", forKey: "refund_per_day")
@@ -1234,9 +1324,11 @@ extension OrderFilterViewController {
                 else if filterMode == "failed"{
                     UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_failed_start_date")
                 }
-                
                 else if filterMode == "paid"{
                     UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_paid_start_date")
+                }
+                else if filterMode == "partial"{
+                    UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_partial_start_date")
                 }
                 else {
                     UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_refund_start_date")
@@ -1297,11 +1389,12 @@ extension OrderFilterViewController {
                     }
                     else if filterMode == "failed"{
                         UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_failed_start_date")
-
                     }
-                    
                     else if filterMode == "paid"{
                         UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_paid_start_date")
+                    }
+                    else if filterMode == "partial"{
+                        UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_partial_start_date")
                     }
                     else {
                         UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_refund_start_date")
@@ -1322,11 +1415,12 @@ extension OrderFilterViewController {
                 }
                 else if filterMode == "failed"{
                     UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_failed_start_date")
-
                 }
-                
                 else if filterMode == "paid"{
                     UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_paid_start_date")
+                }
+                else if filterMode == "partial"{
+                    UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_partial_start_date")
                 }
                 else {
                     UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_refund_start_date")
@@ -1348,11 +1442,12 @@ extension OrderFilterViewController {
             }
             else if filterMode == "failed"{
                 UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_failed_start_date")
-
             }
-            
             else if filterMode == "paid"{
                 UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_paid_start_date")
+            }
+            else if filterMode == "partial"{
+                UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_partial_start_date")
             }
             else {
                 UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_refund_start_date")
@@ -1413,11 +1508,12 @@ extension OrderFilterViewController {
                         }
                         else if filterMode == "failed"{
                             UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_failed_end_date")
-
                         }
-                        
                         else if filterMode == "paid"{
                             UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_paid_end_date")
+                        }
+                        else if filterMode == "partial"{
+                            UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_partial_end_date")
                         }
                         else {
                             UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_refund_end_date")
@@ -1438,11 +1534,12 @@ extension OrderFilterViewController {
                     }
                     else if filterMode == "failed"{
                         UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_failed_end_date")
-
                     }
-                    
                     else if filterMode == "paid"{
                         UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_paid_end_date")
+                    }
+                    else if filterMode == "partial"{
+                        UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_partial_end_date")
                     }
                     else {
                         UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_refund_end_date")
@@ -1461,11 +1558,12 @@ extension OrderFilterViewController {
                 }
                 else if filterMode == "failed"{
                     UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_failed_end_date")
-
                 }
-                
                 else if filterMode == "paid"{
                     UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_paid_end_date")
+                }
+                else if filterMode == "partial"{
+                    UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_partial_end_date")
                 }
                 else {
                     UserDefaults.standard.set(activeTextField.text, forKey: "temp_order_refund_end_date")
