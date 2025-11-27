@@ -267,9 +267,8 @@ extension StockTakeViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.empName.text = "Performed By"
 
-            let e_id = stock.employee_id
             let name = stock.employee_name
-            if e_id == "0" {
+            if name == "" || name == "<null>" {
                 cell.empNameValue.text = "Admin"
             }
             else {
@@ -322,9 +321,8 @@ extension StockTakeViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.empName.text = "Performed By"
             
-            let e_id = stock.employee_id
             let name = stock.employee_name
-            if e_id == "0" {
+            if name == "" || name == "<null>" {
                 cell.empNameValue.text = "Admin"
             }
             else {

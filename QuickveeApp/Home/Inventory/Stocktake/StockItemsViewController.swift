@@ -167,9 +167,8 @@ class StockItemsViewController: UIViewController {
         totalDiscrepancy.text = discrepancyEmail
         totalDisCost.text = costEmail
         
-        let e_id = stock.employee_id
         let name = stock.employee_name
-        if e_id == "0" {
+        if name == "" || name == "<null>" {
             empName.text = "Employee Name: Admin"
         }
         else {
@@ -334,6 +333,7 @@ class StockItemsViewController: UIViewController {
         }
         
         else {
+            let emp_id = UserDefaults.standard.string(forKey: "emp_po_id") ?? ""
           
             self.loadingIndicator.isAnimating = true
             self.voidBtn.isHidden = true
@@ -343,7 +343,7 @@ class StockItemsViewController: UIViewController {
             
             let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
             
-            ApiCalls.sharedCall.stockVoid(merchant_id: id,
+            ApiCalls.sharedCall.stockVoid(merchant_id: id, emp_id: emp_id,
                                           stocktake_id: stock_id) { isSuccess, response in
                 
                 if isSuccess {

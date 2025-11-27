@@ -144,9 +144,8 @@ class StockSaveViewController: UIViewController {
         empBottom.constant = 10
         employeeName.isHidden = false
         
-        let e_id = stock.employee_id
         let name = stock.employee_name
-        if e_id == "0" {
+        if name == "" || name == "<null>" {
             employeeName.text = "Employee Name: Admin"
         }
         else {

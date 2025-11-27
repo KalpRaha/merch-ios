@@ -3271,12 +3271,13 @@ extension ApiCalls {
         
     }
     
-    func stockVoid(merchant_id: String, stocktake_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
+    func stockVoid(merchant_id: String, emp_id: String, stocktake_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.VOID_STOCK
         
         let parameters: [String:Any] = [
             "merchant_id": merchant_id,
+            "employee_id" : emp_id,
             "stocktake_id": stocktake_id
         ]
         
