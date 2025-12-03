@@ -1401,7 +1401,7 @@ extension ApiCalls {
     
     func getOrderList(merchant_id: String, order_list_type: String, order_status: String,
                       order_0: String, order_1: String, start_date: String, end_date: String,
-                      min_amt: String, max_amt: String, search_value: String, paid: Int,
+                      min_amt: String, max_amt: String, payment_type: String, search_value: String, paid: Int,
                       page_no: Int, limit: Int,group_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.ORDERS_LIST
@@ -1416,6 +1416,7 @@ extension ApiCalls {
          "end_date": end_date,
          "min_amt": min_amt,
          "max_amt": max_amt,
+         "payment_type": payment_type,
          "search_value": search_value,
          "order_status": order_status,
          "is_paid": paid,

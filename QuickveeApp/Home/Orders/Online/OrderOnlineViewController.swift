@@ -78,7 +78,6 @@ class OrderOnlineViewController: UIViewController {
       
         if UserDefaults.standard.string(forKey: "modeOnlineSelected") == "new" {
             buttonShadow(tag: 1)
-      
         }
         else  if UserDefaults.standard.string(forKey: "modeOnlineSelected") == "closed" {
             buttonShadow(tag: 2)
@@ -99,7 +98,7 @@ class OrderOnlineViewController: UIViewController {
         var min_amt = ""
         var max_amt = ""
         var order_type = ""
-        
+        var pays_type = ""
         
         if orderListType == "new" {
             
@@ -108,6 +107,8 @@ class OrderOnlineViewController: UIViewController {
             
             let min = UserDefaults.standard.string(forKey: "valid_order_new_min_amt") ?? ""
             let max = UserDefaults.standard.string(forKey: "valid_order_new_max_amt") ?? ""
+            
+            let pay_type = UserDefaults.standard.string(forKey: "valid_order_new_payment_type") ?? ""
             
             if UserDefaults.standard.string(forKey: "new_per_day") == "1" {
                 start_date = start
@@ -123,6 +124,8 @@ class OrderOnlineViewController: UIViewController {
             max_amt = max
             
             order_type = UserDefaults.standard.string(forKey: "valid_order_new_order_type") ?? ""
+            
+            pays_type = pay_type
         }
         
         else if orderListType == "closed" {
@@ -132,6 +135,8 @@ class OrderOnlineViewController: UIViewController {
             
             let min = UserDefaults.standard.string(forKey: "valid_order_closed_min_amt") ?? ""
             let max = UserDefaults.standard.string(forKey: "valid_order_closed_max_amt") ?? ""
+            
+            let pay_type = UserDefaults.standard.string(forKey: "valid_order_closed_payment_type") ?? ""
             
             if UserDefaults.standard.string(forKey: "closed_per_day") == "1" {
                 start_date = start
@@ -148,6 +153,7 @@ class OrderOnlineViewController: UIViewController {
             
             order_type = UserDefaults.standard.string(forKey: "valid_order_closed_order_type") ?? ""
 
+            pays_type = pay_type
         }
         else {
             
@@ -156,6 +162,8 @@ class OrderOnlineViewController: UIViewController {
             
             let min = UserDefaults.standard.string(forKey: "valid_order_failed_min_amt") ?? ""
             let max = UserDefaults.standard.string(forKey: "valid_order_failed_max_amt") ?? ""
+            
+            let pay_type = UserDefaults.standard.string(forKey: "valid_order_failed_payment_type") ?? ""
             
             if UserDefaults.standard.string(forKey: "failed_per_day") == "1" {
                 start_date = start
@@ -172,6 +180,7 @@ class OrderOnlineViewController: UIViewController {
             
             order_type = UserDefaults.standard.string(forKey: "valid_order_failed_order_type") ?? ""
 
+            pays_type = pay_type
         }
         
         var deli = ""
@@ -193,7 +202,7 @@ class OrderOnlineViewController: UIViewController {
         ApiCalls.sharedCall.getOrderList(merchant_id: merchant_id, order_list_type: orderListType,
                                          order_status: "", order_0: deli, order_1: pick,
                                          start_date: start_date, end_date: end_date, min_amt: min_amt,
-                                         max_amt: max_amt, search_value: "", paid: 1,
+                                         max_amt: max_amt, payment_type: pays_type, search_value: "", paid: 1,
                                          page_no: 1, limit: 10, group_id: group_id) { isSuccess, responseData in
             
            
@@ -938,6 +947,7 @@ class OrderOnlineViewController: UIViewController {
                 var max_amt = ""
                 var order_type = ""
                 var listType = ""
+                var pays_type = ""
                 
                 
                 if UserDefaults.standard.string(forKey: "modeOnlineSelected") == "new" {
@@ -949,6 +959,8 @@ class OrderOnlineViewController: UIViewController {
                     
                     let min = UserDefaults.standard.string(forKey: "valid_order_new_min_amt") ?? ""
                     let max = UserDefaults.standard.string(forKey: "valid_order_new_max_amt") ?? ""
+                    
+                    let pay_type = UserDefaults.standard.string(forKey: "valid_order_new_payment_type") ?? ""
                     
                     if UserDefaults.standard.string(forKey: "new_per_day") == "1" {
                         start_date = start
@@ -964,6 +976,8 @@ class OrderOnlineViewController: UIViewController {
                     max_amt = max
                     
                     order_type = UserDefaults.standard.string(forKey: "valid_order_new_order_type") ?? ""
+                    
+                    pays_type = pay_type
                 }
                 
                 else if UserDefaults.standard.string(forKey: "modeOnlineSelected") == "closed" {
@@ -975,6 +989,8 @@ class OrderOnlineViewController: UIViewController {
                     
                     let min = UserDefaults.standard.string(forKey: "valid_order_closed_min_amt") ?? ""
                     let max = UserDefaults.standard.string(forKey: "valid_order_closed_max_amt") ?? ""
+                    
+                    let pay_type = UserDefaults.standard.string(forKey: "valid_order_closed_payment_type") ?? ""
                     
                     if UserDefaults.standard.string(forKey: "closed_per_day") == "1" {
                         start_date = start
@@ -991,6 +1007,7 @@ class OrderOnlineViewController: UIViewController {
                     
                     order_type = UserDefaults.standard.string(forKey: "valid_order_closed_order_type") ?? ""
                     
+                    pays_type = pay_type
                 }
                 else {
                     
@@ -1002,6 +1019,8 @@ class OrderOnlineViewController: UIViewController {
                     
                     let min = UserDefaults.standard.string(forKey: "valid_order_failed_min_amt") ?? ""
                     let max = UserDefaults.standard.string(forKey: "valid_order_failed_max_amt") ?? ""
+                    
+                    let pay_type = UserDefaults.standard.string(forKey: "valid_order_failed_payment_type") ?? ""
                     
                     if UserDefaults.standard.string(forKey: "failed_per_day") == "1" {
                         start_date = start
@@ -1018,6 +1037,7 @@ class OrderOnlineViewController: UIViewController {
                     
                     order_type = UserDefaults.standard.string(forKey: "valid_order_failed_order_type") ?? ""
                     
+                    pays_type = pay_type
                 }
                 
                 var deli = ""
@@ -1041,7 +1061,7 @@ class OrderOnlineViewController: UIViewController {
                 ApiCalls.sharedCall.getOrderList(merchant_id: merchant_id, order_list_type: listType,
                                                  order_status: "", order_0: deli, order_1: pick,
                                                  start_date: start_date, end_date: end_date, min_amt: min_amt,
-                                                 max_amt: max_amt, search_value: "", paid: 1,
+                                                 max_amt: max_amt, payment_type: pays_type, search_value: "", paid: 1,
                                                  page_no: page, limit: 10, group_id: group_id) { isSuccess, responseData in
                     
                     if isSuccess {

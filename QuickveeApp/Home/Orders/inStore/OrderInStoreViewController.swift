@@ -105,6 +105,7 @@ class OrderInStoreViewController: UIViewController {
         var end_date = ""
         var min_amt = ""
         var max_amt = ""
+        var pays_type = ""
         
         if order_status == "paid" {
             
@@ -113,6 +114,8 @@ class OrderInStoreViewController: UIViewController {
             
             let min = UserDefaults.standard.string(forKey: "valid_order_paid_min_amt") ?? ""
             let max = UserDefaults.standard.string(forKey: "valid_order_paid_max_amt") ?? ""
+            
+            let pay_type = UserDefaults.standard.string(forKey: "valid_order_paid_payment_type") ?? ""
             
             if UserDefaults.standard.string(forKey: "paid_per_day") == "1" {
                 start_date = start
@@ -126,6 +129,8 @@ class OrderInStoreViewController: UIViewController {
             
             min_amt = min
             max_amt = max
+            
+            pays_type = pay_type
         }
         else if order_status == "partial_refunded" {
             
@@ -134,6 +139,8 @@ class OrderInStoreViewController: UIViewController {
             
             let min = UserDefaults.standard.string(forKey: "valid_order_partial_min_amt") ?? ""
             let max = UserDefaults.standard.string(forKey: "valid_order_partial_max_amt") ?? ""
+            
+            let pay_type = UserDefaults.standard.string(forKey: "valid_order_partial_payment_type") ?? ""
             
             if UserDefaults.standard.string(forKey: "partial_per_day") == "1" {
                 start_date = start
@@ -147,6 +154,8 @@ class OrderInStoreViewController: UIViewController {
             
             min_amt = min
             max_amt = max
+            
+            pays_type = pay_type
         }
         else {
             
@@ -155,6 +164,8 @@ class OrderInStoreViewController: UIViewController {
             
             let min = UserDefaults.standard.string(forKey: "valid_order_refund_min_amt") ?? ""
             let max = UserDefaults.standard.string(forKey: "valid_order_refund_max_amt") ?? ""
+            
+            let pay_type = UserDefaults.standard.string(forKey: "valid_order_refund_payment_type") ?? ""
             
             if UserDefaults.standard.string(forKey: "refund_per_day") == "1" {
                 start_date = start
@@ -168,11 +179,13 @@ class OrderInStoreViewController: UIViewController {
             
             min_amt = min
             max_amt = max
+            
+            pays_type = pay_type
         }
         
         ApiCalls.sharedCall.getOrderList(merchant_id: id, order_list_type: "instore", order_status: order_status,
                                          order_0: "", order_1: "", start_date: start_date, end_date: end_date,
-                                         min_amt: min_amt, max_amt: max_amt, search_value: "", paid: 1, page_no: 1,
+                                         min_amt: min_amt, max_amt: max_amt, payment_type: pays_type, search_value: "", paid: 1, page_no: 1,
                                          limit: 10, group_id: group_id) { isSuccess, responseData in
             
             
@@ -671,6 +684,7 @@ class OrderInStoreViewController: UIViewController {
                 var min_amt = ""
                 var max_amt = ""
                 var status = ""
+                var pays_type = ""
                 
                 if UserDefaults.standard.string(forKey: "modeSelected") == "paid" {
                     
@@ -681,6 +695,8 @@ class OrderInStoreViewController: UIViewController {
                     
                     let min = UserDefaults.standard.string(forKey: "valid_order_paid_min_amt") ?? ""
                     let max = UserDefaults.standard.string(forKey: "valid_order_paid_max_amt") ?? ""
+                    
+                    let pay_type = UserDefaults.standard.string(forKey: "valid_order_new_payment_type") ?? ""
                     
                     if UserDefaults.standard.string(forKey: "paid_per_day") == "1" {
                         start_date = start
@@ -694,6 +710,8 @@ class OrderInStoreViewController: UIViewController {
                     
                     min_amt = min
                     max_amt = max
+                    
+                    pays_type = pay_type
                 }
                 else if UserDefaults.standard.string(forKey: "modeSelected") == "partial" {
                     
@@ -704,6 +722,8 @@ class OrderInStoreViewController: UIViewController {
                     
                     let min = UserDefaults.standard.string(forKey: "valid_order_partial_min_amt") ?? ""
                     let max = UserDefaults.standard.string(forKey: "valid_order_partial_max_amt") ?? ""
+                    
+                    let pay_type = UserDefaults.standard.string(forKey: "valid_order_partial_payment_type") ?? ""
                     
                     if UserDefaults.standard.string(forKey: "partial_per_day") == "1" {
                         start_date = start
@@ -717,6 +737,8 @@ class OrderInStoreViewController: UIViewController {
                     
                     min_amt = min
                     max_amt = max
+                    
+                    pays_type = pay_type
                 }
                 else {
                     
@@ -727,6 +749,8 @@ class OrderInStoreViewController: UIViewController {
                     
                     let min = UserDefaults.standard.string(forKey: "valid_order_refund_min_amt") ?? ""
                     let max = UserDefaults.standard.string(forKey: "valid_order_refund_max_amt") ?? ""
+                    
+                    let pay_type = UserDefaults.standard.string(forKey: "valid_order_refund_payment_type") ?? ""
                     
                     if UserDefaults.standard.string(forKey: "refund_per_day") == "1" {
                         start_date = start
@@ -740,6 +764,8 @@ class OrderInStoreViewController: UIViewController {
                     
                     min_amt = min
                     max_amt = max
+                    
+                    pays_type = pay_type
                 }
                 
                 page += 1
@@ -747,7 +773,7 @@ class OrderInStoreViewController: UIViewController {
                 ApiCalls.sharedCall.getOrderList(merchant_id: id, order_list_type: "instore",
                                                  order_status: status, order_0: "", order_1: "",
                                                  start_date: start_date, end_date: end_date,
-                                                 min_amt: min_amt, max_amt: max_amt, search_value: "",
+                                                 min_amt: min_amt, max_amt: max_amt, payment_type: pays_type, search_value: "",
                                                  paid: 1, page_no: page,
                                                  limit: 10, group_id: group_id) { isSuccess, responseData in
                     

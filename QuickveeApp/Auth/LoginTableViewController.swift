@@ -491,6 +491,8 @@ class LoginTableViewController: UITableViewController {
     
     @objc func updateTextField(textField: MDCOutlinedTextField) {
         
+        var updatetext = textField.text ?? ""
+        
         if textField == emailField {
             
             if textField.text!.count == 1 {
@@ -510,6 +512,11 @@ class LoginTableViewController: UITableViewController {
                 button.addTarget(self, action: #selector(showPassword), for: .touchUpInside)
                 passwordField.isSecureTextEntry = true
                 createCustomTextField(textField: textField)
+            }
+            else if textField.text!.count == 35 {
+                updatetext = String(updatetext.dropLast())
+                
+                textField.text = updatetext
             }
         }
     }

@@ -675,6 +675,14 @@ class HomeViewController: UIViewController {
         UserDefaults.standard.set("", forKey: "valid_order_refund_min_amt")
         UserDefaults.standard.set("", forKey: "valid_order_refund_max_amt")
         
+        UserDefaults.standard.set("all", forKey: "temp_order_paid_payment_type")
+        UserDefaults.standard.set("all", forKey: "temp_order_partial_payment_type")
+        UserDefaults.standard.set("all", forKey: "temp_order_refund_payment_type")
+        
+        UserDefaults.standard.set("all", forKey: "valid_order_paid_payment_type")
+        UserDefaults.standard.set("all", forKey: "valid_order_partial_payment_type")
+        UserDefaults.standard.set("all", forKey: "valid_order_refund_payment_type")
+        
         //online order
         
         UserDefaults.standard.set("", forKey: "temp_order_new_start_date")
@@ -720,6 +728,14 @@ class HomeViewController: UIViewController {
         UserDefaults.standard.set("", forKey: "valid_order_new_order_type")
         UserDefaults.standard.set("", forKey: "valid_order_closed_order_type")
         UserDefaults.standard.set("", forKey: "valid_order_failed_order_type")
+        
+        UserDefaults.standard.set("all", forKey: "temp_order_new_payment_type")
+        UserDefaults.standard.set("all", forKey: "temp_order_closed_payment_type")
+        UserDefaults.standard.set("all", forKey: "temp_order_failed_payment_type")
+        
+        UserDefaults.standard.set("all", forKey: "valid_order_new_payment_type")
+        UserDefaults.standard.set("all", forKey: "valid_order_closed_payment_type")
+        UserDefaults.standard.set("all", forKey: "valid_order_failed_payment_type")
     }
     
     

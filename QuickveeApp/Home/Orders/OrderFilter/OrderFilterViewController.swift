@@ -16,6 +16,7 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var orderTypeView: UIView!
     @IBOutlet weak var amountView: UIView!
     @IBOutlet weak var perDayView: UIView!
+    @IBOutlet weak var paymentType: UIView!
     
     @IBOutlet weak var topview: UIView!
     @IBOutlet weak var startDate: MDCOutlinedTextField!
@@ -48,6 +49,15 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var delLbl: UILabel!
     
+    
+    @IBOutlet weak var cashBtn: UIButton!
+    @IBOutlet weak var cardBtn: UIButton!
+    @IBOutlet weak var splitBtn: UIButton!
+    
+    @IBOutlet weak var cashLbl: UILabel!
+    @IBOutlet weak var cardLbl: UILabel!
+    @IBOutlet weak var splitLbl: UILabel!
+    
     var activeTextField = UITextField()
     var filterMode = ""
 
@@ -61,8 +71,8 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
     let amount1 = ["$0", "$100", "$150", "$200", "$250"]
     let amount2 = ["$850", "$900", "$950", "$1000"]
     
-    let onlineFiters = ["Filter by Order Date", "Select Order Type", "Filter by Order Amount", "Filter Orders by Day"]
-    let storeFiters = ["Filter by Order Date", "Filter by Order Amount", "Filter Orders by Day"]
+    let onlineFiters = ["Filter by Order Date", "Select Order Type", "Filter by Order Amount", "Filter Orders by Day", "Payment type"]
+    let storeFiters = ["Filter by Order Date", "Filter by Order Amount", "Filter Orders by Day", "Payment type"]
     
  
     override func viewDidLoad() {
@@ -82,6 +92,14 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
         allLbl.font = UIFont(name: "Manrope-Medium", size: 16.0)!
         pickLbl.font = UIFont(name: "Manrope-Medium", size: 16.0)!
         delLbl.font = UIFont(name: "Manrope-Medium", size: 16.0)!
+        
+        cashLbl.text = "Cash"
+        cardLbl.text = "Card"
+        splitLbl.text = "Split"
+        
+        cashLbl.font = UIFont(name: "Manrope-Medium", size: 16.0)!
+        cardLbl.font = UIFont(name: "Manrope-Medium", size: 16.0)!
+        splitLbl.font = UIFont(name: "Manrope-Medium", size: 16.0)!
         
         
         rangeSlider.minValue = 0.0
@@ -103,6 +121,7 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
         orderTypeView.isHidden = true
         perDayView.isHidden = true
         amountView.isHidden = true
+        paymentType.isHidden = true
         
         startDate.delegate = self
         endDate.delegate = self
@@ -138,6 +157,20 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
         tap3.numberOfTapsRequired = 1
         delLbl.isUserInteractionEnabled = true
         
+        let tap4 = UITapGestureRecognizer(target: self, action: #selector(cashClick))
+        cashLbl.addGestureRecognizer(tap4)
+        tap4.numberOfTapsRequired = 1
+        cashLbl.isUserInteractionEnabled = true
+        
+        let tap5 = UITapGestureRecognizer(target: self, action: #selector(cardClick))
+        cardLbl.addGestureRecognizer(tap5)
+        tap5.numberOfTapsRequired = 1
+        cardLbl.isUserInteractionEnabled = true
+        
+        let tap6 = UITapGestureRecognizer(target: self, action: #selector(splitClick))
+        splitLbl.addGestureRecognizer(tap6)
+        tap6.numberOfTapsRequired = 1
+        splitLbl.isUserInteractionEnabled = true
         
         leftTable.separatorColor = UIColor(red: 238.0/255.0, green: 238.0/255.0, blue: 238.0/255.0, alpha: 1.0)
         
@@ -322,6 +355,8 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
         }
         
         setOrderType()
+        
+        setPaymentType()
     }
     
     @objc func clearClick() {
@@ -448,7 +483,7 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
             rangeSlider.layoutSubviews()
         }
     }
-    
+        
     @objc func allClick() {
         
         allBtn.setImage(UIImage(named: "select_radio"), for: .normal)
@@ -467,7 +502,6 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func pickupClick()  {
-        
         
         allBtn.setImage(UIImage(named: "unselect_radio"), for: .normal)
         pickup.setImage(UIImage(named: "select_radio"), for: .normal)
@@ -499,6 +533,84 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
         }
         else {
             UserDefaults.standard.set("delivery", forKey: "temp_order_failed_order_type")
+        }
+    }
+    
+    @objc func cashClick() {
+
+        cashBtn.setImage(UIImage(named: "select_radio"), for: .normal)
+        cardBtn.setImage(UIImage(named: "unselect_radio"), for: .normal)
+        splitBtn.setImage(UIImage(named: "unselect_radio"), for: .normal)
+        
+        if filterMode == "new"{
+            UserDefaults.standard.set("cash", forKey: "temp_order_new_payment_type")
+        }
+        else if filterMode == "closed" {
+            UserDefaults.standard.set("cash", forKey: "temp_order_closed_payment_type")
+        }
+        else if filterMode == "failed" {
+            UserDefaults.standard.set("cash", forKey: "temp_order_failed_payment_type")
+        }
+        else if filterMode == "paid" {
+            UserDefaults.standard.set("cash", forKey: "temp_order_paid_payment_type")
+        }
+        else if filterMode == "partial" {
+            UserDefaults.standard.set("cash", forKey: "temp_order_partial_payment_type")
+        }
+        else {
+            UserDefaults.standard.set("cash", forKey: "temp_order_refund_payment_type")
+        }
+    }
+    
+    @objc func cardClick() {
+        
+        cashBtn.setImage(UIImage(named: "unselect_radio"), for: .normal)
+        cardBtn.setImage(UIImage(named: "select_radio"), for: .normal)
+        splitBtn.setImage(UIImage(named: "unselect_radio"), for: .normal)
+        
+        if filterMode == "new"{
+            UserDefaults.standard.set("card", forKey: "temp_order_new_payment_type")
+        }
+        else if filterMode == "closed" {
+            UserDefaults.standard.set("card", forKey: "temp_order_closed_payment_type")
+        }
+        else if filterMode == "failed" {
+            UserDefaults.standard.set("card", forKey: "temp_order_failed_payment_type")
+        }
+        else if filterMode == "paid" {
+            UserDefaults.standard.set("card", forKey: "temp_order_paid_payment_type")
+        }
+        else if filterMode == "partial" {
+            UserDefaults.standard.set("card", forKey: "temp_order_partial_payment_type")
+        }
+        else {
+            UserDefaults.standard.set("card", forKey: "temp_order_refund_payment_type")
+        }
+    }
+    
+    @objc func splitClick() {
+        
+        cashBtn.setImage(UIImage(named: "unselect_radio"), for: .normal)
+        cardBtn.setImage(UIImage(named: "unselect_radio"), for: .normal)
+        splitBtn.setImage(UIImage(named: "select_radio"), for: .normal)
+        
+        if filterMode == "new"{
+            UserDefaults.standard.set("split", forKey: "temp_order_new_payment_type")
+        }
+        else if filterMode == "closed" {
+            UserDefaults.standard.set("split", forKey: "temp_order_closed_payment_type")
+        }
+        else if filterMode == "failed" {
+            UserDefaults.standard.set("split", forKey: "temp_order_failed_payment_type")
+        }
+        else if filterMode == "paid" {
+            UserDefaults.standard.set("split", forKey: "temp_order_paid_payment_type")
+        }
+        else if filterMode == "partial" {
+            UserDefaults.standard.set("split", forKey: "temp_order_partial_payment_type")
+        }
+        else {
+            UserDefaults.standard.set("split", forKey: "temp_order_refund_payment_type")
         }
     }
     
@@ -702,6 +814,55 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
+    func setPaymentType() {
+     
+        var type = ""
+        var tag = 0
+        
+        if filterMode == "new" {
+            type = UserDefaults.standard.string(forKey: "valid_order_new_payment_type") ?? ""
+        }
+        else if filterMode == "closed" {
+            type = UserDefaults.standard.string(forKey: "valid_order_closed_payment_type") ?? ""
+        }
+        else if filterMode == "failed" {
+            type = UserDefaults.standard.string(forKey: "valid_order_failed_payment_type") ?? ""
+        }
+        else if filterMode == "paid" {
+            type = UserDefaults.standard.string(forKey: "valid_order_paid_payment_type") ?? ""
+        }
+        else if filterMode == "partial" {
+            type = UserDefaults.standard.string(forKey: "valid_order_partial_payment_type") ?? ""
+        }
+        else {
+            type = UserDefaults.standard.string(forKey: "valid_order_refund_payment_type") ?? ""
+        }
+    
+        if type == "all" {
+            tag = 0
+        }
+        else if type == "cash" {
+            tag = 401
+        }
+        else if type == "card" {
+            tag = 402
+        }
+        else {
+            tag = 403
+        }
+        
+        for i in 401...403 {
+            if i == tag {
+                let button = view.viewWithTag(i) as! UIButton
+                button.setImage(UIImage(named: "select_radio"), for: .normal)
+            }
+            else {
+                let button = view.viewWithTag(i) as! UIButton
+                button.setImage(UIImage(named: "unselect_radio"), for: .normal)
+            }
+        }
+    }
 
     
     @IBAction func homeBtnClick(_ sender: UIButton) {
@@ -786,6 +947,124 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    @IBAction func paymentTypeClick(_ sender: UIButton) {
+        
+        for i in 401...403 {
+            
+            if i == sender.tag {
+                let button = view.viewWithTag(i) as! UIButton
+                button.setImage(UIImage(named: "select_radio"), for: .normal)
+            }
+            else {
+                let button = view.viewWithTag(i) as! UIButton
+                button.setImage(UIImage(named: "unselect_radio"), for: .normal)
+            }
+        }
+        
+        if filterMode == "new"{
+            if sender.tag == 401 {
+                UserDefaults.standard.set("cash", forKey: "temp_order_new_payment_type")
+            }
+            
+            else if sender.tag == 402 {
+                UserDefaults.standard.set("card", forKey: "temp_order_new_payment_type")
+            }
+            
+            else if sender.tag == 403 {
+                UserDefaults.standard.set("split", forKey: "temp_order_new_payment_type")
+            }
+            
+            else {
+                UserDefaults.standard.set("all", forKey: "temp_order_new_payment_type")
+            }
+        }
+        else if filterMode == "closed" {
+            if sender.tag == 401 {
+                UserDefaults.standard.set("cash", forKey: "temp_order_closed_payment_type")
+            }
+            
+            else if sender.tag == 402 {
+                UserDefaults.standard.set("card", forKey: "temp_order_closed_payment_type")
+            }
+            
+            else if sender.tag == 403 {
+                UserDefaults.standard.set("split", forKey: "temp_order_closed_payment_type")
+            }
+            
+            else {
+                UserDefaults.standard.set("all", forKey: "temp_order_closed_payment_type")
+            }
+        }
+        else if filterMode == "failed" {
+            if sender.tag == 401 {
+                UserDefaults.standard.set("cash", forKey: "temp_order_failed_payment_type")
+            }
+            
+            else if sender.tag == 402 {
+                UserDefaults.standard.set("card", forKey: "temp_order_failed_payment_type")
+            }
+            
+            else if sender.tag == 403 {
+                UserDefaults.standard.set("split", forKey: "temp_order_failed_payment_type")
+            }
+            
+            else {
+                UserDefaults.standard.set("all", forKey: "temp_order_failed_payment_type")
+            }
+        }
+        else if filterMode == "paid" {
+            if sender.tag == 401 {
+                UserDefaults.standard.set("cash", forKey: "temp_order_paid_payment_type")
+            }
+            
+            else if sender.tag == 402 {
+                UserDefaults.standard.set("card", forKey: "temp_order_paid_payment_type")
+            }
+            
+            else if sender.tag == 403 {
+                UserDefaults.standard.set("split", forKey: "temp_order_paid_payment_type")
+            }
+            
+            else {
+                UserDefaults.standard.set("all", forKey: "temp_order_paid_payment_type")
+            }
+        }
+        else if filterMode == "partial" {
+            if sender.tag == 401 {
+                UserDefaults.standard.set("cash", forKey: "temp_order_partial_payment_type")
+            }
+            
+            else if sender.tag == 402 {
+                UserDefaults.standard.set("card", forKey: "temp_order_partial_payment_type")
+            }
+            
+            else if sender.tag == 403 {
+                UserDefaults.standard.set("split", forKey: "temp_order_partial_payment_type")
+            }
+            
+            else {
+                UserDefaults.standard.set("all", forKey: "temp_order_partial_payment_type")
+            }
+        }
+        else {
+            if sender.tag == 401 {
+                UserDefaults.standard.set("cash", forKey: "temp_order_refund_payment_type")
+            }
+            
+            else if sender.tag == 402 {
+                UserDefaults.standard.set("card", forKey: "temp_order_refund_payment_type")
+            }
+            
+            else if sender.tag == 403 {
+                UserDefaults.standard.set("split", forKey: "temp_order_refund_payment_type")
+            }
+            
+            else {
+                UserDefaults.standard.set("all", forKey: "temp_order_refund_payment_type")
+            }
+        }
+    }
+    
     @IBAction func backBtnClick(_ sender: UIButton) {
 
         dismissTransition()
@@ -817,6 +1096,7 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 
                 let temp_order = UserDefaults.standard.string(forKey: "temp_order_new_order_type") ?? ""
 
+                let temp_pay = UserDefaults.standard.string(forKey: "temp_order_new_payment_type") ?? ""
                 
                 UserDefaults.standard.set(temp_start, forKey: "valid_order_new_start_date")
                 UserDefaults.standard.set(temp_end, forKey: "valid_order_new_end_date")
@@ -826,6 +1106,7 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 
                 UserDefaults.standard.set(temp_order, forKey: "valid_order_new_order_type")
 
+                UserDefaults.standard.set(temp_pay, forKey: "valid_order_new_payment_type")
                 
                 dismissTransition()
             }
@@ -838,6 +1119,7 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 
                 let temp_order = UserDefaults.standard.string(forKey: "temp_order_closed_order_type") ?? ""
 
+                let temp_pay = UserDefaults.standard.string(forKey: "temp_order_closed_payment_type") ?? ""
                 
                 UserDefaults.standard.set(temp_start, forKey: "valid_order_closed_start_date")
                 UserDefaults.standard.set(temp_end, forKey: "valid_order_closed_end_date")
@@ -847,6 +1129,7 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 
                 UserDefaults.standard.set(temp_order, forKey: "valid_order_closed_order_type")
 
+                UserDefaults.standard.set(temp_pay, forKey: "valid_order_closed_payment_type")
                 
                 dismissTransition()
             }
@@ -858,6 +1141,8 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 let temp_max = UserDefaults.standard.string(forKey: "temp_order_failed_max_amt") ?? ""
                 
                 let temp_order = UserDefaults.standard.string(forKey: "temp_order_failed_order_type") ?? ""
+                
+                let temp_pay = UserDefaults.standard.string(forKey: "temp_order_failed_payment_type") ?? ""
 
                 
                 UserDefaults.standard.set(temp_start, forKey: "valid_order_failed_start_date")
@@ -867,7 +1152,8 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 UserDefaults.standard.set(temp_max, forKey: "valid_order_failed_max_amt")
                 
                 UserDefaults.standard.set(temp_order, forKey: "valid_order_failed_order_type")
-
+                
+                UserDefaults.standard.set(temp_pay, forKey: "valid_order_failed_payment_type")
                 
                 dismissTransition()
             }
@@ -879,11 +1165,15 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 let temp_min = UserDefaults.standard.string(forKey: "temp_order_paid_min_amt") ?? ""
                 let temp_max = UserDefaults.standard.string(forKey: "temp_order_paid_max_amt") ?? ""
                 
+                let temp_pay = UserDefaults.standard.string(forKey: "temp_order_paid_payment_type") ?? ""
+                
                 UserDefaults.standard.set(temp_start, forKey: "valid_order_paid_start_date")
                 UserDefaults.standard.set(temp_end, forKey: "valid_order_paid_end_date")
                 
                 UserDefaults.standard.set(temp_min, forKey: "valid_order_paid_min_amt")
                 UserDefaults.standard.set(temp_max, forKey: "valid_order_paid_max_amt")
+                
+                UserDefaults.standard.set(temp_pay, forKey: "valid_order_paid_payment_type")
                 
                 dismissTransition()
             }
@@ -895,11 +1185,15 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 let temp_min = UserDefaults.standard.string(forKey: "temp_order_partial_min_amt") ?? ""
                 let temp_max = UserDefaults.standard.string(forKey: "temp_order_partial_max_amt") ?? ""
                 
+                let temp_pay = UserDefaults.standard.string(forKey: "temp_order_partial_payment_type") ?? ""
+                
                 UserDefaults.standard.set(temp_start, forKey: "valid_order_partial_start_date")
                 UserDefaults.standard.set(temp_end, forKey: "valid_order_partial_end_date")
                 
                 UserDefaults.standard.set(temp_min, forKey: "valid_order_partial_min_amt")
                 UserDefaults.standard.set(temp_max, forKey: "valid_order_partial_max_amt")
+                
+                UserDefaults.standard.set(temp_pay, forKey: "valid_order_partial_payment_type")
                 
                 dismissTransition()
             }
@@ -911,11 +1205,15 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 let temp_min = UserDefaults.standard.string(forKey: "temp_order_refund_min_amt") ?? ""
                 let temp_max = UserDefaults.standard.string(forKey: "temp_order_refund_max_amt") ?? ""
                 
+                let temp_pay = UserDefaults.standard.string(forKey: "temp_order_refund_payment_type") ?? ""
+                
                 UserDefaults.standard.set(temp_start, forKey: "valid_order_refund_start_date")
                 UserDefaults.standard.set(temp_end, forKey: "valid_order_refund_end_date")
                 
                 UserDefaults.standard.set(temp_min, forKey: "valid_order_refund_min_amt")
                 UserDefaults.standard.set(temp_max, forKey: "valid_order_refund_max_amt")
+                
+                UserDefaults.standard.set(temp_pay, forKey: "valid_order_refund_payment_type")
                 
                 dismissTransition()
             }
@@ -942,6 +1240,8 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                     let temp_max = UserDefaults.standard.string(forKey: "temp_order_new_max_amt") ?? ""
                     
                     let temp_order = UserDefaults.standard.string(forKey: "temp_order_new_order_type") ?? ""
+                    
+                    let temp_pay = UserDefaults.standard.string(forKey: "temp_order_new_payment_type") ?? ""
 
                     
                     UserDefaults.standard.set(temp_start, forKey: "valid_order_new_start_date")
@@ -951,6 +1251,8 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                     UserDefaults.standard.set(temp_max, forKey: "valid_order_new_max_amt")
                     
                     UserDefaults.standard.set(temp_order, forKey: "valid_order_new_order_type")
+                    
+                    UserDefaults.standard.set(temp_pay, forKey: "valid_order_new_payment_type")
 
                     
                     dismissTransition()
@@ -964,7 +1266,8 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                     let temp_max = UserDefaults.standard.string(forKey: "temp_order_closed_max_amt") ?? ""
                     
                     let temp_order = UserDefaults.standard.string(forKey: "temp_order_closed_order_type") ?? ""
-
+                    
+                    let temp_pay = UserDefaults.standard.string(forKey: "temp_order_closed_payment_type") ?? ""
                     
                     UserDefaults.standard.set(temp_start, forKey: "valid_order_closed_start_date")
                     UserDefaults.standard.set(temp_end, forKey: "valid_order_closed_end_date")
@@ -974,6 +1277,7 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                     
                     UserDefaults.standard.set(temp_order, forKey: "valid_order_closed_order_type")
 
+                    UserDefaults.standard.set(temp_pay, forKey: "valid_order_closed_payment_type")
                     
                     dismissTransition()
                 }
@@ -985,6 +1289,8 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                     let temp_max = UserDefaults.standard.string(forKey: "temp_order_failed_max_amt") ?? ""
                     
                     let temp_order = UserDefaults.standard.string(forKey: "temp_order_failed_order_type") ?? ""
+                    
+                    let temp_pay = UserDefaults.standard.string(forKey: "temp_order_failed_payment_type") ?? ""
 
                     
                     UserDefaults.standard.set(temp_start, forKey: "valid_order_failed_start_date")
@@ -994,6 +1300,8 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                     UserDefaults.standard.set(temp_max, forKey: "valid_order_failed_max_amt")
                     
                     UserDefaults.standard.set(temp_order, forKey: "valid_order_failed_order_type")
+                    
+                    UserDefaults.standard.set(temp_pay, forKey: "valid_order_failed_payment_type")
 
                     
                     dismissTransition()
@@ -1006,11 +1314,15 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                     let temp_min = UserDefaults.standard.string(forKey: "temp_order_paid_min_amt") ?? ""
                     let temp_max = UserDefaults.standard.string(forKey: "temp_order_paid_max_amt") ?? ""
                     
+                    let temp_pay = UserDefaults.standard.string(forKey: "temp_order_paid_payment_type") ?? ""
+                    
                     UserDefaults.standard.set(temp_start, forKey: "valid_order_paid_start_date")
                     UserDefaults.standard.set(temp_end, forKey: "valid_order_paid_end_date")
                     
                     UserDefaults.standard.set(temp_min, forKey: "valid_order_paid_min_amt")
                     UserDefaults.standard.set(temp_max, forKey: "valid_order_paid_max_amt")
+                    
+                    UserDefaults.standard.set(temp_pay, forKey: "valid_order_paid_payment_type")
                     
                     dismissTransition()
                 }
@@ -1022,11 +1334,15 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                     let temp_min = UserDefaults.standard.string(forKey: "temp_order_partial_min_amt") ?? ""
                     let temp_max = UserDefaults.standard.string(forKey: "temp_order_partial_max_amt") ?? ""
                     
+                    let temp_pay = UserDefaults.standard.string(forKey: "temp_order_partial_payment_type") ?? ""
+                    
                     UserDefaults.standard.set(temp_start, forKey: "valid_order_partial_start_date")
                     UserDefaults.standard.set(temp_end, forKey: "valid_order_partial_end_date")
                     
                     UserDefaults.standard.set(temp_min, forKey: "valid_order_partial_min_amt")
                     UserDefaults.standard.set(temp_max, forKey: "valid_order_partial_max_amt")
+                    
+                    UserDefaults.standard.set(temp_pay, forKey: "valid_order_partial_payment_type")
                     
                     dismissTransition()
                 }
@@ -1038,11 +1354,15 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                     let temp_min = UserDefaults.standard.string(forKey: "temp_order_refund_min_amt") ?? ""
                     let temp_max = UserDefaults.standard.string(forKey: "temp_order_refund_max_amt") ?? ""
                     
+                    let temp_pay = UserDefaults.standard.string(forKey: "temp_order_refund_payment_type") ?? ""
+                    
                     UserDefaults.standard.set(temp_start, forKey: "valid_order_refund_start_date")
                     UserDefaults.standard.set(temp_end, forKey: "valid_order_refund_end_date")
                     
                     UserDefaults.standard.set(temp_min, forKey: "valid_order_refund_min_amt")
                     UserDefaults.standard.set(temp_max, forKey: "valid_order_refund_max_amt")
+                    
+                    UserDefaults.standard.set(temp_pay, forKey: "valid_order_refund_payment_type")
                     
                     dismissTransition()
                 }
@@ -1109,6 +1429,7 @@ extension OrderFilterViewController: UITableViewDelegate, UITableViewDataSource 
                 customDateView.isHidden = false
                 perDayView.isHidden = true
                 amountView.isHidden = true
+                paymentType.isHidden = true
             }
             
             else if indexPath.row == 1 {
@@ -1116,14 +1437,22 @@ extension OrderFilterViewController: UITableViewDelegate, UITableViewDataSource 
                 customDateView.isHidden = true
                 perDayView.isHidden = true
                 amountView.isHidden = false
+                paymentType.isHidden = true
+            }
+            
+            else if indexPath.row == 2 {
+                
+                customDateView.isHidden = true
+                perDayView.isHidden = false
+                amountView.isHidden = true
             }
             
             else {
                 
                 customDateView.isHidden = true
-                perDayView.isHidden = false
+                perDayView.isHidden = true
                 amountView.isHidden = true
-                
+                paymentType.isHidden = false
             }
         }
         
@@ -1136,6 +1465,7 @@ extension OrderFilterViewController: UITableViewDelegate, UITableViewDataSource 
                 orderTypeView.isHidden = true
                 perDayView.isHidden = true
                 amountView.isHidden = true
+                paymentType.isHidden = true
             }
             
             else if indexPath.row == 1 {
@@ -1144,6 +1474,7 @@ extension OrderFilterViewController: UITableViewDelegate, UITableViewDataSource 
                 orderTypeView.isHidden = false
                 perDayView.isHidden = true
                 amountView.isHidden = true
+                paymentType.isHidden = true
             }
             
             else if indexPath.row == 2 {
@@ -1152,14 +1483,25 @@ extension OrderFilterViewController: UITableViewDelegate, UITableViewDataSource 
                 orderTypeView.isHidden = true
                 perDayView.isHidden = true
                 amountView.isHidden = false
+                paymentType.isHidden = true
+            }
+            
+            else if indexPath.row == 3 {
+                
+                customDateView.isHidden = true
+                orderTypeView.isHidden = true
+                perDayView.isHidden = false
+                amountView.isHidden = true
+                paymentType.isHidden = true
             }
             
             else {
                 
                 customDateView.isHidden = true
                 orderTypeView.isHidden = true
-                perDayView.isHidden = false
+                perDayView.isHidden = true
                 amountView.isHidden = true
+                paymentType.isHidden = false
             }
         }
         selectFilter = cell.tag

@@ -236,6 +236,16 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersInRanges ranges: [NSValue], replacementString string: String) -> Bool {
+        
+        let allowedCharacters = CharacterSet.alphanumerics.union(CharacterSet.whitespaces)
+        
+        if let _ = string.rangeOfCharacter(from: allowedCharacters.inverted) {
+            return false
+        }
+        return true
+    }
+    
     @objc func updateTextField(textField: MDCOutlinedTextField) {
         
         var updatetext = textField.text ?? ""
