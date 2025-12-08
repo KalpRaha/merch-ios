@@ -361,6 +361,30 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
     
     @objc func clearClick() {
         
+        DispatchQueue.main.async {
+            self.startDate.text = ""
+            self.endDate.text = ""
+            
+            self.perDayDate.text = ""
+            
+            self.allBtn.setImage(UIImage(named: "select_radio"), for: .normal)
+            self.pickup.setImage(UIImage(named: "unselect_radio"), for: .normal)
+            self.delivery.setImage(UIImage(named: "unselect_radio"), for: .normal)
+
+            self.cashBtn.setImage(UIImage(named: "unselect_radio"), for: .normal)
+            self.cardBtn.setImage(UIImage(named: "unselect_radio"), for: .normal)
+            self.splitBtn.setImage(UIImage(named: "unselect_radio"), for: .normal)
+            
+            self.minimumAmount.text = "$\(0.0)"
+            self.maximumAmount.text = "$\(850.0)"
+            
+            self.rangeSlider.selectedMinValue = 0.0
+            self.rangeSlider.selectedMaxValue = 850.0
+            
+            self.rangeSlider.setNeedsLayout()
+            self.rangeSlider.layoutIfNeeded()
+        }
+        
         //store
         if hideType {
             
@@ -377,6 +401,9 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 
                 UserDefaults.standard.set("", forKey: "valid_order_paid_min_amt")
                 UserDefaults.standard.set("", forKey: "valid_order_paid_max_amt")
+                                
+                UserDefaults.standard.set("all", forKey: "temp_order_paid_payment_type")
+                UserDefaults.standard.set("all", forKey: "valid_order_paid_payment_type")
                 
             }
             
@@ -394,6 +421,9 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 UserDefaults.standard.set("", forKey: "valid_order_partial_min_amt")
                 UserDefaults.standard.set("", forKey: "valid_order_partial_max_amt")
                 
+                UserDefaults.standard.set("all", forKey: "temp_order_partial_payment_type")
+                UserDefaults.standard.set("all", forKey: "valid_order_partial_payment_type")
+                
             }
             
             else {
@@ -409,20 +439,10 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 
                 UserDefaults.standard.set("", forKey: "valid_order_refund_min_amt")
                 UserDefaults.standard.set("", forKey: "valid_order_refund_max_amt")
+                
+                UserDefaults.standard.set("all", forKey: "temp_order_refund_payment_type")
+                UserDefaults.standard.set("all", forKey: "valid_order_refund_payment_type")
             }
-            
-            startDate.text = ""
-            endDate.text = ""
-            
-            perDayDate.text = ""
-            
-            minimumAmount.text = "$\(0.0)"
-            maximumAmount.text = "$\(850.0)"
-            
-            rangeSlider.selectedMinValue = 0.0
-            rangeSlider.selectedMaxValue = 850.0
-            rangeSlider.layoutSubviews()
-            
         }
         
         else {
@@ -439,6 +459,12 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 
                 UserDefaults.standard.set("", forKey: "valid_order_new_min_amt")
                 UserDefaults.standard.set("", forKey: "valid_order_new_max_amt")
+                
+                UserDefaults.standard.set("all", forKey: "temp_order_new_payment_type")
+                UserDefaults.standard.set("all", forKey: "valid_order_new_payment_type")
+                
+                UserDefaults.standard.set("", forKey: "temp_order_new_order_type")
+                UserDefaults.standard.set("", forKey: "valid_order_new_order_type")
             }
             
             else if filterMode == "closed" {
@@ -453,6 +479,12 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 
                 UserDefaults.standard.set("", forKey: "valid_order_closed_min_amt")
                 UserDefaults.standard.set("", forKey: "valid_order_closed_max_amt")
+                
+                UserDefaults.standard.set("all", forKey: "temp_order_closed_payment_type")
+                UserDefaults.standard.set("all", forKey: "valid_order_closed_payment_type")
+                
+                UserDefaults.standard.set("", forKey: "temp_order_closed_order_type")
+                UserDefaults.standard.set("", forKey: "valid_order_closed_order_type")
             }
             
             else {
@@ -467,20 +499,13 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
                 
                 UserDefaults.standard.set("", forKey: "valid_order_failed_min_amt")
                 UserDefaults.standard.set("", forKey: "valid_order_failed_max_amt")
+                
+                UserDefaults.standard.set("all", forKey: "temp_order_failed_payment_type")
+                UserDefaults.standard.set("all", forKey: "valid_order_failed_payment_type")
+                
+                UserDefaults.standard.set("", forKey: "temp_order_failed_order_type")
+                UserDefaults.standard.set("", forKey: "valid_order_failed_order_type")
             }
-            
-            
-            startDate.text = ""
-            endDate.text = ""
-            
-            perDayDate.text = ""
-            
-            minimumAmount.text = "$\(0.0)"
-            maximumAmount.text = "$\(850.0)"
-            
-            rangeSlider.selectedMinValue = 0.0
-            rangeSlider.selectedMaxValue = 850.0
-            rangeSlider.layoutSubviews()
         }
     }
         
