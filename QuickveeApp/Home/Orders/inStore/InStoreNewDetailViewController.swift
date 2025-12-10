@@ -5355,8 +5355,8 @@ class InStoreNewDetailViewController: UIViewController {
         if cust_id == "" || cust_id.contains("null") {
         }
         else {
-            smallName.append("Customer Id")
-            smallValue.append(cust_id)
+            //smallName.append("Customer Id")
+            //smallValue.append(cust_id)
         }
         
         if email == "" && cust_email == "" {

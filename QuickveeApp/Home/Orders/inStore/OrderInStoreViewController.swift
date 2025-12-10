@@ -183,6 +183,8 @@ class OrderInStoreViewController: UIViewController {
             pays_type = pay_type
         }
         
+        print(pays_type)
+        
         ApiCalls.sharedCall.getOrderList(merchant_id: id, order_list_type: "instore", order_status: order_status,
                                          order_0: "", order_1: "", start_date: start_date, end_date: end_date,
                                          min_amt: min_amt, max_amt: max_amt, payment_type: pays_type, search_value: "", paid: 1, page_no: 1,
@@ -696,7 +698,7 @@ class OrderInStoreViewController: UIViewController {
                     let min = UserDefaults.standard.string(forKey: "valid_order_paid_min_amt") ?? ""
                     let max = UserDefaults.standard.string(forKey: "valid_order_paid_max_amt") ?? ""
                     
-                    let pay_type = UserDefaults.standard.string(forKey: "valid_order_new_payment_type") ?? ""
+                    let pay_type = UserDefaults.standard.string(forKey: "valid_order_paid_payment_type")  ?? ""
                     
                     if UserDefaults.standard.string(forKey: "paid_per_day") == "1" {
                         start_date = start
@@ -767,7 +769,7 @@ class OrderInStoreViewController: UIViewController {
                     
                     pays_type = pay_type
                 }
-                
+                print(pays_type)
                 page += 1
                 
                 ApiCalls.sharedCall.getOrderList(merchant_id: id, order_list_type: "instore",

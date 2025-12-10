@@ -24,7 +24,7 @@ class NewOrderDetailVC: UIViewController {
     @IBOutlet weak var belowSummaryView: UIView!
     @IBOutlet weak var belowOrderDetailView: UIView!
     
-    
+    @IBOutlet weak var customerValue: UILabel!
     @IBOutlet weak var belowGrossView: UIView!
     @IBOutlet weak var netDashView: UIView!
     @IBOutlet weak var taxTableView: UITableView!
@@ -1143,7 +1143,7 @@ class NewOrderDetailVC: UIViewController {
         let num = ToastClass.sharedToast.formatPhoneNumber(order.delivery_phn)
         phoneValueLbl.text = num
         emailValueLbl.text = order.email
-       // customerValue.text = order.customer_id
+        customerValue.text = order.customer_id
         
         if order.order_method == "pickup" || self.order_method == "Pickup"  {
             addressLbl.isHidden = true

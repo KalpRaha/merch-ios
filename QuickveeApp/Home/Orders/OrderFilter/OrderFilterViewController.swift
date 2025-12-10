@@ -26,9 +26,11 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var pickup: UIButton!
     @IBOutlet weak var delivery: UIButton!
     
+    @IBOutlet weak var maximumAmount: MDCOutlinedTextField!
+    
     @IBOutlet weak var minimumAmount: MDCOutlinedTextField!
     @IBOutlet weak var minimumBtn: UIButton!
-    @IBOutlet weak var maximumAmount: MDCOutlinedTextField!
+ 
     @IBOutlet weak var perDayDate: MDCOutlinedTextField!
     @IBOutlet weak var maximumBtn: UIButton!
     
@@ -126,6 +128,7 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
         startDate.delegate = self
         endDate.delegate = self
         perDayDate.delegate = self
+       
         
         setTrailingImage()
         
@@ -361,29 +364,29 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
     
     @objc func clearClick() {
         
-        DispatchQueue.main.async {
-            self.startDate.text = ""
-            self.endDate.text = ""
+       // DispatchQueue.main.async {
+            startDate?.text = ""
+            endDate?.text = ""
             
-            self.perDayDate.text = ""
+            perDayDate.text = ""
             
-            self.allBtn.setImage(UIImage(named: "select_radio"), for: .normal)
-            self.pickup.setImage(UIImage(named: "unselect_radio"), for: .normal)
-            self.delivery.setImage(UIImage(named: "unselect_radio"), for: .normal)
+            allBtn?.setImage(UIImage(named: "select_radio"), for: .normal)
+            pickup?.setImage(UIImage(named: "unselect_radio"), for: .normal)
+            delivery?.setImage(UIImage(named: "unselect_radio"), for: .normal)
 
-            self.cashBtn.setImage(UIImage(named: "unselect_radio"), for: .normal)
-            self.cardBtn.setImage(UIImage(named: "unselect_radio"), for: .normal)
-            self.splitBtn.setImage(UIImage(named: "unselect_radio"), for: .normal)
+            cashBtn?.setImage(UIImage(named: "unselect_radio"), for: .normal)
+            cardBtn?.setImage(UIImage(named: "unselect_radio"), for: .normal)
+            splitBtn?.setImage(UIImage(named: "unselect_radio"), for: .normal)
             
-            self.minimumAmount.text = "$\(0.0)"
-            self.maximumAmount.text = "$\(850.0)"
+            minimumAmount?.text = "$\(0.0)"
+            maximumAmount?.text = "$\(850.0)"
             
-            self.rangeSlider.selectedMinValue = 0.0
-            self.rangeSlider.selectedMaxValue = 850.0
+            rangeSlider?.selectedMinValue = 0.0
+            rangeSlider?.selectedMaxValue = 850.0
             
-            self.rangeSlider.setNeedsLayout()
-            self.rangeSlider.layoutIfNeeded()
-        }
+            rangeSlider?.setNeedsLayout()
+            rangeSlider?.layoutIfNeeded()
+       // }
         
         //store
         if hideType {
@@ -647,8 +650,8 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
         
         minMenu.dataSource = amount1
         minMenu.backgroundColor = .white
-        navigationController?.navigationBar.topItem?.titleView = minimumAmount
-        minMenu.anchorView = minimumAmount
+       // navigationController?.navigationBar.topItem?.titleView = minimumBtn
+        minMenu.anchorView = minimumBtn
         
         minMenu.selectionAction = { index, title in
             self.minMenu.deselectRow(at: index)
@@ -695,7 +698,7 @@ class OrderFilterViewController: UIViewController, UITextFieldDelegate {
         
         maxMenu.dataSource = amount2
         maxMenu.backgroundColor = .white
-        navigationController?.navigationBar.topItem?.titleView = maximumAmount
+       // navigationController?.navigationBar.topItem?.titleView = maximumBtn
         maxMenu.anchorView = maximumBtn
         
         maxMenu.selectionAction = { index, title in
@@ -1470,6 +1473,7 @@ extension OrderFilterViewController: UITableViewDelegate, UITableViewDataSource 
                 customDateView.isHidden = true
                 perDayView.isHidden = false
                 amountView.isHidden = true
+                paymentType.isHidden = true
             }
             
             else {

@@ -450,10 +450,70 @@ extension OrdersViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
             UserDefaults.standard.set("", forKey: "valid_order_refund_min_amt")
             UserDefaults.standard.set("", forKey: "valid_order_refund_max_amt")
+           
+            UserDefaults.standard.set("all", forKey: "temp_order_paid_payment_type")
+            UserDefaults.standard.set("all", forKey: "temp_order_partial_payment_type")
+            UserDefaults.standard.set("all", forKey: "temp_order_refund_payment_type")
+            
+            UserDefaults.standard.set("all", forKey: "valid_order_paid_payment_type")
+            UserDefaults.standard.set("all", forKey: "valid_order_partial_payment_type")
+            UserDefaults.standard.set("all", forKey: "valid_order_refund_payment_type")
             
         }
         else {
             UserDefaults.standard.set("paid", forKey: "modeSelected")
+            
+            UserDefaults.standard.set("", forKey: "temp_order_new_start_date")
+            UserDefaults.standard.set("", forKey: "temp_order_new_end_date")
+            
+            UserDefaults.standard.set("", forKey: "temp_order_new_min_amt")
+            UserDefaults.standard.set("", forKey: "temp_order_new_max_amt")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_new_start_date")
+            UserDefaults.standard.set("", forKey: "valid_order_new_end_date")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_new_min_amt")
+            UserDefaults.standard.set("", forKey: "valid_order_new_max_amt")
+            
+            UserDefaults.standard.set("", forKey: "temp_order_closed_start_date")
+            UserDefaults.standard.set("", forKey: "temp_order_closed_end_date")
+            
+            UserDefaults.standard.set("", forKey: "temp_order_closed_min_amt")
+            UserDefaults.standard.set("", forKey: "temp_order_closed_max_amt")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_closed_start_date")
+            UserDefaults.standard.set("", forKey: "valid_order_closed_end_date")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_closed_min_amt")
+            UserDefaults.standard.set("", forKey: "valid_order_closed_max_amt")
+            
+            UserDefaults.standard.set("", forKey: "temp_order_failed_start_date")
+            UserDefaults.standard.set("", forKey: "temp_order_failed_end_date")
+            
+            UserDefaults.standard.set("", forKey: "temp_order_failed_min_amt")
+            UserDefaults.standard.set("", forKey: "temp_order_failed_max_amt")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_failed_start_date")
+            UserDefaults.standard.set("", forKey: "valid_order_failed_end_date")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_failed_min_amt")
+            UserDefaults.standard.set("", forKey: "valid_order_failed_max_amt")
+            
+            UserDefaults.standard.set("", forKey: "temp_order_new_order_type")
+            UserDefaults.standard.set("", forKey: "temp_order_closed_order_type")
+            UserDefaults.standard.set("", forKey: "temp_order_failed_order_type")
+            
+            UserDefaults.standard.set("", forKey: "valid_order_new_order_type")
+            UserDefaults.standard.set("", forKey: "valid_order_closed_order_type")
+            UserDefaults.standard.set("", forKey: "valid_order_failed_order_type")
+            
+            UserDefaults.standard.set("all", forKey: "temp_order_new_payment_type")
+            UserDefaults.standard.set("all", forKey: "temp_order_closed_payment_type")
+            UserDefaults.standard.set("all", forKey: "temp_order_failed_payment_type")
+            
+            UserDefaults.standard.set("all", forKey: "valid_order_new_payment_type")
+            UserDefaults.standard.set("all", forKey: "valid_order_closed_payment_type")
+            UserDefaults.standard.set("all", forKey: "valid_order_failed_payment_type")
         }
         
         if search {
@@ -508,6 +568,14 @@ extension OrdersViewController : UIPageViewControllerDelegate {
             UserDefaults.standard.set("", forKey: "valid_order_refund_min_amt")
             UserDefaults.standard.set("", forKey: "valid_order_refund_max_amt")
             
+            UserDefaults.standard.set("all", forKey: "temp_order_paid_payment_type")
+            UserDefaults.standard.set("all", forKey: "temp_order_partial_payment_type")
+            UserDefaults.standard.set("all", forKey: "temp_order_refund_payment_type")
+            
+            UserDefaults.standard.set("all", forKey: "valid_order_paid_payment_type")
+            UserDefaults.standard.set("all", forKey: "valid_order_partial_payment_type")
+            UserDefaults.standard.set("all", forKey: "valid_order_refund_payment_type")
+            
         }
         else {
             UserDefaults.standard.set("paid", forKey: "modeSelected")
@@ -547,6 +615,14 @@ extension OrdersViewController : UIPageViewControllerDelegate {
             
             UserDefaults.standard.set("", forKey: "valid_order_failed_min_amt")
             UserDefaults.standard.set("", forKey: "valid_order_failed_max_amt")
+            
+            UserDefaults.standard.set("all", forKey: "temp_order_new_payment_type")
+            UserDefaults.standard.set("all", forKey: "temp_order_closed_payment_type")
+            UserDefaults.standard.set("all", forKey: "temp_order_failed_payment_type")
+            
+            UserDefaults.standard.set("all", forKey: "valid_order_new_payment_type")
+            UserDefaults.standard.set("all", forKey: "valid_order_closed_payment_type")
+            UserDefaults.standard.set("all", forKey: "valid_order_failed_payment_type")
             
         }
         

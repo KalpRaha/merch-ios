@@ -122,7 +122,7 @@ class NewOrderRefundDetailVC: UIViewController {
     @IBOutlet weak var belowCustomerView: UIView!
     
     
-    @IBOutlet weak var customerId: UILabel!
+    
     @IBOutlet weak var nameValueLbl: UILabel!
     @IBOutlet weak var phoneValueLbl: UILabel!
     @IBOutlet weak var emailValueLbl: UILabel!
@@ -1026,7 +1026,7 @@ class NewOrderRefundDetailVC: UIViewController {
         let num = ToastClass.sharedToast.formatPhoneNumber(order.delivery_phn)
         phoneValueLbl.text = num
         emailValueLbl.text = order.email
-        customerId.text = order.customer_id
+       
         
         if order.order_method == "pickup" || self.order_method == "Pickup"  {
             addressLbl.isHidden = true

@@ -676,8 +676,14 @@ import UIKit
         updateAccessibilityElements()
 
         // update the delegate
+//        if let delegate = delegate, handleTracking != .none {
+//           delegate?.rangeSeekSlider?(self, didChange: selectedMinValue, maxValue: selectedMaxValue)
+//       }
+        
         if let delegate = delegate, handleTracking != .none {
-            delegate.rangeSeekSlider(self, didChange: selectedMinValue, maxValue: selectedMaxValue)
+            delegate.rangeSeekSlider(self,
+                                     didChange: selectedMinValue,
+                                     maxValue: selectedMaxValue)
         }
     }
 
