@@ -42,7 +42,7 @@ class PlusViewController: UIViewController {
     @IBOutlet weak var upcLbl: UILabel!
     
     @IBOutlet weak var productField: UITextField!
-//    @IBOutlet weak var descField: UITextField!
+    //    @IBOutlet weak var descField: UITextField!
     
     @IBOutlet weak var customView: UIView!
     @IBOutlet weak var customTextView: NoMenuTextView!
@@ -159,7 +159,7 @@ class PlusViewController: UIViewController {
     var isPara = false
     var head = 0
     var placeholderText = "Enter Custom Product Description"
-                          
+    
     var prod_purchaseQty = ""
     var variantsArray = [ProductById]()
     var editProd: ProductById?
@@ -339,7 +339,7 @@ class PlusViewController: UIViewController {
         outerMissView.isHidden = true
         if mode == "add" {
             
-         
+            
             saveBtn.setTitle("Add", for: .normal)
             tripleWidth.constant = 0
             titleText.text = "Add Product"
@@ -394,7 +394,7 @@ class PlusViewController: UIViewController {
         }
         inventSettingsCall()
     }
-  
+    
     func setUpProductApiId() {
         
         let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
@@ -517,10 +517,10 @@ class PlusViewController: UIViewController {
     }
     
     func inflateView(prod: ProductById) {
-           productField.text = prod.title
-
-           let htmlString = prod.description
-
+        productField.text = prod.title
+        
+        let htmlString = prod.description
+        
         if let data = htmlString.data(using: .utf8) {
             do {
                 let attributedString = try NSAttributedString(data: data, options: [
@@ -533,36 +533,36 @@ class PlusViewController: UIViewController {
                         print("Font: \(font.fontName), size: \(font.pointSize), range: \(range)")
                     }
                 }
-
-//                let mutableAttributedString = NSMutableAttributedString(attributedString: attributedString)
-//
-//                // Your base font
-//                let baseFont = UIFont.systemFont(ofSize: 14)
-
+                
+                //                let mutableAttributedString = NSMutableAttributedString(attributedString: attributedString)
+                //
+                //                // Your base font
+                //                let baseFont = UIFont.systemFont(ofSize: 14)
+                
                 // Replace existing fonts while preserving traits (bold/italic)
-//                mutableAttributedString.enumerateAttribute(.font, in: NSRange(location: 0, length: mutableAttributedString.length)) { value, range, _ in
-//                    if let oldFont = value as? UIFont {
-//                        var traits = oldFont.fontDescriptor.symbolicTraits
-//                        if let descriptor = baseFont.fontDescriptor.withSymbolicTraits(traits) {
-//                            let newFont = UIFont(descriptor: descriptor, size: baseFont.pointSize)
-//                            mutableAttributedString.addAttribute(.font, value: newFont, range: range)
-//                        } else {
-//                            // Fallback if symbolic traits failed
-//                            mutableAttributedString.addAttribute(.font, value: baseFont, range: range)
-//                        }
-//                    } else {
-//                        // No font? Apply base font
-//                        mutableAttributedString.addAttribute(.font, value: baseFont, range: range)
-//                    }
-//                }
-
-//                 Apply paragraph style
-//                let paragraphStyle = NSMutableParagraphStyle()
-//                paragraphStyle.lineBreakMode = .byTruncatingTail
-//                paragraphStyle.alignment = .left
-//
-//                mutableAttributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: mutableAttributedString.length))
-//
+                //                mutableAttributedString.enumerateAttribute(.font, in: NSRange(location: 0, length: mutableAttributedString.length)) { value, range, _ in
+                //                    if let oldFont = value as? UIFont {
+                //                        var traits = oldFont.fontDescriptor.symbolicTraits
+                //                        if let descriptor = baseFont.fontDescriptor.withSymbolicTraits(traits) {
+                //                            let newFont = UIFont(descriptor: descriptor, size: baseFont.pointSize)
+                //                            mutableAttributedString.addAttribute(.font, value: newFont, range: range)
+                //                        } else {
+                //                            // Fallback if symbolic traits failed
+                //                            mutableAttributedString.addAttribute(.font, value: baseFont, range: range)
+                //                        }
+                //                    } else {
+                //                        // No font? Apply base font
+                //                        mutableAttributedString.addAttribute(.font, value: baseFont, range: range)
+                //                    }
+                //                }
+                
+                //                 Apply paragraph style
+                //                let paragraphStyle = NSMutableParagraphStyle()
+                //                paragraphStyle.lineBreakMode = .byTruncatingTail
+                //                paragraphStyle.alignment = .left
+                //
+                //                mutableAttributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: mutableAttributedString.length))
+                //
                 if attributedString.string.isEmpty {
                     customTextView.text = placeholderText
                     customTextView.textColor = .lightGray
@@ -570,15 +570,15 @@ class PlusViewController: UIViewController {
                 else {
                     customTextView.attributedText = attributedString
                 }
-
+                
             } catch {
                 print("Error parsing HTML: \(error)")
             }
         }
-
-       }
-
- 
+        
+    }
+    
+    
     func setupTax() {
         
         let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
@@ -683,7 +683,7 @@ class PlusViewController: UIViewController {
             }
         }
     }
- 
+    
     func getGeneratedUpc(length: Int) -> String {
         let characters = "0123456789"
         var result = ""
@@ -1052,11 +1052,11 @@ class PlusViewController: UIViewController {
     }
     
     @objc func openBrandScreen() {
-
+        
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "filtercategory") as! FilterCategoryViewController
         
-
+        
         vc.delegatePlus = self
         vc.catMode = "addProductVc"
         
@@ -1119,7 +1119,7 @@ class PlusViewController: UIViewController {
     }
     
     @objc func dupClick() {
-
+        
         performSegue(withIdentifier: "toDuplicate", sender: nil)
     }
     
@@ -1242,7 +1242,7 @@ class PlusViewController: UIViewController {
         }
         
     }
-  
+    
     @IBAction func disableClick(_ sender: UIButton) {
         
         if UserDefaults.standard.bool(forKey: "lock_disable_product") {
@@ -1294,7 +1294,7 @@ class PlusViewController: UIViewController {
         }
         
     }
- 
+    
     @IBAction func threeDotsClick(_ sender: UIButton) {
         
         if upperView.isHidden {
@@ -1477,8 +1477,29 @@ class PlusViewController: UIViewController {
         }
     }
     
-    @IBAction func stocktakeBtnClick(_ sender: UIButton) {
-       
+//    @IBAction func stocktakeBtnClick(_ sender: UIButton) {
+//        
+//        if UserDefaults.standard.bool(forKey: "lock_add_stocktake") {
+//            ToastClass.sharedToast.showToast(message: "Access Denied", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+//        }
+//        else {
+//            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//            let vc = storyBoard.instantiateViewController(withIdentifier: "StocktakeProductVC") as! StocktakeProductViewController
+//            if variantsArray.count == 0 {
+//                vc.varrObject = editProd
+//                stock_cell_index = 0
+//            }
+//            else {
+//                vc.varrObject = variantsArray[sender.tag]
+//                stock_cell_index = sender.tag
+//            }
+//            vc.delegateStock = self
+//            present(vc, animated: true)
+//        }
+//    }
+    
+    @objc func stockLabelClick(_ sender: UILabel) {
+        
         if UserDefaults.standard.bool(forKey: "lock_add_stocktake") {
             ToastClass.sharedToast.showToast(message: "Access Denied", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
         }
@@ -4555,6 +4576,11 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             cell.reorderQty.addTarget(self, action: #selector(updateText), for: .editingChanged)
             cell.reorderLevel.addTarget(self, action: #selector(updateText), for: .editingChanged)
             
+            let tap = UITapGestureRecognizer(target: self, action: #selector(stockLabelClick(_ :)))
+            cell.stocktakeLbl.addGestureRecognizer(tap)
+            tap.numberOfTapsRequired = 1
+            cell.stocktakeLbl.isUserInteractionEnabled = true
+            
             cell.costPerItem.tag = indexPath.section
             cell.price.tag = indexPath.section
             cell.comparePrice.tag = indexPath.section
@@ -4564,7 +4590,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             cell.customCode.tag = indexPath.section
             cell.upcCode.tag = indexPath.section
             cell.instantBtn.tag = indexPath.section
-            cell.stocktakeBtn.tag = indexPath.section
+            cell.stocktakeLbl.tag = indexPath.section
             cell.salesHistoryBtn.tag = indexPath.section
             cell.reorderQty.tag = indexPath.section
             cell.reorderLevel.tag = indexPath.section
@@ -4661,8 +4687,9 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             //edit
             else {
                 
-                cell.stocktakeBtn.layer.cornerRadius = 5
-                
+                cell.stocktakeLbl.layer.cornerRadius = 5
+                cell.stocktakeLbl.layer.masksToBounds = true
+                cell.stocktakeLbl.clipsToBounds = true
              
                 
                 let cost_method = UserDefaults.standard.string(forKey: "cost_method")
