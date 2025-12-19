@@ -849,6 +849,7 @@ class PlusViewController: UIViewController {
                 }
                 
                 let response = setting as! [String:Any]
+                print(response)
                 let cost_per = response["cost_per"] as? String ?? ""
                 let cost_method = response["cost_method"] as? String ?? ""
                 
@@ -1498,26 +1499,29 @@ class PlusViewController: UIViewController {
 //        }
 //    }
     
-    @objc func stockLabelClick(_ sender: UILabel) {
-        
+    @objc func stockLabelClick(_ gesture: UITapGestureRecognizer) {
+        guard let label = gesture.view as? UILabel else { return }
+        let row = label.tag
         if UserDefaults.standard.bool(forKey: "lock_add_stocktake") {
-            ToastClass.sharedToast.showToast(message: "Access Denied", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+          ToastClass.sharedToast.showToast(message: "Access Denied", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
         }
         else {
-            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyBoard.instantiateViewController(withIdentifier: "StocktakeProductVC") as! StocktakeProductViewController
-            if variantsArray.count == 0 {
-                vc.varrObject = editProd
-                stock_cell_index = 0
-            }
-            else {
-                vc.varrObject = variantsArray[sender.tag]
-                stock_cell_index = sender.tag
-            }
-            vc.delegateStock = self
-            present(vc, animated: true)
+          let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+          let vc = storyBoard.instantiateViewController(withIdentifier: "StocktakeProductVC") as! StocktakeProductViewController
+          if variantsArray.count == 0 {
+            vc.varrObject = editProd
+            stock_cell_index = 0
+            vc.prod_id = editProd?.id ?? ""
+          }
+          else {
+            vc.varrObject = variantsArray[row]
+            stock_cell_index = row
+            vc.prod_id = editProd?.id ?? ""
+          }
+          vc.delegateStock = self
+          present(vc, animated: true)
         }
-    }
+      }
  
     
     func showMissingUPCView(missarray: [String]) {
@@ -2538,6 +2542,7 @@ class PlusViewController: UIViewController {
     func validateEditParams() {
         
         let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let emp_id = UserDefaults.standard.string(forKey: "emp_po_id") ?? ""
         
         guard let name = productField.text, name != "" else {
             productField.isErrorView(numberOfShakes: 3, revert: true)
@@ -2736,7 +2741,7 @@ class PlusViewController: UIViewController {
                                                 varreorder_qty: "", varreorder_level: "",
                                                 varreorder_cost: "",
                                                 varcostperitem: "", varcompareprice: "",
-                                                var_id: "")
+                                                var_id: "", emp_id: emp_id)
             { isSuccess, responseData in
                 
                 if isSuccess {
@@ -2966,7 +2971,7 @@ class PlusViewController: UIViewController {
                                                 varreorder_cost: "",
                                                 varcostperitem: varcostperitem,
                                                 varcompareprice: varcompareprice,
-                                                var_id: varid) { isSuccess, responseData in
+                                                var_id: varid, emp_id: emp_id) { isSuccess, responseData in
                 
                 if isSuccess {
                     
@@ -4680,6 +4685,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.salesHeight.constant = 0
                 cell.costItemInner.isHidden = true
                 cell.qtyInner.isHidden = true
+                cell.stocktakeLbl.isHidden = true
                 
                 variantsArray[indexPath.section] = variants
             }
@@ -4690,11 +4696,11 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.stocktakeLbl.layer.cornerRadius = 5
                 cell.stocktakeLbl.layer.masksToBounds = true
                 cell.stocktakeLbl.clipsToBounds = true
-             
+                cell.stocktakeLbl.isHidden = false
                 
                 let cost_method = UserDefaults.standard.string(forKey: "cost_method")
                 //avg is enabled
-                
+                print(cost_method)
                 if isQuantity[indexPath.section] == "1" {
                     
                     cell.costPerItem.backgroundColor = .systemBackground
@@ -4716,18 +4722,28 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                         cell.costPerItem.setOutlineColor(.clear, for: .normal)
                         cell.costPerItem.setOutlineColor(.clear, for: .editing)
                         cell.costItemInner.isHidden = false
+                        
+                        cell.qty.backgroundColor = UIColor(named: "Disabled Text")
+                        cell.qty.setOutlineColor(.clear, for: .normal)
+                        cell.qty.setOutlineColor(.clear, for: .editing)
+                        cell.qtyInner.isHidden = false
                     }
                     else {
                         cell.costPerItem.backgroundColor = .systemBackground
                         cell.costPerItem.setOutlineColor(UIColor(named: "borderColor")!, for: .normal)
                         cell.costPerItem.setOutlineColor(UIColor(named: "borderColor")!, for: .normal)
                         cell.costItemInner.isHidden = true
+                        
+                        cell.qty.backgroundColor = .systemBackground
+                        cell.qty.setOutlineColor(UIColor(named: "borderColor")!, for: .normal)
+                        cell.qty.setOutlineColor(UIColor(named: "borderColor")!, for: .editing)
+                        cell.qtyInner.isHidden = true
                     }
                     
-                    cell.qty.backgroundColor = UIColor(named: "Disabled Text")
-                    cell.qty.setOutlineColor(.clear, for: .normal)
-                    cell.qty.setOutlineColor(.clear, for: .editing)
-                    cell.qtyInner.isHidden = false
+//                    cell.qty.backgroundColor = UIColor(named: "Disabled Text")
+//                    cell.qty.setOutlineColor(.clear, for: .normal)
+//                    cell.qty.setOutlineColor(.clear, for: .editing)
+//                    cell.qtyInner.isHidden = false
                 }
                 
                 var variants: ProductById?

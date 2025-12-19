@@ -117,7 +117,8 @@ class AddEditLotteryViewController: UIViewController {
             deleteBtn.isHidden = false
             del_width.constant = 50
             addBtn.setTitle("Update", for: .normal)
-            quantityField.isEnabled = false
+            //quantityField.isEnabled = true
+            inventSettingsCall()
         }
         else {
             
@@ -294,6 +295,55 @@ class AddEditLotteryViewController: UIViewController {
         }
     }
   
+    
+    func inventSettingsCall() {
+        
+        let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        
+        ApiCalls.sharedCall.inventorySettingCall(merchant_id: m_id) {isSuccess, responseData in
+            
+            if isSuccess {
+                
+                guard let setting = responseData["result"] else {
+                    return
+                }
+                
+                let response = setting as! [String:Any]
+                print(response)
+                let cost_per = response["cost_per"] as? String ?? ""
+                let cost_method = response["cost_method"] as? String ?? ""
+                
+                let req_Desc = response["inv_setting"] as? String ?? ""
+                if req_Desc.contains("2") {
+                    UserDefaults.standard.set(true, forKey: "Po Descrip")
+                }
+                else{
+                    UserDefaults.standard.set(false, forKey: "Po Descrip")
+                }
+                UserDefaults.standard.set(cost_per, forKey: "cost_per_value")
+                UserDefaults.standard.set(cost_method, forKey: "cost_method")
+                
+                
+                self.setupQtyFields()
+            }else{
+                print("Api Error")
+            }
+        }
+    }
+    
+    func setupQtyFields() {
+        
+        let cost_method = UserDefaults.standard.string(forKey: "cost_method") ?? ""
+        print(cost_method)
+        if cost_method == "1" {
+            quantityField.isEnabled = false
+        }
+        else {
+            quantityField.isEnabled = true
+        }
+        
+    }
+    
     @objc func openCategory() {
         
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -474,6 +524,7 @@ class AddEditLotteryViewController: UIViewController {
         let track_qty = track_check
         
         let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let emp_id = UserDefaults.standard.string(forKey: "emp_po_id") ?? ""
         
         loadIndicator.isAnimating = true
         
@@ -502,7 +553,7 @@ class AddEditLotteryViewController: UIViewController {
                                             varmargin: "", varprofit: "",
                                             varreorder_qty: "", varreorder_level: "",
                                             varreorder_cost: "", varcostperitem: "", varcompareprice: "",
-                                            var_id: "") { isSuccess, responseData in
+                                            var_id: "", emp_id: emp_id) { isSuccess, responseData in
             
             if isSuccess {
                 

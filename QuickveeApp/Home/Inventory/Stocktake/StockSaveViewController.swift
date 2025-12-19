@@ -344,9 +344,9 @@ class StockSaveViewController: UIViewController {
                     var cost_str = String(cost)
                     let dis_str = String(discrepancy_per)
                     
-                    if cost_str.contains("-") {
-                        cost_str.removeFirst()
-                    }
+//                    if cost_str.contains("-") {
+//                        cost_str.removeFirst()
+//                    }
                     total_dis_cost.append(cost_str)
                     total_dis.append(dis_str)
                     
@@ -493,9 +493,9 @@ class StockSaveViewController: UIViewController {
                         var cost_str = String(cost)
                         let dis_str = String(discrepancy_per)
                         
-                        if cost_str.contains("-") {
-                            cost_str.removeFirst()
-                        }
+//                        if cost_str.contains("-") {
+//                            cost_str.removeFirst()
+//                        }
                         total_dis_cost.append(cost_str)
                         total_dis.append(dis_str)
                         
@@ -774,9 +774,9 @@ class StockSaveViewController: UIViewController {
                         var cost_str = String(cost)
                         let dis_str = String(discrepancy_per)
                         
-                        if cost_str.contains("-") {
-                            cost_str.removeFirst()
-                        }
+//                        if cost_str.contains("-") {
+//                            cost_str.removeFirst()
+//                        }
                         total_dis_cost.append(cost_str)
                         total_dis.append(dis_str)
                         
@@ -913,9 +913,9 @@ class StockSaveViewController: UIViewController {
                         var cost_str = String(cost)
                         let dis_str = String(discrepancy_per)
                         
-                        if cost_str.contains("-") {
-                            cost_str.removeFirst()
-                        }
+//                        if cost_str.contains("-") {
+//                            cost_str.removeFirst()
+//                        }
                         total_dis_cost.append(cost_str)
                         total_dis.append(dis_str)
                         

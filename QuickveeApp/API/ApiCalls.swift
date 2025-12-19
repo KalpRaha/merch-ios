@@ -356,7 +356,7 @@ extension ApiCalls {
                          reorder_qty:String, reorder_level:String, reorder_cost:String, is_tobacco:String, disable:String,
                          food_stampable: String, vartrackqnty:String, varcontinue_selling:String, varcheckid:String, vardisable:String,
                          varfood_stampable: String,varmargin:String, varprofit:String, varreorder_qty:String, varreorder_level:String,
-                         varreorder_cost:String, varcostperitem:String, varcompareprice:String, var_id:String, completion:@escaping(Bool,[String:Any]) -> ()){
+                         varreorder_cost:String, varcostperitem:String, varcompareprice:String, var_id:String,emp_id:String, completion:@escaping(Bool,[String:Any]) -> ()){
         
         let url = AppURLs.INVENTORY_PRODUCT_EDIT
         
@@ -428,7 +428,8 @@ extension ApiCalls {
             "varreorder_cost": varreorder_cost,
             "varcostperitem": varcostperitem,
             "varcompareprice": varcompareprice,
-            "var_id": var_id
+            "var_id": var_id,
+            "emp_id": emp_id
         ]
         
         print(parameters)
@@ -1037,7 +1038,7 @@ extension ApiCalls {
                            costperItem: String, margin: String, profit: String, quantity: String,
                            upc: String, custom_code: String, reorder_qty: String, reorder_level: String,
                            reorder_cost: String, track_quantity: String, continue_selling: String,
-                           checkid: String, disable: String, food_stampable: String, completion:@escaping(Bool,[String:Any]) -> ()) {
+                           checkid: String, disable: String, food_stampable: String,emp_id: String,merchant_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let url = AppURLs.INVENTORY_VARIANT_UPDATE
         
@@ -1056,6 +1057,8 @@ extension ApiCalls {
             "reorder_qty": reorder_qty,
             "reorder_level": reorder_level,
             "reorder_cost": reorder_cost,
+            "emp_id": emp_id,
+            "merchant_id": merchant_id,
             "track_quantity": track_quantity,
             "continue_selling": continue_selling,
             "checkid": checkid,

@@ -261,6 +261,10 @@ extension StockTakeViewController: UITableViewDelegate, UITableViewDataSource {
             if cost == "0.00" {
                 cell.stockDisValue.text = "$0.00"
             }
+            else if cost.starts(with: "-") {
+                let costNew = cost.dropFirst()
+                cell.stockDisValue.text = "-$\(costNew)"
+            }
             else {
                 cell.stockDisValue.text = "+$\(cost)"
             }
@@ -314,6 +318,10 @@ extension StockTakeViewController: UITableViewDelegate, UITableViewDataSource {
             
             if cost == "0.00" {
                 cell.stockDisValue.text = "$0.00"
+            }
+            else if cost.starts(with: "-") {
+                let costNew = cost.dropFirst()
+                cell.stockDisValue.text = "-$\(costNew)"
             }
             else {
                 cell.stockDisValue.text = "+$\(cost)"

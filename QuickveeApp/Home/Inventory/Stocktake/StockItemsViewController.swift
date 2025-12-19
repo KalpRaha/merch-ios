@@ -147,17 +147,12 @@ class StockItemsViewController: UIViewController {
             
         }
         var smallcostemail = stock.total_discrepancy_cost
-        
-        if smallcostemail.hasPrefix("-") {
-            smallcostemail = "$\(smallcostemail)"
+        if smallcostemail.starts(with: "-") {
+            let smallNew = smallcostemail.dropFirst()
+            smallcostemail = "-$\(smallNew)"
         }
         else {
-            if smallcostemail.hasPrefix("+") {
-                smallcostemail = "$\(smallcostemail)"
-            }
-            else {
-                smallcostemail = "+$\(smallcostemail)"
-            }
+            smallcostemail = "+$\(smallcostemail)"
         }
         
         
@@ -639,16 +634,15 @@ extension StockItemsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.disCostValue.text = "$0.00"
         }
         else {
-            if cost.hasPrefix("-") {
-                //cost.removeFirst()
-                cell.disCostValue.text = "$\(String(format: "%.2f", cost_doub))"
+            if cost.starts(with: "-") {
+                let costNew = cost.dropFirst()
+                cell.disCostValue.text = "-$\(costNew)"
             }
-            
             else {
-                
                 cell.disCostValue.text = "+$\(String(format: "%.2f", cost_doub))"
             }
         }
+
        
         cell.noteValue.text = item.note
         

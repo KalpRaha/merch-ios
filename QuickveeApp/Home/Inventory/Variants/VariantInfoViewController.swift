@@ -142,7 +142,7 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
         setupSaveUI()
         
         inventSettingsCall()
-        fieldsHide()
+        
         
         
         if UserDefaults.standard.bool(forKey: "var_api_hit") {
@@ -180,26 +180,42 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
     
     func fieldsHide() {
         
+        let cost_method = UserDefaults.standard.string(forKey: "cost_method") ?? ""
+        print(cost_method)
         
-        if UserDefaults.standard.string(forKey: "cost_method") == "1" {
+      //  if UserDefaults.standard.string(forKey: "cost_method") == "1" {
+            
+            if cost_method == "1" {
             
             costPerItem.backgroundColor = UIColor(named: "Disabled Text")
             costPerItem.setOutlineColor(.clear, for: .normal)
             costPerItem.setOutlineColor(.clear, for: .editing)
             costItemInner.isHidden = false
+            
+            qty.backgroundColor = UIColor(named: "Disabled Text")
+            qty.setOutlineColor(.clear, for: .normal)
+            qty.setOutlineColor(.clear, for: .editing)
+            qty.layer.cornerRadius = 5
+            qtyInner.isHidden = false
         }
         else {
             costPerItem.backgroundColor = .systemBackground
             costPerItem.setOutlineColor(UIColor(named: "borderColor")!, for: .normal)
             costPerItem.setOutlineColor(UIColor(named: "borderColor")!, for: .editing)
             costItemInner.isHidden = true
+            
+            qty.backgroundColor = .systemBackground
+            qty.setOutlineColor(UIColor(named: "borderColor")!, for: .normal)
+            qty.setOutlineColor(UIColor(named: "borderColor")!, for: .editing)
+            qty.layer.cornerRadius = 5
+            qtyInner.isHidden = true
         }
         
         margin.backgroundColor = UIColor(named: "Disabled Text")
         profit.backgroundColor = UIColor(named: "Disabled Text")
         marginInner.isHidden = false
         profitInner.isHidden = false
-        qtyInner.isHidden = false
+        //qtyInner.isHidden = true
         
         margin.setOutlineColor(.clear, for: .normal)
         margin.setOutlineColor(.clear, for: .editing)
@@ -215,10 +231,10 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
         profit.layer.cornerRadius = 5
         costPerItem.layer.cornerRadius = 5
         
-        qty.backgroundColor = UIColor(named: "Disabled Text")
-        qty.setOutlineColor(.clear, for: .normal)
-        qty.setOutlineColor(.clear, for: .editing)
-        qty.layer.cornerRadius = 5
+//        qty.backgroundColor = UIColor(named: "Disabled Text")
+//        qty.setOutlineColor(.clear, for: .normal)
+//        qty.setOutlineColor(.clear, for: .editing)
+//        qty.layer.cornerRadius = 5
     }
     
     func inventSettingsCall(){
@@ -246,7 +262,9 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
                     UserDefaults.standard.set(false, forKey: "Po Descrip")
                 }
                 UserDefaults.standard.set(cost_per, forKey: "cost_per_value")
-                UserDefaults.standard.set(cost_method, forKey: "6")
+                UserDefaults.standard.set(cost_method, forKey: "cost_method")
+                
+                self.fieldsHide()
             }else{
                 print("Api Error")
             }
@@ -361,6 +379,7 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
         costPerItem.text = variantObj.costperItem
         margin.text = variantObj.margin
         profit.text = variantObj.profit
+        print(variantObj.quantity)
         qty.text = variantObj.quantity
         customCode.text = variantObj.custom_code.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
         upcCode.text = variantObj.upc
@@ -540,11 +559,14 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
+        let emp_id = UserDefaults.standard.string(forKey: "emp_po_id") ?? ""
+        let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         let com_price = compareAtPrice.text ?? ""
         let cost = costPerItem.text ?? ""
         let marginText = margin.text ?? ""
         let profitText = profit.text ?? ""
         let quanty = qty.text ?? ""
+        print(quanty)
         let custom = customCode.text ?? ""
         
         var reorder_qty = reorderQty.text ?? ""
@@ -568,7 +590,7 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
                                               upc: upcCodeText, custom_code: custom,
                                               reorder_qty: reorder_qty, reorder_level: reorder_level, reorder_cost: "",
                                               track_quantity: checkQuant(), continue_selling: checkSell(),
-                                              checkid: checkIdBox(), disable: checkDis(), food_stampable: checkFood()) { isSuccess, responseData in
+                                              checkid: checkIdBox(), disable: checkDis(), food_stampable: checkFood(), emp_id: emp_id, merchant_id: id) { isSuccess, responseData in
             
             if isSuccess {
                 
@@ -772,12 +794,12 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
             
             if cost_per_value == "" || cost_per_value == "0.00" {
                 
-                let prices = "0.00"
+                //let prices = "0.00"
                 let profits = "0.00"
                 let margins = "0.00"
                 
                  costPerItem.text = cost_per_item
-                price.text = prices
+               // price.text = prices
                 profit.text = profits
                 margin.text = margins
                 
