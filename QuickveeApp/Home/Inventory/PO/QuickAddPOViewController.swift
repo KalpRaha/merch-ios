@@ -34,7 +34,7 @@ class QuickAddPOViewController: UIViewController {
     var isTax = true
     var defaultTax: SetupTaxes?
     var isSymbolOnRight = false
-    var prodName = ""
+    var quick: QuickAddPO?
     
     weak var delegate: AddQuickPODelegate?
     
@@ -77,6 +77,13 @@ class QuickAddPOViewController: UIViewController {
         priceTextField.addTarget(self, action: #selector(updateTextField), for: .editingChanged)
         costPerItemTextField.addTarget(self, action: #selector(updateTextField), for: .editingChanged)
         
+        upcTextField.delegate = self
+        nameTextField.delegate = self
+        priceTextField.delegate = self
+        costPerItemTextField.delegate = self
+        quantityField.delegate = self
+        
+        
         let tapUpc = UITapGestureRecognizer(target: self, action: #selector(genUpcClick))
         genUpcLbl.addGestureRecognizer(tapUpc)
         tapUpc.numberOfTapsRequired = 1
@@ -85,13 +92,30 @@ class QuickAddPOViewController: UIViewController {
         priceTextField.keyboardType = .numberPad
         quantityField.keyboardType = .numberPad
         costPerItemTextField.keyboardType = .numberPad
-        taxBtn.setImage(UIImage(named: "check inventory"), for: .normal)
-        nameTextField.text = prodName
+        
         setUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        nameTextField.text = quick?.name ?? ""
+        upcTextField.text = quick?.upc ?? ""
+        quantityField.text = quick?.quantity ?? ""
+        priceTextField.text = quick?.price ?? ""
+        costPerItemTextField.text = quick?.cost ?? ""
+        
+        let tax = quick?.tax ?? ""
+        
+        if tax == "1" {
+            isTax = true
+            taxBtn.setImage(UIImage(named: "check inventory"), for: .normal)
+        }
+        else {
+            isTax = false
+            taxBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+        }
+        
         setupTax()
     }
     
@@ -143,7 +167,7 @@ class QuickAddPOViewController: UIViewController {
     @objc func openCategory() {
         
         dismiss(animated: true) {
-            self.delegate?.addProduct(mode: 1, category: self.categoryPO)
+            self.delegate?.addProduct(mode: 1, quick: self.quick!, category: self.categoryPO)
         }
     }
     
@@ -161,6 +185,7 @@ class QuickAddPOViewController: UIViewController {
     @objc func genUpcClick() {
         let upcCode = getGeneratedUpc(length: 12)
         upcTextField.text = upcCode
+        quick?.upc = upcCode
     }
     
     
@@ -169,10 +194,12 @@ class QuickAddPOViewController: UIViewController {
         if sender.currentImage == UIImage(named: "uncheck inventory") {
             sender.setImage(UIImage(named: "check inventory"), for: .normal)
             isTax = true
+            quick?.tax = "1"
         }
         else {
             sender.setImage(UIImage(named: "uncheck inventory"), for: .normal)
             isTax = false
+            quick?.tax = "0"
         }
     }
     
@@ -297,7 +324,7 @@ class QuickAddPOViewController: UIViewController {
                         self.loadIndicator.isAnimating = false
                         self.addBtn.isEnabled = true
                         self.dismiss(animated: true) {
-                            self.delegate?.addProduct(mode: 2, category: self.categoryPO)
+                            self.delegate?.addProduct(mode: 2, quick: self.quick!, category: self.categoryPO)
                         }
                     }
                     else{
@@ -324,7 +351,7 @@ class QuickAddPOViewController: UIViewController {
             collHeight.constant = height
         }
         scrollHeight.constant = scrollInnerView.bounds.size.height + collHeight.constant + 103.33
-
+        
         self.view.layoutIfNeeded()
     }
     
@@ -352,6 +379,32 @@ class QuickAddPOViewController: UIViewController {
             loadIndicator.heightAnchor
                 .constraint(equalTo: self.loadIndicator.widthAnchor)
         ])
+    }
+}
+
+extension QuickAddPOViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if textField == upcTextField {
+            quick?.upc = upcTextField.text ?? ""
+        }
+        
+        else if textField == nameTextField {
+            quick?.name = nameTextField.text ?? ""
+        }
+        
+        else if textField == quantityField {
+            quick?.quantity = quantityField.text ?? ""
+        }
+        
+        else if textField == priceTextField {
+            quick?.price = priceTextField.text ?? ""
+        }
+        
+        else {
+            quick?.cost = costPerItemTextField.text ?? ""
+        }
     }
     
     @objc func updateText(textField: UITextField) {

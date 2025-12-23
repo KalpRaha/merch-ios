@@ -132,13 +132,14 @@ class ItemsPOViewController: UIViewController {
             searchBtn.isHidden = true
         }
         else if mode == "edit" {
-            editLbl.text = "Edit"
+            editLbl.text = ""
             threeBtns.isHidden = false
             setupApi()
         }
         else {
             saveBtn.setTitle("Save", for: .normal)
             autoBtn.setTitle("Back", for: .normal)
+            editLbl.text = ""
             vendorName.text = vendorSelect?.name
         }
     }
@@ -408,6 +409,7 @@ class ItemsPOViewController: UIViewController {
     @objc func saveDraftClick() {
         
         let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let emp_id = UserDefaults.standard.string(forKey: "emp_po_id") ?? ""
         
         if saveDraft.text == "Save Draft" {
             
@@ -567,7 +569,7 @@ class ItemsPOViewController: UIViewController {
                 let po_id = bigDetails?.id ?? ""
                 let r_status = bigDetails?.received_status ?? ""
                 
-                ApiCalls.sharedCall.updatePO(merchant_id: m_id, admin_id: m_id, po_id: po_id,
+                ApiCalls.sharedCall.updatePO(merchant_id: m_id, admin_id: m_id, employee_id: emp_id, po_id: po_id,
                                                      issue_date: i_d, stock_date: s_d, reference: r_f,
                                                      vendor_email: v_e, order_items: final_json, is_draft: "1",
                                                      received_status: r_status, updated_at: i_d) { isSuccess, responseData in
@@ -740,6 +742,7 @@ class ItemsPOViewController: UIViewController {
     @IBAction func saveBtnClick(_ sender: UIButton) {
         
         let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let emp_id = UserDefaults.standard.string(forKey: "emp_po_id") ?? ""
         var final_json = ""
         
         let v_id = vendorSelect?.id ?? ""
@@ -897,7 +900,7 @@ class ItemsPOViewController: UIViewController {
             let r_status = bigDetails?.received_status ?? ""
             let upd_at = bigDetails?.updated_at ?? ""
             
-            ApiCalls.sharedCall.updatePO(merchant_id: m_id, admin_id: m_id, po_id: po_id,
+            ApiCalls.sharedCall.updatePO(merchant_id: m_id, admin_id: m_id, employee_id: emp_id, po_id: po_id,
                                          issue_date: i_d, stock_date: s_d, reference: r_f,
                                          vendor_email: v_e, order_items: final_json, is_draft: "0",
                                          received_status: r_status, updated_at: upd_at) { isSuccess, responseData in
@@ -950,6 +953,10 @@ class ItemsPOViewController: UIViewController {
             self.loadingIndicator.isAnimating = false
             self.tableview.isHidden = false
             self.tableview.reloadData()
+            
+            print(self.poSelectedVariants)
+            print(self.poSelectedVariants.count)
+            print("pos")
         }
         
         alertController.addAction(cancel)

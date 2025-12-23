@@ -9,7 +9,7 @@ import UIKit
 import BarcodeScanner
 
 protocol AddQuickPODelegate: AnyObject {
-    func addProduct(mode: Int, category: [InventoryCategory])
+    func addProduct(mode: Int, quick: QuickAddPO, category: [InventoryCategory])
 }
 
 class POSelectViewController: UIViewController {
@@ -20,11 +20,16 @@ class POSelectViewController: UIViewController {
     
     @IBOutlet weak var topView: UIView!
     
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchBarName: UISearchBar!
+    
+    @IBOutlet weak var searchBarUPC: UISearchBar!
     
     @IBOutlet weak var scanBtn: UIButton!
     
     @IBOutlet weak var noProductView: UIView!
+    
+    @IBOutlet weak var scanWidth: NSLayoutConstraint!
+    
     
     var variantList = [InventoryVariant]()
     
@@ -48,7 +53,8 @@ class POSelectViewController: UIViewController {
     var orderItemSelArr = [String]()
     var statusSelArr = [String]()
     
-    var pomode = 0
+    var searchMode = 0
+    var quickAddSelect: QuickAddPO?
     
     weak var selectDelegate: POSelectDelegate?
     
@@ -63,8 +69,12 @@ class POSelectViewController: UIViewController {
         
         setupUI()
         
-        searchBar.searchBarStyle = .minimal
-        searchBar.placeholder = "Start Typing UPC or Item Name"
+        searchBarName.searchBarStyle = .minimal
+        searchBarName.placeholder = "Start Typing Product Name"
+        searchBarUPC.searchBarStyle = .minimal
+        searchBarUPC.placeholder = "Start Typing UPC"
+        scanWidth.constant = 0
+        scanBtn.isHidden = true
         topView.addBottomShadow()
         cancelBtn.layer.cornerRadius = 10
         nextBtn.layer.cornerRadius = 10
@@ -96,12 +106,6 @@ class POSelectViewController: UIViewController {
                 }
                 
                 self.getResponseValues(variant: list)
-                
-                DispatchQueue.main.async {
-                    self.tableview.isHidden = false
-                    self.loadingIndicator.isAnimating = false
-                    self.tableview.reloadData()
-                }
             }
             else {
                 print("Api Error")
@@ -132,7 +136,7 @@ class POSelectViewController: UIViewController {
             }
         }
         
-        variantList = small
+        variantList = small.reversed()
         setCheckVariants()
     }
     
@@ -162,9 +166,15 @@ class POSelectViewController: UIViewController {
                     miniSelect.append(VariantPOModel(po: editvar, isSelect: false))
                 }
             }
-            
-            variantPOList = miniSelect
-            subVariantPOList = miniSelect
+        }
+        
+        variantPOList = miniSelect
+        subVariantPOList = miniSelect
+        
+        DispatchQueue.main.async {
+            self.tableview.isHidden = false
+            self.loadingIndicator.isAnimating = false
+            self.tableview.reloadData()
         }
     }
     
@@ -281,7 +291,7 @@ class POSelectViewController: UIViewController {
         vc.codeDelegate = self
         vc.errorDelegate = self
         vc.dismissalDelegate = self
-        
+        searchMode = 1
         self.present(vc, animated: true)
     }
     
@@ -291,7 +301,17 @@ class POSelectViewController: UIViewController {
         view.endEditing(true)
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "quick") as! QuickAddPOViewController
-        vc.prodName = searchBar.text ?? ""
+        
+        var quick = QuickAddPO(upc: "", name: "",
+                               price: "", cost: "",
+                               quantity: "", category: "", tax: "1")
+        if searchMode == 0 {
+            quick.name = searchBarName.text ?? ""
+        }
+        else {
+            quick.upc = searchBarUPC.text ?? ""
+        }
+        vc.quick = quick
         vc.delegate = self
         
         present(vc, animated: true)
@@ -319,11 +339,13 @@ class POSelectViewController: UIViewController {
 
 extension POSelectViewController: AddQuickPODelegate {
     
-    func addProduct(mode: Int, category: [InventoryCategory]) {
+    func addProduct(mode: Int, quick: QuickAddPO, category: [InventoryCategory]) {
         
         if mode == 1 {
             let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyBoard.instantiateViewController(withIdentifier: "filtercategory") as! FilterCategoryViewController
+            
+            quickAddSelect = quick
             
             vc.delegatePOSelected = self
             vc.catMode = "poQuickVc"
@@ -332,7 +354,12 @@ extension POSelectViewController: AddQuickPODelegate {
             present(vc, animated: true)
         }
         else {
-            variantListApi()
+//            searchBarName.text = ""
+//            searchBarUPC.text = ""
+//            searchBarName.resignFirstResponder()
+//            searchBarUPC.resignFirstResponder()
+//            variantListApi()
+            if
         }
     }
 }
@@ -345,7 +372,7 @@ extension POSelectViewController: SelectedCategoryProductsDelegate {
         let vc = storyBoard.instantiateViewController(withIdentifier: "quick") as! QuickAddPOViewController
         
         vc.categoryPO = categoryArray
-        vc.prodName = searchBar.text ?? ""
+        vc.quick = quickAddSelect
         vc.delegate = self
         self.present(vc, animated: true)
     }
@@ -355,9 +382,9 @@ extension POSelectViewController: BarcodeScannerCodeDelegate, BarcodeScannerErro
     
     func scanner(_ controller: BarcodeScanner.BarcodeScannerViewController, didCaptureCode code: String, type: String) {
         
-        searchBar.text = code
-        
-        searchBar.becomeFirstResponder()
+        searchBarUPC.text = code
+        searchMode = 1
+        searchBarUPC.becomeFirstResponder()
         controller.dismiss(animated: true)
         performSearch(searchText: code)
     }
@@ -375,7 +402,43 @@ extension POSelectViewController: BarcodeScannerCodeDelegate, BarcodeScannerErro
 
 extension POSelectViewController : UISearchBarDelegate {
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if searchBar == searchBarName {
+            searchMode = 0
+            searchBarName.isHidden = false
+            searchBarUPC.isHidden = true
+            searchBarName.showsCancelButton = true
+            searchBarUPC.showsCancelButton = false
+        }
+        else {
+            searchMode = 1
+            searchBarName.isHidden = true
+            searchBarUPC.isHidden = false
+            searchBarName.showsCancelButton = false
+            searchBarUPC.showsCancelButton = true
+            scanBtn.isHidden = false
+            scanWidth.constant = 64
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        if searchBar == searchBarName {
+            searchBarUPC.isHidden = false
+            searchBarName.showsCancelButton = false
+        }
+        else {
+            searchBarName.isHidden = false
+            searchBarUPC.showsCancelButton = false
+            scanWidth.constant = 0
+            scanBtn.isHidden = true
+        }
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        performSearch(searchText: "")
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
          performSearch(searchText: searchText)
     }
     
@@ -446,15 +509,17 @@ extension POSelectViewController: UITableViewDelegate, UITableViewDataSource {
                 let title = variant.po.title
                 let variantName = variant.po.variant
                 
-                if let range = title.range(of: variantName) {
-                    
-                    let separatedTitle = title.replacingCharacters(in: range, with: "").trimmingCharacters(in: .whitespaces)
-                    cell.titleLbl.text = separatedTitle
-                }
-                
-                cell.priceLbl.text = "$ \(variant.po.var_price)"
-                cell.upcLabel.text = variant.po.var_upc
-                cell.varientLbl.text =  variant.po.variant
+//                if let range = title.range(of: variantName) {
+//                    
+//                    let separatedTitle = title.replacingCharacters(in: range, with: "").trimmingCharacters(in: .whitespaces)
+//                    cell.titleLbl.text = separatedTitle
+//                }
+                cell.titleLbl.text = title
+                cell.priceLbl.text = "UPC: \(variant.po.var_upc)" //$ \(variant.po.var_price)"
+                cell.upcLabel.text = "" // variant.po.var_upc
+                cell.varientLbl.text =  "Qty: \(variant.po.quantity)"
+                cell.varientLbl.textColor = .black
+                cell.priceLbl.font = UIFont(name: "Manrope-SemiBold", size: 12.0)
                 
                 let currentVarId = variant.po.var_id
                 
@@ -471,9 +536,11 @@ extension POSelectViewController: UITableViewDelegate, UITableViewDataSource {
             }
             else {
                 cell.titleLbl.text = variant.po.title
-                cell.priceLbl.text = "$\(variant.po.price)"
-                cell.upcLabel.text = variant.po.upc
-                cell.varientLbl.text = ""
+                cell.priceLbl.text = "UPC: \(variant.po.upc)" //$\(variant.po.price)"
+                cell.upcLabel.text = "" //variant.po.upc
+                cell.varientLbl.text = "Qty: \(variant.po.quantity)"
+                cell.varientLbl.textColor = .black
+                cell.priceLbl.font = UIFont(name: "Manrope-SemiBold", size: 12.0)
                 
                 let currentProdId = variant.po.id
                 
@@ -506,15 +573,17 @@ extension POSelectViewController: UITableViewDelegate, UITableViewDataSource {
                 let title = variant.po.title
                 let variantName = variant.po.variant
                 
-                if let range = title.range(of: variantName) {
-                    
-                    let separatedTitle = title.replacingCharacters(in: range, with: "").trimmingCharacters(in: .whitespaces)
-                    cell.titleLbl.text = separatedTitle
-                }
-                
-                cell.priceLbl.text = "$\(variant.po.var_price)"
-                cell.upcLabel.text = variant.po.var_upc
-                cell.varientLbl.text =  variant.po.variant
+//                if let range = title.range(of: variantName) {
+//                    
+//                    let separatedTitle = title.replacingCharacters(in: range, with: "").trimmingCharacters(in: .whitespaces)
+//                    cell.titleLbl.text = separatedTitle
+//                }
+                cell.titleLbl.text = title
+                cell.priceLbl.text = "UPC: \(variant.po.var_upc)" //$\(variant.po.var_price)"
+                cell.upcLabel.text = "" //variant.po.var_upc
+                cell.varientLbl.text = "Qty: \(variant.po.quantity)"
+                cell.varientLbl.textColor = .black
+                cell.priceLbl.font = UIFont(name: "Manrope-SemiBold", size: 12.0)
                 
                 let currentVarId = variant.po.var_id
                 
@@ -534,9 +603,11 @@ extension POSelectViewController: UITableViewDelegate, UITableViewDataSource {
             else {
                 
                 cell.titleLbl.text = variant.po.title
-                cell.priceLbl.text = "$\(variant.po.price)"
-                cell.upcLabel.text = variant.po.upc
-                cell.varientLbl.text = ""
+                cell.priceLbl.text = "UPC: \(variant.po.upc)" //$\(variant.po.price)"
+                cell.upcLabel.text = "" //variant.po.upc
+                cell.varientLbl.text = "Qty: \(variant.po.quantity)"
+                cell.varientLbl.textColor = .black
+                cell.priceLbl.font = UIFont(name: "Manrope-SemiBold", size: 12.0)
                 
                 let currentProdId = variant.po.id
                 
@@ -623,4 +694,15 @@ extension POSelectViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+}
+
+struct QuickAddPO {
+    
+    var upc: String
+    var name: String
+    var price: String
+    var cost: String
+    var quantity: String
+    var category: String
+    var tax: String
 }

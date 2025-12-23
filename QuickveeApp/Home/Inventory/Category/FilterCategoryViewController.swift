@@ -534,9 +534,11 @@ class FilterCategoryViewController: UIViewController {
                 smallres.append(vendor)
             }
         }
-    
-        vendors = smallres
-        subVendors = smallres
+        
+        let sortedNames = smallres.sorted { $0.name < $1.name }
+        
+        vendors = sortedNames
+        subVendors = sortedNames
         
         if selectVendors.count > 0 {
             

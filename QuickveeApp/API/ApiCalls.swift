@@ -3673,13 +3673,14 @@ extension ApiCalls {
         }
     }
     
-    func updatePO(merchant_id: String, admin_id: String, po_id: String, issue_date: String,
+    func updatePO(merchant_id: String, admin_id: String, employee_id: String, po_id: String, issue_date: String,
                 stock_date: String, reference: String, vendor_email: String, order_items: String,
                   is_draft: String, received_status:  String, updated_at: String, completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let parameters: [String:Any] = [
             "merchant_id": merchant_id,
             "admin_id": admin_id,
+            "employee_id": employee_id,
             "po_id": po_id,
             "issue_date": issue_date,
             "stock_date": stock_date,

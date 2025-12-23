@@ -675,13 +675,19 @@ extension SavePOViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.qtyTextField.text = pendQtyArr[indexPath.row]
         
-        if checkArr[indexPath.row] == "1" {
-            cell.deleteBtn.isHidden = false
-            cell.deleteBtn.isEnabled = true
-        }
-        else {
+        if bigDetails?.is_void == "1" {
             cell.deleteBtn.isHidden = true
             cell.deleteBtn.isEnabled = false
+        }
+        else {
+            if checkArr[indexPath.row] == "1" {
+                cell.deleteBtn.isHidden = false
+                cell.deleteBtn.isEnabled = true
+            }
+            else {
+                cell.deleteBtn.isHidden = true
+                cell.deleteBtn.isEnabled = false
+            }
         }
         
         cell.deleteBtn.tag = indexPath.row
