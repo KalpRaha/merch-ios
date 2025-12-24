@@ -29,33 +29,33 @@ class SavePOViewController: UIViewController {
     
     var poVariants = [POItems]()
     var variantList = [InventoryVariant]()
-    var saveSelectedVariants = [InventoryVariant]()
+    var saveSelectedVariants = [VariantPOModel]()
     var id = ""
     
     private var isSymbolOnRight = false
     
-    var checkArr = [String]()
+//    var checkArr = [String]()
     
-    var reqQtyArr = [String]()
-    var pendQtyArr = [String]()
-    var costArr = [String]()
-    var noteArr = [String]()
-    var afterQtyArr = [String]()
-    var totalArr = [String]()
+//    var reqQtyArr = [String]()
+//    var pendQtyArr = [String]()
+//    var costArr = [String]()
+//    var noteArr = [String]()
+//    var afterQtyArr = [String]()
+//    var totalArr = [String]()
+//    
+//    var orderItemArr = [String]()
+//    var statusArr = [String]()
     
-    var orderItemArr = [String]()
-    var statusArr = [String]()
-    
-    var fullAddedPOList = [InventoryVariant]()
-    var fullAddedReqQtyArr = [String]()
-    
-    var fullAddedCostArr = [String]()
-    var fullAddedNoteArr = [String]()
-    var fullAddedAfterQtyArr = [String]()
-    var fullAddedTotalArr = [String]()
-    
-    var fullAddedOrderItemArr = [String]()
-    var fullAddedStatusArr = [String]()
+//    var fullAddedPOList = [InventoryVariant]()
+//    var fullAddedReqQtyArr = [String]()
+//    
+//    var fullAddedCostArr = [String]()
+//    var fullAddedNoteArr = [String]()
+//    var fullAddedAfterQtyArr = [String]()
+//    var fullAddedTotalArr = [String]()
+//    
+//    var fullAddedOrderItemArr = [String]()
+//    var fullAddedStatusArr = [String]()
     
     var vendorSave: VendorPO?
     var bigDetails: PODetails?
@@ -184,22 +184,15 @@ class SavePOViewController: UIViewController {
             
             smallitems.append(poitem)
             
-            reqQtyArr.append(poitem.required_qty)
-            pendQtyArr.append(poitem.pending_qty)
-            costArr.append(poitem.cost_per_item)
-            noteArr.append(poitem.note)
-            afterQtyArr.append(poitem.after_qty)
-            totalArr.append(poitem.total_pricing)
-            
-            orderItemArr.append(poitem.id)
-            statusArr.append(poitem.recieved_status)
-            
-            if poitem.recieved_status == "0" || poitem.recieved_status == "1" {
-                checkArr.append("1")
-            }
-            else {
-                checkArr.append("0")
-            }
+//            reqQtyArr.append(poitem.required_qty)
+//            pendQtyArr.append(poitem.pending_qty)
+//            costArr.append(poitem.cost_per_item)
+//            noteArr.append(poitem.note)
+//            afterQtyArr.append(poitem.after_qty)
+//            totalArr.append(poitem.total_pricing)
+//            
+//            orderItemArr.append(poitem.id)
+//            statusArr.append(poitem.recieved_status)
         }
         poVariants = smallitems
         
@@ -255,6 +248,7 @@ class SavePOViewController: UIViewController {
     func getPOVariants() {
         
         var smallVarList = [InventoryVariant]()
+        var smallPoList = [VariantPOModel]()
         
         for variant in variantList {
             
@@ -271,17 +265,55 @@ class SavePOViewController: UIViewController {
             }
         }
         
-        saveSelectedVariants = smallVarList
+        for variant in smallVarList {
+
+            let pos: Int?
+
+            if variant.isvarient == "1" {
+                pos = poVariants.firstIndex(where: {
+                    $0.variant_id == variant.var_id
+                })
+            } else {
+                pos = poVariants.firstIndex(where: {
+                    $0.product_id == variant.id
+                })
+            }
+
+            // Make sure we found a match
+            guard let index = pos else {
+                print("No PO item found for variant:", variant.id)
+                continue
+            }
+
+            let poItem = poVariants[index]
+
+            var item = VariantPOModel(po: variant, isSelect: true, reqQty: poItem.required_qty,
+                cost: poItem.cost_per_item, note: poItem.note, afterQty: poItem.after_qty,
+                total: poItem.total_pricing, orderItem: poItem.id, status: poItem.recieved_status,
+                pendingQty: poItem.pending_qty, check: "")
+            
+            if poItem.recieved_status == "0" || poItem.recieved_status == "1" {
+                item.check = "1"
+            }
+            else {
+                item.check = "0"
+            }
+
+            smallPoList.append(item)
+        }
+
         
-        saveSelectedVariants.append(contentsOf: fullAddedPOList)
-        reqQtyArr.append(contentsOf: fullAddedReqQtyArr)
-        costArr.append(contentsOf: fullAddedCostArr)
-        noteArr.append(contentsOf: fullAddedNoteArr)
-        afterQtyArr.append(contentsOf: fullAddedAfterQtyArr)
-        totalArr.append(contentsOf: fullAddedTotalArr)
+        saveSelectedVariants = smallPoList
         
-        orderItemArr.append(contentsOf: fullAddedOrderItemArr)
-        statusArr.append(contentsOf: fullAddedStatusArr)
+//        saveSelectedVariants.append(contentsOf: fullAddedPOList)
+//        reqQtyArr.append(contentsOf: fullAddedReqQtyArr)
+//        costArr.append(contentsOf: fullAddedCostArr)
+//        noteArr.append(contentsOf: fullAddedNoteArr)
+//        afterQtyArr.append(contentsOf: fullAddedAfterQtyArr)
+//        totalArr.append(contentsOf: fullAddedTotalArr)
+//        
+//        orderItemArr.append(contentsOf: fullAddedOrderItemArr)
+//        statusArr.append(contentsOf: fullAddedStatusArr)
         
         DispatchQueue.main.async {
             self.loadingIndicator.isAnimating = false
@@ -323,9 +355,11 @@ class SavePOViewController: UIViewController {
         
         if sender.imageView?.image == UIImage(named: "check inventory") {
             sender.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+            saveSelectedVariants[sender.tag].check = "0"
         }
         else {
             sender.setImage(UIImage(named: "check inventory"), for: .normal)
+            saveSelectedVariants[sender.tag].check = "1"
         }
     }
     
@@ -336,13 +370,6 @@ class SavePOViewController: UIViewController {
         let vc = storyBoard.instantiateViewController(withIdentifier: "itemspo") as! ItemsPOViewController
         
         vc.poSelectedVariants = saveSelectedVariants
-        vc.reqQtyArr = reqQtyArr
-        vc.costArr = costArr
-        vc.noteArr = noteArr
-        vc.afterQtyArr = afterQtyArr
-        vc.totalArr = totalArr
-        vc.orderItemArr = orderItemArr
-        vc.statusArr = statusArr
         
         vc.bigDetails = bigDetails
         
@@ -362,57 +389,33 @@ class SavePOViewController: UIViewController {
         
         var final_json = ""
         
-        var upc = ""
-        var var_id = ""
-        var p_id = ""
+        var pendingQty = ""
+        var afterQty = ""
+        var order_item_id = ""
         
-        let v_id = vendorSave?.id ?? ""
-        let i_d = vendorSave?.issue_date ?? ""
-        let s_d = vendorSave?.stock_date ?? ""
-        let r_f = vendorSave?.reference ?? ""
-        let v_e = vendorSave?.vendor_email ?? ""
-        
-        var smallAdd = [EditPO]()
+        var smallAdd = [ReceivePO]()
         
         for item in 0..<saveSelectedVariants.count {
             
-            p_id = saveSelectedVariants[item].id
-            
-            if saveSelectedVariants[item].isvarient == "1" {
-                upc = saveSelectedVariants[item].var_upc
-                var_id = saveSelectedVariants[item].var_id
+            if saveSelectedVariants[item].check == "0" {
+                continue
             }
             else {
-                upc = saveSelectedVariants[item].upc
-                var_id = ""
-            }
-            
-            for a in reqQtyArr {
                 
-                guard a != "" else {
+                pendingQty = saveSelectedVariants[item].pendingQty
+                afterQty = saveSelectedVariants[item].afterQty
+                order_item_id = saveSelectedVariants[item].orderItem
+                
+                guard pendingQty != "" else {
                     ToastClass.sharedToast.showToast(message: "Add Quantity for all variants",
                                                      font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                     return
                 }
+                
+                let pos = ReceivePO(po_item_id: order_item_id, recieved_qty: pendingQty, after_qty: afterQty)
+                
+                smallAdd.append(pos)
             }
-            
-            tableview.isHidden = true
-            loadingIndicator.isAnimating = true
-            
-            let req = reqQtyArr[item]
-            let cost = costArr[item]
-            let total = totalArr[item]
-            let note = noteArr[item]
-            let afterQty = afterQtyArr[item]
-            
-            let order_items = orderItemArr[item]
-            let status = statusArr[item]
-            
-            let pos = EditPO(order_item_id: order_items, product_id: p_id, variant_id: var_id,
-                             required_qty: req, recieved_status: status, cost_per_item: cost,
-                             total_pricing: total, upc: upc, note: note, after_qty: afterQty)
-            
-            smallAdd.append(pos)
         }
         
         guard smallAdd.count != 0 else {
@@ -434,12 +437,10 @@ class SavePOViewController: UIViewController {
             print("Error encoding JSON: \(error)")
         }
         
-        let r_status = bigDetails?.received_status ?? ""
+        tableview.isHidden = true
+        loadingIndicator.isAnimating = true
         
-        ApiCalls.sharedCall.receivePO(merchant_id: m_id, admin_id: m_id, po_id: id, issue_date: i_d,
-                                      stock_date: s_d, reference: r_f,
-                                      vendor_email: v_e, order_items: final_json, is_draft: "0",
-                                      received_status: r_status, updated_at: i_d) { isSuccess, responseData in
+        ApiCalls.sharedCall.receivePO(merchant_id: m_id, admin_id: m_id, po_id: id, po_items: final_json, recieve_date_time: "2025-12-25 21:12:33") { isSuccess, responseData in
             
             if isSuccess {
                 
@@ -450,8 +451,6 @@ class SavePOViewController: UIViewController {
                 print("Api Error")
             }
         }
-        
-        //        {"merchant_id":"VIK175871CA","admin_id":"VIK175871CA","vendor_id":"883","vendor_name":"Drew","po_id":"9188","po_number":"PO0068","product_id":"1480611","variant_id":"0","required_qty":"10","recieved_qty":"10","recieved_status":"0","pending_qty":"10","cost_per_item":"10.00","total_pricing":"100","upc":"00002837","note":"","created_at":"2025-08-25 17:15:22","updated_at":"2025-08-25 17:17:42","after_qty":15,"zoho_invoice_id":null,"product_title":"Juicy J Love 69 Dispo 7k","product_qty":"5","variant_title":null,"variant_qty":null,"item_fullname":"Juicy J Love 69 Dispo 7k","item_qty":"5","newPendingQty":"10","newReceivedQty":"10","toReceiveQty":"10","isChecked":true,"po_item_id":"115423"}
     }
     
     
@@ -515,6 +514,29 @@ extension SavePOViewController: SavePOViewControllerDelegate {
     }
 }
 
+extension SavePOViewController: POSelectDelegate {
+    
+    func didSelectVariant(variant: [VariantPOModel]) {
+        
+        if variant.count > 0 {
+            
+            saveSelectedVariants = variant
+//            reqQtyArr = revreqQtyArr
+//            costArr = revCostArr
+//            noteArr = revNoteArr
+//            afterQtyArr = revAfterQtyArr
+//            totalArr = revTotalArr
+//            orderItemArr = revOrderItemArr
+//            statusArr = revStatusArr
+            
+            tableview.reloadData()
+        }
+        else {
+            
+        }
+    }
+}
+
 extension SavePOViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -527,37 +549,34 @@ extension SavePOViewController: UITextFieldDelegate {
         
         let cell = tableview.cellForRow(at: index) as! ItemsPOTableViewCell
         
-        if textField == cell.qtyTextField {
+        if textField == cell.toReceiveField {
             
-            let req_qty = cell.qtyTextField.text ?? ""
-            let qty = saveSelectedVariants[textField.tag].quantity
-            
-            let cost = cell.costPerTextField.text ?? ""
-            
-            let cost_str = cost.replacingOccurrences(of: "$", with: "")
+            let req_qty = saveSelectedVariants[textField.tag].reqQty
+            let torec = cell.toReceiveField.text ?? ""
             
             let req_int = Int(req_qty) ?? 0
-            let qty_int = Int(qty) ?? 0
+            let torec_int = Int(torec) ?? 0
             
-            let req_doub = Double(req_qty) ?? 0.0
-            let cost_doub = Double(cost_str) ?? 0.0
+            let afterQty = saveSelectedVariants[textField.tag].afterQty
+
+            let afterQty_int = Int(afterQty) ?? 0
             
-            let qtyAfter = qty_int + req_int
-            let total = req_doub * cost_doub
+            let diff = req_int - torec_int
             
-            cell.qtyAfter.text = "Qty After: \(qtyAfter)"
+            if diff == 0 {
             
-            let totoal = String(format: "%.02f", roundOf(item: "\(total)"))
+            }
+            else {
+                let ans = afterQty_int - diff
+                cell.qtyAfter.text = "Qty After: \(ans)"
+            }
             
-            cell.total.text = "Total: $\(totoal)"
-            totalArr[textField.tag] = "\(totoal)"
-            
-            reqQtyArr[textField.tag] = req_qty
-            afterQtyArr[textField.tag] = "\(qtyAfter)"
+            let pending = cell.toReceiveField.text ?? ""
+            saveSelectedVariants[textField.tag].pendingQty = pending
         }
         else if textField == cell.costPerTextField {
             
-            let req_qty = cell.qtyTextField.text ?? ""
+            let req_qty = cell.qtyValue.text ?? ""
             let cost = cell.costPerTextField.text ?? ""
             
             let cost_str = cost.replacingOccurrences(of: "$", with: "")
@@ -567,16 +586,16 @@ extension SavePOViewController: UITextFieldDelegate {
             
             let total = req_doub * cost_doub
             
-            costArr[textField.tag] = cost_str
+            saveSelectedVariants[textField.tag].cost = cost_str
             
             let totoal = String(format: "%.02f", roundOf(item: "\(total)"))
             
             cell.total.text = "Total: $\(totoal)"
-            totalArr[textField.tag] = "\(totoal)"
+            saveSelectedVariants[textField.tag].total = "\(totoal)"
         }
-        else {
+        else if textField == cell.noteField {
             let note = cell.noteField.text ?? ""
-            noteArr[textField.tag] = note
+            saveSelectedVariants[textField.tag].note = note
         }
     }
     
@@ -618,9 +637,15 @@ extension SavePOViewController: UITextFieldDelegate {
         
         var updatetext = textField.text ?? ""
         
-        if textField == cell.qtyTextField {
+        if textField == cell.toReceiveField {
             
-            if updatetext.count > 6 {
+            let req_qty = saveSelectedVariants[textField.tag].reqQty
+            let torec = updatetext
+            
+            let req_int = Int(req_qty) ?? 0
+            let torec_int = Int(torec) ?? 0
+            
+            if torec_int > req_int || updatetext == "0" {
                 updatetext = String(updatetext.dropLast())
             }
         }
@@ -660,27 +685,29 @@ extension SavePOViewController: UITableViewDataSource, UITableViewDelegate {
         
         let item = saveSelectedVariants[indexPath.row]
         
-        cell.name.text = item.title
+        cell.name.text = item.po.title
                 
-        if item.isvarient == "1" {
-            cell.upc.text = "UPC: \(item.var_upc)"
+        if item.po.isvarient == "1" {
+            cell.upc.text = "UPC: \(item.po.var_upc)"
         }
         else {
-            cell.upc.text = "UPC: \(item.upc)"
+            cell.upc.text = "UPC: \(item.po.upc)"
         }
                 
         cell.deleteBtn.setImage(UIImage(named: "check inventory"), for: .normal)
         
-        cell.costPerTextField.text = "$\(costArr[indexPath.row])"
+        cell.costPerTextField.text = "$\(item.cost)"
         
-        cell.qtyTextField.text = pendQtyArr[indexPath.row]
+        cell.toReceiveField.text = "\(item.pendingQty)"
+        
+        cell.qtyValue.text = item.reqQty
         
         if bigDetails?.is_void == "1" {
             cell.deleteBtn.isHidden = true
             cell.deleteBtn.isEnabled = false
         }
         else {
-            if checkArr[indexPath.row] == "1" {
+            if item.check == "1" {
                 cell.deleteBtn.isHidden = false
                 cell.deleteBtn.isEnabled = true
             }
@@ -692,19 +719,24 @@ extension SavePOViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.deleteBtn.tag = indexPath.row
                                 
-        cell.noteField.text = noteArr[indexPath.row]
+        cell.noteField.text = item.note
         
-        cell.qtyAfter.text = "Qty After: \(afterQtyArr[indexPath.row])"
-        cell.total.text = "Total: $\(totalArr[indexPath.row])"
+        cell.qtyAfter.text = "Qty After: \(item.afterQty)"
+        cell.total.text = "Total: $\(item.total)"
         
-        cell.qtyTextField.borderStyle = .none
-        cell.qtyTextField.delegate = self
-        cell.qtyTextField.keyboardType = .numberPad
-        cell.qtyTextField.addTarget(self, action: #selector(updateText), for: .editingChanged)
+//        cell.qtyTextField.borderStyle = .none
+//        cell.qtyTextField.delegate = self
+//        cell.qtyTextField.keyboardType = .numberPad
+//        cell.qtyTextField.addTarget(self, action: #selector(updateText), for: .editingChanged)
         
-        cell.qtyView.layer.borderColor = UIColor(hexString: "#D0D0D0").cgColor
-        cell.qtyView.layer.borderWidth = 1
-        cell.qtyView.layer.cornerRadius = 10
+        cell.toReceiveField.borderStyle = .none
+        cell.toReceiveField.delegate = self
+        cell.toReceiveField.keyboardType = .numberPad
+        cell.toReceiveField.addTarget(self, action: #selector(updateText), for: .editingChanged)
+        
+        cell.toReceiveView.layer.borderColor = UIColor(hexString: "#D0D0D0").cgColor
+        cell.toReceiveView.layer.borderWidth = 1
+        cell.toReceiveView.layer.cornerRadius = 10
         
         cell.costPerTextField.borderStyle = .none
         cell.costPerTextField.delegate = self
@@ -724,10 +756,11 @@ extension SavePOViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.deleteBtn.tag = indexPath.row
         cell.costPerTextField.tag = indexPath.row
-        cell.qtyTextField.tag = indexPath.row
+        cell.qtyValue.tag = indexPath.row
         cell.noteField.tag = indexPath.row
         cell.qtyAfter.tag = indexPath.row
         cell.total.tag = indexPath.row
+        cell.toReceiveField.tag = indexPath.row
         
         return cell
         

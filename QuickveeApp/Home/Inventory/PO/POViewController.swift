@@ -62,7 +62,7 @@ class POListViewController: UIViewController {
     func setUpApi() {
         
         tableview.isHidden = true
-        loadingIndicator.isHidden = true
+        loadingIndicator.isAnimating = true
         noDataView.isHidden = true
         noDataImg.isHidden = true
         noDataLbl.isHidden = true
@@ -784,6 +784,13 @@ struct EditPO: Encodable {
     let total_pricing: String
     let upc: String
     let note: String
+    let after_qty: String
+}
+
+struct ReceivePO: Encodable {
+    
+    let po_item_id: String
+    let recieved_qty: String
     let after_qty: String
 }
 

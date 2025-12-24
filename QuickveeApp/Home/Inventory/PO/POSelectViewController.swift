@@ -38,20 +38,20 @@ class POSelectViewController: UIViewController {
     var variantPOList = [VariantPOModel]()
     var subVariantPOList = [VariantPOModel]()
         
-    var poSelectedVariants = [InventoryVariant]()
+    var poSelectedVariants = [VariantPOModel]()
     
     var searching = false
     var mode = ""
     var vendor: VendorPO?
     
-    var reqQtySelArr = [String]()
-    var costSelArr = [String]()
-    var noteSelArr = [String]()
-    var afterQtySelArr = [String]()
-    var totalSelArr = [String]()
-    
-    var orderItemSelArr = [String]()
-    var statusSelArr = [String]()
+//    var reqQtySelArr = [String]()
+//    var costSelArr = [String]()
+//    var noteSelArr = [String]()
+//    var afterQtySelArr = [String]()
+//    var totalSelArr = [String]()
+//    
+//    var orderItemSelArr = [String]()
+//    var statusSelArr = [String]()
     
     var searchMode = 0
     var quickAddSelect: QuickAddPO?
@@ -145,25 +145,29 @@ class POSelectViewController: UIViewController {
         var miniSelect = [VariantPOModel]()
         
         for selectItem in poSelectedVariants {
-            miniSelect.append(VariantPOModel(po: selectItem, isSelect: true))
+            miniSelect.append(selectItem)
         }
         
         for editvar in variantList {
             
             if editvar.isvarient == "1" {
                 
-                if poSelectedVariants.contains(where: {$0.var_id == editvar.var_id}) {
+                if poSelectedVariants.contains(where: {$0.po.var_id == editvar.var_id}) {
                 }
                 else {
-                    miniSelect.append(VariantPOModel(po: editvar, isSelect: false))
+                    miniSelect.append(VariantPOModel(po: editvar, isSelect: false, reqQty: "",
+                                                     cost: editvar.costperItem, note: "", afterQty: "",
+                                                     total: "", orderItem: "", status: "0", pendingQty: "", check: ""))
                 }
             }
             else {
                 
-                if poSelectedVariants.contains(where: {$0.id == editvar.id}) {
+                if poSelectedVariants.contains(where: {$0.po.id == editvar.id}) {
                 }
                 else {
-                    miniSelect.append(VariantPOModel(po: editvar, isSelect: false))
+                    miniSelect.append(VariantPOModel(po: editvar, isSelect: false, reqQty: "",
+                                                     cost: editvar.costperItem, note: "", afterQty: "",
+                                                     total: "", orderItem: "", status: "0", pendingQty: "", check: ""))
                 }
             }
         }
@@ -181,26 +185,26 @@ class POSelectViewController: UIViewController {
     func unSelectVarient(match: VariantPOModel) {
         
         if match.po.isvarient == "1" {
-            let index = poSelectedVariants.firstIndex(where: {$0.var_id == match.po.var_id}) ?? 0
+            let index = poSelectedVariants.firstIndex(where: {$0.po.var_id == match.po.var_id}) ?? 0
             poSelectedVariants.remove(at: index)
-            reqQtySelArr.remove(at: index)
-            costSelArr.remove(at: index)
-            afterQtySelArr.remove(at: index)
-            totalSelArr.remove(at: index)
-            noteSelArr.remove(at: index)
-            orderItemSelArr.remove(at: index)
-            statusSelArr.remove(at: index)
+//            reqQtySelArr.remove(at: index)
+//            costSelArr.remove(at: index)
+//            afterQtySelArr.remove(at: index)
+//            totalSelArr.remove(at: index)
+//            noteSelArr.remove(at: index)
+//            orderItemSelArr.remove(at: index)
+//            statusSelArr.remove(at: index)
         }
         else {
-            let index = poSelectedVariants.firstIndex(where: {$0.id == match.po.id}) ?? 0
+            let index = poSelectedVariants.firstIndex(where: {$0.po.id == match.po.id}) ?? 0
             poSelectedVariants.remove(at: index)
-            reqQtySelArr.remove(at: index)
-            costSelArr.remove(at: index)
-            afterQtySelArr.remove(at: index)
-            totalSelArr.remove(at: index)
-            noteSelArr.remove(at: index)
-            orderItemSelArr.remove(at: index)
-            statusSelArr.remove(at: index)
+//            reqQtySelArr.remove(at: index)
+//            costSelArr.remove(at: index)
+//            afterQtySelArr.remove(at: index)
+//            totalSelArr.remove(at: index)
+//            noteSelArr.remove(at: index)
+//            orderItemSelArr.remove(at: index)
+//            statusSelArr.remove(at: index)
         }
     }
     
@@ -225,13 +229,6 @@ class POSelectViewController: UIViewController {
         vc.mode = mode
         vc.vendorSelect = vendor
         vc.poSelectedVariants = poSelectedVariants
-        vc.reqQtyArr = reqQtySelArr
-        vc.costArr = costSelArr
-        vc.noteArr = noteSelArr
-        vc.afterQtyArr = afterQtySelArr
-        vc.totalArr = totalSelArr
-        vc.orderItemArr = orderItemSelArr
-        vc.statusArr = statusSelArr
     }
     
     
@@ -276,10 +273,7 @@ class POSelectViewController: UIViewController {
         }
         else {
             dismiss(animated: true) {
-                self.selectDelegate?.didSelectVariant(variant: self.poSelectedVariants, revreqQtyArr: self.reqQtySelArr,
-                                                      revCostArr: self.costSelArr, revNoteArr: self.noteSelArr,
-                                                      revAfterQtyArr: self.afterQtySelArr, revTotalArr: self.totalSelArr,
-                                                      revOrderItemArr: self.orderItemSelArr, revStatusArr: self.statusSelArr)
+                self.selectDelegate?.didSelectVariant(variant: self.poSelectedVariants)
             }
         }
     }
@@ -354,12 +348,12 @@ extension POSelectViewController: AddQuickPODelegate {
             present(vc, animated: true)
         }
         else {
-//            searchBarName.text = ""
-//            searchBarUPC.text = ""
-//            searchBarName.resignFirstResponder()
-//            searchBarUPC.resignFirstResponder()
-//            variantListApi()
-            if
+            searchBarName.text = ""
+            searchBarUPC.text = ""
+            searchBarName.resignFirstResponder()
+            searchBarUPC.resignFirstResponder()
+            searching = false
+            variantListApi()
         }
     }
 }
@@ -527,7 +521,7 @@ extension POSelectViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     cell.checkMarkImage.image = UIImage(named: "check inventory")
                 }
-                else if poSelectedVariants.contains(where: {$0.var_id == currentVarId}) {
+                else if poSelectedVariants.contains(where: {$0.po.var_id == currentVarId}) {
                     cell.checkMarkImage.image = UIImage(named: "check inventory")
                 }
                 else {
@@ -548,7 +542,7 @@ extension POSelectViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     cell.checkMarkImage.image = UIImage(named: "check inventory")
                 }
-                else if poSelectedVariants.contains(where: {$0.id == currentProdId})  {
+                else if poSelectedVariants.contains(where: {$0.po.id == currentProdId})  {
                     
                     cell.checkMarkImage.image = UIImage(named: "check inventory")
                 }
@@ -591,7 +585,7 @@ extension POSelectViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     cell.checkMarkImage.image = UIImage(named: "check inventory")
                 }
-                else if poSelectedVariants.contains(where: {$0.var_id == currentVarId}) {
+                else if poSelectedVariants.contains(where: {$0.po.var_id == currentVarId}) {
                     
                     cell.checkMarkImage.image = UIImage(named: "check inventory")
                 }
@@ -615,7 +609,7 @@ extension POSelectViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     cell.checkMarkImage.image = UIImage(named: "check inventory")
                 }
-                else if poSelectedVariants.contains(where: {$0.id == currentProdId}) {
+                else if poSelectedVariants.contains(where: {$0.po.id == currentProdId}) {
                     
                     cell.checkMarkImage.image = UIImage(named: "check inventory")
                 }
@@ -644,14 +638,7 @@ extension POSelectViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 variant.isSelect = true
                 selectSubVariant(match: variant, offset: true)
-                poSelectedVariants.append(variant.po)
-                reqQtySelArr.append("")
-                costSelArr.append(variant.po.costperItem)
-                afterQtySelArr.append("")
-                totalSelArr.append("")
-                noteSelArr.append("")
-                orderItemSelArr.append("")
-                statusSelArr.append("0")
+                poSelectedVariants.append(variant)
             }
             else {
                 
@@ -675,14 +662,7 @@ extension POSelectViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 variant.isSelect = true
                 selectSubVariant(match: variant, offset: true)
-                poSelectedVariants.append(variant.po)
-                reqQtySelArr.append("")
-                costSelArr.append(variant.po.costperItem)
-                afterQtySelArr.append("")
-                totalSelArr.append("")
-                noteSelArr.append("")
-                orderItemSelArr.append("")
-                statusSelArr.append("0")
+                poSelectedVariants.append(variant)
             }
             else {
                 

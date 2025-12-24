@@ -177,6 +177,7 @@ struct AppURLs {
     static let DELETE_PO = "\(base_url)Purchase_orders_api/delete_po"
     static let VOID_PO = "\(base_url)Purchase_orders_api/void_po"
     static let RECEIVE_PO = "\(base_url)Purchase_orders_api/recieve_po"
+    static let DELETE_PO_ITEM = "\(base_url)Purchase_orders_api/delete_po_item"
     
     static let VENDORS_LIST = "\(base_url)app/vendor_payment_list"
     

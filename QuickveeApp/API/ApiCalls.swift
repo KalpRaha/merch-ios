@@ -3673,14 +3673,17 @@ extension ApiCalls {
         }
     }
     
-    func updatePO(merchant_id: String, admin_id: String, employee_id: String, po_id: String, issue_date: String,
-                stock_date: String, reference: String, vendor_email: String, order_items: String,
-                  is_draft: String, received_status:  String, updated_at: String, completion:@escaping(Bool,[String:Any]) -> ()) {
+    func updatePO(merchant_id: String, admin_id: String, po_id: String, employee_id: String,
+                  vendor_id: String, issue_date: String,
+                  stock_date: String, reference: String,
+                  vendor_email: String, order_items: String, is_draft: String, received_status: String,
+                  updated_at: String, completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let parameters: [String:Any] = [
             "merchant_id": merchant_id,
             "admin_id": admin_id,
             "employee_id": employee_id,
+            "vendor_id": vendor_id,
             "po_id": po_id,
             "issue_date": issue_date,
             "stock_date": stock_date,
@@ -3778,25 +3781,18 @@ extension ApiCalls {
         }
     }
     
-    func receivePO(merchant_id: String, admin_id: String, po_id: String, issue_date: String,
-                stock_date: String, reference: String, vendor_email: String, order_items: String,
-                  is_draft: String, received_status:  String, updated_at: String, completion:@escaping(Bool,[String:Any]) -> ()) {
+    func receivePO(merchant_id: String, admin_id: String, po_id: String, po_items: String, recieve_date_time: String, completion:@escaping(Bool,[String:Any]) -> ()) {
         
         let parameters: [String:Any] = [
             "merchant_id": merchant_id,
             "admin_id": admin_id,
             "po_id": po_id,
-            "issue_date": issue_date,
-            "stock_date": stock_date,
-            "reference": reference,
-            "vendor_email": vendor_email,
-            "order_items": order_items,
-            "is_draft": is_draft,
-            "received_status": received_status,
-            "updated_at": updated_at
+            "po_items": po_items,
+            "recieve_date_time": recieve_date_time
         ]
-        
-        let url = AppURLs.UPDATE_PO
+        print(parameters)
+        print(parameters)
+        let url = AppURLs.RECEIVE_PO
         
         AF.request(url, method: .post, parameters: parameters).responseData {response in
             
@@ -3829,6 +3825,37 @@ extension ApiCalls {
         ]
         
         let url = AppURLs.DELETE_PO
+        
+        AF.request(url, method: .post, parameters: parameters).responseData {response in
+            
+            switch response.result {
+                
+            case .success(_):
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options:[]) as! [String:Any]
+                    completion(true,json)
+                }
+                catch {
+                    let res = "ios_app\(response.response?.statusCode)"
+                    self.logErrorApi(merchant_id: merchant_id, response: res)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                let res = "ios_app\(response.response?.statusCode)"
+                self.logErrorApi(merchant_id: merchant_id, response: res)
+            }
+        }
+    }
+    
+    func deletePOItem(merchant_id: String, po_item_id: String, vendor_id: String, completion:@escaping(Bool,[String:Any]) -> ()) {
+        
+        let parameters: [String:Any] = [
+            "merchant_id": merchant_id,
+            "vendor_id": vendor_id,
+            "po_item_id": po_item_id
+        ]
+        
+        let url = AppURLs.DELETE_PO_ITEM
         
         AF.request(url, method: .post, parameters: parameters).responseData {response in
             
