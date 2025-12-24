@@ -4661,6 +4661,10 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             //edit
             else {
                 
+                cell.costPerItem.isHidden = false
+                cell.profit.isHidden = false
+                cell.margin.isHidden = false
+                
                 cell.stocktakeBtn.layer.cornerRadius = 5
                 
              
@@ -4704,9 +4708,13 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
                         cell.costPerItem.isHidden = true
+                        cell.profit.isHidden = true
+                        cell.margin.isHidden = true
                     }
                     else {
                         cell.costPerItem.isHidden = false
+                        cell.profit.isHidden = false
+                        cell.margin.isHidden = false
                     }
                 }
                 

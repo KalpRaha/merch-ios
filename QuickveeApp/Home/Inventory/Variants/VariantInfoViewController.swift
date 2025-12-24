@@ -146,9 +146,13 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
         
         if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
             costPerItem.isHidden = true
+            profit.isHidden = true
+            margin.isHidden = true
         }
         else {
             costPerItem.isHidden = false
+            profit.isHidden = false
+            margin.isHidden = false
         }
         
         if UserDefaults.standard.bool(forKey: "var_api_hit") {
@@ -893,6 +897,7 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
 
     
     func createCustomTextField(textField: MDCOutlinedTextField) {
+        
         textField.font = UIFont(name: "Manrope-SemiBold", size: 16.0)
         textField.setOutlineColor(UIColor(named: "borderColor")!, for: .normal)
         textField.setOutlineColor(UIColor(named: "borderColor")!, for: .editing)

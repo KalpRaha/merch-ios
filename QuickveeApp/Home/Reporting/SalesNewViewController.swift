@@ -82,7 +82,7 @@ class SalesNewViewController: UIViewController {
             //"https://backend.quickvee.com/login"
             //https://qa-admin-panel.quickvee.us/login
             //https://quickvee.com/merchants/login
-            if urlString == "https://quickvee.com/merchants/login" {
+            if urlString == "https://qa-admin-panel.quickvee.us/login" {
                 
                 self.loadingIndicator.isAnimating = true
                 self.webview.isHidden = true
@@ -134,7 +134,7 @@ class SalesNewViewController: UIViewController {
         //"https://awsbackend.quickvee.com/login"
         //https://qa-admin-panel.quickvee.us/login
         //https://quickvee.com/merchants/login
-        if webview.url!.absoluteString == "https://quickvee.com/merchants/login" {
+        if webview.url!.absoluteString == "https://qa-admin-panel.quickvee.us/login" {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 
