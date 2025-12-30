@@ -16,6 +16,9 @@
 		A54F2B352BBABA1B009B4D53 /* InStoreDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B342BBABA1B009B4D53 /* InStoreDetailViewController.swift */; };
 		A54F2B372BBABA46009B4D53 /* InStoreRefundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B362BBABA46009B4D53 /* InStoreRefundViewController.swift */; };
 		A5D3A9072DF56956000F6B43 /* MissUPCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3A9062DF56956000F6B43 /* MissUPCTableViewCell.swift */; };
+		B4963F5D2F03E8EF00A6AA52 /* Navigatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4963F5C2F03E8EF00A6AA52 /* Navigatable.swift */; };
+		B4963F5F2F03E9E300A6AA52 /* ClassNameRetrievable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4963F5E2F03E9E300A6AA52 /* ClassNameRetrievable.swift */; };
+		B4963F612F03EA1700A6AA52 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4963F602F03EA1700A6AA52 /* UIStoryboard+Extension.swift */; };
 		D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */; };
 		D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */; };
 		D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC882AA9AB8800A216C3 /* VariantViewController.swift */; };
@@ -299,6 +302,9 @@
 		A54F2B362BBABA46009B4D53 /* InStoreRefundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InStoreRefundViewController.swift; sourceTree = "<group>"; };
 		A5D3A9062DF56956000F6B43 /* MissUPCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissUPCTableViewCell.swift; sourceTree = "<group>"; };
 		AAFCE2029C177F03D21729CB /* Pods-QuickveeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickveeApp.debug.xcconfig"; path = "Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp.debug.xcconfig"; sourceTree = "<group>"; };
+		B4963F5C2F03E8EF00A6AA52 /* Navigatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigatable.swift; sourceTree = "<group>"; };
+		B4963F5E2F03E9E300A6AA52 /* ClassNameRetrievable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameRetrievable.swift; sourceTree = "<group>"; };
+		B4963F602F03EA1700A6AA52 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
 		D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeViewController.swift; sourceTree = "<group>"; };
 		D204CC882AA9AB8800A216C3 /* VariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantViewController.swift; sourceTree = "<group>"; };
@@ -601,6 +607,15 @@
 				810001DF67ED71A5175A0AB6 /* Pods-QuickveeApp.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		B4963F572F03E7FE00A6AA52 /* NavigationCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				B4963F5C2F03E8EF00A6AA52 /* Navigatable.swift */,
+				B4963F5E2F03E9E300A6AA52 /* ClassNameRetrievable.swift */,
+			);
+			path = NavigationCoordinator;
 			sourceTree = "<group>";
 		};
 		D204E89F2A122A3D00EED5F5 /* Reporting */ = {
@@ -1117,6 +1132,7 @@
 		D2A6838B296C0B3700F852E6 /* QuickveeApp */ = {
 			isa = PBXGroup;
 			children = (
+				B4963F572F03E7FE00A6AA52 /* NavigationCoordinator */,
 				D2FFEF542AFE00EE003400BD /* Alert */,
 				D2FFEF512AFDFF7D003400BD /* API */,
 				D2D477522AFE31AE008290F9 /* APP */,
@@ -1376,6 +1392,7 @@
 		D2FFEF5B2AFE03DC003400BD /* Extention */ = {
 			isa = PBXGroup;
 			children = (
+				B4963F602F03EA1700A6AA52 /* UIStoryboard+Extension.swift */,
 				D2E239192B286B4D00231FB4 /* Extention.swift */,
 				D2B269E42A6113EC002D140A /* RootTableViewController.swift */,
 				D26F4E752995011200716A51 /* RotationAnimation.swift */,
@@ -1571,6 +1588,7 @@
 				D27B61E42AC5790A00F753BD /* AddVariantAttributeViewController.swift in Sources */,
 				D2C0C1452C3510C000868B0F /* SetupInventoryViewController.swift in Sources */,
 				D29944C62A8376D000120302 /* OrderFilterViewController.swift in Sources */,
+				B4963F5D2F03E8EF00A6AA52 /* Navigatable.swift in Sources */,
 				D262DEAE296FD37E00011E27 /* ReportingPagerViewController.swift in Sources */,
 				D23681D82AA7016A00728FDB /* ProductsTableViewCell.swift in Sources */,
 				04AC908D2E951D360009C2A8 /* DescOptionsCollectionViewCell.swift in Sources */,
@@ -1581,6 +1599,7 @@
 				D26636BA29BB056800B8A5FC /* CouponTableViewCell.swift in Sources */,
 				D2C2CFCE29C08FD80023A7A7 /* SetupTaxViewController.swift in Sources */,
 				D2D625512B75E29E00C25D07 /* BulkEditViewController.swift in Sources */,
+				B4963F5F2F03E9E300A6AA52 /* ClassNameRetrievable.swift in Sources */,
 				D25788FD2D48B3C8003F6218 /* BogoListViewController.swift in Sources */,
 				D25788FE2D48B3C8003F6218 /* BogoListTableViewCell.swift in Sources */,
 				D20A596D2C3D466400470349 /* PlusCollCollectionViewCell.swift in Sources */,
@@ -1621,6 +1640,7 @@
 				D2FAF7F32BBD67AD00B0B03B /* OrderStatusViewController.swift in Sources */,
 				D27624C32C589AF70019EB2B /* SelectCouponTypeViewController.swift in Sources */,
 				D23681D42AA6EF1E00728FDB /* ProductsViewController.swift in Sources */,
+				B4963F612F03EA1700A6AA52 /* UIStoryboard+Extension.swift in Sources */,
 				D233B6592B45044F00FBD6F2 /* DuplicateViewController.swift in Sources */,
 				D25253312CDB453300ADD70B /* StockTakeViewController.swift in Sources */,
 				D2E9243E2AC3DE19002370FE /* FilterCategoryViewController.swift in Sources */,
