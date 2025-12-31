@@ -258,7 +258,8 @@ class LockPassCodeViewController: UIViewController {
         let yesAction = UIAlertAction(title: "Yes", style: .default) { (action:UIAlertAction!) in
             
             print("yes button tapped")
-            UserDefaults.standard.set(false, forKey: "LoggedIn")
+            UDHelper.isLoggedIn = false
+//            UserDefaults.standard.set(false, forKey: "LoggedIn")
             UserDefaults.standard.set(false, forKey: "passcheck")
             UserDefaults.standard.set(false, forKey: "fcm_token_set")
             let story = UIStoryboard(name: "Main", bundle:nil)

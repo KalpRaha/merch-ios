@@ -244,7 +244,8 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
                     let json = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
                     print(json)
                     
-                    UserDefaults.standard.set(false, forKey: "LoggedIn")
+                    UDHelper.isLoggedIn = false
+//                    UserDefaults.standard.set(false, forKey: "LoggedIn")
                     UserDefaults.standard.set(false, forKey: "passcheck")
                     UserDefaults.standard.set(false, forKey: "fcm_token_set")
 

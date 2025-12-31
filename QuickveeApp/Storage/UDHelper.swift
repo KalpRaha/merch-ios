@@ -1,0 +1,40 @@
+//
+//  UDHelper.swift
+//  QuickveeApp
+//
+//  Created by Sooraj kahar on 31/12/25.
+//
+
+import Foundation
+
+/*
+    // make sure if you are, Using this Helper class then the specified key for UD must replace all the existing code of UserDefaults
+ 
+    UserDefaults.standard.set(false, forKey: "LoggedIn")
+    // replace the above line of code with
+ 
+    UDHelper.isLoggedIn = false // where the key is set as isLoggedIn = "LoggedIn"
+ 
+ */
+
+struct UDHelper {
+    
+    
+    @Storage(key: .isLoggedIn, defaultValue: false)
+    static var isLoggedIn: Bool
+    
+    
+
+    
+}
+
+extension UDHelper {
+    
+    
+    enum Keys : String{
+        
+        case isLoggedIn = "LoggedIn"
+        
+    }
+    
+}

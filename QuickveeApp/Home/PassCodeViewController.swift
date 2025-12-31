@@ -71,7 +71,8 @@ final class PassCodeViewController: UIViewController, WKNavigationDelegate, Navi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UserDefaults.standard.set(true, forKey: "LoggedIn")
+        UDHelper.isLoggedIn = true
+//        UserDefaults.standard.set(true, forKey: "LoggedIn")
     } 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -1577,7 +1578,8 @@ final class PassCodeViewController: UIViewController, WKNavigationDelegate, Navi
         let yesAction = UIAlertAction(title: "Yes", style: .default) { (action:UIAlertAction!) in
             
             print("yes button tapped")
-            UserDefaults.standard.set(false, forKey: "LoggedIn")
+            UDHelper.isLoggedIn = false
+//            UserDefaults.standard.set(false, forKey: "LoggedIn")
             UserDefaults.standard.set(false, forKey: "passcheck")
             UserDefaults.standard.set(false, forKey: "fcm_token_set")
             let nav = self.navigationController

@@ -33,6 +33,9 @@
 		B45CB8AA2F04E364004AF269 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8A92F04E364004AF269 /* UIStoryboard+Extension.swift */; };
 		B45CB8AD2F04E6D6004AF269 /* FontFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8AC2F04E6D6004AF269 /* FontFamily.swift */; };
 		B45CB8AF2F04EBD5004AF269 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8AE2F04EBD5004AF269 /* UIView+Extension.swift */; };
+		B45CB8B22F04F4CF004AF269 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8B12F04F4CF004AF269 /* Storage.swift */; };
+		B45CB8B42F04F741004AF269 /* JSONContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8B32F04F741004AF269 /* JSONContainer.swift */; };
+		B45CB8B62F04F75B004AF269 /* UDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8B52F04F75B004AF269 /* UDHelper.swift */; };
 		D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */; };
 		D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */; };
 		D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC882AA9AB8800A216C3 /* VariantViewController.swift */; };
@@ -329,6 +332,9 @@
 		B45CB8A92F04E364004AF269 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		B45CB8AC2F04E6D6004AF269 /* FontFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontFamily.swift; sourceTree = "<group>"; };
 		B45CB8AE2F04EBD5004AF269 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		B45CB8B12F04F4CF004AF269 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		B45CB8B32F04F741004AF269 /* JSONContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONContainer.swift; sourceTree = "<group>"; };
+		B45CB8B52F04F75B004AF269 /* UDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDHelper.swift; sourceTree = "<group>"; };
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
 		D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeViewController.swift; sourceTree = "<group>"; };
 		D204CC882AA9AB8800A216C3 /* VariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantViewController.swift; sourceTree = "<group>"; };
@@ -696,6 +702,16 @@
 				D217913D296EB84400F77C2A /* Fonts */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		B45CB8B02F04F4BD004AF269 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				B45CB8B52F04F75B004AF269 /* UDHelper.swift */,
+				B45CB8B12F04F4CF004AF269 /* Storage.swift */,
+				B45CB8B32F04F741004AF269 /* JSONContainer.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		D204E89F2A122A3D00EED5F5 /* Reporting */ = {
@@ -1218,6 +1234,7 @@
 				D29D1F312AE6708B0017819B /* DataModal */,
 				D2FFEF5B2AFE03DC003400BD /* Extention */,
 				D2FFEF522AFDFFC7003400BD /* Home */,
+				B45CB8B02F04F4BD004AF269 /* Storage */,
 				B45CB8A02F04DFDF004AF269 /* Utils */,
 				B45CB8AB2F04E613004AF269 /* Resources */,
 				D2A6839D296C0B3700F852E6 /* Info.plist */,
@@ -1717,6 +1734,7 @@
 				D27624C32C589AF70019EB2B /* SelectCouponTypeViewController.swift in Sources */,
 				D23681D42AA6EF1E00728FDB /* ProductsViewController.swift in Sources */,
 				D233B6592B45044F00FBD6F2 /* DuplicateViewController.swift in Sources */,
+				B45CB8B62F04F75B004AF269 /* UDHelper.swift in Sources */,
 				D25253312CDB453300ADD70B /* StockTakeViewController.swift in Sources */,
 				D2E9243E2AC3DE19002370FE /* FilterCategoryViewController.swift in Sources */,
 				D2CE369C29769DEA0090A6D2 /* ItemSalesTableViewCell.swift in Sources */,
@@ -1730,6 +1748,7 @@
 				D2439ACF29A77DC000B2ED7B /* SetupEmailSmsViewController.swift in Sources */,
 				D2EF641229C2DC6400EA83CE /* SetupAddTaxViewController.swift in Sources */,
 				D2A2BF7D2B8DF2A6006796D5 /* OrderTableViewCell.swift in Sources */,
+				B45CB8B22F04F4CF004AF269 /* Storage.swift in Sources */,
 				D2D836002BA4049600BB167A /* RefundTableCell.swift in Sources */,
 				D2EE36172BFDBE1D006F5238 /* MaxPurchaseQuantityViewController.swift in Sources */,
 				D2AE68DD2A7B7F12004D85B8 /* OrderRefundViewController.swift in Sources */,
@@ -1802,6 +1821,7 @@
 				A54F2B372BBABA46009B4D53 /* InStoreRefundViewController.swift in Sources */,
 				D253DD9A2C86B9FB003AA842 /* LotteryViewController.swift in Sources */,
 				D2A87AAD2D156DD10008C417 /* CompletedOrderSummaryCell 2.swift in Sources */,
+				B45CB8B42F04F741004AF269 /* JSONContainer.swift in Sources */,
 				D2D879882BBBB59A00ECE573 /* InStoreRefundCustCell.swift in Sources */,
 				D2E2391A2B286B4D00231FB4 /* Extention.swift in Sources */,
 				D21A0DC529A487B600DC36CC /* SetupTableViewCell.swift in Sources */,

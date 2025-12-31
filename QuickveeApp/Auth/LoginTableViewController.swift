@@ -15,6 +15,8 @@ import WebKit
 
 final class LoginTableViewController: UITableViewController, Navigatable {
     
+    static var viewControllerIdentifier: String { "login" }
+    
     @IBOutlet weak var loginView: UIView!
     @IBOutlet weak var sigininText: UILabel!
     @IBOutlet weak var loginBtn: UIButton!
