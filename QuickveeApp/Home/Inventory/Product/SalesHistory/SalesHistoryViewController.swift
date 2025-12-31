@@ -179,12 +179,27 @@ extension SalesHistoryViewController : UITableViewDataSource , UITableViewDelega
             let convertcost = String(format: " %.2f", doub_value1 ?? 0.00)
             cell.salesPriceValue.text = "$\(convert)"
             cell.salesQtyValue.text = salesArr[index].qty
-            cell.costValue.text = "$\(convertcost)"
+            
             cell.salesId.text = salesArr[index].order_id
             
             cell.recordBorderView.layer.cornerRadius = 10
-            cell.costView.layer.cornerRadius = 5
+           // cell.costView.layer.cornerRadius = 5
             cell.recordBorderView.dropShadow2()
+            
+            
+            
+            if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                cell.costView.isHidden = true
+                cell.costValue.text = ""
+            
+            }
+            else {
+                cell.costView.isHidden = false
+                cell.costValue.text = "$\(convertcost)"
+                cell.costView.layer.cornerRadius = 5
+            }
+            
+            
             return cell
         }
         

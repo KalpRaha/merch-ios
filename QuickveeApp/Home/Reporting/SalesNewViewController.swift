@@ -82,7 +82,8 @@ class SalesNewViewController: UIViewController {
             //"https://backend.quickvee.com/login"
             //https://qa-admin-panel.quickvee.us/login
             //https://quickvee.com/merchants/login
-            if urlString == "https://qa-admin-panel.quickvee.us/login" {
+            //https://dev-admin-panel.quickvee.us/login
+            if urlString == "https://dev-admin-panel.quickvee.us/merchants/login" {
                 
                 self.loadingIndicator.isAnimating = true
                 self.webview.isHidden = true
@@ -134,7 +135,8 @@ class SalesNewViewController: UIViewController {
         //"https://awsbackend.quickvee.com/login"
         //https://qa-admin-panel.quickvee.us/login
         //https://quickvee.com/merchants/login
-        if webview.url!.absoluteString == "https://qa-admin-panel.quickvee.us/login" {
+        //https://dev-admin-panel.quickvee.us/login
+        if webview.url!.absoluteString == "https://dev-admin-panel.quickvee.us/merchants/login" {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 
@@ -336,6 +338,41 @@ class SalesNewViewController: UIViewController {
                                                                 print("JavaScript injected successfully")
                                                             }
                                                         })
+                                                        
+                                                        //hide_cost_report_category
+                                                        let hide = UserDefaults.standard.bool(forKey: "lock_hide_cost")
+                                                        print(hide)
+                                                        if UserDefaults.standard.bool(forKey: "lock_hide_cost") {
+                                                            let scripted = """
+                                                                    var observer = new MutationObserver(function(mutationsList, observer) {
+                                                                        var img = document.querySelector('.hide-cost-price-for-android');
+                                                                        if (img) {
+                                                                            img.style.display = 'none';
+                                                                              // Stop observing after the element is found
+                                                                        }
+                                                                    });
+                                                                    observer.observe(document.body, { childList: true, subtree: true });
+                                                                    """
+                                                            
+                                                            // Inject the JavaScript into the WebView
+                                                            self.webview.evaluateJavaScript(scripted) { (result, error) in
+                                                                if let error = error {
+                                                                    print("JavaScript evaluation error: \(error)")
+                                                                } else {
+                                                                    print("JavaScript executed successfully")
+                                                                }
+                                                            }
+                                                            
+                                                        }
+                                                        else {
+                                                            
+                                                        }
+                                                        //hide_cost_report_category
+                                                        
+                                                       
+                                                       
+                                                        
+                                                        
                                                         //
                                                         //                                                        if self.webview.url!.absoluteString !=
                                                         //
