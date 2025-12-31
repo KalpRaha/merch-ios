@@ -31,6 +31,7 @@
 		B45CB8A72F04E2BB004AF269 /* ClassNameRetrievable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8A22F04E2BB004AF269 /* ClassNameRetrievable.swift */; };
 		B45CB8A82F04E2BB004AF269 /* Navigatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8A32F04E2BB004AF269 /* Navigatable.swift */; };
 		B45CB8AA2F04E364004AF269 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8A92F04E364004AF269 /* UIStoryboard+Extension.swift */; };
+		B45CB8AD2F04E6D6004AF269 /* FontFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8AC2F04E6D6004AF269 /* FontFamily.swift */; };
 		D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */; };
 		D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */; };
 		D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC882AA9AB8800A216C3 /* VariantViewController.swift */; };
@@ -51,10 +52,6 @@
 		D2153F9C2ACD605500CC61DA /* POQuantityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2153F9B2ACD605500CC61DA /* POQuantityViewController.swift */; };
 		D2153F9F2ACD646E00CC61DA /* InstantPODescViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2153F9E2ACD646E00CC61DA /* InstantPODescViewController.swift */; };
 		D21711882C45171B00B4FE1F /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21711872C45171B00B4FE1F /* TagsViewController.swift */; };
-		D217914A296EBC6700F77C2A /* Circular Std Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2179146296EBC6700F77C2A /* Circular Std Black.ttf */; };
-		D217914B296EBC6700F77C2A /* Circular Std Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2179147296EBC6700F77C2A /* Circular Std Medium.ttf */; };
-		D217914C296EBC6700F77C2A /* Circular Std Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2179148296EBC6700F77C2A /* Circular Std Book.ttf */; };
-		D217914D296EBC6700F77C2A /* Circular Std Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2179149296EBC6700F77C2A /* Circular Std Bold.ttf */; };
 		D217914F296ECE0700F77C2A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D217914E296ECE0700F77C2A /* HomeViewController.swift */; };
 		D2182D55297120E6004DF7A1 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2182D54297120E6004DF7A1 /* StoreViewController.swift */; };
 		D21911752AC4015A0094B653 /* AttributeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21911742AC4015A0094B653 /* AttributeTableViewCell.swift */; };
@@ -329,6 +326,7 @@
 		B45CB8A32F04E2BB004AF269 /* Navigatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigatable.swift; sourceTree = "<group>"; };
 		B45CB8A42F04E2BB004AF269 /* NavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
 		B45CB8A92F04E364004AF269 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
+		B45CB8AC2F04E6D6004AF269 /* FontFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontFamily.swift; sourceTree = "<group>"; };
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
 		D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeViewController.swift; sourceTree = "<group>"; };
 		D204CC882AA9AB8800A216C3 /* VariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantViewController.swift; sourceTree = "<group>"; };
@@ -349,10 +347,6 @@
 		D2153F9B2ACD605500CC61DA /* POQuantityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POQuantityViewController.swift; sourceTree = "<group>"; };
 		D2153F9E2ACD646E00CC61DA /* InstantPODescViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantPODescViewController.swift; sourceTree = "<group>"; };
 		D21711872C45171B00B4FE1F /* TagsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
-		D2179146296EBC6700F77C2A /* Circular Std Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circular Std Black.ttf"; sourceTree = "<group>"; };
-		D2179147296EBC6700F77C2A /* Circular Std Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circular Std Medium.ttf"; sourceTree = "<group>"; };
-		D2179148296EBC6700F77C2A /* Circular Std Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circular Std Book.ttf"; sourceTree = "<group>"; };
-		D2179149296EBC6700F77C2A /* Circular Std Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circular Std Bold.ttf"; sourceTree = "<group>"; };
 		D217914E296ECE0700F77C2A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D2182D54297120E6004DF7A1 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		D21911742AC4015A0094B653 /* AttributeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeTableViewCell.swift; sourceTree = "<group>"; };
@@ -677,6 +671,7 @@
 		B45CB8A02F04DFDF004AF269 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B45CB8AC2F04E6D6004AF269 /* FontFamily.swift */,
 				B45CB89F2F04DFDF004AF269 /* Logger.swift */,
 				B45CB8A22F04E2BB004AF269 /* ClassNameRetrievable.swift */,
 			);
@@ -746,10 +741,6 @@
 		D217913D296EB84400F77C2A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				D2179146296EBC6700F77C2A /* Circular Std Black.ttf */,
-				D2179149296EBC6700F77C2A /* Circular Std Bold.ttf */,
-				D2179148296EBC6700F77C2A /* Circular Std Book.ttf */,
-				D2179147296EBC6700F77C2A /* Circular Std Medium.ttf */,
 				D268EE5C2C8EA44500B45172 /* Manrope-Bold.ttf */,
 				D268EE5A2C8EA44500B45172 /* Manrope-ExtraBold.ttf */,
 				D268EE5B2C8EA44500B45172 /* Manrope-Medium.ttf */,
@@ -1555,19 +1546,15 @@
 				D268EE602C8EA44500B45172 /* Manrope-Bold.ttf in Resources */,
 				D2A68399296C0B3700F852E6 /* Assets.xcassets in Resources */,
 				D2A68394296C0B3700F852E6 /* Main.storyboard in Resources */,
-				D217914A296EBC6700F77C2A /* Circular Std Black.ttf in Resources */,
 				D268EE612C8EA44500B45172 /* Manrope-SemiBold.ttf in Resources */,
 				D236333F2B4BB9B2009FFAF1 /* ThreeDotsCell.xib in Resources */,
 				D268EE5F2C8EA44500B45172 /* Manrope-Medium.ttf in Resources */,
 				D2B01B912BB3E2F900A40B93 /* RefundHeaderCell.xib in Resources */,
-				D217914D296EBC6700F77C2A /* Circular Std Bold.ttf in Resources */,
 				04B413D82E28EEE70002D0FE /* GoogleService-Info.plist in Resources */,
 				D2F5AB812CE5C2270050B89C /* HeaderViewCell.xib in Resources */,
 				D2F5AB822CE5C2270050B89C /* NoOrderFoundCell.xib in Resources */,
 				D2F5AB832CE5C2270050B89C /* profileCell.xib in Resources */,
 				D2F5AB842CE5C2270050B89C /* OrderCell.xib in Resources */,
-				D217914C296EBC6700F77C2A /* Circular Std Book.ttf in Resources */,
-				D217914B296EBC6700F77C2A /* Circular Std Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1688,6 +1675,7 @@
 				D25788FD2D48B3C8003F6218 /* BogoListViewController.swift in Sources */,
 				D25788FE2D48B3C8003F6218 /* BogoListTableViewCell.swift in Sources */,
 				D20A596D2C3D466400470349 /* PlusCollCollectionViewCell.swift in Sources */,
+				B45CB8AD2F04E6D6004AF269 /* FontFamily.swift in Sources */,
 				D2ED214D2D5211BA004EF316 /* CreatBogoDealCell.swift in Sources */,
 				D29C2C9F2C1C13DA00D774A1 /* SelectMixnMatchCell.swift in Sources */,
 				D220881329D1991A006393C2 /* ShowVendorTableViewCell.swift in Sources */,

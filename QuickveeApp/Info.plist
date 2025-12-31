@@ -13,10 +13,6 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Circular Std Black.ttf</string>
-		<string>Circular Std Bold.ttf</string>
-		<string>Circular Std Book.ttf</string>
-		<string>Circular Std Medium.ttf</string>
 		<string>Manrope-Bold.ttf</string>
 		<string>Manrope-ExtraBold.ttf</string>
 		<string>Manrope-Medium.ttf</string>
