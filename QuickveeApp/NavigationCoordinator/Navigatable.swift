@@ -35,6 +35,10 @@ protocol Navigatable {
 
 extension Navigatable where Self : UIViewController {
     
+    static var storyboard: UIStoryboard { .main }
+    static var viewControllerIdentifier: String { className }
+    
+    
     static func instantiate() -> Self {
         return storyboard.instantiateViewController(identifier: viewControllerIdentifier) as Self
     }
