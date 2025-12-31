@@ -23,6 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.window = window
         }
+        
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        NavigationCoordinator.shared.configureWithWindowScene(windowScene)
     }
     
     @available(iOS 13.0, *)

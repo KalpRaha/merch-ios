@@ -268,28 +268,4 @@ extension AppDelegate {
         (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.delegate as? SceneDelegate
     }
     
-    func rootVC(_ vc: UIViewController) {
-        
-        if #available(iOS 13.0, *) {
-            // iOS 13+ → handled by SceneDelegate
-            guard
-                let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                let sceneDelegate = scene.delegate as? SceneDelegate,
-                let window = sceneDelegate.window
-            else { return }
-            
-            window.rootViewController = vc
-            window.makeKeyAndVisible()
-            
-        } else {
-            // iOS 12 and below
-            if window == nil {
-                window = UIWindow(frame: UIScreen.main.bounds)
-            }
-            
-            window?.rootViewController = vc
-            window?.makeKeyAndVisible()
-        }
-    }
-    
 }

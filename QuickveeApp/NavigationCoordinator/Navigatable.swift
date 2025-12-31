@@ -50,7 +50,7 @@ extension Navigatable where Self : UIViewController {
         let vc = Self.instantiate()
         
         passData?(vc)
-        AppDelegate.getAppInstance().rootVC(vc)
+        NavigationCoordinator.shared.rootVC(vc)
     }
     
     static func push(

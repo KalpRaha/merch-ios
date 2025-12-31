@@ -15,7 +15,9 @@ protocol NotificationDelegate: AnyObject {
     func notifyHome()
 }
 
-class PassCodeViewController: UIViewController, WKNavigationDelegate {
+final class PassCodeViewController: UIViewController, WKNavigationDelegate, Navigatable {
+    
+    static var viewControllerIdentifier: String { "passScreen" }
     
     @IBOutlet weak var stackFourth: UIStackView!
     @IBOutlet weak var stackThird: UIStackView!
@@ -420,7 +422,8 @@ class PassCodeViewController: UIViewController, WKNavigationDelegate {
                     self.loadingIndicator.isAnimating = false
                     self.loadingIndicator.removeFromSuperview()
                     
-                    self.performSegue(withIdentifier: "passcodetoHome", sender: nil)
+                    self.navigateToHome()
+//                    self.performSegue(withIdentifier: "passcodetoHome", sender: nil)
                     
                     
                     //                    if UserDefaults.standard.bool(forKey: "notification_received") {
@@ -1633,14 +1636,20 @@ class PassCodeViewController: UIViewController, WKNavigationDelegate {
                 .constraint(equalTo: self.loadingIndicator.widthAnchor)
         ])
     }
+    
+    private func navigateToHome() {
+        HomeViewController.root(passData: { [weak self] vc in
+            guard let self else { return }
+            vc.page = webview.url
+        })
+    }
 }
 
 extension PassCodeViewController: NotificationDelegate {
     
     func notifyHome() {
-        
-        self.performSegue(withIdentifier: "passcodetoHome", sender: nil)
-        
+        navigateToHome()
+//        self.performSegue(withIdentifier: "passcodetoHome", sender: nil)
         
         //        if UserDefaults.standard.bool(forKey: "notificationscene") {
         //            dismiss(animated: true) {

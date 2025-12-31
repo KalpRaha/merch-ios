@@ -19,6 +19,7 @@
 		B4963F5D2F03E8EF00A6AA52 /* Navigatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4963F5C2F03E8EF00A6AA52 /* Navigatable.swift */; };
 		B4963F5F2F03E9E300A6AA52 /* ClassNameRetrievable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4963F5E2F03E9E300A6AA52 /* ClassNameRetrievable.swift */; };
 		B4963F612F03EA1700A6AA52 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4963F602F03EA1700A6AA52 /* UIStoryboard+Extension.swift */; };
+		B4A00F1E2F04C6130091860D /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A00F1D2F04C6130091860D /* NavigationCoordinator.swift */; };
 		D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */; };
 		D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */; };
 		D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC882AA9AB8800A216C3 /* VariantViewController.swift */; };
@@ -305,6 +306,7 @@
 		B4963F5C2F03E8EF00A6AA52 /* Navigatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigatable.swift; sourceTree = "<group>"; };
 		B4963F5E2F03E9E300A6AA52 /* ClassNameRetrievable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameRetrievable.swift; sourceTree = "<group>"; };
 		B4963F602F03EA1700A6AA52 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
+		B4A00F1D2F04C6130091860D /* NavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
 		D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeViewController.swift; sourceTree = "<group>"; };
 		D204CC882AA9AB8800A216C3 /* VariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantViewController.swift; sourceTree = "<group>"; };
@@ -612,6 +614,7 @@
 		B4963F572F03E7FE00A6AA52 /* NavigationCoordinator */ = {
 			isa = PBXGroup;
 			children = (
+				B4A00F1D2F04C6130091860D /* NavigationCoordinator.swift */,
 				B4963F5C2F03E8EF00A6AA52 /* Navigatable.swift */,
 				B4963F5E2F03E9E300A6AA52 /* ClassNameRetrievable.swift */,
 			);
@@ -1700,6 +1703,7 @@
 				D23493D72CEF2F0B0046D33C /* OrderSummaryCell.swift in Sources */,
 				D257E0C32D278A1F004DF787 /* InStoreProductLotteryCell.swift in Sources */,
 				D23493D82CEF2F0B0046D33C /* OnlineOrderCell.swift in Sources */,
+				B4A00F1E2F04C6130091860D /* NavigationCoordinator.swift in Sources */,
 				D26930AD2E6599AE00C3339B /* CustomerMergeTableViewCell.swift in Sources */,
 				D23493D92CEF2F0B0046D33C /* FeesTableCell.swift in Sources */,
 				D23493DA2CEF2F0B0046D33C /* RefundProductCell.swift in Sources */,
