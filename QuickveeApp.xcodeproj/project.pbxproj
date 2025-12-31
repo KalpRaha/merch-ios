@@ -692,6 +692,15 @@
 			path = NavigationCoordinator;
 			sourceTree = "<group>";
 		};
+		B45CB8AB2F04E613004AF269 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D2A68398296C0B3700F852E6 /* Assets.xcassets */,
+				D217913D296EB84400F77C2A /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		D204E89F2A122A3D00EED5F5 /* Reporting */ = {
 			isa = PBXGroup;
 			children = (
@@ -1211,14 +1220,13 @@
 				B45CB8932F04DF59004AF269 /* APIService */,
 				D2FFEF512AFDFF7D003400BD /* API */,
 				D2FFEF542AFE00EE003400BD /* Alert */,
-				D2A68398296C0B3700F852E6 /* Assets.xcassets */,
 				D2FFEF532AFE0066003400BD /* Auth */,
 				D2FFEF502AFDFF53003400BD /* Cell */,
 				D29D1F312AE6708B0017819B /* DataModal */,
 				D2FFEF5B2AFE03DC003400BD /* Extention */,
-				D217913D296EB84400F77C2A /* Fonts */,
 				D2FFEF522AFDFFC7003400BD /* Home */,
 				B45CB8A02F04DFDF004AF269 /* Utils */,
+				B45CB8AB2F04E613004AF269 /* Resources */,
 				D2A6839D296C0B3700F852E6 /* Info.plist */,
 				D2A6839A296C0B3700F852E6 /* LaunchScreen.storyboard */,
 				D2A68392296C0B3700F852E6 /* Main.storyboard */,
