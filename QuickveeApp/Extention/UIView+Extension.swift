@@ -207,3 +207,20 @@ extension UIView {
     }
     
 }
+
+
+extension UIView {
+
+    func loadNib() {
+        let bundle = Bundle(for: type(of: self))
+        let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
+
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            fatalError("Failed to load nib for \(self)")
+        }
+
+        view.frame = bounds
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(view)
+    }
+}

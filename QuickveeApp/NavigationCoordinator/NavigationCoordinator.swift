@@ -10,7 +10,11 @@ import UIKit
 
 class NavigationCoordinator : NSObject {
     
-    var window: UIWindow?
+    var window: UIWindow? {
+        didSet{
+            AppDelegate.getAppInstance().window = window
+        }
+    }
     var scene : UIWindowScene?
     
     private override init() {

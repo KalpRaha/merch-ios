@@ -36,6 +36,9 @@
 		B45CB8B22F04F4CF004AF269 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8B12F04F4CF004AF269 /* Storage.swift */; };
 		B45CB8B42F04F741004AF269 /* JSONContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8B32F04F741004AF269 /* JSONContainer.swift */; };
 		B45CB8B62F04F75B004AF269 /* UDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8B52F04F75B004AF269 /* UDHelper.swift */; };
+		B45CB8B92F0519CC004AF269 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8B82F0519CC004AF269 /* ToastView.swift */; };
+		B45CB8BB2F051A02004AF269 /* ToastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B45CB8BA2F051A02004AF269 /* ToastView.xib */; };
+		B45CB8BE2F051C03004AF269 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8BD2F051C03004AF269 /* Toast.swift */; };
 		D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */; };
 		D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */; };
 		D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC882AA9AB8800A216C3 /* VariantViewController.swift */; };
@@ -335,6 +338,9 @@
 		B45CB8B12F04F4CF004AF269 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		B45CB8B32F04F741004AF269 /* JSONContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONContainer.swift; sourceTree = "<group>"; };
 		B45CB8B52F04F75B004AF269 /* UDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDHelper.swift; sourceTree = "<group>"; };
+		B45CB8B82F0519CC004AF269 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		B45CB8BA2F051A02004AF269 /* ToastView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToastView.xib; sourceTree = "<group>"; };
+		B45CB8BD2F051C03004AF269 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
 		D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeViewController.swift; sourceTree = "<group>"; };
 		D204CC882AA9AB8800A216C3 /* VariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantViewController.swift; sourceTree = "<group>"; };
@@ -680,6 +686,7 @@
 			isa = PBXGroup;
 			children = (
 				B45CB8AC2F04E6D6004AF269 /* FontFamily.swift */,
+				B45CB8BD2F051C03004AF269 /* Toast.swift */,
 				B45CB89F2F04DFDF004AF269 /* Logger.swift */,
 				B45CB8A22F04E2BB004AF269 /* ClassNameRetrievable.swift */,
 			);
@@ -712,6 +719,23 @@
 				B45CB8B32F04F741004AF269 /* JSONContainer.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		B45CB8B72F05199E004AF269 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B45CB8BC2F051BEC004AF269 /* ToastView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B45CB8BC2F051BEC004AF269 /* ToastView */ = {
+			isa = PBXGroup;
+			children = (
+				B45CB8B82F0519CC004AF269 /* ToastView.swift */,
+				B45CB8BA2F051A02004AF269 /* ToastView.xib */,
+			);
+			path = ToastView;
 			sourceTree = "<group>";
 		};
 		D204E89F2A122A3D00EED5F5 /* Reporting */ = {
@@ -1234,6 +1258,7 @@
 				D29D1F312AE6708B0017819B /* DataModal */,
 				D2FFEF5B2AFE03DC003400BD /* Extention */,
 				D2FFEF522AFDFFC7003400BD /* Home */,
+				B45CB8B72F05199E004AF269 /* View */,
 				B45CB8B02F04F4BD004AF269 /* Storage */,
 				B45CB8A02F04DFDF004AF269 /* Utils */,
 				B45CB8AB2F04E613004AF269 /* Resources */,
@@ -1573,6 +1598,7 @@
 				04B413D82E28EEE70002D0FE /* GoogleService-Info.plist in Resources */,
 				D2F5AB812CE5C2270050B89C /* HeaderViewCell.xib in Resources */,
 				D2F5AB822CE5C2270050B89C /* NoOrderFoundCell.xib in Resources */,
+				B45CB8BB2F051A02004AF269 /* ToastView.xib in Resources */,
 				D2F5AB832CE5C2270050B89C /* profileCell.xib in Resources */,
 				D2F5AB842CE5C2270050B89C /* OrderCell.xib in Resources */,
 			);
@@ -1750,6 +1776,7 @@
 				D2A2BF7D2B8DF2A6006796D5 /* OrderTableViewCell.swift in Sources */,
 				B45CB8B22F04F4CF004AF269 /* Storage.swift in Sources */,
 				D2D836002BA4049600BB167A /* RefundTableCell.swift in Sources */,
+				B45CB8B92F0519CC004AF269 /* ToastView.swift in Sources */,
 				D2EE36172BFDBE1D006F5238 /* MaxPurchaseQuantityViewController.swift in Sources */,
 				D2AE68DD2A7B7F12004D85B8 /* OrderRefundViewController.swift in Sources */,
 				D2A2BF722B8D9516006796D5 /* ProgressShapeLayer.swift in Sources */,
@@ -1839,6 +1866,7 @@
 				A54F2B312BBAB208009B4D53 /* OrderInStoreViewController.swift in Sources */,
 				D2182D55297120E6004DF7A1 /* StoreViewController.swift in Sources */,
 				D2A68397296C0B3700F852E6 /* QuickveeApp.xcdatamodeld in Sources */,
+				B45CB8BE2F051C03004AF269 /* Toast.swift in Sources */,
 				D25D18652CF4982300A79FDE /* CompletedFeesCell.swift in Sources */,
 				D262DEA8296FD2AC00011E27 /* ItemSalesViewController.swift in Sources */,
 				D26778272CB503F10090D863 /* QuickAddSetupViewController.swift in Sources */,
