@@ -32,6 +32,7 @@
 		B45CB8A82F04E2BB004AF269 /* Navigatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8A32F04E2BB004AF269 /* Navigatable.swift */; };
 		B45CB8AA2F04E364004AF269 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8A92F04E364004AF269 /* UIStoryboard+Extension.swift */; };
 		B45CB8AD2F04E6D6004AF269 /* FontFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8AC2F04E6D6004AF269 /* FontFamily.swift */; };
+		B45CB8AF2F04EBD5004AF269 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8AE2F04EBD5004AF269 /* UIView+Extension.swift */; };
 		D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */; };
 		D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */; };
 		D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC882AA9AB8800A216C3 /* VariantViewController.swift */; };
@@ -327,6 +328,7 @@
 		B45CB8A42F04E2BB004AF269 /* NavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
 		B45CB8A92F04E364004AF269 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		B45CB8AC2F04E6D6004AF269 /* FontFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontFamily.swift; sourceTree = "<group>"; };
+		B45CB8AE2F04EBD5004AF269 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
 		D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeViewController.swift; sourceTree = "<group>"; };
 		D204CC882AA9AB8800A216C3 /* VariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantViewController.swift; sourceTree = "<group>"; };
@@ -1468,6 +1470,7 @@
 			isa = PBXGroup;
 			children = (
 				B45CB8A92F04E364004AF269 /* UIStoryboard+Extension.swift */,
+				B45CB8AE2F04EBD5004AF269 /* UIView+Extension.swift */,
 				D2E239192B286B4D00231FB4 /* Extention.swift */,
 				D2B269E42A6113EC002D140A /* RootTableViewController.swift */,
 				D26F4E752995011200716A51 /* RotationAnimation.swift */,
@@ -1735,6 +1738,7 @@
 				D21A0DC329A4863E00DC36CC /* SetupViewController.swift in Sources */,
 				D25D18592CF491DE00A79FDE /* CompletedCartOnlineCell.swift in Sources */,
 				D2A87AAB2D156D300008C417 /* CompletedTaxCell 2.swift in Sources */,
+				B45CB8AF2F04EBD5004AF269 /* UIView+Extension.swift in Sources */,
 				D235A02A2CD0C1C300A81941 /* CustomerViewController.swift in Sources */,
 				D235A02B2CD0C1C300A81941 /* AddRemoveCustViewController.swift in Sources */,
 				D235A02C2CD0C1C300A81941 /* CustomerAddEditViewController.swift in Sources */,
