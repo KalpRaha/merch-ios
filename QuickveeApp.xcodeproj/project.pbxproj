@@ -16,6 +16,17 @@
 		A54F2B352BBABA1B009B4D53 /* InStoreDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B342BBABA1B009B4D53 /* InStoreDetailViewController.swift */; };
 		A54F2B372BBABA46009B4D53 /* InStoreRefundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B362BBABA46009B4D53 /* InStoreRefundViewController.swift */; };
 		A5D3A9072DF56956000F6B43 /* MissUPCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3A9062DF56956000F6B43 /* MissUPCTableViewCell.swift */; };
+		B45CB8942F04DF59004AF269 /* APIEndpointEnumType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8862F04DF59004AF269 /* APIEndpointEnumType.swift */; };
+		B45CB8952F04DF59004AF269 /* APIRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB88D2F04DF59004AF269 /* APIRequestMaker.swift */; };
+		B45CB8962F04DF59004AF269 /* APIResponseDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB88E2F04DF59004AF269 /* APIResponseDecoder.swift */; };
+		B45CB8972F04DF59004AF269 /* GenericAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8922F04DF59004AF269 /* GenericAPIResponse.swift */; };
+		B45CB8982F04DF59004AF269 /* APIEndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8872F04DF59004AF269 /* APIEndpointType.swift */; };
+		B45CB8992F04DF59004AF269 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB88A2F04DF59004AF269 /* API.swift */; };
+		B45CB89A2F04DF59004AF269 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB88F2F04DF59004AF269 /* APIService.swift */; };
+		B45CB89B2F04DF59004AF269 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8882F04DF59004AF269 /* Utils.swift */; };
+		B45CB89C2F04DF59004AF269 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB88C2F04DF59004AF269 /* APIError.swift */; };
+		B45CB89D2F04DF59004AF269 /* APIServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8902F04DF59004AF269 /* APIServiceType.swift */; };
+		B45CB8A12F04DFDF004AF269 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB89F2F04DFDF004AF269 /* Logger.swift */; };
 		D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */; };
 		D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */; };
 		D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC882AA9AB8800A216C3 /* VariantViewController.swift */; };
@@ -299,6 +310,17 @@
 		A54F2B362BBABA46009B4D53 /* InStoreRefundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InStoreRefundViewController.swift; sourceTree = "<group>"; };
 		A5D3A9062DF56956000F6B43 /* MissUPCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissUPCTableViewCell.swift; sourceTree = "<group>"; };
 		AAFCE2029C177F03D21729CB /* Pods-QuickveeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickveeApp.debug.xcconfig"; path = "Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp.debug.xcconfig"; sourceTree = "<group>"; };
+		B45CB8862F04DF59004AF269 /* APIEndpointEnumType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpointEnumType.swift; sourceTree = "<group>"; };
+		B45CB8872F04DF59004AF269 /* APIEndpointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpointType.swift; sourceTree = "<group>"; };
+		B45CB8882F04DF59004AF269 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		B45CB88A2F04DF59004AF269 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		B45CB88C2F04DF59004AF269 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		B45CB88D2F04DF59004AF269 /* APIRequestMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestMaker.swift; sourceTree = "<group>"; };
+		B45CB88E2F04DF59004AF269 /* APIResponseDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseDecoder.swift; sourceTree = "<group>"; };
+		B45CB88F2F04DF59004AF269 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		B45CB8902F04DF59004AF269 /* APIServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceType.swift; sourceTree = "<group>"; };
+		B45CB8922F04DF59004AF269 /* GenericAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAPIResponse.swift; sourceTree = "<group>"; };
+		B45CB89F2F04DFDF004AF269 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
 		D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeViewController.swift; sourceTree = "<group>"; };
 		D204CC882AA9AB8800A216C3 /* VariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantViewController.swift; sourceTree = "<group>"; };
@@ -601,6 +623,55 @@
 				810001DF67ED71A5175A0AB6 /* Pods-QuickveeApp.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		B45CB8892F04DF59004AF269 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				B45CB8862F04DF59004AF269 /* APIEndpointEnumType.swift */,
+				B45CB8872F04DF59004AF269 /* APIEndpointType.swift */,
+				B45CB8882F04DF59004AF269 /* Utils.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		B45CB88B2F04DF59004AF269 /* Endpoint */ = {
+			isa = PBXGroup;
+			children = (
+				B45CB88A2F04DF59004AF269 /* API.swift */,
+			);
+			path = Endpoint;
+			sourceTree = "<group>";
+		};
+		B45CB8912F04DF59004AF269 /* HTTPClient */ = {
+			isa = PBXGroup;
+			children = (
+				B45CB88C2F04DF59004AF269 /* APIError.swift */,
+				B45CB88D2F04DF59004AF269 /* APIRequestMaker.swift */,
+				B45CB88E2F04DF59004AF269 /* APIResponseDecoder.swift */,
+				B45CB88F2F04DF59004AF269 /* APIService.swift */,
+				B45CB8902F04DF59004AF269 /* APIServiceType.swift */,
+			);
+			path = HTTPClient;
+			sourceTree = "<group>";
+		};
+		B45CB8932F04DF59004AF269 /* APIService */ = {
+			isa = PBXGroup;
+			children = (
+				B45CB8892F04DF59004AF269 /* Configuration */,
+				B45CB88B2F04DF59004AF269 /* Endpoint */,
+				B45CB8912F04DF59004AF269 /* HTTPClient */,
+				B45CB8922F04DF59004AF269 /* GenericAPIResponse.swift */,
+			);
+			path = APIService;
+			sourceTree = "<group>";
+		};
+		B45CB8A02F04DFDF004AF269 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B45CB89F2F04DFDF004AF269 /* Logger.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		D204E89F2A122A3D00EED5F5 /* Reporting */ = {
@@ -1118,6 +1189,7 @@
 			isa = PBXGroup;
 			children = (
 				D2FFEF542AFE00EE003400BD /* Alert */,
+				B45CB8932F04DF59004AF269 /* APIService */,
 				D2FFEF512AFDFF7D003400BD /* API */,
 				D2D477522AFE31AE008290F9 /* APP */,
 				D2A68398296C0B3700F852E6 /* Assets.xcassets */,
@@ -1127,6 +1199,7 @@
 				D2FFEF5B2AFE03DC003400BD /* Extention */,
 				D217913D296EB84400F77C2A /* Fonts */,
 				D2FFEF522AFDFFC7003400BD /* Home */,
+				B45CB8A02F04DFDF004AF269 /* Utils */,
 				D2A6839D296C0B3700F852E6 /* Info.plist */,
 				D2A6839A296C0B3700F852E6 /* LaunchScreen.storyboard */,
 				D2A68392296C0B3700F852E6 /* Main.storyboard */,
@@ -1630,6 +1703,7 @@
 				D207DFB62CABFC3400D18B89 /* InStoreTaxTableViewCell.swift in Sources */,
 				D22BC0572A8CD81C00FB2E8C /* OrderAPIManager.swift in Sources */,
 				D22260122B54E588009DC35A /* LockPassCodeViewController.swift in Sources */,
+				B45CB8A12F04DFDF004AF269 /* Logger.swift in Sources */,
 				D27A8D112D114577003AAE33 /* InStoreNewDetailViewController.swift in Sources */,
 				D2439ACF29A77DC000B2ED7B /* SetupEmailSmsViewController.swift in Sources */,
 				D2EF641229C2DC6400EA83CE /* SetupAddTaxViewController.swift in Sources */,
@@ -1754,6 +1828,16 @@
 				D2CE36A22976C00E0090A6D2 /* OrderTypesInfoCollectionViewCell.swift in Sources */,
 				D258A6B72B456A47008BF1DC /* DuplicateVarTableViewCell.swift in Sources */,
 				D28604E02975516A0095BE1D /* ReportingTabsCollectionViewCell.swift in Sources */,
+				B45CB8942F04DF59004AF269 /* APIEndpointEnumType.swift in Sources */,
+				B45CB8952F04DF59004AF269 /* APIRequestMaker.swift in Sources */,
+				B45CB8962F04DF59004AF269 /* APIResponseDecoder.swift in Sources */,
+				B45CB8972F04DF59004AF269 /* GenericAPIResponse.swift in Sources */,
+				B45CB8982F04DF59004AF269 /* APIEndpointType.swift in Sources */,
+				B45CB8992F04DF59004AF269 /* API.swift in Sources */,
+				B45CB89A2F04DF59004AF269 /* APIService.swift in Sources */,
+				B45CB89B2F04DF59004AF269 /* Utils.swift in Sources */,
+				B45CB89C2F04DF59004AF269 /* APIError.swift in Sources */,
+				B45CB89D2F04DF59004AF269 /* APIServiceType.swift in Sources */,
 				D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */,
 				D265CF542DB7B02000915F25 /* DayCollectionViewCell.swift in Sources */,
 				D2DC4B962A3330F900E86A71 /* OnlineOrdersModel.swift in Sources */,
