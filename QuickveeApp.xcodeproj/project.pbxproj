@@ -27,6 +27,10 @@
 		B45CB89C2F04DF59004AF269 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB88C2F04DF59004AF269 /* APIError.swift */; };
 		B45CB89D2F04DF59004AF269 /* APIServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8902F04DF59004AF269 /* APIServiceType.swift */; };
 		B45CB8A12F04DFDF004AF269 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB89F2F04DFDF004AF269 /* Logger.swift */; };
+		B45CB8A62F04E2BB004AF269 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8A42F04E2BB004AF269 /* NavigationCoordinator.swift */; };
+		B45CB8A72F04E2BB004AF269 /* ClassNameRetrievable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8A22F04E2BB004AF269 /* ClassNameRetrievable.swift */; };
+		B45CB8A82F04E2BB004AF269 /* Navigatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8A32F04E2BB004AF269 /* Navigatable.swift */; };
+		B45CB8AA2F04E364004AF269 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8A92F04E364004AF269 /* UIStoryboard+Extension.swift */; };
 		D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */; };
 		D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */; };
 		D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC882AA9AB8800A216C3 /* VariantViewController.swift */; };
@@ -321,6 +325,10 @@
 		B45CB8902F04DF59004AF269 /* APIServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceType.swift; sourceTree = "<group>"; };
 		B45CB8922F04DF59004AF269 /* GenericAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAPIResponse.swift; sourceTree = "<group>"; };
 		B45CB89F2F04DFDF004AF269 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		B45CB8A22F04E2BB004AF269 /* ClassNameRetrievable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameRetrievable.swift; sourceTree = "<group>"; };
+		B45CB8A32F04E2BB004AF269 /* Navigatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigatable.swift; sourceTree = "<group>"; };
+		B45CB8A42F04E2BB004AF269 /* NavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
+		B45CB8A92F04E364004AF269 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
 		D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeViewController.swift; sourceTree = "<group>"; };
 		D204CC882AA9AB8800A216C3 /* VariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantViewController.swift; sourceTree = "<group>"; };
@@ -670,8 +678,18 @@
 			isa = PBXGroup;
 			children = (
 				B45CB89F2F04DFDF004AF269 /* Logger.swift */,
+				B45CB8A22F04E2BB004AF269 /* ClassNameRetrievable.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		B45CB8A52F04E2BB004AF269 /* NavigationCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				B45CB8A32F04E2BB004AF269 /* Navigatable.swift */,
+				B45CB8A42F04E2BB004AF269 /* NavigationCoordinator.swift */,
+			);
+			path = NavigationCoordinator;
 			sourceTree = "<group>";
 		};
 		D204E89F2A122A3D00EED5F5 /* Reporting */ = {
@@ -1188,10 +1206,11 @@
 		D2A6838B296C0B3700F852E6 /* QuickveeApp */ = {
 			isa = PBXGroup;
 			children = (
-				D2FFEF542AFE00EE003400BD /* Alert */,
+				D2D477522AFE31AE008290F9 /* APP */,
+				B45CB8A52F04E2BB004AF269 /* NavigationCoordinator */,
 				B45CB8932F04DF59004AF269 /* APIService */,
 				D2FFEF512AFDFF7D003400BD /* API */,
-				D2D477522AFE31AE008290F9 /* APP */,
+				D2FFEF542AFE00EE003400BD /* Alert */,
 				D2A68398296C0B3700F852E6 /* Assets.xcassets */,
 				D2FFEF532AFE0066003400BD /* Auth */,
 				D2FFEF502AFDFF53003400BD /* Cell */,
@@ -1449,6 +1468,7 @@
 		D2FFEF5B2AFE03DC003400BD /* Extention */ = {
 			isa = PBXGroup;
 			children = (
+				B45CB8A92F04E364004AF269 /* UIStoryboard+Extension.swift */,
 				D2E239192B286B4D00231FB4 /* Extention.swift */,
 				D2B269E42A6113EC002D140A /* RootTableViewController.swift */,
 				D26F4E752995011200716A51 /* RotationAnimation.swift */,
@@ -1646,6 +1666,9 @@
 				D29944C62A8376D000120302 /* OrderFilterViewController.swift in Sources */,
 				D262DEAE296FD37E00011E27 /* ReportingPagerViewController.swift in Sources */,
 				D23681D82AA7016A00728FDB /* ProductsTableViewCell.swift in Sources */,
+				B45CB8A62F04E2BB004AF269 /* NavigationCoordinator.swift in Sources */,
+				B45CB8A72F04E2BB004AF269 /* ClassNameRetrievable.swift in Sources */,
+				B45CB8A82F04E2BB004AF269 /* Navigatable.swift in Sources */,
 				04AC908D2E951D360009C2A8 /* DescOptionsCollectionViewCell.swift in Sources */,
 				D2A2BF6E2B8D94C6006796D5 /* PageViewController.swift in Sources */,
 				D2D625492B75E13300C25D07 /* AddBulkPricingViewController.swift in Sources */,
@@ -1789,6 +1812,7 @@
 				D23FC5902BEB75B30005CC17 /* RefundPartialCell.swift in Sources */,
 				D2A1A1082BFF6282007A1055 /* AddPurchaseCell.swift in Sources */,
 				D2DF61222CE32561003D47B0 /* StockSaveTableViewCell.swift in Sources */,
+				B45CB8AA2F04E364004AF269 /* UIStoryboard+Extension.swift in Sources */,
 				D2EF641A29C2F06000EA83CE /* SetupTaxTableViewCell.swift in Sources */,
 				D28621072AB065CC00AC90B4 /* AddProductCollectionViewCell.swift in Sources */,
 				A52EAC272DF6E171007FB160 /* MissUPCCollectionViewCell.swift in Sources */,

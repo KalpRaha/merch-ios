@@ -28,7 +28,10 @@ protocol UpdatePermissionDelegate: AnyObject {
 }
 
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController, Navigatable {
+    
+    static var viewControllerIdentifier: String { "home" }
+    
     
     @IBOutlet weak var topView: UIView!
     

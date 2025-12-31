@@ -258,3 +258,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 
 }
 
+extension AppDelegate {
+    
+    static func getAppInstance() -> Self {
+        UIApplication.shared.delegate as! Self
+    }
+    
+    static func getSceneDelegate() -> SceneDelegate? {
+        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.delegate as? SceneDelegate
+    }
+    
+}

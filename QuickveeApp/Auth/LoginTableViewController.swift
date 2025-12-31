@@ -13,7 +13,7 @@ import AdSupport
 import AppTrackingTransparency
 import WebKit
 
-class LoginTableViewController: UITableViewController {
+final class LoginTableViewController: UITableViewController, Navigatable {
     
     @IBOutlet weak var loginView: UIView!
     @IBOutlet weak var sigininText: UILabel!
