@@ -16,6 +16,7 @@
 		A54F2B352BBABA1B009B4D53 /* InStoreDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B342BBABA1B009B4D53 /* InStoreDetailViewController.swift */; };
 		A54F2B372BBABA46009B4D53 /* InStoreRefundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B362BBABA46009B4D53 /* InStoreRefundViewController.swift */; };
 		A5D3A9072DF56956000F6B43 /* MissUPCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3A9062DF56956000F6B43 /* MissUPCTableViewCell.swift */; };
+		B42F5F582F078120002252EE /* PersistenceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F5F572F078120002252EE /* PersistenceContainer.swift */; };
 		B45CB8942F04DF59004AF269 /* APIEndpointEnumType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8862F04DF59004AF269 /* APIEndpointEnumType.swift */; };
 		B45CB8952F04DF59004AF269 /* APIRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB88D2F04DF59004AF269 /* APIRequestMaker.swift */; };
 		B45CB8962F04DF59004AF269 /* APIResponseDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB88E2F04DF59004AF269 /* APIResponseDecoder.swift */; };
@@ -318,6 +319,7 @@
 		A54F2B362BBABA46009B4D53 /* InStoreRefundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InStoreRefundViewController.swift; sourceTree = "<group>"; };
 		A5D3A9062DF56956000F6B43 /* MissUPCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissUPCTableViewCell.swift; sourceTree = "<group>"; };
 		AAFCE2029C177F03D21729CB /* Pods-QuickveeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickveeApp.debug.xcconfig"; path = "Target Support Files/Pods-QuickveeApp/Pods-QuickveeApp.debug.xcconfig"; sourceTree = "<group>"; };
+		B42F5F572F078120002252EE /* PersistenceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceContainer.swift; sourceTree = "<group>"; };
 		B45CB8862F04DF59004AF269 /* APIEndpointEnumType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpointEnumType.swift; sourceTree = "<group>"; };
 		B45CB8872F04DF59004AF269 /* APIEndpointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpointType.swift; sourceTree = "<group>"; };
 		B45CB8882F04DF59004AF269 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -639,6 +641,14 @@
 				810001DF67ED71A5175A0AB6 /* Pods-QuickveeApp.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		B42F5F562F078112002252EE /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				B42F5F572F078120002252EE /* PersistenceContainer.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		B45CB8892F04DF59004AF269 /* Configuration */ = {
@@ -1259,6 +1269,7 @@
 				D2FFEF5B2AFE03DC003400BD /* Extention */,
 				D2FFEF522AFDFFC7003400BD /* Home */,
 				B45CB8B72F05199E004AF269 /* View */,
+				B42F5F562F078112002252EE /* CoreData */,
 				B45CB8B02F04F4BD004AF269 /* Storage */,
 				B45CB8A02F04DFDF004AF269 /* Utils */,
 				B45CB8AB2F04E613004AF269 /* Resources */,
@@ -1834,6 +1845,7 @@
 				D23327DD2C9D77A700161CCD /* DoubleSalesTableViewCell.swift in Sources */,
 				D2A6838D296C0B3700F852E6 /* AppDelegate.swift in Sources */,
 				D285ECE32A2ED94C009DFAE5 /* OrdersViewController.swift in Sources */,
+				B42F5F582F078120002252EE /* PersistenceContainer.swift in Sources */,
 				D2CA7D7C2B4555A100918A94 /* DuplicateTaxCollectionViewCell.swift in Sources */,
 				D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */,
 				D2D1F9052C1845C5008BD228 /* MixnMatchPricingViewController.swift in Sources */,
