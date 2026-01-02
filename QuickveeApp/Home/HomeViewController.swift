@@ -310,7 +310,7 @@ final class HomeViewController: UIViewController, Navigatable {
             case .success(_):
                 do {
                     let _ = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:Any]
-                    UDHelper.isLoggedIn = false
+                    UDHelper.shared.isLoggedIn = false
 //                    UserDefaults.standard.set(false, forKey: "LoggedIn")
                     UserDefaults.standard.set(false, forKey: "passcheck")
                     UserDefaults.standard.set(false, forKey: "fcm_token_set")

@@ -17,11 +17,14 @@ import Foundation
  
  */
 
-struct UDHelper {
+class UDHelper {
+    
+    static var shared = UDHelper()
+    private init() { }
     
     
     @Storage(key: .isLoggedIn, defaultValue: false)
-    static var isLoggedIn: Bool
+    var isLoggedIn: Bool
     
     
 

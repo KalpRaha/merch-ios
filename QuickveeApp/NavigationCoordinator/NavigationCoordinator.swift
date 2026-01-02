@@ -48,7 +48,7 @@ class NavigationCoordinator : NSObject {
     func configureIntialScreen() {
         // Configure your initial screen
         
-        if UDHelper.isLoggedIn {
+        if UDHelper.shared.isLoggedIn {
             PassCodeViewController.root()
             
         } else {
