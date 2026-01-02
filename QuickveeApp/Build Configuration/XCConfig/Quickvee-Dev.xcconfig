@@ -1,0 +1,12 @@
+//
+//  Quickvee-Dev.xcconfig
+//  QuickveeApp
+//
+//  Created by Sooraj kahar on 02/01/26.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+
+BASE_URL = https:/$()/qa-api-ci.quickvee.us/
