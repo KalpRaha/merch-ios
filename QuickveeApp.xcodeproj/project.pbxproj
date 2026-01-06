@@ -2273,7 +2273,7 @@
 				DEVELOPMENT_TEAM = UDXGC872R6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = QuickveeApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Mer-Dev";
+				INFOPLIST_KEY_CFBundleDisplayName = "Merchantech Manager";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The app would like to use your camera";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This tracking helps us identify our users uniquely and improves app functionality.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
