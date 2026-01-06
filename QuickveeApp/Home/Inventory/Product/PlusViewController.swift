@@ -1946,18 +1946,24 @@ class PlusViewController: UIViewController {
                 
                 if isSuccess {
                     print(responseData)
-                    if let list = responseData["message"] as? String {
-                        if list == "Success" {
-                            ToastClass.sharedToast.showToast(message: "Successfully created product", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                            self.navigationController?.popViewController(animated: true)
-                            self.saveBtn.isEnabled = true
-                        }
-                        else{
-                            ToastClass.sharedToast.showToast(message: "Product already exist", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                            self.loadIndicator.isAnimating = false
-                            self.saveBtn.isEnabled = true
-                        }
+                    if let successMessage = responseData["success_message"] as? String {
+                        ToastClass.sharedToast.showToast(
+                            message: successMessage,
+                            font: UIFont(name: "Manrope-SemiBold", size: 14.0)!
+                        )
+                        self.navigationController?.popViewController(animated: true)
+
+                    } else if let updateMessage = responseData["update_message"] as? String {
+                        ToastClass.sharedToast.showToast(
+                            message: updateMessage,
+                            font: UIFont(name: "Manrope-SemiBold", size: 14.0)!
+                        )
                     }
+
+                    self.loadIndicator.isAnimating = false
+                    self.saveBtn.isEnabled = true
+                    
+
                 }
                 else {
                     
