@@ -9,11 +9,14 @@ import Foundation
 
 struct AppURLs {
     // live
-    static let base_url = "https://api-ci.quickvee.us/"
+//    static let base_url = "https://api-ci.quickvee.us/"
     
     //test
    // static let base_url = "https://qa-api-ci.quickvee.us/"
 
+    
+    static let base_url = { APIConstant.baseURL }()
+    
     
     static let ORDERS_LIST = "\(base_url)orders/order_list"
     static let ORDER_DETAILS = "\(base_url)orders/order_details"
