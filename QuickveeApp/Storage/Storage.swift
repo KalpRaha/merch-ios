@@ -52,7 +52,7 @@ struct Storage<T : Codable> {
 extension Storage {
     
     private func getData() -> T {
-        if let data = userDefaults.object(forKey: encryptedKey()) as? Data {
+        if let data = userDefaults.value(forKey: encryptedKey()) as? Data {
             
             if let container = try? jsonDecoder.decode(JSONContainer<T>.self, from: data) {
                 return container.value
@@ -62,7 +62,7 @@ extension Storage {
                 return value
             }
             
-        }else if let value = userDefaults.object(forKey: key) as? T {
+        }else if let value = userDefaults.value(forKey: key) as? T {
             setData(newValue: value)
             return value
         }
