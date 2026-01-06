@@ -1640,10 +1640,12 @@ final class PassCodeViewController: UIViewController, WKNavigationDelegate, Navi
     }
     
     private func navigateToHome() {
-        HomeViewController.root(passData: { [weak self] vc in
-            guard let self else { return }
-            vc.page = webview.url
-        })
+        self.performSegue(withIdentifier: "passcodetoHome", sender: nil)
+
+//        HomeViewController.root(passData: { [weak self] vc in
+//            guard let self else { return }
+//            vc.page = webview.url
+//        })
     }
 }
 
