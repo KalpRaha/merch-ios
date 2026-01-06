@@ -13,6 +13,7 @@ class NavigationCoordinator : NSObject {
     var window: UIWindow? {
         didSet{
             AppDelegate.getAppInstance().window = window
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window = window
         }
     }
     var scene : UIWindowScene?
