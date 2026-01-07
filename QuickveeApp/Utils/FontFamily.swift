@@ -10,6 +10,9 @@ import UIKit
 
 enum FontFamily : String {
     
+    case ManropeThin = "Manrope-Thin"
+    case ManropeLight = "Manrope-Light"
+    case ManropeRegular = "Manrope-Regular"
     case ManropeMedium = "Manrope-Medium"
     case ManropeSemiBold = "Manrope-SemiBold"
     case ManropeBold = "Manrope-Bold"

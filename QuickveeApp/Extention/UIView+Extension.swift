@@ -8,6 +8,68 @@
 import UIKit
 import ObjectiveC.runtime
 
+extension UIView{
+    
+    func circularShape(){
+        self.layer.cornerRadius = self.frame.height/2
+    }
+    
+    func applyCornerRadius(cornerRadius: CGFloat, corners: CACornerMask = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]){
+        self.clipsToBounds = true
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = cornerRadius
+        self.layer.maskedCorners = corners
+    }
+    
+    func applyBorder(borderWidth: CGFloat, borderColor: UIColor, borderOpacity: CGFloat = 1.0){
+        self.clipsToBounds = true
+        self.layer.masksToBounds = true
+        self.layer.borderWidth = borderWidth
+        self.layer.borderColor = borderColor.withAlphaComponent(borderOpacity).cgColor
+        
+    }
+    
+    // Function to apply shadow
+    func applyShadow(shadowColor: UIColor, shadowOpacity: Float, shadowXOffset: CGFloat = 0, shadowYOffset: CGFloat = 0, shadowBlur: CGFloat, shadowSpread: CGFloat) {
+        layer.masksToBounds = false  // Set to false to allow the shadow to be visible outside the corner radius
+        
+        layer.shadowColor = shadowColor.cgColor
+        layer.shadowOpacity = shadowOpacity
+        layer.shadowOffset = CGSize(width: shadowXOffset, height: shadowYOffset)
+        layer.shadowRadius = shadowBlur / 2.0
+        
+        // Calculate the spread for the rounded path
+        let spread = max(0, shadowSpread)
+        
+        // Set the shadow path to the rounded path with spread
+        let roundedRect = bounds.insetBy(dx: -spread, dy: -spread)
+        layer.shadowPath = UIBezierPath(roundedRect: roundedRect, cornerRadius: layer.cornerRadius).cgPath
+    }
+    
+    func applyShadowWithFalseMasking(
+        shadowColor: UIColor,
+        shadowOpacity: Float,
+        shadowXOffset: CGFloat = 0,
+        shadowYOffset: CGFloat = 0,
+        shadowBlur: CGFloat,
+        shadowSpread: CGFloat
+    ) {
+        layer.masksToBounds = false
+        layer.shadowColor = shadowColor.cgColor
+        layer.shadowOpacity = shadowOpacity
+        layer.shadowOffset = CGSize(width: shadowXOffset, height: shadowYOffset)
+        layer.shadowRadius = shadowBlur / 2.0
+
+        let spread = max(0, shadowSpread)
+        let shadowRect = bounds.insetBy(dx: -spread, dy: -spread)
+        let adjustedCornerRadius = (bounds.width / 2) + spread // Match corner radius to circular shadow path
+
+        layer.shadowPath = UIBezierPath(roundedRect: shadowRect, cornerRadius: adjustedCornerRadius).cgPath
+    }
+
+}
+
+
 /*
  
  Example :

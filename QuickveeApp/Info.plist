@@ -19,6 +19,9 @@
 		<string>Manrope-ExtraBold.ttf</string>
 		<string>Manrope-Medium.ttf</string>
 		<string>Manrope-SemiBold.ttf</string>
+		<string>manrope.light.otf</string>
+		<string>manrope.regular.otf</string>
+		<string>manrope.thin.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
