@@ -173,7 +173,7 @@ class VariantViewController: UIViewController {
             smallres.append(variant)
         }
         
-        variantList = smallres.reversed()
+        variantList = smallres
         subVarArray = variantList
         searchVarArray = variantList
         filterVarArray = variantList

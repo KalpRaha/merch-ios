@@ -89,7 +89,8 @@ struct AppURLs {
     
     //static let INVENTORY_VARIANT_LIST = "https://qa-elasticsearch.quickvee.us/Productapi/variant_list"
     static let INVENTORY_VARIANT_LIST = "\(base_url)Productapi/variant_list"
-    static let INVENTORY_VARIANT_LIST_PAGINATION = "\(base_url)productapi/variant_list_pagination"
+   // static let INVENTORY_VARIANT_LIST_PAGINATION = "\(base_url)productapi/variant_list_pagination"
+    static let INVENTORY_VARIANT_LIST_PAGINATION = "\(base_url)productapi/variant_list_ios"
     static let INVENTORY_UPDATE_PRODUCT_VARIANT = "\(base_url)productapi/update_product_variant"
     static let INVENTORY_VARIANT_BY_ID = "\(base_url)productapi/get_variantdata_ById"
     static let INVENTORY_VARIANT_UPDATE = "\(base_url)productapi/update_product_variant"
