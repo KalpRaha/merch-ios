@@ -49,4 +49,12 @@ extension UIColor {
         UIColor(named: "878787") ?? .lightGray
     }()
     
+    static var F9F9F9 : UIColor = {
+        UIColor(named: "F9F9F9") ?? .lightGray
+    }()
+    
+    static var B2B2B2 : UIColor = {
+        UIColor(named: "B2B2B2") ?? .lightGray
+    }()
+    
 }

@@ -370,13 +370,40 @@
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                                         <textInputTraits key="textInputTraits" textContentType="organization"/>
                                                                                                     </textField>
+                                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="91H-wx-URR" customClass="GenericSegmentedControl" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                        <rect key="frame" x="280" y="5" width="79.666666666666686" height="39.666666666666664"/>
+                                                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                                        <constraints>
+                                                                                                            <constraint firstAttribute="width" secondItem="91H-wx-URR" secondAttribute="height" multiplier="84:42" id="kjR-4A-kJf"/>
+                                                                                                        </constraints>
+                                                                                                        <userDefinedRuntimeAttributes>
+                                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                                                                                                <real key="value" value="0.0"/>
+                                                                                                            </userDefinedRuntimeAttribute>
+                                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
+                                                                                                                <integer key="value" value="0"/>
+                                                                                                            </userDefinedRuntimeAttribute>
+                                                                                                            <userDefinedRuntimeAttribute type="color" keyPath="controlTextColor">
+                                                                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                            </userDefinedRuntimeAttribute>
+                                                                                                            <userDefinedRuntimeAttribute type="color" keyPath="controlBackgroundColor">
+                                                                                                                <color key="value" name="F9F9F9"/>
+                                                                                                            </userDefinedRuntimeAttribute>
+                                                                                                            <userDefinedRuntimeAttribute type="color" keyPath="controlBorderColor">
+                                                                                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                            </userDefinedRuntimeAttribute>
+                                                                                                        </userDefinedRuntimeAttributes>
+                                                                                                    </view>
                                                                                                 </subviews>
                                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                                 <constraints>
                                                                                                     <constraint firstItem="h75-XG-CoL" firstAttribute="leading" secondItem="ZAu-gv-uVa" secondAttribute="leading" constant="24" id="07i-kB-B0V"/>
+                                                                                                    <constraint firstItem="91H-wx-URR" firstAttribute="top" secondItem="ZAu-gv-uVa" secondAttribute="top" constant="5" id="0gj-HW-AmU"/>
                                                                                                     <constraint firstItem="h75-XG-CoL" firstAttribute="top" secondItem="ZAu-gv-uVa" secondAttribute="top" id="Arq-zs-1yD"/>
                                                                                                     <constraint firstAttribute="bottom" secondItem="h75-XG-CoL" secondAttribute="bottom" id="OA8-aO-KOP"/>
                                                                                                     <constraint firstAttribute="width" secondItem="ZAu-gv-uVa" secondAttribute="height" multiplier="381:52" id="fiC-Ue-dgL"/>
+                                                                                                    <constraint firstAttribute="trailing" secondItem="91H-wx-URR" secondAttribute="trailing" constant="5" id="gxz-YC-Z5j"/>
+                                                                                                    <constraint firstAttribute="bottom" secondItem="91H-wx-URR" secondAttribute="bottom" constant="5" id="veY-HM-ttl"/>
                                                                                                     <constraint firstAttribute="trailing" secondItem="h75-XG-CoL" secondAttribute="trailing" constant="150" id="zf5-mF-EvP"/>
                                                                                                 </constraints>
                                                                                             </view>
@@ -555,6 +582,7 @@
                         <outlet property="lblDiscountPerItem" destination="DLl-lQ-2Hi" id="rFc-wz-NWx"/>
                         <outlet property="lblProductDiscountTypeSelectionViewSubTitle" destination="vKZ-4r-UAJ" id="d7v-ZN-eNB"/>
                         <outlet property="lblProductDiscountTypeSelectionViewTitle" destination="cxc-8e-J7d" id="beI-xv-ky2"/>
+                        <outlet property="segCtrlDiscountPerItemDiscountType" destination="91H-wx-URR" id="Ol2-7H-Fsi"/>
                         <outlet property="swtAllowDiscountStackWithOtherDiscounts" destination="A8c-pd-HRJ" id="fQW-kb-qEE"/>
                         <outlet property="txtDiscountName" destination="ooP-5k-KXU" id="StC-aq-aqm"/>
                         <outlet property="txtDiscountPerItem" destination="h75-XG-CoL" id="BHc-Be-ng4"/>

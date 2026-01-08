@@ -51,6 +51,10 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     @IBOutlet private weak var txtDiscountPerItem: UITextField!
     
     
+    @IBOutlet private weak var segCtrlDiscountPerItemDiscountType : GenericSegmentedControl!
+    
+    
+    
     // Bottom Buttons
     @IBOutlet private weak var btnCancel: GenericButton!
     @IBOutlet private weak var btnSave: GenericButton!
@@ -83,6 +87,11 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     private func updateUI(){
         vwNavigationHeader.delegate = self
         setupUIForDiscountTextFields()
+        
+        segCtrlDiscountPerItemDiscountType.configure(
+            with: viewModel.discountPerItemDiscountTypeSegments.compactMap({ $0.stringValue }),
+            configuration: .default
+        )
     }
     
     private func setupUIForDiscountTextFields(){

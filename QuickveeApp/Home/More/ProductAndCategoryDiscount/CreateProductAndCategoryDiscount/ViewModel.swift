@@ -41,7 +41,10 @@ extension CreateProductAndCategoryDiscountVC {
             }
         }
         
-        
+        var discountPerItemDiscountTypeSegments: [DiscountPerItemDiscountType] = [
+            .currencyValue,
+            .percentage
+        ]
         
     }
     
