@@ -47,6 +47,7 @@ class NaviViewController: UINavigationController {
     }
     
     func checkLogin() -> Bool {
-        return UserDefaults.standard.bool(forKey: "LoggedIn")
+        UDHelper.shared.isLoggedIn
+//        return UserDefaults.standard.bool(forKey: "LoggedIn")
     }
 }
