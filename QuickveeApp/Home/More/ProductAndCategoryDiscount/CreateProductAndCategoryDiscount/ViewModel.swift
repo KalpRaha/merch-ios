@@ -1,5 +1,5 @@
 //
-//  CreateProductAndCategoryDiscountVM.swift
+//  ViewModel.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 08/01/26.
@@ -17,7 +17,7 @@ protocol CreateProductAndCategoryDiscountVMDelegate : AnyObject {
 
 extension CreateProductAndCategoryDiscountVC {
     
-    class CreateProductAndCategoryDiscountVM {
+    class ViewModel {
         
         weak var delegate : CreateProductAndCategoryDiscountVMDelegate?
         

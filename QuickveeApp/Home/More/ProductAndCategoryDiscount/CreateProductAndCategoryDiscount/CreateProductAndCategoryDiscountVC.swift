@@ -13,7 +13,7 @@ class CreateProductAndCategoryDiscountVCFactory {
     static func make() -> CreateProductAndCategoryDiscountVC {
     
         let vc = CreateProductAndCategoryDiscountVC.instantiate()
-        vc.viewModel = CreateProductAndCategoryDiscountVC.CreateProductAndCategoryDiscountVM()
+        vc.viewModel = CreateProductAndCategoryDiscountVC.ViewModel()
         vc.viewModel?.delegate = vc
         
         return vc
@@ -56,7 +56,7 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     @IBOutlet private weak var btnSave: GenericButton!
     
     
-    var viewModel : CreateProductAndCategoryDiscountVM!
+    var viewModel : ViewModel!
     
     
     override func viewDidLoad() {
