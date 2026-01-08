@@ -16,6 +16,8 @@ protocol Navigatable {
     static func instantiate() -> Self
     
     static func root(passData: ( (Self) -> () )?)
+    func root()
+    
     
     static func push(
         in navigationController: UINavigationController?,
@@ -23,12 +25,25 @@ protocol Navigatable {
         animated: Bool
     )
     
+    func push(
+        in navigationController: UINavigationController?,
+        animated: Bool
+    )
+    
+    
     static func present(
         in currentVC: UIViewController,
         passData: ( (Self) -> () )?,
         animated: Bool,
         completion: ( () -> Void )?
     )
+    
+    func present(
+        in currentVC: UIViewController,
+        animated: Bool,
+        completion: ( () -> Void )?
+    )
+    
     
     func popVC(animated: Bool)
 }
@@ -53,6 +68,10 @@ extension Navigatable where Self : UIViewController {
         NavigationCoordinator.shared.rootVC(vc)
     }
     
+    func root() {
+        NavigationCoordinator.shared.rootVC(self)
+    }
+    
     static func push(
         in navigationController: UINavigationController?,
         passData: ( (Self) -> () )? = nil,
@@ -65,6 +84,14 @@ extension Navigatable where Self : UIViewController {
         navigationController?.pushViewController(vc, animated: animated)
     }
     
+    func push(
+        in navigationController: UINavigationController?,
+        animated: Bool = true
+    ) {
+        navigationController?.pushViewController(self, animated: animated)
+    }
+    
+    
     static func present(
         in currentVC: UIViewController,
         passData: ( (Self) -> () )? = nil,
@@ -74,6 +101,14 @@ extension Navigatable where Self : UIViewController {
         let vc = Self.instantiate()
         passData?(vc)
         currentVC.present(vc, animated: animated, completion: completion)
+    }
+    
+    func present(
+        in currentVC: UIViewController,
+        animated: Bool = true,
+        completion: ( () -> Void )? = nil
+    ) {
+        currentVC.present(self, animated: animated, completion: completion)
     }
     
     func popVC(animated: Bool = true) {

@@ -16,6 +16,10 @@
 		A54F2B352BBABA1B009B4D53 /* InStoreDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B342BBABA1B009B4D53 /* InStoreDetailViewController.swift */; };
 		A54F2B372BBABA46009B4D53 /* InStoreRefundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B362BBABA46009B4D53 /* InStoreRefundViewController.swift */; };
 		A5D3A9072DF56956000F6B43 /* MissUPCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3A9062DF56956000F6B43 /* MissUPCTableViewCell.swift */; };
+		B41A9F382F0F4F2B00C543C7 /* CustomSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F372F0F4F2B00C543C7 /* CustomSwitch.swift */; };
+		B41A9F3D2F0F7F3700C543C7 /* CreateProductAndCategoryDiscountVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F3C2F0F7F3700C543C7 /* CreateProductAndCategoryDiscountVM.swift */; };
+		B41A9F402F0F86CC00C543C7 /* ProductAndCategoryDiscountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F3F2F0F86CC00C543C7 /* ProductAndCategoryDiscountType.swift */; };
+		B41A9F422F0F86E300C543C7 /* DiscountPerItemDiscountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F412F0F86E300C543C7 /* DiscountPerItemDiscountType.swift */; };
 		B42F5F582F078120002252EE /* PersistenceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F5F572F078120002252EE /* PersistenceContainer.swift */; };
 		B42F5F5E2F079DA8002252EE /* Quickvee-Local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B42F5F5D2F079DA8002252EE /* Quickvee-Local.xcconfig */; };
 		B42F5F602F07B79C002252EE /* Quickvee-Dev.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B42F5F5F2F07B79C002252EE /* Quickvee-Dev.xcconfig */; };
@@ -57,6 +61,8 @@
 		B49381FE2F0E1D070071D0F1 /* manrope.light.otf in Resources */ = {isa = PBXBuildFile; fileRef = B49381F92F0E1D070071D0F1 /* manrope.light.otf */; };
 		B49382002F0E1EEA0071D0F1 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49381FF2F0E1EEA0071D0F1 /* CustomLabel.swift */; };
 		B49382022F0E20020071D0F1 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382012F0E20020071D0F1 /* UIColor+Extension.swift */; };
+		B49382062F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382052F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift */; };
+		B49382082F0E3F400071D0F1 /* GenericButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382072F0E3F400071D0F1 /* GenericButton.swift */; };
 		D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */; };
 		D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */; };
 		D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC882AA9AB8800A216C3 /* VariantViewController.swift */; };
@@ -336,6 +342,10 @@
 		A54F2B342BBABA1B009B4D53 /* InStoreDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InStoreDetailViewController.swift; sourceTree = "<group>"; };
 		A54F2B362BBABA46009B4D53 /* InStoreRefundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InStoreRefundViewController.swift; sourceTree = "<group>"; };
 		A5D3A9062DF56956000F6B43 /* MissUPCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissUPCTableViewCell.swift; sourceTree = "<group>"; };
+		B41A9F372F0F4F2B00C543C7 /* CustomSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitch.swift; sourceTree = "<group>"; };
+		B41A9F3C2F0F7F3700C543C7 /* CreateProductAndCategoryDiscountVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductAndCategoryDiscountVM.swift; sourceTree = "<group>"; };
+		B41A9F3F2F0F86CC00C543C7 /* ProductAndCategoryDiscountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryDiscountType.swift; sourceTree = "<group>"; };
+		B41A9F412F0F86E300C543C7 /* DiscountPerItemDiscountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountPerItemDiscountType.swift; sourceTree = "<group>"; };
 		B42F5F572F078120002252EE /* PersistenceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceContainer.swift; sourceTree = "<group>"; };
 		B42F5F5D2F079DA8002252EE /* Quickvee-Local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Quickvee-Local.xcconfig"; sourceTree = "<group>"; };
 		B42F5F5F2F07B79C002252EE /* Quickvee-Dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Quickvee-Dev.xcconfig"; sourceTree = "<group>"; };
@@ -377,6 +387,8 @@
 		B49381FB2F0E1D070071D0F1 /* manrope.thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = manrope.thin.otf; sourceTree = "<group>"; };
 		B49381FF2F0E1EEA0071D0F1 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		B49382012F0E20020071D0F1 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		B49382052F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductAndCategoryDiscountVC.swift; sourceTree = "<group>"; };
+		B49382072F0E3F400071D0F1 /* GenericButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericButton.swift; sourceTree = "<group>"; };
 		BD3A5305EE37476CB5794F58 /* Pods_QuickveeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickveeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
 		D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeViewController.swift; sourceTree = "<group>"; };
@@ -679,6 +691,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B41A9F392F0F7F1700C543C7 /* CreateProductAndCategoryDiscount */ = {
+			isa = PBXGroup;
+			children = (
+				B49382052F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift */,
+				B41A9F3C2F0F7F3700C543C7 /* CreateProductAndCategoryDiscountVM.swift */,
+			);
+			path = CreateProductAndCategoryDiscount;
+			sourceTree = "<group>";
+		};
+		B41A9F3E2F0F86BE00C543C7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B41A9F3F2F0F86CC00C543C7 /* ProductAndCategoryDiscountType.swift */,
+				B41A9F412F0F86E300C543C7 /* DiscountPerItemDiscountType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B41A9F432F0F887500C543C7 /* ProductAndCategoryDiscountList */ = {
+			isa = PBXGroup;
+			children = (
+				B49381EC2F0DFCF60071D0F1 /* ProductAndCategoryDiscountListVC.swift */,
+			);
+			path = ProductAndCategoryDiscountList;
+			sourceTree = "<group>";
+		};
 		B42F5F562F078112002252EE /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -791,6 +829,8 @@
 		B45CB8B72F05199E004AF269 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B41A9F372F0F4F2B00C543C7 /* CustomSwitch.swift */,
+				B49382072F0E3F400071D0F1 /* GenericButton.swift */,
 				B49381FF2F0E1EEA0071D0F1 /* CustomLabel.swift */,
 				B49381F72F0E16370071D0F1 /* ViewClass.swift */,
 				B49381F02F0DFD570071D0F1 /* CustomNavigationHeaderView */,
@@ -819,7 +859,9 @@
 		B49381EB2F0DFCB40071D0F1 /* ProductAndCategoryDiscount */ = {
 			isa = PBXGroup;
 			children = (
-				B49381EC2F0DFCF60071D0F1 /* ProductAndCategoryDiscountListVC.swift */,
+				B41A9F432F0F887500C543C7 /* ProductAndCategoryDiscountList */,
+				B41A9F392F0F7F1700C543C7 /* CreateProductAndCategoryDiscount */,
+				B41A9F3E2F0F86BE00C543C7 /* Model */,
 			);
 			path = ProductAndCategoryDiscount;
 			sourceTree = "<group>";
@@ -1819,6 +1861,7 @@
 				B45CB8A62F04E2BB004AF269 /* NavigationCoordinator.swift in Sources */,
 				B45CB8A72F04E2BB004AF269 /* ClassNameRetrievable.swift in Sources */,
 				B45CB8A82F04E2BB004AF269 /* Navigatable.swift in Sources */,
+				B41A9F382F0F4F2B00C543C7 /* CustomSwitch.swift in Sources */,
 				04AC908D2E951D360009C2A8 /* DescOptionsCollectionViewCell.swift in Sources */,
 				D2A2BF6E2B8D94C6006796D5 /* PageViewController.swift in Sources */,
 				D2D625492B75E13300C25D07 /* AddBulkPricingViewController.swift in Sources */,
@@ -1872,12 +1915,14 @@
 				D23681D42AA6EF1E00728FDB /* ProductsViewController.swift in Sources */,
 				D233B6592B45044F00FBD6F2 /* DuplicateViewController.swift in Sources */,
 				B45CB8B62F04F75B004AF269 /* UDHelper.swift in Sources */,
+				B41A9F422F0F86E300C543C7 /* DiscountPerItemDiscountType.swift in Sources */,
 				D25253312CDB453300ADD70B /* StockTakeViewController.swift in Sources */,
 				D2E9243E2AC3DE19002370FE /* FilterCategoryViewController.swift in Sources */,
 				D2CE369C29769DEA0090A6D2 /* ItemSalesTableViewCell.swift in Sources */,
 				D285ECE72A2EE4BF009DFAE5 /* OrderOnlineViewController.swift in Sources */,
 				D2CE369E2976A6590090A6D2 /* ItemSalesInfoCollectionViewCell.swift in Sources */,
 				D207DFB62CABFC3400D18B89 /* InStoreTaxTableViewCell.swift in Sources */,
+				B41A9F402F0F86CC00C543C7 /* ProductAndCategoryDiscountType.swift in Sources */,
 				D22BC0572A8CD81C00FB2E8C /* OrderAPIManager.swift in Sources */,
 				D22260122B54E588009DC35A /* LockPassCodeViewController.swift in Sources */,
 				B45CB8A12F04DFDF004AF269 /* Logger.swift in Sources */,
@@ -1939,6 +1984,7 @@
 				D23493DA2CEF2F0B0046D33C /* RefundProductCell.swift in Sources */,
 				D23493DB2CEF2F0B0046D33C /* LoyaltyTableCell.swift in Sources */,
 				D2F5AB872CE5C2270050B89C /* profileCell.swift in Sources */,
+				B49382082F0E3F400071D0F1 /* GenericButton.swift in Sources */,
 				D2F5AB882CE5C2270050B89C /* OrderCell.swift in Sources */,
 				D247A00B2A5BCDAA005D265F /* UIAlerts.swift in Sources */,
 				D2C02E582C2154980016B1AA /* AddMixnMatchCell.swift in Sources */,
@@ -1966,6 +2012,7 @@
 				B45CB8B42F04F741004AF269 /* JSONContainer.swift in Sources */,
 				D2D879882BBBB59A00ECE573 /* InStoreRefundCustCell.swift in Sources */,
 				D2E2391A2B286B4D00231FB4 /* Extention.swift in Sources */,
+				B49382062F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift in Sources */,
 				D21A0DC529A487B600DC36CC /* SetupTableViewCell.swift in Sources */,
 				D2ABF03D2BBC033900A38D23 /* OrderFilterLeftCell.swift in Sources */,
 				D2A87AA92D156CC50008C417 /* NewOrderDetailVC.swift in Sources */,
@@ -1987,6 +2034,7 @@
 				D26778272CB503F10090D863 /* QuickAddSetupViewController.swift in Sources */,
 				D28F25F429767491002DE7A0 /* SalesOverviewViewController.swift in Sources */,
 				D21911752AC4015A0094B653 /* AttributeTableViewCell.swift in Sources */,
+				B41A9F3D2F0F7F3700C543C7 /* CreateProductAndCategoryDiscountVM.swift in Sources */,
 				D2D6E8822C9D6CF60017B9FE /* SalesNewViewController.swift in Sources */,
 				D2153F9F2ACD646E00CC61DA /* InstantPODescViewController.swift in Sources */,
 				D2C02E562C2133D80016B1AA /* AddMixnMatchViewController.swift in Sources */,

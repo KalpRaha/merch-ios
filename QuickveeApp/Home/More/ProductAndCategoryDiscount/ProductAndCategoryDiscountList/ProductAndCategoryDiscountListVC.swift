@@ -14,10 +14,12 @@ final class ProductAndCategoryDiscountListVC: UIViewController, Navigatable {
     
     @IBOutlet private weak var vwNavigationHeader: CustomNavigationHeaderView!
     
-    
-    
+    // Empty List View // No Discount View
     @IBOutlet private weak var vwNoDiscountView: UIView!
     @IBOutlet private weak var btnCreateDiscount: UIButton!
+    
+    
+    // Discount List Table
     
     
     override func viewDidLoad() {
@@ -35,7 +37,7 @@ final class ProductAndCategoryDiscountListVC: UIViewController, Navigatable {
 
 
     @IBAction private func onClickBtnCreateDiscount(_ sender: UIButton) {
-        
+        CreateProductAndCategoryDiscountVCFactory.make().push(in: self.navigationController)
         Logger.log(#function)
     }
     
