@@ -10,8 +10,8 @@ import Foundation
 
 struct GenericAPIResponse<T: Decodable> : Decodable {
     
-    let status : Bool
-    let message : String
+    let status : Bool?
+    let message : String?
     let result : T?
     
     enum CodingKeys: String, CodingKey {

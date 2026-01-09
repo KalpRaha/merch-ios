@@ -744,7 +744,7 @@ extension VariantViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-struct InventoryVariant {
+struct InventoryVariant : Codable {
     
     let id: String
     let costperItem: String

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProductAndCategorySelectionTBLCell" rowHeight="161" id="KGk-i7-Jjw" customClass="ProductAndCategorySelectionTBLCell" customModule="QuickveeApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="476" height="161"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="476" height="161"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yvo-gh-SDS">
+                        <rect key="frame" x="0.0" y="0.0" width="476" height="161"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jVE-gN-SQX">
+                                <rect key="frame" x="16" y="20" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="jVE-gN-SQX" secondAttribute="height" id="d6d-UE-vqR"/>
+                                    <constraint firstAttribute="width" constant="24" id="zLz-3J-T8K"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wSJ-B9-d8R">
+                                <rect key="frame" x="53" y="20" width="407" height="19.333333333333329"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhh-WT-MJu" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="180.66666666666666" height="19.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TUp-DU-f3G" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                        <rect key="frame" x="190.66666666666663" y="0.0" width="216.33333333333337" height="19.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" name="0A64F9"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0ck-UQ-keI">
+                                <rect key="frame" x="53" y="46.333333333333336" width="407" height="17"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOQ-37-ORV" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="178.33333333333334" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" name="7B7B7B"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nyM-04-q6b" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                        <rect key="frame" x="188.33333333333337" y="0.0" width="218.66666666666663" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" name="7B7B7B"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CLf-Xr-fE3">
+                                <rect key="frame" x="16" y="73.333333333333314" width="444" height="71.666666666666686"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Hxu-Tw-gB1">
+                                        <rect key="frame" x="16" y="9.9999999999999964" width="412" height="51.666666666666657"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="6RB-0b-RmD">
+                                                <rect key="frame" x="0.0" y="0.0" width="201" height="51.666666666666664"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1D8-yx-DTZ" customClass="ManropeMediumLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="201" height="22.333333333333332"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <color key="textColor" name="7B7B7B"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Promotion:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oxp-Im-7oN" customClass="ManropeMediumLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="29.333333333333343" width="201" height="22.333333333333329"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <color key="textColor" name="7B7B7B"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="Kcr-e3-XM1">
+                                                <rect key="frame" x="211" y="0.0" width="201" height="51.666666666666664"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="guw-Rw-4Kq">
+                                                        <rect key="frame" x="0.0" y="0.0" width="201" height="22.333333333333332"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sG9-hK-E3e" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="201" height="22.333333333333332"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="sG9-hK-E3e" secondAttribute="bottom" id="3Qc-dg-QeV"/>
+                                                            <constraint firstItem="sG9-hK-E3e" firstAttribute="leading" secondItem="guw-Rw-4Kq" secondAttribute="leading" id="E5X-0u-YaJ"/>
+                                                            <constraint firstAttribute="trailing" secondItem="sG9-hK-E3e" secondAttribute="trailing" id="I5C-AZ-ZRq"/>
+                                                            <constraint firstItem="sG9-hK-E3e" firstAttribute="top" secondItem="guw-Rw-4Kq" secondAttribute="top" id="SBQ-Z6-RCH"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tDu-RE-iU7">
+                                                        <rect key="frame" x="0.0" y="29.333333333333343" width="201" height="22.333333333333329"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIg-Qh-bWk" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="5.3333333333333286" width="201" height="17"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <color key="textColor" name="Accepted"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="xIg-Qh-bWk" firstAttribute="leading" secondItem="tDu-RE-iU7" secondAttribute="leading" id="1g1-dX-w4p"/>
+                                                            <constraint firstAttribute="bottom" secondItem="xIg-Qh-bWk" secondAttribute="bottom" id="K4t-CH-2Z1"/>
+                                                            <constraint firstAttribute="trailing" secondItem="xIg-Qh-bWk" secondAttribute="trailing" id="f2i-aa-Ub5"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Hxu-Tw-gB1" firstAttribute="top" secondItem="CLf-Xr-fE3" secondAttribute="top" constant="10" id="8KY-2j-OG6"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hxu-Tw-gB1" secondAttribute="trailing" constant="16" id="AwH-cV-sIa"/>
+                                    <constraint firstItem="Hxu-Tw-gB1" firstAttribute="leading" secondItem="CLf-Xr-fE3" secondAttribute="leading" constant="16" id="MWW-fh-wNb"/>
+                                    <constraint firstAttribute="bottom" secondItem="Hxu-Tw-gB1" secondAttribute="bottom" constant="10" id="maE-JT-yqp"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="0ck-UQ-keI" secondAttribute="trailing" constant="16" id="2QT-Ym-PlR"/>
+                            <constraint firstItem="wSJ-B9-d8R" firstAttribute="top" secondItem="Yvo-gh-SDS" secondAttribute="top" constant="20" id="4KS-Bv-xDF"/>
+                            <constraint firstItem="CLf-Xr-fE3" firstAttribute="top" secondItem="0ck-UQ-keI" secondAttribute="bottom" constant="10" id="9kv-4D-ncS"/>
+                            <constraint firstItem="0ck-UQ-keI" firstAttribute="top" secondItem="wSJ-B9-d8R" secondAttribute="bottom" constant="7" id="ER2-by-K2I"/>
+                            <constraint firstAttribute="bottom" secondItem="CLf-Xr-fE3" secondAttribute="bottom" constant="16" id="Ont-XE-if8"/>
+                            <constraint firstItem="jVE-gN-SQX" firstAttribute="top" secondItem="Yvo-gh-SDS" secondAttribute="top" constant="20" id="a1b-n0-goY"/>
+                            <constraint firstItem="CLf-Xr-fE3" firstAttribute="leading" secondItem="Yvo-gh-SDS" secondAttribute="leading" constant="16" id="c5M-Zo-R2v"/>
+                            <constraint firstAttribute="trailing" secondItem="wSJ-B9-d8R" secondAttribute="trailing" constant="16" id="gRh-24-jTm"/>
+                            <constraint firstItem="0ck-UQ-keI" firstAttribute="leading" secondItem="wSJ-B9-d8R" secondAttribute="leading" id="ixZ-sU-9ik"/>
+                            <constraint firstItem="jVE-gN-SQX" firstAttribute="leading" secondItem="Yvo-gh-SDS" secondAttribute="leading" constant="16" id="lop-Go-8To"/>
+                            <constraint firstAttribute="trailing" secondItem="CLf-Xr-fE3" secondAttribute="trailing" constant="16" id="nVi-SY-o92"/>
+                            <constraint firstItem="wSJ-B9-d8R" firstAttribute="leading" secondItem="jVE-gN-SQX" secondAttribute="trailing" constant="13" id="uZm-eP-Pq2"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Yvo-gh-SDS" secondAttribute="trailing" id="5ug-fL-Vig"/>
+                    <constraint firstItem="Yvo-gh-SDS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="AKi-f8-14e"/>
+                    <constraint firstAttribute="bottom" secondItem="Yvo-gh-SDS" secondAttribute="bottom" id="a5v-ye-UnC"/>
+                    <constraint firstItem="Yvo-gh-SDS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="hU0-Dl-ojk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="categoryValue" destination="sG9-hK-E3e" id="xjP-4W-PJN"/>
+                <outlet property="checkImage" destination="jVE-gN-SQX" id="262-HP-uN1"/>
+                <outlet property="priceLbl" destination="TUp-DU-f3G" id="y5p-p9-0YJ"/>
+                <outlet property="productNameLBL" destination="Zhh-WT-MJu" id="mLL-1F-Pej"/>
+                <outlet property="promotionValue" destination="xIg-Qh-bWk" id="9rh-ka-nla"/>
+                <outlet property="stockLBL" destination="nyM-04-q6b" id="b3u-EN-cea"/>
+                <outlet property="upcLBL" destination="WOQ-37-ORV" id="yJg-6C-6Cu"/>
+            </connections>
+            <point key="canvasLocation" x="-635.1145038167939" y="171.47887323943664"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="0A64F9">
+            <color red="0.039215686274509803" green="0.39215686274509803" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="7B7B7B">
+            <color red="0.4823529411764706" green="0.4823529411764706" blue="0.4823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Accepted">
+            <color red="0.12156862745098039" green="0.63529411764705879" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
