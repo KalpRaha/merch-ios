@@ -21,7 +21,7 @@ extension ProductAndCategorySelectionVC {
         var repository: VariantListRepositoryProtocol
         weak var delegate: ProductAndCategorySelectionViewModelDelegate?
         
-        var variantList: [InventoryVariant] = [] {
+        var variantList: [ProductVariantData] = [] {
             didSet {
                 delegate?.getVariasntList()
             }

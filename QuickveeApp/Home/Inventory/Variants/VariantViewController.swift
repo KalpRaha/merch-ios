@@ -744,6 +744,7 @@ extension VariantViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+@available(*, deprecated, renamed: "ProductVariantData")
 struct InventoryVariant : Codable {
     
     let id: String

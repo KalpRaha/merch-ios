@@ -17,6 +17,8 @@ class ProductAndCategorySelectionVCFactory {
                 apiService: APIServiceFactory.make()
             )
         )
+        vc.viewModel.delegate = vc
+        
         
         return vc
     }
@@ -28,12 +30,11 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable{
     static var storyboard: UIStoryboard {.productAndCategoryDiscount}
     
     
-    @IBOutlet weak var tableview: UITableView!
+    @IBOutlet private weak var tableview: UITableView!
     
     
     
     var viewModel : ViewModel!
-    var variantListArr = [InventoryVariant]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
