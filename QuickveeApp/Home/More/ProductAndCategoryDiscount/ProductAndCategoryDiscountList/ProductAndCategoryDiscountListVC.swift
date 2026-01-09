@@ -48,7 +48,7 @@ extension ProductAndCategoryDiscountListVC : CustomNavigationHeaderViewDelegate{
     
     
     func onClickBack() {
-//        popVC()
+        popVC()
     }
     
     func setHeaderTitle() -> String {

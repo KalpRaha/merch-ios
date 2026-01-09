@@ -95,9 +95,12 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     }
     
     private func setupUIForDiscountTextFields(){
+        // Discount Name
         txtDiscountName.attributedPlaceholder = getAttributedPlaceHolderText(for: "Enter Discount Name")
         
+        txtDiscountName.delegate = self
         txtDiscountName.borderStyle = .none
+        txtDiscountName.returnKeyType = .next
         txtDiscountName.superview?.applyBorder(
             borderWidth: 1,
             borderColor: .E4E8EF,
@@ -105,7 +108,7 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
         )
         txtDiscountName.superview?.applyCornerRadius(cornerRadius: 8)
         
-        
+        // Discount Per Item
         txtDiscountPerItem.attributedPlaceholder = getAttributedPlaceHolderText(for: "$0.00")
         txtDiscountPerItem.borderStyle = .none
         txtDiscountPerItem.superview?.applyBorder(
@@ -114,8 +117,36 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
             borderOpacity: 1
         )
         txtDiscountPerItem.superview?.applyCornerRadius(cornerRadius: 8)
+        
+        txtDiscountPerItem.keyboardType = .numberPad
+        txtDiscountPerItem.addTarget(self, action: #selector(updateTextField), for: .editingChanged)
     }
 
+    
+    // MARK: - IBAction
+    
+    @IBAction private func onClickDiscountTypeSelection(_ sender : UIButton) {
+        let discountType : ProductAndCategoryDiscountType = (sender.tag == 0) ? .product : .category
+        
+        if self.viewModel.productOrCategoryDiscountType != discountType {
+            self.viewModel.productOrCategoryDiscountType = discountType
+        }
+        updateUIForDiscountTypeSelectionValueChange()
+        Logger.log(#function)
+    }
+    
+    @IBAction func didChangeValueOfAllowDiscountStackWithOtherDiscounts(_ sender: CustomSwitch) {
+        viewModel.isAllowDiscountToStackWithOtherDiscounts = sender.isOn
+        Logger.log(#function)
+    }
+    
+    
+    @IBAction func didChangeValueOfDiscountPerItemDiscountType(_ sender: GenericSegmentedControl) {
+        viewModel.discountPerItemDiscountType = (sender.selectedIndex == 0) ? .currencyValue : .percentValue
+        Logger.log(#function)
+    }
+    
+    
 
     @IBAction private func onClickBtnCancel(_ sender: GenericButton) {
         
@@ -149,17 +180,6 @@ extension CreateProductAndCategoryDiscountVC : CustomNavigationHeaderViewDelegat
 
 
 extension CreateProductAndCategoryDiscountVC {
-    
-    @IBAction private func onClickDiscountTypeSelection(_ sender : UIButton) {
-        
-        let discountType : ProductAndCategoryDiscountType = (sender.tag == 0) ? .product : .category
-        
-        if self.viewModel.productOrCategoryDiscountType != discountType {
-            self.viewModel.productOrCategoryDiscountType = discountType
-        }
-        updateUIForDiscountTypeSelectionValueChange()
-        Logger.log(#function)
-    }
     
     private func updateUIForDiscountTypeSelectionValueChange(){
         let isProduct = viewModel.productOrCategoryDiscountType == .product
@@ -206,6 +226,23 @@ extension CreateProductAndCategoryDiscountVC {
 
 extension CreateProductAndCategoryDiscountVC {
     
+    @objc func updateTextField(textField: UITextField) {
+        textField.text = DiscountPerItemDiscountTextFormatter.format(
+            textField.text ?? "",
+            type: viewModel.discountPerItemDiscountType
+        )
+        
+    }
+    
+    private func updateUIForDiscountPerItemDiscountTypeValueChange(){
+        let isPercent = viewModel.discountPerItemDiscountType == .percentValue
+        
+        lblDiscountPerItem.text = isPercent ? "Discount per item (%)" : "Discount per item ($)"
+        txtDiscountPerItem.text = nil
+        txtDiscountPerItem.attributedPlaceholder = getAttributedPlaceHolderText(for: isPercent ? "0.00%" : "$0.00")
+        
+    }
+    
     private func getAttributedPlaceHolderText(for text: String) -> NSAttributedString {
         let attributes: [NSAttributedString.Key: Any] = [
             .font: FontFamily.ManropeMedium.size(14),
@@ -214,16 +251,13 @@ extension CreateProductAndCategoryDiscountVC {
         
         return NSAttributedString(string: text, attributes: attributes)
     }
-    
-    private func updateUIForDiscountPerItemDiscountTypeValueChange(){
-        let isPercent = viewModel.discountPerItemDiscountType == .percentage
-        
-        lblDiscountPerItem.text = isPercent ? "Discount per item (%)" : "Discount per item ($)"
-        txtDiscountPerItem.attributedPlaceholder = getAttributedPlaceHolderText(for: isPercent ? "0.00%" : "$0.00")
-        
-    }
 }
 
+extension CreateProductAndCategoryDiscountVC : UITextFieldDelegate{
+    
+    
+    
+}
 
 extension CreateProductAndCategoryDiscountVC : CreateProductAndCategoryDiscountVMDelegate {
     
@@ -232,7 +266,7 @@ extension CreateProductAndCategoryDiscountVC : CreateProductAndCategoryDiscountV
     }
     
     func didUpdateIsAllowDiscountToStackWithOtherDiscounts() {
-        swtAllowDiscountStackWithOtherDiscounts.isOn = viewModel.isAllowDiscountToStackWithOtherDiscounts
+
     }
     
     func didUpdateDiscountPerItemDiscountType() {
@@ -241,4 +275,3 @@ extension CreateProductAndCategoryDiscountVC : CreateProductAndCategoryDiscountV
     
     
 }
-

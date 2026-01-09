@@ -10,20 +10,20 @@ import Foundation
 
 enum DiscountPerItemDiscountType {
     
-    case percentage
+    case percentValue
     case currencyValue
     
     var stringValue : String {
         switch self {
-        case .percentage: "%"
+        case .percentValue: "%"
         case .currencyValue: "$"
         }
     }
     
     mutating func toggle(){
         self = switch self {
-        case .percentage : .currencyValue
-        case .currencyValue : .percentage
+        case .percentValue : .currencyValue
+        case .currencyValue : .percentValue
         }
     }
     
