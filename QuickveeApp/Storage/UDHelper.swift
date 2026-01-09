@@ -26,6 +26,11 @@ class UDHelper {
     @Storage(key: .isLoggedIn, defaultValue: false)
     var isLoggedIn: Bool
     
+    @Storage(key: .merchantId, defaultValue: "-111")
+    var merchantId: String
+     
+    
+    
     
 
     
@@ -37,7 +42,7 @@ extension UDHelper {
     enum Keys : String{
         
         case isLoggedIn = "LoggedIn"
-        
+        case merchantId = "merchant_id"
     }
     
 }
