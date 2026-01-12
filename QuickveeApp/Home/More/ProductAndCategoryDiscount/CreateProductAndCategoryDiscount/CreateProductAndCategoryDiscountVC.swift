@@ -53,6 +53,12 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     
     @IBOutlet private weak var segCtrlDiscountPerItemDiscountType : GenericSegmentedControl!
     
+    @IBOutlet private weak var segCtrlDiscountScheduleType : GenericSegmentedControl!
+    
+    @IBOutlet private weak var swtDealHasNoEndDate: CustomSwitch!
+    
+    @IBOutlet private weak var txtDealStartDate: UITextField!
+    @IBOutlet private weak var txtDealEndDate: UITextField!
     
     
     // Bottom Buttons
@@ -92,6 +98,29 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
             with: viewModel.discountPerItemDiscountTypeSegments.compactMap({ $0.stringValue }),
             configuration: .default
         )
+        
+        configureScheduleType()
+        
+        txtDealStartDate.superview?.addTapGesture(action: { [weak self] gesture in
+            guard let self else { return }
+            
+            let helper = DatePickerHelper()
+            helper.openDatePicker(forTextField: txtDealStartDate)
+            
+            Logger.log("Start Date Pressed :")
+        })
+        
+        
+        txtDealEndDate.superview?.addTapGesture(action: { [weak self] gesture in
+            guard let self else { return }
+            
+            let helper = DatePickerHelper()
+            
+            helper.openDatePicker(forTextField: txtDealEndDate)
+            Logger.log("End Date Pressed :")
+        })
+        
+        
     }
     
     private func setupUIForDiscountTextFields(){
@@ -123,6 +152,25 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     }
 
     
+    private func configureScheduleType(){
+        var configuration : GenericSegmentedControl.Configuration = .default
+        
+        configuration.paddingBetweenThumbAndControl = 5
+        
+        configuration.control.font = FontFamily.ManropeMedium.size(15)
+        configuration.control.textColor = .black
+        configuration.control.bgColor = .white
+        
+        configuration.thumb.font = FontFamily.ManropeSemiBold.size(15)
+        configuration.thumb.textColor = .white
+        configuration.thumb.bgColor = .black
+        
+        segCtrlDiscountScheduleType.configure(
+            with: viewModel.scheduleTypeSegments.map({ $0.stringValue }),
+            configuration: configuration
+        )
+    }
+    
     // MARK: - IBAction
     
     @IBAction private func onClickDiscountTypeSelection(_ sender : UIButton) {
@@ -142,10 +190,24 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     
     
     @IBAction func didChangeValueOfDiscountPerItemDiscountType(_ sender: GenericSegmentedControl) {
-        viewModel.discountPerItemDiscountType = (sender.selectedIndex == 0) ? .currencyValue : .percentValue
+        let discountType : DiscountPerItemDiscountType = (sender.selectedIndex == 0) ? .amountValue : .percentValue
+        
+        if viewModel.discountPerItemDiscountType != discountType {
+            viewModel.discountPerItemDiscountType = discountType
+        }
         Logger.log(#function)
     }
     
+    
+    @IBAction func didChangeValueOfScheduleType(_ sender: GenericSegmentedControl) {
+        let scheduleType : ScheduleType = (sender.selectedIndex == 0) ? .oneTime : .repeatsOnSchedule
+        
+        if viewModel.scheduleType != scheduleType {
+            viewModel.scheduleType = scheduleType
+        }
+         
+        Logger.log(#function)
+    }
     
 
     @IBAction private func onClickBtnCancel(_ sender: GenericButton) {
@@ -273,5 +335,65 @@ extension CreateProductAndCategoryDiscountVC : CreateProductAndCategoryDiscountV
         updateUIForDiscountPerItemDiscountTypeValueChange()
     }
     
+    
+    func didUpdateScheduleType() {
+        
+    }
+    
+}
+
+
+
+class DatePickerHelper {
+    
+    var onClickCancel: (() -> Void)?
+    var onClickDone: ((Date) -> Void)?
+    
+    private var datePicker: UIDatePicker = {
+        UIDatePicker()
+    }()
+    
+    
+    func openDatePicker(
+        forTextField textField: UITextField,
+        existingDate: Date? = nil
+    ) {
+        guard let activeVC = NavigationCoordinator.shared.window?.rootViewController else { return }
+        datePicker.datePickerMode = .date
+        
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
+        
+        textField.inputView = datePicker
+        datePicker.addTarget(self, action: #selector(onClickDatePickerHandler(_:)), for: .valueChanged)
+        
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: activeVC.view.frame.width, height: 40))
+        toolbar.barStyle = .default
+        
+        let cancelBtn = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(onClickBtnDone(_:)))
+        let doneBtn = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(onClickBtnDone(_:)))
+        
+        let flexibleBtn = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        toolbar.setItems([cancelBtn, doneBtn, flexibleBtn], animated: false)
+        textField.inputAccessoryView = toolbar
+        
+    }
+    
+    @objc func onClickDatePickerHandler(_ sender : UIPickerView) {
+        
+        Logger.log(#function)
+    }
+    
+    @objc func onClickBtnCancel(_ sender : UIPickerView) {
+        onClickCancel?()
+        Logger.log(#function)
+    }
+    
+    @objc func onClickBtnDone(_ sender : UIPickerView) {
+        onClickDone?(datePicker.date)
+        Logger.log(#function)
+    }
     
 }

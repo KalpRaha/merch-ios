@@ -28,11 +28,11 @@ class APIRequestMaker {
         request.httpMethod = endpoint.method.rawValue
         Logger.log("HTTPMethod : \(endpoint.method.rawValue)")
         
-        for (k, v) in endpoint.headers {
-            request.setValue(v, forHTTPHeaderField: k)
-        }
-        Logger.log("Header : \(endpoint.headers)")
         
+        // Start with provided headers.
+        setHeaders(request: &request, endpoint: endpoint)
+        
+        // Build body if any.
         if let param = endpoint.parameter {
             request.httpBody = getBody(parameter: param)
         }
@@ -40,12 +40,44 @@ class APIRequestMaker {
         return request
     }
     
+}
+
+
+fileprivate extension APIRequestMaker {
+    
+    
+    private func setHeaders(
+        request: inout URLRequest,
+        endpoint: APIEndpointType
+    ) {
+        for (k, v) in endpoint.headers {
+            request.setValue(v, forHTTPHeaderField: k)
+        }
+        
+        if case let .multipart(builder) = endpoint.parameter {
+            request.setValue(
+                "multipart/form-data; boundary=\(builder.boundary)",
+                forHTTPHeaderField: "Content-Type"
+            )
+        }
+        
+        Logger.log("Header : \(request.allHTTPHeaderFields ?? [:])")
+    }
+    
+    
     private func getBody(parameter : APIParameter) -> Data? {
         
         switch parameter {
+            
+        case .multipart(let builder):
+            let data = builder.buildMultiPartBodyBuilder().build()
+            Logger.log("ParamBody [Multipart] : \(data.count) bytes, boundary=\(builder.boundary)")
+            return data
+            
+            
         case .json(let stringTOAnyDict):
             Logger.log("ParamBody [JSON] : \(stringTOAnyDict)")
-            if let jsonData = try? JSONSerialization.data(withJSONObject: stringTOAnyDict, options: []) {
+            if let jsonData = try? JSONSerialization.data(withJSONObject: stringTOAnyDict) {
                 return jsonData
             }
             

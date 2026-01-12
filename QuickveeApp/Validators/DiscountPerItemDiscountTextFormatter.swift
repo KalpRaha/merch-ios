@@ -32,7 +32,7 @@ class DiscountPerItemDiscountTextFormatter {
             cleanedAmount = String(cleanedAmount.dropLast())
         }
         
-        if type == .currencyValue {
+        if type == .amountValue {
             if Double(cleanedAmount) ?? 00000 > 99999999 {
                 cleanedAmount = String(cleanedAmount.dropLast())
             }

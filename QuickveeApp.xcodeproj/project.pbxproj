@@ -17,7 +17,7 @@
 		A54F2B372BBABA46009B4D53 /* InStoreRefundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B362BBABA46009B4D53 /* InStoreRefundViewController.swift */; };
 		A5D3A9072DF56956000F6B43 /* MissUPCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3A9062DF56956000F6B43 /* MissUPCTableViewCell.swift */; };
 		B41A9F382F0F4F2B00C543C7 /* CustomSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F372F0F4F2B00C543C7 /* CustomSwitch.swift */; };
-		B41A9F3D2F0F7F3700C543C7 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F3C2F0F7F3700C543C7 /* ViewModel.swift */; };
+		B41A9F3D2F0F7F3700C543C7 /* CreateProductAndCategoryDiscountVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F3C2F0F7F3700C543C7 /* CreateProductAndCategoryDiscountVM.swift */; };
 		B41A9F402F0F86CC00C543C7 /* ProductAndCategoryDiscountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F3F2F0F86CC00C543C7 /* ProductAndCategoryDiscountType.swift */; };
 		B41A9F422F0F86E300C543C7 /* DiscountPerItemDiscountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F412F0F86E300C543C7 /* DiscountPerItemDiscountType.swift */; };
 		B41A9F452F0FA88C00C543C7 /* GenericSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F442F0FA88C00C543C7 /* GenericSegmentedControl.swift */; };
@@ -66,6 +66,10 @@
 		B49382082F0E3F400071D0F1 /* GenericButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382072F0E3F400071D0F1 /* GenericButton.swift */; };
 		B49478412F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */; };
 		B49478432F111EE300DED5CA /* ProductVariantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49478422F111EE300DED5CA /* ProductVariantData.swift */; };
+		B4BC09762F14B6DE00BDB89E /* ScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC09752F14B6DE00BDB89E /* ScheduleType.swift */; };
+		B4BC097A2F15063100BDB89E /* MultipartFormDataBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC09792F15063100BDB89E /* MultipartFormDataBuilder.swift */; };
+		B4BC097C2F15108000BDB89E /* MultiPartRequestBodyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC097B2F15108000BDB89E /* MultiPartRequestBodyType.swift */; };
+		B4BC09802F151E0C00BDB89E /* VariantListMultipartRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC097F2F151E0C00BDB89E /* VariantListMultipartRequestBody.swift */; };
 		D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */; };
 		D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */; };
 		D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC882AA9AB8800A216C3 /* VariantViewController.swift */; };
@@ -353,7 +357,7 @@
 		A54F2B362BBABA46009B4D53 /* InStoreRefundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InStoreRefundViewController.swift; sourceTree = "<group>"; };
 		A5D3A9062DF56956000F6B43 /* MissUPCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissUPCTableViewCell.swift; sourceTree = "<group>"; };
 		B41A9F372F0F4F2B00C543C7 /* CustomSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitch.swift; sourceTree = "<group>"; };
-		B41A9F3C2F0F7F3700C543C7 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		B41A9F3C2F0F7F3700C543C7 /* CreateProductAndCategoryDiscountVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductAndCategoryDiscountVM.swift; sourceTree = "<group>"; };
 		B41A9F3F2F0F86CC00C543C7 /* ProductAndCategoryDiscountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryDiscountType.swift; sourceTree = "<group>"; };
 		B41A9F412F0F86E300C543C7 /* DiscountPerItemDiscountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountPerItemDiscountType.swift; sourceTree = "<group>"; };
 		B41A9F442F0FA88C00C543C7 /* GenericSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericSegmentedControl.swift; sourceTree = "<group>"; };
@@ -402,6 +406,10 @@
 		B49382072F0E3F400071D0F1 /* GenericButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericButton.swift; sourceTree = "<group>"; };
 		B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountPerItemDiscountTextFormatter.swift; sourceTree = "<group>"; };
 		B49478422F111EE300DED5CA /* ProductVariantData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVariantData.swift; sourceTree = "<group>"; };
+		B4BC09752F14B6DE00BDB89E /* ScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleType.swift; sourceTree = "<group>"; };
+		B4BC09792F15063100BDB89E /* MultipartFormDataBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataBuilder.swift; sourceTree = "<group>"; };
+		B4BC097B2F15108000BDB89E /* MultiPartRequestBodyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPartRequestBodyType.swift; sourceTree = "<group>"; };
+		B4BC097F2F151E0C00BDB89E /* VariantListMultipartRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantListMultipartRequestBody.swift; sourceTree = "<group>"; };
 		BD3A5305EE37476CB5794F58 /* Pods_QuickveeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickveeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
 		D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeViewController.swift; sourceTree = "<group>"; };
@@ -715,7 +723,7 @@
 			isa = PBXGroup;
 			children = (
 				B49382052F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift */,
-				B41A9F3C2F0F7F3700C543C7 /* ViewModel.swift */,
+				B41A9F3C2F0F7F3700C543C7 /* CreateProductAndCategoryDiscountVM.swift */,
 			);
 			path = CreateProductAndCategoryDiscount;
 			sourceTree = "<group>";
@@ -725,6 +733,7 @@
 			children = (
 				B41A9F3F2F0F86CC00C543C7 /* ProductAndCategoryDiscountType.swift */,
 				B41A9F412F0F86E300C543C7 /* DiscountPerItemDiscountType.swift */,
+				B4BC09752F14B6DE00BDB89E /* ScheduleType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -802,6 +811,7 @@
 			isa = PBXGroup;
 			children = (
 				B45CB8892F04DF59004AF269 /* Configuration */,
+				B4BC097D2F15108500BDB89E /* Multipart */,
 				B45CB88B2F04DF59004AF269 /* Endpoint */,
 				B45CB8912F04DF59004AF269 /* HTTPClient */,
 				B45CB8922F04DF59004AF269 /* GenericAPIResponse.swift */,
@@ -906,6 +916,23 @@
 				B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */,
 			);
 			path = Validators;
+			sourceTree = "<group>";
+		};
+		B4BC097D2F15108500BDB89E /* Multipart */ = {
+			isa = PBXGroup;
+			children = (
+				B4BC097B2F15108000BDB89E /* MultiPartRequestBodyType.swift */,
+				B4BC09792F15063100BDB89E /* MultipartFormDataBuilder.swift */,
+			);
+			path = Multipart;
+			sourceTree = "<group>";
+		};
+		B4BC097E2F151DC900BDB89E /* APIRequestModel */ = {
+			isa = PBXGroup;
+			children = (
+				B4BC097F2F151E0C00BDB89E /* VariantListMultipartRequestBody.swift */,
+			);
+			path = APIRequestModel;
 			sourceTree = "<group>";
 		};
 		D204E89F2A122A3D00EED5F5 /* Reporting */ = {
@@ -1454,6 +1481,7 @@
 				B45CB8A52F04E2BB004AF269 /* NavigationCoordinator */,
 				B45CB8932F04DF59004AF269 /* APIService */,
 				D27F2F5F2F10D47D007AE4C8 /* APIRepository */,
+				B4BC097E2F151DC900BDB89E /* APIRequestModel */,
 				D2FFEF512AFDFF7D003400BD /* API */,
 				D2FFEF542AFE00EE003400BD /* Alert */,
 				D2FFEF532AFE0066003400BD /* Auth */,
@@ -1902,6 +1930,7 @@
 				D2B01B8B2BB3E13E00A40B93 /* RefundCell.swift in Sources */,
 				D208F7FF2D2400EE00924A29 /* LoyaltyOrderTableViewCell.swift in Sources */,
 				D21BB7022B79E53F00EEC73D /* BulkTableViewCell.swift in Sources */,
+				B4BC09802F151E0C00BDB89E /* VariantListMultipartRequestBody.swift in Sources */,
 				A5D3A9072DF56956000F6B43 /* MissUPCTableViewCell.swift in Sources */,
 				D20EE8392AA5F2F900762E56 /* InventoryCollectionViewCell.swift in Sources */,
 				D2E0169E2ADFD73600DDEB8F /* ProductVariantTableViewCell.swift in Sources */,
@@ -1926,6 +1955,7 @@
 				B45CB8A72F04E2BB004AF269 /* ClassNameRetrievable.swift in Sources */,
 				B45CB8A82F04E2BB004AF269 /* Navigatable.swift in Sources */,
 				B41A9F382F0F4F2B00C543C7 /* CustomSwitch.swift in Sources */,
+				B4BC097C2F15108000BDB89E /* MultiPartRequestBodyType.swift in Sources */,
 				04AC908D2E951D360009C2A8 /* DescOptionsCollectionViewCell.swift in Sources */,
 				D2A2BF6E2B8D94C6006796D5 /* PageViewController.swift in Sources */,
 				D2D625492B75E13300C25D07 /* AddBulkPricingViewController.swift in Sources */,
@@ -2103,7 +2133,7 @@
 				D26778272CB503F10090D863 /* QuickAddSetupViewController.swift in Sources */,
 				D28F25F429767491002DE7A0 /* SalesOverviewViewController.swift in Sources */,
 				D21911752AC4015A0094B653 /* AttributeTableViewCell.swift in Sources */,
-				B41A9F3D2F0F7F3700C543C7 /* ViewModel.swift in Sources */,
+				B41A9F3D2F0F7F3700C543C7 /* CreateProductAndCategoryDiscountVM.swift in Sources */,
 				D2D6E8822C9D6CF60017B9FE /* SalesNewViewController.swift in Sources */,
 				D2153F9F2ACD646E00CC61DA /* InstantPODescViewController.swift in Sources */,
 				D2C02E562C2133D80016B1AA /* AddMixnMatchViewController.swift in Sources */,
@@ -2116,6 +2146,7 @@
 				D240F92229A74C5000DC76EA /* StoreSetupViewController.swift in Sources */,
 				D26F4E782995039200716A51 /* StrokeColorAnimation.swift in Sources */,
 				D253DD9C2C86BB96003AA842 /* LotteryTableViewCell.swift in Sources */,
+				B4BC097A2F15063100BDB89E /* MultipartFormDataBuilder.swift in Sources */,
 				D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */,
 				D29D1F302AE66E910017819B /* InventoryProductModel.swift in Sources */,
 				D2D0496829B85A8900EF591E /* AddCouponViewController.swift in Sources */,
@@ -2182,6 +2213,7 @@
 				D29993DE2C9A851600185ED8 /* RegisterCollectionCell.swift in Sources */,
 				A54F2B352BBABA1B009B4D53 /* InStoreDetailViewController.swift in Sources */,
 				D2D8797A2BBBB07A00ECE573 /* InStoreIdentityCell.swift in Sources */,
+				B4BC09762F14B6DE00BDB89E /* ScheduleType.swift in Sources */,
 				D2A6838F296C0B3700F852E6 /* SceneDelegate.swift in Sources */,
 				D2B269E52A6113EC002D140A /* RootTableViewController.swift in Sources */,
 				D27F2F5C2F10C4CE007AE4C8 /* ProductAndCategoryDiscountEndpoint.swift in Sources */,

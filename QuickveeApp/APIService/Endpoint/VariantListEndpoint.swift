@@ -11,7 +11,7 @@ extension  API {
     
     enum  VariantListEndpoint{
         
-        case variantList
+        case variantList(reqBody : VariantListMultipartRequestBody)
         
     }
     
@@ -30,19 +30,16 @@ extension API.VariantListEndpoint: APIEndpointEnumType {
     
     func getEndpoint() -> any APIEndpointType {
         switch self {
-        case .variantList:
+        case .variantList(let reqBody):
             APIEndpoint(
                 baseURL: baseURL,
                 versionURL: versionURL,
                 path: "Productapi/variant_list",
                 method: .POST,
-                parameter: .json(["merchant_id": UDHelper.shared.merchantId]),
+                parameter: .multipart(reqBody),
                 headers: defaultHeaders
             )
         }
     }
     
 }
-
-
-
