@@ -65,7 +65,7 @@
 		B49382062F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382052F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift */; };
 		B49382082F0E3F400071D0F1 /* GenericButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382072F0E3F400071D0F1 /* GenericButton.swift */; };
 		B49478412F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */; };
-		B49478432F111EE300DED5CA /* ProductVariantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49478422F111EE300DED5CA /* ProductVariantData.swift */; };
+		B49478432F111EE300DED5CA /* VariantDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49478422F111EE300DED5CA /* VariantDataModel.swift */; };
 		D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */; };
 		D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */; };
 		D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC882AA9AB8800A216C3 /* VariantViewController.swift */; };
@@ -401,7 +401,7 @@
 		B49382052F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductAndCategoryDiscountVC.swift; sourceTree = "<group>"; };
 		B49382072F0E3F400071D0F1 /* GenericButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericButton.swift; sourceTree = "<group>"; };
 		B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountPerItemDiscountTextFormatter.swift; sourceTree = "<group>"; };
-		B49478422F111EE300DED5CA /* ProductVariantData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVariantData.swift; sourceTree = "<group>"; };
+		B49478422F111EE300DED5CA /* VariantDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantDataModel.swift; sourceTree = "<group>"; };
 		BD3A5305EE37476CB5794F58 /* Pods_QuickveeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickveeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
 		D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeViewController.swift; sourceTree = "<group>"; };
@@ -1362,7 +1362,7 @@
 			isa = PBXGroup;
 			children = (
 				D29D1F2F2AE66E910017819B /* InventoryProductModel.swift */,
-				B49478422F111EE300DED5CA /* ProductVariantData.swift */,
+				B49478422F111EE300DED5CA /* VariantDataModel.swift */,
 			);
 			path = InventoryModel;
 			sourceTree = "<group>";
@@ -2063,7 +2063,7 @@
 				D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */,
 				D2D1F9052C1845C5008BD228 /* MixnMatchPricingViewController.swift in Sources */,
 				D2DF61202CE323A1003D47B0 /* StockSaveViewController.swift in Sources */,
-				B49478432F111EE300DED5CA /* ProductVariantData.swift in Sources */,
+				B49478432F111EE300DED5CA /* VariantDataModel.swift in Sources */,
 				D2A87AA72D156C950008C417 /* NewOrderRefundDetailVC.swift in Sources */,
 				D2DB3F852CDDDD89005E2FEA /* StockItemsViewController.swift in Sources */,
 				D24187B62C1804C400643069 /* RegisterSettingsViewController.swift in Sources */,

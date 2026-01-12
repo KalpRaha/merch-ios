@@ -18,14 +18,58 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
     @IBOutlet weak var promotionValue: UILabel!
     @IBOutlet weak var categoryValue: UILabel!
     
+    var cellData: InventoryVariant! {
+        didSet{
+           updateUIWithData()
+        }
+    }
+    
+    var isSelectedCell : Bool = false {
+        didSet{
+            checkImage.image = isSelectedCell ? .checkInventory : .uncheckInventory
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-       
+    
+    private func updateUIWithData(){
+        
+        if cellData.isvarient == "0" {
+            
+            productNameLBL.text = cellData.title
+            priceLbl.text = cellData.price
+            upcLBL.text = cellData.upc
+            stockLBL.text = "Avaiable Stock:\(cellData.quantity)"
+            
+        }
+        else {
+            productNameLBL.text = cellData.variant
+            priceLbl.text = cellData.var_price
+            upcLBL.text = cellData.var_upc
+            stockLBL.text = "Avaiable Stock:\(cellData.quantity)"
+        }
+        
+        
+      //  guard let cellData else { return }
+        
+//        if cellData.isVarient {
+//            
+//            productNameLBL.text = cellData.productTitle
+//            priceLbl.text = cellData.productPrice
+//            upcLBL.text = cellData.productUPC
+//        }else {
+//            
+//            productNameLBL.text = cellData.variantTitle
+//            priceLbl.text = cellData.variantPrice
+//            upcLBL.text = cellData.variantUpc
+//            
+//        }
+        
+        
     }
     
 }

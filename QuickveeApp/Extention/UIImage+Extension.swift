@@ -13,4 +13,13 @@ extension UIImage {
         UIImage(named: "noDiscountFoundIcon") ?? UIImage()
     }()
     
+    
+    static var uncheckInventory : UIImage = {
+        UIImage(named: "uncheck inventory") ?? UIImage()
+    }()
+    
+    static var checkInventory : UIImage = {
+        UIImage(named: "check inventory") ?? UIImage()
+    }()
+    
 }

@@ -623,6 +623,9 @@
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="back"/>
+                                        <connections>
+                                            <action selector="backBtnClick:" destination="lA0-ul-69Q" eventType="touchUpInside" id="Z0F-ND-aai"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Products" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPd-R5-0fM">
                                         <rect key="frame" x="60" y="14.666666666666657" width="128.33333333333334" height="21"/>
@@ -685,15 +688,39 @@
                                 <rect key="frame" x="0.0" y="224" width="402" height="582"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nGn-zQ-KLj">
+                                <rect key="frame" x="10" y="774" width="382" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w3R-FX-AYB">
+                                        <rect key="frame" x="0.0" y="0.0" width="186" height="50"/>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Cancel"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vx5-K0-M4g">
+                                        <rect key="frame" x="196" y="0.0" width="186" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Confirm"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="6KJ-U4-De7"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fny-5d-Rdn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="fny-5d-Rdn" firstAttribute="trailing" secondItem="wqV-gQ-UZa" secondAttribute="trailing" id="0R8-rI-IL4"/>
+                            <constraint firstItem="fny-5d-Rdn" firstAttribute="trailing" secondItem="nGn-zQ-KLj" secondAttribute="trailing" constant="10" id="74f-OB-9QV"/>
                             <constraint firstItem="fny-5d-Rdn" firstAttribute="trailing" secondItem="ddS-1k-UBb" secondAttribute="trailing" id="Dce-fq-8yM"/>
                             <constraint firstItem="ddS-1k-UBb" firstAttribute="top" secondItem="wqV-gQ-UZa" secondAttribute="bottom" id="I95-RP-CiJ"/>
                             <constraint firstItem="fny-5d-Rdn" firstAttribute="trailing" secondItem="0Nq-Sm-R67" secondAttribute="trailing" id="LvL-x8-Iuj"/>
                             <constraint firstItem="wqV-gQ-UZa" firstAttribute="top" secondItem="fny-5d-Rdn" secondAttribute="top" id="Qvi-cf-7rH"/>
+                            <constraint firstAttribute="bottom" secondItem="nGn-zQ-KLj" secondAttribute="bottom" constant="50" id="ZLn-SC-YsQ"/>
+                            <constraint firstItem="nGn-zQ-KLj" firstAttribute="leading" secondItem="fny-5d-Rdn" secondAttribute="leading" constant="10" id="cGZ-8i-e8J"/>
                             <constraint firstItem="0Nq-Sm-R67" firstAttribute="top" secondItem="ddS-1k-UBb" secondAttribute="bottom" id="eE0-Ox-0eb"/>
                             <constraint firstItem="fny-5d-Rdn" firstAttribute="bottom" secondItem="0Nq-Sm-R67" secondAttribute="bottom" id="gpe-OS-SN9"/>
                             <constraint firstItem="wqV-gQ-UZa" firstAttribute="leading" secondItem="wMk-sI-6Aa" secondAttribute="leading" id="jWn-xO-gtH"/>
@@ -702,7 +729,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableview" destination="0Nq-Sm-R67" id="5dB-2G-BKs"/>
+                        <outlet property="tableView" destination="0Nq-Sm-R67" id="UPA-JD-lew"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXN-QG-GzE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -738,7 +765,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

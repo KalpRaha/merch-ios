@@ -10,7 +10,7 @@ import Foundation
 protocol VariantListRepositoryProtocol : AnyObject {
     
     var apiService: APIServiceType { get }
-    func getVariantList() async throws  -> GenericAPIResponse<[ProductVariantData]>
+    func getVariantList() async throws  -> GenericAPIResponse<[VariantDataModel]>
 }
 
 
@@ -22,10 +22,10 @@ class VariantListRepository : VariantListRepositoryProtocol{
         self.apiService = apiService
     }
     
-    func getVariantList() async throws ->  GenericAPIResponse<[ProductVariantData]> {
+    func getVariantList() async throws ->  GenericAPIResponse<[VariantDataModel]> {
         return try await apiService.getData(
             endpoint: API.VariantListEndpoint.variantList,
-            responseType: GenericAPIResponse<[ProductVariantData]>.self
+            responseType: GenericAPIResponse<[VariantDataModel]>.self
         )
     }
     
