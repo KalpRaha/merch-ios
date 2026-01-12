@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_3" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -173,10 +172,10 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="402" height="575.33333333333337"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SRd-QX-eSV">
-                                                                <rect key="frame" x="0.0" y="0.0" width="402" height="1000"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="402" height="903.33333333333337"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kKn-l9-toQ" userLabel="ContentView">
-                                                                        <rect key="frame" x="18.666666666666657" y="0.0" width="364.66666666666674" height="1000"/>
+                                                                        <rect key="frame" x="18.666666666666657" y="0.0" width="364.66666666666674" height="903.33333333333337"/>
                                                                         <subviews>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kti-9z-hdt" userLabel="Discount Type Selection View">
                                                                                 <rect key="frame" x="0.0" y="18" width="364.66666666666669" height="142.66666666666666"/>
@@ -296,7 +295,7 @@
                                                                                 </constraints>
                                                                             </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P0R-qD-QNq" userLabel="DiscountDetailsView">
-                                                                                <rect key="frame" x="0.0" y="180.66666666666671" width="364.66666666666669" height="419.33333333333326"/>
+                                                                                <rect key="frame" x="0.0" y="180.66666666666669" width="364.66666666666669" height="722.66666666666652"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discount Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6E-VJ-tEk" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="118.33333333333333" height="19.333333333333332"/>
@@ -361,7 +360,7 @@
                                                                                         </constraints>
                                                                                     </view>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PUA-Uc-2O1" userLabel="Discount Per Item View">
-                                                                                        <rect key="frame" x="0.0" y="192.33333333333331" width="364.66666666666669" height="75.666666666666686"/>
+                                                                                        <rect key="frame" x="0.0" y="179.99999999999994" width="364.66666666666669" height="76"/>
                                                                                         <subviews>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discount per Item ($)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLl-lQ-2Hi" userLabel="Discount Per Item Name" customClass="ManropeMediumLabel" customModule="QuickveeApp" customModuleProvider="target">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="137.66666666666666" height="17"/>
@@ -370,16 +369,16 @@
                                                                                                 <nil key="highlightedColor"/>
                                                                                             </label>
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZAu-gv-uVa">
-                                                                                                <rect key="frame" x="0.0" y="25.999999999999996" width="364.66666666666669" height="49.666666666666657"/>
+                                                                                                <rect key="frame" x="0.0" y="26" width="364.66666666666669" height="50"/>
                                                                                                 <subviews>
                                                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h75-XG-CoL">
-                                                                                                        <rect key="frame" x="24" y="0.0" width="246" height="49.666666666666664"/>
+                                                                                                        <rect key="frame" x="24" y="0.0" width="246" height="50"/>
                                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                                         <textInputTraits key="textInputTraits" textContentType="organization"/>
                                                                                                     </textField>
                                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="91H-wx-URR" customClass="GenericSegmentedControl" customModule="QuickveeApp" customModuleProvider="target">
-                                                                                                        <rect key="frame" x="280" y="5" width="79.666666666666686" height="39.666666666666664"/>
+                                                                                                        <rect key="frame" x="280" y="5" width="79.666666666666686" height="40"/>
                                                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                                         <constraints>
                                                                                                             <constraint firstAttribute="width" secondItem="91H-wx-URR" secondAttribute="height" multiplier="84:42" id="kjR-4A-kJf"/>
@@ -429,23 +428,173 @@
                                                                                             <constraint firstAttribute="bottom" secondItem="ZAu-gv-uVa" secondAttribute="bottom" id="ozh-GX-JR0"/>
                                                                                         </constraints>
                                                                                     </view>
+                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bSV-UQ-dLC" customClass="GenericSegmentedControl" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                        <rect key="frame" x="0.0" y="272.99999999999994" width="364.66666666666669" height="49.666666666666686"/>
+                                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="width" secondItem="bSV-UQ-dLC" secondAttribute="height" multiplier="381:52" id="HO9-S7-MHf"/>
+                                                                                        </constraints>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
+                                                                                                <integer key="value" value="0"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                        <connections>
+                                                                                            <action selector="didChangeValueOfScheduleType:" destination="WKV-D6-cs3" eventType="valueChanged" id="Sdk-nZ-820"/>
+                                                                                        </connections>
+                                                                                    </view>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="This Deal Has No End Date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sh0-c2-j3Q" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                        <rect key="frame" x="0.0" y="350.66666666666669" width="313.66666666666669" height="18"/>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Drc-hO-yYh" customClass="CustomSwitch" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                        <rect key="frame" x="323.66666666666663" y="348.66666666666669" width="41" height="22"/>
+                                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="width" constant="41" id="OP2-Bx-BbM"/>
+                                                                                            <constraint firstAttribute="width" secondItem="Drc-hO-yYh" secondAttribute="height" multiplier="41:22" id="cV1-FE-vg0"/>
+                                                                                        </constraints>
+                                                                                    </view>
+                                                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mjo-tk-EEy">
+                                                                                        <rect key="frame" x="0.0" y="386.66666666666669" width="364.66666666666669" height="128.33333333333331"/>
+                                                                                        <subviews>
+                                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cGi-qS-Arq">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="177.33333333333334" height="128.33333333333334"/>
+                                                                                                <subviews>
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFS-QB-a0j" customClass="ManropeMediumLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="69.333333333333329"/>
+                                                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                                        <color key="textColor" name="2B2B2B"/>
+                                                                                                        <nil key="highlightedColor"/>
+                                                                                                    </label>
+                                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myZ-i6-zsF" customClass="CornerRadiusBorderView" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                        <rect key="frame" x="0.0" y="78.333333333333258" width="177.33333333333334" height="50"/>
+                                                                                                        <subviews>
+                                                                                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="DD/MM/YYYY" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VHR-yr-iuI">
+                                                                                                                <rect key="frame" x="15" y="8" width="147.33333333333334" height="34"/>
+                                                                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                                            </textField>
+                                                                                                        </subviews>
+                                                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                                        <constraints>
+                                                                                                            <constraint firstItem="VHR-yr-iuI" firstAttribute="centerY" secondItem="myZ-i6-zsF" secondAttribute="centerY" id="LOe-pR-bAx"/>
+                                                                                                            <constraint firstAttribute="trailing" secondItem="VHR-yr-iuI" secondAttribute="trailing" constant="15" id="oVv-kf-dti"/>
+                                                                                                            <constraint firstAttribute="width" secondItem="myZ-i6-zsF" secondAttribute="height" multiplier="185:52" id="t51-DW-vTB"/>
+                                                                                                            <constraint firstItem="VHR-yr-iuI" firstAttribute="leading" secondItem="myZ-i6-zsF" secondAttribute="leading" constant="15" id="vdC-on-Ete"/>
+                                                                                                        </constraints>
+                                                                                                        <userDefinedRuntimeAttributes>
+                                                                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                                                <color key="value" name="E4E8EF"/>
+                                                                                                            </userDefinedRuntimeAttribute>
+                                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                                                                <real key="value" value="1"/>
+                                                                                                            </userDefinedRuntimeAttribute>
+                                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                                                <real key="value" value="8"/>
+                                                                                                            </userDefinedRuntimeAttribute>
+                                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderOpacity">
+                                                                                                                <real key="value" value="1"/>
+                                                                                                            </userDefinedRuntimeAttribute>
+                                                                                                        </userDefinedRuntimeAttributes>
+                                                                                                    </view>
+                                                                                                </subviews>
+                                                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                <constraints>
+                                                                                                    <constraint firstItem="myZ-i6-zsF" firstAttribute="leading" secondItem="cGi-qS-Arq" secondAttribute="leading" id="I1s-hv-f0J"/>
+                                                                                                    <constraint firstItem="UFS-QB-a0j" firstAttribute="leading" secondItem="cGi-qS-Arq" secondAttribute="leading" id="JCw-K0-8k1"/>
+                                                                                                    <constraint firstItem="UFS-QB-a0j" firstAttribute="top" secondItem="cGi-qS-Arq" secondAttribute="top" id="Lru-Kk-8Sd"/>
+                                                                                                    <constraint firstAttribute="trailing" secondItem="myZ-i6-zsF" secondAttribute="trailing" id="cVe-kl-1MY"/>
+                                                                                                    <constraint firstAttribute="bottom" secondItem="myZ-i6-zsF" secondAttribute="bottom" id="fGe-X3-Dhp"/>
+                                                                                                    <constraint firstItem="myZ-i6-zsF" firstAttribute="top" secondItem="UFS-QB-a0j" secondAttribute="bottom" constant="9" id="fPg-BC-0ab"/>
+                                                                                                </constraints>
+                                                                                            </view>
+                                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GH4-Ci-yd9">
+                                                                                                <rect key="frame" x="187.33333333333331" y="0.0" width="177.33333333333331" height="128.33333333333334"/>
+                                                                                                <subviews>
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajQ-LC-Jze" customClass="ManropeMediumLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="69.333333333333329"/>
+                                                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                                        <color key="textColor" name="2B2B2B"/>
+                                                                                                        <nil key="highlightedColor"/>
+                                                                                                    </label>
+                                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcx-U1-sfl" customClass="CornerRadiusBorderView" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                        <rect key="frame" x="0.0" y="78.333333333333258" width="177.33333333333334" height="50"/>
+                                                                                                        <subviews>
+                                                                                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="DD/MM/YYYY" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Gv-sI-lD1">
+                                                                                                                <rect key="frame" x="15" y="8" width="147.33333333333334" height="34"/>
+                                                                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                                            </textField>
+                                                                                                        </subviews>
+                                                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                                        <constraints>
+                                                                                                            <constraint firstAttribute="trailing" secondItem="3Gv-sI-lD1" secondAttribute="trailing" constant="15" id="NjB-fx-G3Y"/>
+                                                                                                            <constraint firstItem="3Gv-sI-lD1" firstAttribute="leading" secondItem="hcx-U1-sfl" secondAttribute="leading" constant="15" id="WCq-Fg-a43"/>
+                                                                                                            <constraint firstAttribute="width" secondItem="hcx-U1-sfl" secondAttribute="height" multiplier="185:52" id="a2w-dx-nPR"/>
+                                                                                                            <constraint firstItem="3Gv-sI-lD1" firstAttribute="centerY" secondItem="hcx-U1-sfl" secondAttribute="centerY" id="hKt-gk-12v"/>
+                                                                                                        </constraints>
+                                                                                                        <userDefinedRuntimeAttributes>
+                                                                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                                                <color key="value" name="E4E8EF"/>
+                                                                                                            </userDefinedRuntimeAttribute>
+                                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                                                                <real key="value" value="1"/>
+                                                                                                            </userDefinedRuntimeAttribute>
+                                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                                                <real key="value" value="8"/>
+                                                                                                            </userDefinedRuntimeAttribute>
+                                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderOpacity">
+                                                                                                                <real key="value" value="1"/>
+                                                                                                            </userDefinedRuntimeAttribute>
+                                                                                                        </userDefinedRuntimeAttributes>
+                                                                                                    </view>
+                                                                                                </subviews>
+                                                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                <constraints>
+                                                                                                    <constraint firstAttribute="trailing" secondItem="hcx-U1-sfl" secondAttribute="trailing" id="6iq-qH-nEq"/>
+                                                                                                    <constraint firstItem="ajQ-LC-Jze" firstAttribute="leading" secondItem="GH4-Ci-yd9" secondAttribute="leading" id="HDG-B6-Rt3"/>
+                                                                                                    <constraint firstAttribute="bottom" secondItem="hcx-U1-sfl" secondAttribute="bottom" id="K0a-Mn-JHG"/>
+                                                                                                    <constraint firstItem="ajQ-LC-Jze" firstAttribute="top" secondItem="GH4-Ci-yd9" secondAttribute="top" id="P3i-Qc-l8w"/>
+                                                                                                    <constraint firstItem="hcx-U1-sfl" firstAttribute="top" secondItem="ajQ-LC-Jze" secondAttribute="bottom" constant="9" id="VJs-2P-zpE"/>
+                                                                                                    <constraint firstItem="hcx-U1-sfl" firstAttribute="leading" secondItem="GH4-Ci-yd9" secondAttribute="leading" id="hia-uO-IrQ"/>
+                                                                                                </constraints>
+                                                                                            </view>
+                                                                                        </subviews>
+                                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    </stackView>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="bottom" secondItem="Q6E-VJ-tEk" secondAttribute="bottom" constant="400" id="59S-2q-lKJ"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="mjo-tk-EEy" secondAttribute="trailing" id="0ah-ad-dPw"/>
+                                                                                    <constraint firstItem="mjo-tk-EEy" firstAttribute="leading" secondItem="P0R-qD-QNq" secondAttribute="leading" id="0gC-0v-obH"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="bSV-UQ-dLC" secondAttribute="trailing" id="9HT-b3-3cY"/>
                                                                                     <constraint firstItem="CRL-LR-9YA" firstAttribute="top" secondItem="Q6E-VJ-tEk" secondAttribute="bottom" constant="15" id="BH7-hG-YbB"/>
+                                                                                    <constraint firstItem="bSV-UQ-dLC" firstAttribute="top" secondItem="PUA-Uc-2O1" secondAttribute="bottom" constant="17" id="C65-Vk-R0L"/>
                                                                                     <constraint firstItem="Q6E-VJ-tEk" firstAttribute="leading" secondItem="P0R-qD-QNq" secondAttribute="leading" id="GXD-OF-7Wx"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="A8c-pd-HRJ" secondAttribute="trailing" id="JNK-hu-POC"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="kAm-IQ-Jef" secondAttribute="trailing" id="Ong-xm-mJK"/>
-                                                                                    <constraint firstItem="PUA-Uc-2O1" firstAttribute="top" secondItem="A8c-pd-HRJ" secondAttribute="bottom" constant="140" id="QL2-iJ-tWp"/>
+                                                                                    <constraint firstItem="Sh0-c2-j3Q" firstAttribute="centerY" secondItem="Drc-hO-yYh" secondAttribute="centerY" id="RB1-XB-gh3"/>
+                                                                                    <constraint firstItem="Drc-hO-yYh" firstAttribute="top" secondItem="bSV-UQ-dLC" secondAttribute="bottom" constant="26" id="SVd-0P-tah"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="bSV-UQ-dLC" secondAttribute="bottom" constant="400" id="UPy-l7-6p0"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="Drc-hO-yYh" secondAttribute="trailing" id="YcY-Xg-s7F"/>
                                                                                     <constraint firstItem="A8c-pd-HRJ" firstAttribute="top" secondItem="Q6E-VJ-tEk" secondAttribute="bottom" constant="11" id="c2q-IK-ZKs"/>
+                                                                                    <constraint firstItem="Sh0-c2-j3Q" firstAttribute="leading" secondItem="P0R-qD-QNq" secondAttribute="leading" id="f2m-FN-vkJ"/>
                                                                                     <constraint firstItem="PUA-Uc-2O1" firstAttribute="leading" secondItem="P0R-qD-QNq" secondAttribute="leading" id="f9a-UX-Iph"/>
                                                                                     <constraint firstItem="kAm-IQ-Jef" firstAttribute="leading" secondItem="P0R-qD-QNq" secondAttribute="leading" id="hES-EZ-jWt"/>
                                                                                     <constraint firstItem="CRL-LR-9YA" firstAttribute="leading" secondItem="P0R-qD-QNq" secondAttribute="leading" id="kyV-of-HWn"/>
+                                                                                    <constraint firstItem="mjo-tk-EEy" firstAttribute="top" secondItem="Drc-hO-yYh" secondAttribute="bottom" constant="16" id="lim-ey-4IJ"/>
                                                                                     <constraint firstItem="kAm-IQ-Jef" firstAttribute="top" secondItem="A8c-pd-HRJ" secondAttribute="bottom" constant="30" id="nTU-pF-3S5"/>
                                                                                     <constraint firstItem="A8c-pd-HRJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CRL-LR-9YA" secondAttribute="trailing" constant="10" id="p4h-Sq-RDK"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="PUA-Uc-2O1" secondAttribute="trailing" id="pq4-HA-fr3"/>
+                                                                                    <constraint firstItem="PUA-Uc-2O1" firstAttribute="top" secondItem="kAm-IQ-Jef" secondAttribute="bottom" constant="22" id="uIf-YT-7DX"/>
+                                                                                    <constraint firstItem="Drc-hO-yYh" firstAttribute="leading" secondItem="Sh0-c2-j3Q" secondAttribute="trailing" constant="10" id="wCE-8N-He6"/>
                                                                                     <constraint firstItem="Q6E-VJ-tEk" firstAttribute="top" secondItem="P0R-qD-QNq" secondAttribute="top" id="wsc-nd-hNT"/>
+                                                                                    <constraint firstItem="bSV-UQ-dLC" firstAttribute="leading" secondItem="P0R-qD-QNq" secondAttribute="leading" id="xP7-ON-UQ8"/>
                                                                                 </constraints>
                                                                             </view>
                                                                         </subviews>
@@ -454,7 +603,7 @@
                                                                             <constraint firstItem="Kti-9z-hdt" firstAttribute="leading" secondItem="kKn-l9-toQ" secondAttribute="leading" id="6hO-tQ-2Zs"/>
                                                                             <constraint firstAttribute="trailing" secondItem="Kti-9z-hdt" secondAttribute="trailing" id="OYR-54-nvN"/>
                                                                             <constraint firstItem="P0R-qD-QNq" firstAttribute="leading" secondItem="kKn-l9-toQ" secondAttribute="leading" id="eXX-CX-HwK"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="P0R-qD-QNq" secondAttribute="bottom" constant="400" id="edI-GK-HG6"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="P0R-qD-QNq" secondAttribute="bottom" id="edI-GK-HG6"/>
                                                                             <constraint firstAttribute="trailing" secondItem="P0R-qD-QNq" secondAttribute="trailing" id="kM6-T9-Vzb"/>
                                                                             <constraint firstItem="Kti-9z-hdt" firstAttribute="top" secondItem="kKn-l9-toQ" secondAttribute="top" constant="18" id="vez-Dd-ICY"/>
                                                                             <constraint firstItem="P0R-qD-QNq" firstAttribute="top" secondItem="Kti-9z-hdt" secondAttribute="bottom" constant="20" id="ygF-UF-idB"/>
@@ -593,7 +742,11 @@
                         <outlet property="lblProductDiscountTypeSelectionViewSubTitle" destination="vKZ-4r-UAJ" id="d7v-ZN-eNB"/>
                         <outlet property="lblProductDiscountTypeSelectionViewTitle" destination="cxc-8e-J7d" id="beI-xv-ky2"/>
                         <outlet property="segCtrlDiscountPerItemDiscountType" destination="91H-wx-URR" id="Ol2-7H-Fsi"/>
+                        <outlet property="segCtrlDiscountScheduleType" destination="bSV-UQ-dLC" id="rg4-yC-rJy"/>
                         <outlet property="swtAllowDiscountStackWithOtherDiscounts" destination="A8c-pd-HRJ" id="fQW-kb-qEE"/>
+                        <outlet property="swtDealHasNoEndDate" destination="Drc-hO-yYh" id="PZv-Tg-r6Y"/>
+                        <outlet property="txtDealEndDate" destination="3Gv-sI-lD1" id="Dsa-3j-vHp"/>
+                        <outlet property="txtDealStartDate" destination="VHR-yr-iuI" id="kjb-Qj-ayh"/>
                         <outlet property="txtDiscountName" destination="ooP-5k-KXU" id="StC-aq-aqm"/>
                         <outlet property="txtDiscountPerItem" destination="h75-XG-CoL" id="BHc-Be-ng4"/>
                         <outlet property="vwCategoryDiscountTypeSelectionView" destination="ufz-zX-xQv" id="nuN-KY-Rkl"/>
@@ -755,6 +908,9 @@
         <namedColor name="Deliverybtn">
             <color red="0.10999999940395355" green="0.10999999940395355" blue="0.10999999940395355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="E4E8EF">
+            <color red="0.89411764705882357" green="0.90980392156862744" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="F55353">
             <color red="0.96078431372549022" green="0.32549019607843138" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -765,7 +921,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

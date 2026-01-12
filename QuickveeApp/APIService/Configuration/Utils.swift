@@ -9,9 +9,13 @@ import Foundation
 
 
 enum APIParameter {
+    
+    case multipart(MultiPartRequestBodyType)
+    
     case json(StringTOAnyDict)
     case customBody(Codable)
     case rawBody(Data)
+    
 }
 
 enum HTTPMethod : String {

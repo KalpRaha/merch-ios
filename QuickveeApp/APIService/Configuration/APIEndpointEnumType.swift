@@ -22,6 +22,9 @@ protocol APIEndpointEnumType {
 extension APIEndpointEnumType {
     
     var defaultHeaders : [String: String] {
-        [:]
+        [
+            "Accept":"application/json",
+            "Content-Type": "application/json; charset=UTF-8"
+        ]
     }
 }

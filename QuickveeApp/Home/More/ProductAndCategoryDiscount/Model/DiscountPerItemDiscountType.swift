@@ -11,19 +11,19 @@ import Foundation
 enum DiscountPerItemDiscountType {
     
     case percentValue
-    case currencyValue
+    case amountValue
     
     var stringValue : String {
         switch self {
         case .percentValue: "%"
-        case .currencyValue: "$"
+        case .amountValue: "$"
         }
     }
     
     mutating func toggle(){
         self = switch self {
-        case .percentValue : .currencyValue
-        case .currencyValue : .percentValue
+        case .percentValue : .amountValue
+        case .amountValue : .percentValue
         }
     }
     

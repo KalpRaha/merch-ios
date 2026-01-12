@@ -24,8 +24,10 @@ class VariantListRepository : VariantListRepositoryProtocol{
     
     func getVariantList() async throws ->  GenericAPIResponse<[VariantDataModel]> {
         return try await apiService.getData(
-            endpoint: API.VariantListEndpoint.variantList,
-            responseType: GenericAPIResponse<[VariantDataModel]>.self
+            endpoint: API.VariantListEndpoint.variantList(
+                reqBody: .init(merchantId: UDHelper.shared.merchantId)
+            ),
+            responseType: GenericAPIResponse<[VariantDataModel]>.self,
         )
     }
     

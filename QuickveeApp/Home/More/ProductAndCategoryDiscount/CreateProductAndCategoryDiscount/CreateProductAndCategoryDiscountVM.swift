@@ -1,5 +1,5 @@
 //
-//  ViewModel.swift
+//  CreateProductAndCategoryDiscountVM.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 08/01/26.
@@ -13,6 +13,7 @@ protocol CreateProductAndCategoryDiscountVMDelegate : AnyObject {
     func didUpdateProductOrCategoryDiscountType()
     func didUpdateIsAllowDiscountToStackWithOtherDiscounts()
     func didUpdateDiscountPerItemDiscountType()
+    func didUpdateScheduleType()
 }
 
 extension CreateProductAndCategoryDiscountVC {
@@ -35,17 +36,40 @@ extension CreateProductAndCategoryDiscountVC {
         }
         
         
-        var discountPerItemDiscountType: DiscountPerItemDiscountType = .currencyValue {
+        var discountPerItemDiscountTypeSegments: [DiscountPerItemDiscountType] = [
+            .amountValue,
+            .percentValue
+        ]
+        
+        var discountPerItemDiscountType: DiscountPerItemDiscountType = .amountValue {
             didSet{
                 delegate?.didUpdateDiscountPerItemDiscountType()
             }
         }
         
-        var discountPerItemDiscountTypeSegments: [DiscountPerItemDiscountType] = [
-            .currencyValue,
-            .percentValue
+
+        var scheduleTypeSegments: [ScheduleType] = [
+            .oneTime,
+            .repeatsOnSchedule
         ]
+        
+        var scheduleType : ScheduleType = .oneTime {
+            didSet{
+                delegate?.didUpdateScheduleType()
+            }
+        }
+        
         
     }
     
 }
+
+extension CreateProductAndCategoryDiscountVC {
+    
+    enum DealDateType {
+        case startDate
+        case endDate
+    }
+    
+}
+
