@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_3" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -458,114 +459,21 @@
                                                                                         </constraints>
                                                                                     </view>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mjo-tk-EEy">
-                                                                                        <rect key="frame" x="0.0" y="386.66666666666669" width="364.66666666666669" height="128.33333333333331"/>
+                                                                                        <rect key="frame" x="0.0" y="386.66666666666669" width="364.66666666666669" height="72"/>
                                                                                         <subviews>
-                                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cGi-qS-Arq">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="177.33333333333334" height="128.33333333333334"/>
-                                                                                                <subviews>
-                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFS-QB-a0j" customClass="ManropeMediumLabel" customModule="QuickveeApp" customModuleProvider="target">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="69.333333333333329"/>
-                                                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                                        <color key="textColor" name="2B2B2B"/>
-                                                                                                        <nil key="highlightedColor"/>
-                                                                                                    </label>
-                                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myZ-i6-zsF" customClass="CornerRadiusBorderView" customModule="QuickveeApp" customModuleProvider="target">
-                                                                                                        <rect key="frame" x="0.0" y="78.333333333333258" width="177.33333333333334" height="50"/>
-                                                                                                        <subviews>
-                                                                                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="DD/MM/YYYY" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VHR-yr-iuI">
-                                                                                                                <rect key="frame" x="15" y="8" width="147.33333333333334" height="34"/>
-                                                                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                                                <textInputTraits key="textInputTraits"/>
-                                                                                                            </textField>
-                                                                                                        </subviews>
-                                                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                                                        <constraints>
-                                                                                                            <constraint firstItem="VHR-yr-iuI" firstAttribute="centerY" secondItem="myZ-i6-zsF" secondAttribute="centerY" id="LOe-pR-bAx"/>
-                                                                                                            <constraint firstAttribute="trailing" secondItem="VHR-yr-iuI" secondAttribute="trailing" constant="15" id="oVv-kf-dti"/>
-                                                                                                            <constraint firstAttribute="width" secondItem="myZ-i6-zsF" secondAttribute="height" multiplier="185:52" id="t51-DW-vTB"/>
-                                                                                                            <constraint firstItem="VHR-yr-iuI" firstAttribute="leading" secondItem="myZ-i6-zsF" secondAttribute="leading" constant="15" id="vdC-on-Ete"/>
-                                                                                                        </constraints>
-                                                                                                        <userDefinedRuntimeAttributes>
-                                                                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                                                                <color key="value" name="E4E8EF"/>
-                                                                                                            </userDefinedRuntimeAttribute>
-                                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                                                                <real key="value" value="1"/>
-                                                                                                            </userDefinedRuntimeAttribute>
-                                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                                                <real key="value" value="8"/>
-                                                                                                            </userDefinedRuntimeAttribute>
-                                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderOpacity">
-                                                                                                                <real key="value" value="1"/>
-                                                                                                            </userDefinedRuntimeAttribute>
-                                                                                                        </userDefinedRuntimeAttributes>
-                                                                                                    </view>
-                                                                                                </subviews>
+                                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cGi-qS-Arq" userLabel="Start Date" customClass="DatePickerInputView" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="177.33333333333334" height="72"/>
                                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                                <constraints>
-                                                                                                    <constraint firstItem="myZ-i6-zsF" firstAttribute="leading" secondItem="cGi-qS-Arq" secondAttribute="leading" id="I1s-hv-f0J"/>
-                                                                                                    <constraint firstItem="UFS-QB-a0j" firstAttribute="leading" secondItem="cGi-qS-Arq" secondAttribute="leading" id="JCw-K0-8k1"/>
-                                                                                                    <constraint firstItem="UFS-QB-a0j" firstAttribute="top" secondItem="cGi-qS-Arq" secondAttribute="top" id="Lru-Kk-8Sd"/>
-                                                                                                    <constraint firstAttribute="trailing" secondItem="myZ-i6-zsF" secondAttribute="trailing" id="cVe-kl-1MY"/>
-                                                                                                    <constraint firstAttribute="bottom" secondItem="myZ-i6-zsF" secondAttribute="bottom" id="fGe-X3-Dhp"/>
-                                                                                                    <constraint firstItem="myZ-i6-zsF" firstAttribute="top" secondItem="UFS-QB-a0j" secondAttribute="bottom" constant="9" id="fPg-BC-0ab"/>
-                                                                                                </constraints>
                                                                                             </view>
-                                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GH4-Ci-yd9">
-                                                                                                <rect key="frame" x="187.33333333333331" y="0.0" width="177.33333333333331" height="128.33333333333334"/>
-                                                                                                <subviews>
-                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajQ-LC-Jze" customClass="ManropeMediumLabel" customModule="QuickveeApp" customModuleProvider="target">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="69.333333333333329"/>
-                                                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                                        <color key="textColor" name="2B2B2B"/>
-                                                                                                        <nil key="highlightedColor"/>
-                                                                                                    </label>
-                                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcx-U1-sfl" customClass="CornerRadiusBorderView" customModule="QuickveeApp" customModuleProvider="target">
-                                                                                                        <rect key="frame" x="0.0" y="78.333333333333258" width="177.33333333333334" height="50"/>
-                                                                                                        <subviews>
-                                                                                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="DD/MM/YYYY" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Gv-sI-lD1">
-                                                                                                                <rect key="frame" x="15" y="8" width="147.33333333333334" height="34"/>
-                                                                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                                                <textInputTraits key="textInputTraits"/>
-                                                                                                            </textField>
-                                                                                                        </subviews>
-                                                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                                                        <constraints>
-                                                                                                            <constraint firstAttribute="trailing" secondItem="3Gv-sI-lD1" secondAttribute="trailing" constant="15" id="NjB-fx-G3Y"/>
-                                                                                                            <constraint firstItem="3Gv-sI-lD1" firstAttribute="leading" secondItem="hcx-U1-sfl" secondAttribute="leading" constant="15" id="WCq-Fg-a43"/>
-                                                                                                            <constraint firstAttribute="width" secondItem="hcx-U1-sfl" secondAttribute="height" multiplier="185:52" id="a2w-dx-nPR"/>
-                                                                                                            <constraint firstItem="3Gv-sI-lD1" firstAttribute="centerY" secondItem="hcx-U1-sfl" secondAttribute="centerY" id="hKt-gk-12v"/>
-                                                                                                        </constraints>
-                                                                                                        <userDefinedRuntimeAttributes>
-                                                                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                                                                <color key="value" name="E4E8EF"/>
-                                                                                                            </userDefinedRuntimeAttribute>
-                                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                                                                <real key="value" value="1"/>
-                                                                                                            </userDefinedRuntimeAttribute>
-                                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                                                <real key="value" value="8"/>
-                                                                                                            </userDefinedRuntimeAttribute>
-                                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderOpacity">
-                                                                                                                <real key="value" value="1"/>
-                                                                                                            </userDefinedRuntimeAttribute>
-                                                                                                        </userDefinedRuntimeAttributes>
-                                                                                                    </view>
-                                                                                                </subviews>
+                                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GH4-Ci-yd9" userLabel="End Date" customClass="DatePickerInputView" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                <rect key="frame" x="187.33333333333331" y="0.0" width="177.33333333333331" height="72"/>
                                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                                <constraints>
-                                                                                                    <constraint firstAttribute="trailing" secondItem="hcx-U1-sfl" secondAttribute="trailing" id="6iq-qH-nEq"/>
-                                                                                                    <constraint firstItem="ajQ-LC-Jze" firstAttribute="leading" secondItem="GH4-Ci-yd9" secondAttribute="leading" id="HDG-B6-Rt3"/>
-                                                                                                    <constraint firstAttribute="bottom" secondItem="hcx-U1-sfl" secondAttribute="bottom" id="K0a-Mn-JHG"/>
-                                                                                                    <constraint firstItem="ajQ-LC-Jze" firstAttribute="top" secondItem="GH4-Ci-yd9" secondAttribute="top" id="P3i-Qc-l8w"/>
-                                                                                                    <constraint firstItem="hcx-U1-sfl" firstAttribute="top" secondItem="ajQ-LC-Jze" secondAttribute="bottom" constant="9" id="VJs-2P-zpE"/>
-                                                                                                    <constraint firstItem="hcx-U1-sfl" firstAttribute="leading" secondItem="GH4-Ci-yd9" secondAttribute="leading" id="hia-uO-IrQ"/>
-                                                                                                </constraints>
                                                                                             </view>
                                                                                         </subviews>
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="width" secondItem="mjo-tk-EEy" secondAttribute="height" multiplier="380:75" id="xC1-hj-E8z"/>
+                                                                                        </constraints>
                                                                                     </stackView>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -735,6 +643,8 @@
                     <connections>
                         <outlet property="btnCancel" destination="hgl-RN-Ctm" id="mqT-Oc-JOV"/>
                         <outlet property="btnSave" destination="Fgb-mz-GUU" id="dYb-Ce-62p"/>
+                        <outlet property="dtPickerDealEndDate" destination="GH4-Ci-yd9" id="a3e-Te-vmb"/>
+                        <outlet property="dtPickerDealStartDate" destination="cGi-qS-Arq" id="u2z-fG-vqg"/>
                         <outlet property="lblCategoryDiscountTypeSelectionViewSubTitle" destination="Hwf-xC-CtD" id="86C-Qz-OSP"/>
                         <outlet property="lblCategoryDiscountTypeSelectionViewTitle" destination="H37-YM-XNx" id="tb9-Da-VJw"/>
                         <outlet property="lblDiscountName" destination="nq6-Y3-9cv" id="ZQE-i5-L2z"/>
@@ -745,8 +655,6 @@
                         <outlet property="segCtrlDiscountScheduleType" destination="bSV-UQ-dLC" id="rg4-yC-rJy"/>
                         <outlet property="swtAllowDiscountStackWithOtherDiscounts" destination="A8c-pd-HRJ" id="fQW-kb-qEE"/>
                         <outlet property="swtDealHasNoEndDate" destination="Drc-hO-yYh" id="PZv-Tg-r6Y"/>
-                        <outlet property="txtDealEndDate" destination="3Gv-sI-lD1" id="Dsa-3j-vHp"/>
-                        <outlet property="txtDealStartDate" destination="VHR-yr-iuI" id="kjb-Qj-ayh"/>
                         <outlet property="txtDiscountName" destination="ooP-5k-KXU" id="StC-aq-aqm"/>
                         <outlet property="txtDiscountPerItem" destination="h75-XG-CoL" id="BHc-Be-ng4"/>
                         <outlet property="vwCategoryDiscountTypeSelectionView" destination="ufz-zX-xQv" id="nuN-KY-Rkl"/>
@@ -781,7 +689,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Products" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPd-R5-0fM">
-                                        <rect key="frame" x="60" y="14.666666666666657" width="128.33333333333334" height="21"/>
+                                        <rect key="frame" x="60" y="12.666666666666659" width="138" height="24.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -907,9 +815,6 @@
         </namedColor>
         <namedColor name="Deliverybtn">
             <color red="0.10999999940395355" green="0.10999999940395355" blue="0.10999999940395355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="E4E8EF">
-            <color red="0.89411764705882357" green="0.90980392156862744" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="F55353">
             <color red="0.96078431372549022" green="0.32549019607843138" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

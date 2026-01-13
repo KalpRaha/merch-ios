@@ -65,6 +65,8 @@
 		B49382062F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382052F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift */; };
 		B49382082F0E3F400071D0F1 /* GenericButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382072F0E3F400071D0F1 /* GenericButton.swift */; };
 		B49478412F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */; };
+		B4AD368A2F1605CA00E9EF55 /* DatePickerInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD36892F1605CA00E9EF55 /* DatePickerInputView.swift */; };
+		B4AD368D2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD368C2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift */; };
 		B4BC09762F14B6DE00BDB89E /* ScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC09752F14B6DE00BDB89E /* ScheduleType.swift */; };
 		B4BC097A2F15063100BDB89E /* MultipartFormDataBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC09792F15063100BDB89E /* MultipartFormDataBuilder.swift */; };
 		B4BC097C2F15108000BDB89E /* MultiPartRequestBodyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC097B2F15108000BDB89E /* MultiPartRequestBodyType.swift */; };
@@ -405,6 +407,8 @@
 		B49382052F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductAndCategoryDiscountVC.swift; sourceTree = "<group>"; };
 		B49382072F0E3F400071D0F1 /* GenericButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericButton.swift; sourceTree = "<group>"; };
 		B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountPerItemDiscountTextFormatter.swift; sourceTree = "<group>"; };
+		B4AD36892F1605CA00E9EF55 /* DatePickerInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerInputView.swift; sourceTree = "<group>"; };
+		B4AD368C2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerInputViewConfiguration.swift; sourceTree = "<group>"; };
 		B4BC09752F14B6DE00BDB89E /* ScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleType.swift; sourceTree = "<group>"; };
 		B4BC09792F15063100BDB89E /* MultipartFormDataBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataBuilder.swift; sourceTree = "<group>"; };
 		B4BC097B2F15108000BDB89E /* MultiPartRequestBodyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPartRequestBodyType.swift; sourceTree = "<group>"; };
@@ -861,6 +865,7 @@
 		B45CB8B72F05199E004AF269 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B4AD368B2F1627FB00E9EF55 /* DatePickerInputView */,
 				B41A9F442F0FA88C00C543C7 /* GenericSegmentedControl.swift */,
 				B41A9F372F0F4F2B00C543C7 /* CustomSwitch.swift */,
 				B49382072F0E3F400071D0F1 /* GenericButton.swift */,
@@ -916,6 +921,15 @@
 				B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */,
 			);
 			path = Validators;
+			sourceTree = "<group>";
+		};
+		B4AD368B2F1627FB00E9EF55 /* DatePickerInputView */ = {
+			isa = PBXGroup;
+			children = (
+				B4AD36892F1605CA00E9EF55 /* DatePickerInputView.swift */,
+				B4AD368C2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift */,
+			);
+			path = DatePickerInputView;
 			sourceTree = "<group>";
 		};
 		B4BC097D2F15108500BDB89E /* Multipart */ = {
@@ -2180,6 +2194,7 @@
 				D2CE36A02976BFD60090A6D2 /* OrderTypesTableViewCell.swift in Sources */,
 				D2A37A422BFC941A005B59CE /* AddPurchaseQtyViewController.swift in Sources */,
 				D241C61C2ACBC74E007AA415 /* AddAttributeViewController.swift in Sources */,
+				B4AD368D2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift in Sources */,
 				D2C1F3132C1AABD400BA6388 /* MixnMatchPricingCell.swift in Sources */,
 				D237A6452BB2E68F00B403AF /* RefundedItemCell.swift in Sources */,
 				D2C1F3152C1AD0AF00BA6388 /* PriceMixnMatchViewController.swift in Sources */,
@@ -2216,6 +2231,7 @@
 				B4BC09762F14B6DE00BDB89E /* ScheduleType.swift in Sources */,
 				D2A6838F296C0B3700F852E6 /* SceneDelegate.swift in Sources */,
 				D2B269E52A6113EC002D140A /* RootTableViewController.swift in Sources */,
+				B4AD368A2F1605CA00E9EF55 /* DatePickerInputView.swift in Sources */,
 				D27F2F5C2F10C4CE007AE4C8 /* ProductAndCategoryDiscountEndpoint.swift in Sources */,
 				D27F2F612F10D502007AE4C8 /* VariantListRepository.swift in Sources */,
 				D2CA7D782B45242D00918A94 /* DuplicateCatCollectionViewCell.swift in Sources */,
