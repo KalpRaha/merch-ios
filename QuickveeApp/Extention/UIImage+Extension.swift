@@ -22,4 +22,13 @@ extension UIImage {
         UIImage(named: "check inventory") ?? UIImage()
     }()
     
+    
+    static var clockIcon : UIImage = {
+        UIImage(named: "clockIcon") ?? UIImage()
+    }()
+    
+    static var calenderIcon : UIImage = {
+        UIImage(named: "calenderIcon") ?? UIImage()
+    }()
+    
 }

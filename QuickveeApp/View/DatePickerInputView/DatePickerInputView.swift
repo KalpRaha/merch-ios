@@ -16,6 +16,14 @@ protocol DatePickerInputViewDelegate : AnyObject {
     func onClickDone(_ selectedDate: Date)
 }
 
+extension DatePickerInputView{
+    
+    enum PickerType {
+        case date
+        case time
+    }
+    
+}
 
 final class DatePickerInputView: UIView {
 
@@ -36,6 +44,7 @@ final class DatePickerInputView: UIView {
     }
     
     var configuration: Configuration!
+    private var pickerType: PickerType = .date
     
 
     // MARK: - UI Components
@@ -43,10 +52,14 @@ final class DatePickerInputView: UIView {
     private let lblTitle = UILabel()
     private let textFieldContainerView = UIView()
 
+    // New: stack + icon
+    private let hStack = UIStackView()
     private let textField = UITextField()
+    private let iconImageView = UIImageView()
+
     private let datePicker = UIDatePicker()
 
-    // Constraints for textField inside its container
+    // Constraints for content inside its container (now applied to hStack)
     private var topConstraint: NSLayoutConstraint!
     private var leadingConstraint: NSLayoutConstraint!
     private var trailingConstraint: NSLayoutConstraint!
@@ -65,24 +78,37 @@ final class DatePickerInputView: UIView {
         super.init(coder: coder)
     }
 
-    
-    func configureView(delegate : DatePickerInputViewDelegate) {
+    func configureView(
+        pickerType : PickerType,
+        delegate : DatePickerInputViewDelegate
+    ) {
         self.delegate = delegate
         self.configuration = delegate.configureView(self)
+        self.pickerType = pickerType
         
         buildView()
         updateUIForLatestConfiguration()
     }
     
     func updateUIForLatestConfiguration(){
-        lblTitle.text = self.configuration.titleText
-        lblTitle.textColor = self.configuration.titleTextColor
-        lblTitle.font = self.configuration.titleTextFont
+        let config = self.configuration.titleTextConfiguration
+        lblTitle.text = config.title
+        lblTitle.textColor = config.textColor
+        lblTitle.font = config.font
         
         updateConstraintsForInsets()
             
         self.configuration.containerViewConfig.apply(in: self)
         self.configuration.textFieldViewConfig.apply(in: self.textFieldContainerView)
+        
+        // Ensure picker reflects current mode and text shows correct formatting
+        applyPickerType()
+        configureIconForPickerType()
+        if let selectedDate {
+            updateTextField(with: clamp(selectedDate))
+        } else {
+            setDefaultPlaceholder()
+        }
         
         setNeedsLayout()
         layoutSubviews()
@@ -97,7 +123,9 @@ fileprivate extension DatePickerInputView {
     func buildView(){
         setupTitleLabel()
         setupTextFieldContainer()
+        setupStackView()
         setupTextField()
+        setupIconImageView()
         setupDatePicker()
         setupToolbar()
     }
@@ -132,18 +160,20 @@ fileprivate extension DatePickerInputView {
         ])
     }
 
-    func setupTextField() {
-        textField.delegate = self
-        setDefaultPlaceholder()
-        textField.translatesAutoresizingMaskIntoConstraints = false
+    func setupStackView() {
+        hStack.axis = .horizontal
+        hStack.alignment = .center
+        hStack.spacing = 5
+        hStack.translatesAutoresizingMaskIntoConstraints = false
 
-        textFieldContainerView.addSubview(textField)
+        textFieldContainerView.addSubview(hStack)
+
         let contentInsets = configuration.textFieldContentInset
         
-        topConstraint = textField.topAnchor.constraint(equalTo: textFieldContainerView.topAnchor, constant: contentInsets.top)
-        leadingConstraint = textField.leadingAnchor.constraint(equalTo: textFieldContainerView.leadingAnchor, constant: contentInsets.left)
-        trailingConstraint = textField.trailingAnchor.constraint(equalTo: textFieldContainerView.trailingAnchor, constant: -contentInsets.right)
-        bottomConstraint = textField.bottomAnchor.constraint(equalTo: textFieldContainerView.bottomAnchor, constant: -contentInsets.bottom)
+        topConstraint = hStack.topAnchor.constraint(equalTo: textFieldContainerView.topAnchor, constant: contentInsets.top)
+        leadingConstraint = hStack.leadingAnchor.constraint(equalTo: textFieldContainerView.leadingAnchor, constant: contentInsets.left)
+        trailingConstraint = hStack.trailingAnchor.constraint(equalTo: textFieldContainerView.trailingAnchor, constant: -contentInsets.right)
+        bottomConstraint = hStack.bottomAnchor.constraint(equalTo: textFieldContainerView.bottomAnchor, constant: -contentInsets.bottom)
 
         NSLayoutConstraint.activate([
             topConstraint,
@@ -151,6 +181,36 @@ fileprivate extension DatePickerInputView {
             trailingConstraint,
             bottomConstraint
         ])
+    }
+
+    func setupTextField() {
+        textField.delegate = self
+        setDefaultPlaceholder()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+
+        // Ensure text field can compress before icon if space is tight
+        textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
+        hStack.addArrangedSubview(textField)
+    }
+    
+    func setupIconImageView() {
+        iconImageView.translatesAutoresizingMaskIntoConstraints = false
+        iconImageView.contentMode = .scaleAspectFit
+
+        // Provide a sensible size for the icon
+        NSLayoutConstraint.activate([
+            iconImageView.widthAnchor.constraint(equalToConstant: 20),
+            iconImageView.heightAnchor.constraint(equalToConstant: 20)
+        ])
+
+        // Icon should not stretch; keep it hugging
+        iconImageView.setContentHuggingPriority(.required, for: .horizontal)
+        iconImageView.setContentCompressionResistancePriority(.required, for: .horizontal)
+
+        hStack.addArrangedSubview(iconImageView)
+        configureIconForPickerType()
     }
     
     func updateConstraintsForInsets() {
@@ -165,7 +225,7 @@ fileprivate extension DatePickerInputView {
     }
 
     func setupDatePicker() {
-        datePicker.datePickerMode = .date
+        applyPickerType()
 
         if #available(iOS 13.4, *) {
             datePicker.preferredDatePickerStyle = .wheels
@@ -178,6 +238,34 @@ fileprivate extension DatePickerInputView {
         )
 
         textField.inputView = datePicker
+    }
+    
+    func applyPickerType() {
+        switch pickerType {
+        case .date:
+            datePicker.datePickerMode = .date
+        case .time:
+            datePicker.datePickerMode = .time
+        }
+    }
+    
+    func configureIconForPickerType() {
+        // Replace with your asset names
+        // e.g., UIImage(named: "date_picker") and UIImage(named: "time_picker")
+        switch pickerType {
+        case .date:
+            iconImageView.image = .calenderIcon
+        case .time:
+            iconImageView.image = .clockIcon
+        }
+        // If assets aren’t available yet, you can set a system symbol as a fallback on iOS 13+
+        if iconImageView.image == nil {
+            if #available(iOS 13.0, *) {
+                let name = (pickerType == .date) ? "calendar" : "clock"
+                iconImageView.image = UIImage(systemName: name)
+            }
+        }
+        iconImageView.tintColor = configuration.textFieldTextConfiguration.textColor
     }
     
 }
@@ -208,6 +296,7 @@ fileprivate extension DatePickerInputView {
             action: nil
         )
 
+        // Cancel | Done | flexible space
         toolbar.setItems([cancel, done, spacer], animated: false)
         textField.inputAccessoryView = toolbar
     }
@@ -258,20 +347,30 @@ fileprivate extension DatePickerInputView {
     }
 
     func updateTextField(with date: Date) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
-        textField.text = formatter.string(from: date)
+        switch pickerType {
+        case .date:
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yyyy"
+            textField.text = formatter.string(from: date)
+        case .time:
+            let formatter = DateFormatter()
+            formatter.timeStyle = .short
+            formatter.dateStyle = .none
+            textField.text = formatter.string(from: date)
+        }
     }
 
     
     func setDefaultPlaceholder() {
-        textField.attributedPlaceholder = getAttributedPlaceholder("DD/MM/YYYY")
+        textField.attributedPlaceholder = getAttributedPlaceholder(
+            configuration.textFieldTextConfiguration.placeholderText
+        )
     }
 
     func getAttributedPlaceholder(_ text: String) -> NSAttributedString {
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: FontFamily.ManropeMedium.size(14),
-            .foregroundColor: UIColor._878787
+            .font: configuration.textFieldTextConfiguration.font,
+            .foregroundColor: configuration.textFieldTextConfiguration.textColor
         ]
         return NSAttributedString(
             string: text,

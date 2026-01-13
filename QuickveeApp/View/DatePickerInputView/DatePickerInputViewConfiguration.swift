@@ -11,12 +11,13 @@ import UIKit
 // MARK: - Public configuration API
 
 extension DatePickerInputView {
+
     
     struct Configuration {
-
-        var titleText : String
-        var titleTextColor: UIColor
-        var titleTextFont: UIFont
+        
+        var titleTextConfiguration: CustomTextConfiguration
+        var textFieldTextConfiguration: TextFieldConfiguration
+        
         var titleBottomPadding: CGFloat
         var textFieldContentInset: UIEdgeInsets
         
@@ -25,9 +26,8 @@ extension DatePickerInputView {
         
         
         init(
-            titleText: String,
-            titleTextColor: UIColor = .black,
-            titleTextFont: UIFont = FontFamily.ManropeMedium.size(14),
+            titleTextConfiguration: CustomTextConfiguration,
+            textFieldTextConfiguration: TextFieldConfiguration,
             titleBottomPadding: CGFloat = 10,
             textFieldContentInset: UIEdgeInsets = .init(top: 0,left: 15,bottom: 0,right: 15),
             containerViewConfig: ViewConfiguration = .init(
@@ -64,9 +64,9 @@ extension DatePickerInputView {
             )
         ) {
             
-            self.titleText = titleText
-            self.titleTextColor = titleTextColor
-            self.titleTextFont = titleTextFont
+            self.titleTextConfiguration = titleTextConfiguration
+            self.textFieldTextConfiguration = textFieldTextConfiguration
+            
             self.titleBottomPadding = titleBottomPadding
             self.textFieldContentInset = textFieldContentInset
             

@@ -40,10 +40,10 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
 
     
     // DiscountDetails
-    
     @IBOutlet private weak var swtAllowDiscountStackWithOtherDiscounts: CustomSwitch!
     
     
+    // Discount Name and Discount per item
     @IBOutlet private weak var lblDiscountName: UILabel!
     @IBOutlet private weak var txtDiscountName: UITextField!
     
@@ -52,13 +52,27 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     
     
     @IBOutlet private weak var segCtrlDiscountPerItemDiscountType : GenericSegmentedControl!
-    
     @IBOutlet private weak var segCtrlDiscountScheduleType : GenericSegmentedControl!
-    
     @IBOutlet private weak var swtDealHasNoEndDate: CustomSwitch!
     
+    // Date picker
     @IBOutlet private weak var dtPickerDealStartDate: DatePickerInputView!
     @IBOutlet private weak var dtPickerDealEndDate: DatePickerInputView!
+    
+    // Weekly date picker
+    @IBOutlet private weak var vwWeeklySelectionView : WeeklySelectionView!
+    
+    // Deal is active for full day
+    @IBOutlet private weak var swtDealIsActiveForFullDay : CustomSwitch!
+    
+    // Time picker
+    @IBOutlet private weak var dtPickerDealStartTime: DatePickerInputView!
+    @IBOutlet private weak var dtPickerDealEndTime: DatePickerInputView!
+    
+    
+    @IBOutlet private weak var vwAddProductORCategoryBtnSuperView: UIView!
+    @IBOutlet private weak var lblAddProductORCategoryBtn: UILabel!
+    @IBOutlet private weak var btnAddProductORCategory: GenericButton!
     
     
     // Bottom Buttons
@@ -101,8 +115,15 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
         
         configureScheduleType()
         
-        dtPickerDealStartDate.configureView(delegate: self)
-        dtPickerDealEndDate.configureView(delegate: self)
+        dtPickerDealStartDate.configureView(pickerType: .date, delegate: self)
+        dtPickerDealEndDate.configureView(pickerType: .date, delegate: self)
+        
+        vwWeeklySelectionView.configure(
+            titleConfig: .init(title: "Repeat Weekly")
+        )
+        
+        dtPickerDealStartTime.configureView(pickerType: .time, delegate: self)
+        dtPickerDealEndTime.configureView(pickerType: .time, delegate: self)
 
     }
     
@@ -193,6 +214,11 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     }
     
 
+    @IBAction func didChangeValueOfDealIsActiveForFullDay(_ sender: CustomSwitch) {
+        viewModel.isDealIsActiveForFullDay = sender.isOn
+        Logger.log(#function)
+    }
+    
     @IBAction private func onClickBtnCancel(_ sender: GenericButton) {
         
         Logger.log(#function)
@@ -265,6 +291,9 @@ extension CreateProductAndCategoryDiscountVC {
         
         lblCategoryDiscountTypeSelectionViewTitle.textColor = !isProduct ? ._0A64F9 : ._636363
         lblCategoryDiscountTypeSelectionViewSubTitle.textColor = !isProduct ? .black : ._8F8F8F
+        
+        lblAddProductORCategoryBtn.text = isProduct ? "Products Included In Offer" : "Categories Included In This Discount"
+        btnAddProductORCategory.title = isProduct ? "Add products to discount" : "Add Categories to discount"
     }
 }
 
@@ -307,7 +336,11 @@ extension CreateProductAndCategoryDiscountVC : DatePickerInputViewDelegate {
     func configureView(_ datePickerView: DatePickerInputView) -> DatePickerInputView.Configuration {
         
         var configuration = DatePickerInputView.Configuration.init(
-            titleText: "Start Date",
+            titleTextConfiguration: .init(title: "Start Date"),
+            textFieldTextConfiguration: .init(
+                placeholderText: "DD/MM/YYYY",
+                textColor: UIColor._878787
+            ),
             txtViewConfig: .init(
                 borderColor: .E4E8EF,
                 borderWidth: 1,
@@ -316,14 +349,33 @@ extension CreateProductAndCategoryDiscountVC : DatePickerInputViewDelegate {
             )
         )
         
-        if datePickerView == dtPickerDealStartDate {
-            configuration.titleText = "Start Date"
-    
-            
-        }else if datePickerView == dtPickerDealEndDate {
-            configuration.titleText = "End Date"
-        }
+        let dtPlaceholder = "DD/MM/YYYY"
+        let timePlaceholder = "HH:MM"
         
+        switch datePickerView {
+           
+       case dtPickerDealStartDate:
+            configuration.titleTextConfiguration.title = "Start Date"
+            configuration.textFieldTextConfiguration.placeholderText = dtPlaceholder
+            
+       case dtPickerDealEndDate:
+            configuration.titleTextConfiguration.title = "End Date"
+            configuration.textFieldTextConfiguration.placeholderText = dtPlaceholder
+            
+       case dtPickerDealStartTime:
+            configuration.titleTextConfiguration.title = "Start Time"
+            configuration.textFieldTextConfiguration.placeholderText = timePlaceholder
+            
+       case dtPickerDealEndTime:
+            configuration.titleTextConfiguration.title = "End Time"
+            configuration.textFieldTextConfiguration.placeholderText = timePlaceholder
+            
+       default:
+            configuration.titleTextConfiguration.title = "Date or Time"
+            configuration.textFieldTextConfiguration.placeholderText = "Select"
+            
+       }
+    
         return configuration
     }
     
@@ -354,6 +406,10 @@ extension CreateProductAndCategoryDiscountVC : CreateProductAndCategoryDiscountV
     
     
     func didUpdateScheduleType() {
+    
+    }
+    
+    func didUpdateIsDealIsActiveForFullDay() {
         
     }
     

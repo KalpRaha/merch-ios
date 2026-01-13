@@ -67,6 +67,11 @@
 		B49478412F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */; };
 		B4AD368A2F1605CA00E9EF55 /* DatePickerInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD36892F1605CA00E9EF55 /* DatePickerInputView.swift */; };
 		B4AD368D2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD368C2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift */; };
+		B4AD36902F16524A00E9EF55 /* CustomTextConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD368F2F16524A00E9EF55 /* CustomTextConfiguration.swift */; };
+		B4AD36922F16525C00E9EF55 /* TextFieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD36912F16525C00E9EF55 /* TextFieldConfiguration.swift */; };
+		B4AD36952F16694100E9EF55 /* WeeklySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD36942F16694100E9EF55 /* WeeklySelectionView.swift */; };
+		B4AD36972F16695400E9EF55 /* DayItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD36962F16695400E9EF55 /* DayItemView.swift */; };
+		B4AD36992F16697D00E9EF55 /* WeeklySelectionViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD36982F16697D00E9EF55 /* WeeklySelectionViewConfiguration.swift */; };
 		B4BC09762F14B6DE00BDB89E /* ScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC09752F14B6DE00BDB89E /* ScheduleType.swift */; };
 		B4BC097A2F15063100BDB89E /* MultipartFormDataBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC09792F15063100BDB89E /* MultipartFormDataBuilder.swift */; };
 		B4BC097C2F15108000BDB89E /* MultiPartRequestBodyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC097B2F15108000BDB89E /* MultiPartRequestBodyType.swift */; };
@@ -409,6 +414,11 @@
 		B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountPerItemDiscountTextFormatter.swift; sourceTree = "<group>"; };
 		B4AD36892F1605CA00E9EF55 /* DatePickerInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerInputView.swift; sourceTree = "<group>"; };
 		B4AD368C2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerInputViewConfiguration.swift; sourceTree = "<group>"; };
+		B4AD368F2F16524A00E9EF55 /* CustomTextConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextConfiguration.swift; sourceTree = "<group>"; };
+		B4AD36912F16525C00E9EF55 /* TextFieldConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldConfiguration.swift; sourceTree = "<group>"; };
+		B4AD36942F16694100E9EF55 /* WeeklySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySelectionView.swift; sourceTree = "<group>"; };
+		B4AD36962F16695400E9EF55 /* DayItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayItemView.swift; sourceTree = "<group>"; };
+		B4AD36982F16697D00E9EF55 /* WeeklySelectionViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySelectionViewConfiguration.swift; sourceTree = "<group>"; };
 		B4BC09752F14B6DE00BDB89E /* ScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleType.swift; sourceTree = "<group>"; };
 		B4BC09792F15063100BDB89E /* MultipartFormDataBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataBuilder.swift; sourceTree = "<group>"; };
 		B4BC097B2F15108000BDB89E /* MultiPartRequestBodyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPartRequestBodyType.swift; sourceTree = "<group>"; };
@@ -865,6 +875,7 @@
 		B45CB8B72F05199E004AF269 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B4AD36932F16692F00E9EF55 /* WeeklySelectionView */,
 				B4AD368B2F1627FB00E9EF55 /* DatePickerInputView */,
 				B41A9F442F0FA88C00C543C7 /* GenericSegmentedControl.swift */,
 				B41A9F372F0F4F2B00C543C7 /* CustomSwitch.swift */,
@@ -930,6 +941,25 @@
 				B4AD368C2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift */,
 			);
 			path = DatePickerInputView;
+			sourceTree = "<group>";
+		};
+		B4AD368E2F16521700E9EF55 /* ConfigurationModels */ = {
+			isa = PBXGroup;
+			children = (
+				B4AD368F2F16524A00E9EF55 /* CustomTextConfiguration.swift */,
+				B4AD36912F16525C00E9EF55 /* TextFieldConfiguration.swift */,
+			);
+			path = ConfigurationModels;
+			sourceTree = "<group>";
+		};
+		B4AD36932F16692F00E9EF55 /* WeeklySelectionView */ = {
+			isa = PBXGroup;
+			children = (
+				B4AD36942F16694100E9EF55 /* WeeklySelectionView.swift */,
+				B4AD36962F16695400E9EF55 /* DayItemView.swift */,
+				B4AD36982F16697D00E9EF55 /* WeeklySelectionViewConfiguration.swift */,
+			);
+			path = WeeklySelectionView;
 			sourceTree = "<group>";
 		};
 		B4BC097D2F15108500BDB89E /* Multipart */ = {
@@ -1506,6 +1536,7 @@
 				B45CB8B72F05199E004AF269 /* View */,
 				B42F5F562F078112002252EE /* CoreData */,
 				B45CB8B02F04F4BD004AF269 /* Storage */,
+				B4AD368E2F16521700E9EF55 /* ConfigurationModels */,
 				B494783F2F11104D00DED5CA /* Validators */,
 				B49381E82F0DFB780071D0F1 /* Storyboards */,
 				B45CB8A02F04DFDF004AF269 /* Utils */,
@@ -2059,6 +2090,7 @@
 				D25789002D48B492003F6218 /* CreateBOGODealViewController.swift in Sources */,
 				D2153F9C2ACD605500CC61DA /* POQuantityViewController.swift in Sources */,
 				D27624C72C589F410019EB2B /* CouponCategoryCell.swift in Sources */,
+				B4AD36952F16694100E9EF55 /* WeeklySelectionView.swift in Sources */,
 				D212983329A8900B0005DB24 /* SetupBusinessTableViewCell.swift in Sources */,
 				D22C698E2A24B2C4003BF970 /* FilterNewTableViewCell.swift in Sources */,
 				D29566702AF3A18800B93A0F /* AddAttrCell.swift in Sources */,
@@ -2080,6 +2112,7 @@
 				D2D879862BBBB58700ECE573 /* InStoreRefundPayCell.swift in Sources */,
 				D291BD6D297128D900DCD20D /* StoreTableViewCell.swift in Sources */,
 				D2D879782BBBB06800ECE573 /* InStorePayTableCell.swift in Sources */,
+				B4AD36922F16525C00E9EF55 /* TextFieldConfiguration.swift in Sources */,
 				D2BBAD192C94017C00133338 /* GiftCardViewController.swift in Sources */,
 				D27F2F5E2F10C8E5007AE4C8 /* VariantListEndpoint.swift in Sources */,
 				D2F5AB852CE5C2270050B89C /* NoOrderFoundCell.swift in Sources */,
@@ -2088,6 +2121,7 @@
 				D23493D52CEF2F0B0046D33C /* RefundDetailCell.swift in Sources */,
 				D23493D62CEF2F0B0046D33C /* TendersTableCell.swift in Sources */,
 				D23493D72CEF2F0B0046D33C /* OrderSummaryCell.swift in Sources */,
+				B4AD36972F16695400E9EF55 /* DayItemView.swift in Sources */,
 				D257E0C32D278A1F004DF787 /* InStoreProductLotteryCell.swift in Sources */,
 				D23493D82CEF2F0B0046D33C /* OnlineOrderCell.swift in Sources */,
 				D26930AD2E6599AE00C3339B /* CustomerMergeTableViewCell.swift in Sources */,
@@ -2102,6 +2136,7 @@
 				D23327DD2C9D77A700161CCD /* DoubleSalesTableViewCell.swift in Sources */,
 				D2A6838D296C0B3700F852E6 /* AppDelegate.swift in Sources */,
 				D285ECE32A2ED94C009DFAE5 /* OrdersViewController.swift in Sources */,
+				B4AD36992F16697D00E9EF55 /* WeeklySelectionViewConfiguration.swift in Sources */,
 				B42F5F582F078120002252EE /* PersistenceContainer.swift in Sources */,
 				D2CA7D7C2B4555A100918A94 /* DuplicateTaxCollectionViewCell.swift in Sources */,
 				D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */,
@@ -2210,6 +2245,7 @@
 				D26F4E74299500A700716A51 /* StrokeAnimation.swift in Sources */,
 				D21CA0522C47DDA1002E4B74 /* AddBrandTagViewController.swift in Sources */,
 				D2D6254B2B75E1C300C25D07 /* PriceBulkViewController.swift in Sources */,
+				B4AD36902F16524A00E9EF55 /* CustomTextConfiguration.swift in Sources */,
 				B4BC09822F1529A500BDB89E /* VariantDataModel.swift in Sources */,
 				D2A2BF792B8DA6EB006796D5 /* OderDetailTableViewCell.swift in Sources */,
 				D2F08DE22CE1E85B00947F57 /* StockAddViewController.swift in Sources */,

@@ -173,10 +173,10 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="402" height="575.33333333333337"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SRd-QX-eSV">
-                                                                <rect key="frame" x="0.0" y="0.0" width="402" height="903.33333333333337"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="402" height="1439.3333333333333"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kKn-l9-toQ" userLabel="ContentView">
-                                                                        <rect key="frame" x="18.666666666666657" y="0.0" width="364.66666666666674" height="903.33333333333337"/>
+                                                                        <rect key="frame" x="18.666666666666657" y="0.0" width="364.66666666666674" height="1439.3333333333333"/>
                                                                         <subviews>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kti-9z-hdt" userLabel="Discount Type Selection View">
                                                                                 <rect key="frame" x="0.0" y="18" width="364.66666666666669" height="142.66666666666666"/>
@@ -296,7 +296,7 @@
                                                                                 </constraints>
                                                                             </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P0R-qD-QNq" userLabel="DiscountDetailsView">
-                                                                                <rect key="frame" x="0.0" y="180.66666666666669" width="364.66666666666669" height="722.66666666666652"/>
+                                                                                <rect key="frame" x="0.0" y="180.66666666666663" width="364.66666666666669" height="1258.666666666667"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discount Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6E-VJ-tEk" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="118.33333333333333" height="19.333333333333332"/>
@@ -444,18 +444,32 @@
                                                                                             <action selector="didChangeValueOfScheduleType:" destination="WKV-D6-cs3" eventType="valueChanged" id="Sdk-nZ-820"/>
                                                                                         </connections>
                                                                                     </view>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="This Deal Has No End Date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sh0-c2-j3Q" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="350.66666666666669" width="313.66666666666669" height="18"/>
-                                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                        <nil key="highlightedColor"/>
-                                                                                    </label>
-                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Drc-hO-yYh" customClass="CustomSwitch" customModule="QuickveeApp" customModuleProvider="target">
-                                                                                        <rect key="frame" x="323.66666666666663" y="348.66666666666669" width="41" height="22"/>
-                                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8l3-3f-KWp" userLabel="This Deal Has No End Date View">
+                                                                                        <rect key="frame" x="0.0" y="348.66666666666669" width="364.66666666666669" height="22"/>
+                                                                                        <subviews>
+                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="This Deal Has No End Date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sh0-c2-j3Q" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                <rect key="frame" x="0.0" y="2" width="313.66666666666669" height="18"/>
+                                                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                <nil key="highlightedColor"/>
+                                                                                            </label>
+                                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Drc-hO-yYh" customClass="CustomSwitch" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                <rect key="frame" x="323.66666666666663" y="0.0" width="41" height="22"/>
+                                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                                <constraints>
+                                                                                                    <constraint firstAttribute="width" constant="41" id="OP2-Bx-BbM"/>
+                                                                                                    <constraint firstAttribute="width" secondItem="Drc-hO-yYh" secondAttribute="height" multiplier="41:22" id="cV1-FE-vg0"/>
+                                                                                                </constraints>
+                                                                                            </view>
+                                                                                        </subviews>
+                                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <constraints>
-                                                                                            <constraint firstAttribute="width" constant="41" id="OP2-Bx-BbM"/>
-                                                                                            <constraint firstAttribute="width" secondItem="Drc-hO-yYh" secondAttribute="height" multiplier="41:22" id="cV1-FE-vg0"/>
+                                                                                            <constraint firstItem="Sh0-c2-j3Q" firstAttribute="centerY" secondItem="8l3-3f-KWp" secondAttribute="centerY" id="2JM-zD-PQ4"/>
+                                                                                            <constraint firstItem="Drc-hO-yYh" firstAttribute="top" secondItem="8l3-3f-KWp" secondAttribute="top" id="BIH-r5-HG7"/>
+                                                                                            <constraint firstAttribute="trailing" secondItem="Drc-hO-yYh" secondAttribute="trailing" id="Z7m-Mr-A8x"/>
+                                                                                            <constraint firstItem="Drc-hO-yYh" firstAttribute="leading" secondItem="Sh0-c2-j3Q" secondAttribute="trailing" constant="10" id="kip-Mm-EQl"/>
+                                                                                            <constraint firstItem="Sh0-c2-j3Q" firstAttribute="leading" secondItem="8l3-3f-KWp" secondAttribute="leading" id="qbW-2Y-ky5"/>
+                                                                                            <constraint firstAttribute="bottom" secondItem="Drc-hO-yYh" secondAttribute="bottom" id="yyf-TP-C5v"/>
                                                                                         </constraints>
                                                                                     </view>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mjo-tk-EEy">
@@ -475,34 +489,134 @@
                                                                                             <constraint firstAttribute="width" secondItem="mjo-tk-EEy" secondAttribute="height" multiplier="380:75" id="xC1-hj-E8z"/>
                                                                                         </constraints>
                                                                                     </stackView>
+                                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="8jy-Oh-dRf">
+                                                                                        <rect key="frame" x="0.0" y="475.66666666666663" width="364.66666666666669" height="369.66666666666663"/>
+                                                                                        <subviews>
+                                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYR-S8-coI" customClass="WeeklySelectionView" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="364.66666666666669" height="72.666666666666671"/>
+                                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                                <constraints>
+                                                                                                    <constraint firstAttribute="width" secondItem="xYR-S8-coI" secondAttribute="height" multiplier="381:76" id="HPk-Ji-XEc"/>
+                                                                                                </constraints>
+                                                                                            </view>
+                                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0WC-W5-1V1" userLabel="This Deal Is Active For Full Day">
+                                                                                                <rect key="frame" x="0.0" y="97.666666666666629" width="364.66666666666669" height="22"/>
+                                                                                                <subviews>
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="This Deal Is Active For Full Day" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M4N-zz-80G" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                        <rect key="frame" x="0.0" y="2" width="313.66666666666669" height="18"/>
+                                                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                        <nil key="highlightedColor"/>
+                                                                                                    </label>
+                                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WR6-M8-m7a" customClass="CustomSwitch" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                        <rect key="frame" x="323.66666666666663" y="0.0" width="41" height="22"/>
+                                                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                                        <constraints>
+                                                                                                            <constraint firstAttribute="width" secondItem="WR6-M8-m7a" secondAttribute="height" multiplier="41:22" id="lPQ-qj-nVa"/>
+                                                                                                            <constraint firstAttribute="width" constant="41" id="xFe-KD-ono"/>
+                                                                                                        </constraints>
+                                                                                                        <connections>
+                                                                                                            <action selector="didChangeValueOfDealIsActiveForFullDay:" destination="WKV-D6-cs3" eventType="valueChanged" id="XaG-PA-Dmj"/>
+                                                                                                        </connections>
+                                                                                                    </view>
+                                                                                                </subviews>
+                                                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                <constraints>
+                                                                                                    <constraint firstItem="M4N-zz-80G" firstAttribute="leading" secondItem="0WC-W5-1V1" secondAttribute="leading" id="1As-iV-CdY"/>
+                                                                                                    <constraint firstAttribute="trailing" secondItem="WR6-M8-m7a" secondAttribute="trailing" id="3AB-or-78w"/>
+                                                                                                    <constraint firstItem="M4N-zz-80G" firstAttribute="centerY" secondItem="0WC-W5-1V1" secondAttribute="centerY" id="VK6-7z-bbJ"/>
+                                                                                                    <constraint firstItem="WR6-M8-m7a" firstAttribute="top" secondItem="0WC-W5-1V1" secondAttribute="top" id="Zzy-RZ-240"/>
+                                                                                                    <constraint firstAttribute="bottom" secondItem="WR6-M8-m7a" secondAttribute="bottom" id="a8r-kR-pSI"/>
+                                                                                                    <constraint firstItem="WR6-M8-m7a" firstAttribute="leading" secondItem="M4N-zz-80G" secondAttribute="trailing" constant="10" id="wN5-Xg-U0s"/>
+                                                                                                </constraints>
+                                                                                            </view>
+                                                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Hde-mm-2AU">
+                                                                                                <rect key="frame" x="0.0" y="144.66666666666663" width="364.66666666666669" height="72"/>
+                                                                                                <subviews>
+                                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJ8-iJ-YtW" userLabel="Start Date" customClass="DatePickerInputView" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="177.33333333333334" height="72"/>
+                                                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                    </view>
+                                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b14-WJ-48r" userLabel="End Date" customClass="DatePickerInputView" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                        <rect key="frame" x="187.33333333333331" y="0.0" width="177.33333333333331" height="72"/>
+                                                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                    </view>
+                                                                                                </subviews>
+                                                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                            </stackView>
+                                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NIo-R6-V1h">
+                                                                                                <rect key="frame" x="0.0" y="241.66666666666663" width="364.66666666666669" height="128"/>
+                                                                                                <subviews>
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Categories Included In This Discount" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="50g-bc-JGa" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="251.33333333333334" height="18"/>
+                                                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                        <nil key="highlightedColor"/>
+                                                                                                    </label>
+                                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lOq-0A-k9v" customClass="GenericButton" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                        <rect key="frame" x="0.0" y="28" width="364.66666666666669" height="48"/>
+                                                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                                        <constraints>
+                                                                                                            <constraint firstAttribute="width" secondItem="lOq-0A-k9v" secondAttribute="height" multiplier="380:50" id="Mkj-AU-Zqa"/>
+                                                                                                        </constraints>
+                                                                                                        <userDefinedRuntimeAttributes>
+                                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Add"/>
+                                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="buttonStyleRaw">
+                                                                                                                <integer key="value" value="1"/>
+                                                                                                            </userDefinedRuntimeAttribute>
+                                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                                                <real key="value" value="8"/>
+                                                                                                            </userDefinedRuntimeAttribute>
+                                                                                                            <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                                                                                <color key="value" name="0A64F9"/>
+                                                                                                            </userDefinedRuntimeAttribute>
+                                                                                                        </userDefinedRuntimeAttributes>
+                                                                                                    </view>
+                                                                                                </subviews>
+                                                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                <constraints>
+                                                                                                    <constraint firstItem="lOq-0A-k9v" firstAttribute="leading" secondItem="NIo-R6-V1h" secondAttribute="leading" id="47b-Aj-NBA"/>
+                                                                                                    <constraint firstItem="50g-bc-JGa" firstAttribute="top" secondItem="NIo-R6-V1h" secondAttribute="top" id="Czm-6g-eul"/>
+                                                                                                    <constraint firstAttribute="height" constant="128" id="G1s-2B-hgS"/>
+                                                                                                    <constraint firstItem="50g-bc-JGa" firstAttribute="leading" secondItem="NIo-R6-V1h" secondAttribute="leading" id="Hg4-v7-9RG"/>
+                                                                                                    <constraint firstAttribute="trailing" secondItem="lOq-0A-k9v" secondAttribute="trailing" id="ffh-ta-g1m"/>
+                                                                                                    <constraint firstItem="lOq-0A-k9v" firstAttribute="top" secondItem="50g-bc-JGa" secondAttribute="bottom" constant="10" id="fp9-Ik-Uew"/>
+                                                                                                </constraints>
+                                                                                            </view>
+                                                                                        </subviews>
+                                                                                        <constraints>
+                                                                                            <constraint firstItem="Hde-mm-2AU" firstAttribute="width" secondItem="Hde-mm-2AU" secondAttribute="height" multiplier="380:75" id="Btd-60-Q1B"/>
+                                                                                        </constraints>
+                                                                                    </stackView>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <constraints>
+                                                                                    <constraint firstAttribute="trailing" secondItem="8l3-3f-KWp" secondAttribute="trailing" id="0JT-LC-UzY"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="mjo-tk-EEy" secondAttribute="trailing" id="0ah-ad-dPw"/>
                                                                                     <constraint firstItem="mjo-tk-EEy" firstAttribute="leading" secondItem="P0R-qD-QNq" secondAttribute="leading" id="0gC-0v-obH"/>
+                                                                                    <constraint firstItem="8l3-3f-KWp" firstAttribute="bottom" secondItem="mjo-tk-EEy" secondAttribute="top" constant="-16" id="79l-hX-U7W"/>
+                                                                                    <constraint firstItem="8l3-3f-KWp" firstAttribute="leading" secondItem="P0R-qD-QNq" secondAttribute="leading" id="8lQ-Ee-Tb3"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="bSV-UQ-dLC" secondAttribute="trailing" id="9HT-b3-3cY"/>
                                                                                     <constraint firstItem="CRL-LR-9YA" firstAttribute="top" secondItem="Q6E-VJ-tEk" secondAttribute="bottom" constant="15" id="BH7-hG-YbB"/>
                                                                                     <constraint firstItem="bSV-UQ-dLC" firstAttribute="top" secondItem="PUA-Uc-2O1" secondAttribute="bottom" constant="17" id="C65-Vk-R0L"/>
                                                                                     <constraint firstItem="Q6E-VJ-tEk" firstAttribute="leading" secondItem="P0R-qD-QNq" secondAttribute="leading" id="GXD-OF-7Wx"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="A8c-pd-HRJ" secondAttribute="trailing" id="JNK-hu-POC"/>
+                                                                                    <constraint firstItem="8l3-3f-KWp" firstAttribute="top" secondItem="bSV-UQ-dLC" secondAttribute="bottom" constant="26" id="OM3-Mv-YHk"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="kAm-IQ-Jef" secondAttribute="trailing" id="Ong-xm-mJK"/>
-                                                                                    <constraint firstItem="Sh0-c2-j3Q" firstAttribute="centerY" secondItem="Drc-hO-yYh" secondAttribute="centerY" id="RB1-XB-gh3"/>
-                                                                                    <constraint firstItem="Drc-hO-yYh" firstAttribute="top" secondItem="bSV-UQ-dLC" secondAttribute="bottom" constant="26" id="SVd-0P-tah"/>
-                                                                                    <constraint firstAttribute="bottom" secondItem="bSV-UQ-dLC" secondAttribute="bottom" constant="400" id="UPy-l7-6p0"/>
-                                                                                    <constraint firstAttribute="trailing" secondItem="Drc-hO-yYh" secondAttribute="trailing" id="YcY-Xg-s7F"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="mjo-tk-EEy" secondAttribute="bottom" constant="800" id="SFv-sa-sp7"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="8jy-Oh-dRf" secondAttribute="trailing" id="Tqz-d5-Jmh"/>
                                                                                     <constraint firstItem="A8c-pd-HRJ" firstAttribute="top" secondItem="Q6E-VJ-tEk" secondAttribute="bottom" constant="11" id="c2q-IK-ZKs"/>
-                                                                                    <constraint firstItem="Sh0-c2-j3Q" firstAttribute="leading" secondItem="P0R-qD-QNq" secondAttribute="leading" id="f2m-FN-vkJ"/>
                                                                                     <constraint firstItem="PUA-Uc-2O1" firstAttribute="leading" secondItem="P0R-qD-QNq" secondAttribute="leading" id="f9a-UX-Iph"/>
                                                                                     <constraint firstItem="kAm-IQ-Jef" firstAttribute="leading" secondItem="P0R-qD-QNq" secondAttribute="leading" id="hES-EZ-jWt"/>
                                                                                     <constraint firstItem="CRL-LR-9YA" firstAttribute="leading" secondItem="P0R-qD-QNq" secondAttribute="leading" id="kyV-of-HWn"/>
-                                                                                    <constraint firstItem="mjo-tk-EEy" firstAttribute="top" secondItem="Drc-hO-yYh" secondAttribute="bottom" constant="16" id="lim-ey-4IJ"/>
                                                                                     <constraint firstItem="kAm-IQ-Jef" firstAttribute="top" secondItem="A8c-pd-HRJ" secondAttribute="bottom" constant="30" id="nTU-pF-3S5"/>
                                                                                     <constraint firstItem="A8c-pd-HRJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CRL-LR-9YA" secondAttribute="trailing" constant="10" id="p4h-Sq-RDK"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="PUA-Uc-2O1" secondAttribute="trailing" id="pq4-HA-fr3"/>
+                                                                                    <constraint firstItem="8jy-Oh-dRf" firstAttribute="leading" secondItem="P0R-qD-QNq" secondAttribute="leading" id="tDM-eu-L4g"/>
                                                                                     <constraint firstItem="PUA-Uc-2O1" firstAttribute="top" secondItem="kAm-IQ-Jef" secondAttribute="bottom" constant="22" id="uIf-YT-7DX"/>
-                                                                                    <constraint firstItem="Drc-hO-yYh" firstAttribute="leading" secondItem="Sh0-c2-j3Q" secondAttribute="trailing" constant="10" id="wCE-8N-He6"/>
                                                                                     <constraint firstItem="Q6E-VJ-tEk" firstAttribute="top" secondItem="P0R-qD-QNq" secondAttribute="top" id="wsc-nd-hNT"/>
                                                                                     <constraint firstItem="bSV-UQ-dLC" firstAttribute="leading" secondItem="P0R-qD-QNq" secondAttribute="leading" id="xP7-ON-UQ8"/>
+                                                                                    <constraint firstItem="8jy-Oh-dRf" firstAttribute="top" secondItem="mjo-tk-EEy" secondAttribute="bottom" constant="17" id="yrC-Sr-KLj"/>
                                                                                 </constraints>
                                                                             </view>
                                                                         </subviews>
@@ -641,10 +755,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnAddProductORCategory" destination="lOq-0A-k9v" id="YzS-JZ-ySH"/>
                         <outlet property="btnCancel" destination="hgl-RN-Ctm" id="mqT-Oc-JOV"/>
                         <outlet property="btnSave" destination="Fgb-mz-GUU" id="dYb-Ce-62p"/>
                         <outlet property="dtPickerDealEndDate" destination="GH4-Ci-yd9" id="a3e-Te-vmb"/>
+                        <outlet property="dtPickerDealEndTime" destination="b14-WJ-48r" id="jj7-DP-KUZ"/>
                         <outlet property="dtPickerDealStartDate" destination="cGi-qS-Arq" id="u2z-fG-vqg"/>
+                        <outlet property="dtPickerDealStartTime" destination="eJ8-iJ-YtW" id="4j6-9n-Wh6"/>
+                        <outlet property="lblAddProductORCategoryBtn" destination="50g-bc-JGa" id="KVI-sh-mxa"/>
                         <outlet property="lblCategoryDiscountTypeSelectionViewSubTitle" destination="Hwf-xC-CtD" id="86C-Qz-OSP"/>
                         <outlet property="lblCategoryDiscountTypeSelectionViewTitle" destination="H37-YM-XNx" id="tb9-Da-VJw"/>
                         <outlet property="lblDiscountName" destination="nq6-Y3-9cv" id="ZQE-i5-L2z"/>
@@ -655,11 +773,14 @@
                         <outlet property="segCtrlDiscountScheduleType" destination="bSV-UQ-dLC" id="rg4-yC-rJy"/>
                         <outlet property="swtAllowDiscountStackWithOtherDiscounts" destination="A8c-pd-HRJ" id="fQW-kb-qEE"/>
                         <outlet property="swtDealHasNoEndDate" destination="Drc-hO-yYh" id="PZv-Tg-r6Y"/>
+                        <outlet property="swtDealIsActiveForFullDay" destination="WR6-M8-m7a" id="R1q-i9-sVA"/>
                         <outlet property="txtDiscountName" destination="ooP-5k-KXU" id="StC-aq-aqm"/>
                         <outlet property="txtDiscountPerItem" destination="h75-XG-CoL" id="BHc-Be-ng4"/>
+                        <outlet property="vwAddProductORCategoryBtnSuperView" destination="NIo-R6-V1h" id="MCC-Ki-hN3"/>
                         <outlet property="vwCategoryDiscountTypeSelectionView" destination="ufz-zX-xQv" id="nuN-KY-Rkl"/>
                         <outlet property="vwNavigationHeader" destination="56P-Kh-dks" id="dTt-cS-Opd"/>
                         <outlet property="vwProductDiscountTypeSelectionView" destination="WYc-rR-NoV" id="8Yp-UB-ao1"/>
+                        <outlet property="vwWeeklySelectionView" destination="xYR-S8-coI" id="JIu-ST-x4N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JrE-Cy-IAA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -804,6 +925,9 @@
         <image name="filter" width="24" height="24"/>
         <image name="noDiscountFoundIcon" width="132" height="132"/>
         <image name="scanupc" width="24" height="24"/>
+        <namedColor name="0A64F9">
+            <color red="0.039215686274509803" green="0.39215686274509803" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="2B2B2B">
             <color red="0.16862745098039217" green="0.16862745098039217" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

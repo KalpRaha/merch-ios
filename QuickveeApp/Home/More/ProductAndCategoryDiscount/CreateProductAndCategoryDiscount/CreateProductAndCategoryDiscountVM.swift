@@ -14,6 +14,8 @@ protocol CreateProductAndCategoryDiscountVMDelegate : AnyObject {
     func didUpdateIsAllowDiscountToStackWithOtherDiscounts()
     func didUpdateDiscountPerItemDiscountType()
     func didUpdateScheduleType()
+    
+    func didUpdateIsDealIsActiveForFullDay()
 }
 
 extension CreateProductAndCategoryDiscountVC {
@@ -56,6 +58,13 @@ extension CreateProductAndCategoryDiscountVC {
         var scheduleType : ScheduleType = .oneTime {
             didSet{
                 delegate?.didUpdateScheduleType()
+            }
+        }
+        
+        
+        var isDealIsActiveForFullDay: Bool = false {
+            didSet{
+                delegate?.didUpdateIsDealIsActiveForFullDay()
             }
         }
         
