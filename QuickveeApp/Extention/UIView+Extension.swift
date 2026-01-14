@@ -286,3 +286,12 @@ extension UIView {
         addSubview(view)
     }
 }
+
+
+extension UITableViewCell {
+    
+    static var nib : UINib {
+        UINib(nibName: className, bundle: nil)
+    }
+    
+}

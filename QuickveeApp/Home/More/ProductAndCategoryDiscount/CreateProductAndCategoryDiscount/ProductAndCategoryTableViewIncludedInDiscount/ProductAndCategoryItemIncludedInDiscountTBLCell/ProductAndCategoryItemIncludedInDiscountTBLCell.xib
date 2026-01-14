@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" indentationWidth="10" rowHeight="99" id="KGk-i7-Jjw" customClass="ProductAndCategoryItemIncludedInDiscountTBLCell" customModule="QuickveeApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="334" height="66"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="334" height="66"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="luX-Au-MUl">
+                        <rect key="frame" x="0.0" y="0.0" width="334" height="66"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i3p-hs-Wbq">
+                                <rect key="frame" x="0.0" y="0.0" width="334" height="65"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIl-fh-9CC" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                        <rect key="frame" x="18" y="22" width="30" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Eon-h7-Ojz">
+                                        <rect key="frame" x="205" y="22.333333333333336" width="111" height="20.333333333333336"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$30.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yej-8c-jpl">
+                                                <rect key="frame" x="0.0" y="0.0" width="55" height="20.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$24.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JcD-n0-s4m" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                                <rect key="frame" x="59" y="0.0" width="52" height="20.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" name="0A64F9"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="aIl-fh-9CC" secondAttribute="bottom" constant="22" id="1mY-bV-zdQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Eon-h7-Ojz" secondAttribute="trailing" constant="18" id="6ar-rH-Cai"/>
+                                    <constraint firstItem="aIl-fh-9CC" firstAttribute="top" secondItem="i3p-hs-Wbq" secondAttribute="top" constant="22" id="6iT-Sx-MqW"/>
+                                    <constraint firstItem="aIl-fh-9CC" firstAttribute="leading" secondItem="i3p-hs-Wbq" secondAttribute="leading" constant="18" id="ng2-bY-uAM"/>
+                                    <constraint firstItem="Eon-h7-Ojz" firstAttribute="centerY" secondItem="i3p-hs-Wbq" secondAttribute="centerY" id="r8x-JS-Tt3"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fvb-fb-zRz">
+                                <rect key="frame" x="0.0" y="65" width="334" height="1"/>
+                                <color key="backgroundColor" name="E4E4E4"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="G7W-zD-UqF"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Fvb-fb-zRz" firstAttribute="top" secondItem="i3p-hs-Wbq" secondAttribute="bottom" id="Deq-fU-gzF"/>
+                            <constraint firstAttribute="trailing" secondItem="i3p-hs-Wbq" secondAttribute="trailing" id="GAT-Ds-T16"/>
+                            <constraint firstAttribute="trailing" secondItem="Fvb-fb-zRz" secondAttribute="trailing" id="Onr-xz-pdM"/>
+                            <constraint firstAttribute="bottom" secondItem="Fvb-fb-zRz" secondAttribute="bottom" id="fiJ-1W-HNf"/>
+                            <constraint firstItem="i3p-hs-Wbq" firstAttribute="leading" secondItem="luX-Au-MUl" secondAttribute="leading" id="n56-8T-9Gc"/>
+                            <constraint firstItem="i3p-hs-Wbq" firstAttribute="top" secondItem="luX-Au-MUl" secondAttribute="top" id="rbb-ro-Rci"/>
+                            <constraint firstItem="Fvb-fb-zRz" firstAttribute="leading" secondItem="luX-Au-MUl" secondAttribute="leading" id="xzI-iR-gWa"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="luX-Au-MUl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="E6E-lj-eUi"/>
+                    <constraint firstAttribute="bottom" secondItem="luX-Au-MUl" secondAttribute="bottom" id="Uku-TR-Jrz"/>
+                    <constraint firstAttribute="trailing" secondItem="luX-Au-MUl" secondAttribute="trailing" id="ZXF-At-ruD"/>
+                    <constraint firstItem="luX-Au-MUl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="r0Q-V9-ANs"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <point key="canvasLocation" x="-108" y="3"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="0A64F9">
+            <color red="0.039215686274509803" green="0.39215686274509803" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="E4E4E4">
+            <color red="0.89411764705882357" green="0.89411764705882357" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -16,6 +16,7 @@ protocol CreateProductAndCategoryDiscountVMDelegate : AnyObject {
     func didUpdateScheduleType()
     
     func didUpdateIsDealIsActiveForFullDay()
+    func didUpdatedIncludedProductORCategories()
 }
 
 extension CreateProductAndCategoryDiscountVC {
@@ -68,6 +69,12 @@ extension CreateProductAndCategoryDiscountVC {
             }
         }
         
+        
+        var includedProductOrCategories: [String] = [] {
+            didSet{
+                delegate?.didUpdatedIncludedProductORCategories()
+            }
+        }
         
     }
     

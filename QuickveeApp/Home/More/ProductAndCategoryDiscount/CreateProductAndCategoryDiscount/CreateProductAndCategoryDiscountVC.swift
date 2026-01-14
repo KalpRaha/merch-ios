@@ -75,7 +75,12 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     @IBOutlet private weak var btnAddProductORCategory: GenericButton!
     
     
-    // Products or categories inlcuded in this Discount
+    // Edit Products or categories inlcuded in this Discount
+    @IBOutlet private weak var vwEditProductORCategorySuperView: UIView!
+    @IBOutlet private weak var vwEditProductORCategoryBtnSuperView: UIView!
+    @IBOutlet private weak var lblEditProductORCategoryBtn: UILabel!
+    
+    @IBOutlet private weak var tblProductORCategoryItemsIncludedView: ProductAndCategoryItemsIncludedInDiscountTableView!
     
     // Bottom Buttons
     @IBOutlet private weak var btnCancel: GenericButton!
@@ -121,6 +126,7 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
         dtPickerDealStartTime.configureView(pickerType: .time, delegate: self)
         dtPickerDealEndTime.configureView(pickerType: .time, delegate: self)
 
+        tblProductORCategoryItemsIncludedView.configure(with: [])
     }
     
     private func updateInitialUI(){
@@ -136,6 +142,8 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
         swtAllowDiscountStackWithOtherDiscounts.isOn = true
         swtDealHasNoEndDate.isOn = false
         swtDealIsActiveForFullDay.isOn = false
+        
+        viewModel.includedProductOrCategories.removeAll()
     }
     
     private func setupUIForDiscountTextFields(){
@@ -305,6 +313,8 @@ extension CreateProductAndCategoryDiscountVC {
         
         lblAddProductORCategoryBtn.text = isProduct ? "Products Included In Offer" : "Categories Included In This Discount"
         btnAddProductORCategory.title = isProduct ? "Add products to discount" : "Add Categories to discount"
+        
+        lblEditProductORCategoryBtn.text = isProduct ? "Products Included In This Discount" : "Categories Included In This Discount"
     }
 }
 
@@ -346,6 +356,16 @@ extension CreateProductAndCategoryDiscountVC {
         vwWeeklySelectionView.isHidden = isOneTime
         swtDealIsActiveForFullDay.superview?.isHidden = isOneTime
         dtPickerDealStartTime.superview?.isHidden = isOneTime
+    }
+    
+    
+    private func updateUIForIncludedProductsOrCategories() {
+        let isShowTblList = viewModel.includedProductOrCategories.isEmpty == false
+        
+        vwAddProductORCategoryBtnSuperView.isHidden = isShowTblList
+        vwEditProductORCategorySuperView.isHidden = !isShowTblList
+        
+        
     }
     
 }
@@ -434,6 +454,10 @@ extension CreateProductAndCategoryDiscountVC : CreateProductAndCategoryDiscountV
     
     func didUpdateIsDealIsActiveForFullDay() {
         
+    }
+    
+    func didUpdatedIncludedProductORCategories() {
+        updateUIForIncludedProductsOrCategories()
     }
     
 }

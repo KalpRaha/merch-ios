@@ -65,6 +65,9 @@
 		B49382062F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382052F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift */; };
 		B49382082F0E3F400071D0F1 /* GenericButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382072F0E3F400071D0F1 /* GenericButton.swift */; };
 		B49478412F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */; };
+		B4996AD82F175E1800650BB7 /* ProductAndCategoryItemsIncludedInDiscountTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AD72F175E1800650BB7 /* ProductAndCategoryItemsIncludedInDiscountTableView.swift */; };
+		B4996ADC2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4996ADB2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.xib */; };
+		B4996ADD2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996ADA2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.swift */; };
 		B4AD368A2F1605CA00E9EF55 /* DatePickerInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD36892F1605CA00E9EF55 /* DatePickerInputView.swift */; };
 		B4AD368D2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD368C2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift */; };
 		B4AD36902F16524A00E9EF55 /* CustomTextConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD368F2F16524A00E9EF55 /* CustomTextConfiguration.swift */; };
@@ -412,6 +415,9 @@
 		B49382052F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductAndCategoryDiscountVC.swift; sourceTree = "<group>"; };
 		B49382072F0E3F400071D0F1 /* GenericButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericButton.swift; sourceTree = "<group>"; };
 		B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountPerItemDiscountTextFormatter.swift; sourceTree = "<group>"; };
+		B4996AD72F175E1800650BB7 /* ProductAndCategoryItemsIncludedInDiscountTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryItemsIncludedInDiscountTableView.swift; sourceTree = "<group>"; };
+		B4996ADA2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryItemIncludedInDiscountTBLCell.swift; sourceTree = "<group>"; };
+		B4996ADB2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductAndCategoryItemIncludedInDiscountTBLCell.xib; sourceTree = "<group>"; };
 		B4AD36892F1605CA00E9EF55 /* DatePickerInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerInputView.swift; sourceTree = "<group>"; };
 		B4AD368C2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerInputViewConfiguration.swift; sourceTree = "<group>"; };
 		B4AD368F2F16524A00E9EF55 /* CustomTextConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextConfiguration.swift; sourceTree = "<group>"; };
@@ -738,6 +744,7 @@
 			children = (
 				B49382052F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift */,
 				B41A9F3C2F0F7F3700C543C7 /* CreateProductAndCategoryDiscountVM.swift */,
+				B4996AD62F175E0900650BB7 /* ProductAndCategoryTableViewIncludedInDiscount */,
 			);
 			path = CreateProductAndCategoryDiscount;
 			sourceTree = "<group>";
@@ -932,6 +939,24 @@
 				B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */,
 			);
 			path = Validators;
+			sourceTree = "<group>";
+		};
+		B4996AD62F175E0900650BB7 /* ProductAndCategoryTableViewIncludedInDiscount */ = {
+			isa = PBXGroup;
+			children = (
+				B4996AD72F175E1800650BB7 /* ProductAndCategoryItemsIncludedInDiscountTableView.swift */,
+				B4996AD92F175E2500650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell */,
+			);
+			path = ProductAndCategoryTableViewIncludedInDiscount;
+			sourceTree = "<group>";
+		};
+		B4996AD92F175E2500650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell */ = {
+			isa = PBXGroup;
+			children = (
+				B4996ADA2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.swift */,
+				B4996ADB2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.xib */,
+			);
+			path = ProductAndCategoryItemIncludedInDiscountTBLCell;
 			sourceTree = "<group>";
 		};
 		B4AD368B2F1627FB00E9EF55 /* DatePickerInputView */ = {
@@ -1880,6 +1905,7 @@
 				D268EE5F2C8EA44500B45172 /* Manrope-Medium.ttf in Resources */,
 				D2B01B912BB3E2F900A40B93 /* RefundHeaderCell.xib in Resources */,
 				04B413D82E28EEE70002D0FE /* GoogleService-Info.plist in Resources */,
+				B4996ADC2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.xib in Resources */,
 				D2F5AB812CE5C2270050B89C /* HeaderViewCell.xib in Resources */,
 				B42F5F5E2F079DA8002252EE /* Quickvee-Local.xcconfig in Resources */,
 				D2F5AB822CE5C2270050B89C /* NoOrderFoundCell.xib in Resources */,
@@ -2075,6 +2101,7 @@
 				B45CB8B92F0519CC004AF269 /* ToastView.swift in Sources */,
 				D2EE36172BFDBE1D006F5238 /* MaxPurchaseQuantityViewController.swift in Sources */,
 				D2AE68DD2A7B7F12004D85B8 /* OrderRefundViewController.swift in Sources */,
+				B4996ADD2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.swift in Sources */,
 				D2A2BF722B8D9516006796D5 /* ProgressShapeLayer.swift in Sources */,
 				D27A8D132D114EA4003AAE33 /* InStoreNewRefundViewController.swift in Sources */,
 				D21A0DC329A4863E00DC36CC /* SetupViewController.swift in Sources */,
@@ -2108,6 +2135,7 @@
 				D2C1F3192C1B072700BA6388 /* QtyMixnMatchViewController.swift in Sources */,
 				D2F6E9862E61AF9300BBAD99 /* CustomerMergeViewController.swift in Sources */,
 				D24692182A32DB46006D1904 /* TapticEngine.swift in Sources */,
+				B4996AD82F175E1800650BB7 /* ProductAndCategoryItemsIncludedInDiscountTableView.swift in Sources */,
 				B49478412F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift in Sources */,
 				D2D879862BBBB58700ECE573 /* InStoreRefundPayCell.swift in Sources */,
 				D291BD6D297128D900DCD20D /* StoreTableViewCell.swift in Sources */,
