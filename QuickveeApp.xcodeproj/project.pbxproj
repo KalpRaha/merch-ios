@@ -68,6 +68,10 @@
 		B4996AD82F175E1800650BB7 /* ProductAndCategoryItemsIncludedInDiscountTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AD72F175E1800650BB7 /* ProductAndCategoryItemsIncludedInDiscountTableView.swift */; };
 		B4996ADC2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4996ADB2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.xib */; };
 		B4996ADD2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996ADA2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.swift */; };
+		B4996AE52F17AF3500650BB7 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AE42F17AF3500650BB7 /* CommonFunctions.swift */; };
+		B4996AEA2F17B17600650BB7 /* BaseBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AE92F17B17600650BB7 /* BaseBottomSheetVC.swift */; };
+		B4996AED2F17BCE300650BB7 /* BaseBottomSheetVCActionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AEC2F17BCE300650BB7 /* BaseBottomSheetVCActionDelegate.swift */; };
+		B4996AF02F17BD2E00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AEF2F17BD2E00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC.swift */; };
 		B4AD368A2F1605CA00E9EF55 /* DatePickerInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD36892F1605CA00E9EF55 /* DatePickerInputView.swift */; };
 		B4AD368D2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD368C2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift */; };
 		B4AD36902F16524A00E9EF55 /* CustomTextConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD368F2F16524A00E9EF55 /* CustomTextConfiguration.swift */; };
@@ -418,6 +422,10 @@
 		B4996AD72F175E1800650BB7 /* ProductAndCategoryItemsIncludedInDiscountTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryItemsIncludedInDiscountTableView.swift; sourceTree = "<group>"; };
 		B4996ADA2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryItemIncludedInDiscountTBLCell.swift; sourceTree = "<group>"; };
 		B4996ADB2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductAndCategoryItemIncludedInDiscountTBLCell.xib; sourceTree = "<group>"; };
+		B4996AE42F17AF3500650BB7 /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
+		B4996AE92F17B17600650BB7 /* BaseBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBottomSheetVC.swift; sourceTree = "<group>"; };
+		B4996AEC2F17BCE300650BB7 /* BaseBottomSheetVCActionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBottomSheetVCActionDelegate.swift; sourceTree = "<group>"; };
+		B4996AEF2F17BD2E00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoriesPromotionConflictBottomSheetVC.swift; sourceTree = "<group>"; };
 		B4AD36892F1605CA00E9EF55 /* DatePickerInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerInputView.swift; sourceTree = "<group>"; };
 		B4AD368C2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerInputViewConfiguration.swift; sourceTree = "<group>"; };
 		B4AD368F2F16524A00E9EF55 /* CustomTextConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextConfiguration.swift; sourceTree = "<group>"; };
@@ -847,6 +855,7 @@
 				B45CB8BD2F051C03004AF269 /* Toast.swift */,
 				B45CB89F2F04DFDF004AF269 /* Logger.swift */,
 				B45CB8A22F04E2BB004AF269 /* ClassNameRetrievable.swift */,
+				B4996AE42F17AF3500650BB7 /* CommonFunctions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -915,7 +924,8 @@
 		B49381EB2F0DFCB40071D0F1 /* ProductAndCategoryDiscount */ = {
 			isa = PBXGroup;
 			children = (
-				D28C78722F0FBA8D001A2E20 /* ProductAndCategorySelectionTBLCell */,
+				B4996AEE2F17BD1D00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC */,
+				B4996AE32F1770DE00650BB7 /* View */,
 				B41A9F432F0F887500C543C7 /* ProductAndCategoryDiscountList */,
 				B41A9F392F0F7F1700C543C7 /* CreateProductAndCategoryDiscount */,
 				D28DF6862F0FA83C00426975 /* ProductAndCategorySelection */,
@@ -957,6 +967,39 @@
 				B4996ADB2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.xib */,
 			);
 			path = ProductAndCategoryItemIncludedInDiscountTBLCell;
+			sourceTree = "<group>";
+		};
+		B4996AE32F1770DE00650BB7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D28C78722F0FBA8D001A2E20 /* ProductAndCategorySelectionTBLCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B4996AE82F17B14E00650BB7 /* Base Class */ = {
+			isa = PBXGroup;
+			children = (
+				B4996AEB2F17BCD700650BB7 /* BaseBottomSheetVC */,
+			);
+			path = "Base Class";
+			sourceTree = "<group>";
+		};
+		B4996AEB2F17BCD700650BB7 /* BaseBottomSheetVC */ = {
+			isa = PBXGroup;
+			children = (
+				B4996AE92F17B17600650BB7 /* BaseBottomSheetVC.swift */,
+				B4996AEC2F17BCE300650BB7 /* BaseBottomSheetVCActionDelegate.swift */,
+			);
+			path = BaseBottomSheetVC;
+			sourceTree = "<group>";
+		};
+		B4996AEE2F17BD1D00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC */ = {
+			isa = PBXGroup;
+			children = (
+				B4996AEF2F17BD2E00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC.swift */,
+			);
+			path = ProductAndCategoriesPromotionConflictBottomSheetVC;
 			sourceTree = "<group>";
 		};
 		B4AD368B2F1627FB00E9EF55 /* DatePickerInputView */ = {
@@ -1548,6 +1591,7 @@
 				B42F5F5B2F079D6A002252EE /* Build Configuration */,
 				D2D477522AFE31AE008290F9 /* APP */,
 				B45CB8A52F04E2BB004AF269 /* NavigationCoordinator */,
+				B4996AE82F17B14E00650BB7 /* Base Class */,
 				B45CB8932F04DF59004AF269 /* APIService */,
 				D27F2F5F2F10D47D007AE4C8 /* APIRepository */,
 				B4BC097E2F151DC900BDB89E /* APIRequestModel */,
@@ -2041,6 +2085,7 @@
 				B45CB8AD2F04E6D6004AF269 /* FontFamily.swift in Sources */,
 				D2ED214D2D5211BA004EF316 /* CreatBogoDealCell.swift in Sources */,
 				D29C2C9F2C1C13DA00D774A1 /* SelectMixnMatchCell.swift in Sources */,
+				B4996AE52F17AF3500650BB7 /* CommonFunctions.swift in Sources */,
 				D220881329D1991A006393C2 /* ShowVendorTableViewCell.swift in Sources */,
 				D2F712F12CD09205004DA3DE /* CustomerDetailsCell.swift in Sources */,
 				D21A0DC729A49DFE00DC36CC /* StoreOptionsViewController.swift in Sources */,
@@ -2168,6 +2213,7 @@
 				B42F5F582F078120002252EE /* PersistenceContainer.swift in Sources */,
 				D2CA7D7C2B4555A100918A94 /* DuplicateTaxCollectionViewCell.swift in Sources */,
 				D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */,
+				B4996AF02F17BD2E00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC.swift in Sources */,
 				D2D1F9052C1845C5008BD228 /* MixnMatchPricingViewController.swift in Sources */,
 				D2DF61202CE323A1003D47B0 /* StockSaveViewController.swift in Sources */,
 				D2A87AA72D156C950008C417 /* NewOrderRefundDetailVC.swift in Sources */,
@@ -2276,6 +2322,7 @@
 				B4AD36902F16524A00E9EF55 /* CustomTextConfiguration.swift in Sources */,
 				B4BC09822F1529A500BDB89E /* VariantDataModel.swift in Sources */,
 				D2A2BF792B8DA6EB006796D5 /* OderDetailTableViewCell.swift in Sources */,
+				B4996AEA2F17B17600650BB7 /* BaseBottomSheetVC.swift in Sources */,
 				D2F08DE22CE1E85B00947F57 /* StockAddViewController.swift in Sources */,
 				D2EE17C2297E46AF008D3B1B /* LoginTableViewController.swift in Sources */,
 				D2D8798A2BBBB5AF00ECE573 /* InStoreRefundIdCell.swift in Sources */,
@@ -2306,6 +2353,7 @@
 				D25996152AD3ABF70014AAEC /* PassCodeViewController.swift in Sources */,
 				D24692152A32DAF7006D1904 /* RangeSeekSliderDelegate.swift in Sources */,
 				D2D835FE2BA3F24700BB167A /* OrderRefundDetailViewController.swift in Sources */,
+				B4996AED2F17BCE300650BB7 /* BaseBottomSheetVCActionDelegate.swift in Sources */,
 				D24BB58E2ADE533800DFF997 /* BlackShare.swift in Sources */,
 				D258843B29E9079D00B9D62A /* SetupApiManager.swift in Sources */,
 				D2F98F35297E56D200094F37 /* SalesOverviewTableViewCell.swift in Sources */,

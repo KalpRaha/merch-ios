@@ -45,8 +45,17 @@ protocol Navigatable {
     )
     
     
+    static func presentAsChildVC(
+        in currentVC: UIViewController
+    )
+    
+    func presentAsChildVC(
+        in currentVC: UIViewController
+    )
+    
     func popVC(animated: Bool)
 }
+
 
 extension Navigatable where Self : UIViewController {
     
@@ -109,6 +118,23 @@ extension Navigatable where Self : UIViewController {
         completion: ( () -> Void )? = nil
     ) {
         currentVC.present(self, animated: animated, completion: completion)
+    }
+    
+    static func presentAsChildVC(
+        in currentVC: UIViewController
+    ) {
+        
+        let `self` = Self.instantiate()
+        self.presentAsChildVC(in: currentVC)
+    }
+    
+    func presentAsChildVC(
+        in currentVC: UIViewController
+    ) {
+        
+        self.view.frame = currentVC.view.bounds
+        currentVC.view.addSubview(self.view)
+        currentVC.addChild(self)
     }
     
     func popVC(animated: Bool = true) {

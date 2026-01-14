@@ -1036,6 +1036,60 @@
             </objects>
             <point key="canvasLocation" x="1997" y="117"/>
         </scene>
+        <!--Product And Categories Promotion Conflict Bottom SheetVC-->
+        <scene sceneID="4Gl-AW-Lgz">
+            <objects>
+                <viewController storyboardIdentifier="ProductAndCategoriesPromotionConflictBottomSheetVC" id="mje-KJ-Q3Z" customClass="ProductAndCategoriesPromotionConflictBottomSheetVC" customModule="QuickveeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0hz-br-EhZ">
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JKm-T3-gVv">
+                                <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hix-5b-PPk" userLabel="BGView">
+                                        <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wbg-0W-AMY">
+                                        <rect key="frame" x="0.0" y="574" width="402" height="300"/>
+                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="300" id="CdS-KM-cvO"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Hix-5b-PPk" secondAttribute="bottom" id="6pK-se-5ym"/>
+                                    <constraint firstItem="Hix-5b-PPk" firstAttribute="leading" secondItem="JKm-T3-gVv" secondAttribute="leading" id="NTz-CL-Yj1"/>
+                                    <constraint firstItem="Hix-5b-PPk" firstAttribute="top" secondItem="JKm-T3-gVv" secondAttribute="top" id="VTh-Sk-dM5"/>
+                                    <constraint firstAttribute="bottom" secondItem="Wbg-0W-AMY" secondAttribute="bottom" id="ccl-LJ-EGh"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wbg-0W-AMY" secondAttribute="trailing" id="qwq-gc-3fK"/>
+                                    <constraint firstItem="Wbg-0W-AMY" firstAttribute="leading" secondItem="JKm-T3-gVv" secondAttribute="leading" id="uub-eB-hIx"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hix-5b-PPk" secondAttribute="trailing" id="y1e-aU-dcM"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BHb-YA-CF3"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="JKm-T3-gVv" secondAttribute="bottom" id="1oU-YD-PJc"/>
+                            <constraint firstItem="JKm-T3-gVv" firstAttribute="leading" secondItem="BHb-YA-CF3" secondAttribute="leading" id="Udj-Ae-NgH"/>
+                            <constraint firstItem="BHb-YA-CF3" firstAttribute="trailing" secondItem="JKm-T3-gVv" secondAttribute="trailing" id="aFK-bj-Ig8"/>
+                            <constraint firstItem="JKm-T3-gVv" firstAttribute="top" secondItem="0hz-br-EhZ" secondAttribute="top" id="pnN-fz-rI8"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="_bgView" destination="Hix-5b-PPk" id="5un-8F-coE"/>
+                        <outlet property="_bottomContainerView" destination="Wbg-0W-AMY" id="UB6-AL-UZA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pFc-bv-RNC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="403" y="1005"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Search" width="30" height="30"/>
