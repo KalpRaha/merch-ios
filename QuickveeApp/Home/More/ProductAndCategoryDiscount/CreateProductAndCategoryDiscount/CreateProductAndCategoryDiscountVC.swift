@@ -69,11 +69,13 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     @IBOutlet private weak var dtPickerDealStartTime: DatePickerInputView!
     @IBOutlet private weak var dtPickerDealEndTime: DatePickerInputView!
     
-    
+    // Add Product OR Category Button
     @IBOutlet private weak var vwAddProductORCategoryBtnSuperView: UIView!
     @IBOutlet private weak var lblAddProductORCategoryBtn: UILabel!
     @IBOutlet private weak var btnAddProductORCategory: GenericButton!
     
+    
+    // Products or categories inlcuded in this Discount
     
     // Bottom Buttons
     @IBOutlet private weak var btnCancel: GenericButton!
@@ -90,13 +92,7 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: { [weak self] in
-            guard let self else { return }
-            updateUIForDiscountTypeSelectionValueChange()
-        })
-        
-        updateUIForDiscountPerItemDiscountTypeValueChange()
+        updateInitialUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -125,6 +121,21 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
         dtPickerDealStartTime.configureView(pickerType: .time, delegate: self)
         dtPickerDealEndTime.configureView(pickerType: .time, delegate: self)
 
+    }
+    
+    private func updateInitialUI(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: { [weak self] in
+            guard let self else { return }
+            updateUIForDiscountTypeSelectionValueChange()
+        })
+        
+        updateUIForDiscountPerItemDiscountTypeValueChange()
+        updateUIForScheduleTypeValueChange()
+        
+        viewModel.discountPerItemDiscountType = .amountValue
+        swtAllowDiscountStackWithOtherDiscounts.isOn = true
+        swtDealHasNoEndDate.isOn = false
+        swtDealIsActiveForFullDay.isOn = false
     }
     
     private func setupUIForDiscountTextFields(){
@@ -327,6 +338,18 @@ extension CreateProductAndCategoryDiscountVC {
     }
 }
 
+extension CreateProductAndCategoryDiscountVC {
+    
+    private func updateUIForScheduleTypeValueChange() {
+        let isOneTime = viewModel.scheduleType == .oneTime
+        
+        vwWeeklySelectionView.isHidden = isOneTime
+        swtDealIsActiveForFullDay.superview?.isHidden = isOneTime
+        dtPickerDealStartTime.superview?.isHidden = isOneTime
+    }
+    
+}
+
 extension CreateProductAndCategoryDiscountVC : UITextFieldDelegate {
     
 }
@@ -406,7 +429,7 @@ extension CreateProductAndCategoryDiscountVC : CreateProductAndCategoryDiscountV
     
     
     func didUpdateScheduleType() {
-    
+        updateUIForScheduleTypeValueChange()
     }
     
     func didUpdateIsDealIsActiveForFullDay() {
