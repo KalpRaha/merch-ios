@@ -170,7 +170,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="402" height="575.33333333333337"/>
                                                 <subviews>
                                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBz-JA-xXo">
-                                                        <rect key="frame" x="0.0" y="0.0" width="402" height="575.33333333333348"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="402" height="575.33333333333337"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SRd-QX-eSV">
                                                                 <rect key="frame" x="0.0" y="0.0" width="402" height="1836"/>
@@ -1051,12 +1051,106 @@
                                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wbg-0W-AMY">
-                                        <rect key="frame" x="0.0" y="574" width="402" height="300"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wbg-0W-AMY" customClass="CornerRadiusView" customModule="QuickveeApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="543.66666666666663" width="402" height="330.33333333333337"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vendor_close" translatesAutoresizingMaskIntoConstraints="NO" id="mEN-5a-U9U">
+                                                <rect key="frame" x="363" y="18" width="24" height="24"/>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wuQ-yj-7S0">
+                                                <rect key="frame" x="352" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="WU3-D3-w60"/>
+                                                    <constraint firstAttribute="height" constant="50" id="ff7-rq-SeI"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="onClickBtnCross:" destination="mje-KJ-Q3Z" eventType="touchUpInside" id="Usq-pb-1pT"/>
+                                                </connections>
+                                            </button>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="productAndCategoryPromotionConflictIcon" translatesAutoresizingMaskIntoConstraints="NO" id="4bd-eG-vtN">
+                                                <rect key="frame" x="162" y="39.999999999999993" width="78" height="71.333333333333314"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Promotion Conflicts Detected" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ope-t4-EMb" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                                <rect key="frame" x="10" y="131.33333333333337" width="382" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 products already belong to other promotions. Continuing may override their existing promotions." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUe-rw-kcI" customClass="ManropeRegularLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="175.33333333333337" width="362" height="33.666666666666657"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Xto-cl-Lb7">
+                                                <rect key="frame" x="10" y="249.00000000000003" width="382" height="41.333333333333343"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z0c-vG-U1p" customClass="GenericButton" customModule="QuickveeApp" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="186" height="41.333333333333336"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Cancel"/>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="buttonStyleRaw">
+                                                                <integer key="value" value="0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="8"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="onClickBtnCancel:" destination="mje-KJ-Q3Z" eventType="touchUpInside" id="Ap8-qt-8Hb"/>
+                                                        </connections>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nb8-1K-8KO" customClass="GenericButton" customModule="QuickveeApp" customModuleProvider="target">
+                                                        <rect key="frame" x="196" y="0.0" width="186" height="41.333333333333336"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Continue"/>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="buttonStyleRaw">
+                                                                <integer key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="8"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                                <color key="value" name="0A64F9"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="onClickContinue:" destination="mje-KJ-Q3Z" eventType="touchUpInside" id="cmA-Pl-Oei"/>
+                                                        </connections>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Xto-cl-Lb7" secondAttribute="height" multiplier="370:40" id="UBV-ak-Kbg"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="300" id="CdS-KM-cvO"/>
+                                            <constraint firstItem="jUe-rw-kcI" firstAttribute="top" secondItem="Ope-t4-EMb" secondAttribute="bottom" constant="20" id="6O4-xi-d1E"/>
+                                            <constraint firstItem="4bd-eG-vtN" firstAttribute="top" secondItem="Wbg-0W-AMY" secondAttribute="top" constant="40" id="7e3-tJ-YVh"/>
+                                            <constraint firstItem="Ope-t4-EMb" firstAttribute="leading" secondItem="Wbg-0W-AMY" secondAttribute="leading" constant="10" id="98K-A9-vDZ"/>
+                                            <constraint firstAttribute="bottom" secondItem="Xto-cl-Lb7" secondAttribute="bottom" constant="40" id="Bmy-Rd-Ome"/>
+                                            <constraint firstItem="4bd-eG-vtN" firstAttribute="centerX" secondItem="Wbg-0W-AMY" secondAttribute="centerX" id="K7X-6k-Tij"/>
+                                            <constraint firstItem="Xto-cl-Lb7" firstAttribute="top" secondItem="jUe-rw-kcI" secondAttribute="bottom" constant="40" id="M5E-w3-dzH"/>
+                                            <constraint firstAttribute="trailing" secondItem="mEN-5a-U9U" secondAttribute="trailing" constant="15" id="Qf2-m4-VOB"/>
+                                            <constraint firstItem="Xto-cl-Lb7" firstAttribute="leading" secondItem="Wbg-0W-AMY" secondAttribute="leading" constant="10" id="VKL-zS-idz"/>
+                                            <constraint firstAttribute="trailing" secondItem="Xto-cl-Lb7" secondAttribute="trailing" constant="10" id="Zt6-nx-orW"/>
+                                            <constraint firstAttribute="trailing" secondItem="wuQ-yj-7S0" secondAttribute="trailing" id="heA-bY-Iaw"/>
+                                            <constraint firstItem="jUe-rw-kcI" firstAttribute="leading" secondItem="Wbg-0W-AMY" secondAttribute="leading" constant="20" id="mS5-2A-A9Q"/>
+                                            <constraint firstAttribute="trailing" secondItem="jUe-rw-kcI" secondAttribute="trailing" constant="20" id="p7h-G4-d5j"/>
+                                            <constraint firstItem="wuQ-yj-7S0" firstAttribute="top" secondItem="Wbg-0W-AMY" secondAttribute="top" id="qnY-pR-A3m"/>
+                                            <constraint firstItem="Ope-t4-EMb" firstAttribute="top" secondItem="4bd-eG-vtN" secondAttribute="bottom" constant="20" id="u6E-FI-azs"/>
+                                            <constraint firstItem="mEN-5a-U9U" firstAttribute="top" secondItem="Wbg-0W-AMY" secondAttribute="top" constant="18" id="v5n-FA-sN4"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ope-t4-EMb" secondAttribute="trailing" constant="10" id="zfq-tM-ZCL"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1097,7 +1191,9 @@
         <image name="filter" width="24" height="24"/>
         <image name="noDiscountFoundIcon" width="132" height="132"/>
         <image name="pencilIcon" width="24" height="24"/>
+        <image name="productAndCategoryPromotionConflictIcon" width="78" height="71.333335876464844"/>
         <image name="scanupc" width="24" height="24"/>
+        <image name="vendor_close" width="24" height="24"/>
         <namedColor name="0A64F9">
             <color red="0.039215686274509803" green="0.39215686274509803" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

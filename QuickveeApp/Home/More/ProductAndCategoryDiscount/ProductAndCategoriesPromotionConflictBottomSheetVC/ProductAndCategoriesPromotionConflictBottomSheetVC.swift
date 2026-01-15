@@ -22,9 +22,23 @@ final class ProductAndCategoriesPromotionConflictBottomSheetVC: BaseBottomSheetV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        showWithAnimation()
     }
     
+    
+    @IBAction private func onClickBtnCross(_ sender: UIButton) {
+        hideWithAnimation()
+        Logger.log(#function)
+    }
+    
+    @IBAction func onClickBtnCancel(_ sender: GenericButton) {
+        hideWithAnimation()
+        Logger.log(#function)
+    }
+    
+    @IBAction func onClickContinue(_ sender: GenericButton) {
+//        hideWithAnimation()
+        Logger.log(#function)
+    }
     
 }
 
