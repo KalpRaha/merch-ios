@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import BarcodeScanner
 
 class ProductAndCategorySelectionVCFactory {
     
@@ -29,7 +30,7 @@ class ProductAndCategorySelectionVCFactory {
             )
         )
         vc.viewModel.delegate = vc
-        
+        vc.scannerDelegateHandler = BarcodeScannerDelegateHandler()
         
         return vc
     }
@@ -42,8 +43,13 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable{
     
     
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchBtn: UIButton!
+    @IBOutlet weak var scanBtn: UIButton!
+    @IBOutlet weak var backBtn: UIButton!
     
     
+    var scannerDelegateHandler: BarcodeScannerDelegateHandler?
     
     var viewModel : ViewModel!
     
@@ -52,6 +58,10 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable{
         
         configureTableView()
         viewModel.loadData()
+        captureUPC()
+        configureSearchBar()
+        viewModel.isSearching = false
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,25 +77,58 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable{
         tableView.register(nib, forCellReuseIdentifier: "ProductAndCategorySelectionTBLCell")
     }
     
+    func captureUPC() {
+        scannerDelegateHandler?.didCaptureCode = { [weak self] code,type in
+            print(code)
+        }
+    }
     
-    @IBAction func backBtnClick(_ sender: UIButton) {
+    func configureSearchBar(){
+        searchBar.showsCancelButton = true
+        searchBar.searchBarStyle = .minimal
+        searchBar.delegate = self
+    }
+    
+    private func updateUIForSearchFlag(){
+        searchBtn.alpha =  viewModel.isSearching ? 0 : 1
+        searchBar.alpha = viewModel.isSearching ? 1 : 0
+        backBtn.alpha = viewModel.isSearching ? 0 : 1
+        scanBtn.alpha = viewModel.isSearching ? 0 : 1
         
     }
+    
+    @IBAction func backBtnClick(_ sender: UIButton) {
+        popVC()
+    }
+    
+    
+    @IBAction func searchBtnClick(_ sender: UIButton) {
+        viewModel.isSearching = true
+    }
+    
+    @IBAction func scanBtnClick(_ sender: UIButton) {
+        
+        let vc = BarcodeScannerViewController()
+        vc.codeDelegate = scannerDelegateHandler
+        vc.errorDelegate = scannerDelegateHandler
+        vc.dismissalDelegate = scannerDelegateHandler
+        self.present(vc, animated: true)
+    }
+
 }
 
 extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.variantList.count
+        viewModel.tableViewDataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductAndCategorySelectionTBLCell") as! ProductAndCategorySelectionTBLCell
+       
+        cell.cellData = viewModel.tableViewDataSource[indexPath.row]
         
-        
-        cell.cellData = viewModel.variantList[indexPath.row]
-
         cell.categoryData = viewModel.getCategoryData(indexPath.row)
         cell.mixMatchData = viewModel.getMixNMatchData(indexPath.row)
         cell.bogoData = viewModel.getBogoData(indexPath.row)
@@ -107,18 +150,38 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
             print(viewModel.variantList[indexPath.row])
         }
         tableView.reloadRows(at: [indexPath], with: .none)
-        
     }
     
-
 }
+
+
+extension ProductAndCategorySelectionVC : UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.searchQuery = searchText
+        print(searchText)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        viewModel.searchQuery = ""
+        searchBar.text = ""
+        viewModel.isSearching = false
+        view.endEditing(true)
+    }
+}
+
+
 
 extension ProductAndCategorySelectionVC: ProductAndCategorySelectionViewModelDelegate {
     
-    func didUpdatedVariantListData() {
+    func didUpdatedTableViewData() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+    }
+    
+    func didUpdateSearchFlag() {
+        updateUIForSearchFlag()
     }
     
 }

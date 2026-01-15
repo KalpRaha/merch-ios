@@ -247,6 +247,7 @@
 		D28604E02975516A0095BE1D /* ReportingTabsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28604DF2975516A0095BE1D /* ReportingTabsCollectionViewCell.swift */; };
 		D28621072AB065CC00AC90B4 /* AddProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28621062AB065CC00AC90B4 /* AddProductCollectionViewCell.swift */; };
 		D28765052CDE099E00840948 /* StockItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28765042CDE099E00840948 /* StockItemTableViewCell.swift */; };
+		D28C709C2F18C1CF00D99FF3 /* BarcodeScannerDelegateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28C709B2F18C1CF00D99FF3 /* BarcodeScannerDelegateHandler.swift */; };
 		D28C78752F0FBB05001A2E20 /* ProductAndCategorySelectionTBLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28C78732F0FBB05001A2E20 /* ProductAndCategorySelectionTBLCell.swift */; };
 		D28C78762F0FBB05001A2E20 /* ProductAndCategorySelectionTBLCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D28C78742F0FBB05001A2E20 /* ProductAndCategorySelectionTBLCell.xib */; };
 		D28D7B182BABDD860014A9BB /* CartTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28D7B172BABDD860014A9BB /* CartTableCell.swift */; };
@@ -621,6 +622,7 @@
 		D28604DF2975516A0095BE1D /* ReportingTabsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingTabsCollectionViewCell.swift; sourceTree = "<group>"; };
 		D28621062AB065CC00AC90B4 /* AddProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		D28765042CDE099E00840948 /* StockItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockItemTableViewCell.swift; sourceTree = "<group>"; };
+		D28C709B2F18C1CF00D99FF3 /* BarcodeScannerDelegateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerDelegateHandler.swift; sourceTree = "<group>"; };
 		D28C78732F0FBB05001A2E20 /* ProductAndCategorySelectionTBLCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategorySelectionTBLCell.swift; sourceTree = "<group>"; };
 		D28C78742F0FBB05001A2E20 /* ProductAndCategorySelectionTBLCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductAndCategorySelectionTBLCell.xib; sourceTree = "<group>"; };
 		D28D7B172BABDD860014A9BB /* CartTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableCell.swift; sourceTree = "<group>"; };
@@ -909,6 +911,7 @@
 				B45CB89F2F04DFDF004AF269 /* Logger.swift */,
 				B45CB8A22F04E2BB004AF269 /* ClassNameRetrievable.swift */,
 				B4996AE42F17AF3500650BB7 /* CommonFunctions.swift */,
+				D28C709B2F18C1CF00D99FF3 /* BarcodeScannerDelegateHandler.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2232,6 +2235,7 @@
 				D25789002D48B492003F6218 /* CreateBOGODealViewController.swift in Sources */,
 				D2153F9C2ACD605500CC61DA /* POQuantityViewController.swift in Sources */,
 				D27624C72C589F410019EB2B /* CouponCategoryCell.swift in Sources */,
+				D28C709C2F18C1CF00D99FF3 /* BarcodeScannerDelegateHandler.swift in Sources */,
 				B4AD36952F16694100E9EF55 /* WeeklySelectionView.swift in Sources */,
 				D212983329A8900B0005DB24 /* SetupBusinessTableViewCell.swift in Sources */,
 				D22C698E2A24B2C4003BF970 /* FilterNewTableViewCell.swift in Sources */,

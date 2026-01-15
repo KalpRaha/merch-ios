@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_3" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -931,7 +931,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Products" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPd-R5-0fM">
-                                        <rect key="frame" x="60" y="12.666666666666659" width="138" height="24.666666666666671"/>
+                                        <rect key="frame" x="60" y="14.666666666666657" width="128.33333333333334" height="21"/>
                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -952,7 +952,17 @@
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="scanupc"/>
+                                        <connections>
+                                            <action selector="scanBtnClick:" destination="lA0-ul-69Q" eventType="touchUpInside" id="2ew-zT-Ay0"/>
+                                        </connections>
                                     </button>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Moc-O3-MCk">
+                                        <rect key="frame" x="0.0" y="0.0" width="402" height="50"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="lA0-ul-69Q" id="S48-IX-P0l"/>
+                                        </connections>
+                                    </searchBar>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VJ8-ii-T9I">
                                         <rect key="frame" x="342" y="0.0" width="50" height="50"/>
                                         <constraints>
@@ -960,6 +970,9 @@
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="Search"/>
+                                        <connections>
+                                            <action selector="searchBtnClick:" destination="lA0-ul-69Q" eventType="touchUpInside" id="cBA-v3-F2I"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -968,15 +981,19 @@
                                     <constraint firstItem="rVX-DI-M2a" firstAttribute="leading" secondItem="jkL-WU-THP" secondAttribute="trailing" constant="10" id="3lD-Fi-SVW"/>
                                     <constraint firstAttribute="bottom" secondItem="rVX-DI-M2a" secondAttribute="bottom" id="3rr-ku-iu4"/>
                                     <constraint firstItem="jkL-WU-THP" firstAttribute="centerY" secondItem="wqV-gQ-UZa" secondAttribute="centerY" id="FvR-6B-5ug"/>
+                                    <constraint firstAttribute="bottom" secondItem="Moc-O3-MCk" secondAttribute="bottom" id="HMz-79-scW"/>
                                     <constraint firstItem="0hw-cO-chS" firstAttribute="leading" secondItem="wqV-gQ-UZa" secondAttribute="leading" id="Iyh-rp-SEN"/>
                                     <constraint firstItem="rVX-DI-M2a" firstAttribute="top" secondItem="wqV-gQ-UZa" secondAttribute="top" id="Jmi-HH-weU"/>
                                     <constraint firstAttribute="trailing" secondItem="VJ8-ii-T9I" secondAttribute="trailing" constant="10" id="Lar-ra-YaH"/>
+                                    <constraint firstItem="Moc-O3-MCk" firstAttribute="leading" secondItem="wqV-gQ-UZa" secondAttribute="leading" id="Mi0-Nu-iSB"/>
+                                    <constraint firstItem="Moc-O3-MCk" firstAttribute="top" secondItem="wqV-gQ-UZa" secondAttribute="top" id="N6d-h5-Oi9"/>
                                     <constraint firstItem="GPd-R5-0fM" firstAttribute="centerY" secondItem="wqV-gQ-UZa" secondAttribute="centerY" id="S4q-fb-qVq"/>
                                     <constraint firstAttribute="bottom" secondItem="VJ8-ii-T9I" secondAttribute="bottom" id="UqB-7B-TsY"/>
                                     <constraint firstItem="VJ8-ii-T9I" firstAttribute="leading" secondItem="rVX-DI-M2a" secondAttribute="trailing" id="bFR-T4-cBu"/>
                                     <constraint firstAttribute="bottom" secondItem="0hw-cO-chS" secondAttribute="bottom" id="fLQ-h6-8jZ"/>
                                     <constraint firstAttribute="height" constant="50" id="iMo-EY-KlR"/>
                                     <constraint firstItem="0hw-cO-chS" firstAttribute="top" secondItem="wqV-gQ-UZa" secondAttribute="top" id="mtr-rw-oY0"/>
+                                    <constraint firstAttribute="trailing" secondItem="Moc-O3-MCk" secondAttribute="trailing" id="wHS-IZ-ERW"/>
                                     <constraint firstItem="VJ8-ii-T9I" firstAttribute="top" secondItem="wqV-gQ-UZa" secondAttribute="top" id="x9i-WJ-gpY"/>
                                 </constraints>
                             </view>
@@ -1044,6 +1061,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backBtn" destination="0hw-cO-chS" id="xeb-bk-AYl"/>
+                        <outlet property="scanBtn" destination="rVX-DI-M2a" id="ikX-oS-VtM"/>
+                        <outlet property="searchBar" destination="Moc-O3-MCk" id="8xn-Pa-SHM"/>
+                        <outlet property="searchBtn" destination="VJ8-ii-T9I" id="8wO-pn-yPR"/>
                         <outlet property="tableView" destination="0Nq-Sm-R67" id="UPA-JD-lew"/>
                     </connections>
                 </viewController>
@@ -1197,7 +1218,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pFc-bv-RNC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="403" y="1005"/>
+            <point key="canvasLocation" x="431" y="919"/>
         </scene>
     </scenes>
     <resources>
