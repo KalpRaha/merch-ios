@@ -161,7 +161,7 @@ final class GenericButton: UIControl {
             titleLabel.textColor = .black
 
         case .save:
-            backgroundColor = isEnabled ? ._0A64F9 : ._818181
+            backgroundColor = isEnabled ? bgColor : ._818181
             layer.borderWidth = 0
             titleLabel.textColor = .white
         }
