@@ -27,7 +27,14 @@ class SetupViewController: UIViewController, UITextViewDelegate {
     ["Register Settings", "QuickAdd"]
     //"Mix n' Match Pricing","Inventory","Company Info",]
     
-    let moreList = ["Mix n' Match Pricing", "Coupons", "Loyalty Program", "Gift Card", "BOGO"]
+    let moreList = [
+        "Mix n' Match Pricing",
+        "Coupons",
+        "Loyalty Program",
+        "Gift Card",
+        "BOGO",
+        "Product And Category Discount"
+    ]
   
     
     var more = false
@@ -472,7 +479,7 @@ extension SetupViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                 }
                 
-                else {
+                else if indexPath.row == 4{
                     if UserDefaults.standard.bool(forKey: "lock_bogo") {
                         ToastClass.sharedToast.showToast(message: "Access Denied",
                                                          font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
@@ -480,6 +487,8 @@ extension SetupViewController: UITableViewDelegate, UITableViewDataSource {
                     else {
                         performSegue(withIdentifier: "toBogo", sender: nil)
                     }
+                }else {
+                    ProductAndCategoryDiscountListVC.push(in: self.navigationController)
                 }
             }
             
