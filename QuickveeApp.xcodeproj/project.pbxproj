@@ -21,6 +21,7 @@
 		B41A9F402F0F86CC00C543C7 /* ProductAndCategoryDiscountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F3F2F0F86CC00C543C7 /* ProductAndCategoryDiscountType.swift */; };
 		B41A9F422F0F86E300C543C7 /* DiscountPerItemDiscountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F412F0F86E300C543C7 /* DiscountPerItemDiscountType.swift */; };
 		B41A9F452F0FA88C00C543C7 /* GenericSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F442F0FA88C00C543C7 /* GenericSegmentedControl.swift */; };
+		B420F2F72F18A8A300461C92 /* MixnMatchListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F2F62F18A8A300461C92 /* MixnMatchListRepository.swift */; };
 		B42F5F582F078120002252EE /* PersistenceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F5F572F078120002252EE /* PersistenceContainer.swift */; };
 		B42F5F5E2F079DA8002252EE /* Quickvee-Local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B42F5F5D2F079DA8002252EE /* Quickvee-Local.xcconfig */; };
 		B42F5F602F07B79C002252EE /* Quickvee-Dev.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B42F5F5F2F07B79C002252EE /* Quickvee-Dev.xcconfig */; };
@@ -131,7 +132,6 @@
 		D22696D72F165437001C4493 /* BogoListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696D62F165437001C4493 /* BogoListRepository.swift */; };
 		D22696D92F1656E7001C4493 /* BogoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696D82F1656E7001C4493 /* BogoDataModel.swift */; };
 		D22696DD2F166713001C4493 /* MixnMatchListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696DC2F166713001C4493 /* MixnMatchListEndpoint.swift */; };
-		D22696DF2F1668FF001C4493 /* MixnMatchListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696DE2F1668FF001C4493 /* MixnMatchListRepository.swift */; };
 		D22AECB1297AA22D000AA721 /* TaxesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AECB0297AA22D000AA721 /* TaxesTableViewCell.swift */; };
 		D22AECB3297AA255000AA721 /* TaxesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AECB2297AA255000AA721 /* TaxesCollectionViewCell.swift */; };
 		D22BC0572A8CD81C00FB2E8C /* OrderAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22BC0562A8CD81C00FB2E8C /* OrderAPIManager.swift */; };
@@ -385,6 +385,7 @@
 		B41A9F3F2F0F86CC00C543C7 /* ProductAndCategoryDiscountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryDiscountType.swift; sourceTree = "<group>"; };
 		B41A9F412F0F86E300C543C7 /* DiscountPerItemDiscountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountPerItemDiscountType.swift; sourceTree = "<group>"; };
 		B41A9F442F0FA88C00C543C7 /* GenericSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericSegmentedControl.swift; sourceTree = "<group>"; };
+		B420F2F62F18A8A300461C92 /* MixnMatchListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixnMatchListRepository.swift; sourceTree = "<group>"; };
 		B42F5F572F078120002252EE /* PersistenceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceContainer.swift; sourceTree = "<group>"; };
 		B42F5F5D2F079DA8002252EE /* Quickvee-Local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Quickvee-Local.xcconfig"; sourceTree = "<group>"; };
 		B42F5F5F2F07B79C002252EE /* Quickvee-Dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Quickvee-Dev.xcconfig"; sourceTree = "<group>"; };
@@ -496,7 +497,6 @@
 		D22696D62F165437001C4493 /* BogoListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BogoListRepository.swift; sourceTree = "<group>"; };
 		D22696D82F1656E7001C4493 /* BogoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BogoDataModel.swift; sourceTree = "<group>"; };
 		D22696DC2F166713001C4493 /* MixnMatchListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixnMatchListEndpoint.swift; sourceTree = "<group>"; };
-		D22696DE2F1668FF001C4493 /* MixnMatchListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MixnMatchListRepository.swift; path = QuickveeApp/APIService/Endpoint/MixnMatchListRepository.swift; sourceTree = SOURCE_ROOT; };
 		D22890E2299F9A3100A49435 /* QuickveeAppRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuickveeAppRelease.entitlements; sourceTree = "<group>"; };
 		D22AECB0297AA22D000AA721 /* TaxesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxesTableViewCell.swift; sourceTree = "<group>"; };
 		D22AECB2297AA255000AA721 /* TaxesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1481,7 +1481,7 @@
 				D27F2F602F10D502007AE4C8 /* VariantListRepository.swift */,
 				D22696D02F1616FF001C4493 /* CategoryListRepository.swift */,
 				D22696D62F165437001C4493 /* BogoListRepository.swift */,
-				D22696DE2F1668FF001C4493 /* MixnMatchListRepository.swift */,
+				B420F2F62F18A8A300461C92 /* MixnMatchListRepository.swift */,
 			);
 			path = APIRepository;
 			sourceTree = "<group>";
@@ -2130,6 +2130,7 @@
 				D2D6254F2B75E27100C25D07 /* BulkPricingViewController.swift in Sources */,
 				D2DF873A2A6932CA0058CBBA /* AppURLs.swift in Sources */,
 				D24187BC2C180DFA00643069 /* LoyaltyTableViewCell.swift in Sources */,
+				B420F2F72F18A8A300461C92 /* MixnMatchListRepository.swift in Sources */,
 				D2C4B34C2C006CBD005AE9A9 /* MaxPurchaseUpdateViewController.swift in Sources */,
 				D21965142D4C9F4D0003E970 /* SelectBogoVariantViewController.swift in Sources */,
 				B49382002F0E1EEA0071D0F1 /* CustomLabel.swift in Sources */,
@@ -2307,7 +2308,6 @@
 				D26F4E782995039200716A51 /* StrokeColorAnimation.swift in Sources */,
 				D253DD9C2C86BB96003AA842 /* LotteryTableViewCell.swift in Sources */,
 				B4BC097A2F15063100BDB89E /* MultipartFormDataBuilder.swift in Sources */,
-				D22696DF2F1668FF001C4493 /* MixnMatchListRepository.swift in Sources */,
 				D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */,
 				D29D1F302AE66E910017819B /* InventoryProductModel.swift in Sources */,
 				D2D0496829B85A8900EF591E /* AddCouponViewController.swift in Sources */,
