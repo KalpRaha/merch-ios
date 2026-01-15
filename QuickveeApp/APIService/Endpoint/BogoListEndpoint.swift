@@ -7,14 +7,14 @@
 
 import Foundation
 
-extension  API {
+extension API {
     
-    enum  BogoListEndpoint{
+    enum BogoListEndpoint{
         
         case bogoList(reqBody : VariantListMultipartRequestBody)
         
     }
-  
+    
 }
 
 
@@ -29,7 +29,9 @@ extension API.BogoListEndpoint: APIEndpointEnumType {
     }
     
     func getEndpoint() -> any APIEndpointType {
+        
         switch self {
+            
         case .bogoList(let reqBody):
             APIEndpoint(
                 baseURL: baseURL,
@@ -39,8 +41,9 @@ extension API.BogoListEndpoint: APIEndpointEnumType {
                 parameter: .multipart(reqBody),
                 headers: defaultHeaders
             )
+            
         }
     }
-
+    
     
 }

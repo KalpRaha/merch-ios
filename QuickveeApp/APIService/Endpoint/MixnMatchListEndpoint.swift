@@ -7,14 +7,14 @@
 
 import Foundation
 
-extension  API {
+extension API {
     
-    enum  MixnMatchListEndpoint {
+    enum MixnMatchListEndpoint {
         
         case MixnMatchList(reqBody : VariantListMultipartRequestBody)
         
     }
-  
+    
 }
 
 
@@ -29,7 +29,9 @@ extension API.MixnMatchListEndpoint: APIEndpointEnumType {
     }
     
     func getEndpoint() -> any APIEndpointType {
+        
         switch self {
+            
         case .MixnMatchList(let reqBody):
             APIEndpoint(
                 baseURL: baseURL,
@@ -39,8 +41,9 @@ extension API.MixnMatchListEndpoint: APIEndpointEnumType {
                 parameter: .multipart(reqBody),
                 headers: defaultHeaders
             )
+            
         }
     }
-
+    
     
 }

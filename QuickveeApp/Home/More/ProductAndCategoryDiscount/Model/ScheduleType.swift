@@ -20,3 +20,12 @@ enum ScheduleType : String, CaseIterable {
         }
     }
 }
+
+extension ScheduleType : Decodable {
+    
+    enum CodingKeys: String, CodingKey {
+        case oneTime = "0"
+        case repeatsOnSchedule = "1"
+    }
+    
+}
