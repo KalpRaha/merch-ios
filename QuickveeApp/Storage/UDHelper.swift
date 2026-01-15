@@ -28,7 +28,10 @@ class UDHelper {
     
     @Storage(key: .merchantId, defaultValue: "-111")
     var merchantId: String
-     
+    
+    
+    @Storage(key: .categoryListData, defaultValue: [])
+    var categoryListData: [InventoryCategory]
     
     
     
@@ -43,6 +46,10 @@ extension UDHelper {
         
         case isLoggedIn = "LoggedIn"
         case merchantId = "merchant_id"
+        
+        case categoryListData
+        
+        
     }
     
 }

@@ -12,9 +12,20 @@ class ProductAndCategorySelectionVCFactory {
     static func make() -> ProductAndCategorySelectionVC {
         
         let vc = ProductAndCategorySelectionVC.instantiate()
+        let apiService = APIServiceFactory.make()
         vc.viewModel = .init(
+            
             repository: VariantListRepository(
-                apiService: APIServiceFactory.make()
+                apiService: apiService
+            ),
+            categoryRepository: CategoryListRepository(
+                apiService: apiService
+            ),
+            bogoRepository: BogoListRepository (
+                apiService: apiService
+            ),
+            minMatchRepository:  MixnMatchListRepository (
+                apiService: apiService
             )
         )
         vc.viewModel.delegate = vc
@@ -40,7 +51,9 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable{
         super.viewDidLoad()
         
         configureTableView()
-        viewModel.variantListApicall()
+        // viewModel.variantListApicall()
+        // viewModel.getVariantData()
+        viewModel.loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +68,7 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable{
         let nib = UINib(nibName:ProductAndCategorySelectionTBLCell.className , bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "ProductAndCategorySelectionTBLCell")
     }
-     
+    
     
     @IBAction func backBtnClick(_ sender: UIButton) {
         
@@ -71,8 +84,24 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductAndCategorySelectionTBLCell") as! ProductAndCategorySelectionTBLCell
-
+        
+        
         cell.cellData = viewModel.variantList[indexPath.row]
+      
+        let categoryData = viewModel.categoryList.first(where: { $0.id == viewModel.variantList[indexPath.row].category })
+        cell.categoryData = categoryData
+        
+        let itemId = viewModel.variantList[indexPath.row].isVarient ? viewModel.variantList[indexPath.row].variantId : viewModel.variantList[indexPath.row].id
+        
+        let mixMatchData = viewModel.mixMatchList.filter({ $0.itemIds.contains(where:{$0 == itemId} ) }).first
+        cell.mixMatchData = mixMatchData
+       
+       
+        let bogoData = viewModel.bogoList.filter({ $0.items.contains(where:{$0 == itemId} ) }).first
+        cell.bogoData = bogoData
+        
+        
+        
         cell.isSelectedCell = viewModel.selectedIndexPath.contains(indexPath)
         return cell
     }
@@ -85,7 +114,7 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
             print(viewModel.selectedIndexPath.removeAll(where: { $0 == indexPath}))
         }
         else {
-           
+            
             viewModel.selectedIndexPath.append(indexPath)
             print(viewModel.variantList[indexPath.row])
         }
@@ -95,21 +124,17 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? ProductAndCategorySelectionTBLCell else { return }
-        
-      //  cell.isSelectedCell = false
+    
     }
     
 }
 
 extension ProductAndCategorySelectionVC: ProductAndCategorySelectionViewModelDelegate {
     
-    func variantListApicall() {
-        
+    func loadData() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        
-        
     }
     
 }

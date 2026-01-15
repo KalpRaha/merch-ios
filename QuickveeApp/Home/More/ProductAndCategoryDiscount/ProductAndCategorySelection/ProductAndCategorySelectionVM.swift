@@ -10,8 +10,7 @@ import Foundation
 
 protocol ProductAndCategorySelectionViewModelDelegate: AnyObject {
     
-    func variantListApicall()
-    
+    func loadData()
 }
 
 extension ProductAndCategorySelectionVC {
@@ -19,98 +18,65 @@ extension ProductAndCategorySelectionVC {
     class ViewModel {
         
         var repository: VariantListRepositoryProtocol
+        var categoryRepository:  CategoryListRepositoryProtocol
+        var bogoRepository:  BogoListRepositoryProtocol
+        var minMatchRepository:   MixnMatchListRepositoryProtocol
+        
         weak var delegate: ProductAndCategorySelectionViewModelDelegate?
         
-        var variantList: [InventoryVariant] = [] {
+        var variantList: [VariantDataModel] = [] {
             didSet {
-                delegate?.variantListApicall()
+                delegate?.loadData()
             }
         }
         
+        
+        var categoryList: [CategoryDataModel] = []
+           
+        var bogoList: [BogoDataModel] = []
+        
+        var mixMatchList: [MixnMatchDataModel] = []
+
         var selectedIndexPath : [IndexPath] = []
         
-        
-        
-        
-        init(repository: VariantListRepositoryProtocol) {
+  
+        init(repository: VariantListRepositoryProtocol, categoryRepository: CategoryListRepositoryProtocol, bogoRepository: BogoListRepositoryProtocol, minMatchRepository: MixnMatchListRepositoryProtocol) {
             self.repository = repository
+            self.categoryRepository = categoryRepository
+            self.bogoRepository = bogoRepository
+            self.minMatchRepository = minMatchRepository
+            
         }
-      
-//        
-//        func getVariantData(){
-//            
-//            
-//            
-//            
-////            Task{
-////                
-////                do{
-////                    let data = try await repository.getVariantList()
-////                    variantList = data.result ?? []
-////                    print("Variant List:\(variantList)")
-////                }catch{
-////                    
-////                    print("error:\(error)")
-////                    
-////                }
-////            }
-//        }
         
         
-        func variantListApicall() {
+        func loadData() {
             
-            let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
-            
-            ApiCalls.sharedCall.variantListCall(merchant_id: id) { isSuccess, responseData in
-                
-                if isSuccess {
-                    
-                    guard let list = responseData["result"] else {
-                        return
+            Task {
+                do {
+                    async let variantResponse = repository.getVariantList()
+                    async let categoryResponse = categoryRepository.getCategoryList()
+                    async let bogoResponse = bogoRepository.getBogoList()
+                    async let mixMatchResponse = minMatchRepository.getMixnMatchList()
+
+                    let (variantData, categoryData , bogoData,mixmatchData) = try await (variantResponse,categoryResponse,bogoResponse,mixMatchResponse )
+
+                    // UI update (MainActor)
+                    await MainActor.run {
+                        self.categoryList = categoryData.result ?? []
+                        self.bogoList = bogoData.result
+                        self.mixMatchList = mixmatchData.result
+                        
+                        self.variantList = variantData.result ?? []
+                        
+
                     }
-                    self.getResponseValues(varient: list)
-                }
-                else{
-                    print("Api Error")
+
+                } catch {
+                    print("Error loading data: \(error)")
                 }
             }
         }
-        
-        func getResponseValues(varient: Any){
-            
-            let response = varient as! [[String: Any]]
-            var small = [InventoryVariant]()
-            
-            for res in response {
-                
-                let variant = InventoryVariant(id: "\(res["id"] ?? "")",
-                                               costperItem: "\(res["costperItem"] ?? "")",
-                                               title: "\(res["title"] ?? "")",
-                                               isvarient: "\(res["isvarient"] ?? "")",
-                                               upc: "\(res["upc"] ?? "")",
-                                               cotegory: "\(res["cotegory"] ?? "")",
-                                               var_id: "\(res["var_id"] ?? "")",
-                                               var_upc: "\(res["var_upc"] ?? "")",
-                                               quantity: "\(res["quantity"] ?? "")",
-                                               price: "\(res["price"] ?? "")",
-                                               custom_code: "\(res["custom_code"] ?? "")",
-                                               variant: "\(res["variant"] ?? "")",
-                                               var_price: "\(res["var_price"] ?? "")",
-                                               is_lottery: "\(res["is_lottery"] ?? "")",
-                                               var_costperItem: "\(res["var_costperItem"] ?? "")",
-                                               brand: "\(res["brand"] ?? "")",
-                                               brand_id: "\(res["brand_id"] ?? "")",
-                                               tags: "\(res["tags"] ?? "")")
-                
-                small.append(variant)
-            }
-            
-           // variantList = small.compactMap({ $0.toVariantDataModel() })
-            variantList = small 
-          print(variantList)
-        }
-        
-        
+
     }
 }
 

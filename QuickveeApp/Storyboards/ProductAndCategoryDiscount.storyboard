@@ -3,7 +3,7 @@
     <device id="retina6_3" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -989,22 +989,34 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nGn-zQ-KLj">
-                                <rect key="frame" x="10" y="774" width="382" height="50"/>
+                                <rect key="frame" x="10" y="794" width="382" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w3R-FX-AYB">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1VN-VL-J7P" customClass="GenericButton" customModule="QuickveeApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="186" height="50"/>
-                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Cancel"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vx5-K0-M4g">
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="buttonStyleRaw">
+                                                <integer key="value" value="0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Cancel"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u8f-OU-MTw" customClass="GenericButton" customModule="QuickveeApp" customModuleProvider="target">
                                         <rect key="frame" x="196" y="0.0" width="186" height="50"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" systemColor="labelColor"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Confirm"/>
-                                    </button>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                <color key="value" systemColor="labelColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="buttonStyleRaw">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Confirm"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="6KJ-U4-De7"/>
                                 </constraints>
@@ -1019,7 +1031,7 @@
                             <constraint firstItem="ddS-1k-UBb" firstAttribute="top" secondItem="wqV-gQ-UZa" secondAttribute="bottom" id="I95-RP-CiJ"/>
                             <constraint firstItem="fny-5d-Rdn" firstAttribute="trailing" secondItem="0Nq-Sm-R67" secondAttribute="trailing" id="LvL-x8-Iuj"/>
                             <constraint firstItem="wqV-gQ-UZa" firstAttribute="top" secondItem="fny-5d-Rdn" secondAttribute="top" id="Qvi-cf-7rH"/>
-                            <constraint firstAttribute="bottom" secondItem="nGn-zQ-KLj" secondAttribute="bottom" constant="50" id="ZLn-SC-YsQ"/>
+                            <constraint firstAttribute="bottom" secondItem="nGn-zQ-KLj" secondAttribute="bottom" constant="30" id="ZLn-SC-YsQ"/>
                             <constraint firstItem="nGn-zQ-KLj" firstAttribute="leading" secondItem="fny-5d-Rdn" secondAttribute="leading" constant="10" id="cGZ-8i-e8J"/>
                             <constraint firstItem="0Nq-Sm-R67" firstAttribute="top" secondItem="ddS-1k-UBb" secondAttribute="bottom" id="eE0-Ox-0eb"/>
                             <constraint firstItem="fny-5d-Rdn" firstAttribute="bottom" secondItem="0Nq-Sm-R67" secondAttribute="bottom" id="gpe-OS-SN9"/>
@@ -1215,6 +1227,9 @@
         <namedColor name="F9F9F9">
             <color red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

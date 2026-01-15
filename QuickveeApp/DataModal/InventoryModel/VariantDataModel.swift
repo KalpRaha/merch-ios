@@ -11,18 +11,18 @@ struct VariantDataModel : Decodable {
     
     var id: String
     
-    var productId: String
-    var productTitle: String
-    var productCostPerItem: String
-    var productUPC: String
-    var productPrice: String
+    var productId: String?
+    var productTitle: String?
+    var productCostPerItem: String?
+    var productUPC: String?
+    var productPrice: String?
     
-    var category: String
+    var category: String?
     var quantity: String
-    var customCode: String
-    var brand: String
-    var brandId: String
-    var tags: String
+    var customCode: String?
+    var brand: String?
+    var brandId: String?
+    var tags: String?
     
     var variantId : String?
     var variantTitle : String?
@@ -32,8 +32,8 @@ struct VariantDataModel : Decodable {
     
     
     private var _isVarient: String
-    var isLottery: String
-    var isDeleted: String
+    var isLottery: String?
+    var isDeleted: String?
     
     enum CodingKeys : String, CodingKey {
         case id
@@ -92,23 +92,23 @@ struct VariantDataModel : Decodable {
     func toInventoryVariant() -> InventoryVariant {
         InventoryVariant(
             id: id,
-            costperItem: productCostPerItem,
-            title: productTitle,
+            costperItem: productCostPerItem ?? "",
+            title: productTitle ?? "",
             isvarient: _isVarient,
-            upc: productUPC,
-            cotegory: category,
+            upc: productUPC ?? "",
+            cotegory: category ?? "",
             var_id: "",
             var_upc: "",
             quantity: quantity,
-            price: productPrice,
-            custom_code: customCode,
+            price: productPrice ?? "",
+            custom_code: customCode ?? "",
             variant: "",
             var_price: "",
-            is_lottery: isLottery,
+            is_lottery: isLottery ?? "",
             var_costperItem: "",
-            brand: brand,
-            brand_id: brandId,
-            tags: tags
+            brand: brand ?? "",
+            brand_id: brandId ?? "",
+            tags: tags ?? ""
         )
     }
     
