@@ -10,35 +10,45 @@ import Foundation
 
 protocol ProductAndCategorySelectionViewModelDelegate: AnyObject {
     
-    func didUpdatedVariantListData()
+    func didUpdatedTableViewData()
+    func didUpdateSearchFlag()
 }
 
 extension ProductAndCategorySelectionVC {
-
+    
     class ViewModel {
         
         var repository: VariantListAPIRepositoryProtocol
         var categoryRepository:  CategoryListAPIRepositoryProtocol
         var bogoRepository:  BogoListAPIRepositoryProtocol
         var minMatchRepository:   MixnMatchListAPIRepositoryProtocol
-        
-        
+      
         weak var delegate: ProductAndCategorySelectionViewModelDelegate?
-        
-        var variantList: [VariantDataModel] = [] {
-            didSet {
-                delegate?.didUpdatedVariantListData()
-            }
-        }
-        
-        
+    
+        var variantList: [VariantDataModel] = []
         var categoryList: [CategoryDataModel] = []
         var bogoList: [BogoDataModel] = []
         var mixMatchList: [MixnMatchDataModel] = []
-
+        
         var selectedIndexPath : [IndexPath] = []
         
-  
+        var isSearching = false {
+            didSet{
+                delegate?.didUpdateSearchFlag()
+            }
+        }
+        var searchQuery: String = "" {
+            didSet{
+                performSearch()
+            }
+        }
+        
+        var tableViewDataSource = [VariantDataModel]() {
+            didSet{
+                delegate?.didUpdatedTableViewData()
+            }
+        }
+        
         init(
             repository: VariantListAPIRepositoryProtocol,
             categoryRepository: CategoryListAPIRepositoryProtocol,
@@ -52,7 +62,6 @@ extension ProductAndCategorySelectionVC {
             
         }
         
-        
         func loadData() {
             
             Task {
@@ -62,9 +71,9 @@ extension ProductAndCategorySelectionVC {
                     async let categoryResponse = categoryRepository.getCategoryList()
                     async let bogoResponse = bogoRepository.getBogoList()
                     async let mixMatchResponse = minMatchRepository.getMixnMatchList()
-
+                    
                     let (variantData, categoryData , bogoData, mixmatchData) = try await (variantResponse,categoryResponse,bogoResponse,mixMatchResponse )
-
+                    
                     // UI update (MainActor)
                     await MainActor.run {
                         self.categoryList = categoryData.result ?? []
@@ -72,9 +81,9 @@ extension ProductAndCategorySelectionVC {
                         self.mixMatchList = mixmatchData.result
                         
                         self.variantList = variantData.result ?? []
-                        
+                        self.tableViewDataSource = variantList
                     }
-
+                    
                 } catch {
                     Logger.log("Error loading data: \(error)")
                 }
@@ -82,21 +91,35 @@ extension ProductAndCategorySelectionVC {
         }
         
         func getCategoryData(_ index : Int) -> CategoryDataModel? {
-            categoryList.first(where: { $0.id == variantList[index].category })
+            categoryList.first(where: { $0.id == tableViewDataSource[index].category })
         }
         
         func getMixNMatchData(_ index : Int) -> MixnMatchDataModel? {
-            let itemId = variantList[index].isVarient ? variantList[index].variantId : variantList[index].id
+            let itemId = variantList[index].isVarient ? tableViewDataSource[index].variantId : tableViewDataSource[index].id
             
             return mixMatchList.filter({ $0.itemIds.contains(where:{$0 == itemId} ) }).first
         }
         
         func getBogoData(_ index : Int) -> BogoDataModel? {
-            let itemId = variantList[index].isVarient ? variantList[index].variantId : variantList[index].id
+            let itemId = variantList[index].isVarient ? tableViewDataSource[index].variantId : tableViewDataSource[index].id
             
             return bogoList.filter({ $0.items.contains(where:{$0 == itemId} ) }).first
         }
-
+        
+        func performSearch() {
+            let searchQuery = searchQuery.lowercased()
+            tableViewDataSource =  searchQuery.isEmpty ? variantList : variantList.filter { item in
+                (item.productTitle?.lowercased() ?? "").contains(searchQuery) ||
+                (item.variantUpc?.lowercased() ?? "").contains(searchQuery) ||
+                (item.productUPC?.lowercased() ?? "").contains(searchQuery) ||
+                (item.customCode?.lowercased() ?? "").contains(searchQuery)
+            }
+        }
+        
+        func resetData() {
+            tableViewDataSource = variantList
+        }
+        
     }
 }
 
