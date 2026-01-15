@@ -8,7 +8,7 @@
 import UIKit
 
 class ProductAndCategorySelectionTBLCell: UITableViewCell {
-
+    
     @IBOutlet weak var checkImage: UIImageView!
     @IBOutlet weak var productNameLBL: UILabel!
     @IBOutlet weak var priceLbl: UILabel!
@@ -18,11 +18,32 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
     @IBOutlet weak var promotionValue: UILabel!
     @IBOutlet weak var categoryValue: UILabel!
     
-    var cellData: InventoryVariant! {
+    var cellData: VariantDataModel! {
         didSet{
-           updateUIWithData()
+            updateUIWithData()
         }
     }
+    
+    var categoryData: CategoryDataModel? {
+        didSet{
+            updateUIForCategoryData()
+        }
+    }
+    
+    var mixMatchData: MixnMatchDataModel? {
+        didSet{
+            updateUIForPromotion()
+        }
+    }
+  
+    var bogoData: BogoDataModel? {
+        didSet{
+            updateUIForPromotion()
+        }
+    }
+    
+    
+    
     
     var isSelectedCell : Bool = false {
         didSet{
@@ -37,39 +58,51 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
 
     
     private func updateUIWithData(){
+     
+        guard let cellData else { return }
         
-        if cellData.isvarient == "0" {
-            
-            productNameLBL.text = cellData.title
-            priceLbl.text = cellData.price
-            upcLBL.text = cellData.upc
+        if cellData.isVarient {
+            productNameLBL.text = cellData.variantTitle
+            priceLbl.text = cellData.variantPrice
+            upcLBL.text = cellData.variantUpc
             stockLBL.text = "Avaiable Stock:\(cellData.quantity)"
             
+        }else {
+            
+            productNameLBL.text = cellData.productTitle
+            priceLbl.text = cellData.productPrice
+            upcLBL.text = cellData.productUPC
+            stockLBL.text = "Avaiable Stock:\(cellData.quantity)"
+            
+        }
+        
+    }
+    
+    private func updateUIForCategoryData(){
+        if let categoryData {
+            
+            categoryValue.text = categoryData.title
+        }else{
+            categoryValue.text = ""
+        }
+    }
+    
+    private func updateUIForPromotion(){
+        
+        if let mixMatchData   {
+            
+            promotionValue.text = mixMatchData.dealName
         }
         else {
-            productNameLBL.text = cellData.variant
-            priceLbl.text = cellData.var_price
-            upcLBL.text = cellData.var_upc
-            stockLBL.text = "Avaiable Stock:\(cellData.quantity)"
+            promotionValue.text = "-"
         }
         
-        
-      //  guard let cellData else { return }
-        
-//        if cellData.isVarient {
-//            
-//            productNameLBL.text = cellData.productTitle
-//            priceLbl.text = cellData.productPrice
-//            upcLBL.text = cellData.productUPC
-//        }else {
-//            
-//            productNameLBL.text = cellData.variantTitle
-//            priceLbl.text = cellData.variantPrice
-//            upcLBL.text = cellData.variantUpc
-//            
-//        }
-        
-        
+        if let bogoData {
+            promotionValue.text = bogoData.dealName
+        }
+        else {
+            promotionValue.text = "-"
+        }
     }
     
 }

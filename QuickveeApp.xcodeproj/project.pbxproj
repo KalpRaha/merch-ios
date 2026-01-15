@@ -110,6 +110,14 @@
 		D22438B42CDB679C00273AC0 /* StockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22438B32CDB679C00273AC0 /* StockTableViewCell.swift */; };
 		D225879C2AB2C22100D38787 /* ApiCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = D225879B2AB2C22100D38787 /* ApiCalls.swift */; };
 		D225E7592C40DC8B007CFAF2 /* DuplicatePlusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D225E7582C40DC8B007CFAF2 /* DuplicatePlusViewController.swift */; };
+		D22696CD2F161424001C4493 /* CategoryListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696CC2F161424001C4493 /* CategoryListEndpoint.swift */; };
+		D22696D12F1616FF001C4493 /* CategoryListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696D02F1616FF001C4493 /* CategoryListRepository.swift */; };
+		D22696D32F1644B3001C4493 /* CategoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696D22F1644B3001C4493 /* CategoryDataModel.swift */; };
+		D22696D52F1653BE001C4493 /* BogoListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696D42F1653BE001C4493 /* BogoListEndpoint.swift */; };
+		D22696D72F165437001C4493 /* BogoListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696D62F165437001C4493 /* BogoListRepository.swift */; };
+		D22696D92F1656E7001C4493 /* BogoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696D82F1656E7001C4493 /* BogoDataModel.swift */; };
+		D22696DD2F166713001C4493 /* MixnMatchListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696DC2F166713001C4493 /* MixnMatchListEndpoint.swift */; };
+		D22696DF2F1668FF001C4493 /* MixnMatchListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696DE2F1668FF001C4493 /* MixnMatchListRepository.swift */; };
 		D22AECB1297AA22D000AA721 /* TaxesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AECB0297AA22D000AA721 /* TaxesTableViewCell.swift */; };
 		D22AECB3297AA255000AA721 /* TaxesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AECB2297AA255000AA721 /* TaxesCollectionViewCell.swift */; };
 		D22BC0572A8CD81C00FB2E8C /* OrderAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22BC0562A8CD81C00FB2E8C /* OrderAPIManager.swift */; };
@@ -194,6 +202,8 @@
 		D268EE602C8EA44500B45172 /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D268EE5C2C8EA44500B45172 /* Manrope-Bold.ttf */; };
 		D268EE612C8EA44500B45172 /* Manrope-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D268EE5D2C8EA44500B45172 /* Manrope-SemiBold.ttf */; };
 		D26930AD2E6599AE00C3339B /* CustomerMergeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26930AC2E6599AE00C3339B /* CustomerMergeTableViewCell.swift */; };
+		D26B74BC2F17496F00E79B5B /* MixnMatchDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B74BB2F17496F00E79B5B /* MixnMatchDataModel.swift */; };
+		D26B74BE2F178EFF00E79B5B /* ProductAndCategoryItemIDExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B74BD2F178EFF00E79B5B /* ProductAndCategoryItemIDExtractor.swift */; };
 		D26D38A12CA41CBE00AD9309 /* ReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26D38A02CA41CBE00AD9309 /* ReportTableViewCell.swift */; };
 		D26F4E74299500A700716A51 /* StrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26F4E73299500A700716A51 /* StrokeAnimation.swift */; };
 		D26F4E762995011200716A51 /* RotationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26F4E752995011200716A51 /* RotationAnimation.swift */; };
@@ -451,6 +461,14 @@
 		D22438B32CDB679C00273AC0 /* StockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockTableViewCell.swift; sourceTree = "<group>"; };
 		D225879B2AB2C22100D38787 /* ApiCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCalls.swift; sourceTree = "<group>"; };
 		D225E7582C40DC8B007CFAF2 /* DuplicatePlusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatePlusViewController.swift; sourceTree = "<group>"; };
+		D22696CC2F161424001C4493 /* CategoryListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListEndpoint.swift; sourceTree = "<group>"; };
+		D22696D02F1616FF001C4493 /* CategoryListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListRepository.swift; sourceTree = "<group>"; };
+		D22696D22F1644B3001C4493 /* CategoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDataModel.swift; sourceTree = "<group>"; };
+		D22696D42F1653BE001C4493 /* BogoListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BogoListEndpoint.swift; sourceTree = "<group>"; };
+		D22696D62F165437001C4493 /* BogoListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BogoListRepository.swift; sourceTree = "<group>"; };
+		D22696D82F1656E7001C4493 /* BogoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BogoDataModel.swift; sourceTree = "<group>"; };
+		D22696DC2F166713001C4493 /* MixnMatchListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixnMatchListEndpoint.swift; sourceTree = "<group>"; };
+		D22696DE2F1668FF001C4493 /* MixnMatchListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MixnMatchListRepository.swift; path = QuickveeApp/APIService/Endpoint/MixnMatchListRepository.swift; sourceTree = SOURCE_ROOT; };
 		D22890E2299F9A3100A49435 /* QuickveeAppRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuickveeAppRelease.entitlements; sourceTree = "<group>"; };
 		D22AECB0297AA22D000AA721 /* TaxesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxesTableViewCell.swift; sourceTree = "<group>"; };
 		D22AECB2297AA255000AA721 /* TaxesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -536,6 +554,8 @@
 		D268EE5C2C8EA44500B45172 /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
 		D268EE5D2C8EA44500B45172 /* Manrope-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-SemiBold.ttf"; sourceTree = "<group>"; };
 		D26930AC2E6599AE00C3339B /* CustomerMergeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerMergeTableViewCell.swift; sourceTree = "<group>"; };
+		D26B74BB2F17496F00E79B5B /* MixnMatchDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixnMatchDataModel.swift; sourceTree = "<group>"; };
+		D26B74BD2F178EFF00E79B5B /* ProductAndCategoryItemIDExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryItemIDExtractor.swift; sourceTree = "<group>"; };
 		D26D38A02CA41CBE00AD9309 /* ReportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewCell.swift; sourceTree = "<group>"; };
 		D26F4E73299500A700716A51 /* StrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeAnimation.swift; sourceTree = "<group>"; };
 		D26F4E752995011200716A51 /* RotationAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationAnimation.swift; sourceTree = "<group>"; };
@@ -791,6 +811,9 @@
 				B45CB88A2F04DF59004AF269 /* API.swift */,
 				D27F2F5B2F10C4CE007AE4C8 /* ProductAndCategoryDiscountEndpoint.swift */,
 				D27F2F5D2F10C8E5007AE4C8 /* VariantListEndpoint.swift */,
+				D22696CC2F161424001C4493 /* CategoryListEndpoint.swift */,
+				D22696D42F1653BE001C4493 /* BogoListEndpoint.swift */,
+				D22696DC2F166713001C4493 /* MixnMatchListEndpoint.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -913,6 +936,7 @@
 		B494783F2F11104D00DED5CA /* Validators */ = {
 			isa = PBXGroup;
 			children = (
+				D26B74BD2F178EFF00E79B5B /* ProductAndCategoryItemIDExtractor.swift */,
 				B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */,
 			);
 			path = Validators;
@@ -1343,6 +1367,9 @@
 			isa = PBXGroup;
 			children = (
 				D27F2F602F10D502007AE4C8 /* VariantListRepository.swift */,
+				D22696D02F1616FF001C4493 /* CategoryListRepository.swift */,
+				D22696D62F165437001C4493 /* BogoListRepository.swift */,
+				D22696DE2F1668FF001C4493 /* MixnMatchListRepository.swift */,
 			);
 			path = APIRepository;
 			sourceTree = "<group>";
@@ -1390,6 +1417,9 @@
 			children = (
 				D29D1F2F2AE66E910017819B /* InventoryProductModel.swift */,
 				B4BC09812F1529A500BDB89E /* VariantDataModel.swift */,
+				D22696D22F1644B3001C4493 /* CategoryDataModel.swift */,
+				D22696D82F1656E7001C4493 /* BogoDataModel.swift */,
+				D26B74BB2F17496F00E79B5B /* MixnMatchDataModel.swift */,
 			);
 			path = InventoryModel;
 			sourceTree = "<group>";
@@ -1943,6 +1973,7 @@
 				D2EE03C52B3AB6CE001626DD /* PassCollectionViewCell.swift in Sources */,
 				D21711882C45171B00B4FE1F /* TagsViewController.swift in Sources */,
 				D265CF502DB76A7E00915F25 /* AddScheduleViewController.swift in Sources */,
+				D22696D52F1653BE001C4493 /* BogoListEndpoint.swift in Sources */,
 				D2A2BF712B8D9516006796D5 /* ProgressView.swift in Sources */,
 				D27B61E42AC5790A00F753BD /* AddVariantAttributeViewController.swift in Sources */,
 				D2C0C1452C3510C000868B0F /* SetupInventoryViewController.swift in Sources */,
@@ -2004,6 +2035,7 @@
 				D285ECE52A2EE02C009DFAE5 /* OrdersCollectionViewCell.swift in Sources */,
 				D2D6254D2B75E23300C25D07 /* BulkQuantityViewController.swift in Sources */,
 				D24829AA2A396FC4006EFE10 /* OrdersDetailViewController.swift in Sources */,
+				D22696DD2F166713001C4493 /* MixnMatchListEndpoint.swift in Sources */,
 				D256D5542AF0B07E00CF4B2C /* AddProdTaxCell.swift in Sources */,
 				D2FAF7F32BBD67AD00B0B03B /* OrderStatusViewController.swift in Sources */,
 				D27624C32C589AF70019EB2B /* SelectCouponTypeViewController.swift in Sources */,
@@ -2027,6 +2059,7 @@
 				D2A2BF7D2B8DF2A6006796D5 /* OrderTableViewCell.swift in Sources */,
 				B45CB8B22F04F4CF004AF269 /* Storage.swift in Sources */,
 				D2D836002BA4049600BB167A /* RefundTableCell.swift in Sources */,
+				D22696D12F1616FF001C4493 /* CategoryListRepository.swift in Sources */,
 				B45CB8B92F0519CC004AF269 /* ToastView.swift in Sources */,
 				D2EE36172BFDBE1D006F5238 /* MaxPurchaseQuantityViewController.swift in Sources */,
 				D2AE68DD2A7B7F12004D85B8 /* OrderRefundViewController.swift in Sources */,
@@ -2070,6 +2103,7 @@
 				D27F2F5E2F10C8E5007AE4C8 /* VariantListEndpoint.swift in Sources */,
 				D2F5AB852CE5C2270050B89C /* NoOrderFoundCell.swift in Sources */,
 				D2F5AB862CE5C2270050B89C /* HeaderViewCell.swift in Sources */,
+				D26B74BC2F17496F00E79B5B /* MixnMatchDataModel.swift in Sources */,
 				D23493D32CEF2F0B0046D33C /* TaxTableCell.swift in Sources */,
 				D23493D52CEF2F0B0046D33C /* RefundDetailCell.swift in Sources */,
 				D23493D62CEF2F0B0046D33C /* TendersTableCell.swift in Sources */,
@@ -2110,6 +2144,7 @@
 				D2D879882BBBB59A00ECE573 /* InStoreRefundCustCell.swift in Sources */,
 				D2E2391A2B286B4D00231FB4 /* Extention.swift in Sources */,
 				B49382062F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift in Sources */,
+				D22696D92F1656E7001C4493 /* BogoDataModel.swift in Sources */,
 				D21A0DC529A487B600DC36CC /* SetupTableViewCell.swift in Sources */,
 				D2ABF03D2BBC033900A38D23 /* OrderFilterLeftCell.swift in Sources */,
 				D2A87AA92D156CC50008C417 /* NewOrderDetailVC.swift in Sources */,
@@ -2119,6 +2154,7 @@
 				D23FC5902BEB75B30005CC17 /* RefundPartialCell.swift in Sources */,
 				D2A1A1082BFF6282007A1055 /* AddPurchaseCell.swift in Sources */,
 				D2DF61222CE32561003D47B0 /* StockSaveTableViewCell.swift in Sources */,
+				D26B74BE2F178EFF00E79B5B /* ProductAndCategoryItemIDExtractor.swift in Sources */,
 				B45CB8AA2F04E364004AF269 /* UIStoryboard+Extension.swift in Sources */,
 				D2EF641A29C2F06000EA83CE /* SetupTaxTableViewCell.swift in Sources */,
 				D28621072AB065CC00AC90B4 /* AddProductCollectionViewCell.swift in Sources */,
@@ -2141,11 +2177,14 @@
 				D2E9B77F297966EB00EF4A3E /* SMTabbar.swift in Sources */,
 				D20930922B47B4A0007CDAE8 /* SalesHistoryViewController.swift in Sources */,
 				D22438B42CDB679C00273AC0 /* StockTableViewCell.swift in Sources */,
+				D22696D72F165437001C4493 /* BogoListRepository.swift in Sources */,
+				D22696D32F1644B3001C4493 /* CategoryDataModel.swift in Sources */,
 				D27624C52C589E7A0019EB2B /* CouponCategoryViewController.swift in Sources */,
 				D240F92229A74C5000DC76EA /* StoreSetupViewController.swift in Sources */,
 				D26F4E782995039200716A51 /* StrokeColorAnimation.swift in Sources */,
 				D253DD9C2C86BB96003AA842 /* LotteryTableViewCell.swift in Sources */,
 				B4BC097A2F15063100BDB89E /* MultipartFormDataBuilder.swift in Sources */,
+				D22696DF2F1668FF001C4493 /* MixnMatchListRepository.swift in Sources */,
 				D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */,
 				D29D1F302AE66E910017819B /* InventoryProductModel.swift in Sources */,
 				D2D0496829B85A8900EF591E /* AddCouponViewController.swift in Sources */,
@@ -2172,6 +2211,7 @@
 				B45CB8992F04DF59004AF269 /* API.swift in Sources */,
 				B45CB89A2F04DF59004AF269 /* APIService.swift in Sources */,
 				B45CB89B2F04DF59004AF269 /* Utils.swift in Sources */,
+				D22696CD2F161424001C4493 /* CategoryListEndpoint.swift in Sources */,
 				B45CB89C2F04DF59004AF269 /* APIError.swift in Sources */,
 				B45CB89D2F04DF59004AF269 /* APIServiceType.swift in Sources */,
 				D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */,

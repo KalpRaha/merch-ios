@@ -422,7 +422,7 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-struct InventoryCategory {
+struct InventoryCategory : Codable {
     
     let id: String
     let title: String
