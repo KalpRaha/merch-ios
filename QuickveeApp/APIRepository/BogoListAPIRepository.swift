@@ -1,5 +1,5 @@
 //
-//  BogoListRepository.swift
+//  BogoListAPIRepository.swift
 //  QuickveeApp
 //
 //  Created by Pallavi on 13/01/26.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BogoListRepositoryProtocol : AnyObject {
+protocol BogoListAPIRepositoryProtocol : AnyObject {
     
     var apiService: APIServiceType { get }
     func getBogoList() async throws  -> BogoDataModelRes
@@ -16,7 +16,7 @@ protocol BogoListRepositoryProtocol : AnyObject {
 
 
 
-class BogoListRepository : BogoListRepositoryProtocol {
+class BogoListAPIRepository : BogoListAPIRepositoryProtocol {
     
     typealias BogoListResponse  = BogoDataModelRes
     

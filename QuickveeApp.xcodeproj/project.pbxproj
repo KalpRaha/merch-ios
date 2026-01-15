@@ -21,7 +21,7 @@
 		B41A9F402F0F86CC00C543C7 /* ProductAndCategoryDiscountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F3F2F0F86CC00C543C7 /* ProductAndCategoryDiscountType.swift */; };
 		B41A9F422F0F86E300C543C7 /* DiscountPerItemDiscountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F412F0F86E300C543C7 /* DiscountPerItemDiscountType.swift */; };
 		B41A9F452F0FA88C00C543C7 /* GenericSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F442F0FA88C00C543C7 /* GenericSegmentedControl.swift */; };
-		B420F2F72F18A8A300461C92 /* MixnMatchListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F2F62F18A8A300461C92 /* MixnMatchListRepository.swift */; };
+		B420F2F72F18A8A300461C92 /* MixnMatchAPIListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F2F62F18A8A300461C92 /* MixnMatchAPIListRepository.swift */; };
 		B42F5F582F078120002252EE /* PersistenceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F5F572F078120002252EE /* PersistenceContainer.swift */; };
 		B42F5F5E2F079DA8002252EE /* Quickvee-Local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B42F5F5D2F079DA8002252EE /* Quickvee-Local.xcconfig */; };
 		B42F5F602F07B79C002252EE /* Quickvee-Dev.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B42F5F5F2F07B79C002252EE /* Quickvee-Dev.xcconfig */; };
@@ -126,10 +126,10 @@
 		D225879C2AB2C22100D38787 /* ApiCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = D225879B2AB2C22100D38787 /* ApiCalls.swift */; };
 		D225E7592C40DC8B007CFAF2 /* DuplicatePlusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D225E7582C40DC8B007CFAF2 /* DuplicatePlusViewController.swift */; };
 		D22696CD2F161424001C4493 /* CategoryListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696CC2F161424001C4493 /* CategoryListEndpoint.swift */; };
-		D22696D12F1616FF001C4493 /* CategoryListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696D02F1616FF001C4493 /* CategoryListRepository.swift */; };
+		D22696D12F1616FF001C4493 /* CategoryListAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696D02F1616FF001C4493 /* CategoryListAPIRepository.swift */; };
 		D22696D32F1644B3001C4493 /* CategoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696D22F1644B3001C4493 /* CategoryDataModel.swift */; };
 		D22696D52F1653BE001C4493 /* BogoListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696D42F1653BE001C4493 /* BogoListEndpoint.swift */; };
-		D22696D72F165437001C4493 /* BogoListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696D62F165437001C4493 /* BogoListRepository.swift */; };
+		D22696D72F165437001C4493 /* BogoListAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696D62F165437001C4493 /* BogoListAPIRepository.swift */; };
 		D22696D92F1656E7001C4493 /* BogoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696D82F1656E7001C4493 /* BogoDataModel.swift */; };
 		D22696DD2F166713001C4493 /* MixnMatchListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22696DC2F166713001C4493 /* MixnMatchListEndpoint.swift */; };
 		D22AECB1297AA22D000AA721 /* TaxesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AECB0297AA22D000AA721 /* TaxesTableViewCell.swift */; };
@@ -230,7 +230,7 @@
 		D27B61E42AC5790A00F753BD /* AddVariantAttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27B61E32AC5790A00F753BD /* AddVariantAttributeViewController.swift */; };
 		D27F2F5C2F10C4CE007AE4C8 /* ProductAndCategoryDiscountEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27F2F5B2F10C4CE007AE4C8 /* ProductAndCategoryDiscountEndpoint.swift */; };
 		D27F2F5E2F10C8E5007AE4C8 /* VariantListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27F2F5D2F10C8E5007AE4C8 /* VariantListEndpoint.swift */; };
-		D27F2F612F10D502007AE4C8 /* VariantListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27F2F602F10D502007AE4C8 /* VariantListRepository.swift */; };
+		D27F2F612F10D502007AE4C8 /* VariantListAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27F2F602F10D502007AE4C8 /* VariantListAPIRepository.swift */; };
 		D27F2F632F10FBEF007AE4C8 /* ProductAndCategorySelectionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27F2F622F10FBEF007AE4C8 /* ProductAndCategorySelectionVM.swift */; };
 		D285ECE32A2ED94C009DFAE5 /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D285ECE22A2ED94C009DFAE5 /* OrdersViewController.swift */; };
 		D285ECE52A2EE02C009DFAE5 /* OrdersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D285ECE42A2EE02C009DFAE5 /* OrdersCollectionViewCell.swift */; };
@@ -385,7 +385,7 @@
 		B41A9F3F2F0F86CC00C543C7 /* ProductAndCategoryDiscountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryDiscountType.swift; sourceTree = "<group>"; };
 		B41A9F412F0F86E300C543C7 /* DiscountPerItemDiscountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountPerItemDiscountType.swift; sourceTree = "<group>"; };
 		B41A9F442F0FA88C00C543C7 /* GenericSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericSegmentedControl.swift; sourceTree = "<group>"; };
-		B420F2F62F18A8A300461C92 /* MixnMatchListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixnMatchListRepository.swift; sourceTree = "<group>"; };
+		B420F2F62F18A8A300461C92 /* MixnMatchAPIListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixnMatchAPIListRepository.swift; sourceTree = "<group>"; };
 		B42F5F572F078120002252EE /* PersistenceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceContainer.swift; sourceTree = "<group>"; };
 		B42F5F5D2F079DA8002252EE /* Quickvee-Local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Quickvee-Local.xcconfig"; sourceTree = "<group>"; };
 		B42F5F5F2F07B79C002252EE /* Quickvee-Dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Quickvee-Dev.xcconfig"; sourceTree = "<group>"; };
@@ -491,10 +491,10 @@
 		D225879B2AB2C22100D38787 /* ApiCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCalls.swift; sourceTree = "<group>"; };
 		D225E7582C40DC8B007CFAF2 /* DuplicatePlusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatePlusViewController.swift; sourceTree = "<group>"; };
 		D22696CC2F161424001C4493 /* CategoryListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListEndpoint.swift; sourceTree = "<group>"; };
-		D22696D02F1616FF001C4493 /* CategoryListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListRepository.swift; sourceTree = "<group>"; };
+		D22696D02F1616FF001C4493 /* CategoryListAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListAPIRepository.swift; sourceTree = "<group>"; };
 		D22696D22F1644B3001C4493 /* CategoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDataModel.swift; sourceTree = "<group>"; };
 		D22696D42F1653BE001C4493 /* BogoListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BogoListEndpoint.swift; sourceTree = "<group>"; };
-		D22696D62F165437001C4493 /* BogoListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BogoListRepository.swift; sourceTree = "<group>"; };
+		D22696D62F165437001C4493 /* BogoListAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BogoListAPIRepository.swift; sourceTree = "<group>"; };
 		D22696D82F1656E7001C4493 /* BogoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BogoDataModel.swift; sourceTree = "<group>"; };
 		D22696DC2F166713001C4493 /* MixnMatchListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixnMatchListEndpoint.swift; sourceTree = "<group>"; };
 		D22890E2299F9A3100A49435 /* QuickveeAppRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuickveeAppRelease.entitlements; sourceTree = "<group>"; };
@@ -596,7 +596,7 @@
 		D27B61E32AC5790A00F753BD /* AddVariantAttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVariantAttributeViewController.swift; sourceTree = "<group>"; };
 		D27F2F5B2F10C4CE007AE4C8 /* ProductAndCategoryDiscountEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryDiscountEndpoint.swift; sourceTree = "<group>"; };
 		D27F2F5D2F10C8E5007AE4C8 /* VariantListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantListEndpoint.swift; sourceTree = "<group>"; };
-		D27F2F602F10D502007AE4C8 /* VariantListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantListRepository.swift; sourceTree = "<group>"; };
+		D27F2F602F10D502007AE4C8 /* VariantListAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantListAPIRepository.swift; sourceTree = "<group>"; };
 		D27F2F622F10FBEF007AE4C8 /* ProductAndCategorySelectionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategorySelectionVM.swift; sourceTree = "<group>"; };
 		D285ECE22A2ED94C009DFAE5 /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		D285ECE42A2EE02C009DFAE5 /* OrdersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrdersCollectionViewCell.swift; path = QuickveeApp/OrdersCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -1478,10 +1478,10 @@
 		D27F2F5F2F10D47D007AE4C8 /* APIRepository */ = {
 			isa = PBXGroup;
 			children = (
-				D27F2F602F10D502007AE4C8 /* VariantListRepository.swift */,
-				D22696D02F1616FF001C4493 /* CategoryListRepository.swift */,
-				D22696D62F165437001C4493 /* BogoListRepository.swift */,
-				B420F2F62F18A8A300461C92 /* MixnMatchListRepository.swift */,
+				D27F2F602F10D502007AE4C8 /* VariantListAPIRepository.swift */,
+				D22696D02F1616FF001C4493 /* CategoryListAPIRepository.swift */,
+				D22696D62F165437001C4493 /* BogoListAPIRepository.swift */,
+				B420F2F62F18A8A300461C92 /* MixnMatchAPIListRepository.swift */,
 			);
 			path = APIRepository;
 			sourceTree = "<group>";
@@ -2130,7 +2130,7 @@
 				D2D6254F2B75E27100C25D07 /* BulkPricingViewController.swift in Sources */,
 				D2DF873A2A6932CA0058CBBA /* AppURLs.swift in Sources */,
 				D24187BC2C180DFA00643069 /* LoyaltyTableViewCell.swift in Sources */,
-				B420F2F72F18A8A300461C92 /* MixnMatchListRepository.swift in Sources */,
+				B420F2F72F18A8A300461C92 /* MixnMatchAPIListRepository.swift in Sources */,
 				D2C4B34C2C006CBD005AE9A9 /* MaxPurchaseUpdateViewController.swift in Sources */,
 				D21965142D4C9F4D0003E970 /* SelectBogoVariantViewController.swift in Sources */,
 				B49382002F0E1EEA0071D0F1 /* CustomLabel.swift in Sources */,
@@ -2176,7 +2176,7 @@
 				D2A2BF7D2B8DF2A6006796D5 /* OrderTableViewCell.swift in Sources */,
 				B45CB8B22F04F4CF004AF269 /* Storage.swift in Sources */,
 				D2D836002BA4049600BB167A /* RefundTableCell.swift in Sources */,
-				D22696D12F1616FF001C4493 /* CategoryListRepository.swift in Sources */,
+				D22696D12F1616FF001C4493 /* CategoryListAPIRepository.swift in Sources */,
 				B45CB8B92F0519CC004AF269 /* ToastView.swift in Sources */,
 				D2EE36172BFDBE1D006F5238 /* MaxPurchaseQuantityViewController.swift in Sources */,
 				D2AE68DD2A7B7F12004D85B8 /* OrderRefundViewController.swift in Sources */,
@@ -2301,7 +2301,7 @@
 				D2E9B77F297966EB00EF4A3E /* SMTabbar.swift in Sources */,
 				D20930922B47B4A0007CDAE8 /* SalesHistoryViewController.swift in Sources */,
 				D22438B42CDB679C00273AC0 /* StockTableViewCell.swift in Sources */,
-				D22696D72F165437001C4493 /* BogoListRepository.swift in Sources */,
+				D22696D72F165437001C4493 /* BogoListAPIRepository.swift in Sources */,
 				D22696D32F1644B3001C4493 /* CategoryDataModel.swift in Sources */,
 				D27624C52C589E7A0019EB2B /* CouponCategoryViewController.swift in Sources */,
 				D240F92229A74C5000DC76EA /* StoreSetupViewController.swift in Sources */,
@@ -2384,7 +2384,7 @@
 				D2B269E52A6113EC002D140A /* RootTableViewController.swift in Sources */,
 				B4AD368A2F1605CA00E9EF55 /* DatePickerInputView.swift in Sources */,
 				D27F2F5C2F10C4CE007AE4C8 /* ProductAndCategoryDiscountEndpoint.swift in Sources */,
-				D27F2F612F10D502007AE4C8 /* VariantListRepository.swift in Sources */,
+				D27F2F612F10D502007AE4C8 /* VariantListAPIRepository.swift in Sources */,
 				D2CA7D782B45242D00918A94 /* DuplicateCatCollectionViewCell.swift in Sources */,
 				D25B52492AEA18C700E82B83 /* CategoryAddProductCell.swift in Sources */,
 				D2D879822BBBB55900ECE573 /* InStoreRefundCell.swift in Sources */,

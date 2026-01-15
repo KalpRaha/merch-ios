@@ -1,5 +1,5 @@
 //
-//  CategoryListRepository.swift
+//  CategoryListAPIRepository.swift
 //  QuickveeApp
 //
 //  Created by Pallavi on 13/01/26.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol CategoryListRepositoryProtocol : AnyObject {
+protocol CategoryListAPIRepositoryProtocol : AnyObject {
     
     var apiService: APIServiceType { get }
     func getCategoryList() async throws  -> GenericAPIResponse<[CategoryDataModel]>
@@ -16,7 +16,7 @@ protocol CategoryListRepositoryProtocol : AnyObject {
 
 
 
-class CategoryListRepository : CategoryListRepositoryProtocol{
+class CategoryListAPIRepository : CategoryListAPIRepositoryProtocol{
     
     typealias CategoryListResponse  = GenericAPIResponse<[CategoryDataModel]>
     

@@ -1,5 +1,5 @@
 //
-//  VariantListRepository.swift
+//  VariantListAPIRepository.swift
 //  QuickveeApp
 //
 //  Created by Pallavi on 09/01/26.
@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol VariantListRepositoryProtocol : AnyObject {
+protocol VariantListAPIRepositoryProtocol : AnyObject {
     
     var apiService: APIServiceType { get }
     func getVariantList() async throws  -> GenericAPIResponse<[VariantDataModel]>
 }
 
 
-class VariantListRepository : VariantListRepositoryProtocol{
+class VariantListAPIRepository : VariantListAPIRepositoryProtocol{
     
     var apiService: any APIServiceType
     

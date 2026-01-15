@@ -13,18 +13,18 @@ class ProductAndCategorySelectionVCFactory {
         
         let vc = ProductAndCategorySelectionVC.instantiate()
         let apiService = APIServiceFactory.make()
+        
         vc.viewModel = .init(
-            
-            repository: VariantListRepository(
+            repository: VariantListAPIRepository(
                 apiService: apiService
             ),
-            categoryRepository: CategoryListRepository(
+            categoryRepository: CategoryListAPIRepository(
                 apiService: apiService
             ),
-            bogoRepository: BogoListRepository (
+            bogoRepository: BogoListAPIRepository (
                 apiService: apiService
             ),
-            minMatchRepository:  MixnMatchListRepository (
+            minMatchRepository:  MixnMatchAPIListRepository (
                 apiService: apiService
             )
         )
@@ -51,8 +51,6 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable{
         super.viewDidLoad()
         
         configureTableView()
-        // viewModel.variantListApicall()
-        // viewModel.getVariantData()
         viewModel.loadData()
     }
     
@@ -87,33 +85,23 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
         
         
         cell.cellData = viewModel.variantList[indexPath.row]
-      
-        let categoryData = viewModel.categoryList.first(where: { $0.id == viewModel.variantList[indexPath.row].category })
-        cell.categoryData = categoryData
-        
-        let itemId = viewModel.variantList[indexPath.row].isVarient ? viewModel.variantList[indexPath.row].variantId : viewModel.variantList[indexPath.row].id
-        
-        let mixMatchData = viewModel.mixMatchList.filter({ $0.itemIds.contains(where:{$0 == itemId} ) }).first
-        cell.mixMatchData = mixMatchData
-       
-       
-        let bogoData = viewModel.bogoList.filter({ $0.items.contains(where:{$0 == itemId} ) }).first
-        cell.bogoData = bogoData
-        
-        
+
+        cell.categoryData = viewModel.getCategoryData(indexPath.row)
+        cell.mixMatchData = viewModel.getMixNMatchData(indexPath.row)
+        cell.bogoData = viewModel.getBogoData(indexPath.row)
         
         cell.isSelectedCell = viewModel.selectedIndexPath.contains(indexPath)
+        
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if  viewModel.selectedIndexPath.contains(indexPath)  {
-            
             viewModel.selectedIndexPath.removeAll(where: { $0 == indexPath})
-            print(viewModel.selectedIndexPath.removeAll(where: { $0 == indexPath}))
-        }
-        else {
+            
+        } else {
             
             viewModel.selectedIndexPath.append(indexPath)
             print(viewModel.variantList[indexPath.row])
@@ -122,16 +110,12 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
         
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? ProductAndCategorySelectionTBLCell else { return }
-    
-    }
-    
+
 }
 
 extension ProductAndCategorySelectionVC: ProductAndCategorySelectionViewModelDelegate {
     
-    func loadData() {
+    func didUpdatedVariantListData() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }

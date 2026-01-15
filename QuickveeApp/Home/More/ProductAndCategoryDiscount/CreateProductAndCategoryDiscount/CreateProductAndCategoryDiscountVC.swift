@@ -238,6 +238,12 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
         Logger.log(#function)
     }
     
+    
+    @IBAction func onClickBtnAddProductAndCategory(_ sender: GenericButton) {
+        ProductAndCategorySelectionVCFactory.make().present(in: self)
+        Logger.log(#function)
+    }
+    
     @IBAction private func onClickBtnCancel(_ sender: GenericButton) {
         
         Logger.log(#function)

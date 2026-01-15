@@ -1,5 +1,5 @@
 //
-//  MixnMatchListRepository.swift
+//  MixnMatchAPIListRepository.swift
 //  QuickveeApp
 //
 //  Created by Pallavi on 13/01/26.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol MixnMatchListRepositoryProtocol : AnyObject {
+protocol MixnMatchListAPIRepositoryProtocol : AnyObject {
     
     var apiService: APIServiceType { get }
     func getMixnMatchList() async throws  -> MixnMatchDataModelRes
@@ -16,7 +16,7 @@ protocol MixnMatchListRepositoryProtocol : AnyObject {
 
 
 
-class MixnMatchListRepository : MixnMatchListRepositoryProtocol {
+class MixnMatchAPIListRepository : MixnMatchListAPIRepositoryProtocol {
     
     typealias MixnMatchListResponse  = MixnMatchDataModelRes
     
