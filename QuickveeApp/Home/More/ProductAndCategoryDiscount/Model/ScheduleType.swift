@@ -10,8 +10,8 @@ import Foundation
 
 enum ScheduleType : String, CaseIterable {
     
-    case oneTime
-    case repeatsOnSchedule
+    case oneTime = "0"
+    case repeatsOnSchedule = "1"
     
     var stringValue : String {
         switch self {
@@ -22,6 +22,13 @@ enum ScheduleType : String, CaseIterable {
 }
 
 extension ScheduleType : Decodable {
+    
+    func apiValue() -> String {
+        switch self {
+        case .oneTime: "0"
+        case .repeatsOnSchedule: "1"
+        }
+    }
     
     enum CodingKeys: String, CodingKey {
         case oneTime = "0"

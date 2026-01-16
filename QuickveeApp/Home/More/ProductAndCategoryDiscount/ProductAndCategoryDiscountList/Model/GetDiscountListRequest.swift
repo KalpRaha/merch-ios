@@ -12,6 +12,8 @@ extension ProductAndCategoryDiscountListVC {
     
     struct GetDiscountListRequest {
         
+        var boundary: String = { UUID().uuidString }()
+        
         var merchantId : String
         var searchQuery : String?
         var page : String?
@@ -35,10 +37,7 @@ extension ProductAndCategoryDiscountListVC {
 
 
 extension ProductAndCategoryDiscountListVC.GetDiscountListRequest : MultiPartRequestBodyType{
-    
-    var boundary: String { UUID().uuidString }
-    
-    
+
     func buildMultiPartBodyBuilder() -> MultipartFormDataBodyBuilder {
         var entries: [MultipartFormDataEntry] = [
             .string(paramName: "merchant_id", value: merchantId)

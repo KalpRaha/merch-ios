@@ -8,84 +8,73 @@
 import Foundation
 
 
-protocol CreateProductAndCategoryDiscountVMDelegate : AnyObject {
-    
-    func didUpdateProductOrCategoryDiscountType()
-    func didUpdateIsAllowDiscountToStackWithOtherDiscounts()
-    func didUpdateDiscountPerItemDiscountType()
-    func didUpdateScheduleType()
-    
-    func didUpdateIsDealIsActiveForFullDay()
-    func didUpdatedIncludedProductORCategories()
-}
 
 extension CreateProductAndCategoryDiscountVC {
     
     class ViewModel {
         
-        weak var delegate : CreateProductAndCategoryDiscountVMDelegate?
         
-        
-        var productOrCategoryDiscountType : ProductAndCategoryDiscountType = .product {
-            didSet{
-                delegate?.didUpdateProductOrCategoryDiscountType()
-            }
+        init(
+            editableDiscountItem: PNCDDiscountListItem?,
+            builder: CreateProductAndCategoryDiscountVC.AddUpdatePNCDRequestBuilder?
+        ) {
+            self.editableDiscountItem = editableDiscountItem
+            self.builder = builder
+            
+            self.dateNTimeHelper = DateNTimeHelper()
+            self.flagsPropertyManager = FlagsPropertyManager()
         }
         
-        var isAllowDiscountToStackWithOtherDiscounts: Bool = false {
+        var editableDiscountItem: PNCDDiscountListItem? {
             didSet{
-                delegate?.didUpdateIsAllowDiscountToStackWithOtherDiscounts()
+                configureBuilder()
             }
         }
+        var builder: CreateProductAndCategoryDiscountVC.AddUpdatePNCDRequestBuilder?
+        
+       
         
         
-        var discountPerItemDiscountTypeSegments: [DiscountPerItemDiscountType] = [
-            .amountValue,
-            .percentValue
-        ]
+        // StartDate / End Date
+        var dateNTimeHelper : DateNTimeHelper
+        var flagsPropertyManager: FlagsPropertyManager
         
-        var discountPerItemDiscountType: DiscountPerItemDiscountType = .amountValue {
-            didSet{
-                delegate?.didUpdateDiscountPerItemDiscountType()
-            }
+        
+       
+        
+        private func configureBuilder() {
+            
+            dateNTimeHelper.startDate = DateFormatHelper.shared.getFormattedDate(editableDiscountItem?.startDate)
+            dateNTimeHelper.endDate = DateFormatHelper.shared.getFormattedDate(editableDiscountItem?.endDate)
+            
+            dateNTimeHelper.startTime = TimeFormatHelper.shared.getFormattedTime(editableDiscountItem?.startTime)
+            dateNTimeHelper.endTime = TimeFormatHelper.shared.getFormattedTime(editableDiscountItem?.endTime)
+            
         }
         
-
-        var scheduleTypeSegments: [ScheduleType] = [
-            .oneTime,
-            .repeatsOnSchedule
-        ]
-        
-        var scheduleType : ScheduleType = .oneTime {
-            didSet{
-                delegate?.didUpdateScheduleType()
-            }
+        func configureInitialValuesFromExistingData(){
+            guard let editableDiscountItem else { return }
+            
+            flagsPropertyManager.productOrCategoryDiscountType = editableDiscountItem.type ?? .product
+            flagsPropertyManager.isAllowDiscountToStackWithOtherDiscounts = editableDiscountItem.isAllowThisDiscountToStackWithOtherDiscounts
+            
+            flagsPropertyManager.discountPerItemDiscountType = editableDiscountItem.discountType ?? .amountValue
+            
+            flagsPropertyManager.scheduleType = editableDiscountItem.scheduleType ?? .oneTime
+            flagsPropertyManager.isThisDealHasNoEndDate = editableDiscountItem.isThisDealHasNoEndDate
+            
+            
+            
+            dateNTimeHelper.startDate = DateFormatHelper.shared.getFormattedDate(editableDiscountItem.startDate)
+            dateNTimeHelper.endDate = DateFormatHelper.shared.getFormattedDate(editableDiscountItem.endDate)
+            
+            dateNTimeHelper.startTime = TimeFormatHelper.shared.getFormattedTime(editableDiscountItem.startTime)
+            dateNTimeHelper.endTime = TimeFormatHelper.shared.getFormattedTime(editableDiscountItem.endTime)
+            
+            
         }
         
-        
-        var isDealIsActiveForFullDay: Bool = false {
-            didSet{
-                delegate?.didUpdateIsDealIsActiveForFullDay()
-            }
-        }
-        
-        
-        var includedProductOrCategories: [String] = [] {
-            didSet{
-                delegate?.didUpdatedIncludedProductORCategories()
-            }
-        }
         
     }
     
 }
-
-extension CreateProductAndCategoryDiscountVC {
-    
-    enum DealDateType {
-        case startDate
-        case endDate
-    }
-    
-}
-

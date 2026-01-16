@@ -7,23 +7,34 @@
 
 import Foundation
 
-
-enum DiscountPerItemDiscountType {
+enum DiscountPerItemDiscountType: String {
     
-    case percentValue
-    case amountValue
+    // Align raw values with API payload: "1" => percent, "2" => amount
+    case percentValue = "1"
+    case amountValue = "2"
     
-    var stringValue : String {
+    var stringValue: String {
         switch self {
         case .percentValue: "%"
         case .amountValue: "$"
         }
     }
     
-    mutating func toggle(){
+    mutating func toggle() {
         self = switch self {
-        case .percentValue : .amountValue
-        case .amountValue : .percentValue
+        case .percentValue: .amountValue
+        case .amountValue: .percentValue
+        }
+    }
+}
+
+extension DiscountPerItemDiscountType: Codable {
+    
+    // Keep existing API value mapping
+    func apiValue() -> String {
+        switch self {
+        case .percentValue: "1"
+        case .amountValue: "2"
         }
     }
     

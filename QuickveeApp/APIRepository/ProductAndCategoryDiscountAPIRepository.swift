@@ -24,8 +24,8 @@ protocol ProductAndCategoryDiscountAPIRepositoryProtocol : AnyObject {
     
     
     func addUpdateDiscount(
-        request : PNCDListVC.AddUpdatePNCDRequest
-    ) async throws -> GetDiscountListResponse
+        request : CreatePNCDVC.AddUpdatePNCDRequest
+    ) async throws -> CommonResponse
     
     
 }
@@ -64,12 +64,12 @@ class ProductAndCategoryDiscountAPIRepository : ProductAndCategoryDiscountAPIRep
     
     
     func addUpdateDiscount(
-        request : PNCDListVC.AddUpdatePNCDRequest
-    ) async throws -> GetDiscountListResponse
+        request : CreatePNCDVC.AddUpdatePNCDRequest
+    ) async throws -> CommonResponse
     {
         return try await apiService.getData(
             endpoint: API.ProductAndCategoryDiscountEndpoint.addUpdatePNCD(req: request),
-            responseType: GetDiscountListResponse.self
+            responseType: CommonResponse.self
         )
     }
     

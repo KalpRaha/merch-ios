@@ -13,7 +13,7 @@ extension API {
         
         case getDiscountList(req : PNCDListVC.GetDiscountListRequest)
         case updateDiscountEnableDisableStatus(req : PNCDListVC.UpdateDiscountEnableDisableStateRequest)
-        case addUpdatePNCD(req: PNCDListVC.AddUpdatePNCDRequest)
+        case addUpdatePNCD(req: CreatePNCDVC.AddUpdatePNCDRequest)
         
     }
     
