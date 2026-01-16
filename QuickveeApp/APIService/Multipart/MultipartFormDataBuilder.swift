@@ -29,6 +29,17 @@ public class MultipartFormDataBodyBuilder {
     }
     
     func build() -> Data {
+        entries.forEach({ entry in
+            
+            switch entry {
+            case .file(let paramName, let fileName, let fileData, let contentType):
+                Logger.log("MultiPart Param: Type - File, ParamName - \(paramName)), FileName - \(fileName ?? "N/A"), FileData - \(String(describing: fileData?.count)), ContentType - \(contentType)")
+                
+            case .string(let paramName, let value):
+                Logger.log("MultiPart Param: Type - String, ParamName - \(paramName), Value - \(value ?? "N/A")")
+            }
+        })
+        
         var httpData = entries
             .map { $0.makeBodyData(boundary: boundary) }
             .reduce(Data(), +)

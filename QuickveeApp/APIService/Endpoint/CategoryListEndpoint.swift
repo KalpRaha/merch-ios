@@ -7,14 +7,14 @@
 
 import Foundation
 
-extension  API {
+extension API {
     
-    enum  CategoryListEndpoint{
+    enum CategoryListEndpoint{
         
         case categoryList(reqBody : VariantListMultipartRequestBody)
         
     }
-  
+    
 }
 
 
@@ -29,7 +29,9 @@ extension API.CategoryListEndpoint: APIEndpointEnumType {
     }
     
     func getEndpoint() -> any APIEndpointType {
+        
         switch self {
+            
         case .categoryList(let reqBody):
             APIEndpoint(
                 baseURL: baseURL,
@@ -39,9 +41,10 @@ extension API.CategoryListEndpoint: APIEndpointEnumType {
                 parameter: .multipart(reqBody),
                 headers: defaultHeaders
             )
+            
         }
     }
-
+    
     
 }
 

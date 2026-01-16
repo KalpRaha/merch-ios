@@ -488,7 +488,7 @@ extension SetupViewController: UITableViewDelegate, UITableViewDataSource {
                         performSegue(withIdentifier: "toBogo", sender: nil)
                     }
                 }else {
-                    ProductAndCategoryDiscountListVC.push(in: self.navigationController)
+                    ProductAndCategoryDiscountListVCFactory.make().push(in: self)
                 }
             }
             

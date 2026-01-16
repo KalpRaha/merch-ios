@@ -7,6 +7,26 @@
 
 import UIKit
 
+typealias PNCDListVC = ProductAndCategoryDiscountListVC
+
+class ProductAndCategoryDiscountListVCFactory {
+    
+    static func make() -> PNCDListVC {
+        let vc = ProductAndCategoryDiscountListVC.instantiate()
+        
+        vc.viewModel = .init(
+            pncdRepository: ProductAndCategoryDiscountAPIRepository(
+                apiService: APIServiceFactory.make()
+            )
+            
+        )
+        vc.viewModel.delegate = vc
+        
+        return vc
+    }
+    
+}
+
 final class ProductAndCategoryDiscountListVC: UIViewController, Navigatable {
 
     static var storyboard: UIStoryboard { .productAndCategoryDiscount }
@@ -22,9 +42,16 @@ final class ProductAndCategoryDiscountListVC: UIViewController, Navigatable {
     // Discount List Table
     
     
+    var viewModel : ViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.getDiscountList()
     }
     
     private func updateUI(){
@@ -37,7 +64,7 @@ final class ProductAndCategoryDiscountListVC: UIViewController, Navigatable {
 
 
     @IBAction private func onClickBtnCreateDiscount(_ sender: UIButton) {
-        CreateProductAndCategoryDiscountVCFactory.make().push(in: self.navigationController)
+        CreateProductAndCategoryDiscountVCFactory.make().push(in: self)
         Logger.log(#function)
     }
     
@@ -45,7 +72,6 @@ final class ProductAndCategoryDiscountListVC: UIViewController, Navigatable {
 }
 
 extension ProductAndCategoryDiscountListVC : CustomNavigationHeaderViewDelegate{
-    
     
     func onClickBack() {
         popVC()
@@ -55,8 +81,15 @@ extension ProductAndCategoryDiscountListVC : CustomNavigationHeaderViewDelegate{
         "Product or Category Discount"
     }
  
-    
 }
 
-
-
+extension ProductAndCategoryDiscountListVC : ProductAndCategoryDiscountListVMProtocol {
+ 
+    func didUpdatedDiscountList() {
+        DispatchQueue.main.async { [weak self] in
+            guard let _ = self else { return }
+            
+        }
+    }
+    
+}

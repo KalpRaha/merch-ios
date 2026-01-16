@@ -7,9 +7,9 @@
 
 import Foundation
 
-extension  API {
+extension API {
     
-    enum  VariantListEndpoint{
+    enum VariantListEndpoint{
         
         case variantList(reqBody : VariantListMultipartRequestBody)
         
