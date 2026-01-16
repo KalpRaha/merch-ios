@@ -943,7 +943,28 @@
                                         <state key="normal" image="filter">
                                             <color key="titleColor" red="0.039215686270000001" green="0.3921568627" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="categoryfilterBtnClick:" destination="lA0-ul-69Q" eventType="touchUpInside" id="Uj7-Ku-2a2"/>
+                                        </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Lg-Ov-I5u">
+                                        <rect key="frame" x="258" y="12" width="25" height="25"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ux4-g3-50o">
+                                                <rect key="frame" x="-8" y="2.3333333333333428" width="41.333333333333336" height="20.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="Ux4-g3-50o" firstAttribute="centerX" secondItem="3Lg-Ov-I5u" secondAttribute="centerX" id="2EX-ar-TAJ"/>
+                                            <constraint firstAttribute="width" constant="25" id="BL0-fF-L7Y"/>
+                                            <constraint firstItem="Ux4-g3-50o" firstAttribute="centerY" secondItem="3Lg-Ov-I5u" secondAttribute="centerY" id="qc8-PN-t5n"/>
+                                            <constraint firstAttribute="height" constant="25" id="xqq-Lo-Gdy"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVX-DI-M2a">
                                         <rect key="frame" x="292" y="0.0" width="50" height="50"/>
                                         <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -990,8 +1011,10 @@
                                     <constraint firstItem="GPd-R5-0fM" firstAttribute="centerY" secondItem="wqV-gQ-UZa" secondAttribute="centerY" id="S4q-fb-qVq"/>
                                     <constraint firstAttribute="bottom" secondItem="VJ8-ii-T9I" secondAttribute="bottom" id="UqB-7B-TsY"/>
                                     <constraint firstItem="VJ8-ii-T9I" firstAttribute="leading" secondItem="rVX-DI-M2a" secondAttribute="trailing" id="bFR-T4-cBu"/>
+                                    <constraint firstItem="3Lg-Ov-I5u" firstAttribute="leading" secondItem="jkL-WU-THP" secondAttribute="leading" id="dpz-6E-vmH"/>
                                     <constraint firstAttribute="bottom" secondItem="0hw-cO-chS" secondAttribute="bottom" id="fLQ-h6-8jZ"/>
                                     <constraint firstAttribute="height" constant="50" id="iMo-EY-KlR"/>
+                                    <constraint firstItem="3Lg-Ov-I5u" firstAttribute="bottom" secondItem="jkL-WU-THP" secondAttribute="bottom" id="mq1-3a-Hwo"/>
                                     <constraint firstItem="0hw-cO-chS" firstAttribute="top" secondItem="wqV-gQ-UZa" secondAttribute="top" id="mtr-rw-oY0"/>
                                     <constraint firstAttribute="trailing" secondItem="Moc-O3-MCk" secondAttribute="trailing" id="wHS-IZ-ERW"/>
                                     <constraint firstItem="VJ8-ii-T9I" firstAttribute="top" secondItem="wqV-gQ-UZa" secondAttribute="top" id="x9i-WJ-gpY"/>
@@ -1009,10 +1032,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nGn-zQ-KLj">
-                                <rect key="frame" x="10" y="794" width="382" height="50"/>
+                                <rect key="frame" x="17" y="800.33333333333337" width="368" height="43.666666666666629"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1VN-VL-J7P" customClass="GenericButton" customModule="QuickveeApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="186" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="179" height="43.666666666666664"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="buttonStyleRaw">
@@ -1020,9 +1043,12 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="Cancel"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="cancelBtnClick:" destination="lA0-ul-69Q" eventType="valueChanged" id="Pak-hx-S1C"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u8f-OU-MTw" customClass="GenericButton" customModule="QuickveeApp" customModuleProvider="target">
-                                        <rect key="frame" x="196" y="0.0" width="186" height="50"/>
+                                        <rect key="frame" x="189" y="0.0" width="179" height="43.666666666666664"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
@@ -1034,11 +1060,14 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="Confirm"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="confirmBtnClick:" destination="lA0-ul-69Q" eventType="valueChanged" id="Huw-B5-tkv"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="6KJ-U4-De7"/>
+                                    <constraint firstAttribute="width" secondItem="nGn-zQ-KLj" secondAttribute="height" multiplier="380:45" id="RLt-rG-7fw"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -1046,13 +1075,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="fny-5d-Rdn" firstAttribute="trailing" secondItem="wqV-gQ-UZa" secondAttribute="trailing" id="0R8-rI-IL4"/>
-                            <constraint firstItem="fny-5d-Rdn" firstAttribute="trailing" secondItem="nGn-zQ-KLj" secondAttribute="trailing" constant="10" id="74f-OB-9QV"/>
+                            <constraint firstItem="fny-5d-Rdn" firstAttribute="trailing" secondItem="nGn-zQ-KLj" secondAttribute="trailing" constant="17" id="74f-OB-9QV"/>
                             <constraint firstItem="fny-5d-Rdn" firstAttribute="trailing" secondItem="ddS-1k-UBb" secondAttribute="trailing" id="Dce-fq-8yM"/>
                             <constraint firstItem="ddS-1k-UBb" firstAttribute="top" secondItem="wqV-gQ-UZa" secondAttribute="bottom" id="I95-RP-CiJ"/>
                             <constraint firstItem="fny-5d-Rdn" firstAttribute="trailing" secondItem="0Nq-Sm-R67" secondAttribute="trailing" id="LvL-x8-Iuj"/>
                             <constraint firstItem="wqV-gQ-UZa" firstAttribute="top" secondItem="fny-5d-Rdn" secondAttribute="top" id="Qvi-cf-7rH"/>
                             <constraint firstAttribute="bottom" secondItem="nGn-zQ-KLj" secondAttribute="bottom" constant="30" id="ZLn-SC-YsQ"/>
-                            <constraint firstItem="nGn-zQ-KLj" firstAttribute="leading" secondItem="fny-5d-Rdn" secondAttribute="leading" constant="10" id="cGZ-8i-e8J"/>
+                            <constraint firstItem="nGn-zQ-KLj" firstAttribute="leading" secondItem="fny-5d-Rdn" secondAttribute="leading" constant="17" id="cGZ-8i-e8J"/>
                             <constraint firstItem="0Nq-Sm-R67" firstAttribute="top" secondItem="ddS-1k-UBb" secondAttribute="bottom" id="eE0-Ox-0eb"/>
                             <constraint firstItem="fny-5d-Rdn" firstAttribute="bottom" secondItem="0Nq-Sm-R67" secondAttribute="bottom" id="gpe-OS-SN9"/>
                             <constraint firstItem="wqV-gQ-UZa" firstAttribute="leading" secondItem="wMk-sI-6Aa" secondAttribute="leading" id="jWn-xO-gtH"/>
@@ -1062,6 +1091,9 @@
                     </view>
                     <connections>
                         <outlet property="backBtn" destination="0hw-cO-chS" id="xeb-bk-AYl"/>
+                        <outlet property="filterBtn" destination="jkL-WU-THP" id="w7c-8d-Zk7"/>
+                        <outlet property="filterLbl" destination="Ux4-g3-50o" id="h6H-nb-BCz"/>
+                        <outlet property="filterView" destination="3Lg-Ov-I5u" id="ff1-at-4xC"/>
                         <outlet property="scanBtn" destination="rVX-DI-M2a" id="ikX-oS-VtM"/>
                         <outlet property="searchBar" destination="Moc-O3-MCk" id="8xn-Pa-SHM"/>
                         <outlet property="searchBtn" destination="VJ8-ii-T9I" id="8wO-pn-yPR"/>
