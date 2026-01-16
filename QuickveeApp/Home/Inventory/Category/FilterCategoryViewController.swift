@@ -13,7 +13,11 @@ protocol BrandsTagsAddDelegate: AnyObject {
     func callBrandTagFilter(brandtag: String)
 }
 
-class FilterCategoryViewController: UIViewController {
+final class FilterCategoryViewController: UIViewController, Navigatable {
+    
+    static var viewControllerIdentifier: String {
+        "filtercategory"
+    }
     
     @IBOutlet weak var collection: UICollectionView!
     @IBOutlet weak var resetBtn: UIButton!
@@ -83,6 +87,8 @@ class FilterCategoryViewController: UIViewController {
     weak var delegateMixSelected: SelectedCategoryProductsDelegate?
     weak var delegateBogoSelected: SelectedCategoryProductsDelegate?
     weak var delegateCouponSelected: SelectedCategoryProductsDelegate?
+    weak var delegateProductAndCategorySelected: SelectedCategoryProductsDelegate?
+
     
     weak var delegateMixStores: AddMixnMatchStoresDelegate?
     weak var delegateBogoStores: AddBogoStoresDelegate?
@@ -281,6 +287,12 @@ class FilterCategoryViewController: UIViewController {
             
             else if catMode == "BogoVc" {
                 if bogoVarientList.contains(where: { $0.cotegory == category.id }) {
+                    smallres.append(category)
+                }
+            }
+            
+            else if catMode == "prodAndCatVc" {
+                if category.is_lottery == "0" {
                     smallres.append(category)
                 }
             }
@@ -663,6 +675,9 @@ class FilterCategoryViewController: UIViewController {
         else if catMode == "BogoVc" {
             dismiss(animated: true)
         }
+        else if catMode == "prodAndCatVc" {
+            dismiss(animated: true)
+        }
         
         else if catMode == "couponVc" {
             dismiss(animated: true)
@@ -758,6 +773,21 @@ class FilterCategoryViewController: UIViewController {
             }
             
         }
+        else if catMode == "prodAndCatVc" {
+            
+            loadingIndicator.isAnimating = true
+            selectCategory = []
+            tapBlue = []
+            selectAddCategory = []
+            collection.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.loadingIndicator.isAnimating = false
+                self.delegateProductAndCategorySelected?.getProductsCategory(categoryArray: [])
+                self.dismiss(animated: true)
+            }
+            
+        }
         
         else if catMode == "couponVc" {
             
@@ -820,6 +850,19 @@ class FilterCategoryViewController: UIViewController {
         }
         
         else if catMode == "StockVc" {
+            loadingIndicator.isAnimating = true
+            selectCategory = []
+            tapBlue = []
+            selectAddCategory = []
+            collection.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.loadingIndicator.isAnimating = false
+                self.delegateStockTakeAdd?.getProductsCategoryBrandTag(categoryArray: [], brandArray: [], tagArray: [], filter: self.stockFilter)
+                self.dismiss(animated: true)
+            }
+        }
+        else if catMode == "prodandCatSelectVc" {
             loadingIndicator.isAnimating = true
             selectCategory = []
             tapBlue = []
@@ -914,6 +957,11 @@ class FilterCategoryViewController: UIViewController {
         else if catMode == "BogoVc" {
             
             delegateBogoSelected?.getProductsCategory(categoryArray: selectAddCategory)
+            dismiss(animated: true)
+        }
+        else if catMode == "prodAndCatVc" {
+            
+            delegateProductAndCategorySelected?.getProductsCategory(categoryArray: selectAddCategory)
             dismiss(animated: true)
         }
         

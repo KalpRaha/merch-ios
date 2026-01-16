@@ -49,6 +49,12 @@ extension ProductAndCategorySelectionVC {
             }
         }
         
+        var selectedCategories: [InventoryCategory] = [] {
+            didSet {
+                filterByCategories()
+            }
+        }
+        
         init(
             repository: VariantListAPIRepositoryProtocol,
             categoryRepository: CategoryListAPIRepositoryProtocol,
@@ -59,7 +65,6 @@ extension ProductAndCategorySelectionVC {
             self.categoryRepository = categoryRepository
             self.bogoRepository = bogoRepository
             self.minMatchRepository = minMatchRepository
-            
         }
         
         func loadData() {
@@ -96,14 +101,19 @@ extension ProductAndCategorySelectionVC {
         
         func getMixNMatchData(_ index : Int) -> MixnMatchDataModel? {
             let itemId = variantList[index].isVarient ? tableViewDataSource[index].variantId : tableViewDataSource[index].id
-            
-            return mixMatchList.filter({ $0.itemIds.contains(where:{$0 == itemId} ) }).first
+         return mixMatchList.filter({ $0.itemIds.contains(where:{$0 == itemId} ) }).first
         }
         
         func getBogoData(_ index : Int) -> BogoDataModel? {
             let itemId = variantList[index].isVarient ? tableViewDataSource[index].variantId : tableViewDataSource[index].id
-            
             return bogoList.filter({ $0.items.contains(where:{$0 == itemId} ) }).first
+        }
+        
+        func filterByCategories() {
+            tableViewDataSource = variantList.filter({ variant in
+                
+                return selectedCategories.first(where: { $0.id ==  variant.category }) != nil
+            })
         }
         
         func performSearch() {
@@ -122,5 +132,3 @@ extension ProductAndCategorySelectionVC {
         
     }
 }
-
-

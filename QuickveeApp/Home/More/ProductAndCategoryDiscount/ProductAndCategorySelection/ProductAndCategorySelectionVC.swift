@@ -37,7 +37,9 @@ class ProductAndCategorySelectionVCFactory {
 }
 
 
-final class ProductAndCategorySelectionVC: UIViewController,Navigatable{
+final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
+   
+    
     
     static var storyboard: UIStoryboard {.productAndCategoryDiscount}
     
@@ -47,11 +49,14 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable{
     @IBOutlet weak var searchBtn: UIButton!
     @IBOutlet weak var scanBtn: UIButton!
     @IBOutlet weak var backBtn: UIButton!
-    
+    @IBOutlet weak var filterBtn: UIButton!
+    @IBOutlet weak var filterView: UIView!
+    @IBOutlet weak var filterLbl: UILabel!
     
     var scannerDelegateHandler: BarcodeScannerDelegateHandler?
     
     var viewModel : ViewModel!
+    var selectCategory = [InventoryCategory]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +65,7 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable{
         viewModel.loadData()
         captureUPC()
         configureSearchBar()
+        updateUI()
         viewModel.isSearching = false
         
     }
@@ -89,6 +95,17 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable{
         searchBar.delegate = self
     }
     
+    func updateUI(){
+        filterView.isHidden = true
+//        filterView.layer.cornerRadius = 12.5
+//        filterView.backgroundColor =  UIColor(named: "SelectCat")
+//        filterLbl.font = UIFont(name: "Manrope-Medium", size: 12.0)!
+//        filterLbl.textColor = UIColor.white
+    }
+    
+    
+    
+    
     private func updateUIForSearchFlag(){
         searchBtn.alpha =  viewModel.isSearching ? 0 : 1
         searchBar.alpha = viewModel.isSearching ? 1 : 0
@@ -96,6 +113,8 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable{
         scanBtn.alpha = viewModel.isSearching ? 0 : 1
         
     }
+    
+    // MARK: - IBAction
     
     @IBAction func backBtnClick(_ sender: UIButton) {
         popVC()
@@ -115,6 +134,27 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable{
         self.present(vc, animated: true)
     }
 
+    @IBAction func categoryfilterBtnClick(_ sender: UIButton) {
+        
+         FilterCategoryViewController.present(in: self, passData: { [weak self] vc in
+            guard let self else { return }
+            vc.delegateProductAndCategorySelected = self
+            vc.catMode = "prodAndCatVc"
+            vc.apiMode = "category"
+            vc.selectCategory = selectCategory
+        } ,completion: {
+           // vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
+
+        })
+        
+   
+    }
+    @IBAction func cancelBtnClick(_ sender: GenericButton) {
+        dismiss(animated: true)
+    }
+    
+    @IBAction func confirmBtnClick(_ sender: GenericButton) {
+    }
 }
 
 extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSource {
@@ -170,6 +210,11 @@ extension ProductAndCategorySelectionVC : UISearchBarDelegate {
     }
 }
 
+extension ProductAndCategorySelectionVC : SelectedCategoryProductsDelegate {
+    func getProductsCategory(categoryArray: [InventoryCategory]) {
+        viewModel.selectedCategories = categoryArray
+    }
+}
 
 
 extension ProductAndCategorySelectionVC: ProductAndCategorySelectionViewModelDelegate {
@@ -185,6 +230,9 @@ extension ProductAndCategorySelectionVC: ProductAndCategorySelectionViewModelDel
     }
     
 }
+
+
+
 
 
 
