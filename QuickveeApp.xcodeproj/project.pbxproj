@@ -12,7 +12,10 @@
 		044B7F232E3B4ECC0072A6B8 /* AddPOViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B7F222E3B4ECC0072A6B8 /* AddPOViewController.swift */; };
 		0477560D2E3B95A300C7F973 /* ItemsPOTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477560C2E3B95A300C7F973 /* ItemsPOTableViewCell.swift */; };
 		0481E7112E43706E00A43385 /* SavePOViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481E7102E43706E00A43385 /* SavePOViewController.swift */; };
+		0494FE382F163002000F8B64 /* QuickAddTaxPOCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494FE372F163002000F8B64 /* QuickAddTaxPOCollectionViewCell.swift */; };
 		04950B372E3A4A1C00A7DD10 /* POSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04950B362E3A4A1C00A7DD10 /* POSelectViewController.swift */; };
+		04B71F942F14DC000067AD94 /* VendorProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B71F932F14DC000067AD94 /* VendorProductViewController.swift */; };
+		04B71F962F14DE550067AD94 /* VendorProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B71F952F14DE550067AD94 /* VendorProductTableViewCell.swift */; };
 		04C6202B2E33750E001BF3C8 /* POViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6202A2E33750E001BF3C8 /* POViewController.swift */; };
 		04C6202D2E337636001BF3C8 /* POTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6202C2E337636001BF3C8 /* POTableViewCell.swift */; };
 		04DE1C2D2ECB0D44009D01B6 /* QuickAddPOViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE1C2C2ECB0D44009D01B6 /* QuickAddPOViewController.swift */; };
@@ -303,7 +306,10 @@
 		044B7F222E3B4ECC0072A6B8 /* AddPOViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPOViewController.swift; sourceTree = "<group>"; };
 		0477560C2E3B95A300C7F973 /* ItemsPOTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsPOTableViewCell.swift; sourceTree = "<group>"; };
 		0481E7102E43706E00A43385 /* SavePOViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePOViewController.swift; sourceTree = "<group>"; };
+		0494FE372F163002000F8B64 /* QuickAddTaxPOCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickAddTaxPOCollectionViewCell.swift; sourceTree = "<group>"; };
 		04950B362E3A4A1C00A7DD10 /* POSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POSelectViewController.swift; sourceTree = "<group>"; };
+		04B71F932F14DC000067AD94 /* VendorProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorProductViewController.swift; sourceTree = "<group>"; };
+		04B71F952F14DE550067AD94 /* VendorProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorProductTableViewCell.swift; sourceTree = "<group>"; };
 		04C6202A2E33750E001BF3C8 /* POViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POViewController.swift; sourceTree = "<group>"; };
 		04C6202C2E337636001BF3C8 /* POTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POTableViewCell.swift; sourceTree = "<group>"; };
 		04DE1C2C2ECB0D44009D01B6 /* QuickAddPOViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickAddPOViewController.swift; sourceTree = "<group>"; };
@@ -609,6 +615,7 @@
 		04C620292E337412001BF3C8 /* PO */ = {
 			isa = PBXGroup;
 			children = (
+				0494FE372F163002000F8B64 /* QuickAddTaxPOCollectionViewCell.swift */,
 				04DE1C2C2ECB0D44009D01B6 /* QuickAddPOViewController.swift */,
 				0413A27E2E44BDB90016A093 /* SavePOTableViewCell.swift */,
 				044B7F222E3B4ECC0072A6B8 /* AddPOViewController.swift */,
@@ -1381,6 +1388,8 @@
 		D2FFEF582AFE01B2003400BD /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				04B71F952F14DE550067AD94 /* VendorProductTableViewCell.swift */,
+				04B71F932F14DC000067AD94 /* VendorProductViewController.swift */,
 				D23681D32AA6EF1E00728FDB /* ProductsViewController.swift */,
 				D207CE8E2C3D1444006BD3B4 /* PlusViewController.swift */,
 				D20A596C2C3D466400470349 /* PlusCollCollectionViewCell.swift */,
@@ -1609,6 +1618,7 @@
 				D2E924402AC3E42E002370FE /* FilterCategoryCollectionViewCell.swift in Sources */,
 				D262DEAC296FD30000011E27 /* TaxesViewController.swift in Sources */,
 				A54F2B332BBAB3CB009B4D53 /* OrderInStoreTableViewCell.swift in Sources */,
+				04B71F942F14DC000067AD94 /* VendorProductViewController.swift in Sources */,
 				D233685D2983C9BA0085335B /* APIManager.swift in Sources */,
 				D24187B82C1804F200643069 /* SetupLoyaltyViewController.swift in Sources */,
 				D285ECEB2A2EF7D3009DFAE5 /* OrderOnlineTableViewCell.swift in Sources */,
@@ -1695,6 +1705,7 @@
 				D2A87AAB2D156D300008C417 /* CompletedTaxCell 2.swift in Sources */,
 				D235A02A2CD0C1C300A81941 /* CustomerViewController.swift in Sources */,
 				D235A02B2CD0C1C300A81941 /* AddRemoveCustViewController.swift in Sources */,
+				0494FE382F163002000F8B64 /* QuickAddTaxPOCollectionViewCell.swift in Sources */,
 				D235A02C2CD0C1C300A81941 /* CustomerAddEditViewController.swift in Sources */,
 				D235A02F2CD0C1C300A81941 /* CustomerTableViewCell.swift in Sources */,
 				D235A0302CD0C1C300A81941 /* PointBalanceDetailVC.swift in Sources */,
@@ -1733,6 +1744,7 @@
 				D23493D72CEF2F0B0046D33C /* OrderSummaryCell.swift in Sources */,
 				D257E0C32D278A1F004DF787 /* InStoreProductLotteryCell.swift in Sources */,
 				D23493D82CEF2F0B0046D33C /* OnlineOrderCell.swift in Sources */,
+				04B71F962F14DE550067AD94 /* VendorProductTableViewCell.swift in Sources */,
 				D23493D92CEF2F0B0046D33C /* FeesTableCell.swift in Sources */,
 				D23493DA2CEF2F0B0046D33C /* RefundProductCell.swift in Sources */,
 				04C6202D2E337636001BF3C8 /* POTableViewCell.swift in Sources */,

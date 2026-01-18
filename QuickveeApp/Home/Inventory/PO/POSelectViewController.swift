@@ -9,7 +9,7 @@ import UIKit
 import BarcodeScanner
 
 protocol AddQuickPODelegate: AnyObject {
-    func addProduct(mode: Int, quick: QuickAddPO, category: [InventoryCategory])
+    func addProduct(mode: Int, quick: QuickAddPO, category: [InventoryCategory], p_id: String)
 }
 
 class POSelectViewController: UIViewController {
@@ -39,19 +39,15 @@ class POSelectViewController: UIViewController {
     var subVariantPOList = [VariantPOModel]()
         
     var poSelectedVariants = [VariantPOModel]()
+    var autoSelectedVariants = [POVendorProduct]()
+    
+    var varUpc = [String]()
     
     var searching = false
     var mode = ""
     var vendor: VendorPO?
     
-//    var reqQtySelArr = [String]()
-//    var costSelArr = [String]()
-//    var noteSelArr = [String]()
-//    var afterQtySelArr = [String]()
-//    var totalSelArr = [String]()
-//    
-//    var orderItemSelArr = [String]()
-//    var statusSelArr = [String]()
+    var new_id = ""
     
     var searchMode = 0
     var quickAddSelect: QuickAddPO?
@@ -116,7 +112,7 @@ class POSelectViewController: UIViewController {
     func getResponseValues(variant: Any) {
         
         let response = variant as! [[String:Any]]
-        
+        var varupc = [String]()
         var small = [InventoryVariant]()
         
         for res in response {
@@ -133,47 +129,90 @@ class POSelectViewController: UIViewController {
             
             if variant.is_lottery == "0" {
                 small.append(variant)
+                varupc.append(variant.upc)
+                varupc.append(variant.var_upc)
             }
         }
         
+        self.varUpc = varupc
+        
+        UserDefaults.standard.set(self.varUpc, forKey: "variant_upcs")
+        
         variantList = small.reversed()
+
         setCheckVariants()
     }
     
     func setCheckVariants() {
         
         var miniSelect = [VariantPOModel]()
+        var select = [VariantPOModel]()
+        var remainSelect = [InventoryVariant]()
         
-        for selectItem in poSelectedVariants {
-            miniSelect.append(selectItem)
-        }
-        
-        for editvar in variantList {
+        if autoSelectedVariants.count > 0 {
             
-            if editvar.isvarient == "1" {
+            for auto in variantList {
                 
-                if poSelectedVariants.contains(where: {$0.po.var_id == editvar.var_id}) {
+                if auto.isvarient == "1" {
+                    
+                    if autoSelectedVariants.contains(where: {$0.variant_id == auto.var_id}) {
+                        select.append(VariantPOModel(po: auto, isSelect: true, reqQty: "",
+                                                         cost: auto.costperItem, note: "", afterQty: "",
+                                                         total: "", orderItem: "", status: "0", pendingQty: "", check: ""))
+                    }
+                    else {
+                        remainSelect.append(auto)
+                    }
                 }
                 else {
-                    miniSelect.append(VariantPOModel(po: editvar, isSelect: false, reqQty: "",
-                                                     cost: editvar.costperItem, note: "", afterQty: "",
-                                                     total: "", orderItem: "", status: "0", pendingQty: "", check: ""))
+                    if autoSelectedVariants.contains(where: {$0.product_id == auto.id}) {
+                        select.append(VariantPOModel(po: auto, isSelect: true, reqQty: "",
+                                                         cost: auto.costperItem, note: "", afterQty: "",
+                                                         total: "", orderItem: "", status: "0", pendingQty: "", check: ""))
+                    }
+                    else {
+                        remainSelect.append(auto)
+                    }
+                }
+            }
+        }
+        else {
+            remainSelect = variantList
+        }
+        
+        if poSelectedVariants.count > 0 {
+            select.append(contentsOf: poSelectedVariants)
+        }
+        
+        for main in remainSelect {
+            if main.isvarient == "1" {
+                if poSelectedVariants.contains(where: {$0.po.var_id == main.var_id}) {}
+                else {
+                    miniSelect.append(VariantPOModel(po: main, isSelect: false, reqQty: "",
+                                                 cost: main.costperItem, note: "", afterQty: "",
+                                                 total: "", orderItem: "", status: "0", pendingQty: "", check: ""))
                 }
             }
             else {
-                
-                if poSelectedVariants.contains(where: {$0.po.id == editvar.id}) {
+                if poSelectedVariants.contains(where: {$0.po.id == main.id}) {}
+                else if main.id == new_id {
+                    select.append(VariantPOModel(po: main, isSelect: true, reqQty: "",
+                                                             cost: main.costperItem, note: "", afterQty: "",
+                                                             total: "", orderItem: "", status: "0", pendingQty: "", check: ""))
                 }
                 else {
-                    miniSelect.append(VariantPOModel(po: editvar, isSelect: false, reqQty: "",
-                                                     cost: editvar.costperItem, note: "", afterQty: "",
-                                                     total: "", orderItem: "", status: "0", pendingQty: "", check: ""))
+                    miniSelect.append(VariantPOModel(po: main, isSelect: false, reqQty: "",
+                                                 cost: main.costperItem, note: "", afterQty: "",
+                                                 total: "", orderItem: "", status: "0", pendingQty: "", check: ""))
                 }
             }
         }
         
-        variantPOList = miniSelect
-        subVariantPOList = miniSelect
+        poSelectedVariants = select
+        autoSelectedVariants = []
+        
+        variantPOList = select + miniSelect
+        subVariantPOList = select + miniSelect
         
         DispatchQueue.main.async {
             self.tableview.isHidden = false
@@ -333,7 +372,7 @@ class POSelectViewController: UIViewController {
 
 extension POSelectViewController: AddQuickPODelegate {
     
-    func addProduct(mode: Int, quick: QuickAddPO, category: [InventoryCategory]) {
+    func addProduct(mode: Int, quick: QuickAddPO, category: [InventoryCategory], p_id: String) {
         
         if mode == 1 {
             let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -353,6 +392,12 @@ extension POSelectViewController: AddQuickPODelegate {
             searchBarName.resignFirstResponder()
             searchBarUPC.resignFirstResponder()
             searching = false
+            if p_id != "" {
+                new_id = p_id
+            }
+            else {
+                new_id = ""
+            }
             variantListApi()
         }
     }
@@ -443,7 +488,12 @@ extension POSelectViewController : UISearchBarDelegate {
             
             if variantPOList.count == 0 {
                 tableview.isHidden = true
-                noProductView.isHidden = false
+                if mode == "add" {
+                    noProductView.isHidden = false
+                }
+                else {
+                    noProductView.isHidden = true
+                }
             }
             else {
                 tableview.isHidden = false
@@ -464,7 +514,12 @@ extension POSelectViewController : UISearchBarDelegate {
             
             if searchVariantPOList.count == 0 {
                 tableview.isHidden = true
-                noProductView.isHidden = false
+                if mode == "add" {
+                    noProductView.isHidden = false
+                }
+                else {
+                    noProductView.isHidden = true
+                }
             }
             else {
                 tableview.isHidden = false

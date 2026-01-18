@@ -125,60 +125,103 @@ class POListViewController: UIViewController {
         subPOlist = small.reversed()
     }
     
-    func setupFilterApi() {
+    func setupStatusFilterApi() {
         
         var smallPO = [PO]()
         
-        for po in polist {
+        if selectPOStatus.count != 0 && selectArray.count != 0 {
             
-            if selectArray.contains(where: {$0.name == po.vendor_name}) {
-                smallPO.append(po)
-            }
-        }
-        
-        filterList = smallPO
-        subPOlist = smallPO
-        
-        tableview.isHidden = false
-        loadingIndicator.isAnimating = false
-        tableview.reloadData()
-    }
-    
-    func setupStatusFilterApi(status: String) {
-        
-        var smallPO = [PO]()
-        
-        for po in polist {
+            let status = selectPOStatus[0]
             
-            if status == "Active" {
-                if po.received_status == "0" && po.is_draft == "0" && po.is_void == "0" {
-                    smallPO.append(po)
+            for po in polist {
+                
+                if status == "Active" {
+                    if po.received_status == "0" && po.is_draft == "0" && po.is_void == "0" {
+                        smallPO.append(po)
+                    }
+                }
+                else if status == "Partial" {
+                    if po.received_status == "1" && po.is_draft == "0" && po.is_void == "0" {
+                        smallPO.append(po)
+                    }
+                }
+                else if status == "Received" {
+                    if po.received_status == "2" && po.is_draft == "0" && po.is_void == "0" {
+                        smallPO.append(po)
+                    }
+                }
+                else if status == "Void" {
+                    if po.is_void == "1" {
+                        smallPO.append(po)
+                    }
+                }
+                else {
+                    if po.is_draft == "1" {
+                        smallPO.append(po)
+                    }
                 }
             }
-            else if status == "Partial" {
-                if po.received_status == "1" && po.is_draft == "0" && po.is_void == "0" {
-                    smallPO.append(po)
+            
+            var smallsmallPO = [PO]()
+            
+            for po in smallPO {
+                
+                if selectArray.contains(where: {$0.name == po.vendor_name}) {
+                    smallsmallPO.append(po)
                 }
             }
-            else if status == "Received" {
-                if po.received_status == "2" && po.is_draft == "0" && po.is_void == "0" {
-                    smallPO.append(po)
-                }
-            }
-            else if status == "Void" {
-                if po.is_void == "1" {
-                    smallPO.append(po)
-                }
-            }
-            else {
-                if po.is_draft == "1" {
-                    smallPO.append(po)
-                }
-            }
+            
+            filterList = smallsmallPO
+            subPOlist = smallsmallPO
         }
-        
-        filterList = smallPO
-        subPOlist = smallPO
+        else if selectArray.count == 0 {
+            
+            let status = selectPOStatus[0]
+            
+            for po in polist {
+                
+                if status == "Active" {
+                    if po.received_status == "0" && po.is_draft == "0" && po.is_void == "0" {
+                        smallPO.append(po)
+                    }
+                }
+                else if status == "Partial" {
+                    if po.received_status == "1" && po.is_draft == "0" && po.is_void == "0" {
+                        smallPO.append(po)
+                    }
+                }
+                else if status == "Received" {
+                    if po.received_status == "2" && po.is_draft == "0" && po.is_void == "0" {
+                        smallPO.append(po)
+                    }
+                }
+                else if status == "Void" {
+                    if po.is_void == "1" {
+                        smallPO.append(po)
+                    }
+                }
+                else {
+                    if po.is_draft == "1" {
+                        smallPO.append(po)
+                    }
+                }
+            }
+            
+            filterList = smallPO
+            subPOlist = smallPO
+        }
+        else {
+            
+            for po in polist {
+                
+                if selectArray.contains(where: {$0.name == po.vendor_name}) {
+                    smallPO.append(po)
+                }
+            }
+            
+            filterList = smallPO
+            subPOlist = smallPO
+        }
         
         tableview.isHidden = false
         loadingIndicator.isAnimating = false
@@ -190,17 +233,17 @@ class POListViewController: UIViewController {
         if searchText == "" {
             searching = false
             
-            if selectArray.count == 0 {
+            if selectArray.count == 0 && selectPOStatus.count == 0 {
                 setUpApi()
             }
             else {
-                setupFilterApi()
+                setupStatusFilterApi()
             }
         }
         else {
             searching = true
             
-            if selectArray.count == 0 {
+            if selectArray.count == 0 && selectPOStatus.count == 0 {
                 searchPOlist = subPOlist.filter { $0.po_number.lowercased().contains(searchText.lowercased())}
                 if searchPOlist.count == 0 {
                     tableview.isHidden = true
@@ -288,15 +331,10 @@ extension POListViewController: POListDelegate {
             setUpApi()
             lblSelCat.text = ""
         }
-        else if selectPOStatus.count > 0 {
-            isFilter = true
-            setupStatusFilterApi(status: selectPOStatus[0])
-            lblSelCat.text = "   \(selectPOStatus.count)   "
-        }
         else {
             isFilter = true
-            setupFilterApi()
-            lblSelCat.text = "   \(selectArray.count)   "
+            setupStatusFilterApi()
+            lblSelCat.text = "   \(selectPOStatus.count + selectArray.count)   "
         }
     }
 }
@@ -385,7 +423,18 @@ extension POListViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 cell.qtyValue.text = po.total_qty
                 cell.costValue.text = "$\(po.total_cost)"
-                cell.dueDateValue.text = "-"
+                
+                let due = po.stock_date
+                
+                if due == "0000-00-00" {
+                    cell.dueDateValue.text = "-"
+                }
+                else {
+                    let date1 = due.split(separator: " ")[0]
+                    let datestr1 = String(date1)
+                    let upd1 = ToastClass.sharedToast.setCouponsDateFormat(dateStr: datestr1)
+                    cell.dueDateValue.text = upd1
+                }
                 
                 let date1 = po.updated_at.split(separator: " ")[0]
                 let datestr1 = String(date1)
@@ -439,7 +488,18 @@ extension POListViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 cell.qtyValue.text = po.total_qty
                 cell.costValue.text = "$\(po.total_cost)"
-                cell.dueDateValue.text = "-"
+                
+                let due = po.stock_date
+                
+                if due == "0000-00-00" {
+                    cell.dueDateValue.text = "-"
+                }
+                else {
+                    let date1 = due.split(separator: " ")[0]
+                    let datestr1 = String(date1)
+                    let upd1 = ToastClass.sharedToast.setCouponsDateFormat(dateStr: datestr1)
+                    cell.dueDateValue.text = upd1
+                }
                 
                 let date1 = po.updated_at.split(separator: " ")[0]
                 let datestr1 = String(date1)
@@ -502,7 +562,18 @@ extension POListViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 cell.qtyValue.text = po.total_qty
                 cell.costValue.text = "$\(po.total_cost)"
-                cell.dueDateValue.text = "-"
+                
+                let due = po.stock_date
+                
+                if due == "0000-00-00" {
+                    cell.dueDateValue.text = "-"
+                }
+                else {
+                    let date1 = due.split(separator: " ")[0]
+                    let datestr1 = String(date1)
+                    let upd1 = ToastClass.sharedToast.setCouponsDateFormat(dateStr: datestr1)
+                    cell.dueDateValue.text = upd1
+                }
                 
                 let date1 = po.updated_at.split(separator: " ")[0]
                 let datestr1 = String(date1)
@@ -561,7 +632,18 @@ extension POListViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 cell.qtyValue.text = po.total_qty
                 cell.costValue.text = "$\(po.total_cost)"
-                cell.dueDateValue.text = "-"
+                
+                let due = po.stock_date
+                
+                if due == "0000-00-00" {
+                    cell.dueDateValue.text = "-"
+                }
+                else {
+                    let date1 = due.split(separator: " ")[0]
+                    let datestr1 = String(date1)
+                    let upd1 = ToastClass.sharedToast.setCouponsDateFormat(dateStr: datestr1)
+                    cell.dueDateValue.text = upd1
+                }
                 
                 let date1 = po.updated_at.split(separator: " ")[0]
                 let datestr1 = String(date1)
@@ -808,4 +890,20 @@ struct POAutoItem {
     let variant_id: String
     let variant_title: String
     let preferd_vendor_cost: String
+}
+
+struct POVendorProduct {
+    
+    let assigned_vendors: String
+    let costperItem: String
+    let item_qty: String
+    let preferd_vendor_cost: String
+    let prefferd_vendor: String
+    let product_id: String
+    let product_title: String
+    let reorder_level: String
+    let reorder_qty: String
+    let upc: String
+    let variant_id: String
+    let variant_title: String
 }

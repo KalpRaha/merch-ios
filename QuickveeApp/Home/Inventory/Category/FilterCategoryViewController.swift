@@ -72,6 +72,17 @@ class FilterCategoryViewController: UIViewController {
     var subPOStatus = [String]()
     var searchPOStatus = [String]()
     
+    //VendorProduct arrays
+    var selectProductVendors = [VendorProduct]()
+    var selectAddProductVendors = [VendorProduct]()
+    
+    var productVendors = [VendorProduct]()
+    var subProductVendors = [VendorProduct]()
+    var searchProductVendors = [VendorProduct]()
+    
+    var variantProductVendorId = ""
+    var variantSingleProduct = ""
+    
     var tapBlue = [String]()
     
     var newBrandTag = false
@@ -93,6 +104,9 @@ class FilterCategoryViewController: UIViewController {
     
     weak var delegateVendorsSelected: POListDelegate?
     weak var delegateVendorSelected: PODelegate?
+    
+    weak var delegateVendorProduct: VendorProductDelegate?
+    weak var delegateVendorVariant: VendorProductDelegate?
     
     
     var catMode = ""
@@ -185,8 +199,8 @@ class FilterCategoryViewController: UIViewController {
             
             setupBrandsApi()
         }
-        else if apiMode == "vendors" || apiMode == "vendor" {
-            if apiMode == "vendor" {
+        else if apiMode == "vendors" || apiMode == "vendor" || apiMode == "vendorProduct" {
+            if apiMode == "vendor"  || apiMode == "vendorProduct" {
                 selectText.text = "Select Vendor"
                 selectText.isHidden = false
                 selectView.isHidden = true
@@ -376,6 +390,12 @@ class FilterCategoryViewController: UIViewController {
         tapBlue.removeAll(where: {$0 == taxesName})
     }
     
+    func removeVendorProduct(variantName: String) {
+        
+        selectAddProductVendors.removeAll(where: {$0.id == variantName})
+        tapBlue.removeAll(where: {$0 == variantName})
+    }
+    
     func setupBrandsApi() {
         
         collection.isHidden = true
@@ -498,7 +518,12 @@ class FilterCategoryViewController: UIViewController {
                     return
                 }
                 
-                self.getResponsePOValues(list: list)
+                if self.apiMode == "vendorProduct" {
+                    self.getResponseVPValues(list: list)
+                }
+                else {
+                    self.getResponsePOValues(list: list)
+                }
                 
                 DispatchQueue.main.async {
                     self.collection.reloadData()
@@ -507,6 +532,40 @@ class FilterCategoryViewController: UIViewController {
             }else{
                 print("Api Error")
                 self.loadingIndicator.isAnimating = false
+            }
+        }
+    }
+    
+    func getResponseVPValues(list: Any) {
+        
+        let response = list as! [[String:Any]]
+        var smallres = [VendorProduct]()
+        
+        for res in response {
+            
+            let vendor = VendorProduct(id: "\(res["vendor_id"] ?? "")", name: "\(res["name"] ?? "")",
+                                       cost_per_item: "\(res["cost_per_item"] ?? "")", pref_vendor: "\(res["pref_vendor"] ?? "")")
+            
+            if vendor.name == "Select Vendor" {
+                
+            }
+            else {
+                smallres.append(vendor)
+            }
+        }
+        
+        let sortedNames = smallres.sorted {
+            $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
+        }
+        
+        productVendors = sortedNames
+        subProductVendors = sortedNames
+        
+        if selectProductVendors.count > 0 {
+            
+            for select in selectProductVendors {
+                
+                selectAddProductVendors.append(select)
             }
         }
     }
@@ -535,7 +594,9 @@ class FilterCategoryViewController: UIViewController {
             }
         }
         
-        let sortedNames = smallres.sorted { $0.name < $1.name }
+        let sortedNames = smallres.sorted {
+            $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
+        }
         
         vendors = sortedNames
         subVendors = sortedNames
@@ -625,7 +686,7 @@ class FilterCategoryViewController: UIViewController {
                 
                 self.loadingIndicator.isAnimating = false
                 self.delegatePlus?.getSelectedCats(reverseCategory: [], reverseBrandsTags: [],
-                                                   reverseTaxes: [], apiMode: self.apiMode)
+                                                   reverseTaxes: [], vendors: [], variantIdVendorProduct: "", singleProductVendor: "", apiMode: self.apiMode)
                 self.dismiss(animated: true)
             }
         }
@@ -653,7 +714,7 @@ class FilterCategoryViewController: UIViewController {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.loadingIndicator.isAnimating = false
-                self.delegateDuplicate?.getSelectedCats(reverseCategory: [], reverseBrandsTags: [], reverseTaxes: [], apiMode: self.apiMode)
+                self.delegateDuplicate?.getSelectedCats(reverseCategory: [], reverseBrandsTags: [], reverseTaxes: [], vendors: [], variantIdVendorProduct: "", singleProductVendor: "", apiMode: self.apiMode)
                 self.dismiss(animated: true)
             }
         }
@@ -765,6 +826,36 @@ class FilterCategoryViewController: UIViewController {
             }
         }
         
+        else if catMode == "vendorProducts" {
+            
+            loadingIndicator.isAnimating = true
+            selectAddProductVendors = []
+            tapBlue = []
+            selectProductVendors = []
+            collection.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.loadingIndicator.isAnimating = false
+                self.delegateVendorProduct?.getVendorProduct(vendors: [], variant_id: self.variantProductVendorId, singleProduct: self.variantSingleProduct)
+                self.dismiss(animated: true)
+            }
+        }
+        
+        else if catMode == "variantInfoVc" {
+            
+            loadingIndicator.isAnimating = true
+            selectAddProductVendors = []
+            tapBlue = []
+            selectProductVendors = []
+            collection.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.loadingIndicator.isAnimating = false
+                self.delegateVendorVariant?.getVendorProduct(vendors: [], variant_id: self.variantProductVendorId, singleProduct: self.variantSingleProduct)
+                self.dismiss(animated: true)
+            }
+        }
+        
         else {
             loadingIndicator.isAnimating = true
             selectCategory = []
@@ -794,14 +885,14 @@ class FilterCategoryViewController: UIViewController {
                 else {
                     delegatePlus?.getSelectedCats(reverseCategory: selectAddCategory,
                                                   reverseBrandsTags: selectAddBrandsTags,
-                                                  reverseTaxes: selectAddTaxes, apiMode: apiMode)
+                                                  reverseTaxes: selectAddTaxes, vendors: selectAddProductVendors, variantIdVendorProduct: variantProductVendorId, singleProductVendor: variantSingleProduct, apiMode: apiMode)
                     dismiss(animated: true)
                 }
             }
             else {
                 delegatePlus?.getSelectedCats(reverseCategory: selectAddCategory,
                                               reverseBrandsTags: selectAddBrandsTags,
-                                              reverseTaxes: selectAddTaxes, apiMode: apiMode)
+                                              reverseTaxes: selectAddTaxes, vendors: selectAddProductVendors, variantIdVendorProduct: variantProductVendorId, singleProductVendor: variantSingleProduct, apiMode: apiMode)
                 dismiss(animated: true)
             }
         }
@@ -825,25 +916,19 @@ class FilterCategoryViewController: UIViewController {
                     
                     delegateDuplicate?.getSelectedCats(reverseCategory: selectAddCategory,
                                                        reverseBrandsTags: selectAddBrandsTags,
-                                                       reverseTaxes: selectAddTaxes, apiMode: apiMode)
+                                                       reverseTaxes: selectAddTaxes, vendors: selectAddProductVendors, variantIdVendorProduct: "", singleProductVendor: "", apiMode: apiMode)
                     dismiss(animated: true)
                 }
             }
             else {
                 delegateDuplicate?.getSelectedCats(reverseCategory: selectAddCategory,
                                                    reverseBrandsTags: selectAddBrandsTags,
-                                                   reverseTaxes: selectAddTaxes, apiMode: apiMode)
+                                                   reverseTaxes: selectAddTaxes, vendors: selectAddProductVendors, variantIdVendorProduct: "", singleProductVendor: "", apiMode: apiMode)
                 dismiss(animated: true)
             }
         }
         else if catMode == "POVc" {
-            
-            if isPOStatus {
-                delegateVendorsSelected?.getPOVendors(vendors: [], status: selectAddPOStatus)
-            }
-            else {
-                delegateVendorsSelected?.getPOVendors(vendors: selectAddVendors, status: [])
-            }
+            delegateVendorsSelected?.getPOVendors(vendors: selectAddVendors, status: selectAddPOStatus)
             dismiss(animated: true)
         }
         else if catMode == "AddPOVc" {
@@ -879,6 +964,20 @@ class FilterCategoryViewController: UIViewController {
             
             self.dismiss(animated: true) {
                 self.delegatePOSelected?.getProductsCategory(categoryArray: self.selectAddCategory)
+            }
+        }
+        
+        else if catMode == "vendorProducts" {
+            
+            self.dismiss(animated: true) {
+                self.delegateVendorProduct?.getVendorProduct(vendors: self.selectAddProductVendors, variant_id: self.variantProductVendorId, singleProduct: self.variantSingleProduct)
+            }
+        }
+        
+        else if catMode == "variantInfoVc" {
+            
+            self.dismiss(animated: true) {
+                self.delegateVendorVariant?.getVendorProduct(vendors: self.selectAddProductVendors, variant_id: self.variantProductVendorId, singleProduct: self.variantSingleProduct)
             }
         }
         
@@ -1088,12 +1187,17 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
             else if apiMode == "brands" || apiMode == "tags" {
                 return searchBrandsTags.count
             }
-            else if apiMode == "vendors" || apiMode == "vendor" {
+            else if apiMode == "vendors" || apiMode == "vendor" || apiMode == "vendorProduct" {
                 if isPOStatus {
                     return searchPOStatus.count
                 }
                 else {
-                    return searchVendors.count
+                    if apiMode == "vendorProduct" {
+                        return searchProductVendors.count
+                    }
+                    else {
+                        return searchVendors.count
+                    }
                 }
             }
             else {
@@ -1108,12 +1212,17 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
             else if apiMode == "brands" || apiMode == "tags" {
                 return brandsTags.count
             }
-            else if apiMode == "vendors" || apiMode == "vendor" {
+            else if apiMode == "vendors" || apiMode == "vendor" || apiMode == "vendorProduct" {
                 if isPOStatus {
                     return poStatus.count
                 }
                 else {
-                    return vendors.count
+                    if apiMode == "vendorProduct" {
+                        return productVendors.count
+                    }
+                    else {
+                        return vendors.count
+                    }
                 }
             }
             else {
@@ -1212,6 +1321,21 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
                     cell.categoryName.textColor = UIColor(named: "SelectCat")
                     selectAddVendors.append(searchVendors[indexPath.row])
+                }
+                else {
+                    cell.categoryName.textColor = .black
+                    cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+                }
+            }
+            else if apiMode == "vendorProduct" {
+                
+                cell.categoryName.text = searchProductVendors[indexPath.row].name
+                
+                if selectProductVendors.contains(where: {$0.id == searchProductVendors[indexPath.row].id})
+                    || tapBlue.contains(where: {$0 == searchProductVendors[indexPath.row].id}) {
+                    cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                    cell.categoryName.textColor = UIColor(named: "SelectCat")
+                    selectAddProductVendors.append(searchProductVendors[indexPath.row])
                 }
                 else {
                     cell.categoryName.textColor = .black
@@ -1342,6 +1466,24 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
                 }
             }
+            else if apiMode == "vendorProduct" {
+                
+                cell.categoryName.text = productVendors[indexPath.row].name
+                
+                if selectProductVendors.contains(where: {$0.id == productVendors[indexPath.row].id}) {
+                    cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                    cell.categoryName.textColor = UIColor(named: "SelectCat")
+                }
+                else if tapBlue.contains(where: {$0 == productVendors[indexPath.row].id}) {
+                    cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                    cell.categoryName.textColor = UIColor(named: "SelectCat")
+                    selectAddProductVendors.append(productVendors[indexPath.row])
+                }
+                else {
+                    cell.categoryName.textColor = .black
+                    cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+                }
+            }
             else {
                 
                 cell.categoryName.text = taxes[indexPath.row].title
@@ -1412,6 +1554,10 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     selectVendors = []
                     collection.reloadData()
                 }
+                else if apiMode == "vendorProduct" {
+                    let id = searchProductVendors[indexPath.row].id
+                    removeVendorProduct(variantName: id)
+                }
                 else {
                     let id = searchTaxes[indexPath.row].id
                     removeTaxes(taxesName: id)
@@ -1460,6 +1606,12 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     tapBlue = [name.name]
                     collection.reloadData()
                 }
+                else if apiMode == "vendorProduct" {
+                    let name = searchProductVendors[indexPath.row]
+                    selectAddProductVendors.append(name)
+                    tapBlue.append(name.id)
+                }
+                
                 else {
                     let name = searchTaxes[indexPath.row]
                     selectAddTaxes.append(name)
@@ -1502,6 +1654,10 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     selectAddVendors = []
                     tapBlue = []
                     collection.reloadData()
+                }
+                else if apiMode == "vendorProduct" {
+                    let id = productVendors[indexPath.row].id
+                    removeVendorProduct(variantName: id)
                 }
                 else if apiMode == "tags" {
                     let title = brandsTags[indexPath.row].title
@@ -1554,6 +1710,11 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     selectAddVendors = []
                     tapBlue = [name.name]
                     collection.reloadData()
+                }
+                else if apiMode == "vendorProduct" {
+                    let name = productVendors[indexPath.row]
+                    selectAddProductVendors.append(name)
+                    tapBlue.append(name.id)
                 }
                 else {
                     let name = taxes[indexPath.row]

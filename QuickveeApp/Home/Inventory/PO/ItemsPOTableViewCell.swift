@@ -29,4 +29,11 @@ class ItemsPOTableViewCell: UITableViewCell {
     @IBOutlet weak var deleteBtn: UIButton!
     
     @IBOutlet weak var qtyValue: UILabel!
+    
+    @IBOutlet weak var costValue: UILabel!
+    
+    @IBOutlet weak var noteValue: UILabel!
+    
+    @IBOutlet weak var noteLbl: UILabel!
+    
 }

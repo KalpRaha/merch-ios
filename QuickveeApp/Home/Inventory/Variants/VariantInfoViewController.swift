@@ -52,10 +52,13 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var disableLbl: UILabel!
     
     
+    @IBOutlet weak var vendorsBtn: UIButton!
     @IBOutlet weak var salesBtn: UIButton!
     @IBOutlet weak var scanBtn: UIButton!
     
     var activeTextField = UITextField()
+    
+    var vendorProductList = [VendorProduct]()
     
     let loadingIndicator: ProgressView = {
         let progress = ProgressView(colors: [.systemBlue], lineWidth: 5)
@@ -101,6 +104,7 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
         
         instantPO.layer.cornerRadius = 10.0
         salesBtn.layer.cornerRadius = 10.0
+        vendorsBtn.layer.cornerRadius = 10.0
         
         scanBtn.layer.cornerRadius = 6.0
         let tapUpc = UITapGestureRecognizer(target: self, action: #selector(genUpcClick))
@@ -296,8 +300,18 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
                 vc.salesVar_name = v_name
                 vc.salesProd_id = p_id
             }
-           
-          }
+        }
+        else {
+            let vc = segue.destination as! VendorProductViewController
+            vc.vendorProductList = vendorProductList
+            vc.var_id = v_id
+            if is_v == "1" {
+                vc.single_product = is_v
+            }
+            else {
+                vc.single_product = is_v
+            }
+        }
     }
     
     func setUpVarIdApi() {
@@ -885,7 +899,71 @@ class VariantInfoViewController: UIViewController, UITextFieldDelegate {
             
         }
     }
-
+    
+    
+    @IBAction func vendorsBtnClick(_ sender: UIButton) {
+        
+        let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        
+        var varient_id = ""
+        var single_product = ""
+        
+        if is_v == "0" {
+            varient_id = v_id
+            single_product = is_v
+        }
+        else {
+            varient_id = v_id
+            single_product = is_v
+        }
+        
+        ApiCalls.sharedCall.getVendorProductList(merchant_id: id, varient_id: varient_id, single_product: single_product) { isSuccess, responseData in
+            
+            if isSuccess {
+                
+                if let res = responseData["result"] {
+                    self.getVendorProduct(list: res)
+                }
+                else {
+                    
+                    DispatchQueue.main.async {
+                        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyBoard.instantiateViewController(withIdentifier: "filtercategory") as! FilterCategoryViewController
+                        
+                        vc.delegateVendorVariant = self
+                        vc.catMode = "variantInfoVc"
+                        vc.apiMode = "vendorProduct"
+                        if self.is_v == "0" {
+                            vc.variantProductVendorId = self.v_id
+                        }
+                        else {
+                            vc.variantProductVendorId = self.v_id
+                        }
+                        vc.variantSingleProduct = self.is_v
+                        self.present(vc, animated: true)
+                    }
+                }
+            }
+        }
+    }
+    
+    func getVendorProduct(list: Any) {
+        
+        let response = list as! [[String:Any]]
+        var smallres = [VendorProduct]()
+        
+        for res in response {
+            
+            let vendor = VendorProduct(id: "\(res["id"] ?? "")", name: "\(res["name"] ?? "")",
+                                       cost_per_item: "\(res["cost_per_item"] ?? "")", pref_vendor: "\(res["pref_vendor"] ?? "")")
+            
+            smallres.append(vendor)
+        }
+        vendorProductList = smallres
+        
+        performSegue(withIdentifier: "toVendorVariant", sender: nil)
+    }
+    
     
     func createCustomTextField(textField: MDCOutlinedTextField) {
         textField.font = UIFont(name: "Manrope-SemiBold", size: 16.0)
@@ -987,5 +1065,13 @@ extension VariantInfoViewController: BarcodeScannerCodeDelegate, BarcodeScannerD
     
     func scanner(_ controller: BarcodeScanner.BarcodeScannerViewController, didReceiveError error: Error) {
         controller.dismiss(animated: true)
+    }
+}
+
+extension VariantInfoViewController: VendorProductDelegate {
+    
+    func getVendorProduct(vendors: [VendorProduct], variant_id: String, singleProduct: String) {
+        vendorProductList = vendors
+        performSegue(withIdentifier: "toVendorVariant", sender: nil)
     }
 }

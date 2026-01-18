@@ -178,6 +178,12 @@ struct AppURLs {
     static let VOID_PO = "\(base_url)Purchase_orders_api/void_po"
     static let RECEIVE_PO = "\(base_url)Purchase_orders_api/recieve_po"
     static let DELETE_PO_ITEM = "\(base_url)Purchase_orders_api/delete_po_item"
+    static let EMAIL_PO = "\(base_url)Purchase_orders_api/delete_po_item"
+    
+    static let VENDOR_PRODUCT_LIST = "\(base_url)productapi/assign_product_vendors_list"
+    static let VENDOR_PREFER_PRODUCT = "\(base_url)Productapi/assign_preferred_vendor"
+    static let SAVE_VENDOR_PRODUCT = "\(base_url)productapi/save_vendor_list"
+    static let DELETE_VENDOR_PRODUCT = "\(base_url)productapi/delete_product_vendor"
     
     static let VENDORS_LIST = "\(base_url)app/vendor_payment_list"
     

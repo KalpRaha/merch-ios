@@ -32,7 +32,7 @@ class AddPOViewController: UIViewController {
     @IBOutlet weak var innerView: UIView!
     @IBOutlet weak var topView: UIView!
     
-    @IBOutlet weak var cancelBtn: UIButton!
+    @IBOutlet weak var autoPOBtn: UIButton!
     @IBOutlet weak var nextBtn: UIButton!
     
     var selectArray = [VendorsPO]()
@@ -45,6 +45,9 @@ class AddPOViewController: UIViewController {
     
     var vendorSelectMode = ""
     var newVendorId = ""
+    
+    var isAuto = false
+    var autoList = [POVendorProduct]()
     
     weak var delegate: ChangeVendorDelegate?
     
@@ -62,11 +65,11 @@ class AddPOViewController: UIViewController {
         
         addVendorBtn.backgroundColor = UIColor(named: "SelectCat")
         addVendorBtn.layer.cornerRadius = 5
-        cancelBtn.layer.cornerRadius = 10
+        autoPOBtn.layer.cornerRadius = 10
         nextBtn.layer.cornerRadius = 10
         
-        cancelBtn.layer.borderColor = UIColor.black.cgColor
-        cancelBtn.layer.borderWidth = 1
+        autoPOBtn.layer.borderColor = UIColor.black.cgColor
+        autoPOBtn.layer.borderWidth = 1
         
         innerView.backgroundColor = .clear
         
@@ -140,6 +143,21 @@ class AddPOViewController: UIViewController {
         vc.delegateVendorSelected = self
         vc.selectVendors = selectArray
         vc.apiMode = "vendor"
+        isAuto = false
+        
+        present(vc, animated: true)
+    }
+    
+    
+    @IBAction func autoBtnClick(_ sender: UIButton) {
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "filtercategory") as! FilterCategoryViewController
+        vc.catMode = "AddPOVc"
+        vc.delegateVendorSelected = self
+        vc.selectVendors = selectArray
+        vc.apiMode = "vendor"
+        isAuto = true
         
         present(vc, animated: true)
     }
@@ -181,6 +199,11 @@ class AddPOViewController: UIViewController {
     
     
     @IBAction func nextBtnClick(_ sender: UIButton) {
+        isAuto = false
+        nextClick()
+    }
+    
+    func nextClick() {
         
         guard let vname = vendorName.text, vname != "" else {
             vendorName.isError(numberOfShakes: 3, revert: true)
@@ -218,6 +241,12 @@ class AddPOViewController: UIViewController {
         let vc = segue.destination as! POSelectViewController
         vc.mode = mode
         vc.vendor = vendadd
+        if isAuto {
+            vc.autoSelectedVariants = autoList
+        }
+        else {
+            vc.autoSelectedVariants = []
+        }
     }
     
     func vendorCheck(name: String, email: String) {
@@ -285,6 +314,34 @@ extension AddPOViewController: PODelegate {
             vendorSelectMode = "old"
             vendorName.text = vend.name
             vendorEmail.text = vend.email
+            
+            let v_id = vendor[0].vendor_id
+            
+            if isAuto {
+                
+                nextBtn.isEnabled = false
+                loadIndicator.isAnimating = true
+                
+                let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+                
+                ApiCalls.sharedCall.autoPOList(merchant_id: id, admin_id: id, vendor_id: v_id) { isSuccess, responseData in
+                    
+                    if isSuccess {
+                        
+                        guard let list = responseData["result"] else {
+                            ToastClass.sharedToast.showToast(message: "No Products List Found", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                            self.nextBtn.isEnabled = true
+                            self.loadIndicator.isAnimating = false
+                            return
+                        }
+                        
+                        self.getResponseValues(products: list)
+                    }
+                    else {
+                        
+                    }
+                }
+            }
         }
         else {
             vendorName.text = ""
@@ -292,6 +349,31 @@ extension AddPOViewController: PODelegate {
         }
         createCustomTextField(textField: vendorName)
         createCustomTextField(textField: vendorEmail)
+    }
+    
+    func getResponseValues(products: Any) {
+        
+        let response = products as! [[String:Any]]
+        var small = [POVendorProduct]()
+        
+        for res in response {
+            
+            let variant = POVendorProduct(assigned_vendors: "\(res["assigned_vendors"] ?? "")", costperItem: "\(res["costperItem"] ?? "")",
+                                          item_qty: "\(res["item_qty"] ?? "")", preferd_vendor_cost: "\(res["preferd_vendor_cost"] ?? "")",
+                                          prefferd_vendor: "\(res["prefferd_vendor"] ?? "")", product_id: "\(res["product_id"] ?? "")",
+                                          product_title: "\(res["product_title"] ?? "")", reorder_level: "\(res["reorder_level"] ?? "")",
+                                          reorder_qty: "\(res["reorder_qty"] ?? "")", upc: "\(res["upc"] ?? "")",
+                                          variant_id: "\(res["variant_id"] ?? "")", variant_title: "\(res["variant_title"] ?? "")")
+            
+            small.append(variant)
+        }
+        
+        autoList = small
+        
+        loadIndicator.isAnimating = false
+        nextBtn.isEnabled = true
+        isAuto = true
+        nextClick()
     }
 }
 

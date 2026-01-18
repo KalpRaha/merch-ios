@@ -26,17 +26,13 @@ class ItemsPOViewController: UIViewController {
     @IBOutlet weak var editLbl: UILabel!
     @IBOutlet weak var saveDraft: UILabel!
     @IBOutlet weak var searchBtn: UIButton!
-    @IBOutlet weak var threeBtns: UIButton!
-    
-    @IBOutlet weak var threeBtnWidth: NSLayoutConstraint!
-    
-    @IBOutlet weak var menu: UIView!
-    @IBOutlet weak var emailLbl: UILabel!
     
     weak var delegate: POSelectDelegate?
     
     var poSelectedVariants = [VariantPOModel]()
     var variantList = [InventoryVariant]()
+    
+    var deleteIds = [String]()
     
     var bigDetails: PODetails?
     
@@ -45,26 +41,6 @@ class ItemsPOViewController: UIViewController {
     var id = ""
     var displayName = ""
     var vendor_id = ""
-    
-//    var reqQtyArr = [String]()
-//    var costArr = [String]()
-//    var noteArr = [String]()
-//    var afterQtyArr = [String]()
-//    var totalArr = [String]()
-//    
-//    var orderItemArr = [String]()
-//    var statusArr = [String]()
-    
-//    var fullAddedPOList = [InventoryVariant]()
-//    var fullAddedReqQtyArr = [String]()
-//
-//    var fullAddedCostArr = [String]()
-//    var fullAddedNoteArr = [String]()
-//    var fullAddedAfterQtyArr = [String]()
-//    var fullAddedTotalArr = [String]()
-//    
-//    var fullAddedOrderItemArr = [String]()
-//    var fullAddedStatusArr = [String]()
     
     var itemslist = [POItems]()
     
@@ -100,14 +76,6 @@ class ItemsPOViewController: UIViewController {
         tap1.numberOfTapsRequired = 1
         
         setupUI()
-        
-        menu.isHidden = true
-        menu.layer.cornerRadius = 10
-        menu.layer.shadowColor =  UIColor.lightGray.cgColor
-        menu.layer.shadowOpacity = 1
-        menu.layer.shadowRadius = 3
-        menu.layer.shadowOffset = CGSize.zero
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -121,16 +89,13 @@ class ItemsPOViewController: UIViewController {
             saveDraft.textColor = UIColor(named: "SelectCat")
             vendorName.text = vendorSelect?.name ?? ""
             saveBtn.setTitle("Create", for: .normal)
-            autoBtn.setTitle("Auto PO", for: .normal)
+            autoBtn.setTitle("Back", for: .normal)
             autoBtn.setTitleColor(.black, for: .normal)
             autoBtn.layer.borderColor = UIColor.black.cgColor
-            threeBtns.isHidden = true
-            threeBtnWidth.constant = 0
             searchBtn.isHidden = true
         }
         else if mode == "edit" {
             editLbl.text = ""
-            threeBtns.isHidden = false
             setupApi()
         }
         else {
@@ -197,9 +162,7 @@ class ItemsPOViewController: UIViewController {
         autoBtn.setTitle("Delete", for: .normal)
         autoBtn.setTitleColor(UIColor(named: "deletBorder"), for: .normal)
         autoBtn.layer.borderColor = UIColor(named: "deletBorder")?.cgColor
-        threeBtns.isHidden = true
         searchBtn.isHidden = false
-        threeBtnWidth.constant = 0
         
         getItems(items: details.order_items)
     }
@@ -227,18 +190,7 @@ class ItemsPOViewController: UIViewController {
                                item_fullname: "\(item["item_fullname"] ?? "")", item_qty: "\(item["item_qty"] ?? "")")
             
             smallitems.append(poitem)
-            
-            
-            
-//            reqQtyArr.append(poitem.required_qty)
-//            
-//            costArr.append(poitem.cost_per_item)
-//            noteArr.append(poitem.note)
-//            afterQtyArr.append(poitem.after_qty)
-//            totalArr.append(poitem.total_pricing)
-//            
-//            orderItemArr.append(poitem.id)
-//            statusArr.append(poitem.recieved_status)
+        
         }
         itemslist = smallitems
         variantListApi()
@@ -339,16 +291,6 @@ class ItemsPOViewController: UIViewController {
         
         poSelectedVariants = smallPoList
         
-//        poSelectedVariants.append(contentsOf: fullAddedPOList)
-//        reqQtyArr.append(contentsOf: fullAddedReqQtyArr)
-//        costArr.append(contentsOf: fullAddedCostArr)
-//        noteArr.append(contentsOf: fullAddedNoteArr)
-//        afterQtyArr.append(contentsOf: fullAddedAfterQtyArr)
-//        totalArr.append(contentsOf: fullAddedTotalArr)
-//        
-//        orderItemArr.append(contentsOf: fullAddedOrderItemArr)
-//        statusArr.append(contentsOf: fullAddedStatusArr)
-        
         DispatchQueue.main.async {
             self.loadingIndicator.isAnimating = false
             self.tableview.isHidden = false
@@ -394,15 +336,6 @@ class ItemsPOViewController: UIViewController {
             }
         }
         
-//        reqQtyArr.append(contentsOf: fullAddedReqQtyArr)
-//        costArr.append(contentsOf: fullAddedCostArr)
-//        noteArr.append(contentsOf: fullAddedNoteArr)
-//        afterQtyArr.append(contentsOf: fullAddedAfterQtyArr)
-//        totalArr.append(contentsOf: fullAddedTotalArr)
-//        
-//        orderItemArr.append(contentsOf: fullAddedOrderItemArr)
-//        statusArr.append(contentsOf: fullAddedStatusArr)
-        
         DispatchQueue.main.async {
             self.loadingIndicator.isAnimating = false
             self.tableview.isHidden = false
@@ -432,8 +365,17 @@ class ItemsPOViewController: UIViewController {
     
     @objc func saveDraftClick() {
         
+        if mode == "add" {
+            createDraft()
+        }
+        else {
+            deletePO(save: 0)
+        }
+    }
+    
+    func createDraft() {
+        
         let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
-        let emp_id = UserDefaults.standard.string(forKey: "emp_po_id") ?? ""
         
         if saveDraft.text == "Save Draft" {
             
@@ -453,12 +395,14 @@ class ItemsPOViewController: UIViewController {
             var total = ""
             var note = ""
             var afterQty = ""
-            var status = ""
-            var order_item_id = ""
             
-            if mode == "add" {
-                
-                var smallAdd = [AddPO]()
+            var smallAdd = [AddPO]()
+            
+            if poSelectedVariants.count == 0 {
+                ToastClass.sharedToast.showToast(message: "Please Select Atleast One Product Variant",
+                                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+            }
+            else {
                 
                 for item in 0..<poSelectedVariants.count {
                     
@@ -484,12 +428,6 @@ class ItemsPOViewController: UIViewController {
                                                          font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                         return
                     }
-                    
-//                    let req = reqQtyArr[item]
-//                    let cost = costArr[item]
-//                    let total = totalArr[item]
-//                    let note = noteArr[item]
-//                    let afterQty = afterQtyArr[item]
                     
                     let pos = AddPO(product_id: p_id, variant_id: var_id, required_qty: reqQty,
                                     cost_per_item: cost, total_pricing: total, upc: upc,
@@ -536,10 +474,42 @@ class ItemsPOViewController: UIViewController {
                     }
                 }
             }
+        }
+    }
+    
+    func updateDraft() {
+        
+        let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        let emp_id = UserDefaults.standard.string(forKey: "emp_po_id") ?? ""
+        
+        if saveDraft.text == "Save Draft" {
+            
+            var final_json = ""
+            
+            let v_id = vendorSelect?.id ?? ""
+            let i_d = vendorSelect?.issue_date ?? ""
+            let s_d = vendorSelect?.stock_date ?? ""
+            let r_f = vendorSelect?.reference ?? ""
+            let v_e = vendorSelect?.vendor_email ?? ""
+            
+            var upc = ""
+            var var_id = ""
+            var p_id = ""
+            var reqQty = ""
+            var cost = ""
+            var total = ""
+            var note = ""
+            var afterQty = ""
+            var status = ""
+            var order_item_id = ""
+            
+            var smallAdd = [EditPO]()
+            
+            if poSelectedVariants.count == 0 {
+                ToastClass.sharedToast.showToast(message: "Please Select Atleast One Product Variant",
+                                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+            }
             else {
-                
-                var smallAdd = [EditPO]()
-                
                 for item in 0..<poSelectedVariants.count {
                     
                     p_id = poSelectedVariants[item].po.id
@@ -566,15 +536,6 @@ class ItemsPOViewController: UIViewController {
                                                          font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                         return
                     }
-                    
-//                    let req = reqQtyArr[item]
-//                    let cost = costArr[item]
-//                    let total = totalArr[item]
-//                    let note = noteArr[item]
-//                    let afterQty = afterQtyArr[item]
-//                    
-//                    let order_items = orderItemArr[item]
-//                    let status = statusArr[item]
                     
                     let pos = EditPO(order_item_id: order_item_id, product_id: p_id, variant_id: var_id,
                                      required_qty: reqQty, recieved_status: status, cost_per_item: cost,
@@ -625,9 +586,6 @@ class ItemsPOViewController: UIViewController {
                     }
                 }
             }
-        }
-        else {
-            
         }
     }
     
@@ -686,6 +644,7 @@ class ItemsPOViewController: UIViewController {
                     
                     let msg = responseData["message"] as? String ?? ""
                     ToastClass.sharedToast.showToast(message: msg, font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+                    self.poSelectedVariants.remove(at: tag)
                     self.loadingIndicator.isAnimating = false
                     self.tableview.isHidden = false
                     self.tableview.reloadData()
@@ -716,53 +675,42 @@ class ItemsPOViewController: UIViewController {
     }
     
     
-    @IBAction func menuBtnClick(_ sender: UIButton) {
-        
-        if menu.isHidden {
-            menu.isHidden = false
-        }
-        else {
-            menu.isHidden = true
-        }
-    }
-    
-    
     @IBAction func autoBtnClick(_ sender: UIButton) {
         
         let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         
-        if sender.titleLabel?.text == "Auto PO" {
-            
-            loadingIndicator.isAnimating = true
-            tableview.isHidden = true
-            
-            let v = vendorSelect?.id ?? ""
-            
-            ApiCalls.sharedCall.autoPOList(merchant_id: m_id, admin_id: m_id, vendor_id: v) { isSuccess, responseData in
-                
-                if isSuccess {
-                    print(responseData)
-                    if let data = responseData["result"] {
-                        self.getResponseValuesAuto(list: data)
-                    }
-                    else {
-                        ToastClass.sharedToast.showToast(message: "No Product List Found",
-                                                         font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
-                        self.loadingIndicator.isAnimating = false
-                        self.tableview.isHidden = false
-                        print("Api Error")
-                    }
-                }
-                else {
-                    print("Api Error")
-                }
-            }
-        }
-        else if sender.titleLabel?.text == "Delete" {
+//        if sender.titleLabel?.text == "Auto PO" {
+//            
+//            loadingIndicator.isAnimating = true
+//            tableview.isHidden = true
+//            
+//            let v = vendorSelect?.id ?? ""
+//            
+//            ApiCalls.sharedCall.autoPOList(merchant_id: m_id, admin_id: m_id, vendor_id: v) { isSuccess, responseData in
+//                
+//                if isSuccess {
+//                    print(responseData)
+//                    if let data = responseData["result"] {
+//                        self.getResponseValuesAuto(list: data)
+//                    }
+//                    else {
+//                        ToastClass.sharedToast.showToast(message: "No Product List Found",
+//                                                         font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
+//                        self.loadingIndicator.isAnimating = false
+//                        self.tableview.isHidden = false
+//                        print("Api Error")
+//                    }
+//                }
+//                else {
+//                    print("Api Error")
+//                }
+//            }
+//        }
+        if sender.titleLabel?.text == "Delete" {
             
             let emp_id = UserDefaults.standard.string(forKey: "emp_po_id") ?? ""
             
-            let alertController = UIAlertController(title: "Alert", message: "Are you sure you want to delete this PO?", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Alert", message: "Are you sure you want to delete this Purchase Order?", preferredStyle: .alert)
             
             let cancel = UIAlertAction(title: "No", style: .default) { (action:UIAlertAction!) in
                 self.dismiss(animated: true)
@@ -797,13 +745,145 @@ class ItemsPOViewController: UIViewController {
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion:nil)
         }
-        else {
-            dismiss(animated: true)
-        }
+//        else {
+//            dismiss(animated: true) {
+//                self.saveDelegate?.savePOItem(save: self.poSelectedVariants, mode: "join")
+//            }
+//        }
     }
     
     
     @IBAction func saveBtnClick(_ sender: UIButton) {
+    
+        if mode == "add" {
+            createPO()
+        }
+        
+        else {
+            deletePO(save: 1)
+        }
+    }
+    
+    func createPO() {
+        
+        let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        var final_json = ""
+        
+        let v_id = vendorSelect?.id ?? ""
+        let i_d = vendorSelect?.issue_date ?? ""
+        let s_d = vendorSelect?.stock_date ?? ""
+        let r_f = vendorSelect?.reference ?? ""
+        let v_e = vendorSelect?.vendor_email ?? ""
+        
+        var upc = ""
+        var var_id = ""
+        var p_id = ""
+        var reqQty = ""
+        var cost = ""
+        var total = ""
+        var note = ""
+        var afterQty = ""
+        var status = ""
+        var order_item_id = ""
+        
+        var smallAdd = [AddPO]()
+        
+        for item in 0..<poSelectedVariants.count {
+            
+            p_id = poSelectedVariants[item].po.id
+            
+            if poSelectedVariants[item].po.isvarient == "1" {
+                upc = poSelectedVariants[item].po.var_upc
+                var_id = poSelectedVariants[item].po.var_id
+            }
+            else {
+                upc = poSelectedVariants[item].po.upc
+                var_id = ""
+            }
+            
+            reqQty = poSelectedVariants[item].reqQty
+            cost = poSelectedVariants[item].cost
+            total = poSelectedVariants[item].total
+            note = poSelectedVariants[item].note
+            afterQty = poSelectedVariants[item].afterQty
+            
+            guard reqQty != "" else {
+                ToastClass.sharedToast.showToast(message: "Add Quantity for all variants",
+                                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                return
+            }
+            
+            let pos = AddPO(product_id: p_id, variant_id: var_id, required_qty: reqQty,
+                            cost_per_item: cost, total_pricing: total, upc: upc,
+                            note: note, after_qty: afterQty)
+            
+            smallAdd.append(pos)
+        }
+        
+        guard smallAdd.count != 0 else {
+            ToastClass.sharedToast.showToast(message: "Please Select Atleast One Product Variant",
+                                             font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+            return
+        }
+        
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted  // Makes the output readable
+            let jsonData = try encoder.encode(smallAdd) // Wrap the object in an array for consistency with the provided JSON structure
+            
+            // Convert the encoded JSON into a string for display or further processing
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                final_json = jsonString
+            }
+        } catch {
+            print("Error encoding JSON: \(error)")
+        }
+        
+        tableview.isHidden = true
+        loadingIndicator.isAnimating = true
+        
+        ApiCalls.sharedCall.savePO(merchant_id: m_id, admin_id: m_id, vendor_id: v_id,
+                                   issue_date: i_d, stock_date: s_d, reference: r_f,
+                                   vendor_email: v_e, order_items: final_json, is_draft: "0",
+                                   created_at: i_d) { isSuccess, responseData in
+            
+            if isSuccess {
+                
+                ToastClass.sharedToast.showToast(message: "PO Created Successfully", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                self.home()
+            }
+            else {
+                print("Api Error")
+            }
+        }
+    }
+    
+    func deletePO(save: Int) {
+        
+        let po_id = bigDetails?.id ?? ""
+        let v_id = vendorSelect?.id ?? ""
+        
+        if deleteIds.count > 0 {
+            deleteItems(delete: deleteIds, po_id: po_id, v_id: v_id) {
+                if self.mode == "edit" && save == 0 {
+                    self.updateDraft()
+                }
+                else {
+                    self.updatePO()
+                }
+            }
+        }
+        else {
+            if self.mode == "edit" && save == 0 {
+                self.updateDraft()
+            }
+            else {
+                self.updatePO()
+            }
+        }
+    }
+    
+    func updatePO() {
         
         let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
         let emp_id = UserDefaults.standard.string(forKey: "emp_po_id") ?? ""
@@ -826,93 +906,13 @@ class ItemsPOViewController: UIViewController {
         var status = ""
         var order_item_id = ""
         
-        if mode == "add" {
+        var smallAdd = [EditPO]()
+        
+        if poSelectedVariants.count == 0 {
             
-            var smallAdd = [AddPO]()
-            
-            for item in 0..<poSelectedVariants.count {
-                
-                p_id = poSelectedVariants[item].po.id
-                
-                if poSelectedVariants[item].po.isvarient == "1" {
-                    upc = poSelectedVariants[item].po.var_upc
-                    var_id = poSelectedVariants[item].po.var_id
-                }
-                else {
-                    upc = poSelectedVariants[item].po.upc
-                    var_id = ""
-                }
-                
-                reqQty = poSelectedVariants[item].reqQty
-                cost = poSelectedVariants[item].cost
-                total = poSelectedVariants[item].total
-                note = poSelectedVariants[item].note
-                afterQty = poSelectedVariants[item].afterQty
-                
-                guard reqQty != "" else {
-                    ToastClass.sharedToast.showToast(message: "Add Quantity for all variants",
-                                                     font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                    return
-                }
-                
-//                let req = reqQtyArr[item]
-//                let cost = costArr[item]
-//                let total = totalArr[item]
-//                let note = noteArr[item]
-//                let afterQty = afterQtyArr[item]
-                
-                let pos = AddPO(product_id: p_id, variant_id: var_id, required_qty: reqQty,
-                                cost_per_item: cost, total_pricing: total, upc: upc,
-                                note: note, after_qty: afterQty)
-                
-                smallAdd.append(pos)
-            }
-            
-            guard smallAdd.count != 0 else {
-                ToastClass.sharedToast.showToast(message: "Please Select Atleast One Product Variant",
-                                                 font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                return
-            }
-            
-            do {
-                let encoder = JSONEncoder()
-                encoder.outputFormatting = .prettyPrinted  // Makes the output readable
-                let jsonData = try encoder.encode(smallAdd) // Wrap the object in an array for consistency with the provided JSON structure
-                
-                // Convert the encoded JSON into a string for display or further processing
-                if let jsonString = String(data: jsonData, encoding: .utf8) {
-                    final_json = jsonString
-                }
-            } catch {
-                print("Error encoding JSON: \(error)")
-            }
-            
-            
-            
-            tableview.isHidden = true
-            loadingIndicator.isAnimating = true
-            
-            ApiCalls.sharedCall.savePO(merchant_id: m_id, admin_id: m_id, vendor_id: v_id,
-                                       issue_date: i_d, stock_date: s_d, reference: r_f,
-                                       vendor_email: v_e, order_items: final_json, is_draft: "0",
-                                       created_at: i_d) { isSuccess, responseData in
-                
-                if isSuccess {
-                    
-                    ToastClass.sharedToast.showToast(message: "PO Created Successfully", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
-                    self.home()
-                }
-                else {
-                    print("Api Error")
-                }
-            }
+            ToastClass.sharedToast.showToast(message: "Please Select Atleast One Product Variant", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
         }
         else {
-            
-            let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
-            var final_json = ""
-            
-            var smallAdd = [EditPO]()
             
             for item in 0..<poSelectedVariants.count {
                 
@@ -940,15 +940,6 @@ class ItemsPOViewController: UIViewController {
                                                      font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                     return
                 }
-                
-//                let req = reqQtyArr[item]
-//                let cost = costArr[item]
-//                let total = totalArr[item]
-//                let note = noteArr[item]
-//                let afterQty = afterQtyArr[item]
-//                
-//                let order_items = orderItemArr[item]
-//                let status = statusArr[item]
                 
                 let pos = EditPO(order_item_id: order_item_id, product_id: p_id, variant_id: var_id,
                                  required_qty: reqQty, recieved_status: status, cost_per_item: cost,
@@ -998,7 +989,7 @@ class ItemsPOViewController: UIViewController {
                     }
                     else {
                         self.dismiss(animated: true) {
-                            self.saveDelegate?.savePOItem()
+                            self.saveDelegate?.savePOItem(save: [], mode: "")
                         }
                     }
                 }
@@ -1009,18 +1000,48 @@ class ItemsPOViewController: UIViewController {
         }
     }
     
+    func deleteItems(delete: [String], po_id: String, v_id: String, completion: @escaping () -> Void) {
+        
+        let m_id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        var del_ids = delete
+        let id = del_ids.removeFirst()
+        
+        ApiCalls.sharedCall.deletePOItem(merchant_id: m_id, po_item_id: id, vendor_id: v_id) { isSuccess, _ in
+            
+            DispatchQueue.main.async {
+                if isSuccess {
+                    if del_ids.count > 0 {
+                        self.deleteItems(delete: del_ids, po_id: po_id, v_id: v_id, completion: completion)
+                    }
+                    else {
+                        completion()
+                    }
+                }
+                else {
+                    print("Failed to delete item")
+                    completion()
+                }
+            }
+        }
+    }
+    
     @IBAction func deleteClickBtn(_ sender: UIButton) {
         
         let alertController = UIAlertController(title: "Alert", message: "Are you sure you want to delete this item?", preferredStyle: .alert)
         
-        let cancel = UIAlertAction(title: "No", style: .cancel) { (action:UIAlertAction!) in
-        }
+        let cancel = UIAlertAction(title: "No", style: .cancel)
         
         let okAction = UIAlertAction(title: "Yes", style: .default) { (action:UIAlertAction!) in
             
-            let item = self.poSelectedVariants[sender.tag].orderItem
+            let id = self.poSelectedVariants[sender.tag].orderItem
+            
+            if id == "" {
+            }
+            else {
+                self.deleteIds.append(id)
+            }
             self.poSelectedVariants.remove(at: sender.tag)
-            self.setupDeleteApi(id: item, tag: sender.tag)
+            self.tableview.reloadData()
         }
         
         alertController.addAction(cancel)
@@ -1031,11 +1052,30 @@ class ItemsPOViewController: UIViewController {
     
     @IBAction func backBtnClick(_ sender: UIButton) {
         
-        if mode == "add" || mode == "edit" {
+        if mode == "add" {
             navigationController?.popViewController(animated: true)
         }
         else {
-            dismiss(animated: true)
+            
+            let alertController = UIAlertController(title: "Alert", message: "Are you sure you want to Exit?", preferredStyle: .alert)
+            
+            let cancel = UIAlertAction(title: "No", style: .cancel)
+            
+            let okAction = UIAlertAction(title: "Yes", style: .default) { (action:UIAlertAction!) in
+                
+                if self.mode == "edit" {
+                    self.navigationController?.popViewController(animated: true)
+                }
+                else {
+                    self.dismiss(animated: true) {
+                        //self.saveDelegate?.savePOItem(save: self.poSelectedVariants, mode: "join")
+                    }
+                }
+            }
+            
+            alertController.addAction(cancel)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion:nil)
         }
     }
     
@@ -1066,18 +1106,7 @@ extension ItemsPOViewController: POSelectDelegate {
         if variant.count > 0 {
             
             poSelectedVariants = variant
-//            reqQtyArr = revreqQtyArr
-//            costArr = revCostArr
-//            noteArr = revNoteArr
-//            afterQtyArr = revAfterQtyArr
-//            totalArr = revTotalArr
-//            orderItemArr = revOrderItemArr
-//            statusArr = revStatusArr
-            
             tableview.reloadData()
-        }
-        else {
-            
         }
     }
 }
@@ -1293,11 +1322,13 @@ extension ItemsPOViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.qtyTextField.isEnabled = true
                 cell.costPerTextField.isEnabled = true
                 cell.noteField.isEnabled = true
+                cell.deleteBtn.isHidden = false
             }
             else {
                 cell.qtyTextField.isEnabled = false
                 cell.costPerTextField.isEnabled = false
                 cell.noteField.isEnabled = false
+                cell.deleteBtn.isHidden = true
             }
             
             cell.qtyTextField.text = item.reqQty

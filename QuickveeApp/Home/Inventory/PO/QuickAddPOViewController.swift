@@ -10,6 +10,7 @@ import UIKit
 class QuickAddPOViewController: UIViewController {
     
     @IBOutlet weak var collection: UICollectionView!
+    @IBOutlet weak var taxCollection: UICollectionView!
     
     @IBOutlet weak var upcTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
@@ -19,7 +20,6 @@ class QuickAddPOViewController: UIViewController {
     
     @IBOutlet weak var quantityField: UITextField!
     
-    @IBOutlet weak var taxBtn: UIButton!
     @IBOutlet weak var genUpcLbl: UILabel!
     
     @IBOutlet weak var cancelBtn: UIButton!
@@ -27,12 +27,14 @@ class QuickAddPOViewController: UIViewController {
     
     @IBOutlet weak var collHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var taxcollHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var scrollHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollInnerView: UIView!
     
     var categoryPO = [InventoryCategory]()
-    var isTax = true
-    var defaultTax: SetupTaxes?
+    var defaultTax = [SetupTaxes]()
+    var finalTaxes = [CheckTax]()
     var isSymbolOnRight = false
     var quick: QuickAddPO?
     
@@ -105,17 +107,6 @@ class QuickAddPOViewController: UIViewController {
         priceTextField.text = quick?.price ?? ""
         costPerItemTextField.text = quick?.cost ?? ""
         
-        let tax = quick?.tax ?? ""
-        
-        if tax == "1" {
-            isTax = true
-            taxBtn.setImage(UIImage(named: "check inventory"), for: .normal)
-        }
-        else {
-            isTax = false
-            taxBtn.setImage(UIImage(named: "uncheck inventory"), for: .normal)
-        }
-        
         setupTax()
     }
     
@@ -161,13 +152,30 @@ class QuickAddPOViewController: UIViewController {
             }
             first += 1
         }
-        defaultTax = taxArray[0]
+        defaultTax = taxArray
+        
+        var checkTax = [CheckTax]()
+        
+        for tax in defaultTax {
+            if tax.title == "DefaultTax" {
+                checkTax.append(CheckTax(tax: tax, isSelected: true))
+            }
+            else {
+                checkTax.append(CheckTax(tax: tax, isSelected: false))
+            }
+        }
+        finalTaxes = checkTax
+        
+        DispatchQueue.main.async {
+            self.taxcollHeight.constant = 64 * CGFloat(self.finalTaxes.count)
+            self.taxCollection.reloadData()
+        }
     }
     
     @objc func openCategory() {
         
         dismiss(animated: true) {
-            self.delegate?.addProduct(mode: 1, quick: self.quick!, category: self.categoryPO)
+            self.delegate?.addProduct(mode: 1, quick: self.quick!, category: self.categoryPO, p_id: "")
         }
     }
     
@@ -183,26 +191,24 @@ class QuickAddPOViewController: UIViewController {
     }
     
     @objc func genUpcClick() {
-        let upcCode = getGeneratedUpc(length: 12)
-        upcTextField.text = upcCode
-        quick?.upc = upcCode
-    }
-    
-    
-    @IBAction func taxBtnClick(_ sender: UIButton) {
         
-        if sender.currentImage == UIImage(named: "uncheck inventory") {
-            sender.setImage(UIImage(named: "check inventory"), for: .normal)
-            isTax = true
-            quick?.tax = "1"
-        }
-        else {
-            sender.setImage(UIImage(named: "uncheck inventory"), for: .normal)
-            isTax = false
-            quick?.tax = "0"
+        if upcTextField.text == "" {
+            
+            let upcCode = getGeneratedUpc(length: 12)
+            
+            let upcUnique = UserDefaults.standard.stringArray(forKey: "variant_upcs") ?? []
+            
+            if upcUnique.contains(upcCode) {
+                ToastClass.sharedToast.showToast(message: "Duplicate upc found", font:  UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                upcTextField.text = ""
+                quick?.upc = ""
+            }
+            else {
+                quick?.upc = upcCode
+                upcTextField.text = upcCode
+            }
         }
     }
-    
     
     @IBAction func closeBtnClick(_ sender: UIButton) {
         
@@ -251,9 +257,15 @@ class QuickAddPOViewController: UIViewController {
         
         var other_taxes = ""
         var ischargeTax = ""
+        var taxid = [String]()
         
-        if isTax {
-            other_taxes = defaultTax?.id ?? ""
+        for tax in finalTaxes {
+            if tax.isSelected {
+                taxid.append(tax.tax.id)
+            }
+        }
+        if taxid.count > 0 {
+            other_taxes = taxid.joined(separator: ",")
             ischargeTax = "1"
         }
         else {
@@ -269,7 +281,7 @@ class QuickAddPOViewController: UIViewController {
             return
         }
         
-        guard let qty = quantityField.text, qty != "" else {
+        guard var qty = quantityField.text else {
             quantityField.isErrorView(numberOfShakes: 3, revert: true)
             ToastClass.sharedToast.showToast(message: "Enter valid quantity", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
             return
@@ -280,6 +292,10 @@ class QuickAddPOViewController: UIViewController {
             upcTextField.isErrorView(numberOfShakes: 3, revert: true)
             ToastClass.sharedToast.showToast(message: "Enter UPC code", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
             return
+        }
+        
+        if qty == "" {
+            qty = "0"
         }
         
         loadIndicator.isAnimating = true
@@ -320,11 +336,12 @@ class QuickAddPOViewController: UIViewController {
                 
                 if let list = responseData["message"] as? String {
                     if list == "Success" {
+                        let id = responseData["product_id"] as? Int ?? 0
                         ToastClass.sharedToast.showToast(message: "Successfully created product", font: UIFont(name: "Manrope-SemiBold", size: 14.0)!)
                         self.loadIndicator.isAnimating = false
                         self.addBtn.isEnabled = true
                         self.dismiss(animated: true) {
-                            self.delegate?.addProduct(mode: 2, quick: self.quick!, category: self.categoryPO)
+                            self.delegate?.addProduct(mode: 2, quick: self.quick!, category: self.categoryPO, p_id: "\(id)")
                         }
                     }
                     else{
@@ -350,7 +367,10 @@ class QuickAddPOViewController: UIViewController {
         else {
             collHeight.constant = height
         }
-        scrollHeight.constant = scrollInnerView.bounds.size.height + collHeight.constant + 103.33
+        
+        let taxheight = 64 * CGFloat(self.finalTaxes.count)
+        
+        scrollHeight.constant = scrollInnerView.bounds.size.height + taxheight + collHeight.constant + 103.33
         
         self.view.layoutIfNeeded()
     }
@@ -387,7 +407,22 @@ extension QuickAddPOViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         if textField == upcTextField {
-            quick?.upc = upcTextField.text ?? ""
+            
+            let upcString = upcTextField.text ?? ""
+            
+            let upcUnique = UserDefaults.standard.stringArray(forKey: "variant_upcs") ?? []
+            
+            if upcString == "" {}
+            else {
+                if upcUnique.contains(upcString) {
+                    ToastClass.sharedToast.showToast(message: "Duplicate upc found", font:  UIFont(name: "Manrope-SemiBold", size: 14.0)!)
+                    upcTextField.text = ""
+                    quick?.upc = ""
+                }
+                else {
+                    quick?.upc = upcString
+                }
+            }
         }
         
         else if textField == nameTextField {
@@ -454,18 +489,95 @@ extension QuickAddPOViewController: UITextFieldDelegate {
 extension QuickAddPOViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categoryPO.count
+        
+        if collectionView == collection {
+            return categoryPO.count
+        }
+        else {
+            return finalTaxes.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collection.dequeueReusableCell(withReuseIdentifier: "pocatcell", for: indexPath) as! PlusCollCollectionViewCell
-        
-        cell.catPlusLbl.text = categoryPO[indexPath.row].title
-        cell.borderview.layer.cornerRadius = 5.0
-        cell.closeBtn.tag = indexPath.row
-        
-        setCatHeight()
-        return cell
+        if collectionView == collection {
+            let cell = collection.dequeueReusableCell(withReuseIdentifier: "pocatcell", for: indexPath) as! PlusCollCollectionViewCell
+            
+            cell.catPlusLbl.text = categoryPO[indexPath.row].title
+            cell.borderview.layer.cornerRadius = 5.0
+            cell.closeBtn.tag = indexPath.row
+            
+            setCatHeight()
+            return cell
+        }
+        else {
+            
+            let cell = taxCollection.dequeueReusableCell(withReuseIdentifier: "taxcell", for: indexPath) as! QuickAddTaxPOCollectionViewCell
+            
+            let tax = finalTaxes[indexPath.row]
+            
+            if tax.isSelected {
+                cell.taxImg.image = UIImage(named: "check inventory")
+            }
+            else {
+                cell.taxImg.image = UIImage(named: "uncheck inventory")
+            }
+            cell.taxLbl.text = defaultTax[indexPath.row].title
+            
+            cell.taxLbl.tag = indexPath.row
+            
+            setCatHeight()
+            return cell
+        }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if collectionView == taxCollection {
+            
+            let cell = taxCollection.cellForItem(at: indexPath) as! QuickAddTaxPOCollectionViewCell
+            
+            if cell.taxImg.image == UIImage(named: "uncheck inventory") {
+                cell.taxImg.image = UIImage(named: "check inventory")
+            }
+            else {
+                cell.taxImg.image = UIImage(named: "uncheck inventory")
+            }
+            finalTaxes[indexPath.row].isSelected.toggle()
+        }
+    }
+}
+
+extension QuickAddPOViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if collectionView == collection {
+            let width = collectionView.bounds.width
+            return CGSize(width: width, height: 38)
+        }
+        else {
+            let width = collection.bounds.size.width
+            return CGSize(width: width/2 - 10, height: 64)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        if collectionView == collection {
+            return 0
+        }
+        else {
+            return 10
+        }
+    }
+}
+
+struct CheckTax {
+    let tax: SetupTaxes
+    var isSelected: Bool
 }

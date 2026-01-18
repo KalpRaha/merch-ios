@@ -470,7 +470,7 @@ class DuplicatePlusViewController: UIViewController {
             let vc = storyBoard.instantiateViewController(withIdentifier: "filtercategory") as! FilterCategoryViewController
             
             vc.delegateDuplicate = self
-            vc.catMode = "dupProductVC"
+            vc.catMode = "dupProductVCdupProductVC"
             vc.selectBrandsTags = dupProdTag
             vc.apiMode = "tags"
             present(vc, animated: true, completion: {
@@ -1756,7 +1756,7 @@ extension DuplicatePlusViewController: BarcodeScannerCodeDelegate, BarcodeScanne
 extension DuplicatePlusViewController: PlusSelectedCategory {
     
     func getSelectedCats(reverseCategory: [InventoryCategory], reverseBrandsTags: [String],
-                         reverseTaxes: [SetupTaxes], apiMode: String) {
+                         reverseTaxes: [SetupTaxes], vendors: [VendorProduct], variantIdVendorProduct: String, singleProductVendor: String, apiMode: String) {
         
         scroll.isHidden = true
         loadingIndicator.isAnimating = true
