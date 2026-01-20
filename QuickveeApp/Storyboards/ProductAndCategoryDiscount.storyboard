@@ -906,7 +906,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JrE-Cy-IAA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1244.7761194029849" y="116.70480549199084"/>
+            <point key="canvasLocation" x="1173" y="106"/>
         </scene>
         <!--Product And Category SelectionVC-->
         <scene sceneID="KXY-Oz-ZZX">
@@ -937,10 +937,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jkL-WU-THP">
-                                        <rect key="frame" x="258" y="13" width="24" height="24"/>
+                                        <rect key="frame" x="253" y="15.666666666666657" width="19" height="19"/>
                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="15"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="filter">
+                                        <state key="normal" image="productfilter">
                                             <color key="titleColor" red="0.039215686270000001" green="0.3921568627" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
@@ -948,10 +948,10 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Lg-Ov-I5u">
-                                        <rect key="frame" x="258" y="12" width="25" height="25"/>
+                                        <rect key="frame" x="263" y="-0.3333333333333286" width="25" height="25"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ux4-g3-50o">
-                                                <rect key="frame" x="-8" y="2.3333333333333428" width="41.333333333333336" height="20.333333333333332"/>
+                                                <rect key="frame" x="-8" y="2.3333333333333286" width="41.333333333333336" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -999,8 +999,9 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="GPd-R5-0fM" firstAttribute="leading" secondItem="0hw-cO-chS" secondAttribute="trailing" constant="10" id="2Ee-uI-5af"/>
-                                    <constraint firstItem="rVX-DI-M2a" firstAttribute="leading" secondItem="jkL-WU-THP" secondAttribute="trailing" constant="10" id="3lD-Fi-SVW"/>
+                                    <constraint firstItem="rVX-DI-M2a" firstAttribute="leading" secondItem="jkL-WU-THP" secondAttribute="trailing" constant="20" id="3lD-Fi-SVW"/>
                                     <constraint firstAttribute="bottom" secondItem="rVX-DI-M2a" secondAttribute="bottom" id="3rr-ku-iu4"/>
+                                    <constraint firstItem="3Lg-Ov-I5u" firstAttribute="leading" secondItem="jkL-WU-THP" secondAttribute="leading" constant="10" id="3wx-qF-G7y"/>
                                     <constraint firstItem="jkL-WU-THP" firstAttribute="centerY" secondItem="wqV-gQ-UZa" secondAttribute="centerY" id="FvR-6B-5ug"/>
                                     <constraint firstAttribute="bottom" secondItem="Moc-O3-MCk" secondAttribute="bottom" id="HMz-79-scW"/>
                                     <constraint firstItem="0hw-cO-chS" firstAttribute="leading" secondItem="wqV-gQ-UZa" secondAttribute="leading" id="Iyh-rp-SEN"/>
@@ -1011,10 +1012,9 @@
                                     <constraint firstItem="GPd-R5-0fM" firstAttribute="centerY" secondItem="wqV-gQ-UZa" secondAttribute="centerY" id="S4q-fb-qVq"/>
                                     <constraint firstAttribute="bottom" secondItem="VJ8-ii-T9I" secondAttribute="bottom" id="UqB-7B-TsY"/>
                                     <constraint firstItem="VJ8-ii-T9I" firstAttribute="leading" secondItem="rVX-DI-M2a" secondAttribute="trailing" id="bFR-T4-cBu"/>
-                                    <constraint firstItem="3Lg-Ov-I5u" firstAttribute="leading" secondItem="jkL-WU-THP" secondAttribute="leading" id="dpz-6E-vmH"/>
                                     <constraint firstAttribute="bottom" secondItem="0hw-cO-chS" secondAttribute="bottom" id="fLQ-h6-8jZ"/>
                                     <constraint firstAttribute="height" constant="50" id="iMo-EY-KlR"/>
-                                    <constraint firstItem="3Lg-Ov-I5u" firstAttribute="bottom" secondItem="jkL-WU-THP" secondAttribute="bottom" id="mq1-3a-Hwo"/>
+                                    <constraint firstItem="3Lg-Ov-I5u" firstAttribute="bottom" secondItem="jkL-WU-THP" secondAttribute="bottom" constant="-10" id="mq1-3a-Hwo"/>
                                     <constraint firstItem="0hw-cO-chS" firstAttribute="top" secondItem="wqV-gQ-UZa" secondAttribute="top" id="mtr-rw-oY0"/>
                                     <constraint firstAttribute="trailing" secondItem="Moc-O3-MCk" secondAttribute="trailing" id="wHS-IZ-ERW"/>
                                     <constraint firstItem="VJ8-ii-T9I" firstAttribute="top" secondItem="wqV-gQ-UZa" secondAttribute="top" id="x9i-WJ-gpY"/>
@@ -1044,7 +1044,7 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="Cancel"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="cancelBtnClick:" destination="lA0-ul-69Q" eventType="valueChanged" id="Pak-hx-S1C"/>
+                                            <action selector="cancelBtnClick:" destination="lA0-ul-69Q" eventType="valueChanged" id="9Dk-r9-9Ne"/>
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u8f-OU-MTw" customClass="GenericButton" customModule="QuickveeApp" customModuleProvider="target">
@@ -1061,7 +1061,7 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="Confirm"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="confirmBtnClick:" destination="lA0-ul-69Q" eventType="valueChanged" id="Huw-B5-tkv"/>
+                                            <action selector="confirmBtnClick:" destination="lA0-ul-69Q" eventType="touchUpInside" id="oe3-bs-hw3"/>
                                         </connections>
                                     </view>
                                 </subviews>
@@ -1102,7 +1102,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXN-QG-GzE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1997" y="117"/>
+            <point key="canvasLocation" x="1937" y="106"/>
         </scene>
         <!--Product And Categories Promotion Conflict Bottom SheetVC-->
         <scene sceneID="4Gl-AW-Lgz">
@@ -1250,16 +1250,16 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pFc-bv-RNC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="431" y="919"/>
+            <point key="canvasLocation" x="448" y="820"/>
         </scene>
     </scenes>
     <resources>
         <image name="Search" width="30" height="30"/>
         <image name="back" width="24" height="24"/>
-        <image name="filter" width="24" height="24"/>
         <image name="noDiscountFoundIcon" width="132" height="132"/>
         <image name="pencilIcon" width="24" height="24"/>
         <image name="productAndCategoryPromotionConflictIcon" width="78" height="71.333335876464844"/>
+        <image name="productfilter" width="19.767999649047852" height="19.573999404907227"/>
         <image name="scanupc" width="24" height="24"/>
         <image name="vendor_close" width="24" height="24"/>
         <namedColor name="0A64F9">

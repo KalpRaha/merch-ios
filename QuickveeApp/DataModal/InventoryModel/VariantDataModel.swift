@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct VariantDataModel : Decodable {
+struct VariantDataModel : Decodable, Equatable {
     
     var id: String
     
@@ -155,3 +155,4 @@ extension InventoryVariant {
         )
     }
 }
+

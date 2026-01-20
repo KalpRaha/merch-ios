@@ -9,7 +9,7 @@ import UIKit
 
 class ProductAndCategoryItemsIncludedInDiscountTableView: UITableView {
     
-    typealias ItemDataType = String
+    typealias ItemDataType = VariantDataModel
     
     var dataItems: [ItemDataType] = []
     
@@ -36,6 +36,11 @@ class ProductAndCategoryItemsIncludedInDiscountTableView: UITableView {
 
         let nib = ProductAndCategoryItemIncludedInDiscountTBLCell.nib
         self.register(nib, forCellReuseIdentifier: ProductAndCategoryItemIncludedInDiscountTBLCell.className)
+    }
+    
+    func reloadData(with dataItems: [ItemDataType]) {
+        self.dataItems = dataItems
+        reloadData()
     }
     
     private func setupUI() {

@@ -86,7 +86,7 @@ extension CreatePNCDVC {
         
         
         //MARK: - Products OR Categories ID
-        var includedProductOrCategories: [String] = [] {
+        var includedProductOrCategories: [VariantDataModel] = [] {
             didSet{
                 delegate?.didUpdatedIncludedProductORCategories()
             }
