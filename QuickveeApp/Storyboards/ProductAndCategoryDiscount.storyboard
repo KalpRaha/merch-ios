@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_3" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -32,11 +32,11 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="x5s-ZR-KnR">
                                                 <rect key="frame" x="0.0" y="0.0" width="402" height="675"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCb-o9-pSv">
-                                                        <rect key="frame" x="0.0" y="0.0" width="402" height="675"/>
+                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCb-o9-pSv">
+                                                        <rect key="frame" x="0.0" y="0.0" width="402" height="0.0"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rZ1-aT-cko">
-                                                                <rect key="frame" x="20" y="137.66666666666669" width="362" height="400.00000000000006"/>
+                                                                <rect key="frame" x="20" y="-200" width="362" height="400"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noDiscountFoundIcon" translatesAutoresizingMaskIntoConstraints="NO" id="UOL-YA-S4L">
                                                                         <rect key="frame" x="115" y="0.0" width="132" height="132"/>
@@ -51,13 +51,13 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add product or category discounts to enhance your offers." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEp-4p-MwE" customClass="ManropeLightLabel" customModule="QuickveeApp" customModuleProvider="target">
-                                                                        <rect key="frame" x="20" y="206.33333333333331" width="322" height="43"/>
+                                                                        <rect key="frame" x="20" y="206.33333333333334" width="322" height="43"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r9K-9F-xpK">
-                                                                        <rect key="frame" x="55" y="276.33333333333331" width="252" height="47.333333333333314"/>
+                                                                        <rect key="frame" x="55" y="276.33333333333331" width="252" height="47.666666666666686"/>
                                                                         <color key="backgroundColor" name="AccentColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="r9K-9F-xpK" secondAttribute="height" multiplier="265:50" id="mcd-I0-zqy"/>
@@ -98,9 +98,21 @@
                                                             <constraint firstItem="rZ1-aT-cko" firstAttribute="centerX" secondItem="OCb-o9-pSv" secondAttribute="centerX" id="Wdi-rb-wFb"/>
                                                         </constraints>
                                                     </view>
-                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SkH-5o-Scl">
-                                                        <rect key="frame" x="0.0" y="0.0" width="402" height="0.0"/>
-                                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SkH-5o-Scl">
+                                                        <rect key="frame" x="0.0" y="0.0" width="402" height="675"/>
+                                                        <subviews>
+                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="dA0-A0-Ioh">
+                                                                <rect key="frame" x="14" y="0.0" width="374" height="675"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </tableView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="dA0-A0-Ioh" secondAttribute="bottom" id="42u-pB-GlT"/>
+                                                            <constraint firstItem="dA0-A0-Ioh" firstAttribute="leading" secondItem="SkH-5o-Scl" secondAttribute="leading" constant="14" id="EIi-lx-G4L"/>
+                                                            <constraint firstAttribute="trailing" secondItem="dA0-A0-Ioh" secondAttribute="trailing" constant="14" id="PcW-i3-s2M"/>
+                                                            <constraint firstItem="dA0-A0-Ioh" firstAttribute="top" secondItem="SkH-5o-Scl" secondAttribute="top" id="yZZ-pz-p6p"/>
+                                                        </constraints>
                                                     </view>
                                                 </subviews>
                                             </stackView>
@@ -144,6 +156,8 @@
                     </view>
                     <connections>
                         <outlet property="btnCreateDiscount" destination="r9K-9F-xpK" id="ABT-gH-IWI"/>
+                        <outlet property="tblDiscountListView" destination="dA0-A0-Ioh" id="eoF-1r-42r"/>
+                        <outlet property="vwDiscountListTableContainerView" destination="SkH-5o-Scl" id="siP-y6-bb7"/>
                         <outlet property="vwNavigationHeader" destination="ajk-aa-jMy" id="y8r-hu-o6L"/>
                         <outlet property="vwNoDiscountView" destination="OCb-o9-pSv" id="g3E-nn-Vbb"/>
                     </connections>
@@ -931,7 +945,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Products" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPd-R5-0fM">
-                                        <rect key="frame" x="60" y="14.666666666666657" width="128.33333333333334" height="21"/>
+                                        <rect key="frame" x="60" y="12.666666666666659" width="138" height="24.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Manrope-SemiBold" family="Manrope" pointSize="18"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1285,9 +1299,6 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

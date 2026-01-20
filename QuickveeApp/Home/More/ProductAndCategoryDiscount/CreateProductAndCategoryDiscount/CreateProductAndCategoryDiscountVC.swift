@@ -164,7 +164,7 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     private func configureInitialValues(){
         guard let editableDiscountItem = viewModel.editableDiscountItem else { return }
         
-        txtDiscountName.text = editableDiscountItem.dealName
+        txtDiscountName.text = editableDiscountItem.discountName
         txtDiscountPerItem.text = editableDiscountItem.discount ?? "0"
         
         viewModel.configureInitialValuesFromExistingData()

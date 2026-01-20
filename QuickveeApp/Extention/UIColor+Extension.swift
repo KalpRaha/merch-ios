@@ -61,4 +61,12 @@ extension UIColor {
         UIColor(named: "B2B2B2") ?? .lightGray
     }()
     
+    static var _575757 : UIColor = {
+        UIColor(named: "575757") ?? .lightGray
+    }()
+    
+    static var _2DC574 : UIColor = {
+        UIColor(named: "2DC574") ?? .green
+    }()
+    
 }

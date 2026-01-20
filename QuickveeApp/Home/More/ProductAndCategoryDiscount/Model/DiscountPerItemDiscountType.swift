@@ -31,10 +31,19 @@ enum DiscountPerItemDiscountType: String {
 extension DiscountPerItemDiscountType: Codable {
     
     // Keep existing API value mapping
-    func apiValue() -> String {
+    
+    var apiValue : String {
         switch self {
         case .percentValue: "1"
         case .amountValue: "2"
+        }
+    }
+    
+    static func parse(_ type : String?) -> Self{
+        return switch type {
+        case Self.percentValue.apiValue: .percentValue
+        case Self.amountValue.apiValue: .amountValue
+        default: .percentValue
         }
     }
     

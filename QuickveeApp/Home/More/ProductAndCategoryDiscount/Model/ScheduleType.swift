@@ -23,16 +23,24 @@ enum ScheduleType : String, CaseIterable {
 
 extension ScheduleType : Decodable {
     
+    enum CodingKeys: String, CodingKey {
+        case oneTime = "0"
+        case repeatsOnSchedule = "1"
+    }
+
+    static func parse(_ type : String?) -> Self {
+        return switch type {
+        case "0": .oneTime
+        case "1": .repeatsOnSchedule
+        default: .oneTime
+        }
+    }
+    
     func apiValue() -> String {
         switch self {
         case .oneTime: "0"
         case .repeatsOnSchedule: "1"
         }
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case oneTime = "0"
-        case repeatsOnSchedule = "1"
     }
     
 }

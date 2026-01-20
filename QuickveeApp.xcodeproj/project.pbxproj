@@ -37,6 +37,10 @@
 		B42F5F642F07B958002252EE /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F5F632F07B958002252EE /* BuildConfiguration.swift */; };
 		B42F5F662F07CD1A002252EE /* BuildConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F5F652F07CD1A002252EE /* BuildConstants.swift */; };
 		B42F5F682F07DDA2002252EE /* ConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F5F672F07DDA1002252EE /* ConfigurationManager.swift */; };
+		B43280EB2F1F354C002E4802 /* PNCDListItemTBLCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B43280EA2F1F354C002E4802 /* PNCDListItemTBLCell.xib */; };
+		B43280EC2F1F354C002E4802 /* PNCDListItemTBLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43280E92F1F354C002E4802 /* PNCDListItemTBLCell.swift */; };
+		B43280F02F1F906B002E4802 /* WeekDayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43280EF2F1F906B002E4802 /* WeekDayItem.swift */; };
+		B43280F22F1F9183002E4802 /* WeekDayItemParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43280F12F1F9183002E4802 /* WeekDayItemParser.swift */; };
 		B45CB8942F04DF59004AF269 /* APIEndpointEnumType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8862F04DF59004AF269 /* APIEndpointEnumType.swift */; };
 		B45CB8952F04DF59004AF269 /* APIRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB88D2F04DF59004AF269 /* APIRequestMaker.swift */; };
 		B45CB8962F04DF59004AF269 /* APIResponseDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB88E2F04DF59004AF269 /* APIResponseDecoder.swift */; };
@@ -419,6 +423,10 @@
 		B42F5F632F07B958002252EE /* BuildConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildConfiguration.swift; sourceTree = "<group>"; };
 		B42F5F652F07CD1A002252EE /* BuildConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildConstants.swift; sourceTree = "<group>"; };
 		B42F5F672F07DDA1002252EE /* ConfigurationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationManager.swift; sourceTree = "<group>"; };
+		B43280E92F1F354C002E4802 /* PNCDListItemTBLCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDListItemTBLCell.swift; sourceTree = "<group>"; };
+		B43280EA2F1F354C002E4802 /* PNCDListItemTBLCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PNCDListItemTBLCell.xib; sourceTree = "<group>"; };
+		B43280EF2F1F906B002E4802 /* WeekDayItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayItem.swift; sourceTree = "<group>"; };
+		B43280F12F1F9183002E4802 /* WeekDayItemParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayItemParser.swift; sourceTree = "<group>"; };
 		B45CB8862F04DF59004AF269 /* APIEndpointEnumType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpointEnumType.swift; sourceTree = "<group>"; };
 		B45CB8872F04DF59004AF269 /* APIEndpointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpointType.swift; sourceTree = "<group>"; };
 		B45CB8882F04DF59004AF269 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -830,6 +838,7 @@
 			children = (
 				B49381EC2F0DFCF60071D0F1 /* ProductAndCategoryDiscountListVC.swift */,
 				B420F2FC2F18E2A500461C92 /* ProductAndCategoryDiscountListVM.swift */,
+				B43280E62F1F351A002E4802 /* PNCDListItemTBLCell */,
 				B420F2FE2F18E46600461C92 /* Model */,
 			);
 			path = ProductAndCategoryDiscountList;
@@ -875,6 +884,15 @@
 				B42F5F612F07B7B2002252EE /* Quickvee-Prod.xcconfig */,
 			);
 			path = XCConfig;
+			sourceTree = "<group>";
+		};
+		B43280E62F1F351A002E4802 /* PNCDListItemTBLCell */ = {
+			isa = PBXGroup;
+			children = (
+				B43280E92F1F354C002E4802 /* PNCDListItemTBLCell.swift */,
+				B43280EA2F1F354C002E4802 /* PNCDListItemTBLCell.xib */,
+			);
+			path = PNCDListItemTBLCell;
 			sourceTree = "<group>";
 		};
 		B45CB8892F04DF59004AF269 /* Configuration */ = {
@@ -1036,6 +1054,7 @@
 		B494783F2F11104D00DED5CA /* Validators */ = {
 			isa = PBXGroup;
 			children = (
+				B43280F12F1F9183002E4802 /* WeekDayItemParser.swift */,
 				D26B74BD2F178EFF00E79B5B /* ProductAndCategoryItemIDExtractor.swift */,
 				B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */,
 			);
@@ -1114,6 +1133,7 @@
 		B4AD36932F16692F00E9EF55 /* WeeklySelectionView */ = {
 			isa = PBXGroup;
 			children = (
+				B43280EF2F1F906B002E4802 /* WeekDayItem.swift */,
 				B4AD36942F16694100E9EF55 /* WeeklySelectionView.swift */,
 				B4AD36962F16695400E9EF55 /* DayItemView.swift */,
 				B4AD36982F16697D00E9EF55 /* WeeklySelectionViewConfiguration.swift */,
@@ -2042,6 +2062,7 @@
 				B49381F42F0DFD9F0071D0F1 /* CustomNavigationHeaderView.xib in Resources */,
 				D268EE602C8EA44500B45172 /* Manrope-Bold.ttf in Resources */,
 				D2A68399296C0B3700F852E6 /* Assets.xcassets in Resources */,
+				B43280EB2F1F354C002E4802 /* PNCDListItemTBLCell.xib in Resources */,
 				B42F5F622F07B7B2002252EE /* Quickvee-Prod.xcconfig in Resources */,
 				D2A68394296C0B3700F852E6 /* Main.storyboard in Resources */,
 				D268EE612C8EA44500B45172 /* Manrope-SemiBold.ttf in Resources */,
@@ -2223,6 +2244,7 @@
 				D2B7CD792E965E6C00B224D7 /* StocktakeProductViewController.swift in Sources */,
 				D2B20BC72C2C0FF700A5DDD2 /* EmployeesViewController.swift in Sources */,
 				D20930942B47B4F0007CDAE8 /* SalesRecordTableViewCell.swift in Sources */,
+				B43280F02F1F906B002E4802 /* WeekDayItem.swift in Sources */,
 				D25D18612CF495A400A79FDE /* CompletedTendersCell.swift in Sources */,
 				D2D879842BBBB57500ECE573 /* InStoreRefundOrderSumCell.swift in Sources */,
 				D225879C2AB2C22100D38787 /* ApiCalls.swift in Sources */,
@@ -2237,6 +2259,7 @@
 				D23681D42AA6EF1E00728FDB /* ProductsViewController.swift in Sources */,
 				D233B6592B45044F00FBD6F2 /* DuplicateViewController.swift in Sources */,
 				B45CB8B62F04F75B004AF269 /* UDHelper.swift in Sources */,
+				B43280EC2F1F354C002E4802 /* PNCDListItemTBLCell.swift in Sources */,
 				B41A9F422F0F86E300C543C7 /* DiscountPerItemDiscountType.swift in Sources */,
 				D25253312CDB453300ADD70B /* StockTakeViewController.swift in Sources */,
 				D2E9243E2AC3DE19002370FE /* FilterCategoryViewController.swift in Sources */,
@@ -2297,6 +2320,7 @@
 				D2C1F3192C1B072700BA6388 /* QtyMixnMatchViewController.swift in Sources */,
 				D2F6E9862E61AF9300BBAD99 /* CustomerMergeViewController.swift in Sources */,
 				D24692182A32DB46006D1904 /* TapticEngine.swift in Sources */,
+				B43280F22F1F9183002E4802 /* WeekDayItemParser.swift in Sources */,
 				B4996AD82F175E1800650BB7 /* ProductAndCategoryItemsIncludedInDiscountTableView.swift in Sources */,
 				B49478412F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift in Sources */,
 				D2D879862BBBB58700ECE573 /* InStoreRefundPayCell.swift in Sources */,

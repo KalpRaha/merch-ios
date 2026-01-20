@@ -19,6 +19,13 @@ enum ProductAndCategoryDiscountType : String {
         }
     }
     
+    var titleValue : String {
+        switch self {
+        case .product: "Product"
+        case .category: "Category"
+        }
+    }
+    
 }
 
 extension ProductAndCategoryDiscountType : Codable {

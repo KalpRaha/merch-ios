@@ -17,6 +17,8 @@ extension ProductAndCategoryDiscountListVC {
         var status : String
         var enableAll : Bool
         
+        var boundary: String { UUID().uuidString }
+        
         init(
             merchantId: String,
             pncdID: String,
@@ -35,10 +37,8 @@ extension ProductAndCategoryDiscountListVC {
 
 extension ProductAndCategoryDiscountListVC.UpdateDiscountEnableDisableStateRequest : MultiPartRequestBodyType {
     
-    var boundary: String { UUID().uuidString }
-    
     func buildMultiPartBodyBuilder() -> MultipartFormDataBodyBuilder {
-        var entries: [MultipartFormDataEntry] = [
+        let entries: [MultipartFormDataEntry] = [
             .string(paramName: "merchant_id", value: merchantId),
             .string(paramName: "id", value: pncdID),
             .string(paramName: "status", value: status),
