@@ -12,7 +12,7 @@ class DiscountPerItemDiscountTextFormatter {
     
     static func format(
         _ inputText : String,
-        type : DiscountPerItemDiscountType
+        type : DiscountInputValueType
         
     ) -> String {
        

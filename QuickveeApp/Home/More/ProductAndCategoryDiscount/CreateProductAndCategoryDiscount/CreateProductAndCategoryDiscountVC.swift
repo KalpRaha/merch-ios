@@ -169,10 +169,17 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     private func updateUIWithExitingValues(){
         guard let editableDiscountItem = viewModel.editableDiscountItem else { return }
         
+        viewModel.configureInitialValuesFromExistingData()
+        
         txtDiscountName.text = editableDiscountItem.discountName
         txtDiscountPerItem.text = editableDiscountItem.discount ?? "0"
         
-        viewModel.configureInitialValuesFromExistingData()
+        
+        txtDiscountPerItem.text = DiscountPerItemDiscountTextFormatter.format(
+            editableDiscountItem.discount ?? "",
+            type: viewModel.flagsPropertyManager.discountInputValueType
+        )
+        
         
         // This line to be updated/removed later
         viewModel.flagsPropertyManager.includedProductOrCategories.removeAll()
@@ -186,10 +193,10 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
             updateUIForDiscountTypeSelectionValueChange()
         })
         
-        updateUIForDiscountPerItemDiscountTypeValueChange()
+        updateUIForDiscountInputValueTypeChange()
         updateUIForScheduleTypeValueChange()
         
-        viewModel.flagsPropertyManager.discountPerItemDiscountType = .amountValue
+        viewModel.flagsPropertyManager.discountInputValueType = .amountValue
         swtAllowDiscountStackWithOtherDiscounts.isOn = true
         swtDealHasNoEndDate.isOn = false
         swtDealIsActiveForFullDay.isOn = false
@@ -220,7 +227,7 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     // MARK: - IBAction
     
     @IBAction private func onClickDiscountTypeSelection(_ sender : UIButton) {
-        let discountType : ProductAndCategoryDiscountType = (sender.tag == 0) ? .product : .category
+        let discountType : PNCDType = (sender.tag == 0) ? .product : .category
         
         if viewModel.flagsPropertyManager.productOrCategoryDiscountType != discountType {
             viewModel.flagsPropertyManager.productOrCategoryDiscountType = discountType
@@ -236,17 +243,17 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     
     
     @IBAction func didChangeValueOfDiscountPerItemDiscountType(_ sender: GenericSegmentedControl) {
-        let discountType : DiscountPerItemDiscountType = (sender.selectedIndex == 0) ? .amountValue : .percentValue
+        let discountType : DiscountInputValueType = (sender.selectedIndex == 0) ? .amountValue : .percentValue
         
-        if viewModel.flagsPropertyManager.discountPerItemDiscountType != discountType {
-            viewModel.flagsPropertyManager.discountPerItemDiscountType = discountType
+        if viewModel.flagsPropertyManager.discountInputValueType != discountType {
+            viewModel.flagsPropertyManager.discountInputValueType = discountType
         }
         Logger.log(#function)
     }
     
     
     @IBAction func didChangeValueOfScheduleType(_ sender: GenericSegmentedControl) {
-        let scheduleType : ScheduleType = (sender.selectedIndex == 0) ? .oneTime : .repeatsOnSchedule
+        let scheduleType : PNCDScheduleType = (sender.selectedIndex == 0) ? .oneTime : .repeatsOnSchedule
         
         if viewModel.flagsPropertyManager.scheduleType != scheduleType {
             viewModel.flagsPropertyManager.scheduleType = scheduleType
@@ -366,8 +373,8 @@ extension CreateProductAndCategoryDiscountVC : CreatePNCDFlgsPropertyManagerDele
 
     }
     
-    func didUpdateDiscountPerItemDiscountType() {
-        updateUIForDiscountPerItemDiscountTypeValueChange()
+    func didUpdateDiscountInputValueType() {
+        updateUIForDiscountInputValueTypeChange()
     }
     
     

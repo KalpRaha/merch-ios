@@ -83,7 +83,7 @@ struct PNCDDiscountListItem: Decodable {
 extension PNCDDiscountListItem {
     
     func getDisplayValue() -> String {
-        let amountSymbolStringValue = discountType?.stringValue ?? ""
+        let amountSymbolStringValue = discountType.stringValue
         let discountValue = discount ?? "0.0"
         return discountType == .amountValue ? "\(amountSymbolStringValue) \(discountValue)" : "\(discountValue) \(amountSymbolStringValue)"
     }
@@ -96,16 +96,16 @@ extension PNCDDiscountListItem {
         _dealName ?? "Title"
     }
     
-    var type : ProductAndCategoryDiscountType? {
-        ProductAndCategoryDiscountType.parse(_type)
+    var type : PNCDType {
+        PNCDType.parse(_type) ?? .product
     }
     
-    var discountType : DiscountPerItemDiscountType? {
-        DiscountPerItemDiscountType.parse(_discountType)
+    var discountType : DiscountInputValueType {
+        DiscountInputValueType.parse(_discountType)
     }
     
-    var scheduleType: ScheduleType? {
-        ScheduleType.parse(_scheduleType)
+    var scheduleType: PNCDScheduleType {
+        PNCDScheduleType.parse(_scheduleType)
     }
     
     // Convenience parsed weekly days into UI enum

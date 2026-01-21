@@ -1,5 +1,5 @@
 //
-//  ScheduleType.swift
+//  PNCDScheduleType.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 12/01/26.
@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum ScheduleType : String, CaseIterable {
+enum PNCDScheduleType : String, CaseIterable {
     
     case oneTime = "0"
     case repeatsOnSchedule = "1"
@@ -21,7 +21,7 @@ enum ScheduleType : String, CaseIterable {
     }
 }
 
-extension ScheduleType : Decodable {
+extension PNCDScheduleType : Decodable {
     
     enum CodingKeys: String, CodingKey {
         case oneTime = "0"

@@ -55,12 +55,12 @@ extension CreateProductAndCategoryDiscountVC {
         func configureInitialValuesFromExistingData(){
             guard let editableDiscountItem else { return }
             
-            flagsPropertyManager.productOrCategoryDiscountType = editableDiscountItem.type ?? .product
+            flagsPropertyManager.productOrCategoryDiscountType = editableDiscountItem.type
             flagsPropertyManager.isAllowDiscountToStackWithOtherDiscounts = editableDiscountItem.isAllowThisDiscountToStackWithOtherDiscounts
             
-            flagsPropertyManager.discountPerItemDiscountType = editableDiscountItem.discountType ?? .amountValue
+            flagsPropertyManager.discountInputValueType = editableDiscountItem.discountType
             
-            flagsPropertyManager.scheduleType = editableDiscountItem.scheduleType ?? .oneTime
+            flagsPropertyManager.scheduleType = editableDiscountItem.scheduleType
             flagsPropertyManager.isThisDealHasNoEndDate = editableDiscountItem.isThisDealHasNoEndDate
             
             

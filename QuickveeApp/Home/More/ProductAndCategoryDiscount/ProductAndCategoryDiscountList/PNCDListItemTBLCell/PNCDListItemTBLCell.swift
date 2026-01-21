@@ -63,7 +63,7 @@ private extension PNCDListItemTBLCell {
     func updateUIWithData() {
         guard let data = cellData else { return }
         
-        lblDiscountName.text = "\(data.discountName) - (\(data.type?.titleValue ?? "") Discount)"
+        lblDiscountName.text = "\(data.discountName) - (\(data.type.titleValue) Discount)"
         lblDiscountAmount.text = data.getDisplayValue() + " OFF"
         
         

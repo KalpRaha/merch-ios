@@ -12,7 +12,7 @@ protocol CreatePNCDFlgsPropertyManagerDelegate : AnyObject {
     
     func didUpdateProductOrCategoryDiscountType()
     func didUpdateIsAllowDiscountToStackWithOtherDiscounts()
-    func didUpdateDiscountPerItemDiscountType()
+    func didUpdateDiscountInputValueType()
     func didUpdateScheduleType()
     
     func didUpdateIsDealIsActiveForFullDay()
@@ -31,7 +31,7 @@ extension CreatePNCDVC {
         
         //MARK: - Discount Type
         
-        var productOrCategoryDiscountType : ProductAndCategoryDiscountType = .product {
+        var productOrCategoryDiscountType : PNCDType = .product {
             didSet{
                 delegate?.didUpdateProductOrCategoryDiscountType()
             }
@@ -39,25 +39,25 @@ extension CreatePNCDVC {
         
         //MARK: -  Discount Per Item Discount Type
         
-        var discountPerItemDiscountTypeSegments: [DiscountPerItemDiscountType] = [
+        var discountPerItemDiscountTypeSegments: [DiscountInputValueType] = [
             .amountValue,
             .percentValue
         ]
         
-        var discountPerItemDiscountType: DiscountPerItemDiscountType = .amountValue {
+        var discountInputValueType: DiscountInputValueType = .amountValue {
             didSet{
-                delegate?.didUpdateDiscountPerItemDiscountType()
+                delegate?.didUpdateDiscountInputValueType()
             }
         }
         
 
         //MARK: - Schedule / Repeat Type
-        var scheduleTypeSegments: [ScheduleType] = [
+        var scheduleTypeSegments: [PNCDScheduleType] = [
             .oneTime,
             .repeatsOnSchedule
         ]
         
-        var scheduleType : ScheduleType = .oneTime {
+        var scheduleType : PNCDScheduleType = .oneTime {
             didSet{
                 delegate?.didUpdateScheduleType()
             }

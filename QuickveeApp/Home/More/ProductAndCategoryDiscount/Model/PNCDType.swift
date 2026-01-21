@@ -1,5 +1,5 @@
 //
-//  ProductAndCategoryDiscountType.swift
+//  PNCDType.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 08/01/26.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ProductAndCategoryDiscountType : String {
+enum PNCDType : String {
     
     case product = "product"
     case category = "category"
@@ -28,7 +28,7 @@ enum ProductAndCategoryDiscountType : String {
     
 }
 
-extension ProductAndCategoryDiscountType : Codable {
+extension PNCDType : Codable {
     
     enum CodingKeys : String, CodingKey {
         case product = "product"
@@ -44,7 +44,7 @@ extension ProductAndCategoryDiscountType : Codable {
     
 }
 
-extension ProductAndCategoryDiscountType {
+extension PNCDType {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

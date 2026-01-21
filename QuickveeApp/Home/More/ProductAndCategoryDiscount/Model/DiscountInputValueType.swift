@@ -1,5 +1,5 @@
 //
-//  DiscountPerItemDiscountType.swift
+//  DiscountInputValueType.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 08/01/26.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DiscountPerItemDiscountType: String {
+enum DiscountInputValueType: String {
     
     // Align raw values with API payload: "1" => percent, "2" => amount
     case percentValue = "1"
@@ -28,7 +28,7 @@ enum DiscountPerItemDiscountType: String {
     }
 }
 
-extension DiscountPerItemDiscountType: Codable {
+extension DiscountInputValueType: Codable {
     
     // Keep existing API value mapping
     

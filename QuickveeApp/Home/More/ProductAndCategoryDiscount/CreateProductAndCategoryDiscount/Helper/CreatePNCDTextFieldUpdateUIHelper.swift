@@ -41,13 +41,13 @@ extension CreateProductAndCategoryDiscountVC {
     @objc func updateTextField(textField: UITextField) {
         textField.text = DiscountPerItemDiscountTextFormatter.format(
             textField.text ?? "",
-            type: viewModel.flagsPropertyManager.discountPerItemDiscountType
+            type: viewModel.flagsPropertyManager.discountInputValueType
         )
         
     }
     
-    func updateUIForDiscountPerItemDiscountTypeValueChange(){
-        let isPercent = viewModel.flagsPropertyManager.discountPerItemDiscountType == .percentValue
+    func updateUIForDiscountInputValueTypeChange(){
+        let isPercent = viewModel.flagsPropertyManager.discountInputValueType == .percentValue
         
         lblDiscountPerItem.text = isPercent ? "Discount per item (%)" : "Discount per item ($)"
         txtDiscountPerItem.text = nil
@@ -63,6 +63,6 @@ extension CreateProductAndCategoryDiscountVC {
         
         return NSAttributedString(string: text, attributes: attributes)
     }
-
+    
     
 }
