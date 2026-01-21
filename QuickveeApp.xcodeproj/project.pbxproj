@@ -106,6 +106,7 @@
 		B4BC09822F1529A500BDB89E /* VariantDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC09812F1529A500BDB89E /* VariantDataModel.swift */; };
 		B4C342D42F19F88900A3BDA3 /* AddUpdatePNCDRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C342D32F19F88900A3BDA3 /* AddUpdatePNCDRequestBuilder.swift */; };
 		B4C342D62F1A018B00A3BDA3 /* CommonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C342D52F1A018B00A3BDA3 /* CommonResponse.swift */; };
+		B4E4A2302F2090AC000432CB /* CreatePNCDTextFieldUpdateUIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E4A22F2F2090AC000432CB /* CreatePNCDTextFieldUpdateUIHelper.swift */; };
 		D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */; };
 		D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */; };
 		D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC882AA9AB8800A216C3 /* VariantViewController.swift */; };
@@ -492,6 +493,7 @@
 		B4BC09812F1529A500BDB89E /* VariantDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantDataModel.swift; sourceTree = "<group>"; };
 		B4C342D32F19F88900A3BDA3 /* AddUpdatePNCDRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpdatePNCDRequestBuilder.swift; sourceTree = "<group>"; };
 		B4C342D52F1A018B00A3BDA3 /* CommonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonResponse.swift; sourceTree = "<group>"; };
+		B4E4A22F2F2090AC000432CB /* CreatePNCDTextFieldUpdateUIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePNCDTextFieldUpdateUIHelper.swift; sourceTree = "<group>"; };
 		BD3A5305EE37476CB5794F58 /* Pods_QuickveeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickveeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
 		D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeViewController.swift; sourceTree = "<group>"; };
@@ -1017,6 +1019,7 @@
 				B46CD4032F1A5117009011F4 /* DateNTimeHelper.swift */,
 				B46CD3FF2F1A45DE009011F4 /* TimeFormatHelper.swift */,
 				B46CD40D2F1A603F009011F4 /* DateFormatHelper.swift */,
+				B4E4A22F2F2090AC000432CB /* CreatePNCDTextFieldUpdateUIHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -2315,6 +2318,7 @@
 				D220880B29D14133006393C2 /* SetupVendorTableViewCell.swift in Sources */,
 				D25D18632CF4980500A79FDE /* CompletedRefundDetailCell.swift in Sources */,
 				D20EE8372AA5F2A800762E56 /* InventoryViewController.swift in Sources */,
+				B4E4A2302F2090AC000432CB /* CreatePNCDTextFieldUpdateUIHelper.swift in Sources */,
 				D2D2791C2AE61ADB001DD908 /* CustomFlowLayout.swift in Sources */,
 				D2BBAD1A2C94017C00133338 /* GiftCardTableViewCell.swift in Sources */,
 				D2C1F3192C1B072700BA6388 /* QtyMixnMatchViewController.swift in Sources */,

@@ -54,11 +54,11 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     
     
     // Discount Name and Discount per item
-    @IBOutlet private weak var lblDiscountName: UILabel!
-    @IBOutlet private weak var txtDiscountName: UITextField!
+    @IBOutlet weak var lblDiscountName: UILabel!
+    @IBOutlet weak var txtDiscountName: UITextField!
     
-    @IBOutlet private weak var lblDiscountPerItem: UILabel!
-    @IBOutlet private weak var txtDiscountPerItem: UITextField!
+    @IBOutlet weak var lblDiscountPerItem: UILabel!
+    @IBOutlet weak var txtDiscountPerItem: UITextField!
     
     
     @IBOutlet private weak var segCtrlDiscountPerItemDiscountType : GenericSegmentedControl!
@@ -118,11 +118,11 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
         if viewModel.editableDiscountItem != nil {
             
             if !isExisitngPropertiesUpdatedOnUI {
-                configureInitialValues()
+                updateUIWithExitingValues()
             }
             
         }else {
-            updateInitialUI()
+            updateUIWithDefaultInitialValues()
         }
         
     }
@@ -133,6 +133,7 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     }
     
     private func configure() {
+        vwNavigationHeader.delegate = self
         datePickerInputViewConfigurationBuilder.vc = self
         
         viewModel.flagsPropertyManager.delegate = self
@@ -142,7 +143,6 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     }
     
     private func updateUI(){
-        vwNavigationHeader.delegate = self
         setupUIForDiscountTextFields()
 
         segCtrlDiscountPerItemDiscountType.configure(
@@ -166,7 +166,7 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
         tblProductORCategoryItemsIncludedView.configure(with: [])
     }
     
-    private func configureInitialValues(){
+    private func updateUIWithExitingValues(){
         guard let editableDiscountItem = viewModel.editableDiscountItem else { return }
         
         txtDiscountName.text = editableDiscountItem.discountName
@@ -180,7 +180,7 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
         isExisitngPropertiesUpdatedOnUI = true
     }
     
-    private func updateInitialUI(){
+    private func updateUIWithDefaultInitialValues(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: { [weak self] in
             guard let self else { return }
             updateUIForDiscountTypeSelectionValueChange()
@@ -195,34 +195,6 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
         swtDealIsActiveForFullDay.isOn = false
 
         viewModel.flagsPropertyManager.includedProductOrCategories.removeAll()
-    }
-    
-    private func setupUIForDiscountTextFields(){
-        // Discount Name
-        txtDiscountName.attributedPlaceholder = getAttributedPlaceHolderText(for: "Enter Discount Name")
-        
-        txtDiscountName.delegate = self
-        txtDiscountName.borderStyle = .none
-        txtDiscountName.returnKeyType = .next
-        txtDiscountName.superview?.applyBorder(
-            borderWidth: 1,
-            borderColor: .E4E8EF,
-            borderOpacity: 1
-        )
-        txtDiscountName.superview?.applyCornerRadius(cornerRadius: 8)
-        
-        // Discount Per Item
-        txtDiscountPerItem.attributedPlaceholder = getAttributedPlaceHolderText(for: "$0.00")
-        txtDiscountPerItem.borderStyle = .none
-        txtDiscountPerItem.superview?.applyBorder(
-            borderWidth: 1,
-            borderColor: .E4E8EF,
-            borderOpacity: 1
-        )
-        txtDiscountPerItem.superview?.applyCornerRadius(cornerRadius: 8)
-        
-        txtDiscountPerItem.keyboardType = .numberPad
-        txtDiscountPerItem.addTarget(self, action: #selector(updateTextField), for: .editingChanged)
     }
 
     
@@ -336,35 +308,6 @@ extension CreateProductAndCategoryDiscountVC {
     }
 }
 
-
-extension CreateProductAndCategoryDiscountVC {
-    
-    @objc func updateTextField(textField: UITextField) {
-        textField.text = DiscountPerItemDiscountTextFormatter.format(
-            textField.text ?? "",
-            type: viewModel.flagsPropertyManager.discountPerItemDiscountType
-        )
-        
-    }
-    
-    private func updateUIForDiscountPerItemDiscountTypeValueChange(){
-        let isPercent = viewModel.flagsPropertyManager.discountPerItemDiscountType == .percentValue
-        
-        lblDiscountPerItem.text = isPercent ? "Discount per item (%)" : "Discount per item ($)"
-        txtDiscountPerItem.text = nil
-        txtDiscountPerItem.attributedPlaceholder = getAttributedPlaceHolderText(for: isPercent ? "0.00%" : "$0.00")
-        
-    }
-    
-    private func getAttributedPlaceHolderText(for text: String) -> NSAttributedString {
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: FontFamily.ManropeMedium.size(14),
-            .foregroundColor: UIColor._878787
-        ]
-        
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-}
 
 extension CreateProductAndCategoryDiscountVC {
     
