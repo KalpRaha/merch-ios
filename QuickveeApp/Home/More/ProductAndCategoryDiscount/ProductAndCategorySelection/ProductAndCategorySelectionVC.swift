@@ -59,7 +59,8 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
     var scannerDelegateHandler: BarcodeScannerDelegateHandler?
     
     var viewModel : ViewModel!
-    var selectCategory = [InventoryCategory]()
+    
+    
     
     
     weak var delegate: ProductAndCategorySelectionVCProtocol?
@@ -156,24 +157,23 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
 
     @IBAction func categoryfilterBtnClick(_ sender: UIButton) {
         
-         FilterCategoryViewController.present(in: self, passData: { [weak self] vc in
+        FilterCategoryViewController.present(in: self, passData: { [weak self] vc in
             guard let self else { return }
             vc.delegateProductAndCategorySelected = self
             vc.catMode = "prodAndCatVc"
             vc.apiMode = "category"
-             vc.selectCategory = viewModel.selectedCategories
+            vc.selectCategory = viewModel.selectedCategories
         } ,completion: {
-           // vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
-
+            // vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
+            
         })
-        
-   
     }
+    
     
     @IBAction func cancelBtnClick(_ sender: GenericButton) {
         dismiss(animated: true)
     }
-
+    
         
     @IBAction func confirmBtnClick(_ sender: GenericButton) {
         
