@@ -23,7 +23,6 @@ class CreateProductAndCategoryDiscountVCFactory {
             builder: .init(merchantId: UDHelper.shared.merchantId)
         )
         
-        vc.discountTypeSwitchUIUpdateHelper = .init()
         vc.datePickerInputViewConfigurationBuilder = .init()
         
         return vc
@@ -37,6 +36,7 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     
     
     @IBOutlet private weak var vwNavigationHeader: CustomNavigationHeaderView!
+    @IBOutlet private weak var srcScrollView: UIScrollView!
     
     
     // Discount Type Selection View
@@ -100,9 +100,10 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     var viewModel : ViewModel!
     
     var isViewLoadedFlag : Bool = false
+    var isExisitngPropertiesUpdatedOnUI : Bool = false
+    
     
     // Helper to manage type switch UI
-    var discountTypeSwitchUIUpdateHelper: CreatePNCDTypeSwitchUIHelper!
     var datePickerInputViewConfigurationBuilder: CreatePNCDVCDatePickerConfigurationBuilder!
     
     override func viewDidLoad() {
@@ -114,11 +115,16 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if !isViewLoadedFlag && viewModel.editableDiscountItem != nil{
-            configureInitialValues()
+        if viewModel.editableDiscountItem != nil {
+            
+            if !isExisitngPropertiesUpdatedOnUI {
+                configureInitialValues()
+            }
+            
         }else {
             updateInitialUI()
         }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -127,7 +133,6 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     }
     
     private func configure() {
-        discountTypeSwitchUIUpdateHelper.vc = self
         datePickerInputViewConfigurationBuilder.vc = self
         
         viewModel.flagsPropertyManager.delegate = self
@@ -168,6 +173,11 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
         txtDiscountPerItem.text = editableDiscountItem.discount ?? "0"
         
         viewModel.configureInitialValuesFromExistingData()
+        
+        // This line to be updated/removed later
+        viewModel.flagsPropertyManager.includedProductOrCategories.removeAll()
+        
+        isExisitngPropertiesUpdatedOnUI = true
     }
     
     private func updateInitialUI(){
@@ -183,7 +193,7 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
         swtAllowDiscountStackWithOtherDiscounts.isOn = true
         swtDealHasNoEndDate.isOn = false
         swtDealIsActiveForFullDay.isOn = false
-        
+
         viewModel.flagsPropertyManager.includedProductOrCategories.removeAll()
     }
     
@@ -322,9 +332,7 @@ extension CreateProductAndCategoryDiscountVC : CustomNavigationHeaderViewDelegat
 extension CreateProductAndCategoryDiscountVC {
     
     private func updateUIForDiscountTypeSelectionValueChange(){
-        discountTypeSwitchUIUpdateHelper.update(
-            for: viewModel.flagsPropertyManager.productOrCategoryDiscountType
-        )
+        updateUIForPNCDSelectionType()
     }
 }
 
@@ -394,6 +402,7 @@ extension CreateProductAndCategoryDiscountVC : DatePickerInputViewDelegate {
     }
     
     func onClickCancel() {
+        popVC()
         Logger.log(#function)
     }
     
@@ -458,10 +467,9 @@ extension CreateProductAndCategoryDiscountVC : CreatePNCDDateAndTimeUIUpdateDele
 }
 
 extension CreateProductAndCategoryDiscountVC : ProductAndCategorySelectionVCProtocol {
+    
     func didSelectVariants(_ variants: [VariantDataModel]) {
-        print(variants)
         viewModel.flagsPropertyManager.includedProductOrCategories = variants
-       
     }
     
 }

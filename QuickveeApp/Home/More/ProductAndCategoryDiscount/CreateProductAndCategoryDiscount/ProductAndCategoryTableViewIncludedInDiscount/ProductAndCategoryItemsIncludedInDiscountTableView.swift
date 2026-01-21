@@ -33,9 +33,12 @@ class ProductAndCategoryItemsIncludedInDiscountTableView: UITableView {
         
         self.delegate = self
         self.dataSource = self
-
-        let nib = ProductAndCategoryItemIncludedInDiscountTBLCell.nib
-        self.register(nib, forCellReuseIdentifier: ProductAndCategoryItemIncludedInDiscountTBLCell.className)
+        self.isScrollEnabled = false
+        
+        self.register(
+            ProductAndCategoryItemIncludedInDiscountTBLCell.nib,
+            forCellReuseIdentifier: ProductAndCategoryItemIncludedInDiscountTBLCell.className
+        )
     }
     
     func reloadData(with dataItems: [ItemDataType]) {
@@ -47,12 +50,9 @@ class ProductAndCategoryItemsIncludedInDiscountTableView: UITableView {
         // initial UI config
         
     }
-
-    
 }
 
 extension ProductAndCategoryItemsIncludedInDiscountTableView : UITableViewDataSource, UITableViewDelegate {
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         dataItems.count

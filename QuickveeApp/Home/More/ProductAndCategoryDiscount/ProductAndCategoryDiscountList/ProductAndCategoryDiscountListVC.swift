@@ -71,8 +71,7 @@ final class ProductAndCategoryDiscountListVC: UIViewController, Navigatable {
         tblDiscountListView.dataSource = self
         tblDiscountListView.delegate = self
         
-        let nib = UINib(nibName: PNCDListItemTBLCell.className, bundle: nil)
-        tblDiscountListView.register(nib, forCellReuseIdentifier: PNCDListItemTBLCell.className)
+        tblDiscountListView.register(PNCDListItemTBLCell.nib, forCellReuseIdentifier: PNCDListItemTBLCell.className)
         
         viewModel.discountList = []
     }
