@@ -157,8 +157,8 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
         dtPickerDealStartTime.configureView(pickerType: .time, delegate: self)
         dtPickerDealEndTime.configureView(pickerType: .time, delegate: self)
 
-        let array : [String] = ["Sooraj", "Aashish", "Satish", "Sreraj", "Dhiraj", "Harsh", "Shreyansh"]
-        tblProductORCategoryItemsIncludedView.configure(with: array)
+        
+        tblProductORCategoryItemsIncludedView.configure(with: [])
     }
     
     private func configureInitialValues(){
@@ -281,7 +281,10 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     
     
     @IBAction func onClickBtnAddProductAndCategory(_ sender: GenericButton) {
-        ProductAndCategorySelectionVCFactory.make().push(in: navigationController, animated: false)
+        ProductAndCategorySelectionVCFactory.make().push(in: navigationController, passData: { [weak self]  vc in
+            guard let self else { return }
+            vc.delegate = self
+        }, animated: false)
         Logger.log(#function)
     }
     
@@ -367,11 +370,12 @@ extension CreateProductAndCategoryDiscountVC {
     
     
     private func updateUIForIncludedProductsOrCategories() {
+        
         let isShowTblList = viewModel.flagsPropertyManager.includedProductOrCategories.isEmpty == false
         
         vwAddProductORCategoryBtnSuperView.isHidden = isShowTblList
         vwEditProductORCategorySuperView.isHidden = !isShowTblList
-        
+        tblProductORCategoryItemsIncludedView.reloadData(with: viewModel.flagsPropertyManager.includedProductOrCategories)
         
     }
     
@@ -453,3 +457,11 @@ extension CreateProductAndCategoryDiscountVC : CreatePNCDDateAndTimeUIUpdateDele
     
 }
 
+extension CreateProductAndCategoryDiscountVC : ProductAndCategorySelectionVCProtocol {
+    func didSelectVariants(_ variants: [VariantDataModel]) {
+        print(variants)
+        viewModel.flagsPropertyManager.includedProductOrCategories = variants
+       
+    }
+    
+}

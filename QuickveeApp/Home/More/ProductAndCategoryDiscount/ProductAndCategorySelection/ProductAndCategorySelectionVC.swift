@@ -8,6 +8,11 @@
 import UIKit
 import BarcodeScanner
 
+protocol ProductAndCategorySelectionVCProtocol: AnyObject{
+    func didSelectVariants(_ variants: [VariantDataModel])
+    
+}
+
 class ProductAndCategorySelectionVCFactory {
     
     static func make() -> ProductAndCategorySelectionVC {
@@ -38,9 +43,7 @@ class ProductAndCategorySelectionVCFactory {
 
 
 final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
-   
-    
-    
+
     static var storyboard: UIStoryboard {.productAndCategoryDiscount}
     
     
@@ -58,15 +61,18 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
     var viewModel : ViewModel!
     var selectCategory = [InventoryCategory]()
     
+    
+    weak var delegate: ProductAndCategorySelectionVCProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureTableView()
-        viewModel.loadData()
         captureUPC()
         configureSearchBar()
         updateUI()
         viewModel.isSearching = false
+        viewModel.loadData()
         
     }
     
@@ -97,15 +103,29 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
     
     func updateUI(){
         filterView.isHidden = true
-//        filterView.layer.cornerRadius = 12.5
-//        filterView.backgroundColor =  UIColor(named: "SelectCat")
-//        filterLbl.font = UIFont(name: "Manrope-Medium", size: 12.0)!
-//        filterLbl.textColor = UIColor.white
+        filterView.layer.cornerRadius = 12.5
+        filterView.backgroundColor =  UIColor(named: "SelectCat")
+        filterLbl.font = UIFont(name: "Manrope-Medium", size: 12.0)!
+        filterLbl.textColor = UIColor.white
+
     }
     
-    
-    
-    
+
+    func updateCategoryCountUI() {
+        let count = viewModel.selectedCategories.count
+        print("DEBUG count:", count)
+        
+        if count > 0 {
+            filterView.isHidden = false
+            filterLbl.isHidden = false
+            filterLbl.text = "\(count)"
+
+        } else {
+            filterView.isHidden = true
+            filterLbl.isHidden = true
+        }
+    }
+
     private func updateUIForSearchFlag(){
         searchBtn.alpha =  viewModel.isSearching ? 0 : 1
         searchBar.alpha = viewModel.isSearching ? 1 : 0
@@ -141,7 +161,7 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
             vc.delegateProductAndCategorySelected = self
             vc.catMode = "prodAndCatVc"
             vc.apiMode = "category"
-            vc.selectCategory = selectCategory
+             vc.selectCategory = viewModel.selectedCategories
         } ,completion: {
            // vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
 
@@ -149,11 +169,19 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
         
    
     }
+    
     @IBAction func cancelBtnClick(_ sender: GenericButton) {
         dismiss(animated: true)
     }
-    
+
+        
     @IBAction func confirmBtnClick(_ sender: GenericButton) {
+        
+        let result = viewModel.selectedIndexPath.map {
+            viewModel.variantList[$0.row]
+        }
+        delegate?.didSelectVariants(result)
+        popVC()
     }
 }
 
@@ -183,11 +211,23 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
         
         if  viewModel.selectedIndexPath.contains(indexPath)  {
             viewModel.selectedIndexPath.removeAll(where: { $0 == indexPath})
+          //  selectedVariants.removeAll { $0 == viewModel.variantList[indexPath.row] }
+           
             
         } else {
             
             viewModel.selectedIndexPath.append(indexPath)
-            print(viewModel.variantList[indexPath.row])
+//            let variant = viewModel.variantList[indexPath.row]
+//                selectedVariants.append(variant)
+            
+//            var result : [VariantDataModel] = []
+//                       
+//                       for indexPath in viewModel.selectedIndexPath {
+//                           result.append(viewModel.variantList[indexPath.row])
+//                           
+//                       }
+//          print(result)
+           
         }
         tableView.reloadRows(at: [indexPath], with: .none)
     }
@@ -218,6 +258,13 @@ extension ProductAndCategorySelectionVC : SelectedCategoryProductsDelegate {
 
 
 extension ProductAndCategorySelectionVC: ProductAndCategorySelectionViewModelDelegate {
+    func didUpdateSelectedCategories() {
+        viewModel.selectedCategories.count
+        DispatchQueue.main.async {
+            self.updateCategoryCountUI()
+        }
+    }
+    
     
     func didUpdatedTableViewData() {
         DispatchQueue.main.async {

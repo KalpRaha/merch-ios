@@ -12,6 +12,7 @@ protocol ProductAndCategorySelectionViewModelDelegate: AnyObject {
     
     func didUpdatedTableViewData()
     func didUpdateSearchFlag()
+    func didUpdateSelectedCategories()
 }
 
 extension ProductAndCategorySelectionVC {
@@ -52,8 +53,13 @@ extension ProductAndCategorySelectionVC {
         var selectedCategories: [InventoryCategory] = [] {
             didSet {
                 filterByCategories()
+                delegate?.didUpdateSelectedCategories()
             }
         }
+        
+        
+        
+        
         
         init(
             repository: VariantListAPIRepositoryProtocol,
