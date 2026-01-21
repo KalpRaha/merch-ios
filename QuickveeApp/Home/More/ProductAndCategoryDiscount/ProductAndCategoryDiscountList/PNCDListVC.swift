@@ -63,6 +63,19 @@ final class PNCDListVC: UIViewController, Navigatable {
         btnCreateDiscount.backgroundColor = ._0A64F9
         btnCreateDiscount.titleLabel?.font = FontFamily.ManropeMedium.size(15)
         btnCreateDiscount.applyCornerRadius(cornerRadius: 8)
+        
+        
+        tblDiscountListView.addPullToRefresh(configControl: { [weak self] control in
+            guard let _ = self else { return }
+            
+            control.tintColor = .black
+            
+        }, action: { [weak self] action in
+            guard let self else { return }
+            
+            viewModel.getDiscountList()
+        })
+        
     }
 
     private func configureDiscountListTableView() {
@@ -145,6 +158,7 @@ extension PNCDListVC : ProductAndCategoryDiscountListVMProtocol {
                 vwNoDiscountView.isHidden = true
                 vwDiscountListTableContainerView.isHidden = false
                 
+                tblDiscountListView.refreshControl?.endRefreshing()
                 tblDiscountListView.reloadData()
             }
             

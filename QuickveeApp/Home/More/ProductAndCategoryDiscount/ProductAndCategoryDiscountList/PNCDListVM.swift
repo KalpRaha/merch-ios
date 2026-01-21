@@ -1,5 +1,5 @@
 //
-//  ProductAndCategoryDiscountListVM.swift
+//  PNCDListVM.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 15/01/26.

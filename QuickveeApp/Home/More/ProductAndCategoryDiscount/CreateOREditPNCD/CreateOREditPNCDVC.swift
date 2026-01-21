@@ -180,9 +180,11 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
             type: viewModel.flagsPropertyManager.discountInputValueType
         )
         
-        
-        // This line to be updated/removed later
-        viewModel.flagsPropertyManager.includedProductOrCategories.removeAll()
+        // For inital UI update
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: { [weak self] in
+            guard let self else { return }
+            updateUIForDiscountTypeSelectionValueChange()
+        })
         
         isExisitngPropertiesUpdatedOnUI = true
     }
@@ -340,8 +342,6 @@ extension CreateOREditPNCDVC {
         vwAddProductORCategoryBtnSuperView.isHidden = isShowTblList
         vwEditProductORCategorySuperView.isHidden = !isShowTblList
         tblProductORCategoryItemsIncludedView.reloadData(with: viewModel.flagsPropertyManager.includedProductOrCategories)
-   
-        segCtrlDiscountScheduleType.select(index: viewModel.flagsPropertyManager.scheduleType.getIndex())
         
     }
     
@@ -360,7 +360,6 @@ extension CreateOREditPNCDVC : DatePickerInputViewDelegate {
     }
     
     func onClickCancel() {
-        popVC()
         Logger.log(#function)
     }
     

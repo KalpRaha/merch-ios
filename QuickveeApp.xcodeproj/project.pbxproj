@@ -23,7 +23,7 @@
 		B41A9F452F0FA88C00C543C7 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F442F0FA88C00C543C7 /* CustomSegmentedControl.swift */; };
 		B420F2F72F18A8A300461C92 /* MixnMatchAPIListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F2F62F18A8A300461C92 /* MixnMatchAPIListRepository.swift */; };
 		B420F2F92F18CA8100461C92 /* PNCDAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F2F82F18CA8100461C92 /* PNCDAPIRepository.swift */; };
-		B420F2FD2F18E2A500461C92 /* ProductAndCategoryDiscountListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F2FC2F18E2A500461C92 /* ProductAndCategoryDiscountListVM.swift */; };
+		B420F2FD2F18E2A500461C92 /* PNCDListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F2FC2F18E2A500461C92 /* PNCDListVM.swift */; };
 		B420F3002F18E46900461C92 /* GetDiscountListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F2FF2F18E46900461C92 /* GetDiscountListRequest.swift */; };
 		B420F3022F18E55700461C92 /* UpdateDiscountEnableDisableStateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F3012F18E55700461C92 /* UpdateDiscountEnableDisableStateRequest.swift */; };
 		B420F3062F18E67800461C92 /* OtherExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F3052F18E67800461C92 /* OtherExtension.swift */; };
@@ -410,7 +410,7 @@
 		B41A9F442F0FA88C00C543C7 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		B420F2F62F18A8A300461C92 /* MixnMatchAPIListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixnMatchAPIListRepository.swift; sourceTree = "<group>"; };
 		B420F2F82F18CA8100461C92 /* PNCDAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDAPIRepository.swift; sourceTree = "<group>"; };
-		B420F2FC2F18E2A500461C92 /* ProductAndCategoryDiscountListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryDiscountListVM.swift; sourceTree = "<group>"; };
+		B420F2FC2F18E2A500461C92 /* PNCDListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDListVM.swift; sourceTree = "<group>"; };
 		B420F2FF2F18E46900461C92 /* GetDiscountListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDiscountListRequest.swift; sourceTree = "<group>"; };
 		B420F3012F18E55700461C92 /* UpdateDiscountEnableDisableStateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDiscountEnableDisableStateRequest.swift; sourceTree = "<group>"; };
 		B420F3052F18E67800461C92 /* OtherExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherExtension.swift; sourceTree = "<group>"; };
@@ -839,7 +839,7 @@
 			isa = PBXGroup;
 			children = (
 				B49381EC2F0DFCF60071D0F1 /* PNCDListVC.swift */,
-				B420F2FC2F18E2A500461C92 /* ProductAndCategoryDiscountListVM.swift */,
+				B420F2FC2F18E2A500461C92 /* PNCDListVM.swift */,
 				B43280E62F1F351A002E4802 /* PNCDListItemTBLCell */,
 				B420F2FE2F18E46600461C92 /* Model */,
 			);
@@ -2203,7 +2203,7 @@
 				04AC908D2E951D360009C2A8 /* DescOptionsCollectionViewCell.swift in Sources */,
 				D2A2BF6E2B8D94C6006796D5 /* PageViewController.swift in Sources */,
 				D2D625492B75E13300C25D07 /* AddBulkPricingViewController.swift in Sources */,
-				B420F2FD2F18E2A500461C92 /* ProductAndCategoryDiscountListVM.swift in Sources */,
+				B420F2FD2F18E2A500461C92 /* PNCDListVM.swift in Sources */,
 				D20784572D313127000E228A /* StockEmailViewController.swift in Sources */,
 				D2A37A442BFCA8CB005B59CE /* PurchaseQuantityViewController.swift in Sources */,
 				D26636BA29BB056800B8A5FC /* CouponTableViewCell.swift in Sources */,

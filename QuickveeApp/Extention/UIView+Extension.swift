@@ -295,3 +295,38 @@ extension UITableViewCell {
     }
     
 }
+
+extension UIScrollView {
+    
+    func addPullToRefresh(configControl: ((UIRefreshControl) -> Void)? = nil, action: ((UIRefreshControl) -> Void)? = nil){
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handlePullToRefresh(_:)), for: .valueChanged)
+        configControl?(refreshControl)
+        self.refreshControl = refreshControl
+        
+        guard let key = AssociatedPullToRefreshActionKeys.pullAction else {
+            fatalError("AssociatedPullToRefreshActionKeys.pullAction is nil.")
+        }
+        objc_setAssociatedObject(self, key, action, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        
+    }
+    
+    @objc private func handlePullToRefresh(_ refreshControl: UIRefreshControl){
+        guard let key = AssociatedPullToRefreshActionKeys.pullAction else {
+            fatalError("AssociatedPullToRefreshActionKeys.pullAction is nil.")
+        }
+        guard let action = objc_getAssociatedObject(self, key) as? (UIRefreshControl) -> Void else {
+            fatalError("AssociatedPullToRefreshActionKeys.pullAction is nil.")
+        }
+        action(refreshControl)
+        print("Pull To Refresh")
+    }
+    
+    
+    private struct AssociatedPullToRefreshActionKeys {
+        static let pullAction = UnsafeRawPointer(bitPattern: "pullAction".hashValue)
+    }
+
+    
+}
