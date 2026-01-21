@@ -8,7 +8,7 @@
 import Foundation
 
 
-extension ProductAndCategoryDiscountListVC {
+extension PNCDListVC {
     
     struct GetDiscountListRequest {
         
@@ -36,7 +36,7 @@ extension ProductAndCategoryDiscountListVC {
 }
 
 
-extension ProductAndCategoryDiscountListVC.GetDiscountListRequest : MultiPartRequestBodyType{
+extension PNCDListVC.GetDiscountListRequest : MultiPartRequestBodyType{
 
     func buildMultiPartBodyBuilder() -> MultipartFormDataBodyBuilder {
         var entries: [MultipartFormDataEntry] = [

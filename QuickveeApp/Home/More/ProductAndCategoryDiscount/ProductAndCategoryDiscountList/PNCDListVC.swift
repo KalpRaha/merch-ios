@@ -1,5 +1,5 @@
 //
-//  ProductAndCategoryDiscountListVC.swift
+//  PNCDListVC.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 07/01/26.
@@ -7,15 +7,15 @@
 
 import UIKit
 
-typealias PNCDListVC = ProductAndCategoryDiscountListVC
+typealias ProductAndCategoryDiscountListVC = PNCDListVC
 
-class ProductAndCategoryDiscountListVCFactory {
+class PNCDListVCFactory {
     
     static func make() -> PNCDListVC {
-        let vc = ProductAndCategoryDiscountListVC.instantiate()
+        let vc = PNCDListVC.instantiate()
         
         vc.viewModel = .init(
-            pncdRepository: ProductAndCategoryDiscountAPIRepository(
+            pncdRepository: PNCDAPIRepository(
                 apiService: APIServiceFactory.make()
             )
             
@@ -27,7 +27,7 @@ class ProductAndCategoryDiscountListVCFactory {
     
 }
 
-final class ProductAndCategoryDiscountListVC: UIViewController, Navigatable {
+final class PNCDListVC: UIViewController, Navigatable {
 
     static var storyboard: UIStoryboard { .productAndCategoryDiscount }
     
@@ -77,14 +77,14 @@ final class ProductAndCategoryDiscountListVC: UIViewController, Navigatable {
     }
 
     @IBAction private func onClickBtnCreateDiscount(_ sender: UIButton) {
-        CreateProductAndCategoryDiscountVCFactory.make().push(in: self)
+        CreateOREditPNCDVCFactory.make().push(in: self)
         Logger.log(#function)
     }
     
     
 }
 
-extension ProductAndCategoryDiscountListVC : CustomNavigationHeaderViewDelegate{
+extension PNCDListVC : CustomNavigationHeaderViewDelegate{
     
     func onClickBack() {
         popVC()
@@ -96,7 +96,7 @@ extension ProductAndCategoryDiscountListVC : CustomNavigationHeaderViewDelegate{
  
 }
 
-extension ProductAndCategoryDiscountListVC : UITableViewDataSource, UITableViewDelegate {
+extension PNCDListVC : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.discountList.count
@@ -121,7 +121,7 @@ extension ProductAndCategoryDiscountListVC : UITableViewDataSource, UITableViewD
     }
     
     private func handleOnClickEditPNCD(indexPath : IndexPath) {
-        CreateProductAndCategoryDiscountVCFactory.make(
+        CreateOREditPNCDVCFactory.make(
             discountItem: viewModel.discountList[indexPath.row]
         ).push(
             in: self
@@ -130,7 +130,7 @@ extension ProductAndCategoryDiscountListVC : UITableViewDataSource, UITableViewD
     
 }
 
-extension ProductAndCategoryDiscountListVC : ProductAndCategoryDiscountListVMProtocol {
+extension PNCDListVC : ProductAndCategoryDiscountListVMProtocol {
  
     func didUpdatedDiscountList() {
         DispatchQueue.main.async { [weak self] in

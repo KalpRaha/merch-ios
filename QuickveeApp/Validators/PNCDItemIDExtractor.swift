@@ -1,5 +1,5 @@
 //
-//  ProductAndCategoryItemIDExtractor.swift
+//  PNCDItemIDExtractor.swift
 //  QuickveeApp
 //
 //  Created by Pallavi on 14/01/26.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ProductAndCategoryItemIDExtractor {
+class PNCDItemIDExtractor {
     
     static func extract(from text: String) -> [String] {
         guard let data = text.data(using: .utf8) else {

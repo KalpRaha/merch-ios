@@ -1,5 +1,5 @@
 //
-//  ProductAndCategoryDiscountAPIRepository.swift
+//  PNCDAPIRepository.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 15/01/26.
@@ -8,7 +8,7 @@
 import Foundation
 
 
-protocol ProductAndCategoryDiscountAPIRepositoryProtocol : AnyObject {
+protocol PNCDAPIRepositoryProtocol : AnyObject {
         
     var apiService: APIServiceType { get }
 
@@ -31,7 +31,7 @@ protocol ProductAndCategoryDiscountAPIRepositoryProtocol : AnyObject {
 }
 
 
-class ProductAndCategoryDiscountAPIRepository : ProductAndCategoryDiscountAPIRepositoryProtocol{
+class PNCDAPIRepository : PNCDAPIRepositoryProtocol{
     
     var apiService: any APIServiceType
     
@@ -44,7 +44,7 @@ class ProductAndCategoryDiscountAPIRepository : ProductAndCategoryDiscountAPIRep
     ) async throws ->  GetDiscountListResponse {
         
         return try await apiService.getData(
-            endpoint: API.ProductAndCategoryDiscountEndpoint.getDiscountList(
+            endpoint: API.PNCDEndpoint.getDiscountList(
                 req: request
             ),
             responseType: GetDiscountListResponse.self,
@@ -57,7 +57,7 @@ class ProductAndCategoryDiscountAPIRepository : ProductAndCategoryDiscountAPIRep
     
     {
         return try await apiService.getData(
-            endpoint: API.ProductAndCategoryDiscountEndpoint.updateDiscountEnableDisableStatus(req: request),
+            endpoint: API.PNCDEndpoint.updateDiscountEnableDisableStatus(req: request),
             responseType: GenericAPIResponse<PNCDListVC.UpdateDiscountEnableDisableStateResponse>.self
         )
     }
@@ -68,7 +68,7 @@ class ProductAndCategoryDiscountAPIRepository : ProductAndCategoryDiscountAPIRep
     ) async throws -> CommonResponse
     {
         return try await apiService.getData(
-            endpoint: API.ProductAndCategoryDiscountEndpoint.addUpdatePNCD(req: request),
+            endpoint: API.PNCDEndpoint.addUpdatePNCD(req: request),
             responseType: CommonResponse.self
         )
     }

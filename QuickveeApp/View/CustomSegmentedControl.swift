@@ -1,28 +1,42 @@
 //
-//  GenericSegmentedControl.swift
+//  CustomSegmentedControl.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 08/01/26.
 //
 import UIKit
 
-class GenericSegmentedControl: UIControl {
+class CustomSegmentedControl: UIControl {
 
     // MARK: - Public API
 
     var items: [String] = [] {
         didSet {
             rebuildSegments()
-            selectedIndex = min(selectedIndex, items.count - 1)
+            // Keep current selectedIndex within bounds but do not auto-apply selection visually.
+            if !items.isEmpty {
+                let clamped = max(0, min(_selectedIndex, items.count - 1))
+                _selectedIndex = clamped
+            } else {
+                _selectedIndex = 0
+            }
+            setNeedsLayout()
         }
     }
 
-    @IBInspectable var selectedIndex: Int = 0 {
-        didSet {
-            updateSelection(animated: true)
-            sendActions(for: .valueChanged)
-        }
-    }
+    // Externally controlled selected index (apply via select(index:))
+//    private(set) var selectedIndex: Int = 0 {
+//        didSet {
+//            // Keep backing index in sync and update UI
+//            _selectedIndex = max(0, min(selectedIndex, max(0, items.count - 1)))
+//            updateSelection(animated: isAnimateOnSwitching)
+//        }
+//    }
+
+    // The last tapped index (read this in your action handler)
+    private(set) var tappedIndex: Int?
+
+    @IBInspectable private(set) var _selectedIndex: Int = 0
 
     // MARK: - Private Views
 
@@ -32,14 +46,13 @@ class GenericSegmentedControl: UIControl {
 
     private var stackConstraints: [NSLayoutConstraint] = []
 
-    var configuration : Configuration = .default {
-        didSet{
+    var configuration: Configuration = .default {
+        didSet {
             updateConfiguration()
         }
     }
     var isAnimateOnSwitching: Bool = true
-    
-    
+
     // MARK: - Init
 
     override init(frame: CGRect) {
@@ -51,10 +64,9 @@ class GenericSegmentedControl: UIControl {
         super.init(coder: coder)
         commonInit()
     }
-    
-    
-      // MARK: - Layout
-    
+
+    // MARK: - Layout
+
     override func layoutSubviews() {
         super.layoutSubviews()
 
@@ -63,12 +75,12 @@ class GenericSegmentedControl: UIControl {
 
         updateThumbFrame(animated: false)
     }
-    
+
     // MARK: - Setup
 
     private func commonInit() {
         clipsToBounds = true
-        
+
         setupThumbView()
         setupStackView()
     }
@@ -87,49 +99,45 @@ class GenericSegmentedControl: UIControl {
         updateStackConstraints()
     }
 
-    
     // MARK: - Build Segments
 
-    func configure(with items: [String], configuration : Configuration) {
+    func configure(with items: [String], configuration: Configuration) {
         self.items = items
-        
+
         rebuildSegments()
         updateStackConstraints()
-        
+
         self.configuration = configuration
-        
-//        updateConfiguration()
     }
-    
-    func updateConfiguration(configuration : Configuration){
+
+    func updateConfiguration(configuration: Configuration) {
         self.configuration = configuration
         updateConfiguration()
     }
-    
+
     func updateConfiguration() {
         configuration.control.cornerRadiusBorder.apply(in: self)
         configuration.thumb.cornerRadiusBorder.apply(in: thumbView)
-        
+
         self.backgroundColor = configuration.control.bgColor
         self.thumbView.backgroundColor = configuration.thumb.bgColor
-        
-        for (_, label) in labels.enumerated(){
-            let isSelected = (label.tag == selectedIndex)
+
+        for (_, label) in labels.enumerated() {
+            let isSelected = (label.tag == _selectedIndex)
             label.font = isSelected ? configuration.thumb.font : configuration.control.font
             label.textColor = isSelected ? configuration.thumb.textColor : configuration.control.textColor
         }
     }
-    
 }
 
 
-extension GenericSegmentedControl {
-    
+extension CustomSegmentedControl {
+
     private func updateStackConstraints() {
         NSLayoutConstraint.deactivate(stackConstraints)
 
         let padding = configuration.paddingBetweenThumbAndControl
-        
+
         stackConstraints = [
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: padding),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
@@ -140,7 +148,7 @@ extension GenericSegmentedControl {
         NSLayoutConstraint.activate(stackConstraints)
         layoutIfNeeded()
     }
-    
+
     private func rebuildSegments() {
         labels.removeAll()
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
@@ -157,7 +165,7 @@ extension GenericSegmentedControl {
                 action: #selector(segmentTapped(_:))
             )
             label.addGestureRecognizer(tap)
-            
+
             labels.append(label)
             stackView.addArrangedSubview(label)
         }
@@ -167,20 +175,36 @@ extension GenericSegmentedControl {
 
     @objc private func segmentTapped(_ gesture: UITapGestureRecognizer) {
         guard let index = gesture.view?.tag else { return }
-        selectedIndex = index
-    }
 
-    
+        // Do not update UI here. Only notify and let owner decide.
+        tappedIndex = index
+
+        // Choose the event you prefer; keeping .touchUpInside to match your current usage.
+        sendActions(for: .touchUpInside)
+        // If you prefer UIControl.Event.valueChanged, switch to:
+        // sendActions(for: .valueChanged)
+    }
 }
 
 // MARK: - UI Updates
 
-extension GenericSegmentedControl {
+extension CustomSegmentedControl {
+
+    // Call this to apply a new selected index programmatically
+    func select(index: Int, animated: Bool = true) {
+        self.isAnimateOnSwitching = animated
+        
+        _selectedIndex = max(0, min(index, max(0, items.count - 1)))
+        updateSelection(animated: isAnimateOnSwitching)
+        // Do not send actions here; owner already initiated this change.
+        // If you want to notify listeners on programmatic changes, you could
+        // add: sendActions(for: .valueChanged)
+    }
 
     private func updateSelection(animated: Bool) {
         for (i, label) in labels.enumerated() {
-            label.font = (i == selectedIndex) ? configuration.thumb.font : configuration.control.font
-            label.textColor = (i == selectedIndex) ? configuration.thumb.textColor : configuration.control.textColor
+            label.font = (i == _selectedIndex) ? configuration.thumb.font : configuration.control.font
+            label.textColor = (i == _selectedIndex) ? configuration.thumb.textColor : configuration.control.textColor
         }
         updateThumbFrame(animated: animated)
     }
@@ -193,7 +217,7 @@ extension GenericSegmentedControl {
         let height = bounds.height - padding * 2
 
         let targetFrame = CGRect(
-            x: padding + segmentWidth * CGFloat(selectedIndex),
+            x: padding + segmentWidth * CGFloat(_selectedIndex),
             y: padding,
             width: segmentWidth,
             height: height
@@ -215,18 +239,16 @@ extension GenericSegmentedControl {
 }
 
 
-extension GenericSegmentedControl {
-    
+extension CustomSegmentedControl {
+
     struct Configuration {
-        
-        static var `default` : Self = .init()
-        
-        
-        var paddingBetweenThumbAndControl : CGFloat = 0
-        
-        
-        var control : ViewConfiguration = .init(
-            
+
+        static var `default`: Self = .init()
+
+        var paddingBetweenThumbAndControl: CGFloat = 0
+
+        var control: ViewConfiguration = .init(
+
             textColor: .B2B2B2,
             font: FontFamily.ManropeBold.size(16),
             bgColor: .F9F9F9,
@@ -237,8 +259,8 @@ extension GenericSegmentedControl {
                 cornerRadius: 4
             )
         )
-        
-        var thumb : ViewConfiguration = .init(
+
+        var thumb: ViewConfiguration = .init(
             textColor: .white,
             font: FontFamily.ManropeBold.size(16),
             bgColor: .black,
@@ -249,12 +271,12 @@ extension GenericSegmentedControl {
                 cornerRadius: 4
             )
         )
-        
+
         struct ViewConfiguration {
             var textColor: UIColor = .black
-            var font : UIFont = .systemFont(ofSize: 14, weight: .medium)
+            var font: UIFont = .systemFont(ofSize: 14, weight: .medium)
             var bgColor: UIColor = .F9F9F9
-            
+
             var cornerRadiusBorder: CornerRadiusBorder = .init(
                 color: .clear,
                 width: 0,
@@ -262,24 +284,23 @@ extension GenericSegmentedControl {
                 cornerRadius: 4
             )
         }
-        
+
         struct CornerRadiusBorder {
             var color: UIColor = .clear
             var width: CGFloat = 0
             var opacity: CGFloat = 0
             var cornerRadius: CGFloat = 4
-            
-            func apply(in view : UIView) {
+
+            func apply(in view: UIView) {
                 view.applyBorder(
                     borderWidth: width,
                     borderColor: color,
                     borderOpacity: opacity
                 )
-                
+
                 view.applyCornerRadius(cornerRadius: cornerRadius)
             }
         }
-        
+
     }
 }
-

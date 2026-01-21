@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension ProductAndCategoryDiscountListVC {
+extension PNCDListVC {
     
     struct UpdateDiscountEnableDisableStateResponse : Decodable{
         

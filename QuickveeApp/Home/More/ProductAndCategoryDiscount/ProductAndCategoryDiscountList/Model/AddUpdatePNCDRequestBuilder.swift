@@ -8,7 +8,7 @@
 import Foundation
 
 
-extension CreateProductAndCategoryDiscountVC {
+extension CreateOREditPNCDVC {
 
     final class AddUpdatePNCDRequestBuilder {
         

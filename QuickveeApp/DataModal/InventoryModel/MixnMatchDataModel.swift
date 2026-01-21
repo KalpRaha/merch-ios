@@ -35,7 +35,7 @@ struct MixnMatchDataModel: Codable {
     
     private let _itemsId: String?
     var itemIds: [String] {
-        ProductAndCategoryItemIDExtractor.extract(from: _itemsId ?? "")
+        PNCDItemIDExtractor.extract(from: _itemsId ?? "")
     }
     
     enum CodingKeys: String, CodingKey {

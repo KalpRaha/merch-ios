@@ -48,3 +48,23 @@ extension DiscountInputValueType: Codable {
     }
     
 }
+
+// This are the helper methods for only to get the UI update
+extension DiscountInputValueType {
+    
+    func getIndex() -> Int {
+        switch self {
+        case .amountValue: 0
+        case .percentValue: 1
+        }
+    }
+    
+    static func getFromIndex(_ index : Int) -> Self{
+        switch index {
+        case 0: .amountValue
+        case 1: .percentValue
+        default: .amountValue
+        }
+    }
+    
+}

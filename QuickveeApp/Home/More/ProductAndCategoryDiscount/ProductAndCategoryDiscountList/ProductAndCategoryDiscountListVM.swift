@@ -13,12 +13,12 @@ protocol ProductAndCategoryDiscountListVMProtocol: AnyObject {
     
 }
 
-extension ProductAndCategoryDiscountListVC {
+extension PNCDListVC {
     
     class ViewModel {
         
         
-        var pncdRepository : ProductAndCategoryDiscountAPIRepositoryProtocol
+        var pncdRepository : PNCDAPIRepositoryProtocol
         
         weak var delegate : ProductAndCategoryDiscountListVMProtocol?
         
@@ -30,7 +30,7 @@ extension ProductAndCategoryDiscountListVC {
         }
         
         init(
-            pncdRepository: ProductAndCategoryDiscountAPIRepositoryProtocol
+            pncdRepository: PNCDAPIRepositoryProtocol
         ) {
             self.pncdRepository = pncdRepository
         }

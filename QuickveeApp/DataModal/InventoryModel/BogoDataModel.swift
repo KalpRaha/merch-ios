@@ -60,7 +60,7 @@ struct BogoDataModel: Codable {
     
     private let _items: String?
     var items: [String] {
-        ProductAndCategoryItemIDExtractor.extract(from: _items ?? "")
+        PNCDItemIDExtractor.extract(from: _items ?? "")
     }
 
     enum CodingKeys: String, CodingKey {

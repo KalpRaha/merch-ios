@@ -1,5 +1,5 @@
 //
-//  CreatePNCDTextFieldUpdateUIHelper.swift
+//  CreateOREditPNCDTextFieldUpdateUIHelper.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 21/01/26.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension CreateProductAndCategoryDiscountVC {
+extension CreateOREditPNCDVC {
     
     func setupUIForDiscountTextFields(){
         // Discount Name
@@ -24,17 +24,17 @@ extension CreateProductAndCategoryDiscountVC {
         txtDiscountName.superview?.applyCornerRadius(cornerRadius: 8)
         
         // Discount Per Item
-        txtDiscountPerItem.attributedPlaceholder = getAttributedPlaceHolderText(for: "$0.00")
-        txtDiscountPerItem.borderStyle = .none
-        txtDiscountPerItem.superview?.applyBorder(
+        txtDiscountInputValueType.attributedPlaceholder = getAttributedPlaceHolderText(for: "$0.00")
+        txtDiscountInputValueType.borderStyle = .none
+        txtDiscountInputValueType.superview?.applyBorder(
             borderWidth: 1,
             borderColor: .E4E8EF,
             borderOpacity: 1
         )
-        txtDiscountPerItem.superview?.applyCornerRadius(cornerRadius: 8)
+        txtDiscountInputValueType.superview?.applyCornerRadius(cornerRadius: 8)
         
-        txtDiscountPerItem.keyboardType = .numberPad
-        txtDiscountPerItem.addTarget(self, action: #selector(updateTextField), for: .editingChanged)
+        txtDiscountInputValueType.keyboardType = .numberPad
+        txtDiscountInputValueType.addTarget(self, action: #selector(updateTextField), for: .editingChanged)
     }
     
     
@@ -49,9 +49,13 @@ extension CreateProductAndCategoryDiscountVC {
     func updateUIForDiscountInputValueTypeChange(){
         let isPercent = viewModel.flagsPropertyManager.discountInputValueType == .percentValue
         
-        lblDiscountPerItem.text = isPercent ? "Discount per item (%)" : "Discount per item ($)"
-        txtDiscountPerItem.text = nil
-        txtDiscountPerItem.attributedPlaceholder = getAttributedPlaceHolderText(for: isPercent ? "0.00%" : "$0.00")
+        lblDiscountInputValueTypeTitle.text = isPercent ? "Discount per item (%)" : "Discount per item ($)"
+        txtDiscountInputValueType.text = nil
+        txtDiscountInputValueType.attributedPlaceholder = getAttributedPlaceHolderText(for: isPercent ? "0.00%" : "$0.00")
+        
+        segCtrlDiscountInputValueType.select(
+            index: viewModel.flagsPropertyManager.discountInputValueType.getIndex()
+        )
         
     }
     

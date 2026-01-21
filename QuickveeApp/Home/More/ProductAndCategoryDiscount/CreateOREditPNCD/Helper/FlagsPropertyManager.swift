@@ -8,7 +8,7 @@
 import Foundation
 
 
-protocol CreatePNCDFlgsPropertyManagerDelegate : AnyObject {
+protocol CreateOREditPNCDFlagsPropertyManagerDelegate : AnyObject {
     
     func didUpdateProductOrCategoryDiscountType()
     func didUpdateIsAllowDiscountToStackWithOtherDiscounts()
@@ -27,7 +27,7 @@ extension CreatePNCDVC {
     
     class FlagsPropertyManager {
         
-        weak var delegate: CreatePNCDFlgsPropertyManagerDelegate?
+        weak var delegate: CreateOREditPNCDFlagsPropertyManagerDelegate?
         
         //MARK: - Discount Type
         

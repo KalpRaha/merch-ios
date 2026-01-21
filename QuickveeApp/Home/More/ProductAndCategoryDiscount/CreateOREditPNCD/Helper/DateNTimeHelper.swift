@@ -8,7 +8,7 @@
 import Foundation
 
 
-protocol CreatePNCDDateAndTimeUIUpdateDelegate : AnyObject{
+protocol CreateOREditPNCDDateAndTimeUIUpdateDelegate : AnyObject{
     
     func didUpdatedStartDate()
     func didUpdatedEndDate()
@@ -22,7 +22,7 @@ extension CreatePNCDVC {
     
     class DateNTimeHelper {
         
-        weak var timeUIUpdateDelegate: CreatePNCDDateAndTimeUIUpdateDelegate?
+        weak var timeUIUpdateDelegate: CreateOREditPNCDDateAndTimeUIUpdateDelegate?
         
         var startDate : Date? {
             didSet{

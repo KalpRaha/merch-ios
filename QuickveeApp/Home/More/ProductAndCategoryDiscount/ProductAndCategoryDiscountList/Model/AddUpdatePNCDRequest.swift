@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension CreateProductAndCategoryDiscountVC {
+extension CreateOREditPNCDVC {
 
     struct AddUpdatePNCDRequest: Codable {
         
@@ -76,7 +76,7 @@ extension CreateProductAndCategoryDiscountVC {
 
 }
 
-extension CreateProductAndCategoryDiscountVC.AddUpdatePNCDRequest: MultiPartRequestBodyType {
+extension CreateOREditPNCDVC.AddUpdatePNCDRequest: MultiPartRequestBodyType {
     
     var boundary: String {  UUID().uuidString }
 

@@ -19,6 +19,7 @@ enum PNCDScheduleType : String, CaseIterable {
         case .repeatsOnSchedule: "Repeats on a Schedule"
         }
     }
+    
 }
 
 extension PNCDScheduleType : Decodable {
@@ -40,6 +41,26 @@ extension PNCDScheduleType : Decodable {
         switch self {
         case .oneTime: "0"
         case .repeatsOnSchedule: "1"
+        }
+    }
+     
+}
+
+extension PNCDScheduleType {
+    
+    func getIndex() -> Int {
+        switch self {
+        case .oneTime: 0
+        case .repeatsOnSchedule: 1
+        }
+    }
+    
+    static func getFromIndex(_ index: Int) -> Self {
+        return switch index {
+        case 0: .oneTime
+        case 1: .repeatsOnSchedule
+            
+        default: .oneTime
         }
     }
     

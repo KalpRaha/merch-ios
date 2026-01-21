@@ -1,5 +1,5 @@
 //
-//  ProductAndCategoryDiscountEndpoint.swift
+//  PNCDEndpoint.swift
 //  QuickveeApp
 //
 //  Created by Pallavi on 09/01/26.
@@ -9,7 +9,7 @@ import Foundation
 
 extension API {
     
-    enum ProductAndCategoryDiscountEndpoint {
+    enum PNCDEndpoint {
         
         case getDiscountList(req : PNCDListVC.GetDiscountListRequest)
         case updateDiscountEnableDisableStatus(req : PNCDListVC.UpdateDiscountEnableDisableStateRequest)
@@ -20,7 +20,7 @@ extension API {
     
 }
 
-extension API.ProductAndCategoryDiscountEndpoint: APIEndpointEnumType {
+extension API.PNCDEndpoint: APIEndpointEnumType {
     
     var baseURL: String {
         APIConstant.baseURL

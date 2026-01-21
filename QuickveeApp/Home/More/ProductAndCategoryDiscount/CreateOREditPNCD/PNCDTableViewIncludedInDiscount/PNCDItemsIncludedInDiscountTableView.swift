@@ -1,5 +1,5 @@
 //
-//  ProductAndCategoryItemsIncludedInDiscountTableView.swift
+//  PNCDItemsIncludedInDiscountTableView.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 14/01/26.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductAndCategoryItemsIncludedInDiscountTableView: UITableView {
+class PNCDItemsIncludedInDiscountTableView: UITableView {
     
     typealias ItemDataType = VariantDataModel
     
@@ -36,8 +36,8 @@ class ProductAndCategoryItemsIncludedInDiscountTableView: UITableView {
         self.isScrollEnabled = false
         
         self.register(
-            ProductAndCategoryItemIncludedInDiscountTBLCell.nib,
-            forCellReuseIdentifier: ProductAndCategoryItemIncludedInDiscountTBLCell.className
+            PNCDItemIncludedInDiscountTBLCell.nib,
+            forCellReuseIdentifier: PNCDItemIncludedInDiscountTBLCell.className
         )
     }
     
@@ -52,14 +52,14 @@ class ProductAndCategoryItemsIncludedInDiscountTableView: UITableView {
     }
 }
 
-extension ProductAndCategoryItemsIncludedInDiscountTableView : UITableViewDataSource, UITableViewDelegate {
+extension PNCDItemsIncludedInDiscountTableView : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         dataItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        typealias CellType = ProductAndCategoryItemIncludedInDiscountTBLCell
+        typealias CellType = PNCDItemIncludedInDiscountTBLCell
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CellType.className, for: indexPath) as? CellType else {
             return UITableViewCell()

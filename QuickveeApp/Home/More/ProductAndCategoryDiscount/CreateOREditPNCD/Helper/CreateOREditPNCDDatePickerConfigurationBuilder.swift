@@ -1,5 +1,5 @@
 //
-//  CreatePNCDVCDatePickerConfigurationBuilder.swift
+//  CreateOREditPNCDDatePickerConfigurationBuilder.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 16/01/26.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-extension CreateProductAndCategoryDiscountVC {
+extension CreateOREditPNCDVC {
     
-    class CreatePNCDVCDatePickerConfigurationBuilder {
+    class DatePickerConfigurationBuilder {
        
-        weak var vc : CreateProductAndCategoryDiscountVC!
+        weak var vc : CreateOREditPNCDVC!
        
         func make(
             datePickerView: DatePickerInputView,

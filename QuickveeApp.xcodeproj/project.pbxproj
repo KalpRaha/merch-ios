@@ -17,12 +17,12 @@
 		A54F2B372BBABA46009B4D53 /* InStoreRefundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F2B362BBABA46009B4D53 /* InStoreRefundViewController.swift */; };
 		A5D3A9072DF56956000F6B43 /* MissUPCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3A9062DF56956000F6B43 /* MissUPCTableViewCell.swift */; };
 		B41A9F382F0F4F2B00C543C7 /* CustomSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F372F0F4F2B00C543C7 /* CustomSwitch.swift */; };
-		B41A9F3D2F0F7F3700C543C7 /* CreateProductAndCategoryDiscountVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F3C2F0F7F3700C543C7 /* CreateProductAndCategoryDiscountVM.swift */; };
+		B41A9F3D2F0F7F3700C543C7 /* CreateOREditPNCDVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F3C2F0F7F3700C543C7 /* CreateOREditPNCDVM.swift */; };
 		B41A9F402F0F86CC00C543C7 /* PNCDType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F3F2F0F86CC00C543C7 /* PNCDType.swift */; };
 		B41A9F422F0F86E300C543C7 /* DiscountInputValueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F412F0F86E300C543C7 /* DiscountInputValueType.swift */; };
-		B41A9F452F0FA88C00C543C7 /* GenericSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F442F0FA88C00C543C7 /* GenericSegmentedControl.swift */; };
+		B41A9F452F0FA88C00C543C7 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41A9F442F0FA88C00C543C7 /* CustomSegmentedControl.swift */; };
 		B420F2F72F18A8A300461C92 /* MixnMatchAPIListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F2F62F18A8A300461C92 /* MixnMatchAPIListRepository.swift */; };
-		B420F2F92F18CA8100461C92 /* ProductAndCategoryDiscountAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F2F82F18CA8100461C92 /* ProductAndCategoryDiscountAPIRepository.swift */; };
+		B420F2F92F18CA8100461C92 /* PNCDAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F2F82F18CA8100461C92 /* PNCDAPIRepository.swift */; };
 		B420F2FD2F18E2A500461C92 /* ProductAndCategoryDiscountListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F2FC2F18E2A500461C92 /* ProductAndCategoryDiscountListVM.swift */; };
 		B420F3002F18E46900461C92 /* GetDiscountListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F2FF2F18E46900461C92 /* GetDiscountListRequest.swift */; };
 		B420F3022F18E55700461C92 /* UpdateDiscountEnableDisableStateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F3012F18E55700461C92 /* UpdateDiscountEnableDisableStateRequest.swift */; };
@@ -68,11 +68,11 @@
 		B46CD4022F1A4F77009011F4 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CD4012F1A4F77009011F4 /* Date+Extension.swift */; };
 		B46CD4042F1A5117009011F4 /* DateNTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CD4032F1A5117009011F4 /* DateNTimeHelper.swift */; };
 		B46CD4062F1A5218009011F4 /* FlagsPropertyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CD4052F1A5218009011F4 /* FlagsPropertyManager.swift */; };
-		B46CD40A2F1A583F009011F4 /* CreatePNCDTypeSwitchUIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CD4092F1A583F009011F4 /* CreatePNCDTypeSwitchUIHelper.swift */; };
-		B46CD40C2F1A5CD4009011F4 /* CreatePNCDVCDatePickerConfigurationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CD40B2F1A5CD4009011F4 /* CreatePNCDVCDatePickerConfigurationBuilder.swift */; };
+		B46CD40A2F1A583F009011F4 /* CreateOREditPNCDTypeUpdateUIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CD4092F1A583F009011F4 /* CreateOREditPNCDTypeUpdateUIHelper.swift */; };
+		B46CD40C2F1A5CD4009011F4 /* CreateOREditPNCDDatePickerConfigurationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CD40B2F1A5CD4009011F4 /* CreateOREditPNCDDatePickerConfigurationBuilder.swift */; };
 		B46CD40E2F1A603F009011F4 /* DateFormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CD40D2F1A603F009011F4 /* DateFormatHelper.swift */; };
 		B49381EA2F0DFBCA0071D0F1 /* ProductAndCategoryDiscount.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B49381E92F0DFBCA0071D0F1 /* ProductAndCategoryDiscount.storyboard */; };
-		B49381ED2F0DFCF60071D0F1 /* ProductAndCategoryDiscountListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49381EC2F0DFCF60071D0F1 /* ProductAndCategoryDiscountListVC.swift */; };
+		B49381ED2F0DFCF60071D0F1 /* PNCDListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49381EC2F0DFCF60071D0F1 /* PNCDListVC.swift */; };
 		B49381F22F0DFD960071D0F1 /* CustomNavigationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49381F12F0DFD960071D0F1 /* CustomNavigationHeaderView.swift */; };
 		B49381F42F0DFD9F0071D0F1 /* CustomNavigationHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B49381F32F0DFD9F0071D0F1 /* CustomNavigationHeaderView.xib */; };
 		B49381F62F0E14CE0071D0F1 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49381F52F0E14CE0071D0F1 /* UIImage+Extension.swift */; };
@@ -82,12 +82,12 @@
 		B49381FE2F0E1D070071D0F1 /* manrope.light.otf in Resources */ = {isa = PBXBuildFile; fileRef = B49381F92F0E1D070071D0F1 /* manrope.light.otf */; };
 		B49382002F0E1EEA0071D0F1 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49381FF2F0E1EEA0071D0F1 /* CustomLabel.swift */; };
 		B49382022F0E20020071D0F1 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382012F0E20020071D0F1 /* UIColor+Extension.swift */; };
-		B49382062F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382052F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift */; };
+		B49382062F0E2CEA0071D0F1 /* CreateOREditPNCDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382052F0E2CEA0071D0F1 /* CreateOREditPNCDVC.swift */; };
 		B49382082F0E3F400071D0F1 /* GenericButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382072F0E3F400071D0F1 /* GenericButton.swift */; };
 		B49478412F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */; };
-		B4996AD82F175E1800650BB7 /* ProductAndCategoryItemsIncludedInDiscountTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AD72F175E1800650BB7 /* ProductAndCategoryItemsIncludedInDiscountTableView.swift */; };
-		B4996ADC2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4996ADB2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.xib */; };
-		B4996ADD2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996ADA2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.swift */; };
+		B4996AD82F175E1800650BB7 /* PNCDItemsIncludedInDiscountTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AD72F175E1800650BB7 /* PNCDItemsIncludedInDiscountTableView.swift */; };
+		B4996ADC2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4996ADB2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.xib */; };
+		B4996ADD2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996ADA2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.swift */; };
 		B4996AE52F17AF3500650BB7 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AE42F17AF3500650BB7 /* CommonFunctions.swift */; };
 		B4996AEA2F17B17600650BB7 /* BaseBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AE92F17B17600650BB7 /* BaseBottomSheetVC.swift */; };
 		B4996AED2F17BCE300650BB7 /* BaseBottomSheetVCActionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AEC2F17BCE300650BB7 /* BaseBottomSheetVCActionDelegate.swift */; };
@@ -106,7 +106,7 @@
 		B4BC09822F1529A500BDB89E /* VariantDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC09812F1529A500BDB89E /* VariantDataModel.swift */; };
 		B4C342D42F19F88900A3BDA3 /* AddUpdatePNCDRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C342D32F19F88900A3BDA3 /* AddUpdatePNCDRequestBuilder.swift */; };
 		B4C342D62F1A018B00A3BDA3 /* CommonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C342D52F1A018B00A3BDA3 /* CommonResponse.swift */; };
-		B4E4A2302F2090AC000432CB /* CreatePNCDTextFieldUpdateUIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E4A22F2F2090AC000432CB /* CreatePNCDTextFieldUpdateUIHelper.swift */; };
+		B4E4A2302F2090AC000432CB /* CreateOREditPNCDTextFieldUpdateUIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E4A22F2F2090AC000432CB /* CreateOREditPNCDTextFieldUpdateUIHelper.swift */; };
 		D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */; };
 		D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */; };
 		D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC882AA9AB8800A216C3 /* VariantViewController.swift */; };
@@ -239,7 +239,7 @@
 		D268EE612C8EA44500B45172 /* Manrope-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D268EE5D2C8EA44500B45172 /* Manrope-SemiBold.ttf */; };
 		D26930AD2E6599AE00C3339B /* CustomerMergeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26930AC2E6599AE00C3339B /* CustomerMergeTableViewCell.swift */; };
 		D26B74BC2F17496F00E79B5B /* MixnMatchDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B74BB2F17496F00E79B5B /* MixnMatchDataModel.swift */; };
-		D26B74BE2F178EFF00E79B5B /* ProductAndCategoryItemIDExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B74BD2F178EFF00E79B5B /* ProductAndCategoryItemIDExtractor.swift */; };
+		D26B74BE2F178EFF00E79B5B /* PNCDItemIDExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B74BD2F178EFF00E79B5B /* PNCDItemIDExtractor.swift */; };
 		D26D38A12CA41CBE00AD9309 /* ReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26D38A02CA41CBE00AD9309 /* ReportTableViewCell.swift */; };
 		D26F4E74299500A700716A51 /* StrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26F4E73299500A700716A51 /* StrokeAnimation.swift */; };
 		D26F4E762995011200716A51 /* RotationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26F4E752995011200716A51 /* RotationAnimation.swift */; };
@@ -250,7 +250,7 @@
 		D27A8D112D114577003AAE33 /* InStoreNewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A8D102D114577003AAE33 /* InStoreNewDetailViewController.swift */; };
 		D27A8D132D114EA4003AAE33 /* InStoreNewRefundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A8D122D114EA4003AAE33 /* InStoreNewRefundViewController.swift */; };
 		D27B61E42AC5790A00F753BD /* AddVariantAttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27B61E32AC5790A00F753BD /* AddVariantAttributeViewController.swift */; };
-		D27F2F5C2F10C4CE007AE4C8 /* ProductAndCategoryDiscountEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27F2F5B2F10C4CE007AE4C8 /* ProductAndCategoryDiscountEndpoint.swift */; };
+		D27F2F5C2F10C4CE007AE4C8 /* PNCDEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27F2F5B2F10C4CE007AE4C8 /* PNCDEndpoint.swift */; };
 		D27F2F5E2F10C8E5007AE4C8 /* VariantListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27F2F5D2F10C8E5007AE4C8 /* VariantListEndpoint.swift */; };
 		D27F2F612F10D502007AE4C8 /* VariantListAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27F2F602F10D502007AE4C8 /* VariantListAPIRepository.swift */; };
 		D27F2F632F10FBEF007AE4C8 /* ProductAndCategorySelectionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27F2F622F10FBEF007AE4C8 /* ProductAndCategorySelectionVM.swift */; };
@@ -404,12 +404,12 @@
 		A54F2B362BBABA46009B4D53 /* InStoreRefundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InStoreRefundViewController.swift; sourceTree = "<group>"; };
 		A5D3A9062DF56956000F6B43 /* MissUPCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissUPCTableViewCell.swift; sourceTree = "<group>"; };
 		B41A9F372F0F4F2B00C543C7 /* CustomSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitch.swift; sourceTree = "<group>"; };
-		B41A9F3C2F0F7F3700C543C7 /* CreateProductAndCategoryDiscountVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductAndCategoryDiscountVM.swift; sourceTree = "<group>"; };
+		B41A9F3C2F0F7F3700C543C7 /* CreateOREditPNCDVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDVM.swift; sourceTree = "<group>"; };
 		B41A9F3F2F0F86CC00C543C7 /* PNCDType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDType.swift; sourceTree = "<group>"; };
 		B41A9F412F0F86E300C543C7 /* DiscountInputValueType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountInputValueType.swift; sourceTree = "<group>"; };
-		B41A9F442F0FA88C00C543C7 /* GenericSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericSegmentedControl.swift; sourceTree = "<group>"; };
+		B41A9F442F0FA88C00C543C7 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		B420F2F62F18A8A300461C92 /* MixnMatchAPIListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixnMatchAPIListRepository.swift; sourceTree = "<group>"; };
-		B420F2F82F18CA8100461C92 /* ProductAndCategoryDiscountAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryDiscountAPIRepository.swift; sourceTree = "<group>"; };
+		B420F2F82F18CA8100461C92 /* PNCDAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDAPIRepository.swift; sourceTree = "<group>"; };
 		B420F2FC2F18E2A500461C92 /* ProductAndCategoryDiscountListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryDiscountListVM.swift; sourceTree = "<group>"; };
 		B420F2FF2F18E46900461C92 /* GetDiscountListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDiscountListRequest.swift; sourceTree = "<group>"; };
 		B420F3012F18E55700461C92 /* UpdateDiscountEnableDisableStateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDiscountEnableDisableStateRequest.swift; sourceTree = "<group>"; };
@@ -455,11 +455,11 @@
 		B46CD4012F1A4F77009011F4 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		B46CD4032F1A5117009011F4 /* DateNTimeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateNTimeHelper.swift; sourceTree = "<group>"; };
 		B46CD4052F1A5218009011F4 /* FlagsPropertyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagsPropertyManager.swift; sourceTree = "<group>"; };
-		B46CD4092F1A583F009011F4 /* CreatePNCDTypeSwitchUIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePNCDTypeSwitchUIHelper.swift; sourceTree = "<group>"; };
-		B46CD40B2F1A5CD4009011F4 /* CreatePNCDVCDatePickerConfigurationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePNCDVCDatePickerConfigurationBuilder.swift; sourceTree = "<group>"; };
+		B46CD4092F1A583F009011F4 /* CreateOREditPNCDTypeUpdateUIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDTypeUpdateUIHelper.swift; sourceTree = "<group>"; };
+		B46CD40B2F1A5CD4009011F4 /* CreateOREditPNCDDatePickerConfigurationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDDatePickerConfigurationBuilder.swift; sourceTree = "<group>"; };
 		B46CD40D2F1A603F009011F4 /* DateFormatHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatHelper.swift; sourceTree = "<group>"; };
 		B49381E92F0DFBCA0071D0F1 /* ProductAndCategoryDiscount.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductAndCategoryDiscount.storyboard; sourceTree = "<group>"; };
-		B49381EC2F0DFCF60071D0F1 /* ProductAndCategoryDiscountListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryDiscountListVC.swift; sourceTree = "<group>"; };
+		B49381EC2F0DFCF60071D0F1 /* PNCDListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDListVC.swift; sourceTree = "<group>"; };
 		B49381F12F0DFD960071D0F1 /* CustomNavigationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationHeaderView.swift; sourceTree = "<group>"; };
 		B49381F32F0DFD9F0071D0F1 /* CustomNavigationHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomNavigationHeaderView.xib; sourceTree = "<group>"; };
 		B49381F52F0E14CE0071D0F1 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -469,12 +469,12 @@
 		B49381FB2F0E1D070071D0F1 /* manrope.thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = manrope.thin.otf; sourceTree = "<group>"; };
 		B49381FF2F0E1EEA0071D0F1 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		B49382012F0E20020071D0F1 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
-		B49382052F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductAndCategoryDiscountVC.swift; sourceTree = "<group>"; };
+		B49382052F0E2CEA0071D0F1 /* CreateOREditPNCDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDVC.swift; sourceTree = "<group>"; };
 		B49382072F0E3F400071D0F1 /* GenericButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericButton.swift; sourceTree = "<group>"; };
 		B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountPerItemDiscountTextFormatter.swift; sourceTree = "<group>"; };
-		B4996AD72F175E1800650BB7 /* ProductAndCategoryItemsIncludedInDiscountTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryItemsIncludedInDiscountTableView.swift; sourceTree = "<group>"; };
-		B4996ADA2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryItemIncludedInDiscountTBLCell.swift; sourceTree = "<group>"; };
-		B4996ADB2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductAndCategoryItemIncludedInDiscountTBLCell.xib; sourceTree = "<group>"; };
+		B4996AD72F175E1800650BB7 /* PNCDItemsIncludedInDiscountTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDItemsIncludedInDiscountTableView.swift; sourceTree = "<group>"; };
+		B4996ADA2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDItemIncludedInDiscountTBLCell.swift; sourceTree = "<group>"; };
+		B4996ADB2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PNCDItemIncludedInDiscountTBLCell.xib; sourceTree = "<group>"; };
 		B4996AE42F17AF3500650BB7 /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
 		B4996AE92F17B17600650BB7 /* BaseBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBottomSheetVC.swift; sourceTree = "<group>"; };
 		B4996AEC2F17BCE300650BB7 /* BaseBottomSheetVCActionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBottomSheetVCActionDelegate.swift; sourceTree = "<group>"; };
@@ -493,7 +493,7 @@
 		B4BC09812F1529A500BDB89E /* VariantDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantDataModel.swift; sourceTree = "<group>"; };
 		B4C342D32F19F88900A3BDA3 /* AddUpdatePNCDRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpdatePNCDRequestBuilder.swift; sourceTree = "<group>"; };
 		B4C342D52F1A018B00A3BDA3 /* CommonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonResponse.swift; sourceTree = "<group>"; };
-		B4E4A22F2F2090AC000432CB /* CreatePNCDTextFieldUpdateUIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePNCDTextFieldUpdateUIHelper.swift; sourceTree = "<group>"; };
+		B4E4A22F2F2090AC000432CB /* CreateOREditPNCDTextFieldUpdateUIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDTextFieldUpdateUIHelper.swift; sourceTree = "<group>"; };
 		BD3A5305EE37476CB5794F58 /* Pods_QuickveeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickveeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
 		D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeViewController.swift; sourceTree = "<group>"; };
@@ -628,7 +628,7 @@
 		D268EE5D2C8EA44500B45172 /* Manrope-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-SemiBold.ttf"; sourceTree = "<group>"; };
 		D26930AC2E6599AE00C3339B /* CustomerMergeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerMergeTableViewCell.swift; sourceTree = "<group>"; };
 		D26B74BB2F17496F00E79B5B /* MixnMatchDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixnMatchDataModel.swift; sourceTree = "<group>"; };
-		D26B74BD2F178EFF00E79B5B /* ProductAndCategoryItemIDExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryItemIDExtractor.swift; sourceTree = "<group>"; };
+		D26B74BD2F178EFF00E79B5B /* PNCDItemIDExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDItemIDExtractor.swift; sourceTree = "<group>"; };
 		D26D38A02CA41CBE00AD9309 /* ReportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewCell.swift; sourceTree = "<group>"; };
 		D26F4E73299500A700716A51 /* StrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeAnimation.swift; sourceTree = "<group>"; };
 		D26F4E752995011200716A51 /* RotationAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationAnimation.swift; sourceTree = "<group>"; };
@@ -639,7 +639,7 @@
 		D27A8D102D114577003AAE33 /* InStoreNewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InStoreNewDetailViewController.swift; sourceTree = "<group>"; };
 		D27A8D122D114EA4003AAE33 /* InStoreNewRefundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InStoreNewRefundViewController.swift; sourceTree = "<group>"; };
 		D27B61E32AC5790A00F753BD /* AddVariantAttributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVariantAttributeViewController.swift; sourceTree = "<group>"; };
-		D27F2F5B2F10C4CE007AE4C8 /* ProductAndCategoryDiscountEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoryDiscountEndpoint.swift; sourceTree = "<group>"; };
+		D27F2F5B2F10C4CE007AE4C8 /* PNCDEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDEndpoint.swift; sourceTree = "<group>"; };
 		D27F2F5D2F10C8E5007AE4C8 /* VariantListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantListEndpoint.swift; sourceTree = "<group>"; };
 		D27F2F602F10D502007AE4C8 /* VariantListAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantListAPIRepository.swift; sourceTree = "<group>"; };
 		D27F2F622F10FBEF007AE4C8 /* ProductAndCategorySelectionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategorySelectionVM.swift; sourceTree = "<group>"; };
@@ -813,15 +813,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B41A9F392F0F7F1700C543C7 /* CreateProductAndCategoryDiscount */ = {
+		B41A9F392F0F7F1700C543C7 /* CreateOREditPNCD */ = {
 			isa = PBXGroup;
 			children = (
-				B49382052F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift */,
-				B41A9F3C2F0F7F3700C543C7 /* CreateProductAndCategoryDiscountVM.swift */,
+				B49382052F0E2CEA0071D0F1 /* CreateOREditPNCDVC.swift */,
+				B41A9F3C2F0F7F3700C543C7 /* CreateOREditPNCDVM.swift */,
 				B46CD3FC2F1A44FD009011F4 /* Helper */,
-				B4996AD62F175E0900650BB7 /* ProductAndCategoryTableViewIncludedInDiscount */,
+				B4996AD62F175E0900650BB7 /* PNCDTableViewIncludedInDiscount */,
 			);
-			path = CreateProductAndCategoryDiscount;
+			path = CreateOREditPNCD;
 			sourceTree = "<group>";
 		};
 		B41A9F3E2F0F86BE00C543C7 /* Model */ = {
@@ -838,7 +838,7 @@
 		B41A9F432F0F887500C543C7 /* ProductAndCategoryDiscountList */ = {
 			isa = PBXGroup;
 			children = (
-				B49381EC2F0DFCF60071D0F1 /* ProductAndCategoryDiscountListVC.swift */,
+				B49381EC2F0DFCF60071D0F1 /* PNCDListVC.swift */,
 				B420F2FC2F18E2A500461C92 /* ProductAndCategoryDiscountListVM.swift */,
 				B43280E62F1F351A002E4802 /* PNCDListItemTBLCell */,
 				B420F2FE2F18E46600461C92 /* Model */,
@@ -915,7 +915,7 @@
 				D22696CC2F161424001C4493 /* CategoryListEndpoint.swift */,
 				D22696D42F1653BE001C4493 /* BogoListEndpoint.swift */,
 				D22696DC2F166713001C4493 /* MixnMatchListEndpoint.swift */,
-				D27F2F5B2F10C4CE007AE4C8 /* ProductAndCategoryDiscountEndpoint.swift */,
+				D27F2F5B2F10C4CE007AE4C8 /* PNCDEndpoint.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -990,7 +990,7 @@
 			children = (
 				B4AD36932F16692F00E9EF55 /* WeeklySelectionView */,
 				B4AD368B2F1627FB00E9EF55 /* DatePickerInputView */,
-				B41A9F442F0FA88C00C543C7 /* GenericSegmentedControl.swift */,
+				B41A9F442F0FA88C00C543C7 /* CustomSegmentedControl.swift */,
 				B41A9F372F0F4F2B00C543C7 /* CustomSwitch.swift */,
 				B49382072F0E3F400071D0F1 /* GenericButton.swift */,
 				B49381FF2F0E1EEA0071D0F1 /* CustomLabel.swift */,
@@ -1013,9 +1013,9 @@
 		B46CD3FC2F1A44FD009011F4 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				B46CD4092F1A583F009011F4 /* CreatePNCDTypeSwitchUIHelper.swift */,
-				B4E4A22F2F2090AC000432CB /* CreatePNCDTextFieldUpdateUIHelper.swift */,
-				B46CD40B2F1A5CD4009011F4 /* CreatePNCDVCDatePickerConfigurationBuilder.swift */,
+				B46CD4092F1A583F009011F4 /* CreateOREditPNCDTypeUpdateUIHelper.swift */,
+				B4E4A22F2F2090AC000432CB /* CreateOREditPNCDTextFieldUpdateUIHelper.swift */,
+				B46CD40B2F1A5CD4009011F4 /* CreateOREditPNCDDatePickerConfigurationBuilder.swift */,
 				B46CD4052F1A5218009011F4 /* FlagsPropertyManager.swift */,
 				B46CD4032F1A5117009011F4 /* DateNTimeHelper.swift */,
 				B46CD3FF2F1A45DE009011F4 /* TimeFormatHelper.swift */,
@@ -1038,7 +1038,7 @@
 				B4996AEE2F17BD1D00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC */,
 				B4996AE32F1770DE00650BB7 /* View */,
 				B41A9F432F0F887500C543C7 /* ProductAndCategoryDiscountList */,
-				B41A9F392F0F7F1700C543C7 /* CreateProductAndCategoryDiscount */,
+				B41A9F392F0F7F1700C543C7 /* CreateOREditPNCD */,
 				D28DF6862F0FA83C00426975 /* ProductAndCategorySelection */,
 				B41A9F3E2F0F86BE00C543C7 /* Model */,
 			);
@@ -1058,28 +1058,28 @@
 			isa = PBXGroup;
 			children = (
 				B43280F12F1F9183002E4802 /* WeekDayItemParser.swift */,
-				D26B74BD2F178EFF00E79B5B /* ProductAndCategoryItemIDExtractor.swift */,
+				D26B74BD2F178EFF00E79B5B /* PNCDItemIDExtractor.swift */,
 				B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
 		};
-		B4996AD62F175E0900650BB7 /* ProductAndCategoryTableViewIncludedInDiscount */ = {
+		B4996AD62F175E0900650BB7 /* PNCDTableViewIncludedInDiscount */ = {
 			isa = PBXGroup;
 			children = (
-				B4996AD72F175E1800650BB7 /* ProductAndCategoryItemsIncludedInDiscountTableView.swift */,
-				B4996AD92F175E2500650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell */,
+				B4996AD72F175E1800650BB7 /* PNCDItemsIncludedInDiscountTableView.swift */,
+				B4996AD92F175E2500650BB7 /* PNCDItemIncludedInDiscountTBLCell */,
 			);
-			path = ProductAndCategoryTableViewIncludedInDiscount;
+			path = PNCDTableViewIncludedInDiscount;
 			sourceTree = "<group>";
 		};
-		B4996AD92F175E2500650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell */ = {
+		B4996AD92F175E2500650BB7 /* PNCDItemIncludedInDiscountTBLCell */ = {
 			isa = PBXGroup;
 			children = (
-				B4996ADA2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.swift */,
-				B4996ADB2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.xib */,
+				B4996ADA2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.swift */,
+				B4996ADB2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.xib */,
 			);
-			path = ProductAndCategoryItemIncludedInDiscountTBLCell;
+			path = PNCDItemIncludedInDiscountTBLCell;
 			sourceTree = "<group>";
 		};
 		B4996AE32F1770DE00650BB7 /* View */ = {
@@ -1572,7 +1572,7 @@
 				D22696D02F1616FF001C4493 /* CategoryListAPIRepository.swift */,
 				D22696D62F165437001C4493 /* BogoListAPIRepository.swift */,
 				B420F2F62F18A8A300461C92 /* MixnMatchAPIListRepository.swift */,
-				B420F2F82F18CA8100461C92 /* ProductAndCategoryDiscountAPIRepository.swift */,
+				B420F2F82F18CA8100461C92 /* PNCDAPIRepository.swift */,
 			);
 			path = APIRepository;
 			sourceTree = "<group>";
@@ -2073,7 +2073,7 @@
 				D268EE5F2C8EA44500B45172 /* Manrope-Medium.ttf in Resources */,
 				D2B01B912BB3E2F900A40B93 /* RefundHeaderCell.xib in Resources */,
 				04B413D82E28EEE70002D0FE /* GoogleService-Info.plist in Resources */,
-				B4996ADC2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.xib in Resources */,
+				B4996ADC2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.xib in Resources */,
 				D2F5AB812CE5C2270050B89C /* HeaderViewCell.xib in Resources */,
 				B42F5F5E2F079DA8002252EE /* Quickvee-Local.xcconfig in Resources */,
 				D2F5AB822CE5C2270050B89C /* NoOrderFoundCell.xib in Resources */,
@@ -2161,7 +2161,7 @@
 			files = (
 				D24187BA2C18052600643069 /* CreateBonusViewController.swift in Sources */,
 				D2BBAD172C94017C00133338 /* GiftCardDetailViewController.swift in Sources */,
-				B46CD40A2F1A583F009011F4 /* CreatePNCDTypeSwitchUIHelper.swift in Sources */,
+				B46CD40A2F1A583F009011F4 /* CreateOREditPNCDTypeUpdateUIHelper.swift in Sources */,
 				D22AECB1297AA22D000AA721 /* TaxesTableViewCell.swift in Sources */,
 				D26F4E762995011200716A51 /* RotationAnimation.swift in Sources */,
 				D2D879742BBBB04000ECE573 /* PayRefundCell.swift in Sources */,
@@ -2194,8 +2194,8 @@
 				B49381F22F0DFD960071D0F1 /* CustomNavigationHeaderView.swift in Sources */,
 				B46CD4062F1A5218009011F4 /* FlagsPropertyManager.swift in Sources */,
 				B45CB8A62F04E2BB004AF269 /* NavigationCoordinator.swift in Sources */,
-				B41A9F452F0FA88C00C543C7 /* GenericSegmentedControl.swift in Sources */,
-				B46CD40C2F1A5CD4009011F4 /* CreatePNCDVCDatePickerConfigurationBuilder.swift in Sources */,
+				B41A9F452F0FA88C00C543C7 /* CustomSegmentedControl.swift in Sources */,
+				B46CD40C2F1A5CD4009011F4 /* CreateOREditPNCDDatePickerConfigurationBuilder.swift in Sources */,
 				B45CB8A72F04E2BB004AF269 /* ClassNameRetrievable.swift in Sources */,
 				B45CB8A82F04E2BB004AF269 /* Navigatable.swift in Sources */,
 				B41A9F382F0F4F2B00C543C7 /* CustomSwitch.swift in Sources */,
@@ -2284,7 +2284,7 @@
 				B45CB8B92F0519CC004AF269 /* ToastView.swift in Sources */,
 				D2EE36172BFDBE1D006F5238 /* MaxPurchaseQuantityViewController.swift in Sources */,
 				D2AE68DD2A7B7F12004D85B8 /* OrderRefundViewController.swift in Sources */,
-				B4996ADD2F175E9C00650BB7 /* ProductAndCategoryItemIncludedInDiscountTBLCell.swift in Sources */,
+				B4996ADD2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.swift in Sources */,
 				D2A2BF722B8D9516006796D5 /* ProgressShapeLayer.swift in Sources */,
 				D27A8D132D114EA4003AAE33 /* InStoreNewRefundViewController.swift in Sources */,
 				D21A0DC329A4863E00DC36CC /* SetupViewController.swift in Sources */,
@@ -2312,20 +2312,20 @@
 				D2F808722C44EC2F00613E1C /* BrandsTagsViewController.swift in Sources */,
 				D23ACF3629AF46A10067C3F7 /* CouponViewController.swift in Sources */,
 				B46CD4042F1A5117009011F4 /* DateNTimeHelper.swift in Sources */,
-				B420F2F92F18CA8100461C92 /* ProductAndCategoryDiscountAPIRepository.swift in Sources */,
+				B420F2F92F18CA8100461C92 /* PNCDAPIRepository.swift in Sources */,
 				D2AE052F297E867100CA43DD /* RegisterTableViewController.swift in Sources */,
 				D2FFF1582AE924750074344D /* AddVarAttributeCell.swift in Sources */,
 				D220880B29D14133006393C2 /* SetupVendorTableViewCell.swift in Sources */,
 				D25D18632CF4980500A79FDE /* CompletedRefundDetailCell.swift in Sources */,
 				D20EE8372AA5F2A800762E56 /* InventoryViewController.swift in Sources */,
-				B4E4A2302F2090AC000432CB /* CreatePNCDTextFieldUpdateUIHelper.swift in Sources */,
+				B4E4A2302F2090AC000432CB /* CreateOREditPNCDTextFieldUpdateUIHelper.swift in Sources */,
 				D2D2791C2AE61ADB001DD908 /* CustomFlowLayout.swift in Sources */,
 				D2BBAD1A2C94017C00133338 /* GiftCardTableViewCell.swift in Sources */,
 				D2C1F3192C1B072700BA6388 /* QtyMixnMatchViewController.swift in Sources */,
 				D2F6E9862E61AF9300BBAD99 /* CustomerMergeViewController.swift in Sources */,
 				D24692182A32DB46006D1904 /* TapticEngine.swift in Sources */,
 				B43280F22F1F9183002E4802 /* WeekDayItemParser.swift in Sources */,
-				B4996AD82F175E1800650BB7 /* ProductAndCategoryItemsIncludedInDiscountTableView.swift in Sources */,
+				B4996AD82F175E1800650BB7 /* PNCDItemsIncludedInDiscountTableView.swift in Sources */,
 				B49478412F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift in Sources */,
 				D2D879862BBBB58700ECE573 /* InStoreRefundPayCell.swift in Sources */,
 				D291BD6D297128D900DCD20D /* StoreTableViewCell.swift in Sources */,
@@ -2380,7 +2380,7 @@
 				B45CB8B42F04F741004AF269 /* JSONContainer.swift in Sources */,
 				D2D879882BBBB59A00ECE573 /* InStoreRefundCustCell.swift in Sources */,
 				D2E2391A2B286B4D00231FB4 /* Extention.swift in Sources */,
-				B49382062F0E2CEA0071D0F1 /* CreateProductAndCategoryDiscountVC.swift in Sources */,
+				B49382062F0E2CEA0071D0F1 /* CreateOREditPNCDVC.swift in Sources */,
 				D22696D92F1656E7001C4493 /* BogoDataModel.swift in Sources */,
 				D21A0DC529A487B600DC36CC /* SetupTableViewCell.swift in Sources */,
 				D2ABF03D2BBC033900A38D23 /* OrderFilterLeftCell.swift in Sources */,
@@ -2392,7 +2392,7 @@
 				D2A1A1082BFF6282007A1055 /* AddPurchaseCell.swift in Sources */,
 				D2DF61222CE32561003D47B0 /* StockSaveTableViewCell.swift in Sources */,
 				B420F30A2F18EC4900461C92 /* PNCDDiscountListItem.swift in Sources */,
-				D26B74BE2F178EFF00E79B5B /* ProductAndCategoryItemIDExtractor.swift in Sources */,
+				D26B74BE2F178EFF00E79B5B /* PNCDItemIDExtractor.swift in Sources */,
 				B45CB8AA2F04E364004AF269 /* UIStoryboard+Extension.swift in Sources */,
 				D2EF641A29C2F06000EA83CE /* SetupTaxTableViewCell.swift in Sources */,
 				D28621072AB065CC00AC90B4 /* AddProductCollectionViewCell.swift in Sources */,
@@ -2406,7 +2406,7 @@
 				D26778272CB503F10090D863 /* QuickAddSetupViewController.swift in Sources */,
 				D28F25F429767491002DE7A0 /* SalesOverviewViewController.swift in Sources */,
 				D21911752AC4015A0094B653 /* AttributeTableViewCell.swift in Sources */,
-				B41A9F3D2F0F7F3700C543C7 /* CreateProductAndCategoryDiscountVM.swift in Sources */,
+				B41A9F3D2F0F7F3700C543C7 /* CreateOREditPNCDVM.swift in Sources */,
 				D2D6E8822C9D6CF60017B9FE /* SalesNewViewController.swift in Sources */,
 				D2153F9F2ACD646E00CC61DA /* InstantPODescViewController.swift in Sources */,
 				D2C02E562C2133D80016B1AA /* AddMixnMatchViewController.swift in Sources */,
@@ -2468,7 +2468,7 @@
 				D2D879722BBBAFFA00ECE573 /* InStoreProductTableViewCell.swift in Sources */,
 				D25CAC602CE5B0DA004A52EF /* CustomerInfoCell.swift in Sources */,
 				D25CAC612CE5B0DA004A52EF /* CustomerInfoVC.swift in Sources */,
-				B49381ED2F0DFCF60071D0F1 /* ProductAndCategoryDiscountListVC.swift in Sources */,
+				B49381ED2F0DFCF60071D0F1 /* PNCDListVC.swift in Sources */,
 				D21965162D4C9FB40003E970 /* SelectBogoVariantCell.swift in Sources */,
 				D26F4E74299500A700716A51 /* StrokeAnimation.swift in Sources */,
 				D21CA0522C47DDA1002E4B74 /* AddBrandTagViewController.swift in Sources */,
@@ -2498,7 +2498,7 @@
 				D2A6838F296C0B3700F852E6 /* SceneDelegate.swift in Sources */,
 				D2B269E52A6113EC002D140A /* RootTableViewController.swift in Sources */,
 				B4AD368A2F1605CA00E9EF55 /* DatePickerInputView.swift in Sources */,
-				D27F2F5C2F10C4CE007AE4C8 /* ProductAndCategoryDiscountEndpoint.swift in Sources */,
+				D27F2F5C2F10C4CE007AE4C8 /* PNCDEndpoint.swift in Sources */,
 				D27F2F612F10D502007AE4C8 /* VariantListAPIRepository.swift in Sources */,
 				D2CA7D782B45242D00918A94 /* DuplicateCatCollectionViewCell.swift in Sources */,
 				D25B52492AEA18C700E82B83 /* CategoryAddProductCell.swift in Sources */,

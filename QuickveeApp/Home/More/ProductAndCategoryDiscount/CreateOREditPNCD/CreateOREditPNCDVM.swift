@@ -1,5 +1,5 @@
 //
-//  CreateProductAndCategoryDiscountVM.swift
+//  CreateOREditPNCDVM.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 08/01/26.
@@ -9,14 +9,14 @@ import Foundation
 
 
 
-extension CreateProductAndCategoryDiscountVC {
+extension CreateOREditPNCDVC {
     
     class ViewModel {
         
         
         init(
             editableDiscountItem: PNCDDiscountListItem?,
-            builder: CreateProductAndCategoryDiscountVC.AddUpdatePNCDRequestBuilder?
+            builder: CreateOREditPNCDVC.AddUpdatePNCDRequestBuilder?
         ) {
             self.editableDiscountItem = editableDiscountItem
             self.builder = builder
@@ -30,7 +30,7 @@ extension CreateProductAndCategoryDiscountVC {
                 configureBuilder()
             }
         }
-        var builder: CreateProductAndCategoryDiscountVC.AddUpdatePNCDRequestBuilder?
+        var builder: CreateOREditPNCDVC.AddUpdatePNCDRequestBuilder?
         
        
         

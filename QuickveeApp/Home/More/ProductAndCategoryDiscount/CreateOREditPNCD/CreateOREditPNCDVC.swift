@@ -1,5 +1,5 @@
 //
-//  CreateProductAndCategoryDiscountVC.swift
+//  CreateOREditPNCDVC.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 07/01/26.
@@ -7,18 +7,18 @@
 
 import UIKit
 
-typealias CreatePNCDVC = CreateProductAndCategoryDiscountVC
+typealias CreatePNCDVC = CreateOREditPNCDVC
 
-class CreateProductAndCategoryDiscountVCFactory {
+class CreateOREditPNCDVCFactory {
     
     static func make(
         discountItem : PNCDDiscountListItem? = nil
         
-    ) -> CreateProductAndCategoryDiscountVC {
+    ) -> CreateOREditPNCDVC {
     
-        let vc = CreateProductAndCategoryDiscountVC.instantiate()
+        let vc = CreateOREditPNCDVC.instantiate()
         
-        vc.viewModel = CreateProductAndCategoryDiscountVC.ViewModel(
+        vc.viewModel = CreateOREditPNCDVC.ViewModel(
             editableDiscountItem: discountItem,
             builder: .init(merchantId: UDHelper.shared.merchantId)
         )
@@ -30,7 +30,7 @@ class CreateProductAndCategoryDiscountVCFactory {
 }
 
 
-final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
+final class CreateOREditPNCDVC: UIViewController, Navigatable {
 
     static var storyboard: UIStoryboard { .productAndCategoryDiscount }
     
@@ -57,13 +57,13 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     @IBOutlet weak var lblDiscountName: UILabel!
     @IBOutlet weak var txtDiscountName: UITextField!
     
-    @IBOutlet weak var lblDiscountPerItem: UILabel!
-    @IBOutlet weak var txtDiscountPerItem: UITextField!
+    @IBOutlet weak var lblDiscountInputValueTypeTitle: UILabel!
+    @IBOutlet weak var txtDiscountInputValueType: UITextField!
     
     
-    @IBOutlet private weak var segCtrlDiscountPerItemDiscountType : GenericSegmentedControl!
-    @IBOutlet private weak var segCtrlDiscountScheduleType : GenericSegmentedControl!
-    @IBOutlet private weak var swtDealHasNoEndDate: CustomSwitch!
+    @IBOutlet weak var segCtrlDiscountInputValueType : CustomSegmentedControl!
+    @IBOutlet weak var segCtrlDiscountScheduleType : CustomSegmentedControl!
+    @IBOutlet weak var swtDealHasNoEndDate: CustomSwitch!
     
     // Date picker
     @IBOutlet weak var dtPickerDealStartDate: DatePickerInputView!
@@ -90,7 +90,7 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     @IBOutlet private weak var vwEditProductORCategoryBtnSuperView: UIView!
     @IBOutlet weak var lblEditProductORCategoryBtn: UILabel!
     
-    @IBOutlet private weak var tblProductORCategoryItemsIncludedView: ProductAndCategoryItemsIncludedInDiscountTableView!
+    @IBOutlet private weak var tblProductORCategoryItemsIncludedView: PNCDItemsIncludedInDiscountTableView!
     
     // Bottom Buttons
     @IBOutlet private weak var btnCancel: GenericButton!
@@ -104,7 +104,7 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     
     
     // Helper to manage type switch UI
-    var datePickerInputViewConfigurationBuilder: CreatePNCDVCDatePickerConfigurationBuilder!
+    var datePickerInputViewConfigurationBuilder: DatePickerConfigurationBuilder!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,7 +145,7 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     private func updateUI(){
         setupUIForDiscountTextFields()
 
-        segCtrlDiscountPerItemDiscountType.configure(
+        segCtrlDiscountInputValueType.configure(
             with: viewModel.flagsPropertyManager.discountPerItemDiscountTypeSegments.compactMap({ $0.stringValue }),
             configuration: .default
         )
@@ -172,10 +172,10 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
         viewModel.configureInitialValuesFromExistingData()
         
         txtDiscountName.text = editableDiscountItem.discountName
-        txtDiscountPerItem.text = editableDiscountItem.discount ?? "0"
+        txtDiscountInputValueType.text = editableDiscountItem.discount ?? "0"
         
         
-        txtDiscountPerItem.text = DiscountPerItemDiscountTextFormatter.format(
+        txtDiscountInputValueType.text = DiscountPerItemDiscountTextFormatter.format(
             editableDiscountItem.discount ?? "",
             type: viewModel.flagsPropertyManager.discountInputValueType
         )
@@ -206,7 +206,7 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
 
     
     private func configureScheduleType(){
-        var configuration : GenericSegmentedControl.Configuration = .default
+        var configuration : CustomSegmentedControl.Configuration = .default
         
         configuration.paddingBetweenThumbAndControl = 5
         
@@ -236,47 +236,48 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
         Logger.log(#function)
     }
     
-    @IBAction func didChangeValueOfAllowDiscountStackWithOtherDiscounts(_ sender: CustomSwitch) {
+    @IBAction private func didChangeValueOfAllowDiscountStackWithOtherDiscounts(_ sender: CustomSwitch) {
         viewModel.flagsPropertyManager.isAllowDiscountToStackWithOtherDiscounts = sender.isOn
         Logger.log(#function)
     }
     
     
-    @IBAction func didChangeValueOfDiscountPerItemDiscountType(_ sender: GenericSegmentedControl) {
-        let discountType : DiscountInputValueType = (sender.selectedIndex == 0) ? .amountValue : .percentValue
-        
-        if viewModel.flagsPropertyManager.discountInputValueType != discountType {
-            viewModel.flagsPropertyManager.discountInputValueType = discountType
+    @IBAction private  func onClickChangeDiscountInputValueType(_ sender: CustomSegmentedControl) {
+        if let tappedIndex = sender.tappedIndex {
+            viewModel.flagsPropertyManager.discountInputValueType = DiscountInputValueType.getFromIndex(tappedIndex)
         }
         Logger.log(#function)
     }
     
-    
-    @IBAction func didChangeValueOfScheduleType(_ sender: GenericSegmentedControl) {
-        let scheduleType : PNCDScheduleType = (sender.selectedIndex == 0) ? .oneTime : .repeatsOnSchedule
-        
-        if viewModel.flagsPropertyManager.scheduleType != scheduleType {
-            viewModel.flagsPropertyManager.scheduleType = scheduleType
+    @IBAction private func onClickChangeScheduleType(_ sender: CustomSegmentedControl) {
+        if let tappedIndex = sender.tappedIndex {
+            viewModel.flagsPropertyManager.scheduleType = PNCDScheduleType.getFromIndex(tappedIndex)
         }
-         
         Logger.log(#function)
     }
     
-
-    @IBAction func didChangeValueOfDealIsActiveForFullDay(_ sender: CustomSwitch) {
+    @IBAction private func didChangeValueOfDealIsActiveForFullDay(_ sender: CustomSwitch) {
         viewModel.flagsPropertyManager.isDealIsActiveForFullDay = sender.isOn
         Logger.log(#function)
     }
     
     
-    @IBAction func onClickBtnAddProductAndCategory(_ sender: GenericButton) {
-        ProductAndCategorySelectionVCFactory.make().push(in: navigationController, passData: { [weak self]  vc in
-            guard let self else { return }
-            vc.delegate = self
-        }, animated: false)
+    @IBAction private func onClickBtnAddProductAndCategory(_ sender: GenericButton) {
+        ProductAndCategorySelectionVCFactory.make().push(
+            in: navigationController,
+            passData: { [weak self]  vc in
+                guard let self else { return }
+                
+                vc.delegate = self
+                
+            }, animated: false
+        )
+        
         Logger.log(#function)
     }
     
+    
+    // Bottom Actions
     @IBAction private func onClickBtnCancel(_ sender: GenericButton) {
         
         Logger.log(#function)
@@ -295,7 +296,7 @@ final class CreateProductAndCategoryDiscountVC: UIViewController, Navigatable {
     
 }
 
-extension CreateProductAndCategoryDiscountVC : CustomNavigationHeaderViewDelegate{
+extension CreateOREditPNCDVC : CustomNavigationHeaderViewDelegate{
     
     func onClickBack() {
         popVC()
@@ -308,7 +309,7 @@ extension CreateProductAndCategoryDiscountVC : CustomNavigationHeaderViewDelegat
 }
 
 
-extension CreateProductAndCategoryDiscountVC {
+extension CreateOREditPNCDVC {
     
     private func updateUIForDiscountTypeSelectionValueChange(){
         updateUIForPNCDSelectionType()
@@ -316,7 +317,7 @@ extension CreateProductAndCategoryDiscountVC {
 }
 
 
-extension CreateProductAndCategoryDiscountVC {
+extension CreateOREditPNCDVC {
     
     private func updateUIForScheduleTypeValueChange() {
         let isOneTime = viewModel.flagsPropertyManager.scheduleType == .oneTime
@@ -324,6 +325,11 @@ extension CreateProductAndCategoryDiscountVC {
         vwWeeklySelectionView.isHidden = isOneTime
         swtDealIsActiveForFullDay.superview?.isHidden = isOneTime
         dtPickerDealStartTime.superview?.isHidden = isOneTime
+        
+        segCtrlDiscountScheduleType.select(
+            index: viewModel.flagsPropertyManager.scheduleType.getIndex()
+        )
+        
     }
     
     
@@ -334,16 +340,18 @@ extension CreateProductAndCategoryDiscountVC {
         vwAddProductORCategoryBtnSuperView.isHidden = isShowTblList
         vwEditProductORCategorySuperView.isHidden = !isShowTblList
         tblProductORCategoryItemsIncludedView.reloadData(with: viewModel.flagsPropertyManager.includedProductOrCategories)
+   
+        segCtrlDiscountScheduleType.select(index: viewModel.flagsPropertyManager.scheduleType.getIndex())
         
     }
     
 }
 
-extension CreateProductAndCategoryDiscountVC : UITextFieldDelegate {
+extension CreateOREditPNCDVC : UITextFieldDelegate {
     
 }
 
-extension CreateProductAndCategoryDiscountVC : DatePickerInputViewDelegate {
+extension CreateOREditPNCDVC : DatePickerInputViewDelegate {
     
     func configureView(_ datePickerView: DatePickerInputView) -> DatePickerInputView.Configuration {
         return datePickerInputViewConfigurationBuilder.make(
@@ -363,7 +371,7 @@ extension CreateProductAndCategoryDiscountVC : DatePickerInputViewDelegate {
 }
 
 
-extension CreateProductAndCategoryDiscountVC : CreatePNCDFlgsPropertyManagerDelegate {
+extension CreateOREditPNCDVC : CreateOREditPNCDFlagsPropertyManagerDelegate {
     
     func didUpdateProductOrCategoryDiscountType() {
         updateUIForDiscountTypeSelectionValueChange()
@@ -396,7 +404,7 @@ extension CreateProductAndCategoryDiscountVC : CreatePNCDFlgsPropertyManagerDele
     }
 }
 
-extension CreateProductAndCategoryDiscountVC : CreatePNCDDateAndTimeUIUpdateDelegate {
+extension CreateOREditPNCDVC : CreateOREditPNCDDateAndTimeUIUpdateDelegate {
     
     func didUpdatedStartDate() {
         dtPickerDealStartDate.selectedDate = viewModel.dateNTimeHelper.startDate ?? .now()
@@ -416,10 +424,11 @@ extension CreateProductAndCategoryDiscountVC : CreatePNCDDateAndTimeUIUpdateDele
     
 }
 
-extension CreateProductAndCategoryDiscountVC : ProductAndCategorySelectionVCProtocol {
+extension CreateOREditPNCDVC : ProductAndCategorySelectionVCProtocol {
     
     func didSelectVariants(_ variants: [VariantDataModel]) {
         viewModel.flagsPropertyManager.includedProductOrCategories = variants
     }
     
 }
+
