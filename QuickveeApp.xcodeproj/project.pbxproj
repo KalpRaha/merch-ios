@@ -1033,7 +1033,6 @@
 			isa = PBXGroup;
 			children = (
 				B4996AEE2F17BD1D00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC */,
-				B4996AE32F1770DE00650BB7 /* View */,
 				B41A9F432F0F887500C543C7 /* ProductAndCategoryDiscountList */,
 				B41A9F392F0F7F1700C543C7 /* CreateOREditPNCD */,
 				D28DF6862F0FA83C00426975 /* ProductAndCategorySelection */,
@@ -1077,13 +1076,6 @@
 				B4996ADB2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.xib */,
 			);
 			path = PNCDItemIncludedInDiscountTBLCell;
-			sourceTree = "<group>";
-		};
-		B4996AE32F1770DE00650BB7 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		B4996AE82F17B14E00650BB7 /* Base Class */ = {
