@@ -62,9 +62,11 @@ extension PNCDItemsIncludedInDiscountTableView : UITableViewDataSource, UITableV
         typealias CellType = PNCDItemIncludedInDiscountTBLCell
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CellType.className, for: indexPath) as? CellType else {
+            
+            
             return UITableViewCell()
         }
-        
+        cell.cellData = dataItems[indexPath.row]
         
         return cell
     }
