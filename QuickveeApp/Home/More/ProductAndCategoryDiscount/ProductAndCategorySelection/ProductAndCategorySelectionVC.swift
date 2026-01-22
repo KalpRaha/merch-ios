@@ -196,7 +196,7 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductAndCategorySelectionTBLCell") as! ProductAndCategorySelectionTBLCell
-        
+       
         if viewModel.discounttype == .product {
             
             cell.cellData = viewModel.tableViewDataSource[indexPath.row]
@@ -234,29 +234,8 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
                 
                 let finalData = mixNmatchPromotionVariants + bogoPromotionVariants
                 
-                for variant in finalData {
-                    
-                    if let mixDeal = viewModel.mixMatchList.first(where: {
-                        $0.itemIds.contains(variant.itemId)
-                    }) {
-                        let name = mixDeal.dealName ?? ""
-                        if !dealNames.contains(name) {
-                            dealNames.append(name)
-                        }
-                    }
-                        
-                        if let bogoDeal = viewModel.bogoList.first(where: {
-                            $0.items.contains(variant.itemId)
-                        }) {
-                            let name = bogoDeal.dealName ?? ""
-                            if !dealNames.contains(name) {
-                                dealNames.append(name)
-                            }
-                        }
-                    }
-                    
-                    print(dealNames)
-                    
+                
+               
                     if finalData.isEmpty {
                         return .none
                     }else if finalData.count == 1 {

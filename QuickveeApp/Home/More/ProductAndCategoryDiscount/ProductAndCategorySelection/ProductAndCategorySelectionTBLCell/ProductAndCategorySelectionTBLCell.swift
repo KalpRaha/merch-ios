@@ -18,7 +18,8 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
     @IBOutlet weak var promotionValue: UILabel!
     @IBOutlet weak var categoryValue: UILabel!
     
-   
+    @IBOutlet weak var category: ManropeMediumLabel!
+    
     var cellData: VariantDataModel! {
         didSet{
             updateUIWithProductData()
@@ -49,7 +50,7 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
             checkImage.image = isSelectedCell ? .checkInventory : .uncheckInventory
         }
     }
-    
+  
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -62,27 +63,43 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
             productNameLBL.text = cellData.variantTitle
             priceLbl.text = cellData.variantPrice
             upcLBL.text = cellData.variantUpc
-            stockLBL.text = "Avaiable Stock:\(cellData.quantity)"
+            setAttributedLabel(
+                        label: stockLBL,
+                        title: "Available Stock: ",
+                        value: "\(cellData.quantity)"
+                    )
             
         }else {
             productNameLBL.text = cellData.productTitle
             priceLbl.text = cellData.productPrice
             upcLBL.text = cellData.productUPC
-            stockLBL.text = "Avaiable Stock:\(cellData.quantity)"
+            setAttributedLabel(
+                        label: stockLBL,
+                        title: "Available Stock: ",
+                        value: "\(cellData.quantity)"
+                    )
         }
     }
     
    
     
     func updateUIForCategoryData(
-        title:String,
-        productCount:String,
+        title: String,
+        productCount: String,
         promotionType: PromotionType
-    ){
+    ) {
         
+        productNameLBL.text = title
+        priceLbl.isHidden = true
+        stockLBL.isHidden = true
         
-        
+        setAttributedLabel(
+                label: upcLBL,
+                title: "Products in category: ",
+                value: productCount
+            )
     }
+
     
     private func updateUIForProductCategoryData(){
         if let categoryData {
@@ -131,3 +148,34 @@ extension ProductAndCategorySelectionTBLCell {
     }
     
 }
+
+extension ProductAndCategorySelectionTBLCell {
+
+    func setAttributedLabel(
+        label: UILabel,
+        title: String,
+        value: String,
+        titleColor: UIColor = .gray,
+        valueColor: UIColor = .black
+    ) {
+
+        let attributedString = NSMutableAttributedString(
+            string: title,
+            attributes: [
+                .foregroundColor: titleColor
+            ]
+        )
+
+        let valueString = NSAttributedString(
+            string: value,
+            attributes: [
+                .foregroundColor: valueColor,
+                .font: label.font as Any
+            ]
+        )
+
+        attributedString.append(valueString)
+        label.attributedText = attributedString
+    }
+}
+
