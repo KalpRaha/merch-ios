@@ -24,3 +24,11 @@ extension String {
         self == "1"
     }
 }
+
+extension Int {
+    
+    func toString() -> String{
+        "\(self)"
+    }
+    
+}

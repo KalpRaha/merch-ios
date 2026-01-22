@@ -18,15 +18,17 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
     @IBOutlet weak var promotionValue: UILabel!
     @IBOutlet weak var categoryValue: UILabel!
     
+   
     var cellData: VariantDataModel! {
         didSet{
-            updateUIWithData()
+            updateUIWithProductData()
         }
     }
     
+    
     var categoryData: CategoryDataModel? {
         didSet{
-            updateUIForCategoryData()
+            updateUIForProductCategoryData()
         }
     }
     
@@ -42,9 +44,6 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
         }
     }
     
-    
-    
-    
     var isSelectedCell : Bool = false {
         didSet{
             checkImage.image = isSelectedCell ? .checkInventory : .uncheckInventory
@@ -53,11 +52,9 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
 
-    
-    private func updateUIWithData(){
+    private func updateUIWithProductData(){
      
         guard let cellData else { return }
         
@@ -68,17 +65,26 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
             stockLBL.text = "Avaiable Stock:\(cellData.quantity)"
             
         }else {
-            
             productNameLBL.text = cellData.productTitle
             priceLbl.text = cellData.productPrice
             upcLBL.text = cellData.productUPC
             stockLBL.text = "Avaiable Stock:\(cellData.quantity)"
-            
         }
+    }
+    
+   
+    
+    func updateUIForCategoryData(
+        title:String,
+        productCount:String,
+        promotionType: PromotionType
+    ){
+        
+        
         
     }
     
-    private func updateUIForCategoryData(){
+    private func updateUIForProductCategoryData(){
         if let categoryData {
             
             categoryValue.text = categoryData.title
@@ -107,3 +113,21 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
     
 }
 
+extension ProductAndCategorySelectionTBLCell {
+    
+    enum PromotionType {
+        
+        case none
+        case singlePromotion(String)
+        case MultiplePromotion
+        
+        var title: String {
+            switch self {
+            case .none: "None"
+            case .singlePromotion(let title): title
+            case .MultiplePromotion: "Multiple"
+            }
+        }
+    }
+    
+}

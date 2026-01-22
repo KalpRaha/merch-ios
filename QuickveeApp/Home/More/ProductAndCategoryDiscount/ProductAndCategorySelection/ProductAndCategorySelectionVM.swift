@@ -57,10 +57,8 @@ extension ProductAndCategorySelectionVC {
             }
         }
         
-        
-        
-        
-        
+        var discounttype : PNCDType =  .product
+  
         init(
             repository: VariantListAPIRepositoryProtocol,
             categoryRepository: CategoryListAPIRepositoryProtocol,

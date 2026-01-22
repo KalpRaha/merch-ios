@@ -267,7 +267,7 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
             in: navigationController,
             passData: { [weak self]  vc in
                 guard let self else { return }
-                viewModel.flagsPropertyManager.productOrCategoryDiscountType 
+                vc.viewModel.discounttype = viewModel.flagsPropertyManager.productOrCategoryDiscountType 
                 vc.delegate = self
                 
             }, animated: false

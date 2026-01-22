@@ -121,6 +121,10 @@ extension VariantDataModel {
         _isVarient == "1" 
     }
     
+    var itemId: String {
+        (isVarient ? variantId : productId)  ?? ""
+    }
+    
 }
 
 
