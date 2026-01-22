@@ -64,13 +64,11 @@
 		B45CB8B92F0519CC004AF269 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8B82F0519CC004AF269 /* ToastView.swift */; };
 		B45CB8BB2F051A02004AF269 /* ToastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B45CB8BA2F051A02004AF269 /* ToastView.xib */; };
 		B45CB8BE2F051C03004AF269 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CB8BD2F051C03004AF269 /* Toast.swift */; };
-		B46CD4002F1A45DF009011F4 /* TimeFormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CD3FF2F1A45DE009011F4 /* TimeFormatHelper.swift */; };
+		B46CD4002F1A45DF009011F4 /* PNCDTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CD3FF2F1A45DE009011F4 /* PNCDTimeFormatter.swift */; };
 		B46CD4022F1A4F77009011F4 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CD4012F1A4F77009011F4 /* Date+Extension.swift */; };
-		B46CD4042F1A5117009011F4 /* DateNTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CD4032F1A5117009011F4 /* DateNTimeHelper.swift */; };
 		B46CD4062F1A5218009011F4 /* FlagsPropertyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CD4052F1A5218009011F4 /* FlagsPropertyManager.swift */; };
 		B46CD40A2F1A583F009011F4 /* CreateOREditPNCDTypeUpdateUIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CD4092F1A583F009011F4 /* CreateOREditPNCDTypeUpdateUIHelper.swift */; };
 		B46CD40C2F1A5CD4009011F4 /* CreateOREditPNCDDatePickerConfigurationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CD40B2F1A5CD4009011F4 /* CreateOREditPNCDDatePickerConfigurationBuilder.swift */; };
-		B46CD40E2F1A603F009011F4 /* DateFormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CD40D2F1A603F009011F4 /* DateFormatHelper.swift */; };
 		B49381EA2F0DFBCA0071D0F1 /* ProductAndCategoryDiscount.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B49381E92F0DFBCA0071D0F1 /* ProductAndCategoryDiscount.storyboard */; };
 		B49381ED2F0DFCF60071D0F1 /* PNCDListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49381EC2F0DFCF60071D0F1 /* PNCDListVC.swift */; };
 		B49381F22F0DFD960071D0F1 /* CustomNavigationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49381F12F0DFD960071D0F1 /* CustomNavigationHeaderView.swift */; };
@@ -99,6 +97,7 @@
 		B4AD36952F16694100E9EF55 /* WeeklySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD36942F16694100E9EF55 /* WeeklySelectionView.swift */; };
 		B4AD36972F16695400E9EF55 /* DayItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD36962F16695400E9EF55 /* DayItemView.swift */; };
 		B4AD36992F16697D00E9EF55 /* WeeklySelectionViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD36982F16697D00E9EF55 /* WeeklySelectionViewConfiguration.swift */; };
+		B4B77F642F22061A00695BA1 /* PNCDDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B77F632F22061A00695BA1 /* PNCDDateFormatter.swift */; };
 		B4BC09762F14B6DE00BDB89E /* PNCDScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC09752F14B6DE00BDB89E /* PNCDScheduleType.swift */; };
 		B4BC097A2F15063100BDB89E /* MultipartFormDataBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC09792F15063100BDB89E /* MultipartFormDataBuilder.swift */; };
 		B4BC097C2F15108000BDB89E /* MultiPartRequestBodyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC097B2F15108000BDB89E /* MultiPartRequestBodyType.swift */; };
@@ -451,13 +450,11 @@
 		B45CB8B82F0519CC004AF269 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		B45CB8BA2F051A02004AF269 /* ToastView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToastView.xib; sourceTree = "<group>"; };
 		B45CB8BD2F051C03004AF269 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
-		B46CD3FF2F1A45DE009011F4 /* TimeFormatHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormatHelper.swift; sourceTree = "<group>"; };
+		B46CD3FF2F1A45DE009011F4 /* PNCDTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDTimeFormatter.swift; sourceTree = "<group>"; };
 		B46CD4012F1A4F77009011F4 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
-		B46CD4032F1A5117009011F4 /* DateNTimeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateNTimeHelper.swift; sourceTree = "<group>"; };
 		B46CD4052F1A5218009011F4 /* FlagsPropertyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagsPropertyManager.swift; sourceTree = "<group>"; };
 		B46CD4092F1A583F009011F4 /* CreateOREditPNCDTypeUpdateUIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDTypeUpdateUIHelper.swift; sourceTree = "<group>"; };
 		B46CD40B2F1A5CD4009011F4 /* CreateOREditPNCDDatePickerConfigurationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDDatePickerConfigurationBuilder.swift; sourceTree = "<group>"; };
-		B46CD40D2F1A603F009011F4 /* DateFormatHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatHelper.swift; sourceTree = "<group>"; };
 		B49381E92F0DFBCA0071D0F1 /* ProductAndCategoryDiscount.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductAndCategoryDiscount.storyboard; sourceTree = "<group>"; };
 		B49381EC2F0DFCF60071D0F1 /* PNCDListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDListVC.swift; sourceTree = "<group>"; };
 		B49381F12F0DFD960071D0F1 /* CustomNavigationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationHeaderView.swift; sourceTree = "<group>"; };
@@ -486,6 +483,7 @@
 		B4AD36942F16694100E9EF55 /* WeeklySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySelectionView.swift; sourceTree = "<group>"; };
 		B4AD36962F16695400E9EF55 /* DayItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayItemView.swift; sourceTree = "<group>"; };
 		B4AD36982F16697D00E9EF55 /* WeeklySelectionViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySelectionViewConfiguration.swift; sourceTree = "<group>"; };
+		B4B77F632F22061A00695BA1 /* PNCDDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDDateFormatter.swift; sourceTree = "<group>"; };
 		B4BC09752F14B6DE00BDB89E /* PNCDScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDScheduleType.swift; sourceTree = "<group>"; };
 		B4BC09792F15063100BDB89E /* MultipartFormDataBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataBuilder.swift; sourceTree = "<group>"; };
 		B4BC097B2F15108000BDB89E /* MultiPartRequestBodyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPartRequestBodyType.swift; sourceTree = "<group>"; };
@@ -1017,9 +1015,8 @@
 				B4E4A22F2F2090AC000432CB /* CreateOREditPNCDTextFieldUpdateUIHelper.swift */,
 				B46CD40B2F1A5CD4009011F4 /* CreateOREditPNCDDatePickerConfigurationBuilder.swift */,
 				B46CD4052F1A5218009011F4 /* FlagsPropertyManager.swift */,
-				B46CD4032F1A5117009011F4 /* DateNTimeHelper.swift */,
-				B46CD3FF2F1A45DE009011F4 /* TimeFormatHelper.swift */,
-				B46CD40D2F1A603F009011F4 /* DateFormatHelper.swift */,
+				B4B77F632F22061A00695BA1 /* PNCDDateFormatter.swift */,
+				B46CD3FF2F1A45DE009011F4 /* PNCDTimeFormatter.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -2258,7 +2255,6 @@
 				D256D5542AF0B07E00CF4B2C /* AddProdTaxCell.swift in Sources */,
 				D2FAF7F32BBD67AD00B0B03B /* OrderStatusViewController.swift in Sources */,
 				D27624C32C589AF70019EB2B /* SelectCouponTypeViewController.swift in Sources */,
-				B46CD40E2F1A603F009011F4 /* DateFormatHelper.swift in Sources */,
 				D23681D42AA6EF1E00728FDB /* ProductsViewController.swift in Sources */,
 				D233B6592B45044F00FBD6F2 /* DuplicateViewController.swift in Sources */,
 				B45CB8B62F04F75B004AF269 /* UDHelper.swift in Sources */,
@@ -2267,6 +2263,7 @@
 				D25253312CDB453300ADD70B /* StockTakeViewController.swift in Sources */,
 				D2E9243E2AC3DE19002370FE /* FilterCategoryViewController.swift in Sources */,
 				D2CE369C29769DEA0090A6D2 /* ItemSalesTableViewCell.swift in Sources */,
+				B4B77F642F22061A00695BA1 /* PNCDDateFormatter.swift in Sources */,
 				D285ECE72A2EE4BF009DFAE5 /* OrderOnlineViewController.swift in Sources */,
 				D2CE369E2976A6590090A6D2 /* ItemSalesInfoCollectionViewCell.swift in Sources */,
 				D207DFB62CABFC3400D18B89 /* InStoreTaxTableViewCell.swift in Sources */,
@@ -2311,7 +2308,6 @@
 				D220880F29D16EE2006393C2 /* AddVendorViewController.swift in Sources */,
 				D2F808722C44EC2F00613E1C /* BrandsTagsViewController.swift in Sources */,
 				D23ACF3629AF46A10067C3F7 /* CouponViewController.swift in Sources */,
-				B46CD4042F1A5117009011F4 /* DateNTimeHelper.swift in Sources */,
 				B420F2F92F18CA8100461C92 /* PNCDAPIRepository.swift in Sources */,
 				D2AE052F297E867100CA43DD /* RegisterTableViewController.swift in Sources */,
 				D2FFF1582AE924750074344D /* AddVarAttributeCell.swift in Sources */,
@@ -2346,7 +2342,7 @@
 				D26930AD2E6599AE00C3339B /* CustomerMergeTableViewCell.swift in Sources */,
 				D23493D92CEF2F0B0046D33C /* FeesTableCell.swift in Sources */,
 				D23493DA2CEF2F0B0046D33C /* RefundProductCell.swift in Sources */,
-				B46CD4002F1A45DF009011F4 /* TimeFormatHelper.swift in Sources */,
+				B46CD4002F1A45DF009011F4 /* PNCDTimeFormatter.swift in Sources */,
 				D23493DB2CEF2F0B0046D33C /* LoyaltyTableCell.swift in Sources */,
 				D2F5AB872CE5C2270050B89C /* profileCell.swift in Sources */,
 				B49382082F0E3F400071D0F1 /* GenericButton.swift in Sources */,

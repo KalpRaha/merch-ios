@@ -11,6 +11,9 @@ extension CreateOREditPNCDVC {
 
     struct AddUpdatePNCDRequest: Codable {
         
+        var boundary: String {  UUID().uuidString }
+        
+        
         var merchantId: String
         var pNCDId: String?
         var dealName: String?
@@ -77,9 +80,7 @@ extension CreateOREditPNCDVC {
 }
 
 extension CreateOREditPNCDVC.AddUpdatePNCDRequest: MultiPartRequestBodyType {
-    
-    var boundary: String {  UUID().uuidString }
-
+  
     func buildMultiPartBodyBuilder() -> MultipartFormDataBodyBuilder {
         var entries: [MultipartFormDataEntry] = []
 

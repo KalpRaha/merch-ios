@@ -15,6 +15,8 @@ protocol CreateOREditPNCDFlagsPropertyManagerDelegate : AnyObject {
     func didUpdateDiscountInputValueType()
     func didUpdateScheduleType()
     
+    func didUpdatedSelectedWeekDates()
+    
     func didUpdateIsDealIsActiveForFullDay()
     func didUpdatedIncludedProductORCategories()
     
@@ -63,6 +65,11 @@ extension CreatePNCDVC {
             }
         }
         
+        var selectedDates: [WeekDayItem] = [.sun]{
+            didSet{
+                delegate?.didUpdatedSelectedWeekDates()
+            }
+        }
         
         //MARK: - Swith / Bool Flags
         

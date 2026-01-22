@@ -21,7 +21,6 @@ extension CreateOREditPNCDVC {
             self.editableDiscountItem = editableDiscountItem
             self.builder = builder
             
-            self.dateNTimeHelper = DateNTimeHelper()
             self.flagsPropertyManager = FlagsPropertyManager()
         }
         
@@ -35,20 +34,12 @@ extension CreateOREditPNCDVC {
        
         
         
-        // StartDate / End Date
-        var dateNTimeHelper : DateNTimeHelper
         var flagsPropertyManager: FlagsPropertyManager
         
         
        
         
         private func configureBuilder() {
-            
-            dateNTimeHelper.startDate = DateFormatHelper.shared.getFormattedDate(editableDiscountItem?.startDate)
-            dateNTimeHelper.endDate = DateFormatHelper.shared.getFormattedDate(editableDiscountItem?.endDate)
-            
-            dateNTimeHelper.startTime = TimeFormatHelper.shared.getFormattedTime(editableDiscountItem?.startTime)
-            dateNTimeHelper.endTime = TimeFormatHelper.shared.getFormattedTime(editableDiscountItem?.endTime)
             
         }
         
@@ -62,15 +53,6 @@ extension CreateOREditPNCDVC {
             
             flagsPropertyManager.scheduleType = editableDiscountItem.scheduleType
             flagsPropertyManager.isThisDealHasNoEndDate = editableDiscountItem.isThisDealHasNoEndDate
-            
-            
-            
-            dateNTimeHelper.startDate = DateFormatHelper.shared.getFormattedDate(editableDiscountItem.startDate)
-            dateNTimeHelper.endDate = DateFormatHelper.shared.getFormattedDate(editableDiscountItem.endDate)
-            
-            dateNTimeHelper.startTime = TimeFormatHelper.shared.getFormattedTime(editableDiscountItem.startTime)
-            dateNTimeHelper.endTime = TimeFormatHelper.shared.getFormattedTime(editableDiscountItem.endTime)
-            
             
         }
         

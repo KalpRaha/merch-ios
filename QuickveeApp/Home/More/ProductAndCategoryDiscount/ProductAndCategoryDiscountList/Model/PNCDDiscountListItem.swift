@@ -40,13 +40,14 @@ struct PNCDDiscountListItem: Decodable {
     private var _fullDay: String?
     
     private var _scheduleType: String?
-    private var _type: String? = nil
+    private var _type: String?
+    
+    private var _weeklyDays: String?
+    private var monthlyDates: String?
     
     var startDate, endDate: String?
     var startTime, endTime: String?
         
-    private var _weeklyDays: String?
-    private var monthlyDates: String?
     
     var createdAt, updatedAt, isDeleted, updatedTimestamp: String?
 
@@ -109,7 +110,7 @@ extension PNCDDiscountListItem {
     }
     
     // Convenience parsed weekly days into UI enum
-    var weeklyDays: [WeekDayItem] {
+    var selectedWeekDays: [WeekDayItem] {
         WeekDayItemParser.parse(_weeklyDays)
     }
 }

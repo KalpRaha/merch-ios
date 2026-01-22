@@ -163,6 +163,7 @@
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
+                                                            <constraint firstAttribute="width" secondItem="g5m-PM-xW8" secondAttribute="height" multiplier="1:1" id="0Jp-TC-9LD"/>
                                                             <constraint firstItem="gdL-K3-r5e" firstAttribute="centerX" secondItem="g5m-PM-xW8" secondAttribute="centerX" id="Dmw-TC-OUg"/>
                                                             <constraint firstItem="gdL-K3-r5e" firstAttribute="centerY" secondItem="g5m-PM-xW8" secondAttribute="centerY" id="elm-6I-zPC"/>
                                                         </constraints>
@@ -183,6 +184,7 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="qxR-Qt-vNl" firstAttribute="centerY" secondItem="Umd-7V-H9k" secondAttribute="centerY" id="Sn7-Pe-De6"/>
+                                                            <constraint firstAttribute="width" secondItem="Umd-7V-H9k" secondAttribute="height" multiplier="1:1" id="WTD-Yy-xPr"/>
                                                             <constraint firstItem="qxR-Qt-vNl" firstAttribute="centerX" secondItem="Umd-7V-H9k" secondAttribute="centerX" id="rGg-Sj-0hP"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
@@ -201,6 +203,7 @@
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
+                                                            <constraint firstAttribute="width" secondItem="jfx-xZ-HxX" secondAttribute="height" multiplier="1:1" id="QRj-sP-lxF"/>
                                                             <constraint firstItem="oqE-Gu-n0z" firstAttribute="centerY" secondItem="jfx-xZ-HxX" secondAttribute="centerY" id="bJb-1H-2si"/>
                                                             <constraint firstItem="oqE-Gu-n0z" firstAttribute="centerX" secondItem="jfx-xZ-HxX" secondAttribute="centerX" id="cRv-7W-BLm"/>
                                                         </constraints>
@@ -222,6 +225,7 @@
                                                         <constraints>
                                                             <constraint firstItem="mDB-Ia-D6V" firstAttribute="centerY" secondItem="ob2-RF-IUs" secondAttribute="centerY" id="doQ-h2-bnF"/>
                                                             <constraint firstItem="mDB-Ia-D6V" firstAttribute="centerX" secondItem="ob2-RF-IUs" secondAttribute="centerX" id="kfI-lv-dYd"/>
+                                                            <constraint firstAttribute="width" secondItem="ob2-RF-IUs" secondAttribute="height" multiplier="1:1" id="m5c-WU-0fr"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isCapsuleCircle" value="YES"/>
@@ -269,10 +273,6 @@
                                                     </view>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="g5m-PM-xW8" firstAttribute="width" secondItem="g5m-PM-xW8" secondAttribute="height" multiplier="1:1" id="0Jp-TC-9LD"/>
-                                                    <constraint firstItem="jfx-xZ-HxX" firstAttribute="width" secondItem="jfx-xZ-HxX" secondAttribute="height" multiplier="1:1" id="QRj-sP-lxF"/>
-                                                    <constraint firstItem="Umd-7V-H9k" firstAttribute="width" secondItem="Umd-7V-H9k" secondAttribute="height" multiplier="1:1" id="WTD-Yy-xPr"/>
-                                                    <constraint firstItem="ob2-RF-IUs" firstAttribute="width" secondItem="ob2-RF-IUs" secondAttribute="height" multiplier="1:1" id="m5c-WU-0fr"/>
                                                     <constraint firstAttribute="height" constant="37" id="z5l-2g-u7V"/>
                                                 </constraints>
                                             </stackView>
@@ -381,7 +381,7 @@
                 <outlet property="lblDiscountAmount" destination="nMG-pk-S2h" id="tyk-20-UzR"/>
                 <outlet property="lblDiscountName" destination="BOI-I1-bN8" id="jFO-vC-8Sj"/>
                 <outlet property="lblDiscountScheduleDate" destination="jVE-6b-fgS" id="lnX-dd-nyk"/>
-                <outlet property="lblDiscountTime" destination="4Rx-wM-Kf7" id="H8H-WL-YaB"/>
+                <outlet property="lblDiscountScheduleTime" destination="4Rx-wM-Kf7" id="H8H-WL-YaB"/>
                 <outlet property="stkWeeklySelectionView" destination="gdG-J8-rNp" id="cXZ-Fu-NWb"/>
                 <outlet property="vwDiscountDetailBorderBGView" destination="HXI-ar-3hN" id="pMx-AC-IM3"/>
                 <outlet property="vwMainContainerView" destination="zfJ-OZ-Mgb" id="o5K-q6-alP"/>

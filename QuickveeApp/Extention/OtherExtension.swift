@@ -24,3 +24,10 @@ extension String {
         self == "1"
     }
 }
+
+extension Locale {
+    
+    static let enUSPosix = Locale(identifier: "en_US_POSIX")
+    
+}
+

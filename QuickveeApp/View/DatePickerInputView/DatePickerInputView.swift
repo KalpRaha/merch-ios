@@ -12,8 +12,8 @@ protocol DatePickerInputViewDelegate : AnyObject {
     
     func configureView(_ datePickerView : DatePickerInputView) -> DatePickerInputView.Configuration
     
-    func onClickCancel()
-    func onClickDone(_ selectedDate: Date)
+    func onClickCancel(_ datePickerView : DatePickerInputView)
+    func onClickDone(_ datePickerView : DatePickerInputView, selectedDate: Date)
 }
 
 extension DatePickerInputView{
@@ -58,6 +58,9 @@ final class DatePickerInputView: UIView {
     private let iconImageView = UIImageView()
 
     private let datePicker = UIDatePicker()
+
+    // Transparent overlay to expand tap area
+    private let tapOverlayButton = UIButton(type: .custom)
 
     // Constraints for content inside its container (now applied to hStack)
     private var topConstraint: NSLayoutConstraint!
@@ -128,6 +131,7 @@ fileprivate extension DatePickerInputView {
         setupIconImageView()
         setupDatePicker()
         setupToolbar()
+        setupTapOverlay()
     }
     
     func setupTitleLabel() {
@@ -184,6 +188,7 @@ fileprivate extension DatePickerInputView {
     }
 
     func setupTextField() {
+        textField.tintColor = .clear
         textField.delegate = self
         setDefaultPlaceholder()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -246,6 +251,7 @@ fileprivate extension DatePickerInputView {
             datePicker.datePickerMode = .date
         case .time:
             datePicker.datePickerMode = .time
+            datePicker.locale = .enUSPosix
         }
     }
     
@@ -266,6 +272,26 @@ fileprivate extension DatePickerInputView {
             }
         }
         iconImageView.tintColor = configuration.textFieldTextConfiguration.textColor
+    }
+    
+    func setupTapOverlay() {
+        // A transparent button that sits on top to handle taps anywhere in the view
+        tapOverlayButton.translatesAutoresizingMaskIntoConstraints = false
+        tapOverlayButton.backgroundColor = .clear
+        // Ensure it does not show highlight
+        tapOverlayButton.adjustsImageWhenHighlighted = false
+        tapOverlayButton.addTarget(self, action: #selector(handleOverlayTap), for: .touchUpInside)
+        
+        addSubview(tapOverlayButton)
+        // Bring to front so it captures touches
+        bringSubviewToFront(tapOverlayButton)
+        
+        NSLayoutConstraint.activate([
+            tapOverlayButton.topAnchor.constraint(equalTo: topAnchor),
+            tapOverlayButton.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tapOverlayButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tapOverlayButton.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
     }
     
 }
@@ -316,7 +342,7 @@ fileprivate extension DatePickerInputView {
         }
 
         textField.resignFirstResponder()
-        delegate?.onClickCancel()
+        delegate?.onClickCancel(self)
     }
 
     @objc func doneTapped() {
@@ -324,14 +350,19 @@ fileprivate extension DatePickerInputView {
         selectedDate = finalDate
         updateTextField(with: finalDate)
         textField.resignFirstResponder()
-        delegate?.onClickDone(finalDate)
+        delegate?.onClickDone(self, selectedDate: finalDate)
     }
 
+    @objc func handleOverlayTap() {
+        // Make the text field the first responder; caret color already clear
+        textField.becomeFirstResponder()
+    }
       
 }
 
 fileprivate extension DatePickerInputView {
 
+    
     func applySelectedDate() {
         guard let date = selectedDate else { return }
 
@@ -347,16 +378,10 @@ fileprivate extension DatePickerInputView {
     }
 
     func updateTextField(with date: Date) {
+        textField.text =
         switch pickerType {
-        case .date:
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd/MM/yyyy"
-            textField.text = formatter.string(from: date)
-        case .time:
-            let formatter = DateFormatter()
-            formatter.timeStyle = .short
-            formatter.dateStyle = .none
-            textField.text = formatter.string(from: date)
+        case .date: PNCDDateFormatter.shared.getStringToDisplay(date)
+        case .time: PNCDTimeFormatter.shared.getStringToDisplay(date)
         }
     }
 
@@ -378,6 +403,62 @@ fileprivate extension DatePickerInputView {
         )
     }
 
+}
+
+extension DatePickerInputView {
+    
+    func setSelectedDate(
+        date : String?,
+        time: String?,
+        timeZone: TimeZone = .current,
+        locale: Locale = .current
+    ) {
+        
+        // Use local calendar and time zone (device's current time zone)
+        let calendar = Calendar.current
+
+        guard
+            let date = PNCDDateFormatter.shared.parseFromAPI(date),
+            let timeDate = PNCDTimeFormatter.shared.parseFromAPI(time)
+        else {
+            selectedDate = nil
+            return
+        }
+        
+        // Extract date components (year, month, day)
+        var components = calendar.dateComponents([.year, .month, .day], from: date)
+        
+        // Extract time components (hour, minute, second)
+        let timeComponents = calendar.dateComponents([.hour, .minute, .second], from: timeDate)
+        
+        // Combine them
+        components.hour = timeComponents.hour
+        components.minute = timeComponents.minute
+        components.second = timeComponents.second
+        
+        // Create the final Date in local time zone
+        guard let combinedDate = calendar.date(from: components) else { return }
+        print("Combined Date: \(combinedDate)")  // For debugging: e.g., "Jan 22, 2026 at 10:30:00 AM"
+        
+        self.selectedDate = combinedDate
+        printDate(date: combinedDate, timeZone: timeZone, locale: locale)
+    }
+    
+    
+    private func printDate(
+        date: Date,
+        timeZone: TimeZone,
+        locale: Locale
+    ) {
+        let displayFormatter = DateFormatter()
+        displayFormatter.dateStyle = .medium
+        displayFormatter.timeStyle = .medium
+        displayFormatter.timeZone = timeZone
+        displayFormatter.locale = locale
+        
+        Logger.log("✅ Local: \(displayFormatter.string(from: date ))")
+        Logger.log("📊 UTC: \(date)")
+    }
 }
 
 extension DatePickerInputView: UITextFieldDelegate {

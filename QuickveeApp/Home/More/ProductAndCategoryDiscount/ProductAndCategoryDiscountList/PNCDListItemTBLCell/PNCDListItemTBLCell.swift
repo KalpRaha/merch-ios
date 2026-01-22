@@ -18,7 +18,7 @@ class PNCDListItemTBLCell: UITableViewCell {
     @IBOutlet private weak var lblDiscountAmount: ManropeExtraBoldLabel!
     
     @IBOutlet private weak var lblDiscountScheduleDate: ManropeBoldLabel!
-    @IBOutlet private weak var lblDiscountTime: ManropeBoldLabel!
+    @IBOutlet private weak var lblDiscountScheduleTime: ManropeBoldLabel!
     
     
     @IBOutlet private weak var stkWeeklySelectionView: UIStackView!
@@ -67,9 +67,14 @@ private extension PNCDListItemTBLCell {
         lblDiscountAmount.text = data.getDisplayValue() + " OFF"
         
         
-        let startDate = CreatePNCDVC.DateFormatHelper.shared.formatDateForDisplay(data.startDate) ?? "NA"
-        let endDate = CreatePNCDVC.DateFormatHelper.shared.formatDateForDisplay(data.endDate) ?? "NA"
+        let startDate = PNCDDateFormatter.shared.getStringToDisplay(data.startDate)
+        let endDate = PNCDDateFormatter.shared.getStringToDisplay(data.endDate)
         lblDiscountScheduleDate.text = "\(startDate) - \((endDate))"
+        
+        
+        let startTime = PNCDTimeFormatter.shared.getStringToDisplay(data.startTime)
+        let endTime = PNCDTimeFormatter.shared.getStringToDisplay(data.endTime)
+        lblDiscountScheduleTime.text = "\(startTime) - \(endTime)"
         
         isEnabled = data.isDiscountDisable ? false : true
         
@@ -97,7 +102,7 @@ private extension PNCDListItemTBLCell {
 private extension PNCDListItemTBLCell {
 
     func updateUIForWeeklySelectionView(){
-        let selectedWeekItems: Set<WeekDayItem> = Set(cellData?.weeklyDays ?? [])
+        let selectedWeekItems: Set<WeekDayItem> = Set(cellData?.selectedWeekDays ?? [])
         
         for (index, view )in vwWeeklyCapsulesView.enumerated() {
             

@@ -22,9 +22,7 @@ class CreateOREditPNCDVCFactory {
             editableDiscountItem: discountItem,
             builder: .init(merchantId: UDHelper.shared.merchantId)
         )
-        
-        vc.datePickerInputViewConfigurationBuilder = .init()
-        
+
         return vc
     }
 }
@@ -102,10 +100,7 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     var isViewLoadedFlag : Bool = false
     var isExisitngPropertiesUpdatedOnUI : Bool = false
     
-    
-    // Helper to manage type switch UI
-    var datePickerInputViewConfigurationBuilder: DatePickerConfigurationBuilder!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -134,11 +129,7 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     
     private func configure() {
         vwNavigationHeader.delegate = self
-        datePickerInputViewConfigurationBuilder.vc = self
-        
         viewModel.flagsPropertyManager.delegate = self
-        viewModel.dateNTimeHelper.timeUIUpdateDelegate = self
-        
         
     }
     
@@ -178,6 +169,26 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
         txtDiscountInputValueType.text = DiscountPerItemDiscountTextFormatter.format(
             editableDiscountItem.discount ?? "",
             type: viewModel.flagsPropertyManager.discountInputValueType
+        )
+        
+        dtPickerDealStartDate.setSelectedDate(
+            date: editableDiscountItem.startDate,
+            time: editableDiscountItem.startTime
+        )
+        
+        dtPickerDealStartTime.setSelectedDate(
+            date: editableDiscountItem.startDate,
+            time: editableDiscountItem.startTime
+        )
+        
+        dtPickerDealEndDate.setSelectedDate(
+            date: editableDiscountItem.endDate,
+            time: editableDiscountItem.endTime
+        )
+        
+        dtPickerDealEndTime.setSelectedDate(
+            date: editableDiscountItem.endDate,
+            time: editableDiscountItem.endTime
         )
         
         // For inital UI update
@@ -354,16 +365,28 @@ extension CreateOREditPNCDVC : UITextFieldDelegate {
 extension CreateOREditPNCDVC : DatePickerInputViewDelegate {
     
     func configureView(_ datePickerView: DatePickerInputView) -> DatePickerInputView.Configuration {
-        return datePickerInputViewConfigurationBuilder.make(
+        return makeDatePickerConfiguration(
             datePickerView: datePickerView
         )
     }
     
-    func onClickCancel() {
+    func onClickCancel(_ datePickerView : DatePickerInputView) {
         Logger.log(#function)
     }
     
-    func onClickDone(_ selectedDate: Date) {
+    func onClickDone(_ datePickerView : DatePickerInputView, selectedDate: Date) {
+        
+        switch datePickerView {
+            
+        case dtPickerDealStartDate, dtPickerDealEndDate:
+            Logger.log("Start/End Date : \(selectedDate)")
+            
+        case dtPickerDealStartTime, dtPickerDealEndTime:
+            Logger.log("Start/End Time : \(selectedDate)")
+            
+        default: break
+            
+        }
         Logger.log(#function)
     }
     
@@ -377,7 +400,7 @@ extension CreateOREditPNCDVC : CreateOREditPNCDFlagsPropertyManagerDelegate {
     }
     
     func didUpdateIsAllowDiscountToStackWithOtherDiscounts() {
-
+        
     }
     
     func didUpdateDiscountInputValueType() {
@@ -388,6 +411,11 @@ extension CreateOREditPNCDVC : CreateOREditPNCDFlagsPropertyManagerDelegate {
     func didUpdateScheduleType() {
         updateUIForScheduleTypeValueChange()
     }
+    
+    func didUpdatedSelectedWeekDates() {
+        vwWeeklySelectionView.updateSelectedItemsDataSource(viewModel.flagsPropertyManager.selectedDates)
+    }
+    
     
     func didUpdateIsDealIsActiveForFullDay() {
         
@@ -403,25 +431,6 @@ extension CreateOREditPNCDVC : CreateOREditPNCDFlagsPropertyManagerDelegate {
     }
 }
 
-extension CreateOREditPNCDVC : CreateOREditPNCDDateAndTimeUIUpdateDelegate {
-    
-    func didUpdatedStartDate() {
-        dtPickerDealStartDate.selectedDate = viewModel.dateNTimeHelper.startDate ?? .now()
-    }
-    
-    func didUpdatedEndDate() {
-        dtPickerDealEndDate.selectedDate = viewModel.dateNTimeHelper.endDate ?? .now()
-    }
-    
-    func didUpdatedStartTime() {
-        dtPickerDealStartTime.selectedDate = viewModel.dateNTimeHelper.startTime ?? .now()
-    }
-    
-    func didUpdatedEndTime() {
-        dtPickerDealStartTime.selectedDate = viewModel.dateNTimeHelper.endTime ?? .now()
-    }
-    
-}
 
 extension CreateOREditPNCDVC : ProductAndCategorySelectionVCProtocol {
     
