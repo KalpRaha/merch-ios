@@ -105,10 +105,8 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
         filterView.backgroundColor =  UIColor(named: "SelectCat")
         filterLbl.font = UIFont(name: "Manrope-Medium", size: 12.0)!
         filterLbl.textColor = UIColor.white
-
     }
     
-
     func updateCategoryCountUI() {
         let count = viewModel.selectedCategories.count
         print("DEBUG count:", count)
@@ -129,7 +127,6 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
         searchBar.alpha = viewModel.isSearching ? 1 : 0
         backBtn.alpha = viewModel.isSearching ? 0 : 1
         scanBtn.alpha = viewModel.isSearching ? 0 : 1
-        
     }
     
     // MARK: - IBAction
@@ -187,7 +184,7 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if viewModel.discounttype == .product {
             viewModel.tableViewDataSource.count
-            
+
         }else{
             viewModel.categoryList.count
         }
@@ -196,7 +193,7 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductAndCategorySelectionTBLCell") as! ProductAndCategorySelectionTBLCell
-       
+        
         if viewModel.discounttype == .product {
             
             cell.cellData = viewModel.tableViewDataSource[indexPath.row]
@@ -209,7 +206,6 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
             
         }else {
             
-            var dealNames = [String]()
             let categoryData = viewModel.categoryList[indexPath.row]
             let promotionalVariants = viewModel.variantList.filter({ $0.category == categoryData.id })
             
@@ -228,62 +224,57 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
                 bogoPromotionVariants.append(contentsOf: bogoPromotion)
             }
             
-            
-            
             let type: ProductAndCategorySelectionTBLCell.PromotionType = {
                 
                 let finalData = mixNmatchPromotionVariants + bogoPromotionVariants
                 
-                
-               
-                    if finalData.isEmpty {
-                        return .none
-                    }else if finalData.count == 1 {
-                        return .singlePromotion(finalData.first!.productTitle ?? "")
-                    }else {
-                        return .MultiplePromotion
-                    }
+                if finalData.isEmpty {
+                    return .none
+                }else if finalData.count == 1 {
                     
+                    let dealName: String = {
+                        if let variant =  finalData.first {
+                            if mixNmatchPromotionVariants.count == 1 {
+                                return viewModel.mixMatchList.filter({ $0.itemIds.contains( variant.itemId) }).first?.dealName ?? ""
+                            }
+                            else {
+                                return viewModel.bogoList.filter({ $0.items.contains( variant.itemId) }).first?.dealName ?? ""
+                            }
+                        }
+                        else {
+                            return ""
+                        }
+                        
+                    }()
+                    
+                    return .singlePromotion(dealName)
+                }else {
+                    return .MultiplePromotion
+                }
+                
             }()
-                
-                Logger.log("Found some. ")
-                
-                cell.updateUIForCategoryData(
-                    title: categoryData.title ?? "Title",
-                    productCount: promotionalVariants.count.toString(),
-                    promotionType: type
-                )
-                
-            }
             
-            return cell
+            Logger.log("Found some. ")
+            
+            cell.updateUIForCategoryData(
+                title: categoryData.title ?? "Title",
+                productCount: promotionalVariants.count.toString(),
+                promotionType: type
+            )
         }
+        
+        return cell
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if  viewModel.selectedIndexPath.contains(indexPath)  {
             viewModel.selectedIndexPath.removeAll(where: { $0 == indexPath})
-          //  selectedVariants.removeAll { $0 == viewModel.variantList[indexPath.row] }
-           
-            
         } else {
-            
             viewModel.selectedIndexPath.append(indexPath)
-//            let variant = viewModel.variantList[indexPath.row]
-//                selectedVariants.append(variant)
-            
-//            var result : [VariantDataModel] = []
-//                       
-//                       for indexPath in viewModel.selectedIndexPath {
-//                           result.append(viewModel.variantList[indexPath.row])
-//                           
-//                       }
-//          print(result)
-           
         }
         tableView.reloadRows(at: [indexPath], with: .none)
     }
-    
 }
 
 
@@ -308,7 +299,6 @@ extension ProductAndCategorySelectionVC : SelectedCategoryProductsDelegate {
     }
 }
 
-
 extension ProductAndCategorySelectionVC: ProductAndCategorySelectionViewModelDelegate {
     func didUpdateSelectedCategories() {
         viewModel.selectedCategories.count
@@ -316,7 +306,6 @@ extension ProductAndCategorySelectionVC: ProductAndCategorySelectionViewModelDel
             self.updateCategoryCountUI()
         }
     }
-    
     
     func didUpdatedTableViewData() {
         DispatchQueue.main.async {

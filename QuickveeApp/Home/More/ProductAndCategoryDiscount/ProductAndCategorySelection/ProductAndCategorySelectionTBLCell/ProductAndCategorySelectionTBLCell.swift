@@ -16,8 +16,10 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
     @IBOutlet weak var stockLBL: UILabel!
     
     @IBOutlet weak var promotionValue: UILabel!
-    @IBOutlet weak var categoryValue: UILabel!
     
+    @IBOutlet weak var categoryValue: ManropeBoldLabel!
+    
+    @IBOutlet weak var grayBgView: UIView!
     @IBOutlet weak var category: ManropeMediumLabel!
     
     var cellData: VariantDataModel! {
@@ -25,7 +27,6 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
             updateUIWithProductData()
         }
     }
-    
     
     var categoryData: CategoryDataModel? {
         didSet{
@@ -60,6 +61,7 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
         guard let cellData else { return }
         
         if cellData.isVarient {
+            grayBgView.layer.cornerRadius = 5
             productNameLBL.text = cellData.variantTitle
             priceLbl.text = cellData.variantPrice
             upcLBL.text = cellData.variantUpc
@@ -80,18 +82,18 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
                     )
         }
     }
-    
-   
-    
+  
     func updateUIForCategoryData(
         title: String,
         productCount: String,
         promotionType: PromotionType
     ) {
-        
+        grayBgView.layer.cornerRadius = 5
         productNameLBL.text = title
         priceLbl.isHidden = true
         stockLBL.isHidden = true
+        category.isHidden = true
+        categoryValue.isHidden = true
         
         setAttributedLabel(
                 label: upcLBL,
@@ -100,7 +102,6 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
             )
     }
 
-    
     private func updateUIForProductCategoryData(){
         if let categoryData {
             
@@ -127,7 +128,6 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
             promotionValue.text = "-"
         }
     }
-    
 }
 
 extension ProductAndCategorySelectionTBLCell {
@@ -146,11 +146,9 @@ extension ProductAndCategorySelectionTBLCell {
             }
         }
     }
-    
 }
 
 extension ProductAndCategorySelectionTBLCell {
-
     func setAttributedLabel(
         label: UILabel,
         title: String,
@@ -165,7 +163,6 @@ extension ProductAndCategorySelectionTBLCell {
                 .foregroundColor: titleColor
             ]
         )
-
         let valueString = NSAttributedString(
             string: value,
             attributes: [
@@ -173,7 +170,6 @@ extension ProductAndCategorySelectionTBLCell {
                 .font: label.font as Any
             ]
         )
-
         attributedString.append(valueString)
         label.attributedText = attributedString
     }
