@@ -12,8 +12,8 @@ extension API {
     enum PNCDEndpoint {
         
         case getDiscountList(req : PNCDListVC.GetDiscountListRequest)
-        case updateDiscountEnableDisableStatus(req : PNCDListVC.UpdateDiscountEnableDisableStateRequest)
-        case addUpdatePNCD(req: CreatePNCDVC.AddUpdatePNCDRequest)
+        case updatePNCDState(req : PNCDListVC.UpdatePNCDStateRequest)
+        case addUpdatePNCD(req: CreatePNCDVC.CreateOrEditPNCDRequest)
         
     }
     
@@ -44,7 +44,7 @@ extension API.PNCDEndpoint: APIEndpointEnumType {
                 headers: defaultHeaders
             )
             
-        case .updateDiscountEnableDisableStatus(let req):
+        case .updatePNCDState(let req):
             APIEndpoint(
                 baseURL: baseURL,
                 versionURL: versionURL,

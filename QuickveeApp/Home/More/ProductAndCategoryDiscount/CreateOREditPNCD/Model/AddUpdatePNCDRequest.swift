@@ -1,5 +1,5 @@
 //
-//  AddUpdatePNCDRequest.swift
+//  CreateOrEditPNCDRequest.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 15/01/26.
@@ -9,9 +9,9 @@ import Foundation
 
 extension CreateOREditPNCDVC {
 
-    struct AddUpdatePNCDRequest: Codable {
+    struct CreateOrEditPNCDRequest: Codable {
         
-        var boundary: String {  UUID().uuidString }
+        var boundary: String = UUID().uuidString
         
         
         var merchantId: String
@@ -79,7 +79,7 @@ extension CreateOREditPNCDVC {
 
 }
 
-extension CreateOREditPNCDVC.AddUpdatePNCDRequest: MultiPartRequestBodyType {
+extension CreateOREditPNCDVC.CreateOrEditPNCDRequest: MultiPartRequestBodyType {
   
     func buildMultiPartBodyBuilder() -> MultipartFormDataBodyBuilder {
         var entries: [MultipartFormDataEntry] = []

@@ -117,6 +117,17 @@ extension PNCDDiscountListItem {
 
 extension PNCDDiscountListItem {
     
+    // Discount Enable / Disable Flag
+    var isDiscountDisable: Bool {
+        (_isDiscountDisable?.isTrue() ?? false) == true
+    }
+    
+    mutating func updateDiscountDisableFlag(_ flag: Bool) {
+        _isDiscountDisable = flag.toString()
+    }
+    
+    
+    // Discount has End Date Or Not Flag
     var isThisDealHasNoEndDate: Bool {
         // Your toBool() only recognizes "true"/"false"; prefer isTrue() for "1"/"0"
         (_noEndDate?.isTrue() ?? false) == true
@@ -124,10 +135,6 @@ extension PNCDDiscountListItem {
     
     var isAllowThisDiscountToStackWithOtherDiscounts: Bool {
         (_useWithCoupon?.isTrue() ?? false) == true
-    }
-    
-    var isDiscountDisable: Bool {
-        (_isDiscountDisable?.isTrue() ?? false) == true
     }
     
     // Expose use_status as Bool

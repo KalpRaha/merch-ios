@@ -210,10 +210,10 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
         updateUIForScheduleTypeValueChange()
         
         viewModel.flagsPropertyManager.discountInputValueType = .amountValue
-        swtAllowDiscountStackWithOtherDiscounts.isOn = true
-        swtDealHasNoEndDate.isOn = false
-        swtDealIsActiveForFullDay.isOn = false
-
+        swtAllowDiscountStackWithOtherDiscounts.updateIsOnFlag(true)
+        swtDealHasNoEndDate.updateIsOnFlag(false)
+        swtDealIsActiveForFullDay.updateIsOnFlag(false)
+        
         viewModel.flagsPropertyManager.includedProductOrCategories.removeAll()
     }
 

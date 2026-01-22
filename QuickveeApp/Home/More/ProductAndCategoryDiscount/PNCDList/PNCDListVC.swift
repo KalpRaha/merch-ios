@@ -86,9 +86,24 @@ final class PNCDListVC: UIViewController, Navigatable {
         
         tblDiscountListView.register(PNCDListItemTBLCell.nib, forCellReuseIdentifier: PNCDListItemTBLCell.className)
         
-        viewModel.discountList = []
+        updateDiscountListTableView()
     }
-
+    
+    private func updateDiscountListTableView(){
+        if viewModel.discountList.isEmpty {
+            
+            vwNoDiscountView.isHidden = false
+            vwDiscountListTableContainerView.isHidden = true
+            
+        }else{
+            vwNoDiscountView.isHidden = true
+            vwDiscountListTableContainerView.isHidden = false
+            
+            tblDiscountListView.refreshControl?.endRefreshing()
+            tblDiscountListView.reloadData()
+        }
+    }
+    
     @IBAction private func onClickBtnCreateDiscount(_ sender: UIButton) {
         CreateOREditPNCDVCFactory.make().push(in: self)
         Logger.log(#function)
@@ -121,9 +136,19 @@ extension PNCDListVC : UITableViewDataSource, UITableViewDelegate {
         }
         
         cell.cellData = viewModel.discountList[indexPath.row]
+        cell.isLoading = viewModel.enableDisableLoadingStateIds.contains(cell.cellData.id ?? "")
+        
         cell.onClickEditPNCD = { [weak self] in
             guard let self else { return }
             handleOnClickEditPNCD(indexPath: indexPath)
+        }
+        
+        cell.onClickEnableDisable = { [weak self] in
+            guard let self else { return }
+            
+            if let pncdID = cell.cellData.id {
+                viewModel.enableDisableDiscountList(indexPath: indexPath)
+            }
         }
         
         return cell
@@ -149,19 +174,15 @@ extension PNCDListVC : ProductAndCategoryDiscountListVMProtocol {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             
-            if viewModel.discountList.isEmpty {
-                
-                vwNoDiscountView.isHidden = false
-                vwDiscountListTableContainerView.isHidden = true
-                
-            }else{
-                vwNoDiscountView.isHidden = true
-                vwDiscountListTableContainerView.isHidden = false
-                
-                tblDiscountListView.refreshControl?.endRefreshing()
-                tblDiscountListView.reloadData()
-            }
+            updateDiscountListTableView()
+        }
+    }
+    
+    func didUpdatedEnableDisableLoadingStateIds() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
             
+            updateDiscountListTableView()
         }
     }
     

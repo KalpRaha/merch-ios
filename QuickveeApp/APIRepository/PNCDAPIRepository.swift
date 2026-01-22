@@ -18,13 +18,13 @@ protocol PNCDAPIRepositoryProtocol : AnyObject {
     ) async throws ->  GetDiscountListResponse
     
     
-    func updateDiscountEnableDisableState(
-        request : PNCDListVC.UpdateDiscountEnableDisableStateRequest
-    ) async throws -> GenericAPIResponse<PNCDListVC.UpdateDiscountEnableDisableStateResponse>
+    func updatePNCDState(
+        request : PNCDListVC.UpdatePNCDStateRequest
+    ) async throws -> GenericAPIResponse<PNCDListVC.UpdatePNCDStateResponse>
     
     
-    func addUpdateDiscount(
-        request : CreatePNCDVC.AddUpdatePNCDRequest
+    func createOrEditPNCD(
+        request : CreatePNCDVC.CreateOrEditPNCDRequest
     ) async throws -> CommonResponse
     
     
@@ -51,20 +51,20 @@ class PNCDAPIRepository : PNCDAPIRepositoryProtocol{
         )
     }
     
-    func updateDiscountEnableDisableState(
-        request : PNCDListVC.UpdateDiscountEnableDisableStateRequest
-    ) async throws -> GenericAPIResponse<PNCDListVC.UpdateDiscountEnableDisableStateResponse>
+    func updatePNCDState(
+        request : PNCDListVC.UpdatePNCDStateRequest
+    ) async throws -> GenericAPIResponse<PNCDListVC.UpdatePNCDStateResponse>
     
     {
         return try await apiService.getData(
-            endpoint: API.PNCDEndpoint.updateDiscountEnableDisableStatus(req: request),
-            responseType: GenericAPIResponse<PNCDListVC.UpdateDiscountEnableDisableStateResponse>.self
+            endpoint: API.PNCDEndpoint.updatePNCDState(req: request),
+            responseType: GenericAPIResponse<PNCDListVC.UpdatePNCDStateResponse>.self
         )
     }
     
     
-    func addUpdateDiscount(
-        request : CreatePNCDVC.AddUpdatePNCDRequest
+    func createOrEditPNCD(
+        request : CreatePNCDVC.CreateOrEditPNCDRequest
     ) async throws -> CommonResponse
     {
         return try await apiService.getData(

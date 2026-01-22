@@ -54,6 +54,8 @@ extension CreateOREditPNCDVC {
             flagsPropertyManager.scheduleType = editableDiscountItem.scheduleType
             flagsPropertyManager.isThisDealHasNoEndDate = editableDiscountItem.isThisDealHasNoEndDate
             
+            flagsPropertyManager.selectedDates = editableDiscountItem.selectedWeekDays
+            
         }
         
         

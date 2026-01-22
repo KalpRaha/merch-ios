@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -332,6 +331,9 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="sFq-pv-aK9" secondAttribute="height" multiplier="50:28" id="zWI-Fh-PN3"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="onClickEnableDisablePNCD:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3EL-cN-6PP"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" name="F5F5F5"/>
@@ -383,6 +385,7 @@
                 <outlet property="lblDiscountScheduleDate" destination="jVE-6b-fgS" id="lnX-dd-nyk"/>
                 <outlet property="lblDiscountScheduleTime" destination="4Rx-wM-Kf7" id="H8H-WL-YaB"/>
                 <outlet property="stkWeeklySelectionView" destination="gdG-J8-rNp" id="cXZ-Fu-NWb"/>
+                <outlet property="swtPNCDState" destination="sFq-pv-aK9" id="QIl-nb-DqX"/>
                 <outlet property="vwDiscountDetailBorderBGView" destination="HXI-ar-3hN" id="pMx-AC-IM3"/>
                 <outlet property="vwMainContainerView" destination="zfJ-OZ-Mgb" id="o5K-q6-alP"/>
                 <outletCollection property="vwWeeklyCapsulesView" destination="IVb-sd-MSP" collectionClass="NSMutableArray" id="Wa7-qg-2H3"/>

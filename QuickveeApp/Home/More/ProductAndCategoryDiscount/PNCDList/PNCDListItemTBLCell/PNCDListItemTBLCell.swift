@@ -26,20 +26,24 @@ class PNCDListItemTBLCell: UITableViewCell {
     @IBOutlet private var lblWeeklyCapsulesTitle: [UILabel]!
     
     
+    @IBOutlet private weak var swtPNCDState: CustomSwitch!
+    
+    
     var onClickEditPNCD: ( () -> Void )?
+    var onClickEnableDisable: ( () -> Void )?
+    
+    var isLoading: Bool = false {
+        didSet{
+            isLoading ? swtPNCDState.startLoading() : swtPNCDState.stopLoading()
+        }
+    }
     
     var cellData: PNCDDiscountListItem! {
         didSet{
             updateUIWithData()
         }
     }
-    
-    var isEnabled : Bool = false {
-        didSet{
-            updateUIForEnableDisableState()
-        }
-    }
-
+ 
      var selectedWeekItems: Set<WeekDayItem> = [] {
         didSet{
             updateUIForWeeklySelectionView()
@@ -55,6 +59,11 @@ class PNCDListItemTBLCell: UITableViewCell {
         Logger.log(#function)
     }
     
+    @IBAction private func onClickEnableDisablePNCD(_ sender: CustomSwitch) {
+        onClickEnableDisable?()
+        sender.isLoading ? sender.stopLoading() : sender.startLoading()
+        Logger.log(#function)
+    }
     
 }
 
@@ -76,12 +85,15 @@ private extension PNCDListItemTBLCell {
         let endTime = PNCDTimeFormatter.shared.getStringToDisplay(data.endTime)
         lblDiscountScheduleTime.text = "\(startTime) - \(endTime)"
         
-        isEnabled = data.isDiscountDisable ? false : true
         
         updateUIForWeeklySelectionView()
+        
+        let isEnabled = data.isDiscountDisable ? false : true
+        
+        updateUIForEnableDisableState(isEnabled: isEnabled)
     }
     
-    private func updateUIForEnableDisableState(){
+    private func updateUIForEnableDisableState(isEnabled: Bool){
         vwMainContainerView.applyCornerRadius(cornerRadius: 8.0)
         
         vwMainContainerView.applyBorder(
@@ -95,6 +107,8 @@ private extension PNCDListItemTBLCell {
             borderColor: .E4E8EF,
             borderOpacity: isEnabled ? 0 : 1
         )
+        
+        swtPNCDState.updateIsOnFlag(isEnabled, animated: false)
     }
     
 }
@@ -103,6 +117,7 @@ private extension PNCDListItemTBLCell {
 
     func updateUIForWeeklySelectionView(){
         let selectedWeekItems: Set<WeekDayItem> = Set(cellData?.selectedWeekDays ?? [])
+        let isEnabled = cellData.isDiscountDisable ? false : true
         
         for (index, view )in vwWeeklyCapsulesView.enumerated() {
             

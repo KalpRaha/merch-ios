@@ -9,6 +9,10 @@ import Foundation
 
 extension Bool {
     
+    mutating func toggle() {
+        self = !self
+    }
+    
     func toString() -> String{
         self ? "1" : "0"
     }

@@ -24,15 +24,6 @@ class CustomSegmentedControl: UIControl {
         }
     }
 
-    // Externally controlled selected index (apply via select(index:))
-//    private(set) var selectedIndex: Int = 0 {
-//        didSet {
-//            // Keep backing index in sync and update UI
-//            _selectedIndex = max(0, min(selectedIndex, max(0, items.count - 1)))
-//            updateSelection(animated: isAnimateOnSwitching)
-//        }
-//    }
-
     // The last tapped index (read this in your action handler)
     private(set) var tappedIndex: Int?
 

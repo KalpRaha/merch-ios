@@ -12,7 +12,7 @@ extension PNCDListVC {
     
     struct GetDiscountListRequest {
         
-        var boundary: String = { UUID().uuidString }()
+        var boundary: String = UUID().uuidString
         
         var merchantId : String
         var searchQuery : String?

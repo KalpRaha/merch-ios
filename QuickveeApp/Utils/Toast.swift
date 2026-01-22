@@ -20,18 +20,26 @@ class Toast {
     
 
     func show(message : String) {
-        invalidateAndHide()
-        toastView.setMessgae(message)
-        
-        toastView.alpha = 1
-        scheduleToHide()
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            
+            invalidateAndHide()
+            toastView.setMessgae(message)
+            
+            toastView.alpha = 1
+            scheduleToHide()
+        }
     }
     
     func hide() {
-        UIView.animate(withDuration: 3.0, delay: 0.1, options: .curveEaseOut, animations: { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            toastView.alpha = 0.0
-        })
+            
+            UIView.animate(withDuration: 3.0, delay: 0.1, options: .curveEaseOut, animations: { [weak self] in
+                guard let self else { return }
+                toastView.alpha = 0.0
+            })
+        }
     }
     
 }
@@ -52,8 +60,11 @@ extension Toast {
 
 extension Toast {
     
-    static func show(message: String) {
+    static func show(_ message: String) {
         shared.show(message: message)
+    }
+    static func showSomethingWentWrongMessage() {
+        shared.show(message: Constant.somethingWentWrongMessage)
     }
     
     private func scheduleToHide(){

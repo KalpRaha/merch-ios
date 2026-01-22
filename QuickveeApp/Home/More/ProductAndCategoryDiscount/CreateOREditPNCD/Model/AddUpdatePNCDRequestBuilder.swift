@@ -133,8 +133,8 @@ extension CreateOREditPNCDVC {
             return self
         }
         
-        func build() -> AddUpdatePNCDRequest {
-            AddUpdatePNCDRequest(
+        func build() -> CreateOrEditPNCDRequest {
+            CreateOrEditPNCDRequest(
                 merchantId: merchantId,
                 pNCDId: pNCDId,
                 dealName: dealName,
