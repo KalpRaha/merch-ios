@@ -25,6 +25,14 @@ extension String {
     }
 }
 
+extension Int {
+    
+    func toString() -> String{
+        "\(self)"
+    }
+    
+}
+
 extension Locale {
     
     static let enUSPosix = Locale(identifier: "en_US_POSIX")

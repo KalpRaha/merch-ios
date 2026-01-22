@@ -59,10 +59,7 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
     var scannerDelegateHandler: BarcodeScannerDelegateHandler?
     
     var viewModel : ViewModel!
-    
-    
-    
-    
+ 
     weak var delegate: ProductAndCategorySelectionVCProtocol?
     
     override func viewDidLoad() {
@@ -188,24 +185,79 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
 extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.tableViewDataSource.count
+        if viewModel.discounttype == .product {
+            viewModel.tableViewDataSource.count
+            
+        }else{
+            viewModel.categoryList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductAndCategorySelectionTBLCell") as! ProductAndCategorySelectionTBLCell
        
-        cell.cellData = viewModel.tableViewDataSource[indexPath.row]
-        
-        cell.categoryData = viewModel.getCategoryData(indexPath.row)
-        cell.mixMatchData = viewModel.getMixNMatchData(indexPath.row)
-        cell.bogoData = viewModel.getBogoData(indexPath.row)
-        
-        cell.isSelectedCell = viewModel.selectedIndexPath.contains(indexPath)
-        
-        
-        return cell
-    }
+        if viewModel.discounttype == .product {
+            
+            cell.cellData = viewModel.tableViewDataSource[indexPath.row]
+            
+            cell.categoryData = viewModel.getCategoryData(indexPath.row)
+            cell.mixMatchData = viewModel.getMixNMatchData(indexPath.row)
+            cell.bogoData = viewModel.getBogoData(indexPath.row)
+            
+            cell.isSelectedCell = viewModel.selectedIndexPath.contains(indexPath)
+            
+        }else {
+            
+            var dealNames = [String]()
+            let categoryData = viewModel.categoryList[indexPath.row]
+            let promotionalVariants = viewModel.variantList.filter({ $0.category == categoryData.id })
+            
+            
+            var mixNmatchPromotionVariants : [VariantDataModel] = []
+            for mixMatchData in viewModel.mixMatchList {
+                let mixNmatch = promotionalVariants.filter({ mixMatchData.itemIds.contains($0.itemId) })
+                mixNmatchPromotionVariants.append(contentsOf: mixNmatch)
+                
+                print(mixNmatchPromotionVariants)
+            }
+            
+            var bogoPromotionVariants : [VariantDataModel] = []
+            for bogoData in viewModel.bogoList {
+                let bogoPromotion = promotionalVariants.filter({ bogoData.items.contains($0.itemId) })
+                bogoPromotionVariants.append(contentsOf: bogoPromotion)
+            }
+            
+            
+            
+            let type: ProductAndCategorySelectionTBLCell.PromotionType = {
+                
+                let finalData = mixNmatchPromotionVariants + bogoPromotionVariants
+                
+                
+               
+                    if finalData.isEmpty {
+                        return .none
+                    }else if finalData.count == 1 {
+                        return .singlePromotion(finalData.first!.productTitle ?? "")
+                    }else {
+                        return .MultiplePromotion
+                    }
+                    
+            }()
+                
+                Logger.log("Found some. ")
+                
+                cell.updateUIForCategoryData(
+                    title: categoryData.title ?? "Title",
+                    productCount: promotionalVariants.count.toString(),
+                    promotionType: type
+                )
+                
+            }
+            
+            return cell
+        }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

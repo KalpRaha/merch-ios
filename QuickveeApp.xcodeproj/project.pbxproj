@@ -1082,7 +1082,6 @@
 		B4996AE32F1770DE00650BB7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D28C78722F0FBA8D001A2E20 /* ProductAndCategorySelectionTBLCell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1600,6 +1599,7 @@
 			children = (
 				D28DF6842F0FA80700426975 /* ProductAndCategorySelectionVC.swift */,
 				D27F2F622F10FBEF007AE4C8 /* ProductAndCategorySelectionVM.swift */,
+				D28C78722F0FBA8D001A2E20 /* ProductAndCategorySelectionTBLCell */,
 			);
 			path = ProductAndCategorySelection;
 			sourceTree = "<group>";

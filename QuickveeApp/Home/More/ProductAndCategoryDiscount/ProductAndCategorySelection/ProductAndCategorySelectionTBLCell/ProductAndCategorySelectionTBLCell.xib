@@ -176,6 +176,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="category" destination="1D8-yx-DTZ" id="KSw-Ut-3ow"/>
                 <outlet property="categoryValue" destination="sG9-hK-E3e" id="xjP-4W-PJN"/>
                 <outlet property="checkImage" destination="jVE-gN-SQX" id="262-HP-uN1"/>
                 <outlet property="priceLbl" destination="TUp-DU-f3G" id="y5p-p9-0YJ"/>
