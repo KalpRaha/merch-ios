@@ -145,9 +145,9 @@ extension PNCDListVC : UITableViewDataSource, UITableViewDelegate {
         
         cell.onClickEnableDisable = { [weak self] in
             guard let self else { return }
-            
             if let pncdID = cell.cellData.id {
-                viewModel.enableDisableDiscountList(indexPath: indexPath)
+                // Prefer id-based method (avoids reuse/index issues)
+                viewModel.enableDisableDiscountList(pncdID: pncdID)
             }
         }
         
@@ -187,3 +187,4 @@ extension PNCDListVC : ProductAndCategoryDiscountListVMProtocol {
     }
     
 }
+

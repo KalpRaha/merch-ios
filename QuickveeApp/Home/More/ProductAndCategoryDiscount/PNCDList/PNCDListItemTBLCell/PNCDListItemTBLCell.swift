@@ -53,6 +53,16 @@ class PNCDListItemTBLCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        // Ensure no stale loader or animated flips during reuse
+        isLoading = false
+        swtPNCDState.stopLoading()
+        // Don’t force a specific on/off here; it will be set by updateUIWithData without animation.
+        // But do ensure no pending animation is visible by reapplying current layout without animation.
+        swtPNCDState.updateIsOnFlag(swtPNCDState.isOn, animated: false)
+    }
  
     @IBAction private func onClickEditPNCDBtn(_ sender: UIButton) {
         onClickEditPNCD?()
@@ -60,8 +70,8 @@ class PNCDListItemTBLCell: UITableViewCell {
     }
     
     @IBAction private func onClickEnableDisablePNCD(_ sender: CustomSwitch) {
+        // Do not start/stop loading here; VM drives it via enableDisableLoadingStateIds -> cell.isLoading
         onClickEnableDisable?()
-        sender.isLoading ? sender.stopLoading() : sender.startLoading()
         Logger.log(#function)
     }
     
@@ -108,6 +118,7 @@ private extension PNCDListItemTBLCell {
             borderOpacity: isEnabled ? 0 : 1
         )
         
+        // Critical: no animation during cell configuration to avoid flicker from reuse
         swtPNCDState.updateIsOnFlag(isEnabled, animated: false)
     }
     
@@ -141,3 +152,4 @@ private extension PNCDListItemTBLCell {
 
     
 }
+

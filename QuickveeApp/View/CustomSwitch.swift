@@ -159,16 +159,16 @@ final class CustomSwitch: UIControl {
         }
 
         buildLoaderView()
-        loaderView!.isAnimating = true
+        loaderView?.isAnimating = true
     }
 
     // Call from your IBAction after API finishes
     func stopLoading() {
         guard isLoading else { return }
         isLoading = false
-        loaderView!.isAnimating = false
-        loaderView!.isHidden = true
-        loaderView!.removeFromSuperview()
+        loaderView?.isAnimating = false
+        loaderView?.isHidden = true
+        loaderView?.removeFromSuperview()
         loaderView = nil
     }
 
@@ -210,3 +210,4 @@ final class CustomSwitch: UIControl {
         }
     }
 }
+
