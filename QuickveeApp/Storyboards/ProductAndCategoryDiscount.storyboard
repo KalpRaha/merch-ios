@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_3" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -579,7 +578,7 @@
                                                                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                                 <nil key="highlightedColor"/>
                                                                                                                             </label>
-                                                                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lOq-0A-k9v" customClass="GenericButton" customModule="QuickveeApp" customModuleProvider="target">
+                                                                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lOq-0A-k9v" customClass="CustomButton" customModule="QuickveeApp" customModuleProvider="target">
                                                                                                                                 <rect key="frame" x="0.0" y="28" width="364.66666666666669" height="48"/>
                                                                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                                                                 <constraints>
@@ -797,7 +796,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="NDo-dL-DgU">
                                                         <rect key="frame" x="17" y="17.999999999999996" width="368" height="38.666666666666657"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hgl-RN-Ctm" customClass="GenericButton" customModule="QuickveeApp" customModuleProvider="target">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hgl-RN-Ctm" customClass="CustomButton" customModule="QuickveeApp" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="178.66666666666666" height="38.666666666666664"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <userDefinedRuntimeAttributes>
@@ -813,7 +812,7 @@
                                                                     <action selector="onClickBtnCancel:" destination="WKV-D6-cs3" eventType="touchUpInside" id="m1O-pS-h4q"/>
                                                                 </connections>
                                                             </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fgb-mz-GUU" customClass="GenericButton" customModule="QuickveeApp" customModuleProvider="target">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fgb-mz-GUU" customClass="CustomButton" customModule="QuickveeApp" customModuleProvider="target">
                                                                 <rect key="frame" x="189.66666666666663" y="0.0" width="178.33333333333337" height="38.666666666666664"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <userDefinedRuntimeAttributes>
@@ -1049,7 +1048,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nGn-zQ-KLj">
                                 <rect key="frame" x="17" y="800.33333333333337" width="368" height="43.666666666666629"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1VN-VL-J7P" customClass="GenericButton" customModule="QuickveeApp" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1VN-VL-J7P" customClass="CustomButton" customModule="QuickveeApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="179" height="43.666666666666664"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <userDefinedRuntimeAttributes>
@@ -1062,7 +1061,7 @@
                                             <action selector="cancelBtnClick:" destination="lA0-ul-69Q" eventType="touchUpInside" id="QLg-UI-a75"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u8f-OU-MTw" customClass="GenericButton" customModule="QuickveeApp" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u8f-OU-MTw" customClass="CustomButton" customModule="QuickveeApp" customModuleProvider="target">
                                         <rect key="frame" x="189" y="0.0" width="179" height="43.666666666666664"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1169,7 +1168,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Xto-cl-Lb7">
                                                 <rect key="frame" x="10" y="249.00000000000003" width="382" height="41.333333333333343"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z0c-vG-U1p" customClass="GenericButton" customModule="QuickveeApp" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z0c-vG-U1p" customClass="CustomButton" customModule="QuickveeApp" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="186" height="41.333333333333336"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -1185,7 +1184,7 @@
                                                             <action selector="onClickBtnCancel:" destination="mje-KJ-Q3Z" eventType="touchUpInside" id="Ap8-qt-8Hb"/>
                                                         </connections>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nb8-1K-8KO" customClass="GenericButton" customModule="QuickveeApp" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nb8-1K-8KO" customClass="CustomButton" customModule="QuickveeApp" customModuleProvider="target">
                                                         <rect key="frame" x="196" y="0.0" width="186" height="41.333333333333336"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <userDefinedRuntimeAttributes>

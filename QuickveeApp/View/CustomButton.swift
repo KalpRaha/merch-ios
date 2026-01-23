@@ -1,5 +1,5 @@
 //
-//  GenericButton.swift
+//  CustomButton.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 07/01/26.
@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-final class GenericButton: UIControl {
+final class CustomButton: UIControl {
 
     // MARK: - Button Style
 

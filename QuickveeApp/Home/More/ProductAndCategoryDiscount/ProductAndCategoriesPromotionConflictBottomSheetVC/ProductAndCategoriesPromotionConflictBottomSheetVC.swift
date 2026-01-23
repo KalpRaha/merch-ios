@@ -30,12 +30,12 @@ final class ProductAndCategoriesPromotionConflictBottomSheetVC: BaseBottomSheetV
         Logger.log(#function)
     }
     
-    @IBAction func onClickBtnCancel(_ sender: GenericButton) {
+    @IBAction func onClickBtnCancel(_ sender: CustomButton) {
         hideWithAnimation()
         Logger.log(#function)
     }
     
-    @IBAction func onClickContinue(_ sender: GenericButton) {
+    @IBAction func onClickContinue(_ sender: CustomButton) {
 //        hideWithAnimation()
         Logger.log(#function)
     }

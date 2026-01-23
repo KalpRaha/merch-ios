@@ -81,7 +81,7 @@
 		B49382002F0E1EEA0071D0F1 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49381FF2F0E1EEA0071D0F1 /* CustomLabel.swift */; };
 		B49382022F0E20020071D0F1 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382012F0E20020071D0F1 /* UIColor+Extension.swift */; };
 		B49382062F0E2CEA0071D0F1 /* CreateOREditPNCDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382052F0E2CEA0071D0F1 /* CreateOREditPNCDVC.swift */; };
-		B49382082F0E3F400071D0F1 /* GenericButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382072F0E3F400071D0F1 /* GenericButton.swift */; };
+		B49382082F0E3F400071D0F1 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382072F0E3F400071D0F1 /* CustomButton.swift */; };
 		B49478412F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */; };
 		B4996AD82F175E1800650BB7 /* PNCDItemsIncludedInDiscountTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AD72F175E1800650BB7 /* PNCDItemsIncludedInDiscountTableView.swift */; };
 		B4996ADC2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4996ADB2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.xib */; };
@@ -468,7 +468,7 @@
 		B49381FF2F0E1EEA0071D0F1 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		B49382012F0E20020071D0F1 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		B49382052F0E2CEA0071D0F1 /* CreateOREditPNCDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDVC.swift; sourceTree = "<group>"; };
-		B49382072F0E3F400071D0F1 /* GenericButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericButton.swift; sourceTree = "<group>"; };
+		B49382072F0E3F400071D0F1 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountPerItemDiscountTextFormatter.swift; sourceTree = "<group>"; };
 		B4996AD72F175E1800650BB7 /* PNCDItemsIncludedInDiscountTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDItemsIncludedInDiscountTableView.swift; sourceTree = "<group>"; };
 		B4996ADA2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDItemIncludedInDiscountTBLCell.swift; sourceTree = "<group>"; };
@@ -992,7 +992,7 @@
 				B4AD368B2F1627FB00E9EF55 /* DatePickerInputView */,
 				B41A9F442F0FA88C00C543C7 /* CustomSegmentedControl.swift */,
 				B41A9F372F0F4F2B00C543C7 /* CustomSwitch.swift */,
-				B49382072F0E3F400071D0F1 /* GenericButton.swift */,
+				B49382072F0E3F400071D0F1 /* CustomButton.swift */,
 				B49381FF2F0E1EEA0071D0F1 /* CustomLabel.swift */,
 				B49381F72F0E16370071D0F1 /* ViewClass.swift */,
 				B49381F02F0DFD570071D0F1 /* CustomNavigationHeaderView */,
@@ -2349,7 +2349,7 @@
 				B46CD4002F1A45DF009011F4 /* PNCDTimeFormatter.swift in Sources */,
 				D23493DB2CEF2F0B0046D33C /* LoyaltyTableCell.swift in Sources */,
 				D2F5AB872CE5C2270050B89C /* profileCell.swift in Sources */,
-				B49382082F0E3F400071D0F1 /* GenericButton.swift in Sources */,
+				B49382082F0E3F400071D0F1 /* CustomButton.swift in Sources */,
 				D2F5AB882CE5C2270050B89C /* OrderCell.swift in Sources */,
 				D247A00B2A5BCDAA005D265F /* UIAlerts.swift in Sources */,
 				B420F30C2F190D3E00461C92 /* AddUpdatePNCDRequest.swift in Sources */,

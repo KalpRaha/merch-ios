@@ -80,7 +80,7 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     // Add Product OR Category Button
     @IBOutlet private weak var vwAddProductORCategoryBtnSuperView: UIView!
     @IBOutlet weak var lblAddProductORCategoryBtn: UILabel!
-    @IBOutlet weak var btnAddProductORCategory: GenericButton!
+    @IBOutlet weak var btnAddProductORCategory: CustomButton!
     
     
     // Edit Products or categories inlcuded in this Discount
@@ -91,8 +91,8 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     @IBOutlet private weak var tblProductORCategoryItemsIncludedView: PNCDItemsIncludedInDiscountTableView!
     
     // Bottom Buttons
-    @IBOutlet private weak var btnCancel: GenericButton!
-    @IBOutlet private weak var btnSave: GenericButton!
+    @IBOutlet private weak var btnCancel: CustomButton!
+    @IBOutlet private weak var btnSave: CustomButton!
     
     
     var viewModel : ViewModel!
@@ -275,7 +275,7 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     }
     
     
-    @IBAction private func onClickBtnAddProductAndCategory(_ sender: GenericButton) {
+    @IBAction private func onClickBtnAddProductAndCategory(_ sender: CustomButton) {
         ProductAndCategorySelectionVCFactory.make().push(
             in: navigationController,
             passData: { [weak self]  vc in
@@ -291,13 +291,13 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     
     
     // Bottom Actions
-    @IBAction private func onClickBtnCancel(_ sender: GenericButton) {
+    @IBAction private func onClickBtnCancel(_ sender: CustomButton) {
         
         Logger.log(#function)
     }
     
     
-    @IBAction private func onClickBtnSave(_ sender: GenericButton) {
+    @IBAction private func onClickBtnSave(_ sender: CustomButton) {
         if btnSave.isLoading {
             btnSave.hideLoader()
         }else{

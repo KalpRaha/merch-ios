@@ -167,12 +167,12 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
     }
     
     
-    @IBAction func cancelBtnClick(_ sender: GenericButton) {
+    @IBAction func cancelBtnClick(_ sender: CustomButton) {
         dismiss(animated: true)
     }
     
         
-    @IBAction func confirmBtnClick(_ sender: GenericButton) {
+    @IBAction func confirmBtnClick(_ sender: CustomButton) {
         
         let result = viewModel.selectedIndexPath.map {
             viewModel.variantList[$0.row]
