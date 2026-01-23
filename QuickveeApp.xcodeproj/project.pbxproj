@@ -97,6 +97,7 @@
 		B4AD36952F16694100E9EF55 /* WeeklySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD36942F16694100E9EF55 /* WeeklySelectionView.swift */; };
 		B4AD36972F16695400E9EF55 /* DayItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD36962F16695400E9EF55 /* DayItemView.swift */; };
 		B4AD36992F16697D00E9EF55 /* WeeklySelectionViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD36982F16697D00E9EF55 /* WeeklySelectionViewConfiguration.swift */; };
+		B4B4713F2F2326FA003F4723 /* AddItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B4713E2F2326FA003F4723 /* AddItemButton.swift */; };
 		B4B77F642F22061A00695BA1 /* PNCDDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B77F632F22061A00695BA1 /* PNCDDateFormatter.swift */; };
 		B4B77F682F223CD400695BA1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B77F672F223CD400695BA1 /* Constant.swift */; };
 		B4BC09762F14B6DE00BDB89E /* PNCDScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC09752F14B6DE00BDB89E /* PNCDScheduleType.swift */; };
@@ -484,6 +485,7 @@
 		B4AD36942F16694100E9EF55 /* WeeklySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySelectionView.swift; sourceTree = "<group>"; };
 		B4AD36962F16695400E9EF55 /* DayItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayItemView.swift; sourceTree = "<group>"; };
 		B4AD36982F16697D00E9EF55 /* WeeklySelectionViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySelectionViewConfiguration.swift; sourceTree = "<group>"; };
+		B4B4713E2F2326FA003F4723 /* AddItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemButton.swift; sourceTree = "<group>"; };
 		B4B77F632F22061A00695BA1 /* PNCDDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDDateFormatter.swift; sourceTree = "<group>"; };
 		B4B77F672F223CD400695BA1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B4BC09752F14B6DE00BDB89E /* PNCDScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDScheduleType.swift; sourceTree = "<group>"; };
@@ -990,6 +992,7 @@
 			children = (
 				B4AD36932F16692F00E9EF55 /* WeeklySelectionView */,
 				B4AD368B2F1627FB00E9EF55 /* DatePickerInputView */,
+				B4B4713E2F2326FA003F4723 /* AddItemButton.swift */,
 				B41A9F442F0FA88C00C543C7 /* CustomSegmentedControl.swift */,
 				B41A9F372F0F4F2B00C543C7 /* CustomSwitch.swift */,
 				B49382072F0E3F400071D0F1 /* CustomButton.swift */,
@@ -2421,6 +2424,7 @@
 				D240F92229A74C5000DC76EA /* StoreSetupViewController.swift in Sources */,
 				D26F4E782995039200716A51 /* StrokeColorAnimation.swift in Sources */,
 				D253DD9C2C86BB96003AA842 /* LotteryTableViewCell.swift in Sources */,
+				B4B4713F2F2326FA003F4723 /* AddItemButton.swift in Sources */,
 				B4BC097A2F15063100BDB89E /* MultipartFormDataBuilder.swift in Sources */,
 				D204CC892AA9AB8800A216C3 /* VariantViewController.swift in Sources */,
 				D29D1F302AE66E910017819B /* InventoryProductModel.swift in Sources */,
