@@ -261,6 +261,7 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
                 productCount: promotionalVariants.count.toString(),
                 promotionType: type
             )
+            cell.isSelectedCell = viewModel.selectedIndexPath.contains(indexPath)
         }
         
         return cell

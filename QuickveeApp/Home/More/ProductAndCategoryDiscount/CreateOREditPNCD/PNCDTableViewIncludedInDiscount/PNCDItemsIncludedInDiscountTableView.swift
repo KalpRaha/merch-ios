@@ -74,5 +74,4 @@ extension PNCDItemsIncludedInDiscountTableView : UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
     }
-    
 }

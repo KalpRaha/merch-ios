@@ -100,6 +100,20 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
                 title: "Products in category: ",
                 value: productCount
             )
+        
+        switch promotionType {
+            
+        case .none:
+            promotionValue.isHidden = true
+        case .singlePromotion(let dealName):
+            promotionValue.isHidden = false
+            promotionValue.text = dealName
+
+           case .MultiplePromotion:
+            promotionValue.isHidden = false
+            promotionValue.text = "Multiple Active Discounts"
+        }
+        
     }
 
     private func updateUIForProductCategoryData(){
