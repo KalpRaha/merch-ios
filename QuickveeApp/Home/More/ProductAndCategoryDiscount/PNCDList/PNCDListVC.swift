@@ -110,6 +110,12 @@ final class PNCDListVC: UIViewController, Navigatable {
     }
     
     
+    @IBAction private func onClickBtnAddDiscount(_ sender: AddItemButton) {
+        CreateOREditPNCDVCFactory.make().push(in: self)
+        Logger.log(#function)
+    }
+    
+    
 }
 
 extension PNCDListVC : CustomNavigationHeaderViewDelegate{
