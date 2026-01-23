@@ -99,6 +99,8 @@
 		B4AD36992F16697D00E9EF55 /* WeeklySelectionViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD36982F16697D00E9EF55 /* WeeklySelectionViewConfiguration.swift */; };
 		B4B4713F2F2326FA003F4723 /* AddItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B4713E2F2326FA003F4723 /* AddItemButton.swift */; };
 		B4B471412F2330A7003F4723 /* PNCDDateTimeCombiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B471402F2330A7003F4723 /* PNCDDateTimeCombiner.swift */; };
+		B4B471432F233DCD003F4723 /* CreateOREditPNCDUpdateUIHelperForInitialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B471422F233DCD003F4723 /* CreateOREditPNCDUpdateUIHelperForInitialData.swift */; };
+		B4B471452F2385B5003F4723 /* CreateOREditPNCDUpdateUIHelperForFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B471442F2385B4003F4723 /* CreateOREditPNCDUpdateUIHelperForFlags.swift */; };
 		B4B77F642F22061A00695BA1 /* PNCDDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B77F632F22061A00695BA1 /* PNCDDateFormatter.swift */; };
 		B4B77F682F223CD400695BA1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B77F672F223CD400695BA1 /* Constant.swift */; };
 		B4BC09762F14B6DE00BDB89E /* PNCDScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC09752F14B6DE00BDB89E /* PNCDScheduleType.swift */; };
@@ -488,6 +490,8 @@
 		B4AD36982F16697D00E9EF55 /* WeeklySelectionViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySelectionViewConfiguration.swift; sourceTree = "<group>"; };
 		B4B4713E2F2326FA003F4723 /* AddItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemButton.swift; sourceTree = "<group>"; };
 		B4B471402F2330A7003F4723 /* PNCDDateTimeCombiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDDateTimeCombiner.swift; sourceTree = "<group>"; };
+		B4B471422F233DCD003F4723 /* CreateOREditPNCDUpdateUIHelperForInitialData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDUpdateUIHelperForInitialData.swift; sourceTree = "<group>"; };
+		B4B471442F2385B4003F4723 /* CreateOREditPNCDUpdateUIHelperForFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDUpdateUIHelperForFlags.swift; sourceTree = "<group>"; };
 		B4B77F632F22061A00695BA1 /* PNCDDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDDateFormatter.swift; sourceTree = "<group>"; };
 		B4B77F672F223CD400695BA1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B4BC09752F14B6DE00BDB89E /* PNCDScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDScheduleType.swift; sourceTree = "<group>"; };
@@ -822,6 +826,7 @@
 			children = (
 				B49382052F0E2CEA0071D0F1 /* CreateOREditPNCDVC.swift */,
 				B41A9F3C2F0F7F3700C543C7 /* CreateOREditPNCDVM.swift */,
+				B46CD4052F1A5218009011F4 /* FlagsPropertyManager.swift */,
 				B46CD3FC2F1A44FD009011F4 /* Helper */,
 				B4996AD62F175E0900650BB7 /* PNCDTableViewIncludedInDiscount */,
 				B4B77F652F222BCA00695BA1 /* Model */,
@@ -1018,10 +1023,11 @@
 		B46CD3FC2F1A44FD009011F4 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				B4B471442F2385B4003F4723 /* CreateOREditPNCDUpdateUIHelperForFlags.swift */,
+				B4B471422F233DCD003F4723 /* CreateOREditPNCDUpdateUIHelperForInitialData.swift */,
 				B46CD4092F1A583F009011F4 /* CreateOREditPNCDTypeUpdateUIHelper.swift */,
 				B4E4A22F2F2090AC000432CB /* CreateOREditPNCDTextFieldUpdateUIHelper.swift */,
 				B46CD40B2F1A5CD4009011F4 /* CreateOREditPNCDDatePickerConfigurationBuilder.swift */,
-				B46CD4052F1A5218009011F4 /* FlagsPropertyManager.swift */,
 				B4B471402F2330A7003F4723 /* PNCDDateTimeCombiner.swift */,
 				B4B77F632F22061A00695BA1 /* PNCDDateFormatter.swift */,
 				B46CD3FF2F1A45DE009011F4 /* PNCDTimeFormatter.swift */,
@@ -2198,6 +2204,7 @@
 				D262DEAE296FD37E00011E27 /* ReportingPagerViewController.swift in Sources */,
 				D23681D82AA7016A00728FDB /* ProductsTableViewCell.swift in Sources */,
 				B49381F22F0DFD960071D0F1 /* CustomNavigationHeaderView.swift in Sources */,
+				B4B471452F2385B5003F4723 /* CreateOREditPNCDUpdateUIHelperForFlags.swift in Sources */,
 				B46CD4062F1A5218009011F4 /* FlagsPropertyManager.swift in Sources */,
 				B45CB8A62F04E2BB004AF269 /* NavigationCoordinator.swift in Sources */,
 				B41A9F452F0FA88C00C543C7 /* CustomSegmentedControl.swift in Sources */,
@@ -2458,6 +2465,7 @@
 				D22696CD2F161424001C4493 /* CategoryListEndpoint.swift in Sources */,
 				B45CB89C2F04DF59004AF269 /* APIError.swift in Sources */,
 				B45CB89D2F04DF59004AF269 /* APIServiceType.swift in Sources */,
+				B4B471432F233DCD003F4723 /* CreateOREditPNCDUpdateUIHelperForInitialData.swift in Sources */,
 				D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */,
 				D265CF542DB7B02000915F25 /* DayCollectionViewCell.swift in Sources */,
 				D2DC4B962A3330F900E86A71 /* OnlineOrdersModel.swift in Sources */,

@@ -15,21 +15,21 @@ class CreateOREditPNCDVCFactory {
         discountItem : PNCDDiscountListItem? = nil
         
     ) -> CreateOREditPNCDVC {
-    
+        
         let vc = CreateOREditPNCDVC.instantiate()
         
         vc.viewModel = CreateOREditPNCDVC.ViewModel(
             editableDiscountItem: discountItem,
             builder: .init(merchantId: UDHelper.shared.merchantId)
         )
-
+        
         return vc
     }
 }
 
 
 final class CreateOREditPNCDVC: UIViewController, Navigatable {
-
+    
     static var storyboard: UIStoryboard { .productAndCategoryDiscount }
     
     
@@ -45,10 +45,10 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     @IBOutlet weak var vwCategoryDiscountTypeSelectionView: UIView!
     @IBOutlet weak var lblCategoryDiscountTypeSelectionViewTitle: UILabel!
     @IBOutlet weak var lblCategoryDiscountTypeSelectionViewSubTitle: UILabel!
-
+    
     
     // DiscountDetails
-    @IBOutlet private weak var swtAllowDiscountStackWithOtherDiscounts: CustomSwitch!
+    @IBOutlet weak var swtAllowDiscountStackWithOtherDiscounts: CustomSwitch!
     
     
     // Discount Name and Discount per item
@@ -71,7 +71,7 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     @IBOutlet private weak var vwWeeklySelectionView : WeeklySelectionView!
     
     // Deal is active for full day
-    @IBOutlet private weak var swtDealIsActiveForFullDay : CustomSwitch!
+    @IBOutlet weak var swtDealIsActiveForFullDay : CustomSwitch!
     
     // Time picker
     @IBOutlet weak var dtPickerDealStartTime: DatePickerInputView!
@@ -100,7 +100,7 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     var isViewLoadedFlag : Bool = false
     var isExisitngPropertiesUpdatedOnUI : Bool = false
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -109,17 +109,8 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if viewModel.editableDiscountItem != nil {
-            
-            if !isExisitngPropertiesUpdatedOnUI {
-                updateUIWithExitingValues()
-            }
-            
-        }else {
-            updateUIWithDefaultInitialValues()
-        }
-        
+      
+        feedExistingDataInUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -135,7 +126,7 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     
     private func updateUI(){
         setupUIForDiscountTextFields()
-
+        
         segCtrlDiscountInputValueType.configure(
             with: viewModel.flagsPropertyManager.discountPerItemDiscountTypeSegments.compactMap({ $0.stringValue }),
             configuration: .default
@@ -152,71 +143,12 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
         
         dtPickerDealStartTime.configureView(pickerType: .time, delegate: self)
         dtPickerDealEndTime.configureView(pickerType: .time, delegate: self)
-
+        
         
         tblProductORCategoryItemsIncludedView.configure(with: [])
     }
     
-    private func updateUIWithExitingValues(){
-        guard let editableDiscountItem = viewModel.editableDiscountItem else { return }
-        
-        viewModel.configureInitialValuesFromExistingData()
-        
-        txtDiscountName.text = editableDiscountItem.discountName
-        txtDiscountInputValueType.text = editableDiscountItem.discount ?? "0"
-        
-        
-        txtDiscountInputValueType.text = DiscountPerItemDiscountTextFormatter.format(
-            editableDiscountItem.discount ?? "",
-            type: viewModel.flagsPropertyManager.discountInputValueType
-        )
-        
-        dtPickerDealStartDate.setSelectedDate(
-            date: editableDiscountItem.startDate,
-            time: editableDiscountItem.startTime
-        )
-        
-        dtPickerDealStartTime.setSelectedDate(
-            date: editableDiscountItem.startDate,
-            time: editableDiscountItem.startTime
-        )
-        
-        dtPickerDealEndDate.setSelectedDate(
-            date: editableDiscountItem.endDate,
-            time: editableDiscountItem.endTime
-        )
-        
-        dtPickerDealEndTime.setSelectedDate(
-            date: editableDiscountItem.endDate,
-            time: editableDiscountItem.endTime
-        )
-        
-        // For inital UI update
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: { [weak self] in
-            guard let self else { return }
-            updateUIForDiscountTypeSelectionValueChange()
-        })
-        
-        isExisitngPropertiesUpdatedOnUI = true
-    }
-    
-    private func updateUIWithDefaultInitialValues(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: { [weak self] in
-            guard let self else { return }
-            updateUIForDiscountTypeSelectionValueChange()
-        })
-        
-        updateUIForDiscountInputValueTypeChange()
-        updateUIForScheduleTypeValueChange()
-        
-        viewModel.flagsPropertyManager.discountInputValueType = .amountValue
-        swtAllowDiscountStackWithOtherDiscounts.updateIsOnFlag(true)
-        swtDealHasNoEndDate.updateIsOnFlag(false)
-        swtDealIsActiveForFullDay.updateIsOnFlag(false)
-        
-        viewModel.flagsPropertyManager.includedProductOrCategories.removeAll()
-    }
-
+   
     
     private func configureScheduleType(){
         var configuration : CustomSegmentedControl.Configuration = .default
@@ -236,7 +168,7 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
             configuration: configuration
         )
     }
-
+    
     // MARK: - IBAction
     
     @IBAction private func onClickDiscountTypeSelection(_ sender : UIButton) {
@@ -245,42 +177,56 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
         if viewModel.flagsPropertyManager.productOrCategoryDiscountType != discountType {
             viewModel.flagsPropertyManager.productOrCategoryDiscountType = discountType
         }
-        updateUIForDiscountTypeSelectionValueChange()
+        updateUIForPNCDSelectionType()
         Logger.log(#function)
     }
     
     @IBAction private func didChangeValueOfAllowDiscountStackWithOtherDiscounts(_ sender: CustomSwitch) {
-        viewModel.flagsPropertyManager.isAllowDiscountToStackWithOtherDiscounts = sender.isOn
+        viewModel.flagsPropertyManager.isAllowDiscountToStackWithOtherDiscounts.toggle()
         Logger.log(#function)
     }
     
     
     @IBAction private  func onClickChangeDiscountInputValueType(_ sender: CustomSegmentedControl) {
         if let tappedIndex = sender.tappedIndex {
-            viewModel.flagsPropertyManager.discountInputValueType = DiscountInputValueType.getFromIndex(tappedIndex)
+            let type = DiscountInputValueType.getFromIndex(tappedIndex)
+            
+            if type != viewModel.flagsPropertyManager.discountInputValueType {
+                viewModel.flagsPropertyManager.discountInputValueType = type
+            }
         }
         Logger.log(#function)
     }
     
     @IBAction private func onClickChangeScheduleType(_ sender: CustomSegmentedControl) {
         if let tappedIndex = sender.tappedIndex {
-            viewModel.flagsPropertyManager.scheduleType = PNCDScheduleType.getFromIndex(tappedIndex)
+            let type = PNCDScheduleType.getFromIndex(tappedIndex)
+            
+            if type != viewModel.flagsPropertyManager.scheduleType {
+                viewModel.flagsPropertyManager.scheduleType = type
+            }
         }
         Logger.log(#function)
     }
     
+    @IBAction private func didChangeValueOfIsThisDealHasNoEndDate(_ sender: CustomSwitch) {
+        viewModel.flagsPropertyManager.isThisDealHasNoEndDate.toggle()
+        Logger.log(#function)
+    }
+    
+    
     @IBAction private func didChangeValueOfDealIsActiveForFullDay(_ sender: CustomSwitch) {
-        viewModel.flagsPropertyManager.isDealIsActiveForFullDay = sender.isOn
+        viewModel.flagsPropertyManager.isDealIsActiveForFullDay.toggle()
         Logger.log(#function)
     }
     
     
     @IBAction private func onClickBtnAddProductAndCategory(_ sender: CustomButton) {
         ProductAndCategorySelectionVCFactory.make().push(
-            in: navigationController,
+            in: self,
             passData: { [weak self]  vc in
                 guard let self else { return }
-                vc.viewModel.discounttype = viewModel.flagsPropertyManager.productOrCategoryDiscountType 
+                vc.viewModel.discounttype = viewModel.flagsPropertyManager.productOrCategoryDiscountType
                 vc.delegate = self
                 
             }, animated: false
@@ -322,22 +268,16 @@ extension CreateOREditPNCDVC : CustomNavigationHeaderViewDelegate{
 }
 
 
-extension CreateOREditPNCDVC {
-    
-    private func updateUIForDiscountTypeSelectionValueChange(){
-        updateUIForPNCDSelectionType()
-    }
-}
-
 
 extension CreateOREditPNCDVC {
     
-    private func updateUIForScheduleTypeValueChange() {
+    func updateUIForScheduleTypeValueChange() {
         let isOneTime = viewModel.flagsPropertyManager.scheduleType == .oneTime
         
         vwWeeklySelectionView.isHidden = isOneTime
         swtDealIsActiveForFullDay.superview?.isHidden = isOneTime
-        dtPickerDealStartTime.superview?.isHidden = isOneTime
+        
+        updateUIForIsPNCDActiveForFullDayFlagChange()
         
         segCtrlDiscountScheduleType.select(
             index: viewModel.flagsPropertyManager.scheduleType.getIndex()
@@ -346,8 +286,7 @@ extension CreateOREditPNCDVC {
     }
     
     
-    private func updateUIForIncludedProductsOrCategories() {
-        
+    func updateUIForIncludedProductsOrCategories() {
         let isShowTblList = viewModel.flagsPropertyManager.includedProductOrCategories.isEmpty == false
         
         vwAddProductORCategoryBtnSuperView.isHidden = isShowTblList
@@ -396,11 +335,11 @@ extension CreateOREditPNCDVC : DatePickerInputViewDelegate {
 extension CreateOREditPNCDVC : CreateOREditPNCDFlagsPropertyManagerDelegate {
     
     func didUpdateProductOrCategoryDiscountType() {
-        updateUIForDiscountTypeSelectionValueChange()
+        updateUIForPNCDSelectionType()
     }
     
     func didUpdateIsAllowDiscountToStackWithOtherDiscounts() {
-        
+        updateUIForIsAllowDiscountToStackWithOtherDiscountsFlagChange()
     }
     
     func didUpdateDiscountInputValueType() {
@@ -412,23 +351,23 @@ extension CreateOREditPNCDVC : CreateOREditPNCDFlagsPropertyManagerDelegate {
         updateUIForScheduleTypeValueChange()
     }
     
+    func didUpdateIsThisDealHasNoEndDateFlag() {
+        updateUIForIsPNCDHasNoEndDateFlagChange()
+    }
+    
     func didUpdatedSelectedWeekDates() {
         vwWeeklySelectionView.updateSelectedItemsDataSource(viewModel.flagsPropertyManager.selectedDates)
     }
     
-    
     func didUpdateIsDealIsActiveForFullDay() {
-        
+        updateUIForIsPNCDActiveForFullDayFlagChange()
     }
+    
     
     func didUpdatedIncludedProductORCategories() {
         updateUIForIncludedProductsOrCategories()
     }
     
-    
-    func didUpdateIsThisDealHasNoEndDateFlag() {
-        
-    }
 }
 
 

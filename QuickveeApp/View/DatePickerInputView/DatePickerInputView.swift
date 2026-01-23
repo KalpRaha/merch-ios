@@ -39,12 +39,26 @@ final class DatePickerInputView: UIView {
     }
 
     /// Pre-filled date (will be clamped within min/max)
-    var selectedDate: Date? {
+    private(set) var selectedDate: Date? {
         didSet { applySelectedDate() }
     }
     
     var configuration: Configuration!
     private var pickerType: PickerType = .date
+    
+    // MARK: - Enable/Disable API
+    
+    /// Controls whether the view is enabled for interaction.
+    /// When set to false:
+    /// - textFieldContainerView alpha becomes 0.7
+    /// - taps invoke `onDisabledTap` instead of opening the picker
+    /// - the text field will not become first responder
+    private var isEnabled: Bool = true {
+        didSet { updateEnabledState() }
+    }
+    
+    /// Optional callback fired when user taps the view while it is disabled.
+    var onDisabledTap: (() -> Void)?
     
 
     // MARK: - UI Components
@@ -93,7 +107,7 @@ final class DatePickerInputView: UIView {
         updateUIForLatestConfiguration()
     }
     
-    func updateUIForLatestConfiguration(){
+    private func updateUIForLatestConfiguration(){
         let config = self.configuration.titleTextConfiguration
         lblTitle.text = config.title
         lblTitle.textColor = config.textColor
@@ -113,8 +127,16 @@ final class DatePickerInputView: UIView {
             setDefaultPlaceholder()
         }
         
+        // Ensure enabled state visuals are applied after configuration
+        updateEnabledState()
+        
         setNeedsLayout()
         layoutSubviews()
+    }
+    
+    /// Convenience to enable/disable from callers.
+    func setEnabled(_ enabled: Bool) {
+        isEnabled = enabled
     }
 
 }
@@ -294,6 +316,23 @@ fileprivate extension DatePickerInputView {
         ])
     }
     
+    func updateEnabledState() {
+        // Visual feedback
+        textFieldContainerView.alpha = isEnabled ? 1.0 : 0.5
+        
+        // Keep overlay active to intercept taps even when disabled
+        tapOverlayButton.isUserInteractionEnabled = true
+        
+        // Disable direct interaction on textField and datePicker when disabled
+        textField.isUserInteractionEnabled = isEnabled
+        datePicker.isUserInteractionEnabled = isEnabled
+        
+        // If we are disabling while editing, end editing
+        if isEnabled == false, textField.isFirstResponder {
+            textField.resignFirstResponder()
+        }
+    }
+    
 }
 
 fileprivate extension DatePickerInputView {
@@ -354,6 +393,11 @@ fileprivate extension DatePickerInputView {
     }
 
     @objc func handleOverlayTap() {
+        // If disabled, do not open picker; notify caller instead.
+        guard isEnabled else {
+            onDisabledTap?()
+            return
+        }
         // Make the text field the first responder; caret color already clear
         textField.becomeFirstResponder()
     }
@@ -361,6 +405,10 @@ fileprivate extension DatePickerInputView {
 }
 
 extension DatePickerInputView {
+    
+    func setSelectedDate(_ date : Date?) {
+        self.selectedDate = date
+    }
     
     func setSelectedDate(
         date : String?,
@@ -381,7 +429,10 @@ fileprivate extension DatePickerInputView {
 
     
     func applySelectedDate() {
-        guard let date = selectedDate else { return }
+        guard let date = selectedDate else {
+            textField.text = nil
+            return
+        }
 
         let clampedDate = clamp(date)
         datePicker.date = clampedDate
@@ -427,5 +478,11 @@ extension DatePickerInputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
 
     }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        // Prevent becoming first responder when disabled
+        return isEnabled
+    }
 
 }
+

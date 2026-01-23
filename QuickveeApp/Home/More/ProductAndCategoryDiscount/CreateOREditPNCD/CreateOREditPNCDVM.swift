@@ -43,20 +43,7 @@ extension CreateOREditPNCDVC {
             
         }
         
-        func configureInitialValuesFromExistingData(){
-            guard let editableDiscountItem else { return }
-            
-            flagsPropertyManager.productOrCategoryDiscountType = editableDiscountItem.type
-            flagsPropertyManager.isAllowDiscountToStackWithOtherDiscounts = editableDiscountItem.isAllowThisDiscountToStackWithOtherDiscounts
-            
-            flagsPropertyManager.discountInputValueType = editableDiscountItem.discountType
-            
-            flagsPropertyManager.scheduleType = editableDiscountItem.scheduleType
-            flagsPropertyManager.isThisDealHasNoEndDate = editableDiscountItem.isThisDealHasNoEndDate
-            
-            flagsPropertyManager.selectedDates = editableDiscountItem.selectedWeekDays
-            
-        }
+        
         
         
     }
