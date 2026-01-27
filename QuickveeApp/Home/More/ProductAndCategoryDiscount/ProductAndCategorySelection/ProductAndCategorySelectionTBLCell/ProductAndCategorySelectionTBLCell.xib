@@ -177,8 +177,9 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="category" destination="1D8-yx-DTZ" id="KSw-Ut-3ow"/>
-                <outlet property="categoryValue" destination="sG9-hK-E3e" id="xjP-4W-PJN"/>
+                <outlet property="categoryValue" destination="sG9-hK-E3e" id="770-lL-OH8"/>
                 <outlet property="checkImage" destination="jVE-gN-SQX" id="262-HP-uN1"/>
+                <outlet property="grayBgView" destination="CLf-Xr-fE3" id="fB0-1B-w68"/>
                 <outlet property="priceLbl" destination="TUp-DU-f3G" id="y5p-p9-0YJ"/>
                 <outlet property="productNameLBL" destination="dQ2-fM-m2V" id="zLc-Y2-CXu"/>
                 <outlet property="promotionValue" destination="xIg-Qh-bWk" id="9rh-ka-nla"/>

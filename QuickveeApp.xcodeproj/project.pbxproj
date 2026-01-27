@@ -89,7 +89,7 @@
 		B4996AE52F17AF3500650BB7 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AE42F17AF3500650BB7 /* CommonFunctions.swift */; };
 		B4996AEA2F17B17600650BB7 /* BaseBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AE92F17B17600650BB7 /* BaseBottomSheetVC.swift */; };
 		B4996AED2F17BCE300650BB7 /* BaseBottomSheetVCActionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AEC2F17BCE300650BB7 /* BaseBottomSheetVCActionDelegate.swift */; };
-		B4996AF02F17BD2E00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AEF2F17BD2E00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC.swift */; };
+		B4996AF02F17BD2E00650BB7 /* PNCDPromotionConflictBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AEF2F17BD2E00650BB7 /* PNCDPromotionConflictBottomSheetVC.swift */; };
 		B4AD368A2F1605CA00E9EF55 /* DatePickerInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD36892F1605CA00E9EF55 /* DatePickerInputView.swift */; };
 		B4AD368D2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD368C2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift */; };
 		B4AD36902F16524A00E9EF55 /* CustomTextConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD368F2F16524A00E9EF55 /* CustomTextConfiguration.swift */; };
@@ -481,7 +481,7 @@
 		B4996AE42F17AF3500650BB7 /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
 		B4996AE92F17B17600650BB7 /* BaseBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBottomSheetVC.swift; sourceTree = "<group>"; };
 		B4996AEC2F17BCE300650BB7 /* BaseBottomSheetVCActionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBottomSheetVCActionDelegate.swift; sourceTree = "<group>"; };
-		B4996AEF2F17BD2E00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAndCategoriesPromotionConflictBottomSheetVC.swift; sourceTree = "<group>"; };
+		B4996AEF2F17BD2E00650BB7 /* PNCDPromotionConflictBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDPromotionConflictBottomSheetVC.swift; sourceTree = "<group>"; };
 		B4AD36892F1605CA00E9EF55 /* DatePickerInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerInputView.swift; sourceTree = "<group>"; };
 		B4AD368C2F16281800E9EF55 /* DatePickerInputViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerInputViewConfiguration.swift; sourceTree = "<group>"; };
 		B4AD368F2F16524A00E9EF55 /* CustomTextConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextConfiguration.swift; sourceTree = "<group>"; };
@@ -1051,6 +1051,9 @@
 			children = (
 				B4996AEE2F17BD1D00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC */,
 				B41A9F432F0F887500C543C7 /* PNCDList */,
+				B4996AEE2F17BD1D00650BB7 /* PNCDPromotionConflictBottomSheetVC */,
+				B4996AE32F1770DE00650BB7 /* View */,
+				B41A9F432F0F887500C543C7 /* ProductAndCategoryDiscountList */,
 				B41A9F392F0F7F1700C543C7 /* CreateOREditPNCD */,
 				D28DF6862F0FA83C00426975 /* ProductAndCategorySelection */,
 				B41A9F3E2F0F86BE00C543C7 /* Model */,
@@ -1112,12 +1115,12 @@
 			path = BaseBottomSheetVC;
 			sourceTree = "<group>";
 		};
-		B4996AEE2F17BD1D00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC */ = {
+		B4996AEE2F17BD1D00650BB7 /* PNCDPromotionConflictBottomSheetVC */ = {
 			isa = PBXGroup;
 			children = (
-				B4996AEF2F17BD2E00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC.swift */,
+				B4996AEF2F17BD2E00650BB7 /* PNCDPromotionConflictBottomSheetVC.swift */,
 			);
-			path = ProductAndCategoriesPromotionConflictBottomSheetVC;
+			path = PNCDPromotionConflictBottomSheetVC;
 			sourceTree = "<group>";
 		};
 		B4AD368B2F1627FB00E9EF55 /* DatePickerInputView */ = {
@@ -2378,7 +2381,7 @@
 				B42F5F582F078120002252EE /* PersistenceContainer.swift in Sources */,
 				D2CA7D7C2B4555A100918A94 /* DuplicateTaxCollectionViewCell.swift in Sources */,
 				D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */,
-				B4996AF02F17BD2E00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC.swift in Sources */,
+				B4996AF02F17BD2E00650BB7 /* PNCDPromotionConflictBottomSheetVC.swift in Sources */,
 				D2D1F9052C1845C5008BD228 /* MixnMatchPricingViewController.swift in Sources */,
 				D2DF61202CE323A1003D47B0 /* StockSaveViewController.swift in Sources */,
 				D2A87AA72D156C950008C417 /* NewOrderRefundDetailVC.swift in Sources */,
