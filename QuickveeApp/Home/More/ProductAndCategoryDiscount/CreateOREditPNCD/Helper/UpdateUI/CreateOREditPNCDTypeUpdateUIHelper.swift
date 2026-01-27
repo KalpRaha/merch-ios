@@ -12,7 +12,7 @@ extension CreatePNCDVC {
     // Update UI based on selected type
     func updateUIForPNCDSelectionType() {
         
-        let isProduct = (viewModel.flagsPropertyManager.productOrCategoryDiscountType == .product)
+        let isProduct = (viewModel.flagsPropertyManager.pncdType == .product)
         
         // Product View UI Update
         vwProductDiscountTypeSelectionView.applyBorder(

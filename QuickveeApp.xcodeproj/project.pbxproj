@@ -29,7 +29,7 @@
 		B420F3062F18E67800461C92 /* OtherExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F3052F18E67800461C92 /* OtherExtension.swift */; };
 		B420F3082F18E92200461C92 /* UpdatePNCDStateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F3072F18E92200461C92 /* UpdatePNCDStateResponse.swift */; };
 		B420F30A2F18EC4900461C92 /* PNCDDiscountListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F3092F18EC4900461C92 /* PNCDDiscountListItem.swift */; };
-		B420F30C2F190D3E00461C92 /* AddUpdatePNCDRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F30B2F190D3E00461C92 /* AddUpdatePNCDRequest.swift */; };
+		B420F30C2F190D3E00461C92 /* CreateOrEditPNCDRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B420F30B2F190D3E00461C92 /* CreateOrEditPNCDRequest.swift */; };
 		B42F5F582F078120002252EE /* PersistenceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F5F572F078120002252EE /* PersistenceContainer.swift */; };
 		B42F5F5E2F079DA8002252EE /* Quickvee-Local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B42F5F5D2F079DA8002252EE /* Quickvee-Local.xcconfig */; };
 		B42F5F602F07B79C002252EE /* Quickvee-Dev.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B42F5F5F2F07B79C002252EE /* Quickvee-Dev.xcconfig */; };
@@ -108,9 +108,10 @@
 		B4BC097C2F15108000BDB89E /* MultiPartRequestBodyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC097B2F15108000BDB89E /* MultiPartRequestBodyType.swift */; };
 		B4BC09802F151E0C00BDB89E /* VariantListMultipartRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC097F2F151E0C00BDB89E /* VariantListMultipartRequestBody.swift */; };
 		B4BC09822F1529A500BDB89E /* VariantDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC09812F1529A500BDB89E /* VariantDataModel.swift */; };
-		B4C342D42F19F88900A3BDA3 /* AddUpdatePNCDRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C342D32F19F88900A3BDA3 /* AddUpdatePNCDRequestBuilder.swift */; };
+		B4C342D42F19F88900A3BDA3 /* CreateOREditPNCDRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C342D32F19F88900A3BDA3 /* CreateOREditPNCDRequestBuilder.swift */; };
 		B4C342D62F1A018B00A3BDA3 /* CommonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C342D52F1A018B00A3BDA3 /* CommonResponse.swift */; };
 		B4C992692F2875BF006D59E1 /* PNCDListMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C992682F2875BF006D59E1 /* PNCDListMockData.swift */; };
+		B4C992712F28BEF4006D59E1 /* CreateOREditPNCDValidationUpdateUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C992702F28BEF4006D59E1 /* CreateOREditPNCDValidationUpdateUI.swift */; };
 		B4E4A2302F2090AC000432CB /* CreateOREditPNCDTextFieldUpdateUIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E4A22F2F2090AC000432CB /* CreateOREditPNCDTextFieldUpdateUIHelper.swift */; };
 		D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */; };
 		D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */; };
@@ -421,7 +422,7 @@
 		B420F3052F18E67800461C92 /* OtherExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherExtension.swift; sourceTree = "<group>"; };
 		B420F3072F18E92200461C92 /* UpdatePNCDStateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePNCDStateResponse.swift; sourceTree = "<group>"; };
 		B420F3092F18EC4900461C92 /* PNCDDiscountListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDDiscountListItem.swift; sourceTree = "<group>"; };
-		B420F30B2F190D3E00461C92 /* AddUpdatePNCDRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpdatePNCDRequest.swift; sourceTree = "<group>"; };
+		B420F30B2F190D3E00461C92 /* CreateOrEditPNCDRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrEditPNCDRequest.swift; sourceTree = "<group>"; };
 		B42F5F572F078120002252EE /* PersistenceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceContainer.swift; sourceTree = "<group>"; };
 		B42F5F5D2F079DA8002252EE /* Quickvee-Local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Quickvee-Local.xcconfig"; sourceTree = "<group>"; };
 		B42F5F5F2F07B79C002252EE /* Quickvee-Dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Quickvee-Dev.xcconfig"; sourceTree = "<group>"; };
@@ -500,9 +501,10 @@
 		B4BC097B2F15108000BDB89E /* MultiPartRequestBodyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPartRequestBodyType.swift; sourceTree = "<group>"; };
 		B4BC097F2F151E0C00BDB89E /* VariantListMultipartRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantListMultipartRequestBody.swift; sourceTree = "<group>"; };
 		B4BC09812F1529A500BDB89E /* VariantDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantDataModel.swift; sourceTree = "<group>"; };
-		B4C342D32F19F88900A3BDA3 /* AddUpdatePNCDRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpdatePNCDRequestBuilder.swift; sourceTree = "<group>"; };
+		B4C342D32F19F88900A3BDA3 /* CreateOREditPNCDRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDRequestBuilder.swift; sourceTree = "<group>"; };
 		B4C342D52F1A018B00A3BDA3 /* CommonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonResponse.swift; sourceTree = "<group>"; };
 		B4C992682F2875BF006D59E1 /* PNCDListMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDListMockData.swift; sourceTree = "<group>"; };
+		B4C992702F28BEF4006D59E1 /* CreateOREditPNCDValidationUpdateUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDValidationUpdateUI.swift; sourceTree = "<group>"; };
 		B4E4A22F2F2090AC000432CB /* CreateOREditPNCDTextFieldUpdateUIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDTextFieldUpdateUIHelper.swift; sourceTree = "<group>"; };
 		BD3A5305EE37476CB5794F58 /* Pods_QuickveeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickveeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
@@ -1026,14 +1028,8 @@
 		B46CD3FC2F1A44FD009011F4 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				B4B471442F2385B4003F4723 /* CreateOREditPNCDUpdateUIHelperForFlags.swift */,
-				B4B471422F233DCD003F4723 /* CreateOREditPNCDUpdateUIHelperForInitialData.swift */,
-				B46CD4092F1A583F009011F4 /* CreateOREditPNCDTypeUpdateUIHelper.swift */,
-				B4E4A22F2F2090AC000432CB /* CreateOREditPNCDTextFieldUpdateUIHelper.swift */,
-				B46CD40B2F1A5CD4009011F4 /* CreateOREditPNCDDatePickerConfigurationBuilder.swift */,
-				B4B471402F2330A7003F4723 /* PNCDDateTimeCombiner.swift */,
-				B4B77F632F22061A00695BA1 /* PNCDDateFormatter.swift */,
-				B46CD3FF2F1A45DE009011F4 /* PNCDTimeFormatter.swift */,
+				B4C9926C2F28974C006D59E1 /* UpdateUI */,
+				B4C9926D2F289772006D59E1 /* Logic */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1049,11 +1045,8 @@
 		B49381EB2F0DFCB40071D0F1 /* ProductAndCategoryDiscount */ = {
 			isa = PBXGroup;
 			children = (
-				B4996AEE2F17BD1D00650BB7 /* ProductAndCategoriesPromotionConflictBottomSheetVC */,
-				B41A9F432F0F887500C543C7 /* PNCDList */,
 				B4996AEE2F17BD1D00650BB7 /* PNCDPromotionConflictBottomSheetVC */,
-				B4996AE32F1770DE00650BB7 /* View */,
-				B41A9F432F0F887500C543C7 /* ProductAndCategoryDiscountList */,
+				B41A9F432F0F887500C543C7 /* PNCDList */,
 				B41A9F392F0F7F1700C543C7 /* CreateOREditPNCD */,
 				D28DF6862F0FA83C00426975 /* ProductAndCategorySelection */,
 				B41A9F3E2F0F86BE00C543C7 /* Model */,
@@ -1155,8 +1148,8 @@
 		B4B77F652F222BCA00695BA1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B420F30B2F190D3E00461C92 /* AddUpdatePNCDRequest.swift */,
-				B4C342D32F19F88900A3BDA3 /* AddUpdatePNCDRequestBuilder.swift */,
+				B4C342D32F19F88900A3BDA3 /* CreateOREditPNCDRequestBuilder.swift */,
+				B420F30B2F190D3E00461C92 /* CreateOrEditPNCDRequest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1176,6 +1169,29 @@
 				B4BC097F2F151E0C00BDB89E /* VariantListMultipartRequestBody.swift */,
 			);
 			path = APIRequestModel;
+			sourceTree = "<group>";
+		};
+		B4C9926C2F28974C006D59E1 /* UpdateUI */ = {
+			isa = PBXGroup;
+			children = (
+				B4B471442F2385B4003F4723 /* CreateOREditPNCDUpdateUIHelperForFlags.swift */,
+				B4B471422F233DCD003F4723 /* CreateOREditPNCDUpdateUIHelperForInitialData.swift */,
+				B46CD4092F1A583F009011F4 /* CreateOREditPNCDTypeUpdateUIHelper.swift */,
+				B4E4A22F2F2090AC000432CB /* CreateOREditPNCDTextFieldUpdateUIHelper.swift */,
+				B4C992702F28BEF4006D59E1 /* CreateOREditPNCDValidationUpdateUI.swift */,
+				B46CD40B2F1A5CD4009011F4 /* CreateOREditPNCDDatePickerConfigurationBuilder.swift */,
+			);
+			path = UpdateUI;
+			sourceTree = "<group>";
+		};
+		B4C9926D2F289772006D59E1 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				B4B471402F2330A7003F4723 /* PNCDDateTimeCombiner.swift */,
+				B4B77F632F22061A00695BA1 /* PNCDDateFormatter.swift */,
+				B46CD3FF2F1A45DE009011F4 /* PNCDTimeFormatter.swift */,
+			);
+			path = Logic;
 			sourceTree = "<group>";
 		};
 		D204E89F2A122A3D00EED5F5 /* Reporting */ = {
@@ -2219,6 +2235,7 @@
 				B45CB8A82F04E2BB004AF269 /* Navigatable.swift in Sources */,
 				B41A9F382F0F4F2B00C543C7 /* CustomSwitch.swift in Sources */,
 				B4BC097C2F15108000BDB89E /* MultiPartRequestBodyType.swift in Sources */,
+				B4C992712F28BEF4006D59E1 /* CreateOREditPNCDValidationUpdateUI.swift in Sources */,
 				04AC908D2E951D360009C2A8 /* DescOptionsCollectionViewCell.swift in Sources */,
 				D2A2BF6E2B8D94C6006796D5 /* PageViewController.swift in Sources */,
 				D2D625492B75E13300C25D07 /* AddBulkPricingViewController.swift in Sources */,
@@ -2372,7 +2389,7 @@
 				B49382082F0E3F400071D0F1 /* CustomButton.swift in Sources */,
 				D2F5AB882CE5C2270050B89C /* OrderCell.swift in Sources */,
 				D247A00B2A5BCDAA005D265F /* UIAlerts.swift in Sources */,
-				B420F30C2F190D3E00461C92 /* AddUpdatePNCDRequest.swift in Sources */,
+				B420F30C2F190D3E00461C92 /* CreateOrEditPNCDRequest.swift in Sources */,
 				D2C02E582C2154980016B1AA /* AddMixnMatchCell.swift in Sources */,
 				D23327DD2C9D77A700161CCD /* DoubleSalesTableViewCell.swift in Sources */,
 				D2A6838D296C0B3700F852E6 /* AppDelegate.swift in Sources */,
@@ -2525,7 +2542,7 @@
 				D27F2F612F10D502007AE4C8 /* VariantListAPIRepository.swift in Sources */,
 				D2CA7D782B45242D00918A94 /* DuplicateCatCollectionViewCell.swift in Sources */,
 				D25B52492AEA18C700E82B83 /* CategoryAddProductCell.swift in Sources */,
-				B4C342D42F19F88900A3BDA3 /* AddUpdatePNCDRequestBuilder.swift in Sources */,
+				B4C342D42F19F88900A3BDA3 /* CreateOREditPNCDRequestBuilder.swift in Sources */,
 				D2D879822BBBB55900ECE573 /* InStoreRefundCell.swift in Sources */,
 				D25FF9FE297FA18200C02A2A /* SalesModel.swift in Sources */,
 				D262DEAA296FD2D800011E27 /* OrderTypesViewController.swift in Sources */,

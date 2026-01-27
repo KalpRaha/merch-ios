@@ -70,7 +70,7 @@ extension CreateOREditPNCDVC {
         guard let editableDiscountItem = viewModel.editableDiscountItem else { return }
         
         // Product vs Category discount type
-        viewModel.flagsPropertyManager.productOrCategoryDiscountType = editableDiscountItem.type
+        viewModel.flagsPropertyManager.pncdType = editableDiscountItem.type
         
         // Whether this discount can stack with other discounts
         viewModel.flagsPropertyManager.isAllowDiscountToStackWithOtherDiscounts = editableDiscountItem.isAllowThisDiscountToStackWithOtherDiscounts

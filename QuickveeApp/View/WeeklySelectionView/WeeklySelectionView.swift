@@ -14,7 +14,7 @@ final class WeeklySelectionView: UIView {
 
 
     private var dataSource: [WeekDayItem] = []
-    private var selectedItems : [WeekDayItem] = []
+    private(set) var selectedItems : [WeekDayItem] = []
     
 
     private var selectedConfig: DayItemUIConfig!

@@ -33,7 +33,7 @@ extension CreatePNCDVC {
         
         //MARK: - Discount Type
         
-        var productOrCategoryDiscountType : PNCDType = .product {
+        var pncdType : PNCDType = .product {
             didSet{
                 delegate?.didUpdateProductOrCategoryDiscountType()
             }

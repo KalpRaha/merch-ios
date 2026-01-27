@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum WeekDayItem {
+enum WeekDayItem : Codable{
     
     case mon
     case tue

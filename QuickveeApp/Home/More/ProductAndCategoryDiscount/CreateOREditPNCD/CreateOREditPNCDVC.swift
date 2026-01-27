@@ -18,7 +18,15 @@ class CreateOREditPNCDVCFactory {
         
         let vc = CreateOREditPNCDVC.instantiate()
         
+        let repository = PNCDAPIRepository(
+            dataEnvironment: .live,
+            apiService: APIServiceFactory.make(),
+            mockDataService: PNCDListMockData()
+        )
+        
+        
         vc.viewModel = CreateOREditPNCDVC.ViewModel(
+            repository: repository,
             editableDiscountItem: discountItem,
             builder: .init(merchantId: UDHelper.shared.merchantId)
         )
@@ -68,7 +76,7 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     @IBOutlet weak var dtPickerDealEndDate: DatePickerInputView!
     
     // Weekly date picker
-    @IBOutlet private weak var vwWeeklySelectionView : WeeklySelectionView!
+    @IBOutlet weak var vwWeeklySelectionView : WeeklySelectionView!
     
     // Deal is active for full day
     @IBOutlet weak var swtDealIsActiveForFullDay : CustomSwitch!
@@ -91,8 +99,8 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     @IBOutlet private weak var tblProductORCategoryItemsIncludedView: PNCDItemsIncludedInDiscountTableView!
     
     // Bottom Buttons
-    @IBOutlet private weak var btnCancel: CustomButton!
-    @IBOutlet private weak var btnSave: CustomButton!
+    @IBOutlet weak var btnCancel: CustomButton!
+    @IBOutlet weak var btnSave: CustomButton!
     
     
     var viewModel : ViewModel!
@@ -121,7 +129,7 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     private func configure() {
         vwNavigationHeader.delegate = self
         viewModel.flagsPropertyManager.delegate = self
-        
+        viewModel.delegate = self
     }
     
     private func updateUI(){
@@ -174,8 +182,8 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     @IBAction private func onClickDiscountTypeSelection(_ sender : UIButton) {
         let discountType : PNCDType = (sender.tag == 0) ? .product : .category
         
-        if viewModel.flagsPropertyManager.productOrCategoryDiscountType != discountType {
-            viewModel.flagsPropertyManager.productOrCategoryDiscountType = discountType
+        if viewModel.flagsPropertyManager.pncdType != discountType {
+            viewModel.flagsPropertyManager.pncdType = discountType
         }
         updateUIForPNCDSelectionType()
         Logger.log(#function)
@@ -226,7 +234,7 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
             in: self,
             passData: { [weak self]  vc in
                 guard let self else { return }
-                vc.viewModel.discounttype = viewModel.flagsPropertyManager.productOrCategoryDiscountType
+                vc.viewModel.discounttype = viewModel.flagsPropertyManager.pncdType
                 vc.delegate = self
                 
             }, animated: false
@@ -245,9 +253,11 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     
     @IBAction private func onClickBtnSave(_ sender: CustomButton) {
         if btnSave.isLoading {
-            btnSave.hideLoader()
+            Toast.show("Already creating, Please wait.")
+            
         }else{
             btnSave.showLoader()
+            generateRequest()
         }
         Logger.log(#function)
     }
@@ -368,6 +378,31 @@ extension CreateOREditPNCDVC : CreateOREditPNCDFlagsPropertyManagerDelegate {
         updateUIForIncludedProductsOrCategories()
     }
     
+}
+extension CreateOREditPNCDVC: CreateOREditPNCDVMDelegate {
+    
+    func didCreatedPNCD() {
+        DispatchQueue.main.async {[weak self] in
+            guard let self else { return }
+            popVC()
+            
+            if viewModel.editableDiscountItem == nil {
+                Toast.show("Discount added successfully.")
+            }else{
+                Toast.show("Discount updated successfully.")
+            }
+        }
+        
+    }
+    
+    func didFoundErrorWhileCreatingThePNCD() {
+        DispatchQueue.main.async {[weak self] in
+            guard let self else { return }
+            btnSave.hideLoader()
+        }
+        
+        Toast.show("Error While Creating PNCD.")
+    }
 }
 
 

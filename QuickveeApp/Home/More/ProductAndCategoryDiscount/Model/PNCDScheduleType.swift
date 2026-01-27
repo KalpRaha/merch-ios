@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum PNCDScheduleType : String, CaseIterable {
+enum PNCDScheduleType : String, CaseIterable, Codable {
     
     case oneTime = "0"
     case repeatsOnSchedule = "1"
@@ -22,7 +22,7 @@ enum PNCDScheduleType : String, CaseIterable {
     
 }
 
-extension PNCDScheduleType : Decodable {
+extension PNCDScheduleType {
     
     enum CodingKeys: String, CodingKey {
         case oneTime = "0"
@@ -37,7 +37,7 @@ extension PNCDScheduleType : Decodable {
         }
     }
     
-    func apiValue() -> String {
+    var apiValue: String {
         switch self {
         case .oneTime: "0"
         case .repeatsOnSchedule: "1"

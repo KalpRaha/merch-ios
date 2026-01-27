@@ -54,7 +54,8 @@ extension PNCDDateFormatter {
     }
     
     
-    func getStringToSendInAPI(_ date : Date) -> String {
+    func getStringToSendInAPI(_ date : Date?) -> String? {
+        guard let date else { return nil }
         dateFormatter.dateFormat = receiveFromApiDateFormat
         return dateFormatter.string(from: date)
     }
