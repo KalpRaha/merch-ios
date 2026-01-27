@@ -13,3 +13,9 @@ struct Constant {
     static let somethingWentWrongMessage = "Something went wrong. Please try again later."
     
 }
+
+enum DataEnvironment {
+    
+    case live
+    case mock
+}

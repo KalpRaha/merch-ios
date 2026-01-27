@@ -16,7 +16,9 @@ class PNCDListVCFactory {
         
         vc.viewModel = .init(
             pncdRepository: PNCDAPIRepository(
-                apiService: APIServiceFactory.make()
+                dataEnvironment: .live,
+                apiService: APIServiceFactory.make(),
+                mockDataService: .init()
             )
             
         )

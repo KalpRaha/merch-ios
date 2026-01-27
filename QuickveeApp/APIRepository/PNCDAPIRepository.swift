@@ -10,8 +10,9 @@ import Foundation
 
 protocol PNCDAPIRepositoryProtocol : AnyObject {
         
+    var dataEnvironment: DataEnvironment { get }
     var apiService: APIServiceType { get }
-
+    var mockDataService: PNCDListMockData { get }
     
     func getDiscountsList(
         request : PNCDListVC.GetDiscountListRequest
@@ -33,22 +34,37 @@ protocol PNCDAPIRepositoryProtocol : AnyObject {
 
 class PNCDAPIRepository : PNCDAPIRepositoryProtocol{
     
+    var dataEnvironment : DataEnvironment
     var apiService: any APIServiceType
     
-    init(apiService: any APIServiceType) {
+    var mockDataService: PNCDListMockData
+    
+    init(
+        dataEnvironment : DataEnvironment,
+        apiService: any APIServiceType,
+        mockDataService: PNCDListMockData
+    ) {
+        self.dataEnvironment = dataEnvironment
         self.apiService = apiService
+        self.mockDataService = mockDataService
     }
     
     func getDiscountsList(
         request : PNCDListVC.GetDiscountListRequest
     ) async throws ->  GetDiscountListResponse {
         
-        return try await apiService.getData(
-            endpoint: API.PNCDEndpoint.getDiscountList(
-                req: request
-            ),
-            responseType: GetDiscountListResponse.self,
-        )
+        if dataEnvironment == .live {
+            return try await apiService.getData(
+                endpoint: API.PNCDEndpoint.getDiscountList(
+                    req: request
+                ),
+                responseType: GetDiscountListResponse.self,
+            )
+            
+        }else{
+            return try mockDataService.fetch()
+        }
+        
     }
     
     func updatePNCDState(

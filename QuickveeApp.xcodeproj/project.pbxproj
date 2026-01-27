@@ -110,6 +110,7 @@
 		B4BC09822F1529A500BDB89E /* VariantDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC09812F1529A500BDB89E /* VariantDataModel.swift */; };
 		B4C342D42F19F88900A3BDA3 /* AddUpdatePNCDRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C342D32F19F88900A3BDA3 /* AddUpdatePNCDRequestBuilder.swift */; };
 		B4C342D62F1A018B00A3BDA3 /* CommonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C342D52F1A018B00A3BDA3 /* CommonResponse.swift */; };
+		B4C992692F2875BF006D59E1 /* PNCDListMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C992682F2875BF006D59E1 /* PNCDListMockData.swift */; };
 		B4E4A2302F2090AC000432CB /* CreateOREditPNCDTextFieldUpdateUIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E4A22F2F2090AC000432CB /* CreateOREditPNCDTextFieldUpdateUIHelper.swift */; };
 		D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */; };
 		D204CC872AA9AB4700A216C3 /* AttributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204CC862AA9AB4700A216C3 /* AttributeViewController.swift */; };
@@ -501,6 +502,7 @@
 		B4BC09812F1529A500BDB89E /* VariantDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantDataModel.swift; sourceTree = "<group>"; };
 		B4C342D32F19F88900A3BDA3 /* AddUpdatePNCDRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpdatePNCDRequestBuilder.swift; sourceTree = "<group>"; };
 		B4C342D52F1A018B00A3BDA3 /* CommonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonResponse.swift; sourceTree = "<group>"; };
+		B4C992682F2875BF006D59E1 /* PNCDListMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDListMockData.swift; sourceTree = "<group>"; };
 		B4E4A22F2F2090AC000432CB /* CreateOREditPNCDTextFieldUpdateUIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDTextFieldUpdateUIHelper.swift; sourceTree = "<group>"; };
 		BD3A5305EE37476CB5794F58 /* Pods_QuickveeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickveeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20200A52A0DFEB7007D926F /* SearchVendorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVendorTableViewCell.swift; sourceTree = "<group>"; };
@@ -852,6 +854,7 @@
 				B420F2FC2F18E2A500461C92 /* PNCDListVM.swift */,
 				B43280E62F1F351A002E4802 /* PNCDListItemTBLCell */,
 				B420F2FE2F18E46600461C92 /* Model */,
+				B4C992682F2875BF006D59E1 /* PNCDListMockData.swift */,
 			);
 			path = PNCDList;
 			sourceTree = "<group>";
@@ -2265,6 +2268,7 @@
 				D25D18612CF495A400A79FDE /* CompletedTendersCell.swift in Sources */,
 				D2D879842BBBB57500ECE573 /* InStoreRefundOrderSumCell.swift in Sources */,
 				D225879C2AB2C22100D38787 /* ApiCalls.swift in Sources */,
+				B4C992692F2875BF006D59E1 /* PNCDListMockData.swift in Sources */,
 				D285ECE52A2EE02C009DFAE5 /* OrdersCollectionViewCell.swift in Sources */,
 				D2D6254D2B75E23300C25D07 /* BulkQuantityViewController.swift in Sources */,
 				D24829AA2A396FC4006EFE10 /* OrdersDetailViewController.swift in Sources */,
