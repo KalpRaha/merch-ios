@@ -46,7 +46,7 @@ extension CreateOREditPNCDVC {
         txtDiscountInputValueType.text = editableDiscountItem.discount ?? "0"
         
         // Format discount text based on the input type (amount vs percent).
-        txtDiscountInputValueType.text = DiscountPerItemDiscountTextFormatter.format(
+        txtDiscountInputValueType.text = DiscountInputValueTextFormatter.format(
             editableDiscountItem.discount ?? "",
             type: viewModel.flagsPropertyManager.discountInputValueType
         )

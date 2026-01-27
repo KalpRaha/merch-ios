@@ -39,7 +39,7 @@ extension CreateOREditPNCDVC {
     
     
     @objc func updateTextField(textField: UITextField) {
-        textField.text = DiscountPerItemDiscountTextFormatter.format(
+        textField.text = DiscountInputValueTextFormatter.format(
             textField.text ?? "",
             type: viewModel.flagsPropertyManager.discountInputValueType
         )

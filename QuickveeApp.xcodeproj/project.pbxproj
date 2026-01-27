@@ -82,7 +82,7 @@
 		B49382022F0E20020071D0F1 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382012F0E20020071D0F1 /* UIColor+Extension.swift */; };
 		B49382062F0E2CEA0071D0F1 /* CreateOREditPNCDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382052F0E2CEA0071D0F1 /* CreateOREditPNCDVC.swift */; };
 		B49382082F0E3F400071D0F1 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49382072F0E3F400071D0F1 /* CustomButton.swift */; };
-		B49478412F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */; };
+		B49478412F11107000DED5CA /* DiscountInputValueTextFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49478402F11107000DED5CA /* DiscountInputValueTextFormatter.swift */; };
 		B4996AD82F175E1800650BB7 /* PNCDItemsIncludedInDiscountTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996AD72F175E1800650BB7 /* PNCDItemsIncludedInDiscountTableView.swift */; };
 		B4996ADC2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4996ADB2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.xib */; };
 		B4996ADD2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4996ADA2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.swift */; };
@@ -474,7 +474,7 @@
 		B49382012F0E20020071D0F1 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		B49382052F0E2CEA0071D0F1 /* CreateOREditPNCDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDVC.swift; sourceTree = "<group>"; };
 		B49382072F0E3F400071D0F1 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountPerItemDiscountTextFormatter.swift; sourceTree = "<group>"; };
+		B49478402F11107000DED5CA /* DiscountInputValueTextFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountInputValueTextFormatter.swift; sourceTree = "<group>"; };
 		B4996AD72F175E1800650BB7 /* PNCDItemsIncludedInDiscountTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDItemsIncludedInDiscountTableView.swift; sourceTree = "<group>"; };
 		B4996ADA2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDItemIncludedInDiscountTBLCell.swift; sourceTree = "<group>"; };
 		B4996ADB2F175E9C00650BB7 /* PNCDItemIncludedInDiscountTBLCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PNCDItemIncludedInDiscountTBLCell.xib; sourceTree = "<group>"; };
@@ -1072,7 +1072,7 @@
 			children = (
 				B43280F12F1F9183002E4802 /* WeekDayItemParser.swift */,
 				D26B74BD2F178EFF00E79B5B /* PNCDItemIDExtractor.swift */,
-				B49478402F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift */,
+				B49478402F11107000DED5CA /* DiscountInputValueTextFormatter.swift */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -2343,7 +2343,7 @@
 				D24692182A32DB46006D1904 /* TapticEngine.swift in Sources */,
 				B43280F22F1F9183002E4802 /* WeekDayItemParser.swift in Sources */,
 				B4996AD82F175E1800650BB7 /* PNCDItemsIncludedInDiscountTableView.swift in Sources */,
-				B49478412F11107000DED5CA /* DiscountPerItemDiscountTextFormatter.swift in Sources */,
+				B49478412F11107000DED5CA /* DiscountInputValueTextFormatter.swift in Sources */,
 				D2D879862BBBB58700ECE573 /* InStoreRefundPayCell.swift in Sources */,
 				D291BD6D297128D900DCD20D /* StoreTableViewCell.swift in Sources */,
 				D2D879782BBBB06800ECE573 /* InStorePayTableCell.swift in Sources */,

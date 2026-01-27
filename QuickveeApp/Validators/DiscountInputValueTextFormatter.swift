@@ -1,5 +1,5 @@
 //
-//  DiscountPerItemDiscountTextFormatter.swift
+//  DiscountInputValueTextFormatter.swift
 //  QuickveeApp
 //
 //  Created by Sooraj kahar on 09/01/26.
@@ -8,7 +8,7 @@
 import Foundation
 
 
-class DiscountPerItemDiscountTextFormatter {
+class DiscountInputValueTextFormatter {
     
     static func format(
         _ inputText : String,
