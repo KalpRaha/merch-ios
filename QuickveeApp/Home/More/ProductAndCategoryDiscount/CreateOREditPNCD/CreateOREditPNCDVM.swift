@@ -9,6 +9,7 @@ import Foundation
 
 protocol CreateOREditPNCDVMDelegate : AnyObject{
     
+    func didUpdatedValidationErrorFields()
     func didCreatedPNCD()
     func didFoundErrorWhileCreatingThePNCD()
     
@@ -38,7 +39,12 @@ extension CreateOREditPNCDVC {
         
         
         var flagsPropertyManager: FlagsPropertyManager
-      
+        
+        var errorFields: [CreateOREditPNCDInputFields] = [] {
+            didSet{
+                delegate?.didUpdatedValidationErrorFields()
+            }
+        }
         
         func createPNCD(req: CreateOrEditPNCDRequest) {
             Task{

@@ -37,6 +37,7 @@ class ToastView: UIView {
         vwToastSuperView.layer.cornerRadius = 6
         
         lblMessage.font = FontFamily.ManropeSemiBold.size(15)
+        lblMessage.numberOfLines = 0
     }
 
     func setMessgae(_ message: String) {

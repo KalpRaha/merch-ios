@@ -120,39 +120,35 @@ extension CreateOREditPNCDVC.CreateOrEditPNCDRequest: MultiPartRequestBodyType {
         // ScheduleType
         entries.append(.string(paramName: "repeat_type", value: scheduleType.apiValue ))
         
-        if let startDate{
-            entries.append(.string(paramName: "start_date", value: startDate))
-        }
+        entries.append(.string(
+            paramName: "start_date",
+            value: startDate ?? ""
+        ))
         
-        
-        if (isThisDiscountHasNoEndDate == false) {
-            entries.append(.string(paramName: "end_date", value: endDate ))
-        }
-        
+        entries.append(.string(
+            paramName: "end_date",
+            value: (isThisDiscountHasNoEndDate == false) ? endDate : ""
+        ))
         
         entries.append(.string(paramName: "weekly_days", value: selectedWeekDays ))
         
         // Time
         if (isThisDiscountIsActiveForFullDay == false) {
-            entries.append(
-                .string(
-                    paramName: "start_time",
-                    value: startTime ?? "00:00:00"
-                )
-            )
+            entries.append(.string(
+                paramName: "start_time",
+                value: startTime ?? "00:00:00"
+            ))
             
-            entries.append(
-                .string(
-                    paramName: "end_time",
-                    value: endTime ?? "00:00:00"
-                )
-            )
+            entries.append(.string(
+                paramName: "end_time",
+                value: endTime ?? "00:00:00"
+            ))
         }
         
         
         entries.append(.string(paramName: "items", value: ""))
-        entries.append(.string(paramName: "description", value: ""))
-        entries.append(.string(paramName: "monthly_dates", value: ""))
+//        entries.append(.string(paramName: "description", value: ""))
+//        entries.append(.string(paramName: "monthly_dates", value: ""))
         
 
         return MultipartFormDataBodyBuilder(

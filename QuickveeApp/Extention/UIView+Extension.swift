@@ -330,3 +330,32 @@ extension UIScrollView {
 
     
 }
+
+extension UIView {
+    
+    func showValidationErrorAnimation(
+        color: UIColor = .red,
+        duration: CFTimeInterval = 0.15,
+        repeatCount: Float = 2,
+        
+    ){
+        
+        layer.borderWidth = 1.5
+        
+        let animation = CABasicAnimation(keyPath: "borderColor")
+        animation.fromValue = UIColor.clear.cgColor
+        animation.toValue = color.cgColor
+        animation.duration = duration
+        animation.autoreverses = true
+        animation.repeatCount = repeatCount
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        
+        layer.add(animation, forKey: "borderFlicker")
+        
+        // Keep final border color
+        layer.borderColor = color.cgColor
+        
+        CommonFunctions.generateHapticFeedback(value: .warning)
+    }
+    
+}

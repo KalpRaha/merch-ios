@@ -318,6 +318,7 @@ fileprivate extension DatePickerInputView {
     
     func updateEnabledState() {
         // Visual feedback
+        self.configuration.textFieldViewConfig.apply(in: self.textFieldContainerView)
         textFieldContainerView.alpha = isEnabled ? 1.0 : 0.5
         
         // Keep overlay active to intercept taps even when disabled
@@ -404,27 +405,6 @@ fileprivate extension DatePickerInputView {
       
 }
 
-extension DatePickerInputView {
-    
-    func setSelectedDate(_ date : Date?) {
-        self.selectedDate = date
-    }
-    
-    func setSelectedDate(
-        date : String?,
-        time: String?,
-        timeZone: TimeZone = .current,
-        locale: Locale = .current
-        
-    ){
-        self.selectedDate = PNCDDateTimeCombiner.combine(
-            date: date, time: time,
-            timeZone: timeZone, locale: locale
-        )
-    }
-    
-}
-
 fileprivate extension DatePickerInputView {
 
     
@@ -471,6 +451,43 @@ fileprivate extension DatePickerInputView {
         )
     }
 
+}
+
+
+extension DatePickerInputView {
+    
+    func setSelectedDate(_ date : Date?) {
+        self.selectedDate = date
+    }
+    
+    func setSelectedDate(
+        date : String?,
+        time: String?,
+        timeZone: TimeZone = .current,
+        locale: Locale = .current
+        
+    ){
+        self.selectedDate = PNCDDateTimeCombiner.combine(
+            date: date, time: time,
+            timeZone: timeZone, locale: locale
+        )
+    }
+    
+}
+
+extension DatePickerInputView {
+    
+    func updateUIForValidationError(isValid: Bool) {
+        guard isEnabled else { return }
+        
+        if isValid{
+            self.configuration.textFieldViewConfig.apply(in: self.textFieldContainerView)
+        }else{
+            self.textFieldContainerView.applyBorder(borderWidth: 1, borderColor: .red)
+            self.textFieldContainerView.showValidationErrorAnimation()
+        }
+    }
+    
 }
 
 extension DatePickerInputView: UITextFieldDelegate {

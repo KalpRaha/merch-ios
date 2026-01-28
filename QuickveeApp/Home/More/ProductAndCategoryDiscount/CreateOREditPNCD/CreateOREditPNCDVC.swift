@@ -307,10 +307,6 @@ extension CreateOREditPNCDVC {
     
 }
 
-extension CreateOREditPNCDVC : UITextFieldDelegate {
-    
-}
-
 extension CreateOREditPNCDVC : DatePickerInputViewDelegate {
     
     func configureView(_ datePickerView: DatePickerInputView) -> DatePickerInputView.Configuration {
@@ -371,6 +367,10 @@ extension CreateOREditPNCDVC : CreateOREditPNCDFlagsPropertyManagerDelegate {
     
     func didUpdateIsDealIsActiveForFullDay() {
         updateUIForIsPNCDActiveForFullDayFlagChange()
+    }
+    
+    func didUpdatedValidationErrorFields() {
+        updateUIForValidationError()
     }
     
     

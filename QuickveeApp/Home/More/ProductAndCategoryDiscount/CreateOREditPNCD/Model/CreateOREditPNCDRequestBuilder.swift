@@ -188,7 +188,7 @@ extension CreateOREditPNCDVC.CreateOREditPNCDRequestBuilder {
             throw ValidationError.missingStartDate
         }
         
-        if (isThisDiscountHasNoEndDate), endTime == nil{
+        if (isThisDiscountHasNoEndDate == false), endDate == nil{
             throw ValidationError.missingEndDate
         }
         
@@ -204,14 +204,14 @@ extension CreateOREditPNCDVC.CreateOREditPNCDRequestBuilder {
         if (scheduleType == .repeatsOnSchedule) && (isThisDiscountIsActiveForFullDay == false ) {
             
             if startTime == nil {
-                throw ValidationError.missingStartDate
+                throw ValidationError.missingStartTime
             }
             
             if endTime == nil {
                 throw ValidationError.missingEndTime
             }
             
-            if (startTime ?? .now() ) <= ( endTime ?? .now() ) {
+            if (startTime ?? .now() ) >= ( endTime ?? .now() ) {
                 throw ValidationError.endTimeMustBegraterThanStartTime
             }
             
@@ -268,6 +268,52 @@ extension CreateOREditPNCDVC.CreateOREditPNCDRequestBuilder {
         case missingStartTime
         case missingEndTime
         case endTimeMustBegraterThanStartTime
+        
+        var recoverySuggestion: String {
+            return switch self {
+            case .missingPNCDType:
+                "Please choose whether this discount applies to Products or Categories."
+                
+            case .missingIsAllowThisDiscountToStackWithOtherDiscountsFlag:
+                "Please specify if this discount can be combined with other discounts."
+                
+            case .missingIsThisDiscountHasNoEndDateFlag:
+                "Please indicate whether the discount has an end date."
+                
+            case .missingIsThisDiscountIsActiveForFullDayFlag:
+                "Please specify if the discount should be active for the full day."
+                
+            case .missingDiscountName:
+                "Enter a discount name. Example: Weekend Sale."
+                
+            case .missingDiscountValue:
+                "Enter a discount value. Example: 10 or 10%."
+                
+            case .missingDiscountType:
+                "Select a discount type (Amount or Percentage)."
+                
+            case .missingScheduleType:
+                "Choose a schedule type (One Time or Repeats on Schedule)."
+                
+            case .missingStartDate:
+                "Pick a start date to begin the discount."
+                
+            case .missingEndDate:
+                "Pick an end date or enable ‘No End Date’."
+                
+            case .missingSelectedDays:
+                "Select at least one weekday for the repeating schedule."
+                
+            case .missingStartTime:
+                "Choose a start time or enable ‘Active for Full Day’."
+                
+            case .missingEndTime:
+                "Choose an end time that is later than the start time."
+                
+            case .endTimeMustBegraterThanStartTime:
+                "Set the end time to a value later than the start time."
+            }
+        }
         
     }
     

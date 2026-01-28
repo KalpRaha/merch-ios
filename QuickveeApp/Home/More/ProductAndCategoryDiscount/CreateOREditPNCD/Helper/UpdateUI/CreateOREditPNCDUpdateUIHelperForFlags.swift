@@ -29,10 +29,10 @@ extension CreatePNCDVC {
         if let editableDiscountItem = viewModel.editableDiscountItem {
             dtPickerDealStartDate.setSelectedDate(
                 date: editableDiscountItem.startDate,
-                time: editableDiscountItem.startTime
+                time: editableDiscountItem.startTime ?? "00:00:00"
             )
         } else {
-            dtPickerDealStartDate.setSelectedDate(nil)
+//            dtPickerDealStartDate.setSelectedDate(nil)
         }
         
         // End date handling depends on "no end date" flag.
@@ -42,12 +42,10 @@ extension CreatePNCDVC {
         } else {
             // If we have an existing item and no end date picked yet, restore it from the model.
             if dtPickerDealEndDate.selectedDate == nil,
-               let endDate = viewModel.editableDiscountItem?.endDate,
-               let endTime = viewModel.editableDiscountItem?.endTime
-            {
+               let endDate = viewModel.editableDiscountItem?.endDate{
                 dtPickerDealEndDate.setSelectedDate(
                     date: endDate,
-                    time: endTime
+                    time: viewModel.editableDiscountItem?.endTime ?? "00:00:00"
                 )
             }
         }

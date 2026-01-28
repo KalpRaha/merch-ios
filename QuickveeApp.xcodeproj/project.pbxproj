@@ -101,6 +101,7 @@
 		B4B471412F2330A7003F4723 /* PNCDDateTimeCombiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B471402F2330A7003F4723 /* PNCDDateTimeCombiner.swift */; };
 		B4B471432F233DCD003F4723 /* CreateOREditPNCDUpdateUIHelperForInitialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B471422F233DCD003F4723 /* CreateOREditPNCDUpdateUIHelperForInitialData.swift */; };
 		B4B471452F2385B5003F4723 /* CreateOREditPNCDUpdateUIHelperForFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B471442F2385B4003F4723 /* CreateOREditPNCDUpdateUIHelperForFlags.swift */; };
+		B4B500CD2F29F13D00F2ABEC /* CreateOREditPNCDInputFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B500CC2F29F13D00F2ABEC /* CreateOREditPNCDInputFields.swift */; };
 		B4B77F642F22061A00695BA1 /* PNCDDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B77F632F22061A00695BA1 /* PNCDDateFormatter.swift */; };
 		B4B77F682F223CD400695BA1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B77F672F223CD400695BA1 /* Constant.swift */; };
 		B4BC09762F14B6DE00BDB89E /* PNCDScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC09752F14B6DE00BDB89E /* PNCDScheduleType.swift */; };
@@ -494,6 +495,7 @@
 		B4B471402F2330A7003F4723 /* PNCDDateTimeCombiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDDateTimeCombiner.swift; sourceTree = "<group>"; };
 		B4B471422F233DCD003F4723 /* CreateOREditPNCDUpdateUIHelperForInitialData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDUpdateUIHelperForInitialData.swift; sourceTree = "<group>"; };
 		B4B471442F2385B4003F4723 /* CreateOREditPNCDUpdateUIHelperForFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDUpdateUIHelperForFlags.swift; sourceTree = "<group>"; };
+		B4B500CC2F29F13D00F2ABEC /* CreateOREditPNCDInputFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOREditPNCDInputFields.swift; sourceTree = "<group>"; };
 		B4B77F632F22061A00695BA1 /* PNCDDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDDateFormatter.swift; sourceTree = "<group>"; };
 		B4B77F672F223CD400695BA1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B4BC09752F14B6DE00BDB89E /* PNCDScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCDScheduleType.swift; sourceTree = "<group>"; };
@@ -1150,6 +1152,7 @@
 			children = (
 				B4C342D32F19F88900A3BDA3 /* CreateOREditPNCDRequestBuilder.swift */,
 				B420F30B2F190D3E00461C92 /* CreateOrEditPNCDRequest.swift */,
+				B4B500CC2F29F13D00F2ABEC /* CreateOREditPNCDInputFields.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2492,6 +2495,7 @@
 				B4B471432F233DCD003F4723 /* CreateOREditPNCDUpdateUIHelperForInitialData.swift in Sources */,
 				D20200A62A0DFEB7007D926F /* SearchVendorTableViewCell.swift in Sources */,
 				D265CF542DB7B02000915F25 /* DayCollectionViewCell.swift in Sources */,
+				B4B500CD2F29F13D00F2ABEC /* CreateOREditPNCDInputFields.swift in Sources */,
 				D2DC4B962A3330F900E86A71 /* OnlineOrdersModel.swift in Sources */,
 				D2CE36A02976BFD60090A6D2 /* OrderTypesTableViewCell.swift in Sources */,
 				D2A37A422BFC941A005B59CE /* AddPurchaseQtyViewController.swift in Sources */,

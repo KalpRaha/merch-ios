@@ -68,7 +68,7 @@ final class WeeklySelectionView: UIView {
             textColor: ._8B8B8B
         ),
         days: [WeekDayItem] = WeekDayItem.dataSource,
-        selectedItems: [WeekDayItem] = [.sun]
+        selectedItems: [WeekDayItem] = []
     ) {
         self.dataSource = days
         self.selectedItems = selectedItems
@@ -147,6 +147,14 @@ final class WeeklySelectionView: UIView {
         }
     }
     
+    
+    func showValidationErrorUI(){
+        stackView.arrangedSubviews.forEach { view in
+            guard let view = view as? DayItemView else { return }
+            selectedItems.removeAll() // remove default selection
+            view.showValidationErrorAnimation()
+        }
+    }
 
     
 }

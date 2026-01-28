@@ -83,6 +83,7 @@ final class PNCDListVC: UIViewController, Navigatable {
     private func configureDiscountListTableView() {
         tblDiscountListView.showsVerticalScrollIndicator = false
         tblDiscountListView.contentInset.top = 15
+        tblDiscountListView.contentInset.bottom = 50
         tblDiscountListView.dataSource = self
         tblDiscountListView.delegate = self
         

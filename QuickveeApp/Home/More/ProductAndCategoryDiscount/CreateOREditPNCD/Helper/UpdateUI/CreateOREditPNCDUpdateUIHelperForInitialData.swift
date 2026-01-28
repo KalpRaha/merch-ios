@@ -58,6 +58,8 @@ extension CreateOREditPNCDVC {
             updateUIForPNCDSelectionType()
         })
         
+        viewModel.errorFields.removeAll()
+        
         // Ensure we don't re-apply these initial values when the view appears again.
         isExisitngPropertiesUpdatedOnUI = true
     }
@@ -115,6 +117,8 @@ extension CreateOREditPNCDVC {
         
         // Start with no included items
         viewModel.flagsPropertyManager.includedProductOrCategories.removeAll()
+        viewModel.errorFields.removeAll()
+        
     }
     
 }

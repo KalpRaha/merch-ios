@@ -16,21 +16,12 @@ extension CreateOREditPNCDVC {
         txtDiscountName.delegate = self
         txtDiscountName.borderStyle = .none
         txtDiscountName.returnKeyType = .next
-        txtDiscountName.superview?.applyBorder(
-            borderWidth: 1,
-            borderColor: .E4E8EF,
-            borderOpacity: 1
-        )
         txtDiscountName.superview?.applyCornerRadius(cornerRadius: 8)
         
         // Discount Per Item
         txtDiscountInputValueType.attributedPlaceholder = getAttributedPlaceHolderText(for: "$0.00")
         txtDiscountInputValueType.borderStyle = .none
-        txtDiscountInputValueType.superview?.applyBorder(
-            borderWidth: 1,
-            borderColor: .E4E8EF,
-            borderOpacity: 1
-        )
+
         txtDiscountInputValueType.superview?.applyCornerRadius(cornerRadius: 8)
         
         txtDiscountInputValueType.keyboardType = .numberPad
@@ -68,5 +59,9 @@ extension CreateOREditPNCDVC {
         return NSAttributedString(string: text, attributes: attributes)
     }
     
+    
+}
+
+extension CreateOREditPNCDVC : UITextFieldDelegate {
     
 }
