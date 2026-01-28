@@ -119,13 +119,15 @@ protocol Navigatable {
     /// view to fill the parent.
     /// - Parameter currentVC: The parent view controller.
     static func presentAsChildVC(
-        in currentVC: UIViewController
+        in currentVC: UIViewController,
+        passData: ( (Self) -> () )?
     )
     
     /// Embeds `self` as a child of `currentVC`, attaching its view to fill the parent.
     /// - Parameter currentVC: The parent view controller.
     func presentAsChildVC(
-        in currentVC: UIViewController
+        in currentVC: UIViewController,
+        passData: ( (Self) -> () )?
     )
     
     /// Pops the top view controller from the navigation stack containing `self`.
@@ -284,17 +286,19 @@ extension Navigatable where Self : UIViewController {
     /// its view to the parent's bounds.
     /// - Parameter currentVC: The parent view controller.
     static func presentAsChildVC(
-        in currentVC: UIViewController
+        in currentVC: UIViewController,
+        passData: ( (Self) -> () )? = nil
     ) {
-        Self.instantiate().presentAsChildVC(in: currentVC)
+        Self.instantiate().presentAsChildVC(in: currentVC, passData: passData)
     }
     
     /// Embeds `self` as a child of `currentVC`, attaching its view to the parent's bounds.
     /// - Parameter currentVC: The parent view controller.
     func presentAsChildVC(
-        in currentVC: UIViewController
+        in currentVC: UIViewController,
+        passData: ( (Self) -> () )? = nil
     ) {
-        
+        passData?(self)
         self.view.frame = currentVC.view.bounds
         currentVC.view.addSubview(self.view)
         currentVC.addChild(self)

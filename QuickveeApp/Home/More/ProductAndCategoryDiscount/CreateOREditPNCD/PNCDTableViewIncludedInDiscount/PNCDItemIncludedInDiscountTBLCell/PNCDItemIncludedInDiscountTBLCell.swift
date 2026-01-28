@@ -20,6 +20,14 @@ class PNCDItemIncludedInDiscountTBLCell: UITableViewCell {
         }
     }
     
+    var categoryCellData: CategoryDataModel! {
+        didSet{
+            updateUIWithCategoryData()
+        }
+    }
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -37,6 +45,16 @@ class PNCDItemIncludedInDiscountTBLCell: UITableViewCell {
             priceLbl.text = cellData.productPrice
         }
         
+    }
+    
+    
+    private func updateUIWithCategoryData(){
+        
+       guard let categoryCellData else { return }
+        
+        productName.text = categoryCellData.title
+        priceLbl.isHidden = true
+        discountPrice.isHidden  = true
     }
     
 }

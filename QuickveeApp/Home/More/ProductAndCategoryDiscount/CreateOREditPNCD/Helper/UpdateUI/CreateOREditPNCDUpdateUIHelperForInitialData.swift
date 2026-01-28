@@ -15,16 +15,19 @@ extension CreateOREditPNCDVC {
     ///   existing item data once (guarded by `isExisitngPropertiesUpdatedOnUI`).
     /// - Otherwise (create flow), we initialize the UI with sensible defaults.
     func feedExistingDataInUI(){
-        if viewModel.editableDiscountItem != nil {
+        
+        // Avoid re-applying values multiple times when view re-appears.
+        if !isExisitngPropertiesUpdatedOnUI {
             
-            // Avoid re-applying values multiple times when view re-appears.
-            if !isExisitngPropertiesUpdatedOnUI {
+            if viewModel.editableDiscountItem != nil {
                 updateUIWithExitingValues()
+                
+            }else{
+                updateUIWithDefaultInitialValues()
             }
             
-        } else {
-            updateUIWithDefaultInitialValues()
         }
+        
     }
     
     /// Populates UI controls and state with values from an existing discount item.
@@ -119,6 +122,9 @@ extension CreateOREditPNCDVC {
         viewModel.flagsPropertyManager.includedProductOrCategories.removeAll()
         viewModel.errorFields.removeAll()
         
+        viewModel.flagsPropertyManager.includedProductOrVariants.removeAll()
+        
+        isExisitngPropertiesUpdatedOnUI = true
     }
     
 }

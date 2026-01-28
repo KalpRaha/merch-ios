@@ -10,6 +10,7 @@ import BarcodeScanner
 
 protocol ProductAndCategorySelectionVCProtocol: AnyObject{
     func didSelectVariants(_ variants: [VariantDataModel])
+    func didSelectCategory(_ category: [CategoryDataModel])
     
 }
 
@@ -43,7 +44,7 @@ class ProductAndCategorySelectionVCFactory {
 
 
 final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
-
+    
     static var storyboard: UIStoryboard {.productAndCategoryDiscount}
     
     
@@ -59,7 +60,7 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
     var scannerDelegateHandler: BarcodeScannerDelegateHandler?
     
     var viewModel : ViewModel!
- 
+    
     weak var delegate: ProductAndCategorySelectionVCProtocol?
     
     override func viewDidLoad() {
@@ -115,13 +116,13 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
             filterView.isHidden = false
             filterLbl.isHidden = false
             filterLbl.text = "\(count)"
-
+            
         } else {
             filterView.isHidden = true
             filterLbl.isHidden = true
         }
     }
-
+    
     private func updateUIForSearchFlag(){
         searchBtn.alpha =  viewModel.isSearching ? 0 : 1
         searchBar.alpha = viewModel.isSearching ? 1 : 0
@@ -148,7 +149,7 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
         vc.dismissalDelegate = scannerDelegateHandler
         self.present(vc, animated: true)
     }
-
+    
     @IBAction func categoryfilterBtnClick(_ sender: UIButton) {
         
         FilterCategoryViewController.present(in: self, passData: { [weak self] vc in
@@ -165,17 +166,42 @@ final class ProductAndCategorySelectionVC: UIViewController,Navigatable {
     
     
     @IBAction func cancelBtnClick(_ sender: CustomButton) {
-        dismiss(animated: true)
+        popVC()
     }
     
-        
+    
     @IBAction func confirmBtnClick(_ sender: CustomButton) {
-        
-        let result = viewModel.selectedIndexPath.map {
-            viewModel.variantList[$0.row]
+        if viewModel.checkSelectedVariantsForDeal() {
+            PNCDPromotionConflictBottomSheetVC.presentAsChildVC(
+                in: self,
+                passData: { [weak self] vc in
+                    guard let self else { return }
+                    
+                    vc.onClickContinue = {  [weak self] option in
+                        guard let self else { return }
+                        
+                        handelPromotionConflict(option: option)
+                    }
+                }
+            )
+            
+        }else{
+            
+            if self.viewModel.discounttype == .product {
+                let selectedVariants =  self.viewModel.selectedIndexPath.map {
+                    self.viewModel.variantList[$0.row]
+                }
+                self.delegate?.didSelectVariants(selectedVariants)
+            }
+            else {
+                let selectedCategory = self.viewModel.selectedIndexPath.map {
+                    self.viewModel.categoryList[$0.row]
+                }
+                self.delegate?.didSelectCategory(selectedCategory)
+            }
         }
-        delegate?.didSelectVariants(result)
         popVC()
+        
     }
 }
 
@@ -184,7 +210,7 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if viewModel.discounttype == .product {
             viewModel.tableViewDataSource.count
-
+            
         }else{
             viewModel.categoryList.count
         }
@@ -223,6 +249,7 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
                 let bogoPromotion = promotionalVariants.filter({ bogoData.items.contains($0.itemId) })
                 bogoPromotionVariants.append(contentsOf: bogoPromotion)
             }
+            cell.isSelectedCell = viewModel.selectedIndexPath.contains(indexPath)
             
             let type: ProductAndCategorySelectionTBLCell.PromotionType = {
                 
@@ -261,7 +288,7 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
                 productCount: promotionalVariants.count.toString(),
                 promotionType: type
             )
-            cell.isSelectedCell = viewModel.selectedIndexPath.contains(indexPath)
+            
         }
         
         return cell
@@ -279,6 +306,58 @@ extension ProductAndCategorySelectionVC: UITableViewDelegate,UITableViewDataSour
 }
 
 
+extension ProductAndCategorySelectionVC  {
+    
+    func handelPromotionConflict( option: PNCDPromotionConflictOption) {
+        
+        if option == .doNotOverride  {
+            
+            if self.viewModel.discounttype == .product {
+                
+                let selectedVariants =  self.viewModel.selectedIndexPath.map {
+                    self.viewModel.variantList[$0.row]
+                }
+                let filteredVariants = selectedVariants.filter {
+                    !self.viewModel.isVariantIncludedInDeal($0)
+                }
+                self.delegate?.didSelectVariants(filteredVariants)
+            }
+            else {
+                
+                let selectedCategories = self.viewModel.selectedIndexPath.map {
+                    self.viewModel.categoryList[$0.row]
+                }
+                
+                let filteredCategories = selectedCategories.filter {
+                    !self.viewModel.isCategoryIncludedInDeal($0)
+                }
+                
+                self.delegate?.didSelectCategory(filteredCategories)
+            }
+            
+            
+        }
+        else {
+            if self.viewModel.discounttype == .product {
+                let selectedVariants =  self.viewModel.selectedIndexPath.map {
+                    self.viewModel.variantList[$0.row]
+                }
+                self.delegate?.didSelectVariants(selectedVariants)
+            }
+            else {
+                let selectedCategory = self.viewModel.selectedIndexPath.map {
+                    self.viewModel.categoryList[$0.row]
+                }
+                self.delegate?.didSelectCategory(selectedCategory)
+            }
+            
+        }
+        popVC()
+    }
+    
+    
+}
+
 extension ProductAndCategorySelectionVC : UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -293,6 +372,8 @@ extension ProductAndCategorySelectionVC : UISearchBarDelegate {
         view.endEditing(true)
     }
 }
+
+
 
 extension ProductAndCategorySelectionVC : SelectedCategoryProductsDelegate {
     func getProductsCategory(categoryArray: [InventoryCategory]) {
@@ -319,6 +400,7 @@ extension ProductAndCategorySelectionVC: ProductAndCategorySelectionViewModelDel
     }
     
 }
+
 
 
 

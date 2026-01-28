@@ -96,7 +96,7 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
     @IBOutlet private weak var vwEditProductORCategoryBtnSuperView: UIView!
     @IBOutlet weak var lblEditProductORCategoryBtn: UILabel!
     
-    @IBOutlet private weak var tblProductORCategoryItemsIncludedView: PNCDItemsIncludedInDiscountTableView!
+    @IBOutlet weak var tblProductORCategoryItemsIncludedView: PNCDItemsIncludedInDiscountTableView!
     
     // Bottom Buttons
     @IBOutlet weak var btnCancel: CustomButton!
@@ -153,7 +153,7 @@ final class CreateOREditPNCDVC: UIViewController, Navigatable {
         dtPickerDealEndTime.configureView(pickerType: .time, delegate: self)
         
         
-        tblProductORCategoryItemsIncludedView.configure(with: [])
+        tblProductORCategoryItemsIncludedView.configure()
     }
     
    
@@ -297,11 +297,25 @@ extension CreateOREditPNCDVC {
     
     
     func updateUIForIncludedProductsOrCategories() {
-        let isShowTblList = viewModel.flagsPropertyManager.includedProductOrCategories.isEmpty == false
         
-        vwAddProductORCategoryBtnSuperView.isHidden = isShowTblList
-        vwEditProductORCategorySuperView.isHidden = !isShowTblList
-        tblProductORCategoryItemsIncludedView.reloadData(with: viewModel.flagsPropertyManager.includedProductOrCategories)
+       if viewModel.flagsPropertyManager.pncdType == .product {
+            
+            let isShowTblList = viewModel.flagsPropertyManager.includedProductOrVariants.isEmpty == false
+            
+            vwAddProductORCategoryBtnSuperView.isHidden = isShowTblList
+            vwEditProductORCategorySuperView.isHidden = !isShowTblList
+            tblProductORCategoryItemsIncludedView.reloadData(with: viewModel.flagsPropertyManager.includedProductOrVariants)
+            
+        }
+        else {
+          
+            let isShowTblList = viewModel.flagsPropertyManager.includedCategories.isEmpty == false
+            
+            vwAddProductORCategoryBtnSuperView.isHidden = isShowTblList
+            vwEditProductORCategorySuperView.isHidden = !isShowTblList
+            tblProductORCategoryItemsIncludedView.reloadData(with: viewModel.flagsPropertyManager.includedCategories)
+            
+        }
         
     }
     
@@ -339,7 +353,7 @@ extension CreateOREditPNCDVC : DatePickerInputViewDelegate {
 
 
 extension CreateOREditPNCDVC : CreateOREditPNCDFlagsPropertyManagerDelegate {
-    
+
     func didUpdateProductOrCategoryDiscountType() {
         updateUIForPNCDSelectionType()
     }
@@ -369,13 +383,16 @@ extension CreateOREditPNCDVC : CreateOREditPNCDFlagsPropertyManagerDelegate {
         updateUIForIsPNCDActiveForFullDayFlagChange()
     }
     
-    func didUpdatedValidationErrorFields() {
-        updateUIForValidationError()
+    func didUpdatedIncludedProductORVariants() {
+        updateUIForIncludedProductsOrCategories()
     }
     
-    
-    func didUpdatedIncludedProductORCategories() {
+    func didUpdatedIncludedCategories() {
         updateUIForIncludedProductsOrCategories()
+    }
+    
+    func didUpdatedValidationErrorFields() {
+        updateUIForValidationError()
     }
     
 }
@@ -408,9 +425,18 @@ extension CreateOREditPNCDVC: CreateOREditPNCDVMDelegate {
 
 extension CreateOREditPNCDVC : ProductAndCategorySelectionVCProtocol {
     
+ 
     func didSelectVariants(_ variants: [VariantDataModel]) {
-        viewModel.flagsPropertyManager.includedProductOrCategories = variants
+        viewModel.flagsPropertyManager.includedProductOrVariants = variants
     }
+   
+    
+    func didSelectCategory(_ category: [CategoryDataModel]) {
+        print(category)
+        viewModel.flagsPropertyManager.includedCategories = category
+    }
+    
+    
     
 }
 

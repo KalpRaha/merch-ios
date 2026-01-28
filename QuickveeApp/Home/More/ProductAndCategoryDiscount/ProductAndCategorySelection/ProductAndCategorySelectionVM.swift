@@ -130,9 +130,53 @@ extension ProductAndCategorySelectionVC {
             }
         }
         
+        
+        func checkSelectedVariantsForDeal() -> Bool {
+         
+            let checkSelectedVariants: [VariantDataModel]
+
+                if discounttype == .product {
+                    checkSelectedVariants = selectedIndexPath.map {
+                        variantList[$0.row]
+                    }
+                } else {
+                    checkSelectedVariants = selectedIndexPath.flatMap { indexPath in
+                        let category = categoryList[indexPath.row]
+                        return variantList.filter { $0.category == category.id }
+                    }
+                }
+
+                let hasDeal = checkSelectedVariants.contains { variant in
+                    mixMatchList.contains { $0.itemIds.contains(variant.itemId) } ||
+                    bogoList.contains { $0.items.contains(variant.itemId) }
+                }
+       
+            return hasDeal
+        }
+        
+        func isVariantIncludedInDeal(_ variant: VariantDataModel) -> Bool {
+            mixMatchList.contains { $0.itemIds.contains(variant.id) } ||
+            bogoList.contains { $0.items.contains(variant.id) }
+        }
+    
+        func isCategoryIncludedInDeal(_ category: CategoryDataModel) -> Bool {
+            let categoryVariantIds = variantList
+                .filter { $0.category == category.id }
+                .map { $0.id }
+
+            return mixMatchList.contains { deal in
+                deal.itemIds.contains(where: categoryVariantIds.contains)
+            } ||
+            bogoList.contains { deal in
+                deal.items.contains(where: categoryVariantIds.contains)
+            }
+        }
+        
+        
         func resetData() {
             tableViewDataSource = variantList
         }
         
     }
 }
+

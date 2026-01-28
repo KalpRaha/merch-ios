@@ -52,6 +52,8 @@ extension CreatePNCDVC {
         lblAddProductORCategoryBtn.text = isProduct ? "Products Included In Offer" : "Categories Included In This Discount"
         btnAddProductORCategory.title = isProduct ? "Add products to discount" : "Add Categories to discount"
         lblEditProductORCategoryBtn.text = isProduct ? "Products Included In This Discount" : "Categories Included In This Discount"
+        
+        tblProductORCategoryItemsIncludedView.type = viewModel.flagsPropertyManager.pncdType
     }
     
 }

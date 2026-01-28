@@ -122,8 +122,8 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tDu-RE-iU7">
                                                         <rect key="frame" x="0.0" y="29.333333333333343" width="201" height="22.333333333333329"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIg-Qh-bWk" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="5.3333333333333286" width="201" height="17"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIg-Qh-bWk" customClass="ManropeBoldLabel" customModule="QuickveeApp" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="201" height="22.333333333333332"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <color key="textColor" name="Accepted"/>
@@ -135,6 +135,7 @@
                                                             <constraint firstItem="xIg-Qh-bWk" firstAttribute="leading" secondItem="tDu-RE-iU7" secondAttribute="leading" id="1g1-dX-w4p"/>
                                                             <constraint firstAttribute="bottom" secondItem="xIg-Qh-bWk" secondAttribute="bottom" id="K4t-CH-2Z1"/>
                                                             <constraint firstAttribute="trailing" secondItem="xIg-Qh-bWk" secondAttribute="trailing" id="f2i-aa-Ub5"/>
+                                                            <constraint firstItem="xIg-Qh-bWk" firstAttribute="top" secondItem="tDu-RE-iU7" secondAttribute="top" id="r3h-4K-wbm"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
