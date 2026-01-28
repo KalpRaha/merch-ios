@@ -18,7 +18,8 @@ protocol CreateOREditPNCDFlagsPropertyManagerDelegate : AnyObject {
     func didUpdatedSelectedWeekDates()
     
     func didUpdateIsDealIsActiveForFullDay()
-    func didUpdatedIncludedProductORCategories()
+    func didUpdatedIncludedProductORVariants()
+    func didUpdatedIncludedCategories()
     
     func didUpdateIsThisDealHasNoEndDateFlag()
     
@@ -93,9 +94,15 @@ extension CreatePNCDVC {
         
         
         //MARK: - Products OR Categories ID
-        var includedProductOrCategories: [VariantDataModel] = [] {
+        var includedProductOrVariants: [VariantDataModel] = [] {
             didSet{
-                delegate?.didUpdatedIncludedProductORCategories()
+                delegate?.didUpdatedIncludedProductORVariants()
+            }
+        }
+        
+        var includedCategories: [CategoryDataModel] = [] {
+            didSet{
+                delegate?.didUpdatedIncludedCategories()
             }
         }
         

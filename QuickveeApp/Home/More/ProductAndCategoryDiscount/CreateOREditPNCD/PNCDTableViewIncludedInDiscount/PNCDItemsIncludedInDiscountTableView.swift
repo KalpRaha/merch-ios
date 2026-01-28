@@ -9,9 +9,12 @@ import UIKit
 
 class PNCDItemsIncludedInDiscountTableView: UITableView {
     
-    typealias ItemDataType = VariantDataModel
+   
+    var type : PNCDType = .product
     
-    var dataItems: [ItemDataType] = []
+    var variantItems: [VariantDataModel] = []
+    var categoriesItems: [CategoryDataModel] = []
+    
     
     
     override var contentSize: CGSize {
@@ -28,8 +31,20 @@ class PNCDItemsIncludedInDiscountTableView: UITableView {
         )
     }
     
-    func configure(with dataItems: [ItemDataType]) {
-        self.dataItems = dataItems
+    func configure(with dataItems: [VariantDataModel]) {
+        self.variantItems = dataItems
+        
+    }
+    
+    
+    func configure(with dataItems: [CategoryDataModel]) {
+        self.categoriesItems = dataItems
+        
+    }
+    
+    
+    func configure() {
+        
         
         self.delegate = self
         self.dataSource = self
@@ -41,8 +56,13 @@ class PNCDItemsIncludedInDiscountTableView: UITableView {
         )
     }
     
-    func reloadData(with dataItems: [ItemDataType]) {
-        self.dataItems = dataItems
+    func reloadData(with dataItems: [VariantDataModel]) {
+        self.variantItems = dataItems
+        reloadData()
+    }
+    
+    func reloadData(with dataItems: [CategoryDataModel]) {
+        self.categoriesItems = dataItems
         reloadData()
     }
     
@@ -55,7 +75,12 @@ class PNCDItemsIncludedInDiscountTableView: UITableView {
 extension PNCDItemsIncludedInDiscountTableView : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dataItems.count
+        if type == .product {
+            variantItems.count
+        }
+        else {
+            categoriesItems.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,7 +91,15 @@ extension PNCDItemsIncludedInDiscountTableView : UITableViewDataSource, UITableV
             
             return UITableViewCell()
         }
-        cell.cellData = dataItems[indexPath.row]
+        
+        if type == .product {
+            cell.cellData = variantItems[indexPath.row]
+        }
+        else {
+            cell.categoryCellData = categoriesItems[indexPath.row]
+        }
+        
+        
         
         return cell
     }

@@ -94,6 +94,7 @@ class ProductAndCategorySelectionTBLCell: UITableViewCell {
         stockLBL.isHidden = true
         category.isHidden = true
         categoryValue.isHidden = true
+        categoryValue.superview?.isHidden = true
         
         setAttributedLabel(
                 label: upcLBL,
