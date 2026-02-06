@@ -355,7 +355,7 @@ class PlusViewController: UIViewController {
                                             created_on: "", prefferd_vendor: "", reorder_cost: "", other_taxes: "",
                                             buy_with_product: "", costperItem: "0.00", is_tobacco: "0", product_doc: "", user_id: "",
                                             media: "", compare_price: "", loyalty_product_id: "", show_type: "", cotegory: "",
-                                            reorder_level: "", env: "", variant: "", reorder_qty: "", purchase_qty: "")
+                                            reorder_level: "", env: "", variant: "", reorder_qty: "", purchase_qty: "", price_at_sale: "0")
                 
                 variantsArray.append(emptyProd)
             }
@@ -470,7 +470,7 @@ class PlusViewController: UIViewController {
                                       media: "\(product["media"] ?? "")", compare_price: "\(product["compare_price"] ?? "")",
                                       loyalty_product_id: "\(product["loyalty_product_id"] ?? "")", show_type: "\(product["show_type"] ?? "")",
                                       cotegory: "\(product["cotegory"] ?? "")", reorder_level: "\(product["reorder_level"] ?? "")",
-                                      env: "\(product["env"] ?? "")", variant: "", reorder_qty: "\(product["reorder_qty"] ?? "")", purchase_qty: "\(product["purchase_qty"] ?? "")")
+                                      env: "\(product["env"] ?? "")", variant: "", reorder_qty: "\(product["reorder_qty"] ?? "")", purchase_qty: "\(product["purchase_qty"] ?? "")", price_at_sale: "\(product["price_at_sale"] ?? "")")
         
         editProd = productEdit
         
@@ -759,7 +759,7 @@ class PlusViewController: UIViewController {
                                      media: "\(vars["media"] ?? "")", compare_price: "\(vars["compare_price"] ?? "")",
                                      loyalty_product_id: "\(vars["loyalty_vars_id"] ?? "")", show_type: "\(vars["show_type"] ?? "")",
                                      cotegory: "\(vars["cotegory"] ?? "")", reorder_level: "\(vars["reorder_level"] ?? "")",
-                                     env: "\(vars["env"] ?? "")", variant: "\(vars["variant"] ?? "")", reorder_qty: "\(vars["reorder_qty"] ?? "")", purchase_qty: "\(vars["purchase_qty"] ?? "")")
+                                     env: "\(vars["env"] ?? "")", variant: "\(vars["variant"] ?? "")", reorder_qty: "\(vars["reorder_qty"] ?? "")", purchase_qty: "\(vars["purchase_qty"] ?? "")", price_at_sale: "\(vars["price_at_sale"] ?? "")")
             
             
             
@@ -1296,6 +1296,30 @@ class PlusViewController: UIViewController {
         
     }
     
+    
+    @IBAction func priceAtSaleClick(_ sender: UIButton) {
+       
+        if sender.currentImage == UIImage(named: "uncheck inventory") {
+            sender.setImage(UIImage(named: "check inventory"), for: .normal)
+            if variantsArray.count == 0 {
+                editProd?.price_at_sale = "1"
+            }
+            else {
+                variantsArray[sender.tag].price_at_sale = "1"
+            }
+        }
+        else {
+            sender.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+            if variantsArray.count == 0 {
+                editProd?.price_at_sale = "0"
+            }
+            else {
+                variantsArray[sender.tag].price_at_sale = "0"
+            }
+        }
+        
+    }
+    
     @IBAction func threeDotsClick(_ sender: UIButton) {
         
         if upperView.isHidden {
@@ -1667,6 +1691,9 @@ class PlusViewController: UIViewController {
             let is_tobacco = variantsArray[0].is_tobacco
             let disable = variantsArray[0].disable
             let food_stampable = variantsArray[0].food_stampable
+            let price_at_sale = variantsArray[0].price_at_sale
+            
+            
             
             guard let upc_code = variantsArray[0].upc, upc_code != "" else {
                 
@@ -1701,12 +1728,12 @@ class PlusViewController: UIViewController {
                                                reorder_qty: reorder_qty,
                                                reorder_level: reorder_level, reorder_cost: "",
                                                is_tobacco: is_tobacco,
-                                               disable: disable, food_stampable: food_stampable,
+                                               disable: disable, food_stampable: food_stampable, price_at_sale: price_at_sale,
                                                varupc: "",
                                                varcustomcode: "",
                                                vartrackqnty: "", varcontinue_selling: "",
                                                varcheckid: "",
-                                               vardisable: "", varfood_stampable: "", varmargin: "",
+                                               vardisable: "", varfood_stampable: "", var_price_at_sale: "", varmargin: "",
                                                varprofit: "", varreorder_qty: "",
                                                varreorder_level: "", varreorder_cost: "")
             { isSuccess, responseData in
@@ -1891,6 +1918,7 @@ class PlusViewController: UIViewController {
             let varcheckid = check_arr.joined(separator: ",")
             let vardisable = disable_arr.joined(separator: ",")
             let varfood_stampable = foodStamp_arr.joined(separator: ",")
+            let var_price_at_sale = foodStamp_arr.joined(separator: ",")
             
             var optionarray = ""
             var optionvalue = ""
@@ -1950,6 +1978,7 @@ class PlusViewController: UIViewController {
                                                upc: "", custom_code: "", reorder_qty: "", reorder_level: "",
                                                reorder_cost: "", is_tobacco: "", disable: "",
                                                food_stampable: "",
+                                               price_at_sale: "",
                                                varupc: varupc,
                                                varcustomcode: varcustomcode,
                                                vartrackqnty: vartrackqnty,
@@ -1957,6 +1986,7 @@ class PlusViewController: UIViewController {
                                                varcheckid: varcheckid,
                                                vardisable: vardisable,
                                                varfood_stampable: varfood_stampable,
+                                               var_price_at_sale: var_price_at_sale,
                                                varmargin: varmargin,
                                                varprofit: varprofit,
                                                varreorder_qty: varreorder_qty,
@@ -3305,7 +3335,7 @@ extension PlusViewController: PlusAttributeVariant {
                                                  created_on: "", prefferd_vendor: "", reorder_cost: "", other_taxes: "",
                                                  buy_with_product: "", costperItem: "0.00", is_tobacco: "0", product_doc: "", user_id: "",
                                                  media: "", compare_price: "", loyalty_product_id: "", show_type: "", cotegory: "",
-                                                 reorder_level: "", env: "", variant: "", reorder_qty: "", purchase_qty: ""))
+                                                 reorder_level: "", env: "", variant: "", reorder_qty: "", purchase_qty: "", price_at_sale: "0"))
                 isSelectedData.append(false)
                 isQuantity.append("1")
             }
@@ -4605,6 +4635,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             cell.checkID.tag = indexPath.section
             cell.disable.tag = indexPath.section
             cell.foodstampable.tag = indexPath.section
+            cell.priceAtSale.tag = indexPath.section
             
             cell.costPerItem.delegate = self
             cell.price.delegate =  self
@@ -4678,6 +4709,13 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 else {
                     cell.foodstampable.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+                }
+                
+                if variants.price_at_sale == "1"{
+                    cell.priceAtSale.setImage(UIImage(named: "check inventory"), for: .normal)
+                }
+                else {
+                    cell.priceAtSale.setImage(UIImage(named: "uncheck inventory"), for: .normal)
                 }
                 
                 cell.instantBtn.isHidden = true
@@ -4796,6 +4834,12 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                     else {
                         cell.foodstampable.setImage(UIImage(named: "uncheck inventory"), for: .normal)
                     }
+                    if variants?.food_stampable == "1"{
+                        cell.priceAtSale.setImage(UIImage(named: "check inventory"), for: .normal)
+                    }
+                    else {
+                        cell.priceAtSale.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+                    }
                 }
                 
                 else {
@@ -4850,6 +4894,12 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     else {
                         cell.foodstampable.setImage(UIImage(named: "uncheck inventory"), for: .normal)
+                    }
+                    if variants?.food_stampable == "1"{
+                        cell.priceAtSale.setImage(UIImage(named: "check inventory"), for: .normal)
+                    }
+                    else {
+                        cell.priceAtSale.setImage(UIImage(named: "uncheck inventory"), for: .normal)
                     }
                 }
                 cell.instantBtn.isHidden = false
@@ -5329,6 +5379,7 @@ struct ProductById {
     var variant: String
     var reorder_qty: String
     var purchase_qty: String
+    var price_at_sale: String
 }
 
 struct AddProduct {

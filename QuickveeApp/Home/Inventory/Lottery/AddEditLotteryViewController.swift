@@ -211,7 +211,8 @@ class AddEditLotteryViewController: UIViewController {
                                       reorder_level: "\(product["reorder_level"] ?? "")",
                                       env: "\(product["env"] ?? "")", variant: "",
                                       reorder_qty: "\(product["reorder_qty"] ?? "")",
-                                      purchase_qty: "\(product["purchase_qty"] ?? "")")
+                                      purchase_qty: "\(product["purchase_qty"] ?? "")",
+                                      price_at_sale: "\(product["price_at_sale"] ?? "")")
         
         lotteryProduct = productEdit
         
@@ -443,10 +444,10 @@ class AddEditLotteryViewController: UIViewController {
                                            varcostperitem: "", varquantity: "",
                                            upc: upc, custom_code: "", reorder_qty: "0",
                                            reorder_level: "0", reorder_cost: "0.00",
-                                           is_tobacco: "0", disable: "0", food_stampable: "0",
+                                           is_tobacco: "0", disable: "0", food_stampable: "0",price_at_sale: "0",
                                            varupc: "", varcustomcode: "", vartrackqnty: "",
                                            varcontinue_selling: "", varcheckid: "", vardisable: "",
-                                           varfood_stampable: "", varmargin: "", varprofit: "",
+                                           varfood_stampable: "", var_price_at_sale: "0", varmargin: "", varprofit: "",
                                            varreorder_qty: "", varreorder_level: "", varreorder_cost: "") { isSuccess, responseData in
             
             

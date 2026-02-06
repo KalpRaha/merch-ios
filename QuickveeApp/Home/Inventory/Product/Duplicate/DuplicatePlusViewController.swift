@@ -286,7 +286,8 @@ class DuplicatePlusViewController: UIViewController {
                                         env: "\(singleProd?.env ?? "")",
                                         variant: "\(singleProd?.variant ?? "")",
                                         reorder_qty: "\(singleProd?.reorder_qty ?? "")",
-                                        purchase_qty: "\(singleProd?.purchase_qty ?? "")")
+                                        purchase_qty: "\(singleProd?.purchase_qty ?? "")",
+                                        price_at_sale: "\(singleProd?.price_at_sale ?? "")")
             dupProdVariants.append(emptyProd)
             
         }
@@ -2564,7 +2565,7 @@ extension DuplicatePlusViewController: PlusAttributeVariant {
                                                    created_on: "", prefferd_vendor: "", reorder_cost: "", other_taxes: "",
                                                    buy_with_product: "", costperItem: "0.00", is_tobacco: "0", product_doc: "", user_id: "",
                                                    media: "", compare_price: "", loyalty_product_id: "", show_type: "", cotegory: "",
-                                                   reorder_level: "", env: "", variant: "", reorder_qty: "", purchase_qty: ""))
+                                                   reorder_level: "", env: "", variant: "", reorder_qty: "", purchase_qty: "", price_at_sale: "0"))
                 dupisSelectedData.append(false)
             }
         }

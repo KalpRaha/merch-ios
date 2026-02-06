@@ -36,6 +36,8 @@ class ProductVariantTableViewCell: UITableViewCell {
     @IBOutlet weak var scanBtn: UIButton!
     
     @IBOutlet weak var foodstampable: UIButton!
+    
+    @IBOutlet weak var priceAtSale: UIButton!
     @IBOutlet weak var plusMain: UIView!
 
     @IBOutlet weak var lineView: UIView!
