@@ -2354,7 +2354,8 @@ extension DuplicatePlusViewController: BarcodeScannerCodeDelegate, BarcodeScanne
 extension DuplicatePlusViewController: PlusSelectedCategory {
     
     func getSelectedCats(reverseCategory: [InventoryCategory], reverseBrandsTags: [String],
-                         reverseTaxes: [SetupTaxes], reverseITS: [Store], apiMode: String) {
+          reverseTaxes: [SetupTaxes], reverseITS: [Store], vendors: [VendorProduct],
+                         variantIdVendorProduct: String, singleProductVendor: String, apiMode: String) {
         
         scroll.isHidden = true
         loadingIndicator.isAnimating = true

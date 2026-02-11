@@ -37,10 +37,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         }
         
         application.registerForRemoteNotifications()
-        
+
+        IQKeyboardManager.shared.isEnabled = true
         IQKeyboardManager.shared.resignOnTouchOutside = true
-        IQKeyboardToolbarManager.shared.toolbarConfiguration.placeholderConfiguration.showPlaceholder = true
+        IQKeyboardManager.shared.keyboardDistance = 10
+
         IQKeyboardToolbarManager.shared.isEnabled = true
+        IQKeyboardToolbarManager.shared.toolbarConfiguration.placeholderConfiguration.showPlaceholder = true
+
         
         if !UserDefaults.standard.bool(forKey: "hasAppLaunchedOnce") {
             //app opened first time

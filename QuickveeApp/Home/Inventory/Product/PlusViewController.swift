@@ -12,7 +12,7 @@ import BarcodeScanner
 protocol PlusSelectedCategory: AnyObject {
     
     func getSelectedCats(reverseCategory: [InventoryCategory], reverseBrandsTags: [String],
-                         reverseTaxes: [SetupTaxes], reverseITS: [Store], apiMode: String)
+                         reverseTaxes: [SetupTaxes], reverseITS: [Store], vendors: [VendorProduct], variantIdVendorProduct: String, singleProductVendor: String, apiMode: String)
 }
 
 protocol PlusAttributeVariant : AnyObject {
@@ -168,6 +168,11 @@ class PlusViewController: UIViewController {
     var vari_id = ""
     var varname = ""
     var isVarient = ""
+    
+    var varIdVendorProduct = ""
+    var singProductVendor = ""
+    
+    var vendorProductList = [VendorProduct]()
     
     var stock_cell_index = 0
     
@@ -1475,6 +1480,51 @@ class PlusViewController: UIViewController {
         }
         else {
             validateEditParams()
+        }
+    }
+    
+    @IBAction func vendorsBtnClick(_ sender: UIButton) {
+        
+        let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        
+        var varient_id = ""
+        var single_product = ""
+        
+        if variantsArray.count == 0 {
+            varient_id = p_id
+            single_product = "1"
+            varIdVendorProduct = varient_id
+            singProductVendor = single_product
+        }
+        else {
+            varient_id = variantsArray[sender.tag].id
+            single_product = "0"
+            varIdVendorProduct = varient_id
+            singProductVendor = single_product
+        }
+        
+        ApiCalls.sharedCall.getVendorProductList(merchant_id: id, varient_id: varient_id, single_product: single_product) { isSuccess, responseData in
+            
+            if isSuccess {
+                
+                if let res = responseData["result"] {
+                    self.getVendorProduct(list: res)
+                }
+                else {
+                    
+                    DispatchQueue.main.async {
+                        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyBoard.instantiateViewController(withIdentifier: "filtercategory") as! FilterCategoryViewController
+                        
+                        vc.delegatePlus = self
+                        vc.catMode = "addProductVc"
+                        vc.apiMode = "vendorProduct"
+                        vc.variantProductVendorId = varient_id
+                        vc.variantSingleProduct = single_product
+                        self.present(vc, animated: true)
+                    }
+                }
+            }
         }
     }
     
@@ -3073,13 +3123,39 @@ class PlusViewController: UIViewController {
             vc.prod_id = p_id
             
         }
+        
+        else if segue.identifier == "toVendorProduct" {
+            
+            let vc = segue.destination as! VendorProductViewController
+            vc.vendorProductList = vendorProductList
+            vc.var_id = varIdVendorProduct
+            vc.single_product = singProductVendor
+        }
+    }
+    
+    func getVendorProduct(list: Any) {
+        
+        let response = list as! [[String:Any]]
+        var smallres = [VendorProduct]()
+        
+        for res in response {
+            
+            let vendor = VendorProduct(id: "\(res["id"] ?? "")", name: "\(res["name"] ?? "")",
+                                       cost_per_item: "\(res["cost_per_item"] ?? "")", pref_vendor: "\(res["pref_vendor"] ?? "")")
+            
+            smallres.append(vendor)
+        }
+        vendorProductList = smallres
+        
+        
+        performSegue(withIdentifier: "toVendorProduct", sender: nil)
     }
 }
 
 extension PlusViewController: PlusSelectedCategory {
     
     func getSelectedCats(reverseCategory: [InventoryCategory], reverseBrandsTags: [String],
-                         reverseTaxes: [SetupTaxes], reverseITS: [Store], apiMode: String) {
+                         reverseTaxes: [SetupTaxes], reverseITS: [Store], vendors: [VendorProduct], variantIdVendorProduct: String, singleProductVendor: String, apiMode: String) {
         
         scroll.isHidden = true
         loadingIndicator.isAnimating = true
@@ -3138,7 +3214,7 @@ extension PlusViewController: PlusSelectedCategory {
                 setCollHeight(coll: itsColl)
             }
         }
-        else {
+        else if apiMode == "taxes" {
             collTax = reverseTaxes
             if reverseTaxes.count == 0 {
                 taxesColl.reloadData()
@@ -3148,6 +3224,12 @@ extension PlusViewController: PlusSelectedCategory {
                 taxesColl.reloadData()
                 setCollHeight(coll: tagColl)
             }
+        }
+        else {
+            vendorProductList = vendors
+            varIdVendorProduct = variantIdVendorProduct
+            singProductVendor = singleProductVendor
+            performSegue(withIdentifier: "toVendorProduct", sender: nil)
         }
         scroll.isHidden = false
         loadingIndicator.isAnimating = false
@@ -4599,6 +4681,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             cell.salesHistoryBtn.tag = indexPath.section
             cell.reorderQty.tag = indexPath.section
             cell.reorderLevel.tag = indexPath.section
+            cell.vendorsBtn.tag = indexPath.section
             
             cell.trackQty.tag = indexPath.section
             cell.selling.tag = indexPath.section
@@ -4621,6 +4704,7 @@ extension PlusViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.instantBtn.layer.cornerRadius = 10.0
             cell.salesHistoryBtn.layer.cornerRadius = 10.0
+            cell.vendorsBtn.layer.cornerRadius = 10.0
             cell.scanBtn.layer.cornerRadius = 5.0
             
             if mode == "add" {

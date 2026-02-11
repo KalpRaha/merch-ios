@@ -798,6 +798,20 @@ struct VariantBogoModel {
     var isSelect: Bool
 }
 
+struct VariantPOModel {
+   
+    var po: InventoryVariant
+    var isSelect: Bool
+    var reqQty: String
+    var cost: String
+    var note: String
+    var afterQty: String
+    var total: String
+    var orderItem: String
+    var status: String
+    var pendingQty: String
+    var check: String
+}
 
 struct InventoryVariantId {
     

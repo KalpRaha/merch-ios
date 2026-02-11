@@ -44,6 +44,7 @@ struct AppURLs {
     static let COUPON_DELETE = "\(base_url)Couponapi_live/delete_coupon"
     
     static let ADD_EDIT_VENDOR = "\(base_url)app/add_edit_vendor"
+    static let EMAIL_CHECK_VENDOR = "\(base_url)Vendor_api/vendor_email_check"
     static let VENDOR_PAYMENT_LIST = "\(base_url)app/vendor_payment_list"
     static let VENDOR_BY_ID = "\(base_url)app/get_vendorById"
     static let VENDOR_PAYMENT_DETAILS = "\(base_url)app/vendor_payment_report"
@@ -168,6 +169,24 @@ struct AppURLs {
     static let ADD_BOGO = "\(base_url)Bogoapi/add_bogo"
     static let ENABLE_BOGO = "\(base_url)Bogoapi/bogo_status"
     static let DELETE_BOGO = "\(base_url)Bogoapi/delete_bogo"
+    
+    static let PO_LIST = "\(base_url)Purchase_orders_api/po_list"
+    static let PO_BY_ID = "\(base_url)Purchase_orders_api/get_po_by_id"
+    static let AUTO_PO_LIST = "\(base_url)Purchase_orders_api/auto_po_list"
+    static let SAVE_PO = "\(base_url)Purchase_orders_api/save_po"
+    static let UPDATE_PO = "\(base_url)Purchase_orders_api/update_po"
+    static let DELETE_PO = "\(base_url)Purchase_orders_api/delete_po"
+    static let VOID_PO = "\(base_url)Purchase_orders_api/void_po"
+    static let RECEIVE_PO = "\(base_url)Purchase_orders_api/recieve_po"
+    static let DELETE_PO_ITEM = "\(base_url)Purchase_orders_api/delete_po_item"
+    static let EMAIL_PO = "\(base_url)Purchase_orders_api/delete_po_item"
+    
+    static let VENDOR_PRODUCT_LIST = "\(base_url)productapi/assign_product_vendors_list"
+    static let VENDOR_PREFER_PRODUCT = "\(base_url)Productapi/assign_preferred_vendor"
+    static let SAVE_VENDOR_PRODUCT = "\(base_url)productapi/save_vendor_list"
+    static let DELETE_VENDOR_PRODUCT = "\(base_url)productapi/delete_product_vendor"
+    
+    static let VENDORS_LIST = "\(base_url)app/vendor_payment_list"
     
     static let LOGURL = "https://www.quickvees.com/internet_log_ios.php"
 }

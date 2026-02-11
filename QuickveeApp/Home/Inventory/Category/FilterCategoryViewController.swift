@@ -34,6 +34,13 @@ class FilterCategoryViewController: UIViewController {
     @IBOutlet weak var selectBtm: NSLayoutConstraint!
     @IBOutlet weak var selectTop: NSLayoutConstraint!
     
+    @IBOutlet weak var selectStatusView: UIView!
+    
+    @IBOutlet weak var selectStatus: UILabel!
+    @IBOutlet weak var selectVendor: UILabel!
+    
+    @IBOutlet weak var searchBarHeight: NSLayoutConstraint!
+    
     //category arrays
     var selectCategory = [InventoryCategory]()
     var selectAddCategory = [InventoryCategory]()
@@ -67,6 +74,32 @@ class FilterCategoryViewController: UIViewController {
     var subIts = [Store]()
     var searchIts = [Store]()
     
+    //Vendors arrays
+    var selectVendors = [VendorsPO]()
+    var selectAddVendors = [VendorsPO]()
+    
+    var vendors = [VendorsPO]()
+    var subVendors = [VendorsPO]()
+    var searchVendors = [VendorsPO]()
+    
+    var selectPOStatus = [String]()
+    var selectAddPOStatus = [String]()
+    
+    var poStatus = ["Active", "Partial", "Received", "Draft", "Void"]
+    var subPOStatus = [String]()
+    var searchPOStatus = [String]()
+    
+    //VendorProduct arrays
+    var selectProductVendors = [VendorProduct]()
+    var selectAddProductVendors = [VendorProduct]()
+    
+    var productVendors = [VendorProduct]()
+    var subProductVendors = [VendorProduct]()
+    var searchProductVendors = [VendorProduct]()
+    
+    var variantProductVendorId = ""
+    var variantSingleProduct = ""
+    
     var tapBlue = [String]()
     
     var newBrandTag = false
@@ -87,9 +120,17 @@ class FilterCategoryViewController: UIViewController {
     weak var delegateMixStores: AddMixnMatchStoresDelegate?
     weak var delegateBogoStores: AddBogoStoresDelegate?
     
+    weak var delegatePOSelected: SelectedCategoryProductsDelegate?
+    
     weak var delegateBrandTagsSelected: BrandsTagsAddDelegate?
     
     weak var delegateStockTakeAdd: SelectedCategoryBrandsTagsProductsDelegate?
+    
+    weak var delegateVendorsSelected: POListDelegate?
+    weak var delegateVendorSelected: PODelegate?
+    
+    weak var delegateVendorProduct: VendorProductDelegate?
+    weak var delegateVendorVariant: VendorProductDelegate?
     
     var catMode = ""
     var apiMode = ""
@@ -101,6 +142,7 @@ class FilterCategoryViewController: UIViewController {
     var variantList = [InventoryVariant]()
     
     var stockFilter = ""
+    var isPOStatus = false
     
     let loadingIndicator: ProgressView = {
         let progress = ProgressView(colors: [.systemBlue], lineWidth: 5)
@@ -139,6 +181,16 @@ class FilterCategoryViewController: UIViewController {
         selectView.addGestureRecognizer(tap)
         selectView.isUserInteractionEnabled = true
         tap.numberOfTapsRequired = 1
+        
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(vendorClick))
+        selectVendor.addGestureRecognizer(tap1)
+        tap1.numberOfTapsRequired = 1
+        selectVendor.isUserInteractionEnabled = true
+        
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(statusClick))
+        selectStatus.addGestureRecognizer(tap2)
+        tap2.numberOfTapsRequired = 1
+        selectStatus.isUserInteractionEnabled = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -148,6 +200,16 @@ class FilterCategoryViewController: UIViewController {
         subCategory = []
         subBrandsTags = []
         subTaxes = []
+        
+        selectStatusView.isHidden = true
+        selectView.isHidden = false
+        selectVendor.text = ""
+        selectStatus.text = ""
+        selectVendor.isHidden = true
+        selectStatus.isHidden = true
+        selectText.isHidden = false
+        searchBar.isHidden = false
+        searchBarHeight.constant = 50
         
         addBtn.setTitle("Add New", for: .normal)
         addBtn.layer.cornerRadius = 10
@@ -182,6 +244,35 @@ class FilterCategoryViewController: UIViewController {
             selectBtm.constant = 10
             selectTop.constant = 10
         }
+        else if apiMode == "vendors" || apiMode == "vendor" || apiMode == "vendorProduct" {
+            if apiMode == "vendor"  || apiMode == "vendorProduct" {
+                selectText.text = "Select Vendor"
+                selectText.isHidden = false
+                selectStatusView.isHidden = true
+                selectView.isHidden = false
+                selectVendor.text = ""
+                selectStatus.text = ""
+                selectVendor.isHidden = true
+                selectStatus.isHidden = true
+            }
+            else {
+                selectText.text = ""
+                selectText.isHidden = true
+                selectStatusView.isHidden = false
+                selectView.isHidden = true
+                selectVendor.text = "Select Vendor"
+                selectStatus.text = "Select Status"
+                selectVendor.isHidden = false
+                selectStatus.isHidden = false
+                selectVendor.textColor = UIColor(named: "SelectCat")
+                searchBar.isHidden = true
+                searchBarHeight.constant = 0
+            }
+            searchBar.placeholder = "Search Vendor"
+            noCategoryLbl.text = "No Vendor Found"
+            setupVendorsApi()
+        }
+
         else {
             selectText.text = "Select Taxes"
             searchBar.placeholder = "Search Taxes"
@@ -303,6 +394,12 @@ class FilterCategoryViewController: UIViewController {
                 }
             }
             
+            else if catMode == "poQuickVc" {
+                if category.is_lottery == "0" {
+                    smallres.append(category)
+                }
+            }
+            
             else {
                 
             }
@@ -336,6 +433,12 @@ class FilterCategoryViewController: UIViewController {
         tapBlue.removeAll(where: {$0 == tagName})
     }
     
+    func removeVendors(tagName: String) {
+        
+        selectAddVendors.removeAll(where: {$0.vendor_id == tagName})
+        tapBlue.removeAll(where: {$0 == tagName})
+    }
+    
     func removeIts(storeName: String) {
         
         selectAddIts.removeAll(where: {$0.merchant_id == storeName})
@@ -346,6 +449,12 @@ class FilterCategoryViewController: UIViewController {
         
         selectAddTaxes.removeAll(where: {$0.id == taxesName})
         tapBlue.removeAll(where: {$0 == taxesName})
+    }
+    
+    func removeVendorProduct(variantName: String) {
+        
+        selectAddProductVendors.removeAll(where: {$0.id == variantName})
+        tapBlue.removeAll(where: {$0 == variantName})
     }
     
     func setupBrandsApi() {
@@ -593,6 +702,132 @@ class FilterCategoryViewController: UIViewController {
         self.loadingIndicator.isAnimating = false
     }
     
+    func setupVendorsApi() {
+        
+        let id = UserDefaults.standard.string(forKey: "merchant_id") ?? ""
+        
+        ApiCalls.sharedCall.getVendorList(merchant_id: id) { isSuccess, responseData in
+            
+            if isSuccess {
+                
+                guard let list = responseData["result"] else {
+                    self.loadingIndicator.isAnimating = false
+                    return
+                }
+                
+                if self.apiMode == "vendorProduct" {
+                    self.getResponseVPValues(list: list)
+                }
+                else {
+                    self.getResponsePOValues(list: list)
+                }
+                
+                DispatchQueue.main.async {
+                    self.collection.reloadData()
+                }
+                
+            }else{
+                print("Api Error")
+                self.loadingIndicator.isAnimating = false
+            }
+        }
+    }
+    
+    func getResponseVPValues(list: Any) {
+        
+        let response = list as! [[String:Any]]
+        var smallres = [VendorProduct]()
+        
+        for res in response {
+            
+            let vendor = VendorProduct(id: "\(res["vendor_id"] ?? "")", name: "\(res["name"] ?? "")",
+                                       cost_per_item: "\(res["cost_per_item"] ?? "")", pref_vendor: "\(res["pref_vendor"] ?? "")")
+            
+            if vendor.name == "Select Vendor" {
+                
+            }
+            else {
+                smallres.append(vendor)
+            }
+        }
+        
+        let sortedNames = smallres.sorted {
+            $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
+        }
+        
+        productVendors = sortedNames
+        subProductVendors = sortedNames
+        
+        if selectProductVendors.count > 0 {
+            
+            for select in selectProductVendors {
+                
+                selectAddProductVendors.append(select)
+            }
+        }
+    }
+    
+    func getResponsePOValues(list: Any) {
+        
+        let response = list as! [[String:Any]]
+        var smallres = [VendorsPO]()
+        
+        for res in response {
+            
+            let vendor = VendorsPO(vendor_id: "\(res["vendor_id"] ?? "")", name: "\(res["name"] ?? "")",
+                                   phone: "\(res["phone"] ?? "")", email: "\(res["email"] ?? "")",
+                                   city: "\(res["city"] ?? "")", state: "\(res["state"] ?? "")",
+                                   zip_code: "\(res["zip_code"] ?? "")", full_address: "\(res["full_address"] ?? "")",
+                                   pay_count: "\(res["pay_count"] ?? "")", total_pay: "\(res["total_pay"] ?? "")",
+                                   recent_pay_amount: "\(res["recent_pay_amount"] ?? "")",
+                                   recent_payment_datetime: "\(res["recent_payment_datetime"] ?? "")",
+                                   enabled: "\(res["enabled"] ?? "")")
+            
+            if vendor.name == "Select Vendor" {
+                
+            }
+            else {
+                smallres.append(vendor)
+            }
+        }
+        
+        let sortedNames = smallres.sorted {
+            $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
+        }
+        
+        vendors = sortedNames
+        subVendors = sortedNames
+        
+        if selectVendors.count > 0 {
+            
+            for select in selectVendors {
+                
+                selectAddVendors.append(select)
+            }
+        }
+        
+        if selectPOStatus.count > 0 {
+            
+            for select in selectPOStatus {
+                selectAddPOStatus.append(select)
+            }
+        }
+    }
+    
+    @objc func vendorClick() {
+        isPOStatus = false
+        selectVendor.textColor = UIColor(named: "SelectCat")
+        selectStatus.textColor = .black
+        collection.reloadData()
+    }
+    
+    @objc func statusClick() {
+        isPOStatus = true
+        selectVendor.textColor = .black
+        selectStatus.textColor = UIColor(named: "SelectCat")
+        collection.reloadData()
+    }
+    
     @objc func handleTap() {
         
         if selectView.layer.borderColor == UIColor(named: "SelectCat")?.cgColor {
@@ -668,7 +903,19 @@ class FilterCategoryViewController: UIViewController {
             dismiss(animated: true)
         }
         
+        else if catMode == "POVc" {
+            dismiss(animated: true)
+        }
+        
+        else if catMode == "AddPOVc" {
+            dismiss(animated: true)
+        }
+        
         else if catMode == "lotteryVc" {
+            dismiss(animated: true)
+        }
+        
+        else if catMode == "poQuickVc" {
             dismiss(animated: true)
         }
         
@@ -694,8 +941,7 @@ class FilterCategoryViewController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 
                 self.loadingIndicator.isAnimating = false
-                self.delegatePlus?.getSelectedCats(reverseCategory: [], reverseBrandsTags: [],
-                                                   reverseTaxes: [], reverseITS: [], apiMode: self.apiMode)
+                self.delegatePlus?.getSelectedCats(reverseCategory: [], reverseBrandsTags: [], reverseTaxes: [], reverseITS: [], vendors: [], variantIdVendorProduct: "", singleProductVendor: "", apiMode: self.apiMode)
                 self.dismiss(animated: true)
             }
         }
@@ -723,8 +969,7 @@ class FilterCategoryViewController: UIViewController {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.loadingIndicator.isAnimating = false
-                self.delegateDuplicate?.getSelectedCats(reverseCategory: [], reverseBrandsTags: [], 
-                                                        reverseTaxes: [], reverseITS: [], apiMode: self.apiMode)
+                self.delegateDuplicate?.getSelectedCats(reverseCategory: [], reverseBrandsTags: [], reverseTaxes: [], reverseITS: [], vendors: [], variantIdVendorProduct: "", singleProductVendor: "", apiMode: self.apiMode)
                 self.dismiss(animated: true)
             }
         }
@@ -833,6 +1078,83 @@ class FilterCategoryViewController: UIViewController {
             }
         }
         
+        else if catMode == "POVc" {
+            
+            loadingIndicator.isAnimating = true
+            selectVendors = []
+            tapBlue = []
+            selectAddVendors = []
+            selectPOStatus = []
+            selectAddPOStatus = []
+            collection.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.loadingIndicator.isAnimating = false
+                self.delegateVendorsSelected?.getPOVendors(vendors: [], status: [])
+                self.dismiss(animated: true)
+            }
+        }
+        
+        else if catMode == "AddPOVc" {
+            
+            loadingIndicator.isAnimating = true
+            selectVendors = []
+            tapBlue = []
+            selectAddVendors = []
+            collection.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.loadingIndicator.isAnimating = false
+                self.delegateVendorSelected?.getPOVendor(vendor: [])
+                self.dismiss(animated: true)
+            }
+        }
+        
+        else if catMode == "poQuickVc" {
+            
+            loadingIndicator.isAnimating = true
+            selectCategory = []
+            tapBlue = []
+            selectAddCategory = []
+            collection.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.loadingIndicator.isAnimating = false
+                self.delegatePOSelected?.getProductsCategory(categoryArray: [])
+                self.dismiss(animated: true)
+            }
+        }
+        
+        else if catMode == "vendorProducts" {
+            
+            loadingIndicator.isAnimating = true
+            selectAddProductVendors = []
+            tapBlue = []
+            selectProductVendors = []
+            collection.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.loadingIndicator.isAnimating = false
+                self.delegateVendorProduct?.getVendorProduct(vendors: [], variant_id: self.variantProductVendorId, singleProduct: self.variantSingleProduct)
+                self.dismiss(animated: true)
+            }
+        }
+        
+        else if catMode == "variantInfoVc" {
+            
+            loadingIndicator.isAnimating = true
+            selectAddProductVendors = []
+            tapBlue = []
+            selectProductVendors = []
+            collection.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.loadingIndicator.isAnimating = false
+                self.delegateVendorVariant?.getVendorProduct(vendors: [], variant_id: self.variantProductVendorId, singleProduct: self.variantSingleProduct)
+                self.dismiss(animated: true)
+            }
+        }
+        
         else {
             loadingIndicator.isAnimating = true
             selectCategory = []
@@ -860,16 +1182,12 @@ class FilterCategoryViewController: UIViewController {
                                                      font: UIFont(name: "Manrope-SemiBold", size: 15.0)!)
                 }
                 else {
-                    delegatePlus?.getSelectedCats(reverseCategory: selectAddCategory,
-                                                  reverseBrandsTags: selectAddBrandsTags,
-                                                  reverseTaxes: selectAddTaxes, reverseITS: selectAddIts, apiMode: apiMode)
+                    delegatePlus?.getSelectedCats(reverseCategory: selectAddCategory, reverseBrandsTags: selectAddBrandsTags, reverseTaxes: selectAddTaxes, reverseITS: selectAddIts, vendors: selectAddProductVendors, variantIdVendorProduct: variantProductVendorId, singleProductVendor: variantSingleProduct, apiMode: apiMode)
                     dismiss(animated: true)
                 }
             }
             else {
-                delegatePlus?.getSelectedCats(reverseCategory: selectAddCategory,
-                                              reverseBrandsTags: selectAddBrandsTags,
-                                              reverseTaxes: selectAddTaxes, reverseITS: selectAddIts, apiMode: apiMode)
+                delegatePlus?.getSelectedCats(reverseCategory: selectAddCategory, reverseBrandsTags: selectAddBrandsTags, reverseTaxes: selectAddTaxes, reverseITS: selectAddIts, vendors: selectAddProductVendors, variantIdVendorProduct: variantProductVendorId, singleProductVendor: variantSingleProduct, apiMode: apiMode)
                 dismiss(animated: true)
             }
         }
@@ -893,18 +1211,26 @@ class FilterCategoryViewController: UIViewController {
                     
                     delegateDuplicate?.getSelectedCats(reverseCategory: selectAddCategory,
                                                        reverseBrandsTags: selectAddBrandsTags,
-                                                       reverseTaxes: selectAddTaxes, reverseITS: [], apiMode: apiMode)
+                                                       reverseTaxes: selectAddTaxes, reverseITS: [], vendors: selectAddProductVendors, variantIdVendorProduct: "", singleProductVendor: "", apiMode: apiMode)
                     dismiss(animated: true)
                 }
             }
             else {
                 delegateDuplicate?.getSelectedCats(reverseCategory: selectAddCategory,
                                                    reverseBrandsTags: selectAddBrandsTags,
-                                                   reverseTaxes: selectAddTaxes, reverseITS: [], apiMode: apiMode)
+                                                   reverseTaxes: selectAddTaxes, reverseITS: [], vendors: selectAddProductVendors, variantIdVendorProduct: "", singleProductVendor: "", apiMode: apiMode)
                 dismiss(animated: true)
             }
         }
-        
+        else if catMode == "POVc" {
+            delegateVendorsSelected?.getPOVendors(vendors: selectAddVendors, status: selectAddPOStatus)
+            dismiss(animated: true)
+        }
+        else if catMode == "AddPOVc" {
+            
+            delegateVendorSelected?.getPOVendor(vendor: selectAddVendors)
+            dismiss(animated: true)
+        }
         else if catMode == "mixMatchVc" {
             
             delegateMixSelected?.getProductsCategory(categoryArray: selectAddCategory)
@@ -944,6 +1270,26 @@ class FilterCategoryViewController: UIViewController {
         else if catMode == "StockVc" {
             delegateStockTakeAdd?.getProductsCategoryBrandTag(categoryArray: selectAddCategory, brandArray: selectAddBrandsTags, tagArray: selectAddTagsStock, filter: self.stockFilter)
             dismiss(animated: true)
+        }
+        else if catMode == "poQuickVc" {
+            
+            self.dismiss(animated: true) {
+                self.delegatePOSelected?.getProductsCategory(categoryArray: self.selectAddCategory)
+            }
+        }
+        
+        else if catMode == "vendorProducts" {
+            
+            self.dismiss(animated: true) {
+                self.delegateVendorProduct?.getVendorProduct(vendors: self.selectAddProductVendors, variant_id: self.variantProductVendorId, singleProduct: self.variantSingleProduct)
+            }
+        }
+        
+        else if catMode == "variantInfoVc" {
+            
+            self.dismiss(animated: true) {
+                self.delegateVendorVariant?.getVendorProduct(vendors: self.selectAddProductVendors, variant_id: self.variantProductVendorId, singleProduct: self.variantSingleProduct)
+            }
         }
         
         else {
@@ -1036,6 +1382,10 @@ extension FilterCategoryViewController: UISearchBarDelegate {
                 searchIts = subIts.filter { $0.store_name.lowercased().prefix(searchText.count) == searchText.lowercased() }
                 searching = true
             }
+            else if apiMode == "vendors" || apiMode == "vendor" {
+                searchVendors = subVendors.filter { $0.name.lowercased().prefix(searchText.count) == searchText.lowercased() }
+                searching = true
+            }
             else {
                 searchTaxes = subTaxes.filter { $0.title.lowercased().prefix(searchText.count) == searchText.lowercased() }
                 searching = true
@@ -1110,6 +1460,20 @@ extension FilterCategoryViewController: UISearchBarDelegate {
                         selectTop.constant = 10
                     }
                 }
+                else if apiMode == "vendors" || apiMode == "vendor" {
+                    if searchVendors.count == 0 {
+                        collection.isHidden = true
+                        addView.isHidden = true
+                        addBtn.isHidden = true
+                        noCategoryLbl.isHidden = false
+                    }
+                    else {
+                        collection.isHidden = false
+                        addView.isHidden = true
+                        addBtn.isHidden = true
+                        noCategoryLbl.isHidden = true
+                    }
+                }
                 else {
                     if searchTaxes.count == 0 {
                         collection.isHidden = true
@@ -1176,6 +1540,19 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
             else if apiMode == "its" || apiMode == "mts" || apiMode == "bts" {
                 return searchIts.count
             }
+            else if apiMode == "vendors" || apiMode == "vendor" || apiMode == "vendorProduct" {
+                if isPOStatus {
+                    return searchPOStatus.count
+                }
+                else {
+                    if apiMode == "vendorProduct" {
+                        return searchProductVendors.count
+                    }
+                    else {
+                        return searchVendors.count
+                    }
+                }
+            }
             else {
                 return searchTaxes.count
             }
@@ -1190,6 +1567,19 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
             }
             else if apiMode == "its" || apiMode == "mts" || apiMode == "bts" {
                 return its.count
+            }
+            else if apiMode == "vendors" || apiMode == "vendor" || apiMode == "vendorProduct" {
+                if isPOStatus {
+                    return poStatus.count
+                }
+                else {
+                    if apiMode == "vendorProduct" {
+                        return productVendors.count
+                    }
+                    else {
+                        return vendors.count
+                    }
+                }
             }
             else {
                 return taxes.count
@@ -1256,6 +1646,66 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     || tapBlue.contains(where: {$0 == searchIts[indexPath.row].merchant_id}) {
                     cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
                     cell.categoryName.textColor = UIColor(named: "SelectCat")
+                }
+                else {
+                    cell.categoryName.textColor = .black
+                    cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+                }
+            }
+            else if apiMode == "vendors" {
+                
+                if isPOStatus {
+                    cell.categoryName.text = poStatus[indexPath.row]
+                    
+                    if selectPOStatus.contains(where: {$0 == searchPOStatus[indexPath.row]})
+                        || tapBlue.contains(where: {$0 == searchPOStatus[indexPath.row]}) {
+                        cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                        cell.categoryName.textColor = UIColor(named: "SelectCat")
+                        selectAddPOStatus.append(searchPOStatus[indexPath.row])
+                    }
+                    else {
+                        cell.categoryName.textColor = .black
+                        cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+                    }
+                }
+                else {
+                    cell.categoryName.text = searchVendors[indexPath.row].name
+                    
+                    if selectVendors.contains(where: {$0.vendor_id == searchVendors[indexPath.row].vendor_id})
+                        || tapBlue.contains(where: {$0 == searchVendors[indexPath.row].vendor_id}) {
+                        cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                        cell.categoryName.textColor = UIColor(named: "SelectCat")
+                    }
+                    else {
+                        cell.categoryName.textColor = .black
+                        cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+                    }
+                }
+            }
+            else if apiMode == "vendor" {
+                
+                cell.categoryName.text = searchVendors[indexPath.row].name
+                
+                if selectVendors.contains(where: {$0.vendor_id == searchVendors[indexPath.row].vendor_id})
+                    || tapBlue.contains(where: {$0 == searchVendors[indexPath.row].vendor_id}) {
+                    cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                    cell.categoryName.textColor = UIColor(named: "SelectCat")
+                    selectAddVendors.append(searchVendors[indexPath.row])
+                }
+                else {
+                    cell.categoryName.textColor = .black
+                    cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+                }
+            }
+            else if apiMode == "vendorProduct" {
+                
+                cell.categoryName.text = searchProductVendors[indexPath.row].name
+                
+                if selectProductVendors.contains(where: {$0.id == searchProductVendors[indexPath.row].id})
+                    || tapBlue.contains(where: {$0 == searchProductVendors[indexPath.row].id}) {
+                    cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                    cell.categoryName.textColor = UIColor(named: "SelectCat")
+                    selectAddProductVendors.append(searchProductVendors[indexPath.row])
                 }
                 else {
                     cell.categoryName.textColor = .black
@@ -1361,6 +1811,74 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
                 }
             }
+            else if apiMode == "vendors" {
+                
+                if isPOStatus {
+                    cell.categoryName.text = poStatus[indexPath.row]
+                    
+                    if selectPOStatus.contains(where: {$0 == poStatus[indexPath.row]})
+                        || tapBlue.contains(where: {$0 == poStatus[indexPath.row]}) {
+                        cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                        cell.categoryName.textColor = UIColor(named: "SelectCat")
+                        selectAddPOStatus.append(poStatus[indexPath.row])
+                    }
+                    else {
+                        cell.categoryName.textColor = .black
+                        cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+                    }
+                }
+                else {
+                    cell.categoryName.text = vendors[indexPath.row].name
+                    
+                    if selectVendors.contains(where: {$0.vendor_id == vendors[indexPath.row].vendor_id}) {
+                        cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                        cell.categoryName.textColor = UIColor(named: "SelectCat")
+                    }
+                    
+                    else if tapBlue.contains(where: {$0 == vendors[indexPath.row].vendor_id}) {
+                        cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                        cell.categoryName.textColor = UIColor(named: "SelectCat")
+                        selectAddVendors.append(vendors[indexPath.row])
+                    }
+                    else {
+                        cell.categoryName.textColor = .black
+                        cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+                    }
+                }
+            }
+            else if apiMode == "vendor" {
+                
+                cell.categoryName.text = vendors[indexPath.row].name
+                
+                if selectVendors.contains(where: {$0.vendor_id == vendors[indexPath.row].vendor_id})
+                    || tapBlue.contains(where: {$0 == vendors[indexPath.row].vendor_id}) {
+                    cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                    cell.categoryName.textColor = UIColor(named: "SelectCat")
+                    selectAddVendors.append(vendors[indexPath.row])
+                }
+                else {
+                    cell.categoryName.textColor = .black
+                    cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+                }
+            }
+            else if apiMode == "vendorProduct" {
+                
+                cell.categoryName.text = productVendors[indexPath.row].name
+                
+                if selectProductVendors.contains(where: {$0.id == productVendors[indexPath.row].id}) {
+                    cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                    cell.categoryName.textColor = UIColor(named: "SelectCat")
+                }
+                else if tapBlue.contains(where: {$0 == productVendors[indexPath.row].id}) {
+                    cell.contentView.layer.borderColor = UIColor(named: "SelectCat")?.cgColor
+                    cell.categoryName.textColor = UIColor(named: "SelectCat")
+                    selectAddProductVendors.append(productVendors[indexPath.row])
+                }
+                else {
+                    cell.categoryName.textColor = .black
+                    cell.contentView.layer.borderColor = UIColor(named: "CategoryBorder")?.cgColor
+                }
+            }
             else {
                 
                 cell.categoryName.text = taxes[indexPath.row].title
@@ -1421,6 +1939,28 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     let title = searchBrandsTags[indexPath.row].title
                     removeTags(tagName: title)
                 }
+                else if apiMode == "vendors" {
+                    if isPOStatus {
+                        selectAddPOStatus = []
+                        tapBlue = []
+                        selectPOStatus = []
+                        collection.reloadData()
+                    }
+                    else {
+                        let title = searchVendors[indexPath.row].vendor_id
+                        removeVendors(tagName: title)
+                    }
+                }
+                else if apiMode == "vendor" {
+                    selectAddVendors = []
+                    tapBlue = []
+                    selectVendors = []
+                    collection.reloadData()
+                }
+                else if apiMode == "vendorProduct" {
+                    let id = searchProductVendors[indexPath.row].id
+                    removeVendorProduct(variantName: id)
+                }
                 else {
                     let id = searchTaxes[indexPath.row].id
                     removeTaxes(taxesName: id)
@@ -1464,6 +2004,32 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     selectAddTagsStock.append(name.title)
                     tapBlue.append(name.title)
                 }
+                else if apiMode == "vendors" {
+                    if isPOStatus {
+                        let name = searchPOStatus[indexPath.row]
+                        selectPOStatus = [name]
+                        selectAddPOStatus = []
+                        tapBlue = [name]
+                        collection.reloadData()
+                    }
+                    else {
+                        let name = searchVendors[indexPath.row]
+                        selectAddVendors.append(name)
+                        tapBlue.append(name.vendor_id)
+                    }
+                }
+                else if apiMode == "vendor" {
+                    let name = searchVendors[indexPath.row]
+                    selectVendors = [name]
+                    selectAddVendors = []
+                    tapBlue = [name.vendor_id]
+                    collection.reloadData()
+                }
+                else if apiMode == "vendorProduct" {
+                    let name = searchProductVendors[indexPath.row]
+                    selectAddProductVendors.append(name)
+                    tapBlue.append(name.id)
+                }
                 else {
                     let name = searchTaxes[indexPath.row]
                     selectAddTaxes.append(name)
@@ -1501,6 +2067,28 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                 else if apiMode == "tags" {
                     let title = brandsTags[indexPath.row].title
                     removeTags(tagName: title)
+                }
+                else if apiMode == "vendors" {
+                    if isPOStatus {
+                        selectPOStatus = []
+                        selectAddPOStatus = []
+                        tapBlue = []
+                        collection.reloadData()
+                    }
+                    else {
+                        let name = vendors[indexPath.row]
+                        removeVendors(tagName: name.vendor_id)
+                    }
+                }
+                else if apiMode == "vendor" {
+                    selectVendors = []
+                    selectAddVendors = []
+                    tapBlue = []
+                    collection.reloadData()
+                }
+                else if apiMode == "vendorProduct" {
+                    let id = productVendors[indexPath.row].id
+                    removeVendorProduct(variantName: id)
                 }
                 else {
                     let id = taxes[indexPath.row].id
@@ -1544,6 +2132,32 @@ extension FilterCategoryViewController: UICollectionViewDelegate, UICollectionVi
                     selectAddBrandsTags.append(name.title)
                     selectAddTagsStock.append(name.title)
                     tapBlue.append(name.title)
+                }
+                else if apiMode == "vendors" {
+                    if isPOStatus {
+                        let name = poStatus[indexPath.row]
+                        selectPOStatus = [name]
+                        selectAddPOStatus = []
+                        tapBlue = [name]
+                        collection.reloadData()
+                    }
+                    else {
+                        let name = vendors[indexPath.row]
+                        selectAddVendors.append(name)
+                        tapBlue.append(name.vendor_id)
+                    }
+                }
+                else if apiMode == "vendor" {
+                    let name = vendors[indexPath.row]
+                    selectVendors = [name]
+                    selectAddVendors = []
+                    tapBlue = [name.vendor_id]
+                    collection.reloadData()
+                }
+                else if apiMode == "vendorProduct" {
+                    let name = productVendors[indexPath.row]
+                    selectAddProductVendors.append(name)
+                    tapBlue.append(name.id)
                 }
                 else {
                     let name = taxes[indexPath.row]

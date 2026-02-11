@@ -29,6 +29,9 @@ class ProductVariantTableViewCell: UITableViewCell {
     @IBOutlet weak var instantBtn: UIButton!
         
     @IBOutlet weak var salesHistoryBtn: UIButton!
+    
+    @IBOutlet weak var vendorsBtn: UIButton!
+    
     @IBOutlet weak var costItemInner: UIView!
     
     @IBOutlet weak var salesHeight: NSLayoutConstraint!
