@@ -191,20 +191,21 @@ class SalesNewViewController: UIViewController {
                                                 self.webview.evaluateJavaScript(js) { res, error in
                                                     
                                                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                                        
-                                                        // user logo
-                                                        
                                                         let script = """
-                                                                var observer = new MutationObserver(function(mutationsList, observer) {
-                                                                    var img = document.querySelector('img[src="/merchants/static/media/UserLogo.58ba10be96a7ef5617db1c9c133afed7.svg"]');
-                                                                    if (img) {
-                                                                        img.style.display = 'none';
-                                                                          // Stop observing after the element is found
-                                                                    }
-                                                                });
+                                                        var observer = new MutationObserver(function(mutationsList, observer) {
+                                                        var dropdown = document.querySelector('.profile-dropdown-for-android');
+                                                            
+                                                        if (dropdown) {
+                                                                var firstImg = dropdown.querySelector('img:first-of-type');
                                                                 
-                                                                observer.observe(document.body, { childList: true, subtree: true });
-                                                                """
+                                                                if (firstImg) {
+                                                                    firstImg.style.display = 'none';
+                                                                }
+                                                            }
+                                                        });
+
+                                                        observer.observe(document.body, { childList: true, subtree: true });
+                                                        """
                                                         
                                                         // Inject the JavaScript into the WebView
                                                         self.webview.evaluateJavaScript(script) { (result, error) in

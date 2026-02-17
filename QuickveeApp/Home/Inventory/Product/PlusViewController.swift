@@ -877,6 +877,7 @@ class PlusViewController: UIViewController {
     func setCollHeight(coll: UIScrollView) {
         
         if coll == catColl {
+            catColl.layoutIfNeeded()
             let height = catColl.collectionViewLayout.collectionViewContentSize.height
             if height <= 50 {
                 catcollHeight.constant = 50
@@ -887,6 +888,7 @@ class PlusViewController: UIViewController {
         }
         
         else if coll == taxesColl {
+            taxesColl.layoutIfNeeded()
             let height = taxesColl.collectionViewLayout.collectionViewContentSize.height
             if height <= 50 {
                 taxCollHeight.constant = 50
@@ -896,6 +898,7 @@ class PlusViewController: UIViewController {
             }
         }
         else if coll == tagColl {
+            tagColl.layoutIfNeeded()
             let height = tagColl.collectionViewLayout.collectionViewContentSize.height
             if height <= 50 {
                 tagCollHeight.constant = 50
@@ -905,6 +908,7 @@ class PlusViewController: UIViewController {
             }
         }
         else if coll == itsColl {
+            itsColl.layoutIfNeeded()
             let height = itsColl.collectionViewLayout.collectionViewContentSize.height
             if height <= 50 {
                 itsCollHeight.constant = 50
@@ -2459,134 +2463,139 @@ class PlusViewController: UIViewController {
     func wrapTextInHTML() -> String {
         
         let fullString = customTextView.attributedText.string
-        let words = fullString.components(separatedBy: .whitespacesAndNewlines).filter { !$0.isEmpty }
-        var resultText = ""
-        
-        // We'll keep track of position in string to get the right range
-        var position = 0
-        
-        for word in words {
-            // Find range of current word starting from 'position'
-            if let range = fullString.range(of: word, options: [], range: fullString.index(fullString.startIndex, offsetBy: position)..<fullString.endIndex) {
-                let nsRange = NSRange(range, in: fullString)
-                
-                position = nsRange.location + nsRange.length
-                
-                // Get attributes for this word's range
-                let attributes = customTextView.attributedText.attributes(at: nsRange.location, longestEffectiveRange: nil, in: nsRange)
-                
-                // Extract font attribute
-                if let font = attributes[.font] as? UIFont {
-                    let fontDescriptor = font.fontDescriptor
+        if fullString == "Enter Custom Product Description" {
+            return ""
+        }
+        else {
+            let words = fullString.components(separatedBy: .whitespacesAndNewlines).filter { !$0.isEmpty }
+            var resultText = ""
+            
+            // We'll keep track of position in string to get the right range
+            var position = 0
+            
+            for word in words {
+                // Find range of current word starting from 'position'
+                if let range = fullString.range(of: word, options: [], range: fullString.index(fullString.startIndex, offsetBy: position)..<fullString.endIndex) {
+                    let nsRange = NSRange(range, in: fullString)
                     
-                    // Check for traits
-                    let isBold = fontDescriptor.symbolicTraits.contains(.traitBold)
-                    let isItalic = fontDescriptor.symbolicTraits.contains(.traitItalic)
-                    let fontSize = font.pointSize
+                    position = nsRange.location + nsRange.length
                     
-                    let underlineStyle = attributes[.underlineStyle] as? Int ?? 0
-                    let isUnderlined = underlineStyle != 0
+                    // Get attributes for this word's range
+                    let attributes = customTextView.attributedText.attributes(at: nsRange.location, longestEffectiveRange: nil, in: nsRange)
                     
-                    let strikethroughStyle = attributes[.strikethroughStyle] as? Int ?? 0
-                    let isStrikethrough = strikethroughStyle != 0
-                    
-                    let baselineOffset = attributes[.baselineOffset] as? NSNumber
-                    let isSuperscript = (baselineOffset?.doubleValue ?? 0) > 0
-                    let isSubscript = (baselineOffset?.doubleValue ?? 0) < 0
-                    
-                    var r1 = ""
-                    var r2 = ""
-                    
-                    let numberedBulletPattern = #"^\d+\.$"#
-                    let isBullet = word.hasPrefix("•")
-                    let isNumberedBullet = word.range(of: numberedBulletPattern, options: .regularExpression) != nil
-                    
-                    var prefix = ""
-                    if isBullet || isNumberedBullet {
-                        prefix = "<br>"
-                    }
-                    
-                    if isItalic {
-                        if isBold {
-                            r1 = "<strong><i>\(word )</i></strong>"
+                    // Extract font attribute
+                    if let font = attributes[.font] as? UIFont {
+                        let fontDescriptor = font.fontDescriptor
+                        
+                        // Check for traits
+                        let isBold = fontDescriptor.symbolicTraits.contains(.traitBold)
+                        let isItalic = fontDescriptor.symbolicTraits.contains(.traitItalic)
+                        let fontSize = font.pointSize
+                        
+                        let underlineStyle = attributes[.underlineStyle] as? Int ?? 0
+                        let isUnderlined = underlineStyle != 0
+                        
+                        let strikethroughStyle = attributes[.strikethroughStyle] as? Int ?? 0
+                        let isStrikethrough = strikethroughStyle != 0
+                        
+                        let baselineOffset = attributes[.baselineOffset] as? NSNumber
+                        let isSuperscript = (baselineOffset?.doubleValue ?? 0) > 0
+                        let isSubscript = (baselineOffset?.doubleValue ?? 0) < 0
+                        
+                        var r1 = ""
+                        var r2 = ""
+                        
+                        let numberedBulletPattern = #"^\d+\.$"#
+                        let isBullet = word.hasPrefix("•")
+                        let isNumberedBullet = word.range(of: numberedBulletPattern, options: .regularExpression) != nil
+                        
+                        var prefix = ""
+                        if isBullet || isNumberedBullet {
+                            prefix = "<br>"
+                        }
+                        
+                        if isItalic {
+                            if isBold {
+                                r1 = "<strong><i>\(word )</i></strong>"
+                            }
+                            else {
+                                r1 = "<i>\(word )</i>"
+                            }
                         }
                         else {
-                            r1 = "<i>\(word )</i>"
+                            if isBold {
+                                r1 = "<strong>\(word )</strong>"
+                            }
+                            else {
+                                r1 = "\(word) "
+                            }
                         }
-                    }
-                    else {
-                        if isBold {
-                            r1 = "<strong>\(word )</strong>"
+                        
+                        if isSuperscript {
+                            r1 = "<sup>\(r1 )</sup>"
+                        }
+                        
+                        if isSubscript {
+                            r1 = "<sub>\(r1 )</sub>"
+                        }
+                        
+                        if isUnderlined {
+                            r1 = "<u>\(r1 )</u>"
+                        }
+                        
+                        if isStrikethrough {
+                            r1 = "<strike>\(r1)</strike>"
+                        }
+                        
+                        if fontSize == 26 {
+                            r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
+                        }
+                        else if fontSize == 24 {
+                            r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
+                        }
+                        else if fontSize == 22 {
+                            r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
+                        }
+                        else if fontSize == 20 {
+                            r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
+                        }
+                        else if fontSize == 18 {
+                            r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
+                        }
+                        else if fontSize == 16 {
+                            r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
                         }
                         else {
-                            r1 = "\(word) "
+                            r2 = "\(r1) "
                         }
-                    }
-                    
-                    if isSuperscript {
-                        r1 = "<sup>\(r1 )</sup>"
-                    }
-
-                    if isSubscript {
-                        r1 = "<sub>\(r1 )</sub>"
-                    }
-                    
-                    if isUnderlined {
-                        r1 = "<u>\(r1 )</u>"
-                    }
-                    
-                    if isStrikethrough {
-                        r1 = "<strike>\(r1)</strike>"
-                    }
-                    
-                    if fontSize == 26 {
-                        r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
-                    }
-                    else if fontSize == 24 {
-                        r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
-                    }
-                    else if fontSize == 22 {
-                        r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
-                    }
-                    else if fontSize == 20 {
-                        r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
-                    }
-                    else if fontSize == 18 {
-                        r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
-                    }
-                    else if fontSize == 16 {
-                        r2 = "<span style=\"font-size: \(fontSize)px\">\(r1) </span>"
+                        resultText +=  prefix + r2
                     }
                     else {
-                        r2 = "\(r1) "
+                        resultText += "\(word) "
                     }
-                    resultText +=  prefix + r2
-                }
-                else {
-                    resultText += "\(word) "
                 }
             }
-        }
-        
-        var alignmentStyle = "text-align: left;" // default
-        
-        if let paragraphStyle = customTextView.attributedText.attribute(.paragraphStyle, at: 0, effectiveRange: nil) as? NSParagraphStyle {
-            switch paragraphStyle.alignment {
-            case .center:
-                alignmentStyle = "text-align: center;"
-            case .right:
-                alignmentStyle = "text-align: right;"
-            case .justified:
-                alignmentStyle = "text-align: justify;"
-            default:
-                alignmentStyle = "text-align: left;"
+            
+            var alignmentStyle = "text-align: left;" // default
+            
+            if let paragraphStyle = customTextView.attributedText.attribute(.paragraphStyle, at: 0, effectiveRange: nil) as? NSParagraphStyle {
+                switch paragraphStyle.alignment {
+                case .center:
+                    alignmentStyle = "text-align: center;"
+                case .right:
+                    alignmentStyle = "text-align: right;"
+                case .justified:
+                    alignmentStyle = "text-align: justify;"
+                default:
+                    alignmentStyle = "text-align: left;"
+                }
             }
+            
+            // Wrap all text with alignment div
+            let alignedHTML = "<div style=\"\(alignmentStyle)\">\(resultText)</div>"
+            
+            return alignedHTML
         }
-        
-        // Wrap all text with alignment div
-        let alignedHTML = "<div style=\"\(alignmentStyle)\">\(resultText)</div>"
-        
-        return alignedHTML
     }
 
     func validateEditParams() {

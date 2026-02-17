@@ -55,6 +55,7 @@ class POListViewController: UIViewController {
         super.viewWillAppear(animated)
         
         subPOlist = []
+        searching = false
         setupUI()
         setUpApi()
     }

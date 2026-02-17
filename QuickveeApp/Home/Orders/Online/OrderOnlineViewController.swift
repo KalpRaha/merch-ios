@@ -666,6 +666,7 @@ class OrderOnlineViewController: UIViewController {
             vc.statusName = orderArray[sender.tag].name
             vc.number = orderArray[sender.tag].delivery_phn
             vc.delegate = self
+            vc.modalPresentationStyle = .overCurrentContext
             self.present(vc, animated: true)
         }
     }

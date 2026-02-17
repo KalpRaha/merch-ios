@@ -102,6 +102,7 @@ class MixnMatchPricingViewController: UIViewController {
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyBoard.instantiateViewController(withIdentifier: "PriceMixnMatchViewController") as! PriceMixnMatchViewController
                 vc.delegate = self
+                vc.modalPresentationStyle = .overCurrentContext
                 present(vc, animated: true)
             }
         }
@@ -463,7 +464,7 @@ extension MixnMatchPricingViewController: PriceQtyDelegate {
             
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyBoard.instantiateViewController(withIdentifier: "QtyMixnMatchViewController") as! QtyMixnMatchViewController
-            
+            vc.modalPresentationStyle = .overCurrentContext
             vc.delegate = self
             present(vc, animated: true)
         }

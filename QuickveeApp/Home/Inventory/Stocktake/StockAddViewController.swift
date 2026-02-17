@@ -111,7 +111,7 @@ class StockAddViewController: UIViewController {
         setupUI()
         subVariantList = []
         categoryVariantList = []
-
+        
         filterBlackView.isHidden = true
         categoryBtn.setTitleColor(.black, for: .normal)
         categoryBtn.layer.borderColor = UIColor.black.cgColor
@@ -126,7 +126,12 @@ class StockAddViewController: UIViewController {
         tagBtn.layer.borderWidth = 1
         tagBtn.layer.cornerRadius = 10
         
-        variantListApi()
+        if isCat || isTag || isBrand {
+            setupFilterApi()
+        }
+        else {
+            variantListApi()
+        }
     }
     
     

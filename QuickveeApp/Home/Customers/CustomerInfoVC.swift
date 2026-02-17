@@ -267,6 +267,7 @@ class CustomerInfoVC: UIViewController {
         else {
             let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyBoard.instantiateViewController(withIdentifier: "PointBalanceDetailVC") as! PointBalanceDetailVC
+            vc.modalPresentationStyle = .overCurrentContext
             vc.pointDelegate = self
             vc.pointValue = p_Value
            

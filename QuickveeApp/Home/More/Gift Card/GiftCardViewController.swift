@@ -248,6 +248,7 @@ extension GiftCardViewController : giftCardDelegate {
             vc.created = created_at
             vc.user_Id = user_Id
             vc.delegate = self
+            vc.modalPresentationStyle = .overCurrentContext
             self.present(vc, animated: true)
         }
         else if modal == 2 {
@@ -262,6 +263,7 @@ extension GiftCardViewController : giftCardDelegate {
             vc.number = number
             vc.user_Id = user_Id
             vc.delegate = self
+            vc.modalPresentationStyle = .overCurrentContext
             self.present(vc, animated: true)
         }
         
@@ -382,6 +384,7 @@ extension GiftCardViewController : UITableViewDelegate , UITableViewDataSource {
         let vc = storyBoard.instantiateViewController(withIdentifier: "GiftCardDetailViewController") as! GiftCardDetailViewController
         vc.nav = self
         vc.price = price
+        vc.modalPresentationStyle = .overCurrentContext
         self.present(vc, animated: true)
     }
 }

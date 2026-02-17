@@ -313,7 +313,7 @@ class InventoryViewController: UIViewController {
                 searchBar.placeholder = "Search Tags"
             }
             else {
-                searchBar.placeholder = "Search Stock"
+                searchBar.placeholder = "Search Stocktake"
             }
         }
         
@@ -697,41 +697,42 @@ extension InventoryViewController : UIPageViewControllerDelegate {
         deselect = pageControl.currentPage
         send(str: currentIndex)
         
-        
-        if currentIndex == 1 {
-            let indexPath = IndexPath(item: 0, section: 0)
-            collection.scrollToItem(at: indexPath, at: .right, animated: true)
-        }
-        
-        else if currentIndex == 2 {
-            let indexPath = IndexPath(item: 2, section: 0)
-            collection.scrollToItem(at: indexPath, at: .left, animated: true)
-        }
-        
-        else if currentIndex == 3 {
-            let indexPath = IndexPath(item: 3, section: 0)
-            collection.scrollToItem(at: indexPath, at: .left, animated: true)
-        }
-        
-        else if currentIndex == 4 {
-            let indexPath = IndexPath(item: 4, section: 0)
-            collection.scrollToItem(at: indexPath, at: .left, animated: true)
-        }
-        
-        else if currentIndex == 5 {
-            let indexPath = IndexPath(item: 5, section: 0)
-            collection.scrollToItem(at: indexPath, at: .left, animated: true)
-        }
-        
-        else if currentIndex == 6 {
-            let indexPath = IndexPath(item: 6, section: 0)
-            collection.scrollToItem(at: indexPath, at: .left, animated: true)
-        }
-        
-        else if currentIndex == 7 {
-            let indexPath = IndexPath(item: 7, section: 0)
-            collection.scrollToItem(at: indexPath, at: .left, animated: true)
-        }
+        let indexPath = IndexPath(item: currentIndex, section: 0)
+        collection.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+//        if currentIndex == 1 {
+//            let indexPath = IndexPath(item: 0, section: 0)
+//            collection.scrollToItem(at: indexPath, at: .right, animated: true)
+//        }
+//        
+//        else if currentIndex == 2 {
+//            let indexPath = IndexPath(item: 2, section: 0)
+//            collection.scrollToItem(at: indexPath, at: .left, animated: true)
+//        }
+//        
+//        else if currentIndex == 3 {
+//            let indexPath = IndexPath(item: 3, section: 0)
+//            collection.scrollToItem(at: indexPath, at: .left, animated: true)
+//        }
+//        
+//        else if currentIndex == 4 {
+//            let indexPath = IndexPath(item: 4, section: 0)
+//            collection.scrollToItem(at: indexPath, at: .left, animated: true)
+//        }
+//        
+//        else if currentIndex == 5 {
+//            let indexPath = IndexPath(item: 5, section: 0)
+//            collection.scrollToItem(at: indexPath, at: .left, animated: true)
+//        }
+//        
+//        else if currentIndex == 6 {
+//            let indexPath = IndexPath(item: 6, section: 0)
+//            collection.scrollToItem(at: indexPath, at: .left, animated: true)
+//        }
+//        
+//        else if currentIndex == 7 {
+//            let indexPath = IndexPath(item: 6, section: 0)
+//            collection.scrollToItem(at: indexPath, at: .left, animated: true)
+//        }
         
         if currentIndex == 0 || currentIndex == 2 || currentIndex == 3 || currentIndex == 4 || currentIndex == 5 || currentIndex == 6 {
             
@@ -783,7 +784,12 @@ extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDat
     
         let cell = collection.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! InventoryCollectionViewCell
         
-        cell.inventoryLabel.text = contents[indexPath.row]
+        if contents[indexPath.row] == "" {
+            cell.inventoryLabel.text = "Tags"
+        }
+        else {
+            cell.inventoryLabel.text = contents[indexPath.row]
+        }
         
         if indexPath.row == UserDefaults.standard.integer(forKey: "inventory_highlight") {
             cell.inventoryLabel.textColor = UIColor(named: "SelectCat")
@@ -804,7 +810,7 @@ extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         let width = collection.bounds.size.width / 2
-        return CGSize(width: width * 0.75, height: 50)
+        return CGSize(width: width * 0.85, height: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -834,44 +840,52 @@ extension InventoryViewController: UICollectionViewDelegate, UICollectionViewDat
         selectHighlight()
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        currentVC = cell!.tag
+        currentVC = indexPath.item
         
         currentIndex = currentVC
         
-        if currentIndex == 1 {
-            let indexPath = IndexPath(item: 0, section: 0)
-            collection.scrollToItem(at: indexPath, at: .right, animated: true)
-        }
+//        if currentIndex == 1 {
+//            let indexPath = IndexPath(item: 0, section: 0)
+//            collection.scrollToItem(at: indexPath, at: .right, animated: true)
+//        }
+//        
+//        else if currentIndex == 2 {
+//            let indexPath = IndexPath(item: 2, section: 0)
+//            collection.scrollToItem(at: indexPath, at: .left, animated: true)
+//        }
+//        
+//        else if currentIndex == 3 {
+//            let indexPath = IndexPath(item: 3, section: 0)
+//            collection.scrollToItem(at: indexPath, at: .left, animated: true)
+//        }
+//        
+//        else if currentIndex == 4 {
+//            let indexPath = IndexPath(item: 4, section: 0)
+//            collection.scrollToItem(at: indexPath, at: .left, animated: true)
+//        }
+//        
+//        else if currentIndex == 5 {
+//            let indexPath = IndexPath(item: 5, section: 0)
+//            collection.scrollToItem(at: indexPath, at: .left, animated: true)
+//        }
+//        
+//        else if currentIndex == 6 {
+//            let indexPath = IndexPath(item: 6, section: 0)
+//            collection.scrollToItem(at: indexPath, at: .left, animated: true)
+//        }
+//        
+//        else if currentIndex == 7 {
+//            let indexPath = IndexPath(item: 7, section: 0)
+//            collection.scrollToItem(at: indexPath, at: .left, animated: true)
+//        }
+//        
+//        else if currentIndex == 8 {
+//            let indexPath = IndexPath(item: 8, section: 0)
+//            collection.scrollToItem(at: indexPath, at: .left, animated: true)
+//        }
         
-        else if currentIndex == 2 {
-            let indexPath = IndexPath(item: 2, section: 0)
-            collection.scrollToItem(at: indexPath, at: .left, animated: true)
-        }
-        
-        else if currentIndex == 3 {
-            let indexPath = IndexPath(item: 3, section: 0)
-            collection.scrollToItem(at: indexPath, at: .left, animated: true)
-        }
-        
-        else if currentIndex == 4 {
-            let indexPath = IndexPath(item: 4, section: 0)
-            collection.scrollToItem(at: indexPath, at: .left, animated: true)
-        }
-        
-        else if currentIndex == 5 {
-            let indexPath = IndexPath(item: 5, section: 0)
-            collection.scrollToItem(at: indexPath, at: .left, animated: true)
-        }
-        
-        else if currentIndex == 6 {
-            let indexPath = IndexPath(item: 6, section: 0)
-            collection.scrollToItem(at: indexPath, at: .left, animated: true)
-        }
-        
-        else if currentIndex == 7 {
-            let indexPath = IndexPath(item: 7, section: 0)
-            collection.scrollToItem(at: indexPath, at: .left, animated: true)
-        }
+        let indexPath = IndexPath(item: currentIndex, section: 0)
+        collection.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         
         if currentIndex == 0 || currentIndex == 2 || currentIndex == 3 || currentIndex == 4 || currentIndex == 5 || currentIndex == 6  {
             

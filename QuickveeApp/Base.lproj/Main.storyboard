@@ -7553,14 +7553,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVi-vX-udY">
-                                                    <rect key="frame" x="5" y="64" width="118" height="0.0"/>
-                                                    <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fVi-vX-udY">
+                                                    <rect key="frame" x="64" y="64" width="0.0" height="0.0"/>
+                                                    <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="15"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Iy-Vh-PBe">
-                                                    <rect key="frame" x="7" y="125" width="114" height="3"/>
+                                                    <rect key="frame" x="2" y="125" width="124" height="3"/>
                                                     <color key="backgroundColor" red="0.039215686270000001" green="0.3921568627" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="3" id="WLH-bW-cWx"/>
@@ -7569,12 +7569,11 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="fVi-vX-udY" firstAttribute="leading" secondItem="33u-FA-IrG" secondAttribute="leading" constant="5" id="BQZ-ll-Ia9"/>
-                                                <constraint firstAttribute="trailing" secondItem="8Iy-Vh-PBe" secondAttribute="trailing" constant="7" id="Ha7-qf-5bE"/>
-                                                <constraint firstAttribute="trailing" secondItem="fVi-vX-udY" secondAttribute="trailing" constant="5" id="azs-Fy-KR2"/>
-                                                <constraint firstItem="fVi-vX-udY" firstAttribute="centerY" secondItem="33u-FA-IrG" secondAttribute="centerY" id="kLh-3f-sBV"/>
+                                                <constraint firstAttribute="trailing" secondItem="8Iy-Vh-PBe" secondAttribute="trailing" constant="2" id="Ha7-qf-5bE"/>
                                                 <constraint firstAttribute="bottom" secondItem="8Iy-Vh-PBe" secondAttribute="bottom" id="ozr-Vt-Ng8"/>
-                                                <constraint firstItem="8Iy-Vh-PBe" firstAttribute="leading" secondItem="33u-FA-IrG" secondAttribute="leading" constant="7" id="xSr-qS-1ef"/>
+                                                <constraint firstItem="fVi-vX-udY" firstAttribute="centerX" secondItem="33u-FA-IrG" secondAttribute="centerX" id="rBG-3n-2qV"/>
+                                                <constraint firstItem="8Iy-Vh-PBe" firstAttribute="leading" secondItem="33u-FA-IrG" secondAttribute="leading" constant="2" id="xSr-qS-1ef"/>
+                                                <constraint firstItem="fVi-vX-udY" firstAttribute="centerY" secondItem="33u-FA-IrG" secondAttribute="centerY" id="zBL-Vv-sFh"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
@@ -12383,7 +12382,7 @@
             <objects>
                 <viewController id="7n2-fZ-9fx" customClass="StockSaveViewController" customModule="QuickveeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rXr-SC-8fH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="848"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UhD-C0-7ea">
@@ -12393,7 +12392,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7DX-RR-6j7">
-                                <rect key="frame" x="0.0" y="138.5" width="414" height="664.5"/>
+                                <rect key="frame" x="0.0" y="138.5" width="414" height="654.5"/>
                                 <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="bf5-Vv-4J5" customClass="StockSaveTableViewCell" customModule="QuickveeApp" customModuleProvider="target">
@@ -12556,7 +12555,7 @@
                                 </connections>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yUT-gb-7Xb">
-                                <rect key="frame" x="10" y="803" width="394" height="45"/>
+                                <rect key="frame" x="10" y="793" width="394" height="45"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ShH-5R-VMX">
                                         <rect key="frame" x="0.0" y="0.0" width="192" height="45"/>
@@ -18204,11 +18203,11 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Qt9-bJ-AMm"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.60071215986394555" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.60236025528169013" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Qt9-bJ-AMm" firstAttribute="leading" secondItem="cIK-Mq-Dwa" secondAttribute="leading" id="Mfj-R2-pQ5"/>
-                            <constraint firstItem="Qt9-bJ-AMm" firstAttribute="trailing" secondItem="cIK-Mq-Dwa" secondAttribute="trailing" id="U0m-FI-zka"/>
-                            <constraint firstAttribute="bottom" secondItem="cIK-Mq-Dwa" secondAttribute="bottom" id="p6j-rX-daI"/>
+                            <constraint firstItem="cIK-Mq-Dwa" firstAttribute="trailing" secondItem="Qt9-bJ-AMm" secondAttribute="trailing" id="VpR-4S-HVg"/>
+                            <constraint firstAttribute="bottom" secondItem="cIK-Mq-Dwa" secondAttribute="bottom" id="xfq-hm-TH6"/>
+                            <constraint firstItem="cIK-Mq-Dwa" firstAttribute="leading" secondItem="Qt9-bJ-AMm" secondAttribute="leading" id="ylu-lc-AB6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2eU-ef-706"/>
@@ -49496,7 +49495,7 @@
         <segue reference="Eyu-JW-VW2"/>
         <segue reference="SeS-H7-xfm"/>
         <segue reference="BX0-qg-734"/>
-        <segue reference="UEa-dC-72T"/>
+        <segue reference="UfE-A6-dPb"/>
         <segue reference="vbg-HO-Xhb"/>
         <segue reference="0XF-Ao-PWs"/>
     </inferredMetricsTieBreakers>
